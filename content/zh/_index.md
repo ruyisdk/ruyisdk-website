@@ -2,7 +2,7 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: 100 万 RISC-V 软件开发人员做好准备" image_anchor="top" height="full" >}}
+{{< blocks/cover title="RuyiSDK: 为100 万 RISC-V 软件开发人员做好准备" image_anchor="top" height="auto" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/zh/docs/supported">
  支持矩阵 <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
