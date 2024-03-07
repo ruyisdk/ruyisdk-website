@@ -1,5 +1,5 @@
 ---
-title: 社区
+title: Community
 menu: {main: {weight: 40}}
 ---
 {{% blocks/section color="white" type="row" %}}
