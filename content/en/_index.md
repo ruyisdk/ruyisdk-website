@@ -4,7 +4,7 @@ title: RuyiSDK
 
 {{< blocks/cover title="RuyiSDK: Get ready for 1 million RISC-V software developers" image_anchor="top" height="full" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/supported">
- Supported matrix <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+ Support matrix <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/ruyisdk">
   Get started <i class="fab fa-github ms-2 "></i>
