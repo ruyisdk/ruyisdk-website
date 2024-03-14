@@ -6,7 +6,7 @@ menu: {main: {weight: 50}}
 
 
 {{% blocks/section color="white" type="row" %}}
-{{% alert title="提示" color="info" %}}
+{{% alert title="提示" color="warning" %}}
 下载并使用RuyiSDK，即表示您同意许可条款和隐私声明。
 {{% /alert %}}
 
