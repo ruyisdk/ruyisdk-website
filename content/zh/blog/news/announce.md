@@ -4,4 +4,4 @@ date: 2024-02-26
 description:
 ---
 
-如意SDK官方网站上线啦！
+RUYISDK官方网站上线啦！
