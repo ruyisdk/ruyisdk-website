@@ -10,7 +10,7 @@ menu: {main: {weight: 50}}
 下载并使用RuyiSDK，即表示您同意许可条款和隐私声明。
 {{% /alert %}}
 
-{{% blocks/feature icon="fa-regular fa-window-maximize" title="如意IDE" url="https://ruyisdk.org" url_text="敬请期待" %}}
+{{% blocks/feature icon="fa-regular fa-window-maximize" title="Ruyi IDE" url="https://ruyisdk.org" url_text="敬请期待" %}}
 {{% /blocks/feature %}}
 {{% blocks/feature icon="fa-solid fa-cube" title="RuyiSDK包管理器" url="https://github.com/ruyisdk/ruyi/releases" url_text="下载" %}}
 {{% /blocks/feature %}}
