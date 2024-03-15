@@ -19,7 +19,7 @@ RUYISDK is a product plan designed to provide an all-in-one integrated developme
 2. Developers can specify any commonly used RISC-V extended instruction set architecture combination, and can use the RUYISDK system to generate the operating system, tool chain, language execution environment (runtime or virtual machine), computing library, and application framework required by the customer wait. In particular, it is emphasized that RUYISDK will fully support draft standards (or manufacturer-customized extensions) such as Vector 0.7.1 and RVP 0.5.2 that have been siliconized on a large scale.
 3. Cultivate and operate an active and comprehensive developer communication community.
 
-<!-- {{% /blocks/section %}}
+{{% /blocks/section %}}
 {{% blocks/section color="white" %}}
 
 ## RUYISDK architecture diagram
@@ -27,7 +27,7 @@ RUYISDK is a product plan designed to provide an all-in-one integrated developme
 <img src=./1703147196780.png width=100% >
 {{% /blocks/section %}}
 
-{{% blocks/section color="primary" %}} -->
+{{% blocks/section color="primary" %}}
 
 ## Components of RuyiSDK
 
