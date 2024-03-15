@@ -19,15 +19,15 @@ RUYISDK 是一个旨在提供给一个一体化集成开发环境的产品计划
 2. 开发者可以指定任何常用的 RISC-V 扩展指令集架构组合，都可以通过 RUYISDK 系统生成客户所需的操作系统、工具链、语言执行环境 (运行时或虚拟机)、计算库、应用框架等。尤其强调 RUYISDK 将完全支持 Vector 0.7.1 和 RVP 0.5.2 等已经大规模硅化的草案 标准 (or 厂商定制扩展)。
 3. 培育运营一个活跃全面的开发者交流社区。
 
-{{% /blocks/section %}}
-{{% blocks/section color="white" %}}
+<!-- {{% /blocks/section %}} -->
+<!-- {{% blocks/section color="white" %}}
 
 ## RUYISDK 架构示意图
 
 <img src=./1703147196780.png width=100% >
-{{% /blocks/section %}}
+{{% /blocks/section %}} -->
 
-{{% blocks/section color="primary" %}}
+<!-- {{% blocks/section color="primary" %}} -->
 
 ## RuyiSDK 的组成
 
