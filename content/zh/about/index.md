@@ -42,25 +42,3 @@ RuyiSDK 主要包含了一个组件管理器（也称为Ruyi包管理器）、�
 
 {{% /blocks/section %}}
 
-{{% blocks/section %}}
-
-## RuyiSDK 成果
-
-### RUYI 包管理器
-
-* [在线软件源 RUYI REPO](https://mirror.iscas.ac.cn/ruyisdk/) ：https://mirror.iscas.ac.cn/ruyisdk
-* 包管理器工具
-
-  * [GitHub 项目](https://github.com/ruyisdk/ruyi)：https://github.com/ruyisdk/ruyi
-  * download（latest release）：
-    - GitHub Releases: https://github.com/ruyisdk/ruyi/releases/tag/0.2.0
-    - ISCAS Ruyi Repo: https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.2.0/
-
-### RUYI IDE
-
-### 开发者社区
-
-* [文档和教程](../ruyi/index.md)
-<!-- {.text-center} -->
-
-{{% /blocks/section %}}
