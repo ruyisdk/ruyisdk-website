@@ -5,4 +5,4 @@ menu: {main: {weight: 20}}
 weight: 20
 ---
 
-本手册包含了 RuyiSDK 如何构建、如何使用的相关内容。
+本手册包含了 RuyiSDK 如何构建、如何使用的相关内容。**文档正在建设中**，请移步 https://ruyisdk.github.io/docs/zh/index.html
