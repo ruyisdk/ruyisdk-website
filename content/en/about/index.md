@@ -42,25 +42,4 @@ RuyiSDK mainly includes a component manager (also called Ruyi package manager), 
 
 {{% /blocks/section %}}
 
-{{% blocks/section %}}
 
-## RuyiSDK results
-
-### RUYI package manager
-
-* [Online software source RUYI REPO](https://mirror.iscas.ac.cn/ruyisdk/) ：https://mirror.iscas.ac.cn/ruyisdk
-* Package manager tools
-
-  * [GitHub Projects](https://github.com/ruyisdk/ruyi)：https://github.com/ruyisdk/ruyi
-  * download（latest release）：
-    - GitHub Releases: https://github.com/ruyisdk/ruyi/releases/tag/0.2.0
-    - ISCAS Ruyi Repo: https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.2.0/
-
-### RUYI IDE
-
-### Developer community
-
-* [Documentation and Tutorials](../ruyi/index.md)
-<!-- {.text-center} -->
-
-{{% /blocks/section %}}

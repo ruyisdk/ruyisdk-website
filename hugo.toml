@@ -168,7 +168,7 @@ enable = true
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
   name = "Github Discussions"
-  url = "https://github.com/ArchFeh/ruyisdk-org/discussions"
+  url = "https://github.com/ruyisdk/ruyisdk-website/discussions"
   icon = "fa-solid fa-comments" 
   desc = "Discussion and help from your fellow users"
 # [[params.links.user]]

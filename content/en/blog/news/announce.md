@@ -1,7 +1,7 @@
 ---
 title: Anouncement
-date: 2024-02-26
+date: 2024-03-15
 description:
 ---
 
-Ruyi SDK official website is online!
+RuyiSDK official website is online!
