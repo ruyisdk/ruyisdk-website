@@ -57,7 +57,6 @@ contentDir = "content/zh"
 weight = 1
 [languages.zh.params]
 title = "RuyiSDK"
-description = "RuyiSDK简体中文"
 time_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
 
@@ -66,7 +65,35 @@ languageName ="English"
 contentDir = "content/en"
 [languages.en.params]
 title = "RuyiSDK"
-description = "RuyiSDK English"
+
+  [languages.ru]
+    contentDir = 'content/ru'
+    disabled = false
+    languageCode = 'ru-RU'
+    languageDirection = 'ltr'
+    languageName = 'Русский'
+    title = 'RuyiSDK'
+    weight = 3
+  [languages.ja]
+    contentDir = 'content/ja'
+    disabled = false
+    languageCode = 'ja-JP'
+    languageDirection = 'ltr'
+    languageName = '日本語'
+    title = 'RuyiSDK'
+    weight = 4
+    hasCJKLanguage = true
+    summaryLength = 230
+  [languages.ko]
+    contentDir = 'content/ko'
+    disabled = false
+    languageCode = 'ko-KR'
+    languageDirection = 'ltr'
+    languageName = '한국어'
+    title = 'RuyiSDK'
+    weight = 5
+    hasCJKLanguage = true
+    summaryLength = 230
 
 [markup]
   [markup.goldmark]
