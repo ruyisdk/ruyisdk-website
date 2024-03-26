@@ -59,12 +59,22 @@ weight = 1
 title = "RuyiSDK"
 time_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
+[languages.zh.menus]
+[[languages.zh.menus.main]]
+        name = '文档'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
 
 [languages.en]
 languageName ="English"
 contentDir = "content/en"
 [languages.en.params]
 title = "RuyiSDK"
+[languages.en.menus]
+[[languages.en.menus.main]]
+        name = 'Docs'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
 
   [languages.ru]
     contentDir = 'content/ru'
@@ -74,6 +84,11 @@ title = "RuyiSDK"
     languageName = 'Русский'
     title = 'RuyiSDK'
     weight = 3
+    [languages.ru.menus]
+[[languages.ru.menus.main]]
+        name = 'Документы'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
   [languages.ja]
     contentDir = 'content/ja'
     disabled = false
@@ -84,6 +99,11 @@ title = "RuyiSDK"
     weight = 4
     hasCJKLanguage = true
     summaryLength = 230
+    [languages.ja.menus]
+[[languages.ja.menus.main]]
+        name = '書類'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
   [languages.ko]
     contentDir = 'content/ko'
     disabled = false
@@ -94,6 +114,11 @@ title = "RuyiSDK"
     weight = 5
     hasCJKLanguage = true
     summaryLength = 230
+        [languages.ko.menus]
+[[languages.ko.menus.main]]
+        name = '문서'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
 
 [markup]
   [markup.goldmark]
@@ -153,7 +178,7 @@ url_latest_version = "https://example.com"
 #gcs_engine_id = "d72aa9b2712488cc3"
 
 # Enable Lunr.js offline search
-offlineSearch = true
+offlineSearch = false
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = false

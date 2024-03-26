@@ -1,7 +1,7 @@
 ---
-title: 官宣
+title: Официальное объявление
 date: 2024-03-15
 description:
 ---
 
-RUYISDK官方网站上线啦！
+Официальный сайт RuyiSDK онлайн!
