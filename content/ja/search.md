@@ -1,4 +1,4 @@
 ---
-title: 搜索结果
+title: 検索結果
 layout: search
 ---
