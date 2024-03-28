@@ -1,4 +1,4 @@
 ---
-title: 新闻
+title: 뉴스
 weight: 20
 ---

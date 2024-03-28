@@ -4,9 +4,9 @@ title: RISCV Board and OS Supported Matrix
 
 {{% blocks/section color="white" type="row" %}}
 
-## 主流操作系统 for RISC-V 硬件适配情况（主流 RISC-V 开发板）
+## 메인스트림 운영 체제 for RISC-V 하드웨어 적합도(메인스트림 RISC-V 개발 보드)
 
-| CPU      | 产品型号                      | Arch Linux | Debian/RevyOS | Fedora | FreeBSD | Gentoo | openAnolis | OpenBSD | openCloudOS | openEuler | openKylin | openSUSE | Ubuntu | Tina-Linux | Android 13 | Armbian | BuildRoot | OpenHarmony | FreeRTOS | RT-Thread | Zephyr | OpenWRT | ThreadX |
+| CPU      | 제품 모델 번호                  | Arch Linux | Debian/RevyOS | Fedora | FreeBSD | Gentoo | openAnolis | OpenBSD | openCloudOS | openEuler | openKylin | openSUSE | Ubuntu | Tina-Linux | Android 13 | Armbian | BuildRoot | OpenHarmony | FreeRTOS | RT-Thread | Zephyr | OpenWRT | ThreadX |
 |----------|-------------------------------|------------|---------------|--------|---------|--------|------------|---------|-------------|-----------|-----------|----------|--------|------------|------------|---------|-----------|-------------|----------|-----------|--------|---------|---------|
 | SG2042   | [Pioneer Box][Pioneer]        | N/A        | Good          | Good   | N/A     | N/A    | N/A        | N/A     | WIP         | Good      | Good      | N/A      | N/A    | N/A        | N/A        | N/A     | N/A       | WIP         | N/A      | N/A       | N/A    | N/A     | N/A     |
 | CV1800B  | [Milk-V Duo (64M)][Duo]       | Basic      | Basic         | CFH    | N/A     | N/A    | N/A        | N/A     | N/A         | Basic     | N/A       | N/A      | N/A    | N/A        | N/A        | N/A     | Basic     | N/A         | Basic    | Basic     | N/A    | WIP     | N/A     |
@@ -21,15 +21,15 @@ title: RISCV Board and OS Supported Matrix
 | FSL1030M | [Milk-V Vega][Vega]           | N/A        | N/A           | N/A    | N/A     | N/A    | N/A        | N/A     | N/A         | N/A       | N/A       | N/A      | N/A    | N/A        | N/A        | N/A     | CFH       | N/A         | N/A      | N/A       | N/A    | N/A     | N/A     |
 | TH1520   | [Milk-V Meles][Meles]         | N/A        | CFT           | N/A    | N/A     | N/A    | N/A        | N/A     | N/A         | N/A       | N/A       | N/A      | N/A    | N/A        | N/A        | N/A     | N/A       | N/A         | N/A      | N/A       | N/A    | N/A     | N/A     |
 
-#### 说明
+#### 설명
 
-* Good：支持图形界面
-* Basic：能启动运行
-* CFH (Call for help)：官方/论坛资料表示支持，但是未跑通
-* CFT (Call for testing)：镜像链接有，但是缺乏硬件设备验证
-* CFI (Call for more information)：官方资料宣称有，但是找不到镜像文件等实际可用的资料
-* WIP：官方宣发操作系统即将/正在对开发板进行支持，但暂未获取到可用的镜像
-* N/A：暂未从官方或者其它渠道获取到开发板的支持信息
+* Good: 그래픽 인터페이스 지원
+* Basic:작동가능
+* CFH (Call for help) : 공식/포럼 자료 지원, 불통
+* CFT (Call for testing) : 미러링크는 있으나 하드웨어 기기 검증이 부족함
+* CFI (Call for more information) : 공식자료는 있으나 미러링 파일 등 실제 사용 가능한 자료는 찾을 수 없음
+* WIP: 공식 OS가 곧/개발보드를 지원하고 있지만, 아직 미러링을 받을 수 없습니다.
+* N/A: 공식 또는 기타 경로에서 아직 개발 보드 지원 정보를 얻지 못했습니다.
 
 [Pioneer]: https://github.com/ruyisdk/support-matrix/blob/main/Pioneer/README.md
 [Duo]: https://github.com/ruyisdk/support-matrix/blob/main/Duo/README.md
