@@ -1,5 +1,5 @@
 ---
-title: 动态
+title: 동태
 menu: {main: {weight: 30}}
 ---
 

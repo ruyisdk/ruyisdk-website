@@ -4,7 +4,7 @@ title: RISCV Board and OS Supported Matrix
 
 {{% blocks/section color="white" type="row" %}}
 
-## 主流操作系统 for RISC-V 硬件适配情况（主流 RISC-V 开发板）
+## RISC-Vハードウェアへの主流オペレーティングシステムの適応状況（主要なRISC-V開発ボード）
 
 | CPU      | 产品型号                      | Arch Linux | Debian/RevyOS | Fedora | FreeBSD | Gentoo | openAnolis | OpenBSD | openCloudOS | openEuler | openKylin | openSUSE | Ubuntu | Tina-Linux | Android 13 | Armbian | BuildRoot | OpenHarmony | FreeRTOS | RT-Thread | Zephyr | OpenWRT | ThreadX |
 |----------|-------------------------------|------------|---------------|--------|---------|--------|------------|---------|-------------|-----------|-----------|----------|--------|------------|------------|---------|-----------|-------------|----------|-----------|--------|---------|---------|
@@ -21,15 +21,15 @@ title: RISCV Board and OS Supported Matrix
 | FSL1030M | [Milk-V Vega][Vega]           | N/A        | N/A           | N/A    | N/A     | N/A    | N/A        | N/A     | N/A         | N/A       | N/A       | N/A      | N/A    | N/A        | N/A        | N/A     | CFH       | N/A         | N/A      | N/A       | N/A    | N/A     | N/A     |
 | TH1520   | [Milk-V Meles][Meles]         | N/A        | CFT           | N/A    | N/A     | N/A    | N/A        | N/A     | N/A         | N/A       | N/A       | N/A      | N/A    | N/A        | N/A        | N/A     | N/A       | N/A         | N/A      | N/A       | N/A    | N/A     | N/A     |
 
-#### 说明
+#### 説明
 
-* Good：支持图形界面
-* Basic：能启动运行
-* CFH (Call for help)：官方/论坛资料表示支持，但是未跑通
-* CFT (Call for testing)：镜像链接有，但是缺乏硬件设备验证
-* CFI (Call for more information)：官方资料宣称有，但是找不到镜像文件等实际可用的资料
-* WIP：官方宣发操作系统即将/正在对开发板进行支持，但暂未获取到可用的镜像
-* N/A：暂未从官方或者其它渠道获取到开发板的支持信息
+* Good：グラフィカルユーザーインターフェースをサポート
+* Basic：起動して実行可能
+* CFH (Call for help)：公式/フォーラムの資料によるとサポートされているが、実行に成功していない
+* CFT (Call for testing)：イメージのリンクは存在するが、ハードウェアの検証が不足している
+* CFI (Call for more information)：公式資料ではサポートが宣言されているが、イメージファイルなどの実際に利用可能な資料が見つからない
+* WIP：公式が開発ボードのサポートを発表している/進行中だが、まだ利用可能なイメージを入手していない
+* N/A：公式または他のチャンネルからの開発ボードのサポート情報を現時点で入手していない
 
 [Pioneer]: https://github.com/ruyisdk/support-matrix/blob/main/Pioneer/README.md
 [Duo]: https://github.com/ruyisdk/support-matrix/blob/main/Duo/README.md

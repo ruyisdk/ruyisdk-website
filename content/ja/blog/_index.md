@@ -1,5 +1,5 @@
 ---
-title: 动态
+title: 動態
 menu: {main: {weight: 30}}
 ---
 
