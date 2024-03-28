@@ -2,12 +2,12 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: 为100 万 RISC-V 软件开发人员做好准备" image_anchor="top" height="auto" >}}
+{{< blocks/cover title="RuyiSDK: 100만 RISC-V 소프트웨어 개발자를 위한 준비" image_anchor="top" height="auto" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/ko/supported">
- 支持矩阵 <i class="fas fa-arrow-alt-circle-right ms-2"></i>
+ support SoCs <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/ruyisdk">
-  开始 <i class="fab fa-github ms-2 "></i>
+  시작 <i class="fab fa-github ms-2 "></i>
 </a>
 <p class="lead mt-5">RISC-V is inevitable!</p>
 {{< blocks/link-down color="info" >}}
@@ -15,22 +15,22 @@ title: RuyiSDK
 
 
 {{% blocks/lead color="primary" %}}
-# 我们的愿景
+# 우리의 비전
 
-计划用三年时间为 RISC-V 开发者提供一个完整的、全家桶式的全功能开发环境
+3년 동안 RISC-V 개발자에게 완전하고 온가족 배럴식 풀 기능 개발 환경을 제공할 계획입니다
 {{% /blocks/lead %}}
 
 
 {{% blocks/section color="dark" type="row" %}}
-{{% blocks/feature icon="fa-solid fa-microchip" title="任何一款 RISC-V 开发板或模组，都可以通过 RUYISDK 系统获得硬件资料说明、固件/软件更新、调试支持等。" %}}
+{{% blocks/feature icon="fa-solid fa-microchip" title="RISC-V 개발 보드 또는 모듈은 RUYISDK 시스템을 통해 하드웨어 데이터 설명, 펌웨어/소프트웨어 업데이트, 디버깅 지원 등을 얻을 수 있습니다." %}}
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fa-solid fa-dice-d6" title="开发者可以指定任何常用的 RISC-V 扩展指令集架构组合， 都可以通过 RUYISDK 系统生成客户所需的操作系统、工具链、语言执行环境（运行时或虚拟机）、计算库、应用框架等。" %}}
+{{% blocks/feature icon="fa-solid fa-dice-d6" title="개발자는 일반적으로 사용되는 RISC-V 확장 명령 집합 아키텍처의 조합을 지정할 수 있으며 RUYISDK 시스템을 통해 고객이 필요로 하는 운영 체제, 도구줄, 언어 실행 환경(실행 또는 가상 시스템), 컴퓨팅 라이브러리, 애플리케이션 프레임워크 등을 생성할 수 있습니다." %}}
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fa-solid fa-comments" title="培育运营一个活跃全面的开发者交流社区。" %}}
+{{% blocks/feature icon="fa-solid fa-comments" title="활발하고 종합적인 개발자 교류 커뮤니티를 육성하고 운영합니다." %}}
 {{% /blocks/feature %}}
 
 
@@ -40,9 +40,9 @@ title: RuyiSDK
 <div class="newsletter-subscribe mt-5 container">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center newsletter">加入我们的订阅！</h2>
+                <h2 class="text-center newsletter">구독 가입할게요!</h2>
                 <p class="text-center">
-                作为一款开源软件，如意SDK旨在为开发者提供最优质、最便捷的开发工具和资源。想要与我们保持紧密联系，第一时间获取我们的最新动态和更新吗？立即订阅我们的网站，您将获得我们最新版本的发布通知、开发技巧和最佳实践，以及与其他开发者交流的机会。加入我们的订阅者行列，让我们一起打造更加强大、更加优秀的开发生态！ </p>
+                오픈 소스 소프트웨어로서 SDK는 개발자에게 가장 고품질의 편리한 개발 도구와 자원을 제공하는 것을 목표로 합니다.저희와 긴밀히 연락하여 우리의 최신 동향과 업데이트를 가장 먼저 얻고 싶습니까?지금 바로 저희 웹사이트를 구독하시면 최신 버전의 공지사항, 개발 노하우, 모범 사례, 그리고 다른 개발자들과 교류할 수 있는 기회를 얻게 됩니다. 구독자 대열에 합류해서 더 강력하고 더 훌륭한 개발 생태계를 만들어갑시다! </p>
             </div>
             <form class="form-inline" method="post"  action="https://fabform.io/f/pFPStcS">
               <div class="form-group"><input class="form-control" type="name" name="fullName" placeholder="名称"></div>
