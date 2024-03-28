@@ -12,7 +12,7 @@ menu: {main: {weight: 40}}
             <form class="form-inline" method="post"  action="https://fabform.io/f/pFPStcS">
               <div class="form-group"><input class="form-control" type="name" name="fullName" placeholder="名前"></div>
                 <div class="form-group"><input class="form-control" type="email" name="email" placeholder="メール"></div>
-                <div class="form-group"><button class="btn btn-primary" type="submit">Subscribe </button></div>
+                <div class="form-group"><button class="btn btn-primary" type="submit">購読する</button></div>
             </form>
         </div>
     </div>
