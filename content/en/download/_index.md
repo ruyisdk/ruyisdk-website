@@ -3,12 +3,12 @@ title: Download
 linkTitle: Download
 menu: {main: {weight: 50}}
 ---
-
-
-{{% blocks/section color="white" type="row" %}}
+{{% blocks/lead color="white" %}}
 {{% alert title="Warning" color="warning" %}}
 By downloading and using RuyiSDK, you agree to the license terms and privacy statement.
 {{% /alert %}}
+{{% /blocks/lead %}}
+{{% blocks/section color="white" type="row" %}}
 
 {{% blocks/feature icon="fa-regular fa-window-maximize" title="Ruyi IDE" url="https://ruyisdk.org" url_text="Please stay tuned" %}}
 {{% /blocks/feature %}}
