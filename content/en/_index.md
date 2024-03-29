@@ -2,7 +2,7 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: Get ready for 1 million RISC-V software developers" image_anchor="top" height="auto" >}}
+{{< blocks/cover title="RuyiSDK: Get ready for 1 million RISC-V software developers" image_anchor="top" height="full" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/supported">
  Support matrix <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
