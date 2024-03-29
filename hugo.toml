@@ -1,15 +1,9 @@
 baseURL = "https://ruyisdk.org/"
 title = "RuyiSDK"
-
+theme = "docsy"
+languageCode = 'en-us'
 enableRobotsTXT = true
-
-# Will give values to .Lastmod etc.
 enableGitInfo = false
-
-# Comment out to enable taxonomies in Docsy
-# disableKinds = ["taxonomy", "taxonomyTerm"]
-
-# You can add your own taxonomies
 [taxonomies]
 tag = "tags"
 category = "categories"
@@ -250,14 +244,13 @@ enable = true
 #   icon = "fa fa-envelope"
 #   desc = "Discuss development issues around the project"
 
-# hugo module configuration
-
-[module]
-  # Uncomment the next line to build and serve using local docsy clone declared in the named Hugo workspace:
-  # workspace = "docsy.work"
-  [module.hugoVersion]
-    extended = true
-    min = "0.110.0"
-  [[module.imports]]
-    path = "github.com/google/docsy"
-    disable = false
+# # hugo module configuration
+# [module]
+#   # Uncomment the next line to build and serve using local docsy clone declared in the named Hugo workspace:
+#   # workspace = "docsy.work"
+#   [module.hugoVersion]
+#     extended = true
+#     min = "0.110.0"
+#   [[module.imports]]
+#     path = "github.com/ArchFeh/docsy"
+#     disable = false
