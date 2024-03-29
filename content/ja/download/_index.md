@@ -3,12 +3,12 @@ title: 下载
 linkTitle: 下载
 menu: {main: {weight: 50}}
 ---
-
-
-{{% blocks/section color="white" type="row" %}}
+{{% blocks/lead color="white" %}}
 {{% alert title="提示" color="warning" %}}
 RuyiSDKをダウンロードして使用することにより、ライセンス条項とプライバシーポリシーに同意したことになります。
 {{% /alert %}}
+{{% /blocks/lead %}}
+{{% blocks/section color="white" type="row" %}}
 
 {{% blocks/feature icon="fa-regular fa-window-maximize" title="Ruyi IDE" url="https://ruyisdk.org" url_text="お楽しみに" %}}
 {{% /blocks/feature %}}
