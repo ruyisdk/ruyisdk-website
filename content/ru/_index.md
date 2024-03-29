@@ -2,7 +2,7 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: готов принять 1 миллион разработчиков ПО RISC-V" image_anchor="top" height="auto" >}}
+{{< blocks/cover title="RuyiSDK: готов принять 1 миллион разработчиков ПО RISC-V" image_anchor="top" height="full" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/ru/supported">
  Опорная матрица <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>

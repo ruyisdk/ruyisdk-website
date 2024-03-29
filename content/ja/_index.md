@@ -2,7 +2,7 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: 100万人のRISC-Vソフトウェア開発者に備える" image_anchor="top" height="auto" >}}
+{{< blocks/cover title="RuyiSDK: 100万人のRISC-Vソフトウェア開発者に備える" image_anchor="top" height="full" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/ja/supported">
  各開発ボードのサポート状況 <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>

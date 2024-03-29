@@ -2,7 +2,7 @@
 title: RuyiSDK
 ---
 
-{{< blocks/cover title="RuyiSDK: 100만 RISC-V 소프트웨어 개발자를 위한 준비" image_anchor="top" height="auto" >}}
+{{< blocks/cover title="RuyiSDK: 100만 RISC-V 소프트웨어 개발자를 위한 준비" image_anchor="top" height="full" >}}
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/ko/supported">
  support SoCs <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
