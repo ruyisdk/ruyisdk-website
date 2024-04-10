@@ -217,11 +217,11 @@ enable = true
   url = "https://github.com/ruyisdk/ruyisdk-website/discussions"
   icon = "fa-solid fa-comments" 
   desc = "Discussion and help from your fellow users"
-# [[params.links.user]]
-#   name ="Twitter"
-#   url = "https://example.org/twitter"
-#   icon = "fab fa-twitter"
-#   desc = "在 Twitter 上关注我们以获取最新消息！"
+[[params.links.user]]
+  name ="Twitter"
+  url = "https://twitter.com/RuyiSDK"
+  icon = "fab fa-twitter"
+  desc = "Follow us on Twitter for the latest news!"
 # [[params.links.user]]
 #   name = "Stack Overflow"
 #   url = "https://example.org/stack"
@@ -233,6 +233,11 @@ enable = true
   url = "https://github.com/ruyisdk"
   icon = "fab fa-github"
   desc = "Development takes place here!"
+[[params.links.developer]]
+  name = "Telegram"
+  url = "https://t.me/ruyisdk"
+  icon = "fab fa-telegram"
+  desc = "Interact with us directly on Telegram!"
 # [[params.links.developer]]
 #   name = "Slack"
 #   url = "https://example.org/slack"
