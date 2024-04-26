@@ -113,7 +113,19 @@ title = "RuyiSDK"
         name = '문서'
         url = 'https://ruyisdk.github.io/docs/zh/index.html'
         weight = 20
-
+  [languages.de]
+    contentDir = 'content/de'
+    disabled = false
+    languageCode = 'de-DE'
+    languageDirection = 'ltr'
+    languageName = 'Deutsch'
+    title = 'RuyiSDK'
+    weight = 3
+    [languages.de.menus]
+[[languages.de.menus.main]]
+        name = 'Dokumentationen'
+        url = 'https://ruyisdk.github.io/docs/zh/index.html'
+        weight = 20
 [markup]
   [markup.goldmark]
     [markup.goldmark.parser.attribute]
