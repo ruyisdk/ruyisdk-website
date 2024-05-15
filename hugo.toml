@@ -271,3 +271,5 @@ enable = true
 #   [[module.imports]]
 #     path = "github.com/ArchFeh/docsy"
 #     disable = false
+[params.busuanzi]
+  enable=true
