@@ -6,14 +6,14 @@ menu: {main: {weight: 40}}
 <div class="newsletter-subscribe mt-5 container">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center newsletter">Subscribe to our Newsletter</h2>
+                <h2 class="text-center newsletter">Abonniere unseren Newsletter</h2>
                 <p class="text-center">
-               As an open source software, RuyiSDK aims to provide developers with the highest quality and most convenient development tools and resources. Want to stay connected with us and get our latest news and updates as soon as possible? Subscribe to our site today and you'll get notifications of our latest releases, development tips and best practices, and the chance to network with other developers. Join our subscribers and let us build a stronger and better development ecosystem together! </p>
+               Als Open-Source-Software zielt RuyiSDK darauf ab, Entwicklern die hochwertigsten und bequemsten Entwicklungstools und -ressourcen zur Verfügung zu stellen. Möchten Sie mit uns in Verbindung bleiben und so schnell wie möglich unsere neuesten Nachrichten und Updates erhalten? Abonnieren Sie noch heute unsere Website und Sie erhalten Benachrichtigungen über unsere neuesten Versionen, Entwicklungstipps und Best Practices sowie die Möglichkeit, sich mit anderen Entwicklern zu vernetzen. Schließen Sie sich unseren Abonnenten an und lassen Sie uns gemeinsam ein stärkeres und besseres Entwicklungsökosystem aufbauen! </p>
             </div>
             <form class="form-inline" method="post"  action="https://fabform.io/f/pFPStcS">
               <div class="form-group"><input class="form-control" type="name" name="fullName" placeholder="Your Name"></div>
                 <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Your Email"></div>
-                <div class="form-group"><button class="btn btn-primary" type="submit">Subscribe </button></div>
+                <div class="form-group"><button class="btn btn-primary" type="submit">Abonnieren </button></div>
             </form>
         </div>
     </div>

@@ -4,40 +4,40 @@ linkTitle: About
 menu: {main: {weight: 10}}
 ---
 
-{{% blocks/cover title="What is RuyiSDK?" image_anchor="bottom" height="auto" %}}
+{{% blocks/cover title="Was ist RuyiSDK?" image_anchor="bottom" height="auto" %}}
 
-RUYISDK is a product plan designed to provide an all-in-one integrated development environment. Preparations will begin in 2023, and it is planned to provide RISC-V developers with a complete, full-featured development environment in three years.
+RUYISDK ist ein Produktplan, der eine umfassende integrierte Entwicklungsumgebung bereitstellen soll. Die Vorbereitungen begannen im Jahr 2023 und es ist geplant, RISC-V-Entwicklern in drei Jahren eine vollständige Entwicklungsumgebung mit vollem Funktionsumfang zur Verfügung zu stellen.
 {.mt-5}
 
 {{% /blocks/cover %}}
 
 {{% blocks/section %}}
 
-## Goals of RUYISDK
+## Ziele von RUYISDK
 
-1. Developers who purchase (almost) any RISC-V development board or module can obtain hardware documentation, firmware/software updates, debugging support, etc. through the RUYISDK system.
-2. Developers can specify any commonly used RISC-V extended instruction set architecture combination, and can use the RUYISDK system to generate the operating system, tool chain, language execution environment (runtime or virtual machine), computing library, and application framework required by the customer wait. In particular, it is emphasized that RUYISDK will fully support draft standards (or manufacturer-customized extensions) such as Vector 0.7.1 and RVP 0.5.2 that have been siliconized on a large scale.
-3. Cultivate and operate an active and comprehensive developer communication community.
+1. Entwickler, die (fast) jedes RISC-V-Entwicklungsboard oder -Modul kaufen, können über das RUYISDK-System Hardwaredokumentation, Firmware-/Software-Updates, Debugging-Unterstützung usw. erhalten.
+2. Entwickler können jede häufig verwendete RISC-V-Architekturkombination mit erweitertem Befehlssatz angeben und das RUYISDK-System verwenden, um das vom Kunden benötigte Betriebssystem, die Toolkette, die Sprachausführungsumgebung (Laufzeit oder virtuelle Maschine), die Computerbibliothek und das Anwendungsframework zu generieren Warten. Insbesondere wird betont, dass RUYISDK Entwurfsstandards (oder herstellerspezifische Erweiterungen) wie Vector 0.7.1 und RVP 0.5.2, die in großem Umfang silikonisiert wurden, vollständig unterstützen wird.
+3. Pflegen und betreiben Sie eine aktive und umfassende Entwicklerkommunikations-Community.
 
 {{% /blocks/section %}}
 {{% blocks/section color="white" %}}
 
-## RUYISDK architecture diagram
+## RUYISDK-Architekturdiagramm
 
 <img src=./1703147196780.png width=100% >
 {{% /blocks/section %}}
 
 {{% blocks/section color="primary" %}}
 
-## Components of RuyiSDK
+## Komponenten von RuyiSDK
 
-RuyiSDK mainly includes a component manager (also called Ruyi package manager), an integrated development environment (Ruyi IDE), and a developer communication community;
+RuyiSDK umfasst hauptsächlich einen Komponentenmanager (auch Ruyi-Paketmanager genannt), eine integrierte Entwicklungsumgebung (Ruyi IDE) und eine Entwicklerkommunikations-Community;
 
-- Ruyi Component Manager includes an online software source (Ruyi repo) and a package management tool (ruyi). The online software source, Ruyi Repo, centrally stores the compilation tool chain, debugging tools, simulators, running environments, documents, codes, tools, target system images, etc. required for the RISC-V integrated development environment; the package manager tool is used As a tool for interacting with online software sources, it provides a set of command line interface (ruyi) or graphical user interface (GUI may be provided in the future) to enable developers to search, install, update and manage software packages. The package management tool is responsible for obtaining software package information from online software sources, parsing the dependencies of the software packages, and automatically processing the download and installation of dependencies.
-- Ruyi Integrated Development Environment (Ruyi IDE) is a toolbox specifically used to develop software and applications that can run on RISC-V architecture devices. Can help developers write and test their own programs.
+- Ruyi Component Manager umfasst eine Online-Softwarequelle (Ruyi Repo) und ein Paketverwaltungstool (Ruyi). Die Online-Softwarequelle Ruyi Repo speichert zentral die Kompilierungs-Toolkette, Debugging-Tools, Simulatoren, Laufumgebungen, Dokumente, Codes, Tools, Zielsystem-Images usw., die für die integrierte Entwicklungsumgebung RISC-V erforderlich sind; Das Paketmanager-Tool wird als Tool für die Interaktion mit Online-Softwarequellen verwendet und bietet eine Reihe von Befehlszeilenschnittstellen (Ruyi) oder grafischen Benutzeroberflächen (GUI wird möglicherweise in Zukunft bereitgestellt), um Entwicklern das Suchen, Installieren, Aktualisieren und zu ermöglichen Softwarepakete verwalten. Das Paketverwaltungstool ist dafür verantwortlich, Softwarepaketinformationen aus Online-Softwarequellen abzurufen, die Abhängigkeiten der Softwarepakete zu analysieren und den Download und die Installation von Abhängigkeiten automatisch zu verarbeiten.
+- Ruyi Integrated Development Environment (Ruyi IDE) ist eine Toolbox, die speziell zum Entwickeln von Software und Anwendungen verwendet wird, die auf Geräten mit RISC-V-Architektur ausgeführt werden können. Kann Entwicklern helfen, ihre eigenen Programme zu schreiben und zu testen.
 
-   Imagine that you want to make an application that can run on a RISC-V device, such as developing an image recognition program in C or C++ language. Ruyi IDE is like a studio for you, with various Tools can help you accomplish this task. First create the project, download and install the required compilation tool chain, debugging tools, simulator and other tools from the RuyiSDK package manager, then complete the editing of the code in the text editor, and then compile and build the project to obtain RISC-V The executable program of the architecture is finally run and tested on the simulator or RISC-V development board. If the code needs to be debugged, you can also use debugging tools to debug the code. This process is consistent with the development, compilation, construction, debugging, and running processes under x86, except that the RISC-V compilation tool chain, simulator and other software and tools suitable for the current development language and target running device can be downloaded from Ruyi Obtained from the package manager, it has been integrated into the Ruyi integrated development environment during installation and IDE initial setup, so users do not need to spend energy on setting up the environment.
-- The Ruyi Developer Exchange Community provides documents and tutorials, forums and technical discussion areas, blogs and documents, etc. The purpose is to provide an open communication platform for RISC-V developers, provide mutual technical support and resource sharing, and gather RISC-V developers and driving the development of the RISC-V ecosystem.
+   Stellen Sie sich vor, Sie möchten eine Anwendung erstellen, die auf einem RISC-V-Gerät ausgeführt werden kann, beispielsweise die Entwicklung eines Bilderkennungsprogramms in der Sprache C oder C++. Ruyi IDE ist für Sie wie ein Studio, mit verschiedenen Tools, die Ihnen bei der Bewältigung dieser Aufgabe helfen können. Erstellen Sie zuerst das Projekt, laden Sie die erforderliche Kompilierungs-Toolkette, Debugging-Tools, den Simulator und andere Tools vom RuyiSDK-Paketmanager herunter und installieren Sie sie. Schließen Sie dann die Bearbeitung des Codes im Texteditor ab und kompilieren und erstellen Sie dann das Projekt, um RISC zu erhalten. V Das ausführbare Programm der Architektur wird schließlich auf dem Simulator oder dem RISC-V-Entwicklungsboard ausgeführt und getestet. Wenn der Code debuggt werden muss, können Sie zum Debuggen des Codes auch Debugging-Tools verwenden. Dieser Prozess stimmt mit den Entwicklungs-, Kompilierungs-, Konstruktions-, Debugging- und Ausführungsprozessen unter x86 überein, mit der Ausnahme, dass die RISC-V-Kompilierungstoolkette, der Simulator und andere Software und Tools, die für die aktuelle Entwicklungssprache und das Ziellaufgerät geeignet sind, heruntergeladen werden können Ruyi wird vom Paketmanager bezogen und während der Installation und der Ersteinrichtung der IDE in die integrierte Entwicklungsumgebung von Ruyi integriert, sodass Benutzer keine Energie für die Einrichtung der Umgebung aufwenden müssen.
+- Die Ruyi Developer Exchange Community bietet Dokumente und Tutorials, Foren und technische Diskussionsbereiche, Blogs und Dokumente usw. Der Zweck besteht darin, eine offene Kommunikationsplattform für RISC-V-Entwickler bereitzustellen, gegenseitigen technischen Support und Ressourcenaustausch bereitzustellen und RISC-V zu sammeln Entwickler und treiben die Entwicklung des RISC-V-Ökosystems voran.
 <!-- {.text-center} -->
 
 {{% /blocks/section %}}
