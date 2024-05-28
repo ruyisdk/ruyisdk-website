@@ -3,6 +3,6 @@ title: Recent
 menu: {main: {weight: 30}}
 ---
 
-This is the **blog** section. It has two categories: News and Releases.
+Dies ist der **Blog**-Bereich. Es gibt zwei Kategorien: Neuigkeiten und Veröffentlichungen.
 
-Files in these directories will be listed in reverse chronological order.
+Dateien in diesen Verzeichnissen werden in umgekehrter chronologischer Reihenfolge aufgelistet.
