@@ -3,7 +3,7 @@ title: RuyiSDK
 ---
 
 {{< blocks/cover title="RuyiSDK: Machen Sie sich bereit für 1 Million RISC-V-Softwareentwickler" image_anchor="top" height="full" >}}
-<a class="btn btn-lg btn-primary me-3 mb-4" href="/supported">
+<a class="btn btn-lg btn-primary me-3 mb-4" href="/de/supported">
 Unterstützungsmatrix <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/ruyisdk">
