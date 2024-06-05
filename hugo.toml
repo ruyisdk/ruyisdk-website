@@ -255,11 +255,11 @@ enable = true
 #   url = "https://example.org/slack"
 #   icon = "fab fa-slack"
 #   desc = "Chat with other project developers"
-# [[params.links.developer]]
-#   name = "Developer mailing list"
-#   url = "https://example.org/mail"
-#   icon = "fa fa-envelope"
-#   desc = "Discuss development issues around the project"
+[[params.links.developer]]
+  name = "Developer mailing list"
+  url = "contact@ruyisdk.cn"
+  icon = "fa fa-envelope"
+  desc = "Discuss development issues around the project"
 
 # # hugo module configuration
 # [module]
