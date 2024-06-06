@@ -36,19 +36,3 @@ title: RuyiSDK
 
 {{% /blocks/section %}}
 
-{{% blocks/section color="white" %}}
-<div class="newsletter-subscribe mt-5 container">
-        <div class="container">
-            <div class="intro">
-                <h2 class="text-center newsletter">구독 가입할게요!</h2>
-                <p class="text-center">
-                오픈 소스 소프트웨어로서 SDK는 개발자에게 가장 고품질의 편리한 개발 도구와 자원을 제공하는 것을 목표로 합니다.저희와 긴밀히 연락하여 우리의 최신 동향과 업데이트를 가장 먼저 얻고 싶습니까?지금 바로 저희 웹사이트를 구독하시면 최신 버전의 공지사항, 개발 노하우, 모범 사례, 그리고 다른 개발자들과 교류할 수 있는 기회를 얻게 됩니다. 구독자 대열에 합류해서 더 강력하고 더 훌륭한 개발 생태계를 만들어갑시다! </p>
-            </div>
-            <form class="form-inline" method="post"  action="https://fabform.io/f/pFPStcS">
-              <div class="form-group"><input class="form-control" type="name" name="fullName" placeholder="이름"></div>
-                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="이메일"></div>
-                <div class="form-group"><button class="btn btn-primary" type="submit">신청</button></div>
-            </form>
-        </div>
-    </div>
-{{% /blocks/section %}}

@@ -259,7 +259,7 @@ enable = true
   name = "Developer mailing list"
   url = "contact@ruyisdk.cn"
   icon = "fa fa-envelope"
-  desc = "Discuss development issues around the project"
+  desc = "Contact us via email!"
 
 # # hugo module configuration
 # [module]
