@@ -1,5 +1,5 @@
 # RuyiSDK: Preparing for 1 million RISC-V software developers
 
-Official Website of RuyiSDK Project.
+![example workflow](https://github.com/ruyisdk/ruyisdk-website/actions/workflows/hugo.yaml/badge.svg)
 
-It will be officially launched publicly on **April 1, 2024**. Stay tuned.
+Official Website of RuyiSDK Project.
