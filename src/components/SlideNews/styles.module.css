@@ -1,0 +1,171 @@
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* .container {
+  height: 900px;
+  background-image: url(/static/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+} */
+
+.invContainer {
+  display: inline-block;
+  /* padding-top: 300px; */
+  font-size: 25px;
+}
+
+.svgContent {
+  position: absolute;
+}
+
+.logo {
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 60px;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.subtitle {
+  font-weight: 500;
+  color: var(--home-secondary-text);
+  font-size: 28px;
+}
+
+.content {
+  position: relative;
+  /* top: 120px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.primaryButton {
+  background-color: var(--home-button-primary);
+  color: var(--home-button-primary-text);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 99rem;
+  font-weight: bold;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.primaryButton:hover {
+  color: var(--home-button-primary-text);
+  background-color: var(--home-button-primary-hover);
+}
+
+.secondaryButton {
+  border: none;
+  padding: 10px 24px;
+  border-radius: 99rem;
+  font-weight: bold;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  /* color: var(--home-button-secondary-text); */
+  color: #000;
+  border: 1px solid var(--home-button-secondary-border);
+  /* background-color: var(--home-button-secondary); */
+  background-color: #ffa630;
+}
+
+.secondaryButton:hover {
+  background-color: var(--home-button-secondary-hover);
+  color: var(--home-button-secondary-text);
+}
+
+@media (max-width: 600px) {
+  .largeFormatDevices {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .content {
+    top: 50px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: calc(100% - 2rem);
+  }
+}
+
+/* @media screen and (max-width: 996px) {
+  .container {
+    background-image: url(/static/img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  }
+} */
+
+.spanStyle {
+  display: inline-block;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #ffff;
+  color: #ffffff;
+  position: absolute;
+  bottom: 15px;
+  border-radius: 25px;
+  align-items: flex-end;
+}
+
+.divStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 480px;
+}
+.infobutton {
+  position: absolute;
+
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  margin-top: 300px;
+}
+
+@media screen and (max-width: 824px) {
+  .divStyle {
+    height: 300px;
+  }
+  .infobutton {
+    margin-top: 200px;
+  }
+}
+
+.slidetitle {
+  color: white;
+}

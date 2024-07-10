@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.ruyi包管理器": {
+    "message": "ruyi Package Manager",
+    "description": "The label for category ruyi包管理器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ruyi包管理器.link.generated-index.description": {
+    "message": "Learn what ruyi package manager is in 5 minutes.",
+    "description": "The generated-index page description for category ruyi包管理器 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.使用案例": {
+    "message": "Cases",
+    "description": "The label for category 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.其他说明": {
+    "message": "Other instructions",
+    "description": "The label for category 其他说明 in sidebar tutorialSidebar"
+  }
+}
