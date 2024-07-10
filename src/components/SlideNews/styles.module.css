@@ -5,28 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* .container {
-  height: 900px;
-  background-image: url(/static/img/background.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-} */
-
-.invContainer {
-  display: inline-block;
-  /* padding-top: 300px; */
-  font-size: 25px;
-}
-
-.svgContent {
-  position: absolute;
-}
-
-.logo {
-  margin-bottom: 1rem;
-}
-
 .title {
   font-size: 60px;
   margin-bottom: 1.5rem;
@@ -99,12 +77,6 @@
   color: var(--home-button-secondary-text);
 }
 
-@media (max-width: 600px) {
-  .largeFormatDevices {
-    display: none;
-  }
-}
-
 @media (max-width: 450px) {
   .content {
     top: 50px;
@@ -115,16 +87,6 @@
     width: calc(100% - 2rem);
   }
 }
-
-/* @media screen and (max-width: 996px) {
-  .container {
-    background-image: url(/static/img/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-  }
-} */
 
 .spanStyle {
   display: inline-block;
@@ -147,7 +109,6 @@
 }
 .infobutton {
   position: absolute;
-
   padding: 12px 24px;
   font-weight: bold;
   font-size: 17px;
