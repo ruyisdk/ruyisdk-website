@@ -1,6 +1,6 @@
 {
   "title": {
-    "message": "RuyiSDK 博客",
+    "message": "RuyiSDK ブログ",
     "description": "The title for the blog used in SEO"
   },
   "description": {
@@ -8,7 +8,7 @@
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {
-    "message": "所有博文",
+    "message": "すべてのブログ投稿",
     "description": "The label for the left sidebar"
   }
 }

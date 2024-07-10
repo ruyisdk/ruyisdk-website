@@ -1,6 +1,6 @@
 {
   "title": {
-    "message": "RuyiSDK 双周报",
+    "message": "RuyiSDK 격주 보고서",
     "description": "The title for the blog used in SEO"
   },
   "description": {
@@ -8,7 +8,7 @@
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {
-    "message": "RuyiSDK 双周报",
+    "message": "Ruyi SDK 격주 보고서",
     "description": "The label for the left sidebar"
   }
 }

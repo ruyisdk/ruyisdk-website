@@ -1,12 +1,12 @@
 {
   "meetup": {
-    "message": "我们近期举办的活动"
+    "message": "Unsere letzten Veranstaltungen"
   },
   "homepage.primarybutton": {
-    "message": "了解更多"
+    "message": "Lern mehr"
   },
   "homepage.secondarybutton": {
-    "message": "现在开始"
+    "message": "Jetzt anfangen"
   },
   "theme.common.headingLinkTitle": {
     "message": "Direkter Link zur {heading}",
@@ -296,51 +296,63 @@
     "description": "The unlisted content banner message"
   },
   "ruyi 包管理器": {
-    "message": "ruyi 包管理器"
+    "message": "ruyi-Paketmanager"
   },
   "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。": {
-    "message": "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。"
+    "message": "Online-Softwarequellen und Verwaltungstools speichern die für die RISC-V-Entwicklungsumgebung erforderlichen Compiler-Toolchains, Debugging-Tools, Simulator, Laufzeitumgebungen, Dokumentation, Code, Hilfsprogramme und Ziel-Systemabbilder sowie Werkzeuge zur Interaktion mit den Online-Softwarequellen."
   },
   "ruyi IDE": {
     "message": "ruyi IDE"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
-    "message": "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。"
+    "message": "Eine Toolbox, die speziell für die Entwicklung von Software und Anwendungen entwickelt wurde, die auf Geräten mit RISC-V-Architektur ausgeführt werden können. Es kann Entwicklern helfen, ihre eigenen Programme zu schreiben und zu testen, und Benutzer müssen keine Energie für die Einrichtung der Umgebung aufwenden."
   },
   "社区": {
-    "message": "社区"
+    "message": "Gemeinschaft"
   },
   "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。": {
-    "message": "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。"
+    "message": "Die Community stellt Dokumente und Tutorials, Foren und technische Diskussionsbereiche usw. bereit. Der Zweck besteht darin, eine offene Kommunikationsplattform für RISC-V-Entwickler bereitzustellen, gegenseitige technische Unterstützung und gemeinsame Nutzung von Ressourcen bereitzustellen, RISC-V-Entwickler zusammenzubringen und das RISC-V-Ökosystem zu fördern Systementwicklung."
   },
   "开放源代码": {
-    "message": "开放源代码"
+    "message": "Open Source"
   },
   "我们的代码完全开源，意味着每个人都可以在许可证允许的条件下查看、使用、修改和共享它。无论你是开发者、学生、爱好者还是企业，都可以自由地参与到我们的项目中，共同构建更好的 RuyiSDK。欢迎加入我们的社区，一起推动开源的发展！": {
-    "message": "我们的代码完全开源，意味着每个人都可以在许可证允许的条件下查看、使用、修改和共享它。无论你是开发者、学生、爱好者还是企业，都可以自由地参与到我们的项目中，共同构建更好的 RuyiSDK。欢迎加入我们的社区，一起推动开源的发展！"
+    "message": "Unser Code ist vollständig Open Source, was bedeutet, dass jeder ihn gemäß der Lizenz sehen, verwenden, ändern und teilen kann. Egal, ob Sie Entwickler, Student, Enthusiast oder Unternehmen sind, es steht Ihnen frei, an unseren Projekten teilzunehmen und gemeinsam ein besseres RuyiSDK zu entwickeln. Willkommen, um unserer Community beizutreten und gemeinsam die Entwicklung von Open Source voranzutreiben!"
   },
   "RuyiSDK首次线下meetup：北京站": {
-    "message": "RuyiSDK首次线下meetup：北京站"
+    "message": "RuyiSDKs erstes Offline-Treffen: Beijing"
   },
   "第三期 Meetup 重磅回顾：技术大咖齐聚，精彩不容错过！": {
-    "message": "第三期 Meetup 重磅回顾：技术大咖齐聚，精彩不容错过！"
+    "message": "Große Rezension der dritten Ausgabe von Meetup"
   },
   "actionwelcome": {
-    "message": "欢迎来到RuyiSDK 社区"
+    "message": "Willkommen in der RuyiSDK-Community"
   },
   "actionstart": {
-    "message": "现在开始"
+    "message": "Jetzt anfangen"
   },
   "RuyiSDK": {
     "message": "RuyiSDK"
   },
   "面向RISC-V架构的一体化集成开发环境": {
-    "message": "面向RISC-V架构的一体化集成开发环境"
+    "message": "Eine integrierte All-in-One-Entwicklungsumgebung für die RISC-V-Architektur"
   },
   "RuyiSDK首次线下Meetup回顾": {
-    "message": "RuyiSDK首次线下Meetup回顾"
+    "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
   },
   "第三期 Meetup 重磅回顾": {
-    "message": "第三期 Meetup 重磅回顾"
+    "message": "Große Rezension der dritten Ausgabe von Meetup"
+  },
+  "RuyiSDK 双周报": {
+    "message": "Zweiwöchentlicher RuyiSDK-Bericht"
+  },
+  "每两周获得最新开发进展": {
+    "message": "Erhalten Sie alle zwei Wochen die neuesten Entwicklungsupdates"
+  },
+  "博客": {
+    "message": "Blog"
+  },
+  "随时看到来自 RuyiSDK 团队的重大消息": {
+    "message": "Bleiben Sie mit aktuellen Nachrichten vom RuyiSDK-Team auf dem Laufenden"
   }
 }

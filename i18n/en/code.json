@@ -342,5 +342,17 @@
   },
   "第三期 Meetup 重磅回顾": {
     "message": "Review of the third Meetup"
+  },
+  "RuyiSDK 双周报": {
+    "message": "Newsletter RuyiSDK"
+  },
+  "每两周获得最新开发进展": {
+    "message": "Get the latest development progress every two weeks"
+  },
+  "博客": {
+    "message": "Blog"
+  },
+  "随时看到来自 RuyiSDK 团队的重大消息": {
+    "message": "See important news from the RuyiSDK team at any time"
   }
 }
