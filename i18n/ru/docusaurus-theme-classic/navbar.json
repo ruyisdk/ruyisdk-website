@@ -1,0 +1,50 @@
+{
+  "title": {
+    "message": "RuyiSDK",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "My Site Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.文档": {
+    "message": "Документы",
+    "description": "Navbar item with label 文档"
+  },
+  "item.label.博客": {
+    "message": "Блог",
+    "description": "Navbar item with label 博客"
+  },
+  "item.label.双周报": {
+    "message": "Журнал",
+    "description": "Navbar item with label 双周报"
+  },
+  "item.label.下载": {
+    "message": "Загрузка",
+    "description": "Navbar item with label 下载"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.社区": {
+    "message": "Сообщество",
+    "description": "Navbar item with label 社区"
+  },
+  "item.label.联系我们": {
+    "message": "Найти нас",
+    "description": "Navbar item with label 联系我们"
+  },
+  "item.label.Discussion": {
+    "message": "Discussion",
+    "description": "Navbar item with label Discussion"
+  },
+  "item.label.社区活动": {
+    "message": "Митап Сообщества",
+    "description": "Navbar item with label 社区活动"
+  },
+  "item.label.社区守则": {
+    "message": "Правила сообщества",
+    "description": "Navbar item with label 社区守则"
+  }
+}

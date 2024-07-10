@@ -1,0 +1,53 @@
+import MyApp from "@site/src/components/Comment";
+
+:::tip
+By downloading and using RuyiSDK, you agree to the license terms and privacy statement.
+:::
+
+# You can get pre-built binaries from [GitHub releases](https://github.com/ruyisdk/ruyi/releases) or [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/)
+
+## Download
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/ruyi.amd64.20231211  #Download ruyi from the software source
+$ chmod +x ./ruyi.amd64.20231211  #Add execution permissions to ruyi
+$ sudo cp ruyi.amd64.20231211 /usr/local/bin/ruyi #Rename the ruyi.amd64.20231211 to ruyi and put it in PATH
+$ ruyi version #Success！
+Ruyi 0.2.0-beta.20231211
+Copyright (C) 2023 Institute of Software, Chinese Academy of Sciences (ISCAS).
+All rights reserved.
+License: Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
+```
+
+## Update
+
+```bash
+$ ruyi update
+There are 10 new news item(s):
+
+ No.   ID                                  Title
+──────────────────────────────────────────────────────────────────────────────────────────────────
+ 1     2024-01-14-ruyi-news                RuyiSDK now supports displaying news
+ 2     2024-01-15-new-board-images         New board images available (2024-01-15)
+ 3     2024-01-29-new-board-images         New board images available (2024-01-29)
+ 4     2024-01-29-ruyi-0.4                 Release notes for RuyiSDK 0.4
+ 5     2024-02-26-gnu-plct-rv64ilp32-elf   RV64ILP32 bare-metal toolchain & profile now available
+ 6     2024-04-23-ruyi-0.9                 Release notes for RuyiSDK 0.9
+ 7     2024-05-14-ruyi-0.10                Release notes for RuyiSDK 0.10
+ 8     2024-05-28-ruyi-0.11                Release notes for RuyiSDK 0.11
+ 9     2024-06-11-ruyi-0.12                Release notes for RuyiSDK 0.12
+ 10    2024-07-08-box64-wps-office-poc     尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office
+
+You can read them with ruyi news read.
+```
+
+## List profiles
+
+```bash
+$ ruyi list profiles
+generic
+baremetal-rv64ilp32 (needs flavor(s): {'rv64ilp32'})
+xiangshan-nanhu
+sipeed-lpi4a (needs flavor(s): {'xthead'})
+milkv-duo
+```
