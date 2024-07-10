@@ -13,11 +13,9 @@ export default function BlogLayout(props) {
     return (
       <Layout {...layoutProps}>
         <div className="container margin-vert--lg">
-          <div class="hero hero--secondary" style={{ height: "10em" }}>
-            <div class="container">
-              <h1 class="hero__title">RuyiSDK 双周报</h1>
-              <p class="hero__subtitle">每两周获得最新开发进展</p>
-            </div>
+          <div class="container">
+            <h1 class="hero__title">RuyiSDK 双周报</h1>
+            <p class="hero__subtitle">每两周获得最新开发进展</p>
           </div>
           <div className="container" style={{ marginTop: "20px" }}>
             <div className="row">
@@ -40,11 +38,9 @@ export default function BlogLayout(props) {
     return (
       <Layout {...layoutProps}>
         <div className="container margin-vert--lg">
-          <div class="hero hero--primary" style={{ height: "10rem" }}>
-            <div class="container">
-              <h1 class="hero__title">博客</h1>
-              <p class="hero__subtitle">随时看到来自 RuyiSDK 团队的重大消息</p>
-            </div>
+          <div class="container">
+            <h1 class="hero__title">博客</h1>
+            <p class="hero__subtitle">随时看到来自 RuyiSDK 团队的重大消息</p>
           </div>
           <div className="container" style={{ marginTop: "20px" }}>
             <div className="row">

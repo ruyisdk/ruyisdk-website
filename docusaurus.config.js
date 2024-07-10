@@ -10,8 +10,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
-  favicon:
-    "https://github.com/ruyisdk/ruyisdk-website/blob/e885f348818c3ba99f8344add6fce78e71a7974e/static/favicons/favicon.ico",
+  favicon: "img/favicon.ico",
 
   // Set the production url of your site here
   url: "https://ruyisdk.org",
