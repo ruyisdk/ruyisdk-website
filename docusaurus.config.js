@@ -10,13 +10,14 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
-  favicon: "https://ruyisdk.org/favicons/favicon.ico",
+  favicon:
+    "https://github.com/ruyisdk/ruyisdk-website/blob/e885f348818c3ba99f8344add6fce78e71a7974e/static/favicons/favicon.ico",
 
   // Set the production url of your site here
   url: "https://ruyisdk.org",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/ruyisdk-website/",
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
