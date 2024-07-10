@@ -4,19 +4,19 @@
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.ruyi包管理器": {
-    "message": "ruyi包管理器",
+    "message": "ruyi-Paketmanager",
     "description": "The label for category ruyi包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.ruyi包管理器.link.generated-index.description": {
-    "message": "5分钟了解什么是ruyi包管理器。",
+    "message": "Erfahren Sie in 5 Minuten, was der ruyi-Paketmanager ist.",
     "description": "The generated-index page description for category ruyi包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.使用案例": {
-    "message": "使用案例",
+    "message": "Anwendungsfälle",
     "description": "The label for category 使用案例 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.其他说明": {
-    "message": "其他说明",
+    "message": "andere Anweisungen",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
   }
 }

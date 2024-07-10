@@ -8,19 +8,19 @@
     "description": "The alt text of navbar logo"
   },
   "item.label.文档": {
-    "message": "文档",
+    "message": "書類",
     "description": "Navbar item with label 文档"
   },
   "item.label.博客": {
-    "message": "博客",
+    "message": "ブログ",
     "description": "Navbar item with label 博客"
   },
   "item.label.双周报": {
-    "message": "双周报",
+    "message": "隔週レポート",
     "description": "Navbar item with label 双周报"
   },
   "item.label.下载": {
-    "message": "下载",
+    "message": "ダウンロード",
     "description": "Navbar item with label 下载"
   },
   "item.label.GitHub": {
@@ -28,11 +28,11 @@
     "description": "Navbar item with label GitHub"
   },
   "item.label.社区": {
-    "message": "社区",
+    "message": "コミュニティ",
     "description": "Navbar item with label 社区"
   },
   "item.label.联系我们": {
-    "message": "联系我们",
+    "message": "お問い合わせ",
     "description": "Navbar item with label 联系我们"
   },
   "item.label.Discussion": {
@@ -40,11 +40,11 @@
     "description": "Navbar item with label Discussion"
   },
   "item.label.社区活动": {
-    "message": "社区活动",
+    "message": "コミュニティ活動",
     "description": "Navbar item with label 社区活动"
   },
   "item.label.社区守则": {
-    "message": "社区守则",
+    "message": "コミュニティガイドライン",
     "description": "Navbar item with label 社区守则"
   }
 }
