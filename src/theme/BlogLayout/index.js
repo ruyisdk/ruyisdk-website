@@ -14,27 +14,24 @@ export default function BlogLayout(props) {
     return (
       <Layout {...layoutProps}>
         <div className="container margin-vert--lg">
-          <div class="container">
-            <h1 class="hero__title">
-              <Translate>RuyiSDK 双周报</Translate>
-            </h1>
-            <p class="hero__subtitle">
-              <Translate>每两周获得最新开发进展</Translate>
-            </p>
-          </div>
-          <div className="container" style={{ marginTop: "20px" }}>
-            <div className="row">
-              <BlogSidebar sidebar={sidebar} />
-              <main
-                className={clsx("col", {
-                  "col--7": hasSidebar,
-                  "col--9 col--offset-1": !hasSidebar,
-                })}
-              >
-                {children}
-              </main>
-              {toc && <div className="col col--2">{toc}</div>}
-            </div>
+          <h1 class="hero__title">
+            <Translate>RuyiSDK 双周报</Translate>
+          </h1>
+          <p class="hero__subtitle">
+            <Translate>每两周获得最新开发进展</Translate>
+          </p>
+
+          <div className="row">
+            <BlogSidebar sidebar={sidebar} />
+            <main
+              className={clsx("col", {
+                "col--7": hasSidebar,
+                "col--9 col--offset-1": !hasSidebar,
+              })}
+            >
+              {children}
+            </main>
+            {toc && <div className="col col--2">{toc}</div>}
           </div>
         </div>
       </Layout>
@@ -43,27 +40,24 @@ export default function BlogLayout(props) {
     return (
       <Layout {...layoutProps}>
         <div className="container margin-vert--lg">
-          <div class="container">
-            <h1 class="hero__title">
-              <Translate>博客</Translate>
-            </h1>
-            <p class="hero__subtitle">
-              <Translate>随时看到来自 RuyiSDK 团队的重大消息</Translate>
-            </p>
-          </div>
-          <div className="container" style={{ marginTop: "20px" }}>
-            <div className="row">
-              <BlogSidebar sidebar={sidebar} />
-              <main
-                className={clsx("col", {
-                  "col--7": hasSidebar,
-                  "col--9 col--offset-1": !hasSidebar,
-                })}
-              >
-                {children}
-              </main>
-              {toc && <div className="col col--2">{toc}</div>}
-            </div>
+          <h1 class="hero__title">
+            <Translate>博客</Translate>
+          </h1>
+          <p class="hero__subtitle">
+            <Translate>随时看到来自 RuyiSDK 团队的重大消息</Translate>
+          </p>
+
+          <div className="row">
+            <BlogSidebar sidebar={sidebar} />
+            <main
+              className={clsx("col", {
+                "col--7": hasSidebar,
+                "col--9 col--offset-1": !hasSidebar,
+              })}
+            >
+              {children}
+            </main>
+            {toc && <div className="col col--2">{toc}</div>}
           </div>
         </div>
       </Layout>
