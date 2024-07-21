@@ -1,0 +1,34 @@
+.button {
+  font-size: 12px;
+  background-color: var(--home-button-primary);
+  color: var(--home-button-primary-text);
+  margin: 0.6em 0.3em;
+  padding: 0.6em 1.2em;
+  border-radius: 99rem;
+  border: none;
+  height: 45px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.input {
+  background: #eff1f4;
+  border: none;
+  border-radius: 99rem;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+  text-indent: 9px;
+  height: 45px;
+  margin-right: 10px;
+  min-width: 250px;
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  font-size: 17px;
+  text-align: center;
+}
+
+.button:hover {
+  color: var(--home-button-primary-text);
+  background-color: var(--home-button-primary-hover);
+}
