@@ -4,6 +4,7 @@ import Layout from "@theme/Layout";
 import BlogSidebar from "@theme/BlogSidebar";
 import useRouteContext from "@docusaurus/useRouteContext";
 import Translate, { translate } from "@docusaurus/Translate";
+import ButtonSubscription from "@site/src/components/Subscription/ButtonSubscription";
 
 export default function BlogLayout(props) {
   const { sidebar, toc, children, ...layoutProps } = props;
@@ -19,6 +20,7 @@ export default function BlogLayout(props) {
           </h1>
           <p class="hero__subtitle">
             <Translate>每两周获得最新开发进展</Translate>
+            <ButtonSubscription />
           </p>
 
           <div className="row">
@@ -45,6 +47,7 @@ export default function BlogLayout(props) {
           </h1>
           <p class="hero__subtitle">
             <Translate>随时看到来自 RuyiSDK 团队的重大消息</Translate>
+            <ButtonSubscription />
           </p>
 
           <div className="row">
