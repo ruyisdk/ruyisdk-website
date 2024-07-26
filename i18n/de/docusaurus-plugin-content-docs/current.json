@@ -18,5 +18,9 @@
   "sidebar.tutorialSidebar.category.其他说明": {
     "message": "andere Anweisungen",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.版本日志": {
+    "message": "Changelog",
+    "description": "The label for category 版本日志 in sidebar tutorialSidebar"
   }
 }
