@@ -4,26 +4,35 @@ import MyApp from "@site/src/components/Comment";
 By downloading and using RuyiSDK, you agree to the license terms and privacy statement.
 :::
 
-# You can get pre-built binaries from [GitHub releases](https://github.com/ruyisdk/ruyi/releases) or [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/)
+# The document is time-sensitive. If the demonstration link cannot be downloaded, you can get the pre-built binaries of all versions from [GitHub releases](https://github.com/ruyisdk/ruyi/releases) or [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/)
 
 ## Download
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/ruyi.amd64.20231211  #Download ruyi from the software source
-$ chmod +x ./ruyi.amd64.20231211  #Add execution permissions to ruyi
-$ sudo cp ruyi.amd64.20231211 /usr/local/bin/ruyi #Rename the ruyi.amd64.20231211 to ruyi and put it in PATH
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.15.0/ruyi.amd64  #Download ruyi from the software source
+$ chmod +x ./ruyi.amd64  #Add execution permissions to ruyi
+$ sudo cp ruyi.amd64 /usr/local/bin/ruyi #Rename the ruyi.amd64.20231211 to ruyi and put it in PATH
 $ ruyi version #Success！
-Ruyi 0.2.0-beta.20231211
+Ruyi 0.15.0
+
+Running on linux/x86_64.
+
 Copyright (C) 2023 Institute of Software, Chinese Academy of Sciences (ISCAS).
 All rights reserved.
 License: Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
+
+This version of ruyi makes use of code licensed under the Mozilla Public
+License 2.0 (https://mozilla.org/MPL/2.0/). You can get the respective
+project's sources from the project's official website:
+
+* certifi: https://github.com/certifi/python-certifi
 ```
 
 ## Update
 
 ```bash
 $ ruyi update
-There are 10 new news item(s):
+There are 13 new news item(s):
 
  No.   ID                                  Title
 ──────────────────────────────────────────────────────────────────────────────────────────────────
@@ -36,7 +45,10 @@ There are 10 new news item(s):
  7     2024-05-14-ruyi-0.10                Release notes for RuyiSDK 0.10
  8     2024-05-28-ruyi-0.11                Release notes for RuyiSDK 0.11
  9     2024-06-11-ruyi-0.12                Release notes for RuyiSDK 0.12
- 10    2024-07-08-box64-wps-office-poc     尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office
+ 10    2024-06-24-ruyi-0.13                Release notes for RuyiSDK 0.13
+ 11    2024-07-08-box64-wps-office-poc     尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office
+ 12    2024-07-09-ruyi-0.14                Release notes for RuyiSDK 0.14
+ 13    2024-07-23-ruyi-0.15                Release notes for RuyiSDK 0.15
 
 You can read them with ruyi news read.
 ```
