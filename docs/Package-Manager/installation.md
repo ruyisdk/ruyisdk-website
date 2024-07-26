@@ -20,14 +20,23 @@ sidebar_position: 2
 ## amd64 架构示例
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/ruyi.amd64.20231211
-$ chmod +x ./ruyi.amd64.20231211
-$ sudo cp ruyi.amd64.20231211 /usr/local/bin/ruyi
-$ ruyi version
-Ruyi 0.2.0-beta.20231211
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.15.0/ruyi.amd64  #从软件源下载ruyi本体
+$ chmod +x ./ruyi.amd64  #给ruyi添加执行权限
+$ sudo cp ruyi.amd64 /usr/local/bin/ruyi #将ruyi本体改名为ruyi，并放入PATH
+$ ruyi version #成功！
+Ruyi 0.15.0
+
+Running on linux/x86_64.
+
 Copyright (C) 2023 Institute of Software, Chinese Academy of Sciences (ISCAS).
 All rights reserved.
 License: Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
+
+This version of ruyi makes use of code licensed under the Mozilla Public
+License 2.0 (https://mozilla.org/MPL/2.0/). You can get the respective
+project's sources from the project's official website:
+
+* certifi: https://github.com/certifi/python-certifi
 ```
 
 > `ruyi version` 应当可以正常打印版本信息。**注意二进制的文件名必须为** ruyi。
@@ -37,23 +46,27 @@ License: Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
 ```bash
 $ ruyi --help
 
-RuyiSDK Package Manager 0.2.0-beta.20231211
+usage: ruyi [-h] [-V] [--porcelain] {device,extract,install,i,list,news,update,venv,admin,self,version} ...
+
+RuyiSDK Package Manager 0.15.0
 
 options:
   -h, --help            show this help message and exit
   -V, --version         Print version information
+  --porcelain           Give the output in a machine-friendly format if applicable
 
 subcommands:
-  {extract,install,i,list,update,venv,admin,self,version}
+  {device,extract,install,i,list,news,update,venv,admin,self,version}
+    device              Manage devices
     extract             Fetch package(s) then extract to current directory
     install (i)         Install package from configured repository
     list                List available packages in configured repository
+    news                List and read news items from configured repository
     update              Update RuyiSDK repo and packages
     venv                Generate a virtual environment adapted to the chosen toolchain and profile
-    admin               (NOT FOR REGULAR USERS) Subcommands for managing Ruyi Repos
+    admin               (NOT FOR REGULAR USERS) Subcommands for managing Ruyi repos
     self                Manage this Ruyi installation
     version             Print version information
-
 
 ```
 
