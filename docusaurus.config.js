@@ -61,14 +61,14 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // announcementBar: {
-      //   id: "ruyi",
-      //   content:
-      //     'k230D最新发布，<a target="_blank" rel="noopener noreferrer" href="#">点击查看</a>',
-      //   backgroundColor: "#20232a",
-      //   textColor: "#fff",
-      //   isCloseable: true,
-      // },
+      announcementBar: {
+        id: "k230d",
+        content:
+          '嘉楠勘智K230D: 首款基于新32位 RuyiSDK 的AIoT量产芯片! <a target="_blank" rel="noopener noreferrer" href="/blog/2024/07/30/k230d">点击查看</a>',
+        backgroundColor: "#20232a",
+        textColor: "#fff",
+        isCloseable: true,
+      },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,
