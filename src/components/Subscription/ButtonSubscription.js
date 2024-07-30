@@ -31,7 +31,7 @@ function ButtonSubscription() {
     e.preventDefault();
     setLoading(true);
     const url =
-      "https://ruyisdk.us13.list-manage.com/subscribe/post?u=a7bba3aa9de6214adf1c66d82&amp;id=a894094570&amp;f_id=00e7d1edf0"; // you can use .env file to replace this
+      "https://ruyisdk.us13.list-manage.com/subscribe/post?u=553607139703751354f0f8c72&amp;id=07fe20b41c&amp;f_id=002d3ee3f0"; // you can use .env file to replace this
     jsonp(`${url}&EMAIL=${email}`, { param: "c" }, (_, { msg }) => {
       alert(msg);
       setLoading(false);
