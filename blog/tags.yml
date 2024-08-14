@@ -1,16 +1,5 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+k230d:
+  label: 'K230D'
+  permalink: '/k230d'
+  description: '嘉楠勘智K230D: 首款基于新32位 RuyiSDK 的AIoT量产芯片'
+
