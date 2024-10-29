@@ -35,8 +35,8 @@ https://download.eclipse.org/eclipse/downloads/index.html
 
 RevyOS小队隶属于 PLCT Lab, ISCAS。ISCAS 是 RISC-V International 的 Development Partner、Training Partner，同时在2024年8月获得了 RISC-V Ecosystem Labs 认证。
 
-**特别致谢以下贡献者***
+**特别致谢以下贡献者**
 
 于波、陈璇、Hannes Wellmann、Alexander Kurtakov、Ed Merks、Pawel Stankiewicz、Frederic Gurr
 
-*如有遗漏，请联系作者
+*如有遗漏，请联系作者*
