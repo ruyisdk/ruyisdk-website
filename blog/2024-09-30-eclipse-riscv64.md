@@ -1,12 +1,11 @@
 ---
 title: "Eclipse 上游初步支持 RISC-V，每日构建镜像已经可以下载试用"
-authors: [white]
 ---
 # Eclipse 上游初步支持 RISC-V，每日构建镜像已经可以下载试用
 
-> 原文链接：https://riscv.org/blog-chinese/2024/09/eclipse-riscv64-support-upstreamed/
-> 日期: September 30, 2024
-> 作者：陈璇
+> - 原文链接：https://riscv.org/blog-chinese/2024/09/eclipse-riscv64-support-upstreamed/
+> - 日期: September 30, 2024
+> - 作者：陈璇
 
 Eclipse 是一款开源且功能强大的集成开发环境（IDE），广泛支持多种编程语言，为开发者提供了一个统一的平台，用于编写、调试和管理代码。同时，Eclipse 还具备强大的插件系统，可根据需求灵活扩展功能。
 
@@ -16,8 +15,6 @@ Eclipse 是一款开源且功能强大的集成开发环境（IDE），广泛支
 
 *图1-Eclipse upstream 涉及到几十个不同的组建和支持过程，许多开发者都进行了贡献*
 
-
-
 相关改动已被合入上游，感兴趣的朋友可通过下方链接，建议选择 Integration Builds 板块中的最新构建日期（20240929以后每日构建支持riscv）进入每日构建资源页面，选择“Eclipse SDK -> Linux (64 bit version for RISC-V)”下载后进行体验。
 
 https://download.eclipse.org/eclipse/downloads/index.html
@@ -25,7 +22,6 @@ https://download.eclipse.org/eclipse/downloads/index.html
 ![eclipse-pic-2.png](/img/eclipse-pic-2.png)
 
 *图2-在安装了 Debian 操作系统的 SiFive Unmatched 上测试运行 Eclipse SDK IDE*
-
 
 接下来，RevyOS 小队将继续完善 Eclipse riscv64 的支持，敬请期待更多优化与改进！
 
