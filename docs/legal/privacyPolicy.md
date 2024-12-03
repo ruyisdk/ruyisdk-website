@@ -9,7 +9,7 @@ RuyiSDK 专注于产品使用情况和用户体验优化，秉持最小化收集
 - 浏览网站：仅浏览本网站时，无需提供个人信息。
 - 邮件订阅：当您使用我们的邮件订阅服务时，我们会收集您的电子邮件地址以提供相关服务。
 - 参与贡献：RuyiSDK 社区是一个开源社区，其代码托管在 GitHub 平台。您可以通过 GitHub 仓库 issue 和 discussions 的方式参与沟通和反馈，或直接参与开发。通过 GitHub 平台参与社区活动时，您将需要遵循 GitHub 的隐私政策 [*GitHub General Privacy Statement*](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)。
-- 安装工具：使用RuyiSDK包管理器时，我们匿名化收集使用数据，具体请参见第2章节。
+- 安装与使用工具：使用 RuyiSDK 包管理器时，我们可能会收集匿名化的使用数据，具体请参见第 2 章节。
 
 ## 2. 我们的数据收集方式
 
