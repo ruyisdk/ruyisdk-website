@@ -40,7 +40,7 @@ RuyiSDK 专注于产品使用情况和用户体验优化，秉持最小化收集
 您可以选择是否参与遥测。如果您不希望参与，请在运行包含遥测功能的 RuyiSDK 包管理器之前执行以下操作之一：
 
 * 确保环境变量中存在 `RUYI_TELEMETRY_OPTOUT=1`；
-* 在配置文件 `~/.config/ruyi/config.toml`中加入以下内容：
+* 在配置文件 `~/.config/ruyi/config.toml` 中加入以下内容：
 
 ```toml
 [telemetry]
