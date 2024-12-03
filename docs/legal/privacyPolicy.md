@@ -42,10 +42,9 @@ RuyiSDK 专注于产品使用情况和用户体验优化，秉持最小化收集
 * 确保环境变量中存在 `RUYI_TELEMETRY_OPTOUT=1`；
 * 在配置文件 `~/.config/ruyi/config.toml`中加入以下内容：
 
-  ```toml
-  [telemetry]
-  mode = "off"
-  ```
+```toml
+[telemetry]
+mode = "off"
 
 ### 2.4 删除遥测数据
 
