@@ -7,14 +7,6 @@
     "message": "RuyiSDK",
     "description": "The label of footer link with label=RuyiSDK linking to /docs/intro"
   },
-  "link.item.label.X": {
-    "message": "X",
-    "description": "The label of footer link with label=X linking to https://twitter.com/RuyiSDK"
-  },
-  "link.item.label.Telegram": {
-    "message": "Telegram",
-    "description": "The label of footer link with label=Telegram linking to https://t.me/ruyisdk"
-  },
   "link.item.label.GitHub": {
     "message": "GitHub",
     "description": "The label of footer link with label=GitHub linking to https://github.com/ruyisdk"

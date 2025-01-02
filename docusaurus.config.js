@@ -157,14 +157,6 @@ const config = {
                 label: "Discussion",
                 href: "https://github.com/ruyisdk/ruyisdk-website/discussions",
               },
-              {
-                label: "X",
-                href: "https://twitter.com/RuyiSDK",
-              },
-              {
-                label: "Telegram",
-                href: "https://t.me/ruyisdk",
-              },
             ],
           },
           {
