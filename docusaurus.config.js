@@ -61,16 +61,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      algolia: {
+      /* algolia: {
         // The application ID provided by Algolia
-        appId: '7DOYWOQP64',
+        appId: '',
   
         // Public API key: it is safe to commit it
-        apiKey: '4a7eae0eb99f9064e72aa86c3ab0c53e',
+        apiKey: '',
   
         indexName: 'ruyisdk',
 
-      },
+      }, */
       announcementBar: {
         id: "k230d",
         content:
@@ -214,13 +214,13 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
-    [
+    /* [
       "@docusaurus/plugin-google-gtag",
       {
-        trackingID: "G-DHG3DDL4VG",
+        trackingID: "",
         anonymizeIP: true,
       },
-    ],
+    ], */
   ],
 };
 
