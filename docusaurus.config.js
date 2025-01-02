@@ -31,7 +31,7 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en", "ru", "de", "ja", "ko"],
+    locales: ["zh-Hans", "en", "de"],
   },
 
   presets: [
@@ -72,9 +72,9 @@ const config = {
 
       }, */
       announcementBar: {
-        id: "k230d",
+        id: "th1520",
         content:
-          '嘉楠勘智K230D: 首款基于新32位 RuyiSDK 的AIoT量产芯片! <a target="_blank" rel="noopener noreferrer" href="/blog/2024/07/30/k230d">点击查看</a>',
+          'Kernel Upgraded from 5.10 to 6.6, RuyiSDK Releases New Operating System Image for TH1520 Series Development Boards <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">Click to View</a>',
         backgroundColor: "#20232a",
         textColor: "#fff",
         isCloseable: true,
@@ -106,6 +106,7 @@ const config = {
           {
             type: "localeDropdown",
             position: "right",
+            queryString: "?test"
           },
           {
             href: "https://github.com/ruyisdk",
@@ -169,6 +170,20 @@ const config = {
               {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
+              },
+              {
+                label: "微信公众号",
+                className: 'hover-wechat-link',
+                to: '/contact'
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                label: "QQ群",
+                className: 'hover-qq-link',
+                to: '/contact'
               },
             ],
           },
