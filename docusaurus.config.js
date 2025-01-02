@@ -64,17 +64,17 @@ const config = {
       algolia: {
         // The application ID provided by Algolia
         appId: '7DOYWOQP64',
-  
+
         // Public API key: it is safe to commit it
         apiKey: '4a7eae0eb99f9064e72aa86c3ab0c53e',
-  
+
         indexName: 'ruyisdk',
 
       },
       announcementBar: {
-        id: "k230d",
+        id: "th1520",
         content:
-          '嘉楠勘智K230D: 首款基于新32位 RuyiSDK 的AIoT量产芯片! <a target="_blank" rel="noopener noreferrer" href="/blog/2024/07/30/k230d">点击查看</a>',
+          '内核从 5.10 升级至 6.6，RuyiSDK 发布面向 TH1520 系列开发板操作系统新镜像 <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">点击查看</a>',
         backgroundColor: "#20232a",
         textColor: "#fff",
         isCloseable: true,
