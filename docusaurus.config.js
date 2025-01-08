@@ -31,7 +31,7 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en", "ru", "de", "ja", "ko"],
+    locales: ["zh-Hans", "en", "de"],
   },
 
   presets: [
@@ -169,6 +169,20 @@ const config = {
               {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
+              },
+              {
+                label: "微信公众号",
+                className: 'hover-wechat-link',
+                to: '/contact'
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                label: "QQ群",
+                className: 'hover-qq-link',
+                to: '/contact'
               },
             ],
           },
