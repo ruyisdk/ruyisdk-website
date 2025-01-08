@@ -170,6 +170,20 @@ const config = {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
               },
+              {
+                label: "微信公众号",
+                className: 'hover-wechat-link',
+                to: '/contact'
+              },
+            ],
+          },
+          {
+            items: [
+              {
+                label: "QQ群",
+                className: 'hover-qq-link',
+                to: '/contact'
+              },
             ],
           },
         ],
