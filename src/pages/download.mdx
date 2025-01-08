@@ -4,62 +4,59 @@ import MyApp from "@site/src/components/Comment";
 下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
 :::
 
-# 文档具有时效性，如示范链接无法下载，您可以从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 或 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)中获取所有版本的预构建二进制文件
-
 ## 下载
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.15.0/ruyi.amd64  #从软件源下载ruyi本体
-$ chmod +x ./ruyi.amd64  #给ruyi添加执行权限
-$ sudo cp ruyi.amd64 /usr/local/bin/ruyi #将ruyi本体改名为ruyi，并放入PATH
-$ ruyi version #成功！
-Ruyi 0.15.0
+Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
 
-Running on linux/x86_64.
-
-Copyright (C) 2023 Institute of Software, Chinese Academy of Sciences (ISCAS).
-All rights reserved.
-License: Apache-2.0 <https://www.apache.org/licenses/LICENSE-2.0>
-
-This version of ruyi makes use of code licensed under the Mozilla Public
-License 2.0 (https://mozilla.org/MPL/2.0/). You can get the respective
-project's sources from the project's official website:
-
-* certifi: https://github.com/certifi/python-certifi
-```
-
-## 更新
+如果输出为 ``x86_64``：
 
 ```bash
-$ ruyi update
-There are 13 new news item(s):
-
- No.   ID                                  Title
-──────────────────────────────────────────────────────────────────────────────────────────────────
- 1     2024-01-14-ruyi-news                RuyiSDK now supports displaying news
- 2     2024-01-15-new-board-images         New board images available (2024-01-15)
- 3     2024-01-29-new-board-images         New board images available (2024-01-29)
- 4     2024-01-29-ruyi-0.4                 Release notes for RuyiSDK 0.4
- 5     2024-02-26-gnu-plct-rv64ilp32-elf   RV64ILP32 bare-metal toolchain & profile now available
- 6     2024-04-23-ruyi-0.9                 Release notes for RuyiSDK 0.9
- 7     2024-05-14-ruyi-0.10                Release notes for RuyiSDK 0.10
- 8     2024-05-28-ruyi-0.11                Release notes for RuyiSDK 0.11
- 9     2024-06-11-ruyi-0.12                Release notes for RuyiSDK 0.12
- 10    2024-06-24-ruyi-0.13                Release notes for RuyiSDK 0.13
- 11    2024-07-08-box64-wps-office-poc     尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office
- 12    2024-07-09-ruyi-0.14                Release notes for RuyiSDK 0.14
- 13    2024-07-23-ruyi-0.15                Release notes for RuyiSDK 0.15
-
-You can read them with ruyi news read.
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.amd64
 ```
 
-## 列出 profiles
+如果输出为 ``aarch64``：
 
 ```bash
-$ ruyi list profiles
-generic
-baremetal-rv64ilp32 (needs flavor(s): {'rv64ilp32'})
-xiangshan-nanhu
-sipeed-lpi4a (needs flavor(s): {'xthead'})
-milkv-duo
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.arm64
 ```
+
+如果输出为 ``riscv64``：
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.riscv64
+```
+
+:::tip
+文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
+:::
+
+## 安装
+
+下面以 x86_64 架构为例，给下载的二进制添加执行权限：
+
+```bash
+$ chmod +x ./ruyi.amd64
+```
+
+安装二进制到 ``PATH`` 包含的目录中：
+
+```bash
+$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
+```
+
+:::tip
+注意二进制文件名必须为 ``ruyi``
+:::
+
+验证安装：
+
+```bash
+$ ruyi version
+```
+
+若命令执行并正常打印了 Copyright 信息则安装已经成功；若出现了非预期的失败则需要检查安装过程和系统环境。
+
+## 开始使用
+
+阅读文档以了解 Ruyi 的强大功能！
+
