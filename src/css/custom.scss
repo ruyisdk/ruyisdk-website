@@ -2010,3 +2010,71 @@ giscus-widget {
   background-color: var(--home-button-secondary-hover);
   color: var(--home-button-secondary-text);
 }
+
+.hover-wechat-link {
+  position: relative;
+  text-decoration: none;
+  color: white;
+}
+
+.hover-wechat-link::after {
+  content: '公众号二维码';
+  color: #000;
+  border-radius: 5%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: medium;
+  position: absolute;
+  left: -100%;
+  top: -18rem;
+  width: 15rem;
+  height: 18rem;
+  background-size: cover;
+  background-image: url('/img/wechat_account_img.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hover-wechat-link:hover::after {
+  opacity: 1;
+}
+
+.hover-qq-link {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  margin-top: 5rem;
+}
+
+.hover-qq-link::after {
+  content: 'RUYISDK技术交流群二维码';
+  color: #000;
+  border-radius: 5%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: medium;
+  position: absolute;
+  left: -200%;
+  top: -24rem;
+  width: 15rem;
+  height: 24rem;
+  background-size: cover;
+  background-image: url('/img/qqgroup_img.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hover-qq-link:hover::after {
+  opacity: 1;
+}
+
+.custom-image {
+  max-width: 300px;
+  height: auto;
+}
