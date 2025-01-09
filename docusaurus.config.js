@@ -74,7 +74,7 @@ const config = {
       announcementBar: {
         id: "th1520",
         content:
-          '内核从 5.10 升级至 6.6，RuyiSDK 发布面向 TH1520 系列开发板操作系统新镜像 <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">点击查看</a>',
+          'Kernel Upgraded from 5.10 to 6.6, RuyiSDK Releases New Operating System Image for TH1520 Series Development Boards <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">Click to View</a>',
         backgroundColor: "#20232a",
         textColor: "#fff",
         isCloseable: true,
