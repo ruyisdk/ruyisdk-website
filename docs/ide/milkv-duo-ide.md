@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 # Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试
 
@@ -20,7 +20,7 @@ sidebar_position: 3
    ```
 3. 创建和使用Duo编译环境
 
-   ```
+   ```bash
    #查看ruyi预配置环境
    #ruyi list profiles
 
@@ -32,18 +32,18 @@ sidebar_position: 3
 
 ### 源码准备
 
-本文以 milkv-duo 开发板的应用示例 duo-examples 为例。使用下面任一方式获取源码：
+   本文以 milkv-duo 开发板的应用示例 duo-examples 为例。使用下面任一方式获取源码：
 
-```
+```bash
 
-#方法一：git clone
+   #方法一：git clone
 
-git clone https://github.com/milkv-duo/duo-examples.git
+   git clone https://github.com/milkv-duo/duo-examples.git
 
 
-#方法二：ruyi extract 命令下载
+   #方法二：ruyi extract 命令下载
 
-ruyi extract milkv-duo-examples
+   ruyi extract milkv-duo-examples
 
 ```
 
@@ -82,59 +82,59 @@ ruyi extract milkv-duo-examples
    - 为了实现从构建到目标程序的自动拷贝到目标设备，Makefile中还增加了upload目标（这是建立在PC和目标设备完成SSH认证的前提下，请参考文末“SSH秘钥配置”），同时还需要预先在目标设备上建好相关的目录（存放路径自定义，但请修改scp命令后的路径确保和实际环境一致）。
    - 您还可以在下面 Makefile 的基础上继续修改，本文只是提供一种参考。
 
-   ```makefile
-   # Eclipse 工具链设置
-   #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
-   TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+      ```makefile
+      
+      # Eclipse 工具链及编译选项设置
+      #milkv duo
+      #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
+      #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -O3 -DNDEBUG -I~/milkv/duo/duo-examples/include/system
+      #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
 
-   # 编译选项-O3  
-   #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I/home/phebe/milkv/duo/duo-examples/include/system
-   #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
-   CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g  #-mcpu=c906fdv -march=rv64imafdcv0p7xthead : One of the two must be set
-   LDFLAGS := 
+      # ruyisdk milkv-duo
+      TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+      CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g  #-mcpu=c906fdv -march=rv64imafdcv0p7xthead : One of the two must be set
+      LDFLAGS := 
 
-   TARGET=helloworld
+      TARGET=helloworld
 
-   ifeq (,$(TOOLCHAIN_PREFIX))
-   $(error TOOLCHAIN_PREFIX is not set)
-   endif
+      ifeq (,$(TOOLCHAIN_PREFIX))
+      $(error TOOLCHAIN_PREFIX is not set)
+      endif
 
-   ifeq (,$(CFLAGS))
-   $(error CFLAGS is not set)
-   endif
+      ifeq (,$(CFLAGS))
+      $(error CFLAGS is not set)
+      endif
 
-   CC = $(TOOLCHAIN_PREFIX)gcc
+      CC = $(TOOLCHAIN_PREFIX)gcc
 
-   SOURCE = $(wildcard *.c)
-   OBJS = $(patsubst %.c,%.o,$(SOURCE))
+      SOURCE = $(wildcard *.c)
+      OBJS = $(patsubst %.c,%.o,$(SOURCE))
 
-   # 默认目标
-   all: $(TARGET)
+      # 默认目标
+      all: $(TARGET)
 
-   $(TARGET): $(OBJS)
-   	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+      $(TARGET): $(OBJS)
+         $(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
-   %.o: %.c
-   	$(CC) $(CFLAGS) -o $@ -c $<
+      %.o: %.c
+         $(CC) $(CFLAGS) -o $@ -c $<
 
-   # 上传目标
-   upload: $(TARGET)
-   	scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
+      # 上传目标
+      upload: $(TARGET)
+         scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
 
-   .PHONY: clean upload
-   clean:
-   	rm -f *.o $(TARGET)
+      .PHONY: clean upload
+      clean:
+         rm -f *.o $(TARGET)
 
-   # 让 'all' 目标依赖于 'upload'，以便在构建后自动上传
-   all: upload
-   ```
+      # 让 'all' 目标依赖于 'upload'，以便在构建后自动上传
+      all: upload
+      ```
 6. 在IDE中打开 Terminal 视窗，创建一个 SSH Terminal，方便在IDE中登录目标设备并进行相关操作。如果需要，同时也可以再创建一个 Local Terminal 窗口配合使用。这个根据个人习惯自行选择。具体操作：
 
    - Window > Show View > Terminal
+      ![1735626678903](image//1735626678903.png)
    - Terminal: Open a new Terminal View/Open a Terminal > SSH Terminal > 对照下图输入Host、User、Password（milkvduo的root密码是：milkv）
-
-     ![1735626678903](image//1735626678903.png)
-
      ![1735626740680](image//1735626740680.png)
 
      ![1735626766840](image//1735626766840.png)
@@ -164,13 +164,13 @@ ruyi extract milkv-duo-examples
 
 在IDE中有多种方式可以支持运行目标程序，可以按照习惯和需求选择。这里列举了一些我尝试通过的方式，更多方式欢迎一起探索。
 
-#### SSH Terminal
+#### SSH Terminal 中运行
 
 可以在 SSH Terminal 窗口中查看 helloworld 目标程序，并运行：
 
-![1736777304796](image/1736777304796.png)
+   ![1736777304796](image/1736777304796.png)
 
-#### C/C++ Remote Application
+#### C/C++ Remote Application 方式运行
 
 操作：右键项目 > Run As  > Run Configurations  >  C/C++ Remote Application
 
@@ -182,9 +182,9 @@ ruyi extract milkv-duo-examples
 - Remote Absolute File Path for C/C++ Application : 输入在RISC-V设备上目标程序的绝对地址（本例中需要与Makefile upload的scp命令中的路径一致）
 - Skip download to target path：当前版本这里建议勾选，并搭配在Makefile中定义upload目标来实现目标程序从主机传输到目标开发板上。这是因为不勾选的情况下，需要IDE安装RSE（Remote System Explorer）插件，并且要求目标设备系统支持 sftp-server。目前 milkvduo 上不支持 sftp-server，所以暂时不支持该功能。
 
-![1736321809187](image/1736321809187.png)
+   ![1736321809187](image/1736321809187.png)
 
-![1736320799175](image/1736320799175.png)
+   ![1736320799175](image/1736320799175.png)
 
 运行效果展示：
 
@@ -202,126 +202,126 @@ helloworld的示例调试效果不佳，为了体现调试、打断点、单步�
 
 sumdemo.c
 
-```c
+   ```c
 
-#include <stdio.h>
-
-
-int Sum(int s, int e)
-
-{
-
-    int result = 0;
-
-    for(int i = s; i <= e; i++)
-
-    {
-
-        result += i;
-
-    }
-
-    return result;
-
-}
+   #include <stdio.h>
 
 
-int main()
+   int Sum(int s, int e)
 
-{
+   {
 
-    int start = 1;
+      int result = 0;
 
-    int end = 10;
+      for(int i = s; i <= e; i++)
 
-    printf("I will begin\n");
+      {
 
-    int n = Sum(start, end);
+         result += i;
 
-    printf("running done, result is: [%d-%d]=%d\n", start, end, n);
+      }
 
-    return 0;
+      return result;
 
-}
+   }
 
 
-```
+   int main()
+
+   {
+
+      int start = 1;
+
+      int end = 10;
+
+      printf("I will begin\n");
+
+      int n = Sum(start, end);
+
+      printf("running done, result is: [%d-%d]=%d\n", start, end, n);
+
+      return 0;
+
+   }
+
+
+   ```
 
 Makefile：
 
-```makefile
+   ```makefile
 
-# Eclipse 工具链设置
-#TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
-TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+   # Eclipse 工具链及编译选项设置
+   #milkv duo
+   #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
+   #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -O3 -DNDEBUG -I~/milkv/duo/duo-examples/include/system
+   #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
 
-
-# 编译选项-O3   -static
-#CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I~/milkv/duo/duo-examples/include/system
-#LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
-CFLAGS := -march=rv64imafdcv0p7xthead -g 
-LDFLAGS := 
-
-
-TARGET=sumdemo
+   # ruyisdk milkv-duo
+   TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+   CFLAGS := -march=rv64imafdcv0p7xthead -g 
+   LDFLAGS := 
 
 
-ifeq (,$(TOOLCHAIN_PREFIX))
-
-$(error TOOLCHAIN_PREFIX is not set)
-
-endif
+   TARGET=sumdemo
 
 
-ifeq (,$(CFLAGS))
+   ifeq (,$(TOOLCHAIN_PREFIX))
 
-$(error CFLAGS is not set)
+   $(error TOOLCHAIN_PREFIX is not set)
 
-endif
-
-
-CC = $(TOOLCHAIN_PREFIX)gcc
+   endif
 
 
-SOURCE = $(wildcard*.c)
+   ifeq (,$(CFLAGS))
 
-OBJS = $(patsubst%.c,%.o,$(SOURCE))
+   $(error CFLAGS is not set)
 
-
-# 默认目标
-
-all: $(TARGET)
+   endif
 
 
-$(TARGET): $(OBJS)
-
-   $(CC)$(CFLAGS) -o $@$(OBJS)$(LDFLAGS)
+   CC = $(TOOLCHAIN_PREFIX)gcc
 
 
-%.o: %.c
+   SOURCE = $(wildcard*.c)
 
-   $(CC)$(CFLAGS) -o $@ -c $<
-
-
-# 上传目标
-
-upload: $(TARGET)
-
-   scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
+   OBJS = $(patsubst%.c,%.o,$(SOURCE))
 
 
-.PHONY: clean upload
+   # 默认目标
 
-clean:
-
-   rm -f *.o $(TARGET)
+   all: $(TARGET)
 
 
-# 让 'all' 目标依赖于 'upload'，以便在构建后自动上传
+   $(TARGET): $(OBJS)
 
-all: upload
+      $(CC)$(CFLAGS) -o $@$(OBJS)$(LDFLAGS)
 
-```
+
+   %.o: %.c
+
+      $(CC)$(CFLAGS) -o $@ -c $<
+
+
+   # 上传目标
+
+   upload: $(TARGET)
+
+      scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
+
+
+   .PHONY: clean upload
+
+   clean:
+
+      rm -f *.o $(TARGET)
+
+
+   # 让 'all' 目标依赖于 'upload'，以便在构建后自动上传
+
+   all: upload
+
+   ```
 
 #### 准备gdbserver
 
@@ -338,7 +338,7 @@ all: upload
 
    ```
 
-#### Terminal中调试
+#### Terminal 中调试
 
 这种操作跟使用操作系统的Terminal调试无差别，习惯使用命令的可以尝试。
 
@@ -348,14 +348,14 @@ GDBServer + GDB命令远程调试的步骤如下：
 
 1. milkvduo设备端（helloworld所在目录下操作）:
 
-   ```
+   ```bash
    [root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
    Process ./sumdemo created; pid = 1802
    Listening on port 2345
    ```
 2. PC端（helloworld.c所在目录下操作）：
 
-   ```
+   ```bash
    cd ~/ews-milkvduo-t01/sumdemo
 
    #查看gdb版本，启动调试
@@ -374,14 +374,14 @@ GDBServer + GDB命令远程调试的步骤如下：
    print result                      #打印内部变量result
 
    ```
+3. 执行效果：
+   执行效果可参考下图：
 
-![1736245928403](image/1736245928403.png)
+   ![1736326691511](image/1736326691511.png)
 
-![1736326691511](image/1736326691511.png)
+   [Local Terminal + SSH Terminal | GDBSerer+GDB 调试展示](image/gdb-terminal-1.gif)
 
-[Local Terminal + SSH Terminal | GDBSerer+GDB 调试展示](image/gdb-terminal-1.gif)
-
-#### C/C++ Remote Application
+#### C/C++ Remote Application 方式调试
 
 对照下面的图，参考着配置相关参数，重点如下：
 
@@ -393,21 +393,21 @@ GDBServer + GDB命令远程调试的步骤如下：
 - Debugger > Main > GDB Debugger : 指定GDB的路径。本例中使用的是 `~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-gdb`
 - Debugger > GDB > GDBserver setting: 指定GDBServer 及通信端口
 
-![1736320771077](image/1736320771077.png)
+   ![1736320771077](image/1736320771077.png)
 
-![1736320799175](image/1736320799175.png)
+   ![1736320799175](image/1736320799175.png)
 
-![1736320837701](image/1736320837701.png)
+   ![1736320837701](image/1736320837701.png)
 
-![1736324370390](image/1736324370390.png)
+   ![1736324370390](image/1736324370390.png)
 
 跟运行一样，由于目前 milkv duo 不支持 sftp-server，因此目标程序的远端传输功能不可用，执行会报如下的错误。
 
-![1736320589408](image/1736320589408.png)
+   ![1736320589408](image/1736320589408.png)
 
 勾选 Skip download to target path 跳过下载目标程序，就能绕过这个问题。配合Makefile中的upload定义，在构建阶段就完成目标程序从主机传输到目标设备中。
 
-![1736321809187](image/1736321809187.png)
+   ![1736321809187](image/1736321809187.png)
 
 运行效果展示：
 
@@ -426,7 +426,7 @@ GDBServer + GDB命令远程调试的步骤如下：
 
     2. 将公钥添加到milkv duo上：
 
-    ```
+    ```bash
 
     #cat ~/.ssh/id_rsa.pub | ssh username@milkv_duo_ip_address 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 
@@ -434,6 +434,6 @@ GDBServer + GDB命令远程调试的步骤如下：
 
     ```
 
-    3. 验证：ssh root@192.168.42.1
+    3. 验证：`ssh root@192.168.42.1`
 
     成功的情况下此时不需要再输入密码了。
