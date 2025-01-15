@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Head from "@docusaurus/Head";
 
@@ -22,18 +22,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { translate } from "@docusaurus/Translate";
 const Index = () => {
   const { siteConfig } = useDocusaurusContext();
-  useEffect(() => {
-    const supportedLocales = ['en', 'de'];
-    const browserLocale = navigator.language.split('-')[0];
-    const targetLocale = supportedLocales.includes(browserLocale)
-      ? browserLocale
-      : '';
-
-    if (!window.location.pathname.startsWith(`/${targetLocale}`)) {
-      console.log(targetLocale)
-      window.location.href = `/${targetLocale}`;
-    }
-  }, []);
 
   return (
     <Layout

@@ -106,7 +106,6 @@ const config = {
           {
             type: "localeDropdown",
             position: "right",
-            queryString: "?test"
           },
           {
             href: "https://github.com/ruyisdk",
