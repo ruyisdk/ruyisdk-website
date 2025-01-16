@@ -369,5 +369,23 @@
   },
   "QQ1": {
     "message": "QQ-Gruppe 1"
+  },
+  "RuyiSDK 数据总览": {
+    "message": "RuyiSDK Datenübersicht"
+  },
+  "下载数量 Downloads": {
+    "message": "Anzahl der Downloads"
+  },
+  "安装台数 Installs": {
+    "message": "Anzahl der Installationen"
+  },
+  "最常用指令 Top Commands": {
+    "message": "Meistgenutzte Befehle"
+  },
+  "最常用包 Top Packages": {
+    "message": "Meistgenutzte Pakete"
+  },
+  "暂无数据": {
+    "message": "Keine Daten verfügbar"
   }
 }
