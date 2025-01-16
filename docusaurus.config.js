@@ -148,6 +148,10 @@ const config = {
                 label: "RuyiSDK",
                 to: "/docs/intro",
               },
+              {
+                label: "RevyOS",
+                to: "https://docs.revyos.dev/",
+              },
             ],
           },
           {
@@ -187,7 +191,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} RuyiSDK`,
+        copyright: `Copyright © 2024-${new Date().getFullYear()} RuyiSDK`,
       },
       prism: {
         additionalLanguages: ["bash"],
