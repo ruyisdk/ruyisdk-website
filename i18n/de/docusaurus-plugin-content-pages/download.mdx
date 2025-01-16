@@ -1,0 +1,62 @@
+import MyApp from "@site/src/components/Comment";
+
+:::tip
+Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](https://ruyisdk.org/docs/legal/privacyPolicy/) zu.
+:::
+
+## Ruyi herunterladen
+
+Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an. Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
+
+Für ``x86_64``：
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.amd64
+```
+
+Für ``aarch64``：
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.arm64
+```
+
+Für ``riscv64``：
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.riscv64
+```
+
+:::tip
+Dieses Dokument ist zeitkritisch. Falls die Links auf eine veraltete Version von Ruyi verweisen, besuchen Sie den [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/), um die neuesten Binärdateien zu finden. Alternativ finden Sie diese auch in den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
+:::
+
+## Ruyi installieren
+
+Nehmen Sie die Binärdatei für x86_64 als Beispiel. Fügen Sie der Datei Ausführungsrechte hinzu:
+
+```bash
+$ chmod +x ./ruyi.amd64
+```
+
+Verschieben Sie die Binärdatei in ein Verzeichnis, das im PATH-Systempfad enthalten ist:
+
+```bash
+$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
+```
+
+:::tip
+Stellen Sie sicher, dass der Dateiname ``ruyi`` lautet.
+:::
+
+Führen Sie den folgenden Befehl aus, um die Installation zu überprüfen:
+
+```bash
+$ ruyi version
+```
+
+Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
+
+## Ruyi verwenden
+
+Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen können.
+

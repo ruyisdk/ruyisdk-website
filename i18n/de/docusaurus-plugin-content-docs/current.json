@@ -3,12 +3,12 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.ruyi包管理器": {
-    "message": "ruyi-Paketmanager",
-    "description": "The label for category ruyi包管理器 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.ruyi-包管理器": {
+    "message": "Ruyi Paketmanager",
+    "description": "The label for category Ruyi 包管理器 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.ruyi包管理器.link.generated-index.description": {
-    "message": "Erfahren Sie in 5 Minuten, was der ruyi-Paketmanager ist.",
+  "sidebar.tutorialSidebar.category.ruyi-包管理器.link.generated-index.description": {
+    "message": "Erfahren Sie in 5 Minuten, was der Ruyi Paketmanager ist.",
     "description": "The generated-index page description for category ruyi包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.使用案例": {
@@ -19,8 +19,8 @@
     "message": "andere Anweisungen",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.版本日志": {
-    "message": "Changelog",
-    "description": "The label for category 版本日志 in sidebar tutorialSidebar"
+  "sidebar.tutorialSidebar.category.法律信息": {
+    "message": "Gesetz",
+    "description": "The label for category 法律信息 in sidebar tutorialSidebar"
   }
 }
