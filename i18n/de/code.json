@@ -334,6 +334,12 @@
   "RuyiSDK": {
     "message": "RuyiSDK"
   },
+  "嘉楠勘智K230D": {
+    "message": "Canaan Kendryte K230D"
+  },
+  "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
+    "message": "The first AIoT mass-production chip based on the new 32-bit RuyiSDK."
+  },
   "面向RISC-V架构的一体化集成开发环境": {
     "message": "Eine integrierte All-in-One-Entwicklungsumgebung für die RISC-V-Architektur"
   },
@@ -354,5 +360,8 @@
   },
   "随时看到来自 RuyiSDK 团队的重大消息": {
     "message": "Bleiben Sie mit aktuellen Nachrichten vom RuyiSDK-Team auf dem Laufenden"
+  },
+  "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备": {
+    "message": "RuyiSDK: Vorbereitung für 1 Million RISC-V Softwareentwickler"
   }
 }
