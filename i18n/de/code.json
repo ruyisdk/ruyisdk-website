@@ -363,5 +363,11 @@
   },
   "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备": {
     "message": "RuyiSDK: Vorbereitung für 1 Million RISC-V Softwareentwickler"
+  },
+  "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊": {
+    "message": "Sie können den QR-Code scannen oder auf den QR-Code klicken, um QQ aufzurufen und dem Gruppenchat beizutreten"
+  },
+  "QQ1": {
+    "message": "QQ-Gruppe 1"
   }
 }

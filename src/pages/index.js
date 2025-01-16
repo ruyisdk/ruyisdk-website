@@ -20,6 +20,8 @@ import CallToAction from "./CallToAction";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { translate } from "@docusaurus/Translate";
+
+
 const Index = () => {
   const { siteConfig } = useDocusaurusContext();
 
