@@ -46,5 +46,8 @@
   "item.label.社区守则": {
     "message": "Community Code",
     "description": "Navbar item with label 社区守则"
+  },
+  "item.label.数据统计": {
+    "message": "Data Statistics"
   }
 }
