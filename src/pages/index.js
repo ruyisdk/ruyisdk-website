@@ -19,6 +19,7 @@ import CallToAction from "./CallToAction";
 
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
+import { translate } from "@docusaurus/Translate";
 const Index = () => {
   const { siteConfig } = useDocusaurusContext();
 
@@ -29,8 +30,9 @@ const Index = () => {
       description="Description will go into a meta tag in <head />"
     >
       <Head>
-        <title>RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备</title>
+        <title>{translate({ id: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备", message: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备" })}</title>
       </Head>
+
       <Home />
       <HomepageFeatures />
       <CallToAction />

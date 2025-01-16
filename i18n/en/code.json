@@ -295,6 +295,12 @@
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
   },
+  "嘉楠勘智K230D": {
+    "message": "Canaan Kendryte K230D"
+  },
+  "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
+    "message": "Der erste AIoT-Massenproduktionschip basierend auf dem neuen 32-Bit-RuyiSDK."
+  },
   "ruyi 包管理器": {
     "message": "ruyi Package Manager"
   },
@@ -354,5 +360,8 @@
   },
   "随时看到来自 RuyiSDK 团队的重大消息": {
     "message": "See important news from the RuyiSDK team at any time"
+  },
+  "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备": {
+    "message": "RuyiSDK: Preparing for 1 Million RISC-V Software Developers"
   }
 }
