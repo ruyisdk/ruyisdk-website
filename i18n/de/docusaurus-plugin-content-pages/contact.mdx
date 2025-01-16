@@ -2,17 +2,46 @@ import MyApp from "@site/src/components/Comment";
 
 # Über uns
 
-## Einführung
+## Projektvorstellung
 
-- Die RuyiSDK-Community ist bestrebt, eine offene, freundliche, vielfältige, integrative, gesunde und aktive Community zu schaffen.
+RUYISDK ist eine umfassende und integrierte Entwicklungsumgebung, die speziell für RISC-V-Entwickler entwickelt wurde.
+Unter der Leitung des Instituts für Software der Chinesischen Akademie der Wissenschaften (ISCAS) zielt RUYISDK darauf ab, eine All-in-One-Entwicklungslösung für RISC-V-Entwickler bereitzustellen. Die Planung für das Projekt begann in der zweiten Hälfte des Jahres 2022, und seit Anfang 2024 wurde ein agiler zweiwöchentlicher Veröffentlichungszyklus eingeführt. Seit Beginn des Projekts haben wir das Produkt kontinuierlich optimiert, um der breiten RISC-V-Entwicklergemeinschaft qualitativ hochwertige Dienste zu bieten.
 
-- Bevor Sie an Community-Diskussionen teilnehmen, lesen Sie bitte den [Community-Code](/code_of_conduct), um innerhalb der Community besser kommunizieren zu können.
+### Hauptziele
+
+1. Entwickler, die (fast) jede RISC-V-Entwicklungsplatine oder jedes Modul erwerben, können über das RUYISDK-System auf Hardwaredokumentationen, Firmware-/Software-Updates und Debugging-Unterstützung zugreifen.
+2. Entwickler können jede gängige Kombination von RISC-V-Erweiterungsbefehlssätzen angeben und über das RUYISDK-System das benötigte Betriebssystem, Toolchains, Sprach-Runtime/virtuelle Maschine, Berechnungsbibliotheken, Anwendungs-Frameworks und mehr generieren. RUYISDK wird vollständig unterstützte Entwürfe wie Vector 0.7.1 und RVP 0.5.2 sowie benutzerspezifische Erweiterungen unterstützen.
+3. Aufbau und Betrieb einer lebendigen und umfassenden Entwickler-Community.
+
+### Unsere Produkte
+
+- RISC-V-Betriebssystem (angepasste Distribution, optimiert für XuanTie-Chips): [RevyOS](https://github.com/ruyisdk/revyos)
+- RISC-V-Paketmanager: [ruyi](https://github.com/ruyisdk/ruyi)
+- RISC-V-Betriebssystem-Installationswerkzeug: ruyi device provision
+- RISC-V-IDE: RuyiSDK IDE
+- RISC-V-Toolchains: PLCT-GCC, PLCT-LLVM
+- Wichtige Software für RISC-V-Anpassung und -Unterstützung (im RuyiSDK-Software-Repository integriert):
+  - QEMU
+  - Box64
+  - LuaJIT
+  - DynamoRIO
+
+### Open-Source-Beitrag
+
+Das RUYISDK-Projekt verwendet ein Open-Source-Managementmodell, und der Code wird auf [GitHub](https://github.com/ruyisdk) gehostet. Wir laden Entwickler ein, am Projekt teilzunehmen und zur Weiterentwicklung der RISC-V-Technologie beizutragen.
+- Die RUYISDK-Community zielt darauf ab, ein offenes, freundliches, vielfältiges, inklusives und aktives Ökosystem aufzubauen.
+- Wir suchen leidenschaftliche und talentierte Personen, die unserem Team beitreten möchten. Wenn Sie begeistert von der RISC-V-Technologie sind, senden Sie bitte Ihren Lebenslauf an: Professor Wu unter wuwei2016@iscas.ac.cn.
+- Bitte lesen Sie vor der Teilnahme an Community-Diskussionen den [Community-Verhaltenskodex](/code_of_conduct), um eine effektive Kommunikation sicherzustellen.
 
 ## Kontakt
 
-Sie können unserer Community auf folgende Weise beitreten:
-
-- Folgen Sie dem öffentlichen WeChat-Konto: RUYISDK.
-- Senden Sie eine E-Mail an [contact@ruyisdk.cn](mailto:contact@ruyisdk.cn)
+Wenn Sie Fragen oder Anregungen haben, kontaktieren Sie uns gerne über folgende Kanäle:
+- E-Mail: [contact@ruyisdk.cn](mailto:contact@ruyisdk.cn)
+- Offizielle Website: [www.ruyisdk.org](http://www.ruyisdk.org)
+- GitHub: [ruyisdk](https://github.com/ruyisdk)
+- WeChat-Offizieller Account: RUYISDK
+  <img className='custom-image' src="/img/wechat_account_img.jpg" alt="Unser WeChat-Account" />
+- RUYISDK-Technik-Austausch QQ-Gruppe ID: 544940413
+  <img className='custom-image' src="/img/qqgroup_img.jpg" alt="Unsere QQ-Gruppe" />
 
   <MyApp />
