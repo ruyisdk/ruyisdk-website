@@ -31,7 +31,7 @@ Historically, RISC-V development faced challenges due to the lack of a unified p
 
 RuyiSDK is divided into the following three components:
 
-### [Ruyi Package Manager](/docs/category/ruyi-package-manager)
+### [Ruyi Package Manager](/docs/category/ruyi-包管理器)
 
 This package manager is an online software repository that provides the following:
 
