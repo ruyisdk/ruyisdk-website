@@ -11,7 +11,10 @@ const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
   favicon: "img/favicon.ico",
-
+  customFields: {
+    // Put your custom environment here
+    apiURL: process.env.BASE_URL,
+  },
   // Set the production url of your site here
   url: "https://ruyisdk.org",
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -179,6 +182,10 @@ const config = {
                 className: 'hover-wechat-link',
                 to: '/contact'
               },
+              {
+                label: "数据统计",
+                to: "/StatisticalDataPages",
+              },
             ],
           },
           {
@@ -224,6 +231,7 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
+
     /* [
       "@docusaurus/plugin-google-gtag",
       {
