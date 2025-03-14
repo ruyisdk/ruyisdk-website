@@ -153,7 +153,7 @@ const config = {
               },
               {
                 label: "RevyOS",
-                to: "https://docs.revyos.dev/",
+                href: "https://docs.revyos.dev/",
               },
             ],
           },
@@ -170,26 +170,22 @@ const config = {
             title: "更多",
             items: [
               {
-                label: "博客",
-                to: "/blog",
+                label: "数据统计",
+                to: "/StatisticalDataPages",
               },
               {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
               },
+            ],
+          },
+          {
+            items: [
               {
                 label: "微信公众号",
                 className: 'hover-wechat-link',
                 to: '/contact'
               },
-              {
-                label: "数据统计",
-                to: "/StatisticalDataPages",
-              },
-            ],
-          },
-          {
-            items: [
               {
                 label: "QQ群",
                 className: 'hover-qq-link',
