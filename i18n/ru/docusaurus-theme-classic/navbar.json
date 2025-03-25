@@ -31,9 +31,9 @@
     "message": "Сообщество",
     "description": "Navbar item with label 社区"
   },
-  "item.label.联系我们": {
+  "item.label.关于": {
     "message": "Найти нас",
-    "description": "Navbar item with label 联系我们"
+    "description": "Navbar item with label 关于"
   },
   "item.label.Discussion": {
     "message": "Discussion",
