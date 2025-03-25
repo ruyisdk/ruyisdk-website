@@ -28,12 +28,12 @@ const StatisticalData = () => {
         <ConfigProvider renderEmpty={customizeRenderEmpty}>
           {data && <Card style={{ width: "90%", height: '90%', backgroundColor: "rgba(0,0,0,0)", border: "none" }}>
             <h2 style={{ color: "#e3e3e3" }}><RuyiLogo style={{ width: "2%", height: "2%" }}></RuyiLogo> <Divider type="vertical" style={{ borderColor: "#e3e3e3" }}></Divider>{translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}</h2>
-            <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "下载数量 Downloads", message: "下载数量 Downloads" })}</span>}
+            <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "下载数量 Downloads", message: "组件下载数量" })}</span>}
               value={data.downloads.total}
               valueStyle={{ color: "#e3e3e3", fontSize: "3rem" }}
               style={{ marginTop: "10rem" }}
             ></Statistic>
-            <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "安装台数 Installs", message: "安装台数 Installs" })}</span>}
+            <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "安装台数 Installs", message: "包管理器安装台数" })}</span>}
               value={data.installs.total}
               headStyle={{ color: "#e3e3e3" }}
               valueStyle={{ color: "#e3e3e3", fontSize: "3rem" }}
@@ -85,10 +85,14 @@ const StatisticalData = () => {
                   />
                 </div>
               </Card>
+
             </div>
+            {data && <p style={{ marginTop: "2rem", color: "#d1d1d1", fontSize: '0.8rem' }}>{String(data.last_updated).slice(0, 10)}</p>}
 
           </Card >}
+
         </ConfigProvider>
+
       </div >
     </>
   )
