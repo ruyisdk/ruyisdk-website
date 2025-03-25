@@ -643,6 +643,31 @@ html[data-theme="dark"] {
   }
 }
 
+.navbar__toggle {
+  margin-left: auto;
+  margin-right: 0;
+  order: 2;
+}
+
+.navbar-sidebar__brand .navbar__brand {
+  display: none;
+}
+
+.navbar-sidebar__close {
+  margin-left: auto;
+}
+
+.navbar-sidebar {
+  left: auto;
+  right: 0;
+//  background-color:var(--ifm-navbar-background-color);
+//  box-shadow:var(--ifm-global-shadow-md);
+//  position:fixed;
+  transform:translate3d(100%,0,0);
+//  transition-property:opacity,visibility,transform;
+//  width:var(--ifm-navbar-sidebar-width)
+}
+
 // .navbar__inner {
 //   max-width: 1360px;
 //   margin: 0 auto;
