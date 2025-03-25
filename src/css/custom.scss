@@ -660,12 +660,12 @@ html[data-theme="dark"] {
 .navbar-sidebar {
   left: auto;
   right: 0;
-//  background-color:var(--ifm-navbar-background-color);
-//  box-shadow:var(--ifm-global-shadow-md);
-//  position:fixed;
-  transform:translate3d(-100%,0,0);
-//  transition-property:opacity,visibility,transform;
-//  width:var(--ifm-navbar-sidebar-width)
+  //  background-color:var(--ifm-navbar-background-color);
+  //  box-shadow:var(--ifm-global-shadow-md);
+  //  position:fixed;
+  transform: translate3d(-100%, 0, 0);
+  //  transition-property:opacity,visibility,transform;
+  //  width:var(--ifm-navbar-sidebar-width)
 }
 
 // .navbar__inner {
@@ -2051,9 +2051,9 @@ giscus-widget {
   font-size: medium;
   position: absolute;
   left: -50%;
-  top: -18rem;
-  width: 15rem;
-  height: 18rem;
+  top: -10rem;
+  width: 10rem;
+  height: 10rem;
   background-size: cover;
   background-image: url('/img/wechat_account_img.png');
   background-size: cover;
@@ -2083,9 +2083,9 @@ giscus-widget {
   font-size: medium;
   position: absolute;
   left: -100%;
-  top: -20rem;
-  width: 15rem;
-  height: 20rem;
+  top: -10rem;
+  width: 10rem;
+  height: 10rem;
   background-size: cover;
   background-image: url('/img/qqgroup_img.png');
   background-size: cover;
@@ -2112,7 +2112,7 @@ giscus-widget {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: #0da8fa;
+  background: grey;
   border-radius: 4px;
 
 }
