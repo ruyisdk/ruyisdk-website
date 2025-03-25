@@ -90,27 +90,22 @@ const config = {
         style: "dark",
         items: [
           {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "文档",
-          },
-          { to: "/blog", label: "博客", position: "left" },
-          { to: "/biweekly", label: "双周报", position: "left" },
-          { to: "/download", label: "下载", position: "left" },
-          {
             type: "localeDropdown",
             position: "right",
           },
           {
-            href: "https://github.com/ruyisdk",
-            label: "GitHub",
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
             position: "right",
+            label: "文档",
           },
+          { to: "/blog", label: "博客", position: "right" },
+          { to: "/biweekly", label: "双周报", position: "right" },
+          { to: "/download", label: "下载", position: "right" },
           {
             type: "dropdown",
             label: "社区",
-            position: "left",
+            position: "right",
             items: [
               {
                 label: "Discussion",
@@ -129,7 +124,12 @@ const config = {
           {
             label: "关于",
             to: "/contact",
-            position: "left",
+            position: "right",
+          },
+          {
+            href: "https://github.com/ruyisdk",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
