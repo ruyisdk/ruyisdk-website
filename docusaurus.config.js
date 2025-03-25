@@ -74,14 +74,6 @@ const config = {
         indexName: 'ruyisdk',
 
       }, */
-      announcementBar: {
-        id: "th1520",
-        content:
-          'Kernel Upgraded from 5.10 to 6.6, RuyiSDK Releases New Operating System Image for TH1520 Series Development Boards <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">Click to View</a>',
-        backgroundColor: "#20232a",
-        textColor: "#fff",
-        isCloseable: true,
-      },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,
@@ -135,7 +127,7 @@ const config = {
             ],
           },
           {
-            label: "联系我们",
+            label: "关于",
             to: "/contact",
             position: "left",
           },
