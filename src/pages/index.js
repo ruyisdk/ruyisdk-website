@@ -37,7 +37,6 @@ const Index = () => {
 
       <Home />
       <HomepageFeatures />
-      <CallToAction />
     </Layout>
   );
 };
