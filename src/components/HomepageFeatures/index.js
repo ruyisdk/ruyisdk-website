@@ -5,7 +5,7 @@ import Translate, { translate } from "@docusaurus/Translate";
 
 const FeatureList = [
   {
-    title: <Translate>ruyi 包管理器</Translate>,
+    title: <Translate>RuyiSDK 包管理器</Translate>,
     Svg: require("@site/static/img/undraw_coding_re_iv62.svg").default,
     description: (
       <Translate>
@@ -15,7 +15,7 @@ const FeatureList = [
     ),
   },
   {
-    title: <Translate>ruyi IDE</Translate>,
+    title: <Translate>RuyiSDK IDE</Translate>,
     Svg: require("@site/static/img/undraw_code_review_re_woeb.svg").default,
     description: (
       <Translate>
