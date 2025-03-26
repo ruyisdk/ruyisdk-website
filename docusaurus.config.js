@@ -11,7 +11,10 @@ const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
   favicon: "img/favicon.ico",
-
+  customFields: {
+    // Put your custom environment here
+    apiURL: process.env.BASE_URL,
+  },
   // Set the production url of your site here
   url: "https://ruyisdk.org",
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -71,14 +74,6 @@ const config = {
         indexName: 'ruyisdk',
 
       }, */
-      announcementBar: {
-        id: "th1520",
-        content:
-          'Kernel Upgraded from 5.10 to 6.6, RuyiSDK Releases New Operating System Image for TH1520 Series Development Boards <a target="_blank" rel="noopener noreferrer" href="/blog/2024/12/31/th1520">Click to View</a>',
-        backgroundColor: "#20232a",
-        textColor: "#fff",
-        isCloseable: true,
-      },
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,
@@ -95,31 +90,26 @@ const config = {
         style: "dark",
         items: [
           {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "文档",
-          },
-          { to: "/blog", label: "博客", position: "left" },
-          { to: "/biweekly", label: "双周报", position: "left" },
-          { to: "/download", label: "下载", position: "left" },
-          {
             type: "localeDropdown",
             position: "right",
           },
           {
-            href: "https://github.com/ruyisdk",
-            label: "GitHub",
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
             position: "right",
+            label: "文档",
           },
+          { to: "/blog", label: "博客", position: "right" },
+          { to: "/biweekly", label: "双周报", position: "right" },
+          { to: "/download", label: "下载", position: "right" },
           {
             type: "dropdown",
             label: "社区",
-            position: "left",
+            position: "right",
             items: [
               {
                 label: "Discussion",
-                href: "https://github.com/ruyisdk/ruyisdk-website/discussions",
+                href: "https://github.com/ruyisdk/ruyisdk/discussions",
               },
               {
                 label: "社区活动",
@@ -132,9 +122,14 @@ const config = {
             ],
           },
           {
-            label: "联系我们",
+            label: "关于",
             to: "/contact",
-            position: "left",
+            position: "right",
+          },
+          {
+            href: "https://github.com/ruyisdk",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
@@ -147,6 +142,10 @@ const config = {
               {
                 label: "RuyiSDK",
                 to: "/docs/intro",
+              },
+              {
+                label: "RevyOS",
+                href: "https://docs.revyos.dev/",
               },
             ],
           },
@@ -163,22 +162,22 @@ const config = {
             title: "更多",
             items: [
               {
-                label: "博客",
-                to: "/blog",
+                label: "数据统计",
+                to: "/StatisticalDataPages",
               },
               {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
               },
+            ],
+          },
+          {
+            items: [
               {
                 label: "微信公众号",
                 className: 'hover-wechat-link',
                 to: '/contact'
               },
-            ],
-          },
-          {
-            items: [
               {
                 label: "QQ群",
                 className: 'hover-qq-link',
@@ -187,7 +186,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} RuyiSDK`,
+        copyright: `Copyright © 2024-${new Date().getFullYear()} RuyiSDK`,
       },
       prism: {
         additionalLanguages: ["bash"],
@@ -220,6 +219,7 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
+
     /* [
       "@docusaurus/plugin-google-gtag",
       {

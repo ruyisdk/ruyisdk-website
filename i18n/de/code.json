@@ -334,6 +334,12 @@
   "RuyiSDK": {
     "message": "RuyiSDK"
   },
+  "嘉楠勘智K230D": {
+    "message": "Canaan Kendryte K230D"
+  },
+  "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
+    "message": "The first AIoT mass-production chip based on the new 32-bit RuyiSDK."
+  },
   "面向RISC-V架构的一体化集成开发环境": {
     "message": "Eine integrierte All-in-One-Entwicklungsumgebung für die RISC-V-Architektur"
   },
@@ -354,5 +360,32 @@
   },
   "随时看到来自 RuyiSDK 团队的重大消息": {
     "message": "Bleiben Sie mit aktuellen Nachrichten vom RuyiSDK-Team auf dem Laufenden"
+  },
+  "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备": {
+    "message": "RuyiSDK: Vorbereitung für 1 Million RISC-V Softwareentwickler"
+  },
+  "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊": {
+    "message": "Sie können den QR-Code scannen oder auf den QR-Code klicken, um QQ aufzurufen und dem Gruppenchat beizutreten"
+  },
+  "QQ1": {
+    "message": "QQ-Gruppe 1"
+  },
+  "RuyiSDK 数据总览": {
+    "message": "RuyiSDK Datenübersicht"
+  },
+  "下载数量 Downloads": {
+    "message": "Anzahl der Downloads"
+  },
+  "安装台数 Installs": {
+    "message": "Anzahl der Installationen"
+  },
+  "最常用指令 Top Commands": {
+    "message": "Meistgenutzte Befehle"
+  },
+  "最常用包 Top Packages": {
+    "message": "Meistgenutzte Pakete"
+  },
+  "暂无数据": {
+    "message": "Keine Daten verfügbar"
   }
 }

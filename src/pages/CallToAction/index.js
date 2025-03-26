@@ -22,7 +22,7 @@ function CallToAction() {
         <h1 className={styles.title}>
           <Translate id="actionwelcome">欢迎来到RuyiSDK 社区</Translate>
         </h1>
-        <a href="contact" className={styles.primaryButton}>
+        <a href="download" className={styles.primaryButton}>
           <Translate id="actionstart">现在开始</Translate>
         </a>
       </div>

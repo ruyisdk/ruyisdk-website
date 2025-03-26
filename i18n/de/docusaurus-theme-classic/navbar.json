@@ -31,9 +31,9 @@
     "message": "Gemeinschaft",
     "description": "Navbar item with label 社区"
   },
-  "item.label.联系我们": {
+  "item.label.关于": {
     "message": "Kontaktiere uns",
-    "description": "Navbar item with label 联系我们"
+    "description": "Navbar item with label 关于"
   },
   "item.label.Discussion": {
     "message": "Discussion",
@@ -46,5 +46,8 @@
   "item.label.社区守则": {
     "message": "Community-Richtlinien",
     "description": "Navbar item with label 社区守则"
+  },
+  "item.label.数据统计": {
+    "message": "Datenstatistik"
   }
 }

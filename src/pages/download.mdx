@@ -1,36 +1,35 @@
-import MyApp from "@site/src/components/Comment";
 
 :::tip
 下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
 :::
 
-## 下载
+## 下载 RuyiSDK 包管理器
 
 Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
 
 如果输出为 ``x86_64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.amd64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.29.0/ruyi.amd64
 ```
 
 如果输出为 ``aarch64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.arm64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.29.0/ruyi.arm64
 ```
 
 如果输出为 ``riscv64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/ruyi.riscv64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.29.0/ruyi.riscv64
 ```
 
 :::tip
 文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
 :::
 
-## 安装
+### 安装 RuyiSDK 包管理器
 
 下面以 x86_64 架构为例，给下载的二进制添加执行权限：
 
@@ -56,7 +55,45 @@ $ ruyi version
 
 若命令执行并正常打印了 Copyright 信息则安装已经成功；若出现了非预期的失败则需要检查安装过程和系统环境。
 
+## 下载 RuyiSDK IDE
+
+RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制。
+
+可以下载适合架构的 tarball：
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+```
+
+:::tip
+文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
+:::
+
+### 安装 RuyiSDK IDE
+
+
+下面演示将 RuyiSDK IDE 安装至 ``/opt/ruyisdk`` 目录。
+
+首先建立目录：
+
+```bash
+$ sudo mkdir /opt/ruyisdk
+```
+
+解包，这个步骤依赖 tar 和 gunzip，已经下载好的 tarball 路径请依据实际更改：
+
+```bash
+$ cd /opt/ruyisdk
+$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+```
+
+运行 RuyiSDK IDE：
+
+```bash
+$ /opt/ruyisdk/ruyisdk/ruyisdk
+```
+
 ## 开始使用
 
-阅读文档以了解 Ruyi 的强大功能！
+阅读[文档](/docs/intro)以了解 Ruyi 的强大功能！
 

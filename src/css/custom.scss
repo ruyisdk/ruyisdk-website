@@ -643,6 +643,31 @@ html[data-theme="dark"] {
   }
 }
 
+.navbar__toggle {
+  margin-left: auto;
+  margin-right: 0;
+  order: 2;
+}
+
+.navbar-sidebar__brand .navbar__brand {
+  display: none;
+}
+
+.navbar-sidebar__close {
+  margin-left: auto;
+}
+
+.navbar-sidebar {
+  left: auto;
+  right: 0;
+//  background-color:var(--ifm-navbar-background-color);
+//  box-shadow:var(--ifm-global-shadow-md);
+//  position:fixed;
+  transform:translate3d(100%,0,0);
+//  transition-property:opacity,visibility,transform;
+//  width:var(--ifm-navbar-sidebar-width)
+}
+
 // .navbar__inner {
 //   max-width: 1360px;
 //   margin: 0 auto;
@@ -2018,7 +2043,7 @@ giscus-widget {
 }
 
 .hover-wechat-link::after {
-  content: '公众号二维码';
+  content: '';
   color: #000;
   border-radius: 5%;
   text-align: center;
@@ -2030,7 +2055,7 @@ giscus-widget {
   width: 15rem;
   height: 18rem;
   background-size: cover;
-  background-image: url('/img/wechat_account_img.jpg');
+  background-image: url('/img/wechat_account_img.png');
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2050,7 +2075,7 @@ giscus-widget {
 }
 
 .hover-qq-link::after {
-  content: 'RUYISDK技术交流群二维码';
+  content: '';
   color: #000;
   border-radius: 5%;
   text-align: center;
@@ -2058,11 +2083,11 @@ giscus-widget {
   font-size: medium;
   position: absolute;
   left: -100%;
-  top: -24rem;
+  top: -20rem;
   width: 15rem;
-  height: 24rem;
+  height: 20rem;
   background-size: cover;
-  background-image: url('/img/qqgroup_img.jpg');
+  background-image: url('/img/qqgroup_img.png');
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2074,7 +2099,20 @@ giscus-widget {
   opacity: 1;
 }
 
-.custom-image {
-  max-width: 300px;
-  height: auto;
+.custom-scroll {
+  overflow-y: scroll;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 2px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #0da8fa;
+  border-radius: 4px;
+
 }

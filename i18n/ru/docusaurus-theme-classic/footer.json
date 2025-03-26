@@ -11,10 +11,6 @@
     "message": "GitHub",
     "description": "The label of footer link with label=GitHub linking to https://github.com/ruyisdk"
   },
-  "copyright": {
-    "message": "Copyright © 2024 RuyiSDK",
-    "description": "The footer copyright"
-  },
   "link.item.label.Discussion": {
     "message": "Discussion",
     "description": "The label of footer link with label=Discussion linking to https://github.com/ruyisdk/ruyisdk-website/discussions"
