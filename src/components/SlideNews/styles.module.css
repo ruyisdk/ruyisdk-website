@@ -14,7 +14,7 @@
 }
 
 .title {
-  font-size: 60px;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -22,7 +22,7 @@
 .subtitle {
   font-weight: 500;
   color: var(--home-secondary-text);
-  font-size: 28px;
+  font-size: 1rem;
 }
 
 .content {
@@ -48,10 +48,10 @@
   background-color: var(--home-button-primary);
   color: var(--home-button-primary-text);
   border: none;
-  padding: 10px 24px;
+  padding: 0.5rem 1.5rem;
   border-radius: 99rem;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,10 +65,10 @@
 
 .secondaryButton {
   border: none;
-  padding: 10px 24px;
+  padding: 0.5rem 1.5rem;
   border-radius: 99rem;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,12 +87,12 @@
 
 @media (max-width: 450px) {
   .content {
-    top: 50px;
+    top: 10px;
   }
 
   .primaryButton,
   .secondaryButton {
-    width: calc(100% - 2rem);
+    width: 8rem;
   }
 }
 
@@ -115,6 +115,7 @@
   background-size: cover;
   height: 480px;
 }
+/*
 .infobutton {
   position: absolute;
   padding: 12px 24px;
@@ -125,6 +126,7 @@
   background-color: transparent;
   margin-top: 300px;
 }
+*/
 
 @media screen and (max-width: 824px) {
   .divStyle {

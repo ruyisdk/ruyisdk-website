@@ -9,7 +9,6 @@ const slideImages = [
     subtitle: <Translate>面向RISC-V架构的一体化集成开发环境</Translate>,
     Image: require("@site/static/img/background.jpg").default,
     Links: "docs/intro",
-    visibility: "secondaryButtonShow",
     subLinks: "download",
   },
   {
@@ -17,14 +16,12 @@ const slideImages = [
     subtitle: <Translate>RuyiSDK 社区讨论板块现已开启</Translate>,
     Image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Links: "https://github.com/ruyisdk/ruyisdk/discussions/",
-    visibility: "secondaryButtonHide",
   },
   {
     title: <Translate>嘉楠勘智K230D</Translate>,
     subtitle: <Translate>首款基于新32位 RuyiSDK 的AIoT量产芯片</Translate>,
     Image: "https://images.unsplash.com/photo-1532883031962-d3574f99541b?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Links: "/blog/2024/07/30/k230d",
-    visibility: "secondaryButtonHide",
   },
 ];
 
@@ -50,7 +47,7 @@ export default function SlideNews() {
                   {slideImage.subLinks && (
                   <a
                     href={slideImage.subLinks}
-                    className={slideImage.visibility}
+                    className={styles.secondaryButton}
                   >
                     <Translate id="homepage.secondarybutton">
                       现在开始
