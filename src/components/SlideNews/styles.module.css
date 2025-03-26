@@ -74,15 +74,15 @@
   justify-content: center;
   gap: 0.35rem;
   /* color: var(--home-button-secondary-text); */
-  color: #000;
+  color: #000000;
   border: 1px solid var(--home-button-secondary-border);
   /* background-color: var(--home-button-secondary); */
   background-color: #ffa630;
 }
 
 .secondaryButton:hover {
-  background-color: var(--home-button-secondary-hover);
-  color: var(--home-button-secondary-text);
+  background-color: #ffb968;
+  color: #000000;
 }
 
 @media (max-width: 450px) {
