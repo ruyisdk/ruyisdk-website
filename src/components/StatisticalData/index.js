@@ -82,12 +82,12 @@ const StatisticalData = () => {
             <h2 style={{ color: "#e3e3e3" }}>{translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}</h2>
 
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "下载数量 Downloads", message: "组件下载数量" })}</span>}
-              value={data?.downloads?.total || "loading..."}
+              value={data?.downloads?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
               style={{ marginTop: "10rem" }}
             ></Statistic>
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "安装台数 Installs", message: "包管理器安装台数" })}</span>}
-              value={data?.installs?.total || "loading..."}
+              value={data?.installs?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
               headStyle={{ color: "#e3e3e3" }}
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
             ></Statistic>
