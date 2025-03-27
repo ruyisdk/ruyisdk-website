@@ -16,7 +16,7 @@ const mockData = {
 
 const customizeRenderEmpty = () => (
   <div style={{ textAlign: 'center' }}>
-    <SmileOutlined style={{ fontSize: '2rem', color: "#e3e3e3" }} />
+    <SmileOutlined style={{ fontSize: '2rem', color: "#e3e3e3", marginTop: "1rem" }} />
     <p style={{ color: "#e3e3e3" }}>{translate({ id: "暂无数据", message: "暂无数据" })}</p>
   </div>
 );
@@ -34,8 +34,8 @@ const TopList = ({ data }) => (
                         <List.Item
                           style={{ marginLeft: "1rem" }}>
                           <List.Item.Meta
-                            title={<span style={{ color: "#d1d1d1" }}>{idx + 1}.  {key}</span>}
-                            description={<span style={{ color: "#0da8fa", marginLeft: "1rem", fontWeight: "bold", fontSize: "1rem" }}>{value.total}</span>}
+                            title={<span style={{ color: "#d1d1d1", fontSize: "1.5rem" }}>{idx + 1}.  {key}</span>}
+                            description={<span style={{ color: "#0da8fa", marginLeft: "1rem", fontWeight: "bold", fontSize: "1.5rem" }}>{value.total}</span>}
                           />
                         </List.Item>
                       </div>
@@ -89,16 +89,16 @@ const StatisticalData = () => {
 
   return (
     <>
-      <div style={{ backgroundImage: `url('/img/data_background.jpg')`, backgroundPosition: "center", backgroundSize: "cover", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div style={{ backgroundImage: `url('/img/data_background.jpg')`, backgroundPosition: "center", backgroundSize: "cover", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", boxSizing: "border-box" }}>
 
         <ConfigProvider renderEmpty={customizeRenderEmpty}>
           <Card style={{ width: "90%", height: '90%', backgroundColor: "rgba(0,0,0,0)", border: "none" }}>
-            <h2 style={{ color: "#e3e3e3" }}>{translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}</h2>
+            <h1 style={{ color: "#e3e3e3" }}>{translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}</h1>
 
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "下载数量 Downloads", message: "组件下载数量" })}</span>}
               value={data?.downloads?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
-              style={{ marginTop: "10rem" }}
+              style={{ marginTop: "8rem" }}
             ></Statistic>
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "安装台数 Installs", message: "包管理器安装台数" })}</span>}
               value={data?.installs?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
@@ -106,20 +106,20 @@ const StatisticalData = () => {
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
             ></Statistic>
 
-            <div style={{ display: "flex", flexDirection: "row", marginTop: "8rem", height: '50vh' }}>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "6rem", height: 'auto', flexWrap: 'wrap', gap: '1rem', width: '100%', maxWidth: '100vw', boxSizing: 'border-box' }}>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用指令 Top Commands", message: "最常用指令" })}</span>}
-                style={{ width: "90%", height: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
+                style={{ flex: 'none', width: "400px", minWidth: '300px', maxWidth: '100%', height: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", overflow: "auto", width: "60%", borderTopLeftRadius: "0.4rem", borderBottomLeftRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                <div className="custom-scroll" style={{ maxHeight: "20rem", overflow: "auto", width: "80%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                   <TopList data={data?.top_commands || {}} />
                 </div>
               </Card>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用包 Top Packages", message: "最常用包" })}</span>}
-                style={{ width: "90%", height: '15rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
+                style={{ flex: 'none', width: "400px", minWidth: '300px', maxWidth: '100%', height: '15rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", width: "60%", borderTopLeftRadius: "0.4rem", borderBottomLeftRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                <div className="custom-scroll" style={{ maxHeight: "20rem", width: "80%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                   <TopList data={data?.top_packages || {}} />
                 </div>
               </Card>
