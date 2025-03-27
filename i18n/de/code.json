@@ -387,5 +387,8 @@
   },
   "暂无数据": {
     "message": "Keine Daten verfügbar"
+  },
+  "载入中": {
+    "message": "Wird geladen"
   }
 }

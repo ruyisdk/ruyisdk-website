@@ -390,5 +390,8 @@
   },
   "暂无数据": {
     "message": "No data available"
+  },
+  "载入中": {
+    "message": "loading"
   }
 }
