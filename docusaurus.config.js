@@ -154,7 +154,7 @@ const config = {
             items: [
               {
                 label: "Discussion",
-                href: "https://github.com/ruyisdk/ruyisdk-website/discussions",
+                href: "https://github.com/ruyisdk/ruyisdk/discussions",
               },
             ],
           },
