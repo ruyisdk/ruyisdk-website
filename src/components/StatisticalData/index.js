@@ -82,19 +82,19 @@ const StatisticalData = () => {
             <h2 style={{ color: "#e3e3e3" }}>{translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}</h2>
 
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "下载数量 Downloads", message: "组件下载数量" })}</span>}
-              value={data?.downloads?.total || -1}
-              valueStyle={{ color: "#e3e3e3", fontSize: "3rem" }}
+              value={data?.downloads?.total || "loading..."}
+              valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
               style={{ marginTop: "10rem" }}
             ></Statistic>
             <Statistic title={<span style={{ color: "#e3e3e3", fontSize: "2rem", fontWeight: "bold" }}>{translate({ id: "安装台数 Installs", message: "包管理器安装台数" })}</span>}
-              value={data?.installs?.total || -1}
+              value={data?.installs?.total || "loading..."}
               headStyle={{ color: "#e3e3e3" }}
-              valueStyle={{ color: "#e3e3e3", fontSize: "3rem" }}
+              valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
             ></Statistic>
 
             <div style={{ display: "flex", flexDirection: "row", marginTop: "8rem", height: '50vh' }}>
 
-              <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用指令 Top Commands", message: "最常用指令 Top Commands" })}</span>}
+              <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用指令 Top Commands", message: "最常用指令" })}</span>}
                 style={{ width: "90%", height: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3" }}>
                 <div className="custom-scroll" style={{ maxHeight: "20rem", overflow: "auto", width: "60%", borderTopLeftRadius: "0.4rem", borderBottomLeftRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
@@ -102,7 +102,7 @@ const StatisticalData = () => {
                 </div>
               </Card>
 
-              <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用包 Top Packages", message: "最常用包 Top Packages" })}</span>}
+              <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用包 Top Packages", message: "最常用包" })}</span>}
                 style={{ width: "90%", height: '15rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3" }}>
                 <div className="custom-scroll" style={{ maxHeight: "20rem", width: "60%", borderTopLeftRadius: "0.4rem", borderBottomLeftRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
