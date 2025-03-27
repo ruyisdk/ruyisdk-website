@@ -55,21 +55,35 @@ const StatisticalData = () => {
     // setData(mockData);
     // return;
 
+    let retryTimer = null;
+    let retryCount = 0;
+
     const apiPost = async () => {
+        if (retryCount > 5) {
+          console.warn('Stop retry')
+          return;
+        }
+
         try {
           setData((await axiosInstance.post('/fe/dashboard', {})).data)
+          setError(null);
         } catch (error) {
-          console.error('Statistical Data API error:', error)
+          console.error('Statistical Data API error, will retry', error)
           setError(error);
+          retryTimer = setTimeout(apiPost, 2 ** retryCount * 1000);
+          retryCount++;
         }
     };
 
     if ("requestIdleCallback" in window) {
       const id = requestIdleCallback(apiPost);
-      return () => cancelIdleCallback(id);
+      return () => {
+        cancelIdleCallback(id);
+        clearTimeout(retryTimer);
+      }
     } else {
-      const timer = setTimeout(apiPost, 0);
-      return () => clearTimeout(timer);
+      retryTimer = setTimeout(apiPost, 500);
+      return () => clearTimeout(retryTimer);
     }
   }, [axiosInstance])
 
