@@ -4,7 +4,7 @@ import StatisticalData from '../../components/StatisticalData';
 
 const StatisticalDataPages = () => {
   return (
-    <Layout title="Hello" description="Hello React Page">
+    <Layout title="Data Panel" description="RuyiSDK Data Panel">
       <div
         style={{
           display: 'flex',
