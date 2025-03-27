@@ -34,5 +34,9 @@
   "link.item.label.QQ群": {
     "message": "QQ-Gruppe",
     "description": "The label of footer link with label=QQ群 linking to /contact"
+  },
+  "link.item.label.数据统计": {
+    "message": "Datenübersicht",
+    "description": "The label of footer link with label=数据统计 linking to /StatisticalDataPages"
   }
 }
