@@ -106,21 +106,21 @@ const StatisticalData = () => {
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
             ></Statistic>
 
-            <div style={{ display: "flex", flexDirection: "row", marginTop: "4rem", height: 'auto', flexWrap: 'wrap',  width: '100%', maxWidth: '100vw', boxSizing: 'border-box' }}>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "4rem", height: 'auto', flexWrap: 'wrap',  width: '100%', maxWidth: '100vw', boxSizing: 'border-box',gap: "4rem" }}>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用指令 Top Commands", message: "最常用指令" })}</span>}
-                style={{ flex: 'none', width: "30rem", minWidth: '24rem', maxWidth: '70%', minHeight: '20rem', height: '30rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
+                style={{ flex: 'none', width: "24rem", minWidth: '19rem', maxWidth: '70%', minHeight: '20rem', height: '30rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3", padding: "0" }}
               bodyStyle={{ padding: "16px 0" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", overflow: "auto", width: "80%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", overflow: "auto", width: "100%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                   <TopList data={data?.top_commands || {}} />
                 </div>
               </Card>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用包 Top Packages", message: "最常用包" })}</span>}
-                style={{ flex: 'none', width: "30rem", minWidth: '24rem', maxWidth: '70%', height: '30rem', minHeight: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
+                style={{ flex: 'none', width: "24rem", minWidth: '19rem', maxWidth: '70%', height: '30rem', minHeight: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3", padding: "0" }} bodyStyle={{ padding: "16px 0" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", width: "80%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", width: "100%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
                   <TopList data={data?.top_packages || {}} />
                 </div>
               </Card>
