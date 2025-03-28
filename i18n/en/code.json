@@ -393,5 +393,8 @@
   },
   "载入中": {
     "message": "loading"
+  },
+  "最后更新时间": {
+    "message": "Last Update"
   }
 }

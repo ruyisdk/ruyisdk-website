@@ -390,5 +390,8 @@
   },
   "载入中": {
     "message": "Wird geladen"
+  },
+  "最后更新时间": {
+    "message": "Zuletzt aktualisiert"
   }
 }
