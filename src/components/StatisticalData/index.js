@@ -9,7 +9,7 @@ import { translate } from "@docusaurus/Translate"
 const mockData = {
   downloads: { total: 9961 },
   installs: { total: 9760 },
-  top_commands: { "youmu sakuya hibiki hoshiro serina ayanami": { total: 46 }, youmu: { total: 46 }, sakuya: { total: 16 }, hibiki: { total: 16 }, hoshino: { total: 16 }, serina: { total: 16 }, ayanami: { total: 31 } },
+  top_commands: { "youmu sakuya hibiki hoshiro serina ayanami": { total: 46 }, youmu: { total: 46 }, sakuya: { total: 16 }, hibiki: { total: 16 }, hoshino: { total: 16 }, serina: { total: 16 }, ayanami: { total: 31 }, hina: { total: 31 }, plana: { total: 31 }, ibuki: { total: 11 } },
   top_packages: { ruyi: { total: 46 }, flang: { total: 16 } },
   last_updated: new Date().toISOString(),
 };
@@ -23,7 +23,7 @@ const customizeRenderEmpty = () => (
 
 const TopList = ({ data }) => (
                   <List
-                    style={{ width: "100%", borderWidth: "0.5px", borderColor: "grey" }}
+                    style={{ width: "100%", borderWidth: "0.5px", borderColor: "grey", flex: "1", height: "100%" }}
                     itemLayout="horizontal"
                     dataSource={Object.entries(data)}
                     locale={{
@@ -52,8 +52,8 @@ const StatisticalData = () => {
     if (!axiosInstance) return;
 
     // set test data
-    // setData(mockData);
-    // return;
+     setData(mockData);
+     return;
 
     let retryTimer = null;
     let retryCount = 0;
@@ -106,21 +106,21 @@ const StatisticalData = () => {
               valueStyle={{ color: "#e3e3e3", fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem", }}
             ></Statistic>
 
-            <div style={{ display: "flex", flexDirection: "row", marginTop: "4rem", height: 'auto', flexWrap: 'wrap',  width: '100%', maxWidth: '100vw', boxSizing: 'border-box',gap: "4rem" }}>
+            <div style={{ display: "flex", flexDirection: "row", marginTop: "4rem", height: 'auto', flexWrap: 'wrap',  width: '100%', maxWidth: '100vw', boxSizing: 'border-box', gap: "4rem", alignItems: "stretch"  }}>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用指令 Top Commands", message: "最常用指令" })}</span>}
-                style={{ flex: 'none', width: "24rem", minWidth: '19rem', maxWidth: '70%', minHeight: '20rem', height: '30rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
+                style={{ flex: '0 0 24rem', width: "24rem", minWidth: '19rem', maxWidth: '70%',  backgroundColor: "rgba(0,0,0,0)", border: "none", height: "auto", display: "flex", flexDirection: "column" }}
                 headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3", padding: "0" }}
-              bodyStyle={{ padding: "16px 0" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", overflow: "auto", width: "100%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+               bodyStyle={{ padding: "16px 0", flex: "1", display: "flex", flexDirection: "column" }}>
+                <div className="custom-scroll" style={{ borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)", flex: '1' }}>
                   <TopList data={data?.top_commands || {}} />
                 </div>
               </Card>
 
               <Card title={<span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>{translate({ id: "最常用包 Top Packages", message: "最常用包" })}</span>}
-                style={{ flex: 'none', width: "24rem", minWidth: '19rem', maxWidth: '70%', height: '30rem', minHeight: '20rem', backgroundColor: "rgba(0,0,0,0)", border: "none" }}
-                headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3", padding: "0" }} bodyStyle={{ padding: "16px 0" }}>
-                <div className="custom-scroll" style={{ maxHeight: "20rem", minHeight: "20rem", width: "100%", borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                style={{ flex: '0 0 24rem', width: "24rem", minWidth: '19rem', maxWidth: '70%', backgroundColor: "rgba(0,0,0,0)", border: "none", height: "auto", display: "flex", flexDirection: "column" }}
+                headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3", padding: "0" }} bodyStyle={{ padding: "16px 0", flex: "1", display: "flex", flexDirection: "column" }}>
+                <div className="custom-scroll" style={{  borderRadius: "0.4rem", backgroundColor: "rgba(0, 0, 0, 0.5)", flex: '1' }}>
                   <TopList data={data?.top_packages || {}} />
                 </div>
               </Card>
