@@ -52,8 +52,8 @@ const StatisticalData = () => {
     if (!axiosInstance) return;
 
     // set test data
-     setData(mockData);
-     return;
+    // setData(mockData);
+    // return;
 
     let retryTimer = null;
     let retryCount = 0;
