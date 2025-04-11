@@ -28,23 +28,23 @@ const slideImages = [
 export default function SlideNews() {
   return (
     <div className={styles.verticalSlideContainer}>
-        {slideImages.map((slideImage, index) => (
-          <div key={index}>
-            <div
-              key={index}
-              className={styles.divStyle}
-              style={{
-                backgroundImage: `url(${slideImage.Image})`,
-              }}
-            >
-              <div className={styles.content}>
-                <h1 className={styles.title}>{slideImage.title}</h1>
-                <h2 className={styles.subtitle}>{slideImage.subtitle}</h2>
-                <div className={styles.buttonContainer}>
-                  <a href={slideImage.Links} className={styles.primaryButton}>
-                    <Translate id="homepage.primarybutton">了解更多</Translate>
-                  </a>
-                  {slideImage.subLinks && (
+      {slideImages.map((slideImage, index) => (
+        <div key={index}>
+          <div
+            key={index}
+            className={styles.divStyle}
+            style={{
+              backgroundImage: `url(${slideImage.Image})`,
+            }}
+          >
+            <div className={styles.content}>
+              <h1 className={styles.title}>{slideImage.title}</h1>
+              <h2 className={styles.subtitle}>{slideImage.subtitle}</h2>
+              <div className={styles.buttonContainer}>
+                <a href={slideImage.Links} className={styles.primaryButton}>
+                  <Translate id="homepage.primarybutton">了解更多</Translate>
+                </a>
+                {slideImage.subLinks && (
                   <a
                     href={slideImage.subLinks}
                     className={styles.secondaryButton}
@@ -53,12 +53,12 @@ export default function SlideNews() {
                       现在开始
                     </Translate>
                   </a>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 }
