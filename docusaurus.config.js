@@ -137,7 +137,7 @@ const config = {
         style: "dark",
         links: [
           {
-            title: "文档",
+            title: "生态",
             items: [
               {
                 label: "RuyiSDK",
@@ -146,6 +146,10 @@ const config = {
               {
                 label: "RevyOS",
                 href: "https://docs.revyos.dev/",
+              },
+              {
+                label: "Support Matrix",
+                href: "https://matrix.ruyisdk.org/",
               },
             ],
           },
