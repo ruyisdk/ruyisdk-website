@@ -1,4 +1,4 @@
-# RuyiSDK Website ![example workflow](https://github.com/ruyisdk/ruyisdk-website/actions/workflows/deploy.yml/badge.svg)
+# RuyiSDK Website ![example workflow](https://github.com/ruyisdk/ruyisdk-website/actions/workflows/deploy.yml/badge.svg) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 Official website of RuyiSDK Project.
 
@@ -25,7 +25,7 @@ This repo contains the website configuration and documentation powering the [Ruy
 
 ## 👏 Contributing
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+We welcome contributions to Ruyi! Please see our [contribution guidelines](./CONTRIBUTING.md) ([中文](./CONTRIBUTING.zh.md)) for details on how to get started.
 
 ## 📄 License
 
