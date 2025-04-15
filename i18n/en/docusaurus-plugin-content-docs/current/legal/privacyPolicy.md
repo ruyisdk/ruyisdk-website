@@ -58,7 +58,7 @@ Except for the following scenarios, we will not share any information that can d
 1. **Anonymized Data Sharing**: We may share anonymized data with partners for market analysis, product improvement, and other purposes. This data does not contain any information that can identify your personal identity.
 2. **Legal Requirements**: We may share information as required by law or to protect national security, public safety, and the significant legal rights and interests of you and other individuals.
 
-## 3. How Long We Retain Your Personal Information
+## 4. How Long We Retain Your Personal Information
 
 We will retain your personal information based on the following principles:
 
@@ -66,14 +66,14 @@ We will retain your personal information based on the following principles:
 2. **Legal Requirements**: If we are required by law to extend the retention period, we will comply with relevant laws.
 3. **Anonymization**: After the retention period expires, we will anonymize personal information or delete it as required by law.
 
-## 4. How We Protect Your Personal Information
+## 5. How We Protect Your Personal Information
 
 We take the following measures to protect your personal information:
 
 1. **Technical Measures**: We use encryption, anonymization, and other technical means to protect your personal information.
 2. **Physical and Administrative Measures**: We implement appropriate administrative measures to ensure that only authorized personnel can access personal information.
 
-## 5. How to Access or Control Your Personal Information
+## 6. How to Access or Control Your Personal Information
 
 According to applicable laws and regulations, you may have the following rights regarding your personal information:
 
@@ -92,19 +92,19 @@ You can actively control your personal information through the following operati
 
 Additionally, please note that the above rights are not absolute and may be subject to limitations under applicable laws. If you need our assistance in exercising the above requests or rights, or if you have further requirements, questions, opinions, or suggestions regarding your data subject rights, please contact us through the methods described in the "How to Contact Us" section of this Statement.
 
-## 6. Location of Personal Information Storage
+## 7. Location of Personal Information Storage
 
 Since the data we collect does not contain any information that can identify your personal identity, your personal information will not be stored. Anonymized data will be stored on servers within the territory of the People's Republic of China that comply with legal and regulatory requirements.
 
-## 7. How We Update This Statement
+## 8. How We Update This Statement
 
 We may update or modify this Statement based on changes in services or data processing. The latest version of the privacy statement will be published on this website and will take effect immediately upon publication. We recommend that you regularly review this Statement to stay informed of any changes.
 
-## 8. Protection of Children's Personal Information
+## 9. Protection of Children's Personal Information
 
 Our services are primarily aimed at adults. Children (minors under the age of 14) should obtain the consent of their parents or guardians before using our services.
 
-## 9. How to Contact Us
+## 10. How to Contact Us
 
 If you wish to contact us or exercise your relevant rights, please contact us through the following methods:
 
