@@ -18,8 +18,8 @@ The ruyi package manager primarily provides the following functionalities.
 | `ruyi news read 1`                                                                           | Read specific news item by index.                  | 1 represents the index or ID of the news entry.                 |
 | `ruyi news read`                                                                             | Read next news item.                    |                                     |
 | `ruyi news read --quiet`                                                                     | Mark news as read without output.            | No output, only marks as read.                     |
-| `ruyi list`                                                                                  | List all available packages.                  |                                     |
-| `ruyi list -v`                                                                               | List detailed information of all packages.               |                                     |
+| `ruyi list --name-contains`                                                         | List all available packages.                  |                                     |
+| `ruyi list --verbose --name-contains`                                            | List detailed information of all packages.               |                                     |
 | `ruyi list profiles`                                                                         | View predefined virtual environment configurations.                |                     |
 | `ruyi install gnu-upstream`                                                                  | Install latest GNU upstream toolchain.            | Installs latest version of gnu-upstream by default.             |
 | `ruyi install 'gnu-upstream(0.20231118.0)'`                                                  | Install specified version of GNU upstream toolchain.          | Install historical versions by specifying version number.                      |
