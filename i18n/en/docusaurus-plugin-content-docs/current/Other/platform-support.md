@@ -71,7 +71,7 @@ The current operating system and distribution support status is as follows. Dist
 * openEuler: The most recent 1 long-term support (LTS) version.
     * openEuler 24.03 LTS
 * RevyOS: Aligned with RevyOS support for LicheePi 4A and Pioneer Box.
-* RuyiOS: The most recent 1 version.
+* RedleafOS: The most recent 1 version.
 * Ubuntu: The most recent 2 long-term support (LTS) versions.
     * Ubuntu 22.04
     * Ubuntu 24.04
