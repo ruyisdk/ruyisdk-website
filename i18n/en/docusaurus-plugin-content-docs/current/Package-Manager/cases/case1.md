@@ -46,7 +46,7 @@ ruyi update
 5. View the software repository package index information
 
 ```bash
-ruyi list
+ruyi list --name-contains gnu-plct --category-is toolchain
 ```
 
 6. Install gnu: `ruyi install <package-name>`

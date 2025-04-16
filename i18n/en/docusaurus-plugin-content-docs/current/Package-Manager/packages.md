@@ -78,7 +78,7 @@ Use the ``ruyi list`` command to list all available packages. Note that even if 
 Here is an example on an ``x86_64`` machine; the actual list will be longer:
 
 ```bash
-$ ruyi list
+$ ruyi list --name-contains ''
 List of available packages:
 
 * source/milkv-duo-examples
@@ -119,7 +119,7 @@ List of available packages:
   - 12.1.0-r.17885 ()
 ```
 
-The ``list`` command also provides the ``--verbose`` or ``-v`` option to output more detailed information, which will print almost all information from the package repository. Since the output will be lengthy, it is recommended to redirect the output to a file or a tool like ``less``.
+The ``list`` command also provides the ``--verbose`` or ``-v`` option to output more detailed information, which will print almost all information from the package repository. Since the full output will be very long, it is recommended to pass a non-empty search field to ``--name-contains``, add other limiting parameters, or redirect the full output to a file or a tool such as ``less``.
 
 Lines like ``toolchain/llvm-plct`` represent a package name, which is required when using the ``install`` command to install the package. In most cases, specifying only the name after the ``/`` is sufficient, such as ``llvm-plct`` in this example.
 
