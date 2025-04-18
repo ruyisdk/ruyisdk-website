@@ -6,7 +6,7 @@ sidebar_position: 2
 
 Let's begin with the installation of the RuyiSDK package manager.
 
-This document uses ``~`` to represent the home directory of the current regular user, and ``/home/myhone`` as an example of the absolute path to the home directory when necessary.
+This document uses ``~`` to represent the home directory of the current regular user, and ``/home/foo`` as an example of the absolute path to the home directory when necessary.
 
 ## Installing Using Precompiled Binaries
 
