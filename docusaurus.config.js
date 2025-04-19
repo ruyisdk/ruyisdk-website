@@ -167,7 +167,7 @@ const config = {
             items: [
               {
                 label: "数据统计",
-                to: "/StatisticalDataPages",
+                to: "/Home/StatisticalDataPages",
               },
               {
                 label: "GitHub",
