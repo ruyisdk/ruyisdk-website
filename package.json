@@ -15,6 +15,7 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
+    "@antv/g2": "^5.3.0",
     "@docusaurus/core": "3.4.0",
     "@docusaurus/plugin-google-gtag": "^3.4.0",
     "@docusaurus/preset-classic": "3.4.0",
@@ -28,10 +29,12 @@
     "docusaurus-plugin-sass": "^0.2.5",
     "dotenv-cli": "^8.0.0",
     "jsonp": "^0.2.1",
+    "lodash": "^4.17.21",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-player": "^2.16.0",
+    "react-scroll": "^1.9.3",
     "react-slideshow-image": "^4.3.1",
     "sass": "^1.77.6",
     "video.js": "^8.16.1"
