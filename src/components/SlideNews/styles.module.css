@@ -80,6 +80,36 @@
   background-color: #ffa630;
 }
 
+@media screen and (max-width: 824px) {
+  .primaryButton {
+    background-color: var(--home-button-primary);
+    color: var(--home-button-primary-text);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 99rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+  .secondaryButton {
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 99rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    color: #000000;
+    border: 1px solid var(--home-button-secondary-border);
+    background-color: #ffa630;
+  }
+}
+
 .secondaryButton:hover {
   background-color: #ffb968;
   color: #000000;
@@ -130,7 +160,7 @@
 
 @media screen and (max-width: 824px) {
   .divStyle {
-    height: 300px;
+    height: 400px;
   }
   .infobutton {
     margin-top: 200px;
