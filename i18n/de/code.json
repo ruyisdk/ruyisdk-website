@@ -295,8 +295,8 @@
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
   },
-  "ruyi 包管理器": {
-    "message": "ruyi-Paketmanager"
+  "RuyiSDK 包管理器": {
+    "message": "RuyiSDK-Paketmanager"
   },
   "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。": {
     "message": "Online-Softwarequellen und Verwaltungstools speichern die für die RISC-V-Entwicklungsumgebung erforderlichen Compiler-Toolchains, Debugging-Tools, Simulator, Laufzeitumgebungen, Dokumentation, Code, Hilfsprogramme und Ziel-Systemabbilder sowie Werkzeuge zur Interaktion mit den Online-Softwarequellen."
@@ -309,6 +309,12 @@
   },
   "社区": {
     "message": "Gemeinschaft"
+  },
+  "RuyiSDK 社区": {
+    "message": "RuyiSDK-Community"
+  },
+  "RuyiSDK 社区讨论板块现已开启": {
+    "message": "Die RuyiSDK-Community hat jetzt ein Diskussionsforum!"
   },
   "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。": {
     "message": "Die Community stellt Dokumente und Tutorials, Foren und technische Diskussionsbereiche usw. bereit. Der Zweck besteht darin, eine offene Kommunikationsplattform für RISC-V-Entwickler bereitzustellen, gegenseitige technische Unterstützung und gemeinsame Nutzung von Ressourcen bereitzustellen, RISC-V-Entwickler zusammenzubringen und das RISC-V-Ökosystem zu fördern Systementwicklung."
