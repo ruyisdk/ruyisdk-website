@@ -301,8 +301,8 @@
   "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
     "message": "Der erste AIoT-Massenproduktionschip basierend auf dem neuen 32-Bit-RuyiSDK."
   },
-  "ruyi 包管理器": {
-    "message": "ruyi Package Manager"
+  "RuyiSDK 包管理器": {
+    "message": "RuyiSDK Package Manager"
   },
   "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。": {
     "message": "The online software source and management tool centrally stores the compilation tool chain, debugging tools, simulators, runtime environment, documents, codes, tools, target system images, and other contents required for the RISC-V integrated development environment, as well as tools for interacting with the online software source."
@@ -315,6 +315,12 @@
   },
   "社区": {
     "message": "Community"
+  },
+  "RuyiSDK 社区": {
+    "message": "RuyiSDK Community"
+  },
+  "RuyiSDK 社区讨论板块现已开启": {
+    "message": "The RuyiSDK Community has a new discussion forum—join the conversation!"
   },
   "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。": {
     "message": "The community provides functions such as documentation and tutorials, forums and technical discussion areas, with the aim of providing an open communication platform for RISC-V developers, providing mutual technical support and resource sharing, gathering RISC-V developers and promoting the development of the RISC-V ecosystem."
