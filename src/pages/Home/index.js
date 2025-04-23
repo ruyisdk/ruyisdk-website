@@ -8,13 +8,13 @@
 import React from "react";
 import styles from "./styles.module.css";
 import SlideNews from "../../components/SlideNews";
-import DemoBoardsDisplay from "../../components/DemoBoardsDisplay";
+import DemoDisplay from "../../components/DemoDisplay";
 
 function Hero() {
   return (
     <div className={styles.container} style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "100%" }}>
       <SlideNews />
-      {/* <DemoBoardsDisplay /> */}
+      {/* <DemoDisplay></DemoDisplay> */}
     </div>
   );
 

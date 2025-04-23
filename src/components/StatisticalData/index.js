@@ -16,7 +16,6 @@ const CustomizeRenderEmpty = () => (
 const TopList = ({ data }) => {
   const containerRef = useRef();
   const chartRef = useRef();
-  const scrollContainerRef = useRef();
 
   const barData = useMemo(() => {
     return Object.entries(data)
@@ -84,14 +83,22 @@ const TopList = ({ data }) => {
 
   return (
     <div
-      ref={scrollContainerRef}
       className="custom-scroll"
       style={{
         height: "75vh",
         overflow: "auto",
-        WebkitOverflowScrolling: "touch"
+        WebkitOverflowScrolling: "touch",
+        overscrollBehavior: "contain",
+        msOverflowStyle: "none",
+        scrollbarWidth: "none",
       }}
     >
+      <style jsx>{`
+        .custom-scroll::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+
       {barData.length ?
         <div
           ref={containerRef}
@@ -109,7 +116,7 @@ const TopList = ({ data }) => {
               left: 0,
               right: 0,
               bottom: 0,
-              zIndex: 10,
+              zIndex: 0,
               background: "transparent"
             }}
           />
@@ -127,6 +134,147 @@ const StatisticalData = () => {
   const axiosInstance = useDashboardClient()
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const containerRef = useRef();
+  const footerRef = useRef(null);
+  const [isFooterVisible, setIsFooterVisible] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 1024px)').matches);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScrollForIndicator = () => {
+      if (containerRef.current) {
+        const scrollPosition = containerRef.current.scrollTop;
+        const cardHeight = window.innerHeight;
+        const slide = Math.round(scrollPosition / cardHeight);
+        setCurrentSlide(slide);
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScrollForIndicator);
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScrollForIndicator);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footerRef.current = footer;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          setIsFooterVisible(entry.isIntersecting);
+        });
+      }, { threshold: [0] });
+
+      observer.observe(footer);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
+
+  const scrollToCard = (index) => {
+    if (containerRef.current && !isScrolling && !isFooterVisible) {
+      setIsScrolling(true);
+
+      containerRef.current.scrollTo({
+        top: index * window.innerHeight,
+        behavior: 'smooth'
+      });
+
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 500);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (isScrolling || isFooterVisible || !isMobile) return;
+
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault();
+      const targetSlide = Math.min(2, currentSlide + 1);
+      scrollToCard(targetSlide);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      const targetSlide = Math.max(0, currentSlide - 1);
+      scrollToCard(targetSlide);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, [isScrolling, currentSlide, isFooterVisible, isMobile]);
+
+  const NavigationDots = () => {
+    if (!isMobile) return null;
+
+    return (
+      <div style={{
+        position: 'fixed',
+        right: '20px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        zIndex: 100
+      }}>
+        {[0, 1, 2].map(index => (
+          <div
+            key={index}
+            onClick={() => scrollToCard(index)}
+            style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              border: 'none',
+              background: currentSlide === index ? '#ffffff' : 'rgba(255,255,255,0.5)',
+              transition: 'background 0.3s ease',
+              cursor: isFooterVisible ? 'default' : 'pointer'
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 
   const CardOneitems = [
     {
@@ -181,8 +329,14 @@ const StatisticalData = () => {
 
   return (
     <div
+      ref={containerRef}
       className={styles.container}
+      style={{
+        pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto'
+      }}
     >
+      <NavigationDots />
+
       <ConfigProvider
         renderEmpty={CustomizeRenderEmpty}
         theme={{
@@ -194,9 +348,7 @@ const StatisticalData = () => {
           }
         }}
       >
-        <div
-          className={styles.card}
-        >
+        <div className={`${styles.card}`}>
           <Card
             style={{
               width: '90%',
@@ -253,9 +405,7 @@ const StatisticalData = () => {
           </Card>
         </div>
 
-        <div
-          className={styles.card}
-        >
+        <div className={`${styles.card}`}>
           <Card
             style={{
               width: '80%',
@@ -273,9 +423,7 @@ const StatisticalData = () => {
           </Card>
         </div>
 
-        <div
-          className={styles.card}
-        >
+        <div className={`${styles.card}`}>
           <Card
             style={{
               width: '80%',
