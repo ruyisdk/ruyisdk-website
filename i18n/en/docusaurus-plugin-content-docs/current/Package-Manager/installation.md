@@ -22,19 +22,19 @@ Using the ISCAS mirror as an example, the installation process is described belo
 If the output is ``x86_64``:
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.31.0/ruyi.amd64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.amd64
 ```
 
 If the output is ``aarch64``:
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.31.0/ruyi.arm64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.arm64
 ```
 
 If the output is ``riscv64``:
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.31.0/ruyi.riscv64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.riscv64
 ```
 
 The following example assumes the ``x86_64`` architecture. Grant execution permissions to the downloaded binary:
