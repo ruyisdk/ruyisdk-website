@@ -3,33 +3,33 @@
 By downloading and using RuyiSDK, you agree to the license terms and the [privacy statement](https://ruyisdk.org/docs/legal/privacyPolicy/).
 :::
 
-## Download ruyi
+## Download RuyiSDK Package Manager
 
-Ruyi provides pre-built binaries for x86_64, riscv64, and aarch64 architectures. Run ``uname -m`` to check your system architecture, then download the appropriate binary.
+RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures. Run ``uname -m`` to check your system architecture, then download the appropriate binary.
 
 For ``x86_64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.amd64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.32.0/ruyi-0.32.0.amd64
 ```
 
 For ``aarch64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.arm64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.32.0/ruyi-0.32.0.arm64
 ```
 
 For ``riscv64``：
 
 ```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.riscv64
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.32.0/ruyi-0.32.0.riscv64
 ```
 
 :::tip
-This document is time-sensitive. If the links point to an outdated version of Ruyi, visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
+If the page does not properly display the download link, you can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
 :::
 
-## Install ruyi
+## Install RuyiSDK Package Manager
 
 Take the x86_64 binary as an example. Add execution permissions to the file:
 
@@ -55,7 +55,43 @@ $ ruyi version
 
 If the command outputs the version and copyright information, Ruyi is installed successfully. If it fails, check your system environment and repeat the steps.
 
+# Download RuyiSDK IDE
+
+RuyiSDK IDE has also released binaries for three architectures: x86_64, riscv64, and aarch64.
+
+You can download the tarball suitable for your architecture:
+
+```bash
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+```
+
+:::tip
+This document is time-sensitive. If the links point to an outdated version of Ruyi, visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/) for the latest binaries. 
+:::
+
+### Install RuyiSDK IDE
+
+The following demonstrates how to install RuyiSDK IDE into the ``/opt/ruyisdk`` directory.
+
+First, create the directory: 
+
+```bash
+$ sudo mkdir /opt/ruyisdk
+```
+
+Unpack the tarball. This step requires tar and gunzip, and ensure the downloaded tarball path is adjusted based on your actual location: 
+
+```bash
+$ cd /opt/ruyisdk
+$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+```
+
+Run RuyiSDK IDE:
+
+```bash
+$ /opt/ruyisdk/ruyisdk/ruyisdk
+```
+
 ## Use ruyi
 
-Refer to the documentation to learn how to use Ruyi effectively.
-
+Refer to the [documentation](https://ruyisdk.org/en/docs/intro/) to learn how to use Ruyi effectively.
