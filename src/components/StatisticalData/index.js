@@ -217,7 +217,11 @@ const StatisticalData = () => {
                     {translate({ id: "下载数量 Downloads", message: "组件下载数量" })}
                   </span>
                 }
-                value={data?.downloads?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
+                value={
+                  data?.downloads?.total != null && data?.pm_downloads?.total != null
+                    ? data.downloads.total + data.pm_downloads.total
+                    : translate({ id: "载入中", message: "载入中" }) + "..."
+                }
                 valueStyle={{
                   color: "#e3e3e3",
                   fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem",
