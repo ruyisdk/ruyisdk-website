@@ -1,7 +1,10 @@
+import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
 
 :::tip
 下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
 :::
+
+<ReleaseProvider/>
 
 ## 下载 RuyiSDK 包管理器
 
@@ -9,24 +12,18 @@ Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的�
 
 如果输出为 ``x86_64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.amd64
-```
+<DownloadRuyi arch="x86_64" />
 
 如果输出为 ``aarch64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.arm64
-```
+<DownloadRuyi arch="aarch64" />
 
 如果输出为 ``riscv64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/ruyi.riscv64
-```
+<DownloadRuyi arch="riscv64" />
 
 :::tip
-文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
+若页面没有正常显示下载链接，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
 :::
 
 ### 安装 RuyiSDK 包管理器
