@@ -1,3 +1,7 @@
+import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+
+<ReleaseProvider>
+  <>
 
 :::tip
 Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](https://ruyisdk.org/docs/legal/privacyPolicy/) zu.
@@ -9,24 +13,18 @@ Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 u
 
 Für ``x86_64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.amd64
-```
+<DownloadRuyi arch="x86_64" />
 
 Für ``aarch64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.arm64
-```
+<DownloadRuyi arch="aarch64" />
 
 Für ``riscv64``：
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.riscv64
-```
+<DownloadRuyi arch="riscv64" />
 
 :::tip
-Dieses Dokument ist zeitkritisch. Falls die Links auf eine veraltete Version von Ruyi verweisen, besuchen Sie den [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/), um die neuesten Binärdateien zu finden. Alternativ finden Sie diese auch in den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
+Falls die Seite den Download-Link nicht korrekt anzeigt, können Sie das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie sie auch bei den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
 :::
 
 ## Ruyi installieren
@@ -58,4 +56,7 @@ Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erf
 ## Ruyi verwenden
 
 Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen können.
+
+  </>
+</ReleaseProvider>
 
