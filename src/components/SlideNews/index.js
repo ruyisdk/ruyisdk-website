@@ -29,14 +29,14 @@ export default function SlideNews() {
   return (
     <div className={styles.verticalSlideContainer}>
       {slideImages.map((slideImage, index) => (
-        <div key={index}>
+        <div key={index} className={styles.slideWrapper}>
           <div
-            key={index}
-            className={styles.divStyle}
+            className={styles.slideBackground}
             style={{
               backgroundImage: `url(${slideImage.Image})`,
             }}
-          >
+          />
+
             <div className={styles.content}>
               <h1 className={styles.title}>{slideImage.title}</h1>
               <h2 className={styles.subtitle}>{slideImage.subtitle}</h2>
@@ -57,7 +57,6 @@ export default function SlideNews() {
               </div>
             </div>
           </div>
-        </div>
       ))}
     </div>
   );
