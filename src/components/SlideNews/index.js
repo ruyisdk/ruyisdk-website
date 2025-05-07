@@ -2,6 +2,7 @@ import styles from "./styles.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
 import "react-slideshow-image/dist/styles.css";
 import { Slide } from "react-slideshow-image";
+import clsx from "clsx";
 
 const slideImages = [
   {
@@ -37,26 +38,26 @@ export default function SlideNews() {
             }}
           />
 
-            <div className={styles.content}>
-              <h1 className={styles.title}>{slideImage.title}</h1>
-              <h2 className={styles.subtitle}>{slideImage.subtitle}</h2>
-              <div className={styles.buttonContainer}>
-                <a href={slideImage.Links} className={styles.primaryButton}>
-                  <Translate id="homepage.primarybutton">了解更多</Translate>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{slideImage.title}</h1>
+            <h2 className={styles.subtitle}>{slideImage.subtitle}</h2>
+            <div className={styles.buttonContainer}>
+              <a href={slideImage.Links} className={styles.primaryButton}>
+                <Translate id="homepage.primarybutton">了解更多</Translate>
+              </a>
+              {slideImage.subLinks && (
+                <a
+                  href={slideImage.subLinks}
+                  className={styles.secondaryButton}
+                >
+                  <Translate id="homepage.secondarybutton">
+                    现在开始
+                  </Translate>
                 </a>
-                {slideImage.subLinks && (
-                  <a
-                    href={slideImage.subLinks}
-                    className={styles.secondaryButton}
-                  >
-                    <Translate id="homepage.secondarybutton">
-                      现在开始
-                    </Translate>
-                  </a>
-                )}
-              </div>
+              )}
             </div>
           </div>
+        </div>
       ))}
     </div>
   );

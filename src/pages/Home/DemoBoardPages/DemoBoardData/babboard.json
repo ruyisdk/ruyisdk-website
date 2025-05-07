@@ -1,0 +1,19 @@
+{
+  "image": "../../../../staitc/img/616c6103a9a4656a2b24226e55425d62.png",
+  "abstract": "# RuyiSDK 镜像文件安装指南\n\nRuyiSDK 目前提供了 LP64 和 ILP32 两种镜像文件，可以通过 RuyiSDK 下载安装，具体步骤如下：\n\n1. 请确保您已经下载并安装了 ruyi，请参考 [RuyiSDK 包管理器安装说明](#)安装（建议您下载最新版本），安装完成后可以执行 `ruyi --version` 查看版本信息\n\n2. 执行 `ruyi update` 更新 RuyiSDK 软件源：该操作将会把软件源的最新软件包等资源索引更新到本地，方便后续查询、安装能够得到最新的信息。\n\n当前，RiviSDK 为 K230D 提供了以下系统：\n- **RV641LP32**（玄铁新82位内核+32位rootfs）\n- **RV64LP64**（常规64位系统）\n\n推荐您安装 RV641LP32 系统体验新32位在动态内存空间消耗上的优势。\n\n## 支持的系统配置\n\n以下是您所选择的设备变体支持的系统配置：\n\n- Canaan Kendryte K230D CanMV Linux SDK demo. RV641LP32 ABI\n- Canaan Kendryte K230D CanMV Linux SDK demo. RV64LP64 ABI",
+  "canshu": {
+    "CPU": "CPU1,1.6GHZ,支持RVV1.0；CPU2,800MHZ;",
+    "DPU": "第三代KPU,支持INT8/INT16等多种数据类型,典型网络性能：Restnet50>=85fps@INT8；",
+    "KPU": "内置 3D 结构光深度引擎,最大分辨率支持到 1920*1080； VPU: 内置 H.264/H.265 硬件编解码器; ",
+    "VPU": "内置 H.264/H.265 硬件编解码器",
+    "USB": "1 路 USB 2.0 接口,支持 OTG 功能;"
+  },
+  "implement": [
+    "Canaan 开发者中心 : https://developer.canaan-creative.com/document",
+    "Github docs: https://github.com/kendryte/k230_docs/",
+    "Canaan K230 Series chip Specification introduction: https://www.youtube.com/watch?v=8eNtRKSxDeM",
+    "i. 芯片手册：https://github.com/kendryte/k230_docs/blob/main/zh/00_hardware/K230_datasheet.md"
+  ],
+  "howtodownload": "# Banana Pi BPI-CanMV-K230D-Zero\n\nBanana Pi BPI-CanMV-K230D-Zero 采用嘉楠科技 K230D RISC-V芯片设计，探索 RISC-V Vector1.0 的前沿技术，选择嘉楠科技的 Canmy K230D Zero 开发板。\n\n这款创新的开发板是由嘉楠科技与香蕉派开源社区联合设计研发，搭载了先进的勘智 K230D 芯片。 \n\n## 技术规格\n\nK230D 芯片拥有：\n- 双核玄铁 C908 RISC-V CPU\n- 集成自主研发的第三代 KPU\n- 内置 128MB LPDDR4 内存\n- 提供备和嵌入式系统\n\n其丰富的开发资源和小巧的尺寸使其成为市场上最具竞争力的开发板之一。",
+  "howtobuild": "# K230D SDK 镜像构建说明\n\n## 注意事项\n> **注意**：k230d canmy-lip32 defconfig 需要 ubuntu 22.04 或 24.04 并安装 tv64ip32 工具链，因此源码构建请在Ubuntu 22.04 或 Ubuntu 24.04 环境下操作\n\nK230D SDK 提供了镜像的构建说明，构建完成后，镜像文件存放在 `output` 目录下。根据执行的 defconfig 分别存放，64ILP32 和 64LP64 的镜像文件路径分别为：\n\n### 64ILP32\n```\noutput/k230d_canmv_ilp32_defconfig/images/sysimage-sdcard.img\n```\n\n### 64LP64\n```\noutput/k230d_canmv_lp64_defconfig/images/sysimage-sdcard.img\n```"
+}
