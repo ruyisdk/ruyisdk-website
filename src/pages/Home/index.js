@@ -8,13 +8,22 @@
 import React from "react";
 import styles from "./styles.module.css";
 import SlideNews from "../../components/SlideNews";
-import DemoDisplay from "../../components/DemoDisplay";
+import MainDisplay from "../../components/HomepageComponent/MainDisplay";
+import RuyiInLive from "../../components/HomepageComponent/RuyiInLive";
+import DemoBoardsDisplay from "../../components/DemoDisplay"
+import BoardSelector from "../../components/BoardsFinder/BoardSelector";
 
 function Hero() {
   return (
-    <div className={styles.container} style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "100%" }}>
-      <SlideNews />
-      {/* <DemoDisplay></DemoDisplay> */}
+    <div className="homecontainer">
+      <div className={styles.container} style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "100%" }}>
+        <MainDisplay />
+        <SlideNews />
+        <RuyiInLive />
+        
+
+        {/*<DemoBoardsDisplay />*/}
+      </div>
     </div>
   );
 
