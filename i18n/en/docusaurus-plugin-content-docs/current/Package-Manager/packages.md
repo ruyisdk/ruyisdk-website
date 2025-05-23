@@ -14,24 +14,24 @@ $ ruyi update
 
 The package cache will be stored in the user's home directory, typically at ``~/.cache/ruyi/packages-index/``. If the ``XDG_CACHE_HOME`` environment variable is set, the directory will be ``$XDG_CACHE_HOME/ruyi/packages-index/``.
 
-### ``ruyi update`` Pull Failure
+### `ruyi update` Pull Failure
 
-Since the package index information is currently hosted on a GitHub repository, if there are issues with repository access instability, you can configure the use of an [alternative repository](https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git) in the configuration file.
-
-The Ruyi package manager's configuration file is by default located at ``~/.config/ruyi/config.toml``, or at ``$XDG_CONFIG_HOME/ruyi/config.toml`` if ``XDG_CONFIG_HOME`` is configured. If the file does not exist, you can create it manually.
-
-```
-[repo]
-local = ""
-remote = "https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git"
-branch = "main"
-```
-
-Here, ``local`` refers to the local cache directory, ``remote`` is the URL of the remote mirror repository, and ``branch`` is the git branch of the mirror.
-
-After saving the configuration, try refreshing the local cache again:
+Since the package index is currently hosted in a GitHub repository, if the repository access becomes unstable, you can use the `ruyi config` subcommand to configure the use of the [alternative repository](https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git).
 
 ```bash
+# Check the current repository configuration
+$ ruyi config get repo
+
+# Switch the remote repository to the ISCAS mirror
+$ ruyi config set repo.remote https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git
+
+# (Optional) Modify the default branch, usually set to main
+$ ruyi config set repo.branch main
+
+# (Optional) Modify the local cache directory
+$ ruyi config set repo.local /your/custom/cache/path
+
+# After completing the configuration changes, refresh the local package cache again
 $ ruyi update
 ```
 
@@ -229,3 +229,4 @@ $ ruyi self clean --distfiles --installed-pkgs
 If you insist on deleting a specific package, although it is not recommended, you can manually delete them. If you accidentally delete some files but Ruyi still considers the package installed, you can try using ``install --reinstall`` to restore it.
 
 Note that if a toolchain package is deleted, any virtual environments that depend on it will become invalid, and there will be no warning when activating such a compilation environment.
+
