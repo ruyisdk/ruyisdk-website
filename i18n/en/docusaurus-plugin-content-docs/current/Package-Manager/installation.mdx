@@ -38,7 +38,6 @@ If the output is ``riscv64``:
 
 You can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
 
-
 The following example assumes the ``x86_64`` architecture. Grant execution permissions to the downloaded binary:
 
 ```bash
@@ -81,12 +80,9 @@ $ sudo pacman -Sy
 $ sudo pacman -S ruyi
 ```
 
-
 ### Gentoo Linux
 
 Gentoo Linux users can follow the steps below to install and configure the Ruyi package manager (`ruyi`) using the officially provided `ruyisdk-overlay`.
-
-
 
 1. Install `eselect-repository` and Git client:
 
@@ -95,7 +91,6 @@ sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
 ```
 
 2. Ensure that the system has added the main Gentoo repository (usually configured by default).
-
 
 3. Use `eselect-repository` to add `ruyisdk-overlay`.
 
@@ -128,7 +123,6 @@ sudo emerge --ask dev-util/ruyi
 
 ---
 
-
 ## Verifying Your Installation
 
 ```bash
@@ -136,7 +130,6 @@ $ ruyi version
 ```
 
 The command should run successfully and print version and Copyright information. If it fails, check your system environment or retry the installation.
-
 
 ## Getting Started
 
