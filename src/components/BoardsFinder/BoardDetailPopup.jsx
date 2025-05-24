@@ -1,10 +1,5 @@
 import React from 'react';
 
-<<<<<<< HEAD
-=======
-//Not finished, do NOT use it!!!
-
->>>>>>> 5d65062 (minor changes)
 // Custom SVG Icons with Apple-style
 const IconX = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -326,8 +321,4 @@ const BoardDetailPopup = ({ board, onClose }) => {
   );
 };
 
-<<<<<<< HEAD
 export default BoardDetailPopup;
-=======
-export default BoardDetailPopup;
->>>>>>> 5d65062 (minor changes)
