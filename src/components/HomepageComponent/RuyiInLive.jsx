@@ -384,7 +384,7 @@ const RuyiInLive = () => {
       <div style={styles.container}>
         {/* Left Panel */}
         <div style={styles.leftPanel}>
-          <h1 style={styles.title}>Ruyi in Live</h1>
+          <h1 style={styles.title}>Ruyi社区</h1>
           <p style={styles.subtitle}>Ruyi是一个活跃的社区。</p>
           <div style={styles.buttonContainer}>
             <a 
@@ -393,13 +393,6 @@ const RuyiInLive = () => {
             >
               <UsersIcon />
               社区
-            </a>
-            <a 
-              href="https://ruyisdk.org/biweekly" 
-              style={{...styles.button, backgroundColor: colors.creamBeige, color: colors.textDark}}
-            >
-              <NewspaperIcon />
-              新闻
             </a>
             <a 
               href="https://github.com/ruyisdk" 
