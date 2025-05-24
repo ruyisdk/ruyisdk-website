@@ -17,12 +17,10 @@ This repo contains the website configuration and documentation powering the [Ruy
 
 1.  `cd ruyisdk-website` to go into the project root.
 1.  Run `npm ci` to install the website's workspace dependencies.
-1.  Run `npm run build` to build the website.
 
 ### Running locally
 
 1.  `npm start` to start the development server _(powered by [Docusaurus](https://v2.docusaurus.io))_.
-1.  Or `npm run serve` to start the server after `npm run build`
 1.  Open http://localhost:3000/ site in your favorite browser.
 
 ## 👏 Contributing
@@ -31,4 +29,4 @@ We welcome contributions to Ruyi! Please see our [contribution guidelines](./CON
 
 ## 📄 License
 
-ruyisdk-website is [Apache-2.0 license](./LICENSE).
+ruyisdk-website is [ Apache-2.0 license](./LICENSE).
