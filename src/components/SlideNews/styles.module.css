@@ -8,21 +8,79 @@
 .verticalSlideContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-  padding: 0 0.5rem
+  gap: 1rem; /* Consistent gap between all rows */
+  margin: 0;
+  padding: 8px 32px 24px;
+  position: relative;
+  background-color: #f5f5f7; /* Added light gray background */
 }
 
-.slideWrapper {
-  position: relative;
+/* Small cards container for proper wrapping */
+.smallCardsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Same gap between small cards */
   width: 100%;
-  height: 480px;
+  margin: 0; /* Remove margin to maintain consistent spacing */
+}
+
+/* Card size classes */
+.cardLarge,
+.cardMedium,
+.cardSmall,
+.mobileCard {
+  position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px; /* Smaller rounded corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* Card large - full width, 2x height */
+.cardLarge {
+  width: 100%;
+  height: 480px;
+  margin: 0; /* Remove margin to use gap for consistent spacing */
+}
+
+/* Card medium - full width, 1x height */
+.cardMedium {
+  width: 100%;
+  height: 240px;
+  margin: 0; /* Remove margin to use gap for consistent spacing */
+}
+
+/* Card small - half width, 1x height */
+.cardSmall {
+  width: calc(50% - 0.5rem);
+  height: 240px;
+  flex: 0 0 calc(50% - 0.5rem); /* Flex basis prevents growth/shrinking */
+  margin: 0; /* Remove margin to use gap for consistent spacing */
+}
+
+/* Card mobile - for small screens */
+.mobileCard {
+  width: 100%;
+  height: 240px;
+  margin: 0; /* Use gap for spacing */
+}
+
+.clickableCard {
+  cursor: pointer;
+}
+
+.cardLarge:hover,
+.cardMedium:hover,
+.cardSmall:hover,
+.mobileCard:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Base background styles */
 .slideBackground {
   position: absolute;
   top: 0;
@@ -30,44 +88,57 @@
   right: 0;
   bottom: 0;
   background-size: cover;
-  filter: blur(25px);
+  background-position: center;
   z-index: 0;
-  transform: scale(1.05);
+  /* Darken overlay for readability */
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: darken;
 }
 
-.title {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-}
-
-.subtitle {
-  font-weight: 500;
-  color: var(--home-secondary-text);
-  font-size: 1rem;
+/* Blurred background style - applied as a separate class */
+.blurredBackground {
+  filter: blur(15px);
+  transform: scale(1.05); /* Slight scale to avoid blur edges */
 }
 
 .content {
   position: relative;
-  /* top: 120px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   z-index: 1;
+  padding: 2rem;
+  width: 85%;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+}
+
+.subtitle {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
 }
 
 .buttonContainer {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .primaryButton {
-  background-color: var(--home-button-primary);
-  color: var(--home-button-primary-text);
+  background: #0071e3; /* Solid blue color */
+  color: #ffffff;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 99rem;
@@ -77,11 +148,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .primaryButton:hover {
-  color: var(--home-button-primary-text);
-  background-color: var(--home-button-primary-hover);
+  color: #ffffff;
+  background: #0077ed; /* Slightly lighter blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
 .secondaryButton {
@@ -94,36 +169,37 @@
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  /* color: var(--home-button-secondary-text); */
-  color: #000000;
-  border: 1px solid var(--home-button-secondary-border);
-  /* background-color: var(--home-button-secondary); */
-  background-color: #ffa630;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/*@media screen and (max-width: 824px) {
-  .primaryButton {
-    font-size: 0.8rem;
-  }
-  .secondaryButton {
-    font-size: 0.8rem;
-  }
-}*/
-
 .secondaryButton:hover {
-  background-color: #ffb968;
-  color: #000000;
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 450px) {
   .content {
     top: 10px;
+    width: 95%;
+    padding: 1.5rem;
   }
-
-  /* .primaryButton,
-  .secondaryButton {
-    width: 8rem;
-  } */
+  
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .spanStyle {
@@ -146,118 +222,206 @@
   height: 480px;
 }
 
-/*
-.infobutton {
-  position: absolute;
-  padding: 12px 24px;
-  font-weight: bold;
-  font-size: 17px;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  background-color: transparent;
-  margin-top: 300px;
-}
-
-@media screen and (max-width: 824px) {
-  .divStyle {
-    height: 400px;
-  }
-
-  .infobutton {
-    margin-top: 200px;
-  }
-}
-*/
-
 .slidetitle {
   color: white;
 }
 
-/* .slideOneGradient {
-  width: 100%;
-  height: 500px;
-  background: radial-gradient(circle at center,
-      rgb(180, 90, 0) 0%,
-      rgb(150, 70, 0) 15%,
-      rgb(120, 55, 0) 30%,
-      rgb(90, 40, 0) 50%,
-      rgb(60, 25, 0) 70%,
-      rgb(30, 12, 0) 85%,
-      rgb(10, 5, 0) 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.slideTwoGradient {
-  width: 100%;
-  height: 500px;
-  background: linear-gradient(to bottom,
-      #000000 0%,
-      #0a0d23 5%,
-      #151b4a 10%,
-      #19235b 17%,
-      #1d2a6d 25%,
-      #252f7a 35%,
-      #2d3a8c 50%,
-      #3544a5 56%,
-      #3e50bf 62%,
-      #4359c8 68%,
-      #4863d0 75%,
-      #7790dd 85%,
-      #99b4e4 90%,
-      #bcd8e8 100%);
-  position: relative;
-  overflow: hidden;
-} */
-
-/* .slideTwoGradient::before {
-  content: "";
-  position: absolute;
+/* Expanded Card Styles */
+.expandedCardOverlay {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 70% 30%,
-      rgba(114, 137, 218, 0.3) 0%,
-      rgba(80, 104, 231, 0.1) 40%,
-      transparent 70%);
-} */
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease-out;
+}
 
-/* .slideThreeGradient {
-  width: 100%;
-  height: 500px;
-  background: linear-gradient(to bottom,
-      #e6f0f5 0%,
-      #dbe9f4 25%,
-      #d0e3f0 50%,
-      #c6deec 75%,
-      #bcd8e8 100%);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.expandedCard {
   position: relative;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 10px; /* Smaller rounded corners */
   overflow: hidden;
-} */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(230, 230, 230, 1);
+}
 
-/* .slideThreeGradient::before {
-  content: "";
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.expandedCardBackground {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0) 100%);
+  width: 100%;
+  height: 40%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  /* No blur in expanded view */
+  filter: none; 
+  /* Darken for readability */
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: darken;
 }
 
-.titleDark {
+.expandedCardContent {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  margin-top: 35%;
+  background: #ffffff;
+  border-radius: 10px 10px 0 0; /* Smaller rounded corners */
+  min-height: 60%;
+  overflow-y: auto;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.expandedCardTitle {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  margin-top: 1.5rem;
-  color: #000000;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #1a1a1a; /* Force black text for expanded card */
 }
 
-.subtitleDark {
-  font-weight: 500;
-  color: #000000;
-  font-size: 1rem;
-} */
+.expandedCardSubtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #333333; /* Force dark gray text for expanded card */
+}
+
+.expandedCardDescription {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  color: #333333; /* Force dark gray text for expanded card */
+}
+
+.expandedCardButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Override button styles in expanded card */
+.expandedCardButtons .primaryButton {
+  /* Keep the same styling for primary button */
+}
+
+.expandedCardButtons .secondaryButton {
+  color: #333333; /* Dark text for better readability in expanded view */
+  background: rgba(240, 240, 240, 0.8);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.expandedCardButtons .secondaryButton:hover {
+  background: rgba(230, 230, 230, 0.9);
+  color: #222222;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .expandedCardOverlay {
+    padding: 1rem;
+  }
+  
+  .expandedCard {
+    width: 95%;
+    max-height: 85vh;
+  }
+  
+  .expandedCardTitle {
+    font-size: 2rem;
+  }
+  
+  .expandedCardSubtitle {
+    font-size: 1rem;
+  }
+  
+  .expandedCardButtons {
+    flex-direction: column;
+  }
+  
+  .expandedCardContent {
+    margin-top: 40%;
+    padding: 1.5rem;
+  }
+  
+  .expandedCardButtons a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Make all cards full width on mobile */
+  .cardSmall {
+    width: 100%;
+    flex: 0 0 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .content {
+    width: 95%;
+  }
+  
+  /* Remove smallCardsRow special layout on mobile */
+  .smallCardsRow {
+    display: block;
+  }
+}
