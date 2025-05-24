@@ -2,11 +2,16 @@
 sidebar_position: 2
 ---
 
+import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+
 # Installation
 
 Lassen Sie uns mit der Installation des RuyiSDK-Paketmanagers beginnen.
 
 Dieses Dokument verwendet ``~`` als Kurznotation für das Home-Verzeichnis des aktuellen regulären Benutzers und verwendet, falls erforderlich, ``/home/myhone`` als Beispiel für einen absoluten Pfad zum Home-Verzeichnis.
+
+<ReleaseProvider>
+  <>
 
 ## Installation mit vorgefertigten Binärdateien
 
@@ -21,21 +26,17 @@ Um den Installationsprozess zu beschreiben, verwenden wir das ISCAS-Mirror-Sourc
 
 Wenn die Ausgabe ``x86_64`` ist:
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.amd64
-```
+<DownloadRuyi arch="x86_64" />
 
 Wenn die Ausgabe ``aarch64`` ist:
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.arm64
-```
+<DownloadRuyi arch="aarch64" />
 
 Wenn die Ausgabe ``riscv64`` ist:
 
-```bash
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/ruyi.riscv64
-```
+<DownloadRuyi arch="riscv64" />
+
+Sie können das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie diese auch unter den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
 
 Im Folgenden nehmen wir die Architektur ``x86_64`` als Beispiel, um dem heruntergeladenen Binary Ausführungsrechte zu erteilen:
 
@@ -54,6 +55,8 @@ Wenn Ihr ``PATH`` das Verzeichnis ``~/.local/bin/`` enthält, könnte es die emp
 Bitte beachten Sie, dass der Name der Binärdatei ``ruyi`` sein muss.
 
 ## Installation mit dem System-Paketmanager
+
+### Arch Linux
 
 Derzeit können Arch-Linux-Benutzer den Ruyi-Paketmanager über den System-Paketmanager installieren und deinstallieren. Im Vergleich zur Verwendung der vorgefertigten Binärdateien ist die Wartung einfacher; die Verwendung von System-Python kann auch bessere Leistung bieten.
 
@@ -77,6 +80,49 @@ $ sudo pacman -Sy
 $ sudo pacman -S ruyi
 ```
 
+### Gentoo Linux
+
+Gentoo-Linux-Nutzer können die folgenden Schritte ausführen, um den Ruyi-Paketmanager (`ruyi`) mithilfe des offiziell bereitgestellten `ruyisdk-overlay` zu installieren und zu konfigurieren.
+
+1. Installieren Sie `eselect-repository` und den Git-Client:
+
+```bash
+sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
+```
+
+2. Stellen Sie sicher, dass das System das Hauptrepository von Gentoo hinzugefügt hat (dies ist in der Regel standardmäßig konfiguriert).
+
+3. Fügen Sie mit `eselect-repository` das Overlay `ruyisdk-overlay` hinzu:
+
+```bash
+sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git
+```
+
+4. Synchronisieren Sie das Repository
+
+```bash
+sudo emaint sync -r ruyisdk
+```
+
+5. Test-Keywords akzeptieren (Entmaskieren)
+
+Das Ebuild für Ruyi ist als Testversion (`~amd64`) gekennzeichnet und muss vor der Installation entmaskiert werden.
+
+```bash
+sudo emerge dev-util/ruyi --autounmask-write --autounmask
+sudo dispatch-conf
+```
+
+1. Der erste Befehl generiert die notwendigen Änderungen an `package.accept_keywords`.
+2. Führen Sie `dispatch-conf` aus und geben Sie im Interface `u` (use-new) ein, um die Änderungen zu übernehmen.
+3. Installieren Sie anschließend den Ruyi-Paketmanager:
+
+```bash
+sudo emerge --ask dev-util/ruyi
+```
+
+---
+
 ## Überprüfen Sie Ihre Installation
 
 ```bash
@@ -94,3 +140,6 @@ Hilfeinformationen auflisten:
 ```bash
 $ ruyi --help
 ```
+
+  </>
+</ReleaseProvider>
