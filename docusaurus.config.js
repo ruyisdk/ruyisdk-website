@@ -215,6 +215,9 @@ const config = {
          * *DO NOT* include a trailing slash.
          */
         routeBasePath: "biweekly",
+        exclude: ["articles/*",
+                  "README.md",
+                  "ruyisdk-biweekly.md"],
         /**
          * Path to data on filesystem relative to site dir.
          */
