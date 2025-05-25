@@ -70,7 +70,6 @@ const NewsShowcase = () => {
         .newsshowcase-link-indicator { position: absolute; bottom: 1.5rem; right: 1.5rem; display: inline-flex; align-items: center; color: #0A2C7E; font-weight: bold; font-size: 1rem; opacity: 0; transform: translateX(10px); transition: all 0.3s ease; background: #FDEFC3; padding: 0.5rem 1rem; border-radius: 99rem; border: rgb(255, 228, 138); gap: 0.35rem; }
         .newsshowcase-card:hover .newsshowcase-link-indicator { opacity: 1; transform: translateX(0); }
         .newsshowcase-arrow { font-size: 1rem; }
-        /* Mobile accordion */
         @media (max-width: 768px) {
           .newsshowcase-container { flex-direction: column; height: auto; padding: 1rem; }
           .newsshowcase-sidebar, .newsshowcase-main { display: none; }
@@ -82,10 +81,16 @@ const NewsShowcase = () => {
           .accordion-content .newsshowcase-card { box-shadow: none; border: none; margin: 0; }
           .accordion-content .newsshowcase-image { height: 200px; }
           .accordion-content .newsshowcase-content { padding: 1rem; }
+          .accordion-content .newsshowcase-link-indicator {
+            position: static;
+            opacity: 1;
+            transform: none;
+            margin-top: 1rem;
+            justify-content: center;
+          }
         }
       `}</style>
 
-      {/* Desktop layout */}
       {!isMobile && (
         <>
           <div className="newsshowcase-sidebar">
@@ -120,7 +125,6 @@ const NewsShowcase = () => {
         </>
       )}
 
-      {/* Mobile accordion layout */}
       {isMobile && (
         <div className="accordion-wrapper">
           {newsData.map((news, idx) => (
