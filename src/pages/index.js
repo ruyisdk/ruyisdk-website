@@ -36,7 +36,6 @@ const Index = () => {
       </Head>
 
       <Home />
-      <HomepageFeatures />
     </Layout>
   );
 };

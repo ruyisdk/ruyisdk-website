@@ -10,6 +10,7 @@ import styles from "./styles.module.css";
 import SlideNews from "../../components/SlideNews";
 import MainDisplay from "../../components/HomepageComponent/MainDisplay";
 import RuyiInLive from "../../components/HomepageComponent/RuyiInLive";
+import NewsShowcase from "../../components/HomepageComponent/NewsShowcase";
 import DemoBoardsDisplay from "../../components/DemoDisplay"
 import BoardSelector from "../../components/BoardsFinder/BoardSelector";
 
@@ -20,7 +21,7 @@ function Hero() {
         <MainDisplay />
         <SlideNews />
         <RuyiInLive />
-        
+        <NewsShowcase />
 
         {/*<DemoBoardsDisplay />*/}
       </div>

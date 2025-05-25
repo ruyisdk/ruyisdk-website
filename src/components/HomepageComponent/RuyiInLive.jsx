@@ -384,7 +384,7 @@ const RuyiInLive = () => {
       <div style={styles.container}>
         {/* Left Panel */}
         <div style={styles.leftPanel}>
-          <h1 style={styles.title}>Ruyi in Live</h1>
+          <h1 style={styles.title}>Ruyi社区</h1>
           <p style={styles.subtitle}>Ruyi是一个活跃的社区。</p>
           <div style={styles.buttonContainer}>
             <a 
