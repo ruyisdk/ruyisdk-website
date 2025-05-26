@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import { translate } from '@docusaurus/Translate';
+import Translate, { translate } from '@docusaurus/Translate';
 import styles from './mainDisplay.module.css';
 
 const Terminal = () => {
@@ -205,11 +205,11 @@ const MainDisplay = () => {
         <div className={styles.contentRow}>
           <div className={styles.leftContent}>
             <h1 className={styles.title}>RuyiSDK</h1>
-            <p className={styles.subtitle}>面向 RISC-V 架构的一体化集成开发环境</p>
+            <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
             
             <div className={styles.buttonContainer}>
-              <a href="/download" className={styles.primaryButton}>获取 Ruyi</a>
-              <a href="/docs/intro" className={styles.secondaryButton}>查看文档</a>
+              <a href="/download" className={styles.primaryButton}><Translate>获取 Ruyi</Translate></a>
+              <a href="/docs/intro" className={styles.secondaryButton}><Translate>查看文档</Translate></a>
             </div>
           </div>
           

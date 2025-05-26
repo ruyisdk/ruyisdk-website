@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Chart } from '@antv/g2';
+import Translate, { translate } from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import axios from 'axios';
 
@@ -384,8 +385,8 @@ const RuyiInLive = () => {
       <div style={styles.container}>
         {/* Left Panel */}
         <div style={styles.leftPanel}>
-          <h1 style={styles.title}>RuyiSDK 社区</h1>
-          <p style={styles.subtitle}>RuyiSDK 同时是一个活跃的社区</p>
+          <h1 style={styles.title}><Translate>RuyiSDK 社区</Translate></h1>
+          <p style={styles.subtitle}><Translate>RuyiSDK 社区讨论板块现已开启</Translate></p>
           <div style={styles.buttonContainer}>
             <a 
               href="https://github.com/ruyisdk/ruyisdk/discussions/"
@@ -393,7 +394,7 @@ const RuyiInLive = () => {
               style={styles.button}
             >
               <UsersIcon />
-              讨论组
+              <Translate>讨论组</Translate>
             </a>
             <a 
               href="https://github.com/ruyisdk" 
@@ -401,7 +402,7 @@ const RuyiInLive = () => {
               style={{...styles.button, backgroundColor: colors.creamBeige, color: colors.textDark}}
             >
               <GithubIcon />
-              源码库
+              <Translate>源码库</Translate>
             </a>
           </div>
           <div style={styles.leftPanelAccent}></div>
@@ -410,7 +411,7 @@ const RuyiInLive = () => {
         {/* Right Panel */}
         <div style={styles.rightPanel}>
           <div style={styles.chartContainer}>
-            <h2 style={styles.chartTitle}>大家都在用</h2>
+            <h2 style={styles.chartTitle}><Translate>大家都在用</Translate></h2>
             
             {loading ? (
               <>

@@ -38,7 +38,7 @@ const FeatureList = [
     description: (
       <Translate>
         我们的代码完全开源，意味着每个人都可以在许可证允许的条件下查看、使用、修改和共享它。无论你是开发者、学生、爱好者还是企业，都可以自由地参与到我们的项目中，共同构建更好的 RuyiSDK。欢迎加入我们的社区，一起推动开源的发展！
-      <Translate/>
+      </Translate>
     ),
   },
 ];

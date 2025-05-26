@@ -1,25 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Translate, { translate } from '@docusaurus/Translate';
 
 const NewsShowcase = () => {
   const newsData = [
     {
+      title: "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径",
+      description: "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。",
+      img: "img/newsshowcase/OSPP.webp",
+      link: "https://mp.weixin.qq.com/s/n4do0LAlECR8mak_QW1Uyw"
+    },
+    {
       title: "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！",
-      description: "2025年软件所公众科学日上，PLCT实验室以\"小架构，大神通\"为主题，通过丰富互动展示全面揭秘RISC-V生态，点燃公众探索开源与软件未来的热情。",
+      description: "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！",
       img: "img/newsshowcase/2025OpenDay.webp",
       link: "https://mp.weixin.qq.com/s/lXXLUuNh_aOBXEh3oXxECw"
     },
     {
-      title: "2025 RISC-V欧洲峰会之巴黎游记",
-      description: "在2025 RISC-V 欧洲峰会之余，两位中国学者于巴黎街头感受人情温暖与城市变迁，记录下一段科技与人文交织的别样旅程。",
-      img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=400&fit=crop",
-      link: "https://mp.weixin.qq.com/s/n4do0LAlECR8mak_QW1Uyw"
-    },
-    {
       title: "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升",
       description: "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。",
-      img: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=400&fit=crop",
+      img: "img/newsshowcase/DebianRiscv.png",
       link: "https://mp.weixin.qq.com/s/G_cZU6t_MPoeDoYCwmGIqg"
-    }
+    },
   ];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -100,7 +101,7 @@ const NewsShowcase = () => {
                 className={`newsshowcase-title-item ${selectedIndex === idx ? 'newsshowcase-active' : ''}`}
                 onClick={() => handleNewsClick(idx)}
               >
-                {news.title}
+                <Translate>{news.title}</Translate>
               </div>
             ))}
           </div>
@@ -112,11 +113,11 @@ const NewsShowcase = () => {
                   className="newsshowcase-card"
                   onClick={() => handleCardClick(news.link)}
                 >
-                  <img src={news.img} alt={news.title} className="newsshowcase-image" />
+                  <img src={news.img} alt=<Translate>{news.title}</Translate> className="newsshowcase-image" />
                   <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title">{news.title}</h2>
-                    <p className="newsshowcase-description">{news.description}</p>
-                    <div className="newsshowcase-link-indicator">前往阅读<span className="newsshowcase-arrow">→</span></div>
+                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
+                    <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
+                    <div className="newsshowcase-link-indicator"><Translate>前往阅读</Translate><span className="newsshowcase-arrow">→</span></div>
                   </div>
                 </div>
               ))}
@@ -133,16 +134,16 @@ const NewsShowcase = () => {
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
                 onClick={() => handleNewsClick(idx)}
               >
-                <span>{news.title}</span>
+                <span><Translate>{news.title}</Translate></span>
                 <span>{selectedIndex === idx ? '−' : '+'}</span>
               </div>
               <div className={`accordion-content ${selectedIndex === idx ? 'expanded' : ''}`}>
                 <div className="newsshowcase-card" onClick={() => handleCardClick(news.link)}>
-                  <img src={news.img} alt={news.title} className="newsshowcase-image" />
+                  <img src={news.img} alt=<Translate>{news.title}</Translate> className="newsshowcase-image" />
                   <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title">{news.title}</h2>
-                    <p className="newsshowcase-description">{news.description}</p>
-                    <div className="newsshowcase-link-indicator">前往阅读<span className="newsshowcase-arrow">→</span></div>
+                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
+                    <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
+                    <div className="newsshowcase-link-indicator"><Translate>前往阅读</Translate><span className="newsshowcase-arrow">→</span></div>
                   </div>
                 </div>
               </div>
