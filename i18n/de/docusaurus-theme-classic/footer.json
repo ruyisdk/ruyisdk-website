@@ -45,5 +45,9 @@
   "link.item.label.数据统计": {
     "message": "Datenübersicht",
     "description": "The label of footer link with label=数据统计 linking to /StatisticalDataPages"
+  },
+  "link.item.label.实习生招聘": {
+    "message": "Praktikumsstellen",
+    "description": "The label of footer link with label=实习生招聘 linking to /StatisticalDataPages"
   }
 }

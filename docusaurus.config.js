@@ -166,10 +166,6 @@ const config = {
             title: "更多",
             items: [
               {
-                label: "GitHub",
-                href: "https://github.com/ruyisdk",
-              },
-              {
                 label: "微信公众号",
                 className: 'hover-wechat-link',
                 to: '/contact'
@@ -178,6 +174,10 @@ const config = {
                 label: "QQ群",
                 className: 'hover-qq-link',
                 to: '/contact'
+              },
+              {
+                label: "实习生招聘",
+                href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
               },
             ],
           },
