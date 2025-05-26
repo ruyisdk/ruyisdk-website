@@ -13,6 +13,16 @@
   background-attachment: fixed;
 } */
 
+.homecontainer {
+  background-color: #f5f5f7;
+  color: #000;
+  min-height: 100vh;
+  padding: 0rem;
+  margin: 2rem;
+  max-width: 1000px;
+}
+
+
 .invContainer {
   display: inline-block;
   /* padding-top: 300px; */

@@ -307,8 +307,14 @@
   "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。": {
     "message": "The online software source and management tool centrally stores the compilation tool chain, debugging tools, simulators, runtime environment, documents, codes, tools, target system images, and other contents required for the RISC-V integrated development environment, as well as tools for interacting with the online software source."
   },
-  "ruyi IDE": {
-    "message": "ruyi IDE"
+  "RuyiSDK IDE": {
+    "message": "RuyiSDK IDE"
+  },
+  "将 Ruyi 包管理器带到桌面环境": {
+    "message": "Make Ruyi available on the desktop"
+  },
+  "RISC-V 开发板与操作系统支持矩阵": {
+    "message": "RISC-V Board and OS Support Matrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
     "message": "A toolbox specifically designed for developing software and applications that can run on RISC-V architecture devices. It can help developers write and test their own programs without the need for users to spend time setting up the environment."
@@ -325,8 +331,14 @@
   "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。": {
     "message": "The community provides functions such as documentation and tutorials, forums and technical discussion areas, with the aim of providing an open communication platform for RISC-V developers, providing mutual technical support and resource sharing, gathering RISC-V developers and promoting the development of the RISC-V ecosystem."
   },
-  "开放源代码": {
-    "message": "Open Source"
+  "大家都在用": {
+    "message": "Popular among users"
+  },
+  "讨论组": {
+    "message": "Discussion"
+  },
+  "源码库": {
+    "message": "Source Code"
   },
   "我们的代码完全开源，意味着每个人都可以在许可证允许的条件下查看、使用、修改和共享它。无论你是开发者、学生、爱好者还是企业，都可以自由地参与到我们的项目中，共同构建更好的 RuyiSDK。欢迎加入我们的社区，一起推动开源的发展！": {
     "message": "Our code is completely open source, which means everyone can view, use, modify and share it under the conditions permitted by the license. Whether you are a developer, student, enthusiast or enterprise, you can freely participate in our project and build a better RuyiSDK together. Welcome to join our community and promote the development of open source together!"
@@ -346,8 +358,35 @@
   "RuyiSDK": {
     "message": "RuyiSDK"
   },
-  "面向RISC-V架构的一体化集成开发环境": {
+  "面向 RISC-V 架构的一体化集成开发环境": {
     "message": "All-in-one integrated development environment for RISC-V architecture"
+  },
+  "获取 Ruyi": {
+    "message": "Get Ruyi"
+  },
+  "查看文档": {
+    "message": "View Docs"
+  },
+  "前往阅读": {
+    "message": "Read more"
+  },
+  "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
+    "message": "Open Source Promotion Plan 2025: Hefei University of Technology—Shihua Liao Shared His Journey to Becoming a GCC Developer"
+  },
+  "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
+    "message": "In this talk, Shihua Liao analyzed the key skills and knowledge system required to become a GCC developer. He explained the core concepts and compilation process of GCC, and shared practical programming and debugging insights from his own experience."
+  },
+  "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
+    "message": "2025 Public Science Day at the Institute of Software, Chinese Academy of Sciences: PLCT Lab Unveils the Power of RISC-V—Small Architecture, Big Potential!"
+  },
+  "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
+    "message": "Join the PLCT Lab to explore the mysteries and possibilities of software science!"
+  },
+  "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升": {
+    "message": "The Shoe Has Dropped: riscv64 Becomes an Officially Supported Debian Architecture, Marking a Major Leap for the Global RISC-V Software Ecosystem"
+  },
+  "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。": {
+    "message": "RISC-V is now a official supported platform in Debian, marking a major milestone for the global open source software ecosystem."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Review of RuyiSDK's first offline meetup"

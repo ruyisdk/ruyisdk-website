@@ -75,7 +75,7 @@ const config = {
 
       }, */
       colorMode: {
-        defaultMode: "dark",
+        defaultMode: "light",
         disableSwitch: true,
       },
       // Replace with your project's social card
@@ -87,7 +87,7 @@ const config = {
           alt: "RuyiSDK Logo",
           src: "img/ruyi-logo-720.svg",
         },
-        style: "dark",
+        style: "primary",
         items: [
           {
             type: "localeDropdown",
@@ -134,7 +134,7 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
+        style: "light",
         links: [
           {
             title: "生态",
@@ -157,8 +157,12 @@ const config = {
             title: "社区",
             items: [
               {
-                label: "Discussion",
+                label: "讨论组",
                 href: "https://github.com/ruyisdk/ruyisdk/discussions",
+              },
+              {
+                label: "数据统计",
+                to: "/Home/StatisticalDataPages",
               },
             ],
           },
@@ -166,17 +170,9 @@ const config = {
             title: "更多",
             items: [
               {
-                label: "数据统计",
-                to: "/Home/StatisticalDataPages",
-              },
-              {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
               },
-            ],
-          },
-          {
-            items: [
               {
                 label: "微信公众号",
                 className: 'hover-wechat-link',

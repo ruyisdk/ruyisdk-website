@@ -301,8 +301,14 @@
   "在线软件源和管理工具集中存储了 RISC-V 集成开发环境所需的编译工具链、调试工具、模拟器、运行环境、文档、代码、工具、target系统镜像等内容以及用于与在线软件源交互的工具。": {
     "message": "Online-Softwarequellen und Verwaltungstools speichern die für die RISC-V-Entwicklungsumgebung erforderlichen Compiler-Toolchains, Debugging-Tools, Simulator, Laufzeitumgebungen, Dokumentation, Code, Hilfsprogramme und Ziel-Systemabbilder sowie Werkzeuge zur Interaktion mit den Online-Softwarequellen."
   },
-  "ruyi IDE": {
-    "message": "ruyi IDE"
+  "RuyiSDK IDE": {
+    "message": "RuyiSDK IDE"
+  },
+  "将 Ruyi 包管理器带到桌面环境": {
+    "message": "Den Ruyi-Paketmanager auf den Desktop bringen"
+  },
+  "RISC-V 开发板与操作系统支持矩阵": {
+    "message": "RISC-V-Board- und OS-Unterstützungsmatrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
     "message": "Eine Toolbox, die speziell für die Entwicklung von Software und Anwendungen entwickelt wurde, die auf Geräten mit RISC-V-Architektur ausgeführt werden können. Es kann Entwicklern helfen, ihre eigenen Programme zu schreiben und zu testen, und Benutzer müssen keine Energie für die Einrichtung der Umgebung aufwenden."
@@ -319,8 +325,14 @@
   "社区提供文档和教程、论坛和技术讨论区等功能，目的是为 RISC-V 开发者提供一个开放的交流平台，提供互助式技术支持和资源共享，聚集 RISC-V 开发者并推动 RISC-V 生态系统的发展。": {
     "message": "Die Community stellt Dokumente und Tutorials, Foren und technische Diskussionsbereiche usw. bereit. Der Zweck besteht darin, eine offene Kommunikationsplattform für RISC-V-Entwickler bereitzustellen, gegenseitige technische Unterstützung und gemeinsame Nutzung von Ressourcen bereitzustellen, RISC-V-Entwickler zusammenzubringen und das RISC-V-Ökosystem zu fördern Systementwicklung."
   },
-  "开放源代码": {
-    "message": "Open Source"
+  "大家都在用": {
+    "message": "Beliebt bei Nutzern"
+  },
+  "讨论组": {
+    "message": "Diskussion"
+  },
+  "源码库": {
+    "message": "Quellcode"
   },
   "我们的代码完全开源，意味着每个人都可以在许可证允许的条件下查看、使用、修改和共享它。无论你是开发者、学生、爱好者还是企业，都可以自由地参与到我们的项目中，共同构建更好的 RuyiSDK。欢迎加入我们的社区，一起推动开源的发展！": {
     "message": "Unser Code ist vollständig Open Source, was bedeutet, dass jeder ihn gemäß der Lizenz sehen, verwenden, ändern und teilen kann. Egal, ob Sie Entwickler, Student, Enthusiast oder Unternehmen sind, es steht Ihnen frei, an unseren Projekten teilzunehmen und gemeinsam ein besseres RuyiSDK zu entwickeln. Willkommen, um unserer Community beizutreten und gemeinsam die Entwicklung von Open Source voranzutreiben!"
@@ -346,8 +358,35 @@
   "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
     "message": "The first AIoT mass-production chip based on the new 32-bit RuyiSDK."
   },
-  "面向RISC-V架构的一体化集成开发环境": {
+  "面向 RISC-V 架构的一体化集成开发环境": {
     "message": "Eine integrierte All-in-One-Entwicklungsumgebung für die RISC-V-Architektur"
+  },
+  "获取 Ruyi": {
+    "message": "Ruyi herunterladen"
+  },
+  "查看文档": {
+    "message": "Dokumentation ansehen"
+  },
+  "前往阅读": {
+    "message": "Mehr lesen"
+  },
+  "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
+    "message": "Open Source Summer an der Universität Hefei: Liao Shihua über den Weg zum GCC-Entwickler"
+  },
+  "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
+    "message": "In seinem Vortrag analysierte Liao Shihua die wichtigsten Fähigkeiten und das nötige Wissen, um ein GCC-Entwickler zu werden. Er erläuterte die zentralen Konzepte und den Kompilierungsprozess von GCC und teilte praktische Erfahrungen zum Programmieren und Debugging."
+  },
+  "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
+    "message": "Tag der offenen Tür 2025 am ISCAS: Das PLCT-Labor enthüllt das Potenzial von RISC-V – 'Kleine Architektur, große Wirkung'"
+  },
+  "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
+    "message": "Begleiten Sie das PLCT-Labor und entdecken Sie die Geheimnisse und Möglichkeiten der Softwarewissenschaft!"
+  },
+  "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升": {
+    "message": "Es ist offiziell: riscv64 wird offizielle Architektur in Debian"
+  },
+  "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。": {
+    "message": "Die RISC-V-Architektur ist nun offiziell in Debian unterstützt – ein bedeutender Schritt für das globale Open-Source-Ökosystem."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
