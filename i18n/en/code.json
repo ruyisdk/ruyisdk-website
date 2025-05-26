@@ -310,8 +310,17 @@
   "RuyiSDK IDE": {
     "message": "RuyiSDK IDE"
   },
+  "荔枝派 4A": {
+    "message": "LicheePi 4A"
+  },
   "将 Ruyi 包管理器带到桌面环境": {
     "message": "Make Ruyi available on the desktop"
+  },
+  "针对 XuanTie 生态芯片优化的 Debian 发行版": {
+    "message": "Debian distribution optimized for the XuanTie ecosystem"
+  },
+  "荔枝派 4A 软件生态已并入 RuyiSDK 项目": {
+    "message": "The LicheePi 4A software ecosystem is now integrated into the RuyiSDK project"
   },
   "RISC-V 开发板与操作系统支持矩阵": {
     "message": "RISC-V Board and OS Support Matrix"
