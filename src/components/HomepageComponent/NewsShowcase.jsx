@@ -7,7 +7,7 @@ const NewsShowcase = () => {
       title: "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径",
       description: "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。",
       img: "img/newsshowcase/OSPP.webp",
-      link: "https://mp.weixin.qq.com/s/n4do0LAlECR8mak_QW1Uyw"
+      link: "https://mp.weixin.qq.com/s/nnumLWZNUyn2XKjgEHYZBw"
     },
     {
       title: "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！",
