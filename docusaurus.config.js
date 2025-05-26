@@ -112,10 +112,6 @@ const config = {
                 href: "https://github.com/ruyisdk/ruyisdk/discussions",
               },
               {
-                label: "社区活动",
-                to: "/meetup",
-              },
-              {
                 label: "社区守则",
                 to: "/code_of_conduct",
               },
