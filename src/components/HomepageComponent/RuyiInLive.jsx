@@ -312,13 +312,13 @@ const RuyiInLive = () => {
       minHeight: isMobile ? '250px' : 'auto',
     },
     title: {
-      fontSize: '28px', // Slightly smaller title
+      fontSize: '2rem', // Slightly smaller title
       fontWeight: '700',
       marginBottom: '6px',
       letterSpacing: '-0.5px',
     },
     subtitle: {
-      fontSize: '13px', // Smaller subtitle
+      fontSize: '1rem', // Smaller subtitle
       lineHeight: '1.5',
       marginBottom: '18px',
       fontWeight: '500',
@@ -339,7 +339,7 @@ const RuyiInLive = () => {
       padding: '12px 24px',
       borderRadius: '9999px', // Pill shape
       fontWeight: '600',
-      fontSize: '14px',
+      fontSize: '1rem',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
       boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -384,22 +384,24 @@ const RuyiInLive = () => {
       <div style={styles.container}>
         {/* Left Panel */}
         <div style={styles.leftPanel}>
-          <h1 style={styles.title}>Ruyi社区</h1>
-          <p style={styles.subtitle}>Ruyi是一个活跃的社区。</p>
+          <h1 style={styles.title}>RuyiSDK 社区</h1>
+          <p style={styles.subtitle}>RuyiSDK 同时是一个活跃的社区</p>
           <div style={styles.buttonContainer}>
             <a 
-              href="https://github.com/ruyisdk/ruyisdk/discussions/" 
+              href="https://github.com/ruyisdk/ruyisdk/discussions/"
+              target="_blank"
               style={styles.button}
             >
               <UsersIcon />
-              社区
+              讨论组
             </a>
             <a 
               href="https://github.com/ruyisdk" 
+              target="_blank"
               style={{...styles.button, backgroundColor: colors.creamBeige, color: colors.textDark}}
             >
               <GithubIcon />
-              源码
+              源码库
             </a>
           </div>
           <div style={styles.leftPanelAccent}></div>

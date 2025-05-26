@@ -13,8 +13,20 @@ const CardSizes = {
 // Card data with content field, custom colors, sizes, blur option, and ispopup attribute
 const slideImages = [
   {
+    title: <Translate>RuyiSDK IDE</Translate>,
+    subtitle: <Translate>将 Ruyi 包管理器带到桌面环境</Translate>,
+    content: "RuyiSDK IDE 是一款基于开源软件 Eclipse 开发的、图形化的、主要面向 RISC-V 开发者的集成开发环境。该工具在继承 Eclipse 对嵌入式开发支持的基础上，计划逐步集成多款主流RISC-V开发板的 SDK，使得 RISC-V 开发更加便捷。",
+    Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    Links: "/docs/IDE/",
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: false,                 // Apply blur effect to background
+    ispopup: false,                // Disable click-to-show-popup for this card
+  },
+  {
     title: <Translate>Support Matrix</Translate>,
-    subtitle: <Translate>查看开发板与系统适配信息</Translate>,
+    subtitle: <Translate>RISC-V 开发板与系统支持矩阵</Translate>,
     content: "How you went there as there's no popup?",
     Image: "img/ruyi-logo-720.svg",
     Links: "https://matrix.ruyisdk.org/",
@@ -22,19 +34,7 @@ const slideImages = [
     subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
     size: CardSizes.S,             // Small card (half width, 1x height)
     isBlur: false,                 // No blur on background
-    ispopup: false,                 // Enable click-to-show-popup for this card
-  },
-  {
-    title: <Translate>RuyiSDK IDE</Translate>,
-    subtitle: <Translate>下载RuyiSDK IDE</Translate>,
-    content: "RuyiSDK IDE 是一款基于开源软件 Eclipse 开发的、图形化的、主要面向 RISC-V 开发者的集成开发环境。该工具在继承 Eclipse 对嵌入式开发支持的基础上，计划逐步集成多款主流RISC-V开发板的 SDK，使得 RISC-V 开发更加便捷。",
-    Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    Links: "https://mirror.iscas.ac.cn/ruyisdk/ide/",
-    titleColor: "#ffffff",         // Custom title color (white)
-    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-    size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: false,                 // Apply blur effect to background
-    ispopup: false,                // Disable click-to-show-popup for this card
+    ispopup: false,                // Enable click-to-show-popup for this card
   },
 ];
 
@@ -260,7 +260,7 @@ export default function SlideNews() {
             {card.subtitle}
           </h2>
           <div className={styles.buttonContainer}>
-            <a href={card.Links} className={styles.primaryButton}>
+            <a target="_blank" href={card.Links} className={styles.primaryButton}>
               <Translate id="homepage.primarybutton">了解更多</Translate>
             </a>
             {card.subLinks && (
