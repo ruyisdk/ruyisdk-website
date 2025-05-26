@@ -26,7 +26,7 @@ const slideImages = [
   },
   {
     title: <Translate>Support Matrix</Translate>,
-    subtitle: <Translate>RISC-V 开发板与系统支持矩阵</Translate>,
+    subtitle: <Translate>RISC-V 开发板与操作系统支持矩阵</Translate>,
     content: "How you went there as there's no popup?",
     Image: "img/ruyi-logo-720.svg",
     Links: "https://matrix.ruyisdk.org/",

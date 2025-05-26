@@ -411,7 +411,7 @@ const RuyiInLive = () => {
         {/* Right Panel */}
         <div style={styles.rightPanel}>
           <div style={styles.chartContainer}>
-            <h2 style={styles.chartTitle}><Translate>大家都在用</Translate></h2>
+            <h2 style={styles.chartTitle}><a href="/Home/StatisticalDataPages"><Translate>大家都在用</Translate></a></h2>
             
             {loading ? (
               <>

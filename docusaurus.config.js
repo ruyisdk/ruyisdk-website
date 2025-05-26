@@ -157,8 +157,12 @@ const config = {
             title: "社区",
             items: [
               {
-                label: "Discussion",
+                label: "讨论组",
                 href: "https://github.com/ruyisdk/ruyisdk/discussions",
+              },
+              {
+                label: "数据统计",
+                to: "/Home/StatisticalDataPages",
               },
             ],
           },
@@ -166,17 +170,9 @@ const config = {
             title: "更多",
             items: [
               {
-                label: "数据统计",
-                to: "/Home/StatisticalDataPages",
-              },
-              {
                 label: "GitHub",
                 href: "https://github.com/ruyisdk",
               },
-            ],
-          },
-          {
-            items: [
               {
                 label: "微信公众号",
                 className: 'hover-wechat-link',

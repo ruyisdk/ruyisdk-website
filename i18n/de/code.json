@@ -307,7 +307,7 @@
   "将 Ruyi 包管理器带到桌面环境": {
     "message": "Den Ruyi-Paketmanager auf den Desktop bringen"
   },
-  "RISC-V 开发板与系统支持矩阵": {
+  "RISC-V 开发板与操作系统支持矩阵": {
     "message": "RISC-V-Board- und OS-Unterstützungsmatrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {

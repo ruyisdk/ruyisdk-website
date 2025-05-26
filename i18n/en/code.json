@@ -313,7 +313,7 @@
   "将 Ruyi 包管理器带到桌面环境": {
     "message": "Make Ruyi available on the desktop"
   },
-  "RISC-V 开发板与系统支持矩阵": {
+  "RISC-V 开发板与操作系统支持矩阵": {
     "message": "RISC-V Board and OS Support Matrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
@@ -371,19 +371,19 @@
     "message": "Read more"
   },
   "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
-    "message": "Open Source Summer at Hefei University of Technology: Liao Shihua shares the path to becoming a GCC developer"
+    "message": "Open Source Promotion Plan 2025: Hefei University of Technology—Shihua Liao Shared His Journey to Becoming a GCC Developer"
   },
   "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
-    "message": "In this talk, Liao Shihua analyzed the key skills and knowledge system required to become a GCC developer. He explained the core concepts and compilation process of GCC, and shared practical programming and debugging insights from his own experience."
+    "message": "In this talk, Shihua Liao analyzed the key skills and knowledge system required to become a GCC developer. He explained the core concepts and compilation process of GCC, and shared practical programming and debugging insights from his own experience."
   },
   "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
-    "message": "2025 ISCAS Open Science Day: PLCT Lab unveils the magic of RISC-V — 'Small Architecture, Great Potential'"
+    "message": "2025 Public Science Day at the Institute of Software, Chinese Academy of Sciences: PLCT Lab Unveils the Power of RISC-V—Small Architecture, Big Potential!"
   },
   "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
     "message": "Join the PLCT Lab to explore the mysteries and possibilities of software science!"
   },
   "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升": {
-    "message": "It’s Official: riscv64 becomes an officially supported architecture in Debian"
+    "message": "The Shoe Has Dropped: riscv64 Becomes an Officially Supported Debian Architecture, Marking a Major Leap for the Global RISC-V Software Ecosystem"
   },
   "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。": {
     "message": "RISC-V is now a official supported platform in Debian, marking a major milestone for the global open source software ecosystem."
