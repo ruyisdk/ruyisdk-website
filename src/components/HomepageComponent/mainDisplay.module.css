@@ -127,7 +127,7 @@
   border: none;
   border-radius: 24px;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s;
@@ -147,7 +147,7 @@
   border: none;
   border-radius: 24px;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s;

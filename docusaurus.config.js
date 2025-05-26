@@ -87,7 +87,7 @@ const config = {
           alt: "RuyiSDK Logo",
           src: "img/ruyi-logo-720.svg",
         },
-        style: "dark",
+        style: "primary",
         items: [
           {
             type: "localeDropdown",
@@ -134,7 +134,7 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
+        style: "light",
         links: [
           {
             title: "生态",

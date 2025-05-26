@@ -638,15 +638,50 @@ html[data-theme="dark"] {
 /* Navbar */
 
 .navbar {
+  /* always white background */
+  background-color: #fff;
+  /* default text color */
+  color: #000;
+
+  /* also override the “dark” and “light” variants */
   &.navbar--dark {
     background-color: var(--deepdark);
   }
+  &.navbar--light {
+    background-color: #fff;
+    color: #000;
+  }
+
+  /* Brand/logo */
+  .navbar__brand {
+    color: #000;
+
+    &:focus {
+      color: #333;
+    }
+  }
+
+  /* Nav links */
+  .navbar__item,
+  .navbar__link {
+    color: #000;
+
+    &:hover,
+    &:focus {
+      color: #333;
+    }
+  }
 }
 
+/* Hamburger / toggle icon */
 .navbar__toggle {
   margin-left: auto;
   margin-right: 0;
   order: 2;
+  /* make the icon lines black */
+  svg path {
+    stroke: #000;
+  }
 }
 
 .navbar-sidebar__brand .navbar__brand {
@@ -658,8 +693,12 @@ html[data-theme="dark"] {
 }
 
 .navbar-sidebar {
+  --ifm-menu-color: #282c34;
+  --ifm-menu-color-active: #5d84b3;
+
   left: auto;
   right: 0;
+  background-color: #fff;
   //  background-color:var(--ifm-navbar-background-color);
   //  box-shadow:var(--ifm-global-shadow-md);
   //  position:fixed;
@@ -1257,8 +1296,40 @@ html[data-theme="dark"] {
 /* Footer */
 
 .footer {
+  /* Base: white background, black text */
+  background-color: #fff !important;
+  color: #000 !important;
+
+  /* Override both “dark” and “light” modifiers */
   &.footer--dark {
     --ifm-footer-background-color: var(--deepdark);
+  }
+  &.footer--light {
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Footer links */
+  a {
+    color: #000 !important;
+
+    &:hover,
+    &:focus {
+      color: #333 !important;
+    }
+  }
+
+  /* Any footer headings */
+  h2,
+  h3,
+  h4 {
+    color: #000 !important;
+  }
+
+  /* Social icons, separators, etc. */
+  .footer__link-list-item::before,
+  .footer__item-separator {
+    background-color: #000 !important;
   }
 }
 
@@ -2003,90 +2074,6 @@ div[class*="announcementBarContent"] {
 // figcaption > p:last-child {
 //   margin-bottom: 0;
 // }
-.navbar {
-  /* always white background */
-  background-color: #fff !important;
-  /* default text color */
-  color: #000 !important;
-
-  /* also override the “dark” and “light” variants */
-  &.navbar--dark,
-  &.navbar--light {
-    background-color: #fff !important;
-    color: #000 !important;
-  }
-
-  /* Brand/logo */
-  .navbar__brand {
-    color: #000 !important;
-  }
-
-  /* Nav links */
-  .navbar__item,
-  .navbar__link {
-    color: #000 !important;
-
-    &:hover,
-    &:focus {
-      color: #333 !important;
-    }
-  }
-
-  /* Hamburger / toggle icon */
-  .navbar__toggle {
-    margin-left: auto;
-    margin-right: 0;
-    order: 2;
-    /* make the icon lines black */
-    svg path {
-      stroke: #000 !important;
-    }
-  }
-
-  /* Mobile sidebar adjustments still apply */
-  .navbar-sidebar {
-    left: auto;
-    right: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-}
-
-.footer {
-  /* Base: white background, black text */
-  background-color: #fff !important;
-  color: #000 !important;
-
-  /* Override both “dark” and “light” modifiers */
-  &.footer--dark,
-  &.footer--light {
-    background-color: #fff !important;
-    color: #000 !important;
-  }
-
-  /* Footer links */
-  a {
-    color: #000 !important;
-
-    &:hover,
-    &:focus {
-      color: #333 !important;
-    }
-  }
-
-  /* Any footer headings */
-  h2,
-  h3,
-  h4 {
-    color: #000 !important;
-  }
-
-  /* Social icons, separators, etc. */
-  .footer__link-list-item::before,
-  .footer__item-separator {
-    background-color: #000 !important;
-  }
-}
-
 
 giscus-widget {
   display: flex;
