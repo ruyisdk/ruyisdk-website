@@ -289,7 +289,7 @@ export default function SlideNews() {
           </h2>
           <div className={styles.buttonContainer}>
             <a target="_blank" href={card.Links} className={styles.primaryButton}>
-              <Translate id="homepage.primarybutton">了解更多</Translate>
+              <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
             </a>
             {card.subLinks && (
               <a
