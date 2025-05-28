@@ -18,10 +18,24 @@ const slideImages = [
     content: "RuyiSDK IDE 是一款基于开源软件 Eclipse 开发的、图形化的、主要面向 RISC-V 开发者的集成开发环境。该工具在继承 Eclipse 对嵌入式开发支持的基础上，计划逐步集成多款主流RISC-V开发板的 SDK，使得 RISC-V 开发更加便捷。",
     Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Links: "/docs/IDE/",
+    ButtonText: "了解更多",        // 了解更多/立即跳转
     titleColor: "#ffffff",         // Custom title color (white)
     subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
     size: CardSizes.S,             // Small card (half width, 1x height)
     isBlur: false,                 // Apply blur effect to background
+    ispopup: false,                // Disable click-to-show-popup for this card
+  },
+  {
+    title: <Translate>RevyOS</Translate>,
+    subtitle: <Translate>针对 XuanTie 生态芯片优化的 Debian 发行版</Translate>,
+    content: "How you went there as there's no popup?",
+    Image: "img/RevyOS-logo.svg",
+    Links: "https://docs.revyos.dev/",
+    ButtonText: "立即跳转",
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: true,                  // Enable blur on background
     ispopup: false,                // Disable click-to-show-popup for this card
   },
   {
@@ -30,11 +44,25 @@ const slideImages = [
     content: "How you went there as there's no popup?",
     Image: "img/ruyi-logo-720.svg",
     Links: "https://matrix.ruyisdk.org/",
+    ButtonText: "立即跳转",
     titleColor: "#ffffff",         // Custom title color (white)
     subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
     size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: false,                 // No blur on background
-    ispopup: false,                // Enable click-to-show-popup for this card
+    isBlur: true,                  // Enable blur on background
+    ispopup: false,                // Disable click-to-show-popup for this card
+  },
+  {
+    title: <Translate>荔枝派 4A</Translate>,
+    subtitle: <Translate>荔枝派 4A 软件生态已并入 RuyiSDK 项目</Translate>,
+    content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。当前 RevyOS 的 LicheePi 4A 版本已经更新到 20250420。",
+    Image: "img/RevyOS-logo.svg",
+    Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20250420/",
+    ButtonText: "立即跳转",
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: true,                  // Enable blur on background
+    ispopup: false,                 // Enable click-to-show-popup for this card
   },
 ];
 
