@@ -14,13 +14,14 @@ const WeChatLink = ({
   const [isMobile, setIsMobile] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
-  // Define colors used by the component (can be imported from a shared theme if available)
+  // Define colors used by the component
   const colors = {
-    navyBlue: '#002677',      // For title, button text, QR code color
-    creamBeige_light: 'rgb(252, 232, 164)', // For button background
-    creamBeige: '#F8F3E2',    // Alternative button background or QR bg
+    navyBlue: '#002677',
+    creamBeige_light: 'rgb(252, 232, 164)',
+    creamBeige: '#F8F3E2',
     white: '#FFFFFF',
-    textDark: '#002677',      // Primarily for text
+    textDark: '#002677',
+    lightGray: '#F5F5F7',
   };
 
   useEffect(() => {
@@ -31,36 +32,43 @@ const WeChatLink = ({
   }, []);
 
   const styles = {
-    wrapper: {
+    // New outer wrapper for full-width background
+    fullWidthWrapper: {
+      backgroundColor: colors.lightGray,
+      padding: '1.5rem 0', // Apply vertical padding here, horizontal padding will be handled by contentWrapper or by content itself
+      width: '100%', // Ensure it spans full width
+    },
+    // Renamed from 'wrapper' to 'contentWrapper' for clarity
+    contentWrapper: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: '1.5rem 1rem', // 24px top/bottom, 16px left/right
-      gap: '1rem', // 16px spacing between elements
+      padding: '1.5rem 1rem', // Padding for the content block itself
+      gap: '1rem', // Spacing between elements within the content block
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-      backgroundColor: colors.white, // Optional: give it a background if it's placed on a colored page
-      borderRadius: '0.75rem', // 12px, optional if it needs to look like a card
-      // boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.05)', // Optional subtle shadow
-      margin: '1rem auto', // Center it if it's narrower than its parent
-      maxWidth: '25rem', // 400px, constrain width on mobile
+      // backgroundColor is now on fullWidthWrapper
+      borderRadius: '0.75rem', // Optional: if the content block should still look like a card on the lightGray bg
+      // boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.05)', // Optional: shadow for the content block
+      margin: '0 auto', // Center the content block within the fullWidthWrapper
+      maxWidth: '25rem', // Constrain width of the content block
     },
     title: {
-      fontSize: '1.25rem', // 20px
+      fontSize: '1.25rem',
       fontWeight: '700',
       color: colors.textDark,
       textAlign: 'center',
-      marginBottom: '0.25rem', // 4px extra spacing if needed
+      marginBottom: '0.25rem',
     },
     qrImageLink: {
-      display: 'block', // To ensure the link wraps the image correctly
+      display: 'block',
       cursor: 'pointer',
     },
     qrImage: {
-      width: '9.375rem', // 150px
-      height: '9.375rem', // 150px
+      width: '9.375rem',
+      height: '9.375rem',
       display: 'block',
-      borderRadius: '0.5rem', // 8px, slight rounding for the QR image
-      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.08)', // Subtle shadow for the QR
+      borderRadius: '0.5rem',
+      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.08)',
     },
     button: {
       display: 'flex',
@@ -69,25 +77,24 @@ const WeChatLink = ({
       backgroundColor: colors.creamBeige_light,
       color: colors.textDark,
       border: 'none',
-      padding: '0.625rem 1.25rem', // 10px 20px
-      borderRadius: '62.4375rem', // 9999px (pill shape)
+      padding: '0.625rem 1.25rem',
+      borderRadius: '62.4375rem',
       fontWeight: '600',
-      fontSize: '0.9rem', // 14.4px
+      fontSize: '0.9rem',
       cursor: 'pointer',
       transition: 'all 0.2s ease-out',
-      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)', // 0 2px 8px
+      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
       textDecoration: 'none',
-      minWidth: '9.375rem', // 150px
+      minWidth: '9.375rem',
       textAlign: 'center',
     },
     buttonHover: {
       transform: 'translateY(-2px)',
-      boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.18)', // Enhanced shadow
-      backgroundColor: colors.creamBeige, // Slightly different shade on hover
+      boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.18)',
+      backgroundColor: colors.creamBeige,
     },
   };
 
-  // Combine base and hover styles for the button
   const dynamicButtonStyle = {
     ...styles.button,
     ...(isButtonHovered ? styles.buttonHover : {}),
@@ -98,27 +105,31 @@ const WeChatLink = ({
   }
 
   return (
-    <div style={styles.wrapper}>
-      <h3 style={styles.title}>{titleText}</h3>
-      <a
-        href={linkUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={styles.qrImageLink}
-        aria-label={translate({ message: 'Open link by clicking QR code', id: 'wechatlink.qrAriaLabel', description: 'Accessibility label for QR code link' })}
-      >
-        <img src={qrCodeImageUrl} alt={translate({ message: 'QR Code', id: 'wechatlink.qrAltText', description: 'Alt text for QR code image' })} style={styles.qrImage} />
-      </a>
-      <a
-        href={linkUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={dynamicButtonStyle}
-        onMouseEnter={() => setIsButtonHovered(true)}
-        onMouseLeave={() => setIsButtonHovered(false)}
-      >
-        {buttonText}
-      </a>
+    // This div now handles the full-width lightGray background
+    <div style={styles.fullWidthWrapper}>
+      {/* This div centers and constrains the actual content */}
+      <div style={styles.contentWrapper}>
+        <h3 style={styles.title}>{titleText}</h3>
+        <a
+          href={linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={styles.qrImageLink}
+          aria-label={translate({ message: 'Open link by clicking QR code', id: 'wechatlink.qrAriaLabel', description: 'Accessibility label for QR code link' })}
+        >
+          <img src={qrCodeImageUrl} alt={translate({ message: 'QR Code', id: 'wechatlink.qrAltText', description: 'Alt text for QR code image' })} style={styles.qrImage} />
+        </a>
+        <a
+          href={linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={dynamicButtonStyle}
+          onMouseEnter={() => setIsButtonHovered(true)}
+          onMouseLeave={() => setIsButtonHovered(false)}
+        >
+          {buttonText}
+        </a>
+      </div>
     </div>
   );
 };
