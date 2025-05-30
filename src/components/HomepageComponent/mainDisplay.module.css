@@ -120,7 +120,8 @@
   margin-bottom: 30px;
 }
 
-/* Primary button styling */
+/* Note: Button styles are now handled inline with JavaScript for hover effects */
+/* These CSS classes remain for fallback but the main styling is done inline */
 .primaryButton {
   background: linear-gradient(180deg, #0A2C7E 0%, #071E58 100%);
   color: white;
@@ -130,17 +131,20 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s ease-out;
   box-shadow: 0 2px 6px rgba(10, 44, 126, 0.3);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .primaryButton:hover {
   background: linear-gradient(180deg, #0D369A 0%, #0A2C7E 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(10, 44, 126, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 1rem rgba(10, 44, 126, 0.4);
 }
 
-/* Secondary button styling */
 .secondaryButton {
   background: rgba(249, 194, 60, 0.15);
   color: #0A2C7E;
@@ -150,11 +154,18 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0.125rem 0.5rem rgba(249, 194, 60, 0.1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .secondaryButton:hover {
   background: rgba(249, 194, 60, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 1rem rgba(249, 194, 60, 0.3);
 }
 
 /* Terminal container */
@@ -169,7 +180,7 @@
 .terminal {
   width: 100%;
   background-color: #1e1f29;
-  border-radius: 8px; /* Changed from 8px 8px 0 0 to round all corners */
+  border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
@@ -233,7 +244,7 @@
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   white-space: pre-wrap;
   word-break: break-word;
-  background-color: #1e1f29; /* Explicitly set the same background color as the terminal */
+  background-color: #1e1f29;
 }
 
 /* Modal styles */
@@ -266,19 +277,19 @@
     justify-content: center;
     align-items: center;
   }
-  
+ 
   .leftContent {
     max-width: 100%;
     justify-content: center;
     text-align: center;
     align-items: center;
   }
-  
+ 
   .terminalContainer {
     width: 100%;
     max-width: 500px;
   }
-  
+ 
   .buttonContainer {
     justify-content: center;
   }

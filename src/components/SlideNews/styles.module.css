@@ -8,23 +8,21 @@
 .verticalSlideContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Consistent gap between all rows */
+  gap: 1rem; /* 16px */
   margin: 0;
-  padding: 8px 32px 24px;
+  padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
   position: relative;
-  background-color: #f5f5f7; /* Added light gray background */
+  background-color: #f5f5f7; /* Light gray background from RuyiInLive */
 }
 
-/* Small cards container for proper wrapping */
 .smallCardsRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* Same gap between small cards */
+  gap: 1rem; /* 16px - Same gap between small cards */
   width: 100%;
-  margin: 0; /* Remove margin to maintain consistent spacing */
+  margin: 0;
 }
 
-/* Card size classes */
 .cardLarge,
 .cardMedium,
 .cardSmall,
@@ -35,36 +33,32 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 10px; /* Smaller rounded corners */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
 }
 
-/* Card large - full width, 2x height */
 .cardLarge {
   width: 100%;
-  height: 480px;
-  margin: 0; /* Remove margin to use gap for consistent spacing */
+  height: 30rem; /* 480px */
+  margin: 0;
 }
 
-/* Card medium - full width, 1x height */
 .cardMedium {
   width: 100%;
-  height: 240px;
-  margin: 0; /* Remove margin to use gap for consistent spacing */
+  height: 15rem; /* 240px */
+  margin: 0;
 }
 
-/* Card small - half width, 1x height */
 .cardSmall {
-  width: calc(50% - 0.5rem);
-  height: 240px;
-  flex: 0 0 calc(50% - 0.5rem); /* Flex basis prevents growth/shrinking */
-  margin: 0; /* Remove margin to use gap for consistent spacing */
+  width: calc(50% - 0.5rem); /* 0.5rem is half of 1rem gap */
+  height: 15rem; /* 240px */
+  flex: 0 0 calc(50% - 0.5rem);
+  margin: 0;
 }
 
-/* Card mobile - for small screens */
 .mobileCard {
   width: 100%;
-  height: 240px;
+  height: 15rem; /* 240px */
   margin: 0; /* Use gap for spacing */
 }
 
@@ -76,11 +70,10 @@
 .cardMedium:hover,
 .cardSmall:hover,
 .mobileCard:hover {
-  transform: scale(1.01);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(1.01); /* Keep this subtle hover */
+  box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
 }
 
-/* Base background styles */
 .slideBackground {
   position: absolute;
   top: 0;
@@ -90,15 +83,13 @@
   background-size: cover;
   background-position: center;
   z-index: 0;
-  /* Darken overlay for readability */
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: darken;
 }
 
-/* Blurred background style - applied as a separate class */
 .blurredBackground {
-  filter: blur(15px);
-  transform: scale(1.05); /* Slight scale to avoid blur edges */
+  filter: blur(0.9375rem); /* 15px */
+  transform: scale(1.05);
 }
 
 .content {
@@ -109,108 +100,106 @@
   align-items: center;
   text-align: center;
   z-index: 1;
-  padding: 2rem;
+  padding: 2rem; /* 32px */
   width: 85%;
 }
 
 .title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem; /* Kept as is, assuming relative unit or specific design choice */
+  margin-bottom: 1rem; /* Reduced from 1.5rem to be closer to RuyiInLive proportions */
   font-weight: 700;
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+  letter-spacing: -0.03125rem; /* -0.5px */
+  text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5); /* 0 2px 4px */
 }
 
 .subtitle {
   font-weight: 500;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+  font-size: 1rem; /* Kept as is */
+  margin-bottom: 1.125rem; /* 18px, similar to RuyiInLive */
+  text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5); /* 0 2px 4px */
 }
 
+/* Button Container adapted from RuyiInLive */
 .buttonContainer {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 0.75rem; /* 12px, from RuyiInLive */
+  margin-top: 1.125rem; /* 18px, consistent with subtitle margin */
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.primaryButton {
-  background: #0071e3; /* Solid blue color */
-  color: #ffffff;
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 99rem;
-  font-weight: bold;
-  font-size: 1rem;
+/* Generic Button styles adapted from RuyiInLive */
+.primaryButton,
+.secondaryButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border: none;
+  padding: 0.625rem 1.125rem; /* 10px 18px */
+  border-radius: 62.4375rem; /* 9999px (pill shape) */
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1); /* 0 2px 8px */
+  text-decoration: none;
+  min-width: 6.25rem; /* 100px */
+  color: #002677; /* RuyiInLive textDark */
+}
+
+/* Primary Button specific style from RuyiInLive */
+.primaryButton {
+  background-color: rgb(252, 232, 164); /* RuyiInLive creamBeige_light */
 }
 
 .primaryButton:hover {
-  color: #ffffff;
-  background: #0077ed; /* Slightly lighter blue on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  background-color: rgb(242, 222, 154); /* Slightly darker creamBeige_light */
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* Optional: slightly deeper shadow on hover */
+  color: #002677;
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
+/* Secondary Button specific style from RuyiInLive */
 .secondaryButton {
-  border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 99rem;
-  font-weight: bold;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #F8F3E2; /* RuyiInLive creamBeige */
 }
 
 .secondaryButton:hover {
-  background: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  background-color: #E8E3D2; /* Slightly darker creamBeige */
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* Optional: slightly deeper shadow on hover */
+  color: #002677;
+  transform: translateY(-2px); /* Slight lift effect */
 }
 
-@media (max-width: 450px) {
+
+@media (max-width: 450px) { /* Breakpoint in px is fine for media query definition */
   .content {
-    top: 10px;
+    /* top: 0.625rem; */ /* 10px - top property can cause issues, rely on padding */
     width: 95%;
-    padding: 1.5rem;
+    padding: 1.5rem; /* 24px */
   }
-  
+
   .title {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem; /* Kept as is */
+    margin-bottom: 0.75rem; /* 12px */
   }
-  
+
   .subtitle {
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1rem; /* Kept as is */
+    margin-bottom: 0.75rem; /* 12px */
   }
 }
 
+/* spanStyle and divStyle are not used in SlideNews component, can be removed or kept if used elsewhere */
 .spanStyle {
   display: inline-block;
-  padding: 10px;
+  padding: 0.625rem; /* 10px */
   background: transparent;
-  border: 1px solid #ffff;
+  border: 0.0625rem solid #ffff; /* 1px */
   color: #ffffff;
   position: absolute;
-  bottom: 15px;
-  border-radius: 25px;
+  bottom: 0.9375rem; /* 15px */
+  border-radius: 1.5625rem; /* 25px */
   align-items: flex-end;
 }
 
@@ -219,7 +208,7 @@
   align-items: center;
   justify-content: center;
   background-size: cover;
-  height: 480px;
+  height: 30rem; /* 480px */
 }
 
 .slidetitle {
@@ -238,7 +227,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 2rem;
+  padding: 2rem; /* 32px */
   overflow-y: auto;
   animation: fadeIn 0.3s ease-out;
 }
@@ -255,17 +244,17 @@
 .expandedCard {
   position: relative;
   width: 90%;
-  max-width: 900px;
+  max-width: 56.25rem; /* 900px */
   max-height: 90vh;
   background: #ffffff;
-  border-radius: 10px; /* Smaller rounded corners */
+  border-radius: 0.625rem; /* 10px */
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1.5625rem 3.125rem rgba(0, 0, 0, 0.15); /* 0 25px 50px */
   animation: slideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   transform-origin: center;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(230, 230, 230, 1);
+  border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
 }
 
 @keyframes slideIn {
@@ -281,14 +270,14 @@
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  top: 1rem; /* 16px */
+  right: 1rem; /* 16px */
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.2);
   color: #ffffff;
-  font-size: 1.8rem;
+  font-size: 1.8rem; /* Kept as is */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -296,8 +285,8 @@
   cursor: pointer;
   z-index: 10;
   transition: background-color 0.2s, transform 0.2s;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0.25rem); /* 4px */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 0 4px 8px */
 }
 
 .closeButton:hover {
@@ -310,13 +299,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 40%;
+  height: 40%; /* Percentage based, no change */
   background-size: cover;
   background-position: center;
   z-index: 1;
-  /* No blur in expanded view */
-  filter: none; 
-  /* Darken for readability */
+  filter: none;
   background-color: rgba(0, 0, 0, 0.2);
   background-blend-mode: darken;
 }
@@ -324,87 +311,83 @@
 .expandedCardContent {
   position: relative;
   z-index: 2;
-  padding: 2rem;
-  margin-top: 35%;
+  padding: 2rem; /* 32px */
+  margin-top: 35%; /* Percentage based, no change */
   background: #ffffff;
-  border-radius: 10px 10px 0 0; /* Smaller rounded corners */
-  min-height: 60%;
+  border-radius: 0.625rem 0.625rem 0 0; /* 10px 10px 0 0 */
+  min-height: 60%; /* Percentage based, no change */
   overflow-y: auto;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -0.625rem 1.875rem rgba(0, 0, 0, 0.05); /* 0 -10px 30px */
 }
 
 .expandedCardTitle {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem; /* Kept as is */
+  margin-bottom: 1rem; /* 16px */
   line-height: 1.2;
   font-weight: 700;
-  color: #1a1a1a; /* Force black text for expanded card */
+  color: #1a1a1a;
 }
 
 .expandedCardSubtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  color: #333333; /* Force dark gray text for expanded card */
+  font-size: 1.2rem; /* Kept as is */
+  margin-bottom: 2rem; /* 32px */
+  color: #333333;
 }
 
 .expandedCardDescription {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* 32px */
   line-height: 1.6;
   white-space: pre-line;
-  color: #333333; /* Force dark gray text for expanded card */
+  color: #333333;
 }
 
 .expandedCardButtons {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 0.75rem; /* 12px, same as RuyiInLive's button container */
+  margin-top: 1.5rem; /* 24px */
 }
 
-/* Override button styles in expanded card */
-.expandedCardButtons .primaryButton {
-  /* Keep the same styling for primary button */
-}
-
+/* Ensure expanded card buttons also use the new style */
+.expandedCardButtons .primaryButton,
 .expandedCardButtons .secondaryButton {
-  color: #333333; /* Dark text for better readability in expanded view */
-  background: rgba(240, 240, 240, 0.8);
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  /* Styles are inherited from the general .primaryButton and .secondaryButton definitions */
 }
 
-.expandedCardButtons .secondaryButton:hover {
-  background: rgba(230, 230, 230, 0.9);
-  color: #222222;
-}
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
-  .expandedCardOverlay {
-    padding: 1rem;
+@media (max-width: 768px) { /* Breakpoint in px is fine for media query definition */
+  .verticalSlideContainer {
+    padding: 0.5rem 1rem 1rem; /* Adjusted padding for mobile */
   }
-  
+
+  .expandedCardOverlay {
+    padding: 1rem; /* 16px */
+  }
+
   .expandedCard {
     width: 95%;
     max-height: 85vh;
   }
-  
+
   .expandedCardTitle {
-    font-size: 2rem;
+    font-size: 2rem; /* Kept as is */
   }
-  
+
   .expandedCardSubtitle {
-    font-size: 1rem;
+    font-size: 1rem; /* Kept as is */
   }
-  
+
   .expandedCardButtons {
     flex-direction: column;
+    gap: 0.75rem; /* 12px */
   }
-  
+
   .expandedCardContent {
-    margin-top: 40%;
-    padding: 1.5rem;
+    margin-top: 40%; /* Percentage based, no change */
+    padding: 1.5rem; /* 24px */
   }
-  
-  .expandedCardButtons a {
+
+  .expandedCardButtons a { /* Ensure buttons take full width in column layout */
     width: 100%;
     justify-content: center;
   }
@@ -413,15 +396,66 @@
   .cardSmall {
     width: 100%;
     flex: 0 0 100%;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; Removed to rely on container gap */
   }
-  
+
   .content {
     width: 95%;
+    padding: 1rem; /* Adjusted padding for content on mobile */
   }
   
-  /* Remove smallCardsRow special layout on mobile */
+  .title {
+    font-size: 1.5rem; /* Further adjustment for very small screens if needed */
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .buttonContainer {
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .primaryButton, .secondaryButton {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
   .smallCardsRow {
-    display: block;
+    /* On mobile, smallCardsRow children (.mobileCard or .cardSmall forced to full width)
+        will be stacked due to verticalSlideContainer's flex-direction: column and gap.
+        No specific style needed here for mobile stacking, it's handled by card width and container gap.
+    */
+    gap: 1rem; /* Ensure gap is consistent even if it becomes a column */
+  }
+}
+
+/* Further adjustments for very small screens (e.g., less than 480px) */
+@media (max-width: 480px) { /* Was 450px, using 480px as a common breakpoint */
+  .verticalSlideContainer {
+    padding: 0.5rem 0.75rem 1rem; /* 8px 12px 16px */
+  }
+  .content {
+    padding: 1rem; /* 16px */
+  }
+  .title {
+    font-size: 1.5rem; /* Reduced for smaller screens */
+    margin-bottom: 0.5rem; /* 8px */
+  }
+  .subtitle {
+    font-size: 0.9rem; /* Reduced for smaller screens */
+    margin-bottom: 1rem; /* 16px */
+  }
+  .expandedCardTitle {
+    font-size: 1.8rem;
+  }
+  .expandedCardSubtitle {
+    font-size: 1rem;
+  }
+  .buttonContainer {
+    margin-top: 1rem; /* 16px */
   }
 }

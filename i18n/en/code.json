@@ -295,6 +295,12 @@
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
   },
+  "wechatlink.title": {
+    "message": "RuyiSDK WeChat Official Account"
+  },
+  "wechatlink.buttonText": {
+    "message": "Click to follow"
+  },
   "嘉楠勘智K230D": {
     "message": "Canaan Kendryte K230D"
   },

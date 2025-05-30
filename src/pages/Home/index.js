@@ -11,6 +11,7 @@ import SlideNews from "../../components/SlideNews";
 import MainDisplay from "../../components/HomepageComponent/MainDisplay";
 import RuyiInLive from "../../components/HomepageComponent/RuyiInLive";
 import NewsShowcase from "../../components/HomepageComponent/NewsShowcase";
+import WeChatLink from "../../components/HomepageComponent/WeChatLink";
 import DemoBoardsDisplay from "../../components/DemoDisplay"
 import BoardSelector from "../../components/BoardsFinder/BoardSelector";
 
@@ -19,10 +20,9 @@ function Hero() {
     <div className="homecontainer">
       <div className={styles.container} style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "100%" }}>
         <MainDisplay />
-        <SlideNews />
         <RuyiInLive />
         <NewsShowcase />
-
+        <WeChatLink />
         {/*<DemoBoardsDisplay />*/}
       </div>
     </div>
