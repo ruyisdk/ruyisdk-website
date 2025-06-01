@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Translate, { translate } from '@docusaurus/Translate'; // Assuming you might want to translate texts
 
 // Placeholder QR Code Image URL (replace with your actual QR code URL)
-const DEFAULT_QR_CODE_IMAGE_URL = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://weixin.qq.com/r/mp/Rx3t9T3E42CcrXmW90hV&color=002677&bgcolor=F8F3E2';
+const DEFAULT_QR_CODE_IMAGE_URL = '/img/wechat_account_img.png';
 const DEFAULT_LINK_URL = 'http://weixin.qq.com/r/mp/Rx3t9T3E42CcrXmW90hV';
 
 const WeChatLink = ({
