@@ -31,7 +31,7 @@
     "description": "The label of footer link with label=博客 linking to /blog"
   },
   "link.item.label.微信公众号": {
-    "message": "WeChat-Öffentlicher Account",
+    "message": "WeChat-Account",
     "description": "The label of footer link with label=微信公众号 linking to /contact"
   },
   "link.item.label.QQ群": {
