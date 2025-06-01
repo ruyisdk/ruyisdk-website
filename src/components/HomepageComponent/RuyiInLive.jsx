@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { Chart } from '@antv/g2';
 import Translate, { translate } from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import axios from 'axios';
 
+// Helper for px to rem conversion for clarity during generation, values will be hardcoded
+// const pxToRem = (px) => `${px / 16}rem`;
+
 // Custom SVG icons
 const UsersIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '8px' }}>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '0.5rem' /* 8px */ }}>
     <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" />
     <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" strokeWidth="2" />
     <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" />
@@ -14,39 +16,23 @@ const UsersIcon = () => (
   </svg>
 );
 
-const NewspaperIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '8px' }}>
-    <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
-    <path d="M3 8h18" stroke="currentColor" strokeWidth="2" />
-    <path d="M7 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    <path d="M7 16h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
-
 const GithubIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '8px' }}>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '0.5rem' /* 8px */ }}>
     <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.252-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.934.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" fill="currentColor" />
   </svg>
 );
 
-// Custom hook for dashboard client
 const useDashboardClient = () => {
   const { siteConfig: { customFields } } = useDocusaurusContext();
-  
   const axiosInstance = useMemo(() => {
     if (!customFields.apiURL) return null;
-    
     const instance = axios.create({
       baseURL: `https://${customFields.apiURL}`,
-      timeout: 10000,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      timeout: 10000, // timeout in ms, not typically converted to rem
+      headers: { "Content-Type": "application/json" },
     });
-    
     return instance;
   }, [customFields.apiURL]);
-  
   return axiosInstance;
 };
 
@@ -56,66 +42,51 @@ const RuyiInLive = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  
-  const containerRef = useRef();
-  const chartRef = useRef();
-  const placeholderRef = useRef();
-  const placeholderChartRef = useRef();
-  
-  // Colors from the Ruyi style
-  const colors = {
-    navyBlue: '#002677', // Darker blue matching the image
-    creamBeige_light:'rgb(252, 232, 164)',  
-    creamBeige: '#F8F3E2', // Cream/beige color from the image
-    gold: '#FFBD30',     // Gold/yellow from the Ruyi logo
-    lightGold: '#FFD580', // Lighter gold
+
+  // State for button hover effects
+  const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
+  const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
+
+  const colors = { // Color scheme remains the same
+    navyBlue: '#002677',
+    creamBeige_light: 'rgb(252, 232, 164)',
+    creamBeige: '#F8F3E2',
+    gold: '#FFBD30',
+    lightGold: '#FFD580',
     white: '#FFFFFF',
     lightGray: '#F5F5F7',
-    textDark: '#002677', // Dark blue text
+    textDark: '#002677',
     textGray: '#86868B',
-    placeholderGrey: '#E0E0E0', // Grey color for placeholder
+    placeholderGrey: '#E0E0E0',
+    placeholderTextShade: 'rgba(0,0,0,0.1)',
   };
 
-  // Handle resize
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    // Set initial state
+    const handleResize = () => setIsMobile(window.innerWidth < 768); // 768px is a common breakpoint, kept as px for JS logic
     handleResize();
-    
-    // Add event listener
     window.addEventListener('resize', handleResize);
-    
-    // Clean up
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Placeholder data for loading state
-  const placeholderData = useMemo(() => {
-    return [
-      { action: 'Action 1', total: 80 },
-      { action: 'Action 2', total: 65 },
-      { action: 'Action 3', total: 50 },
-      { action: 'Action 4', total: 35 },
-      { action: 'Action 5', total: 20 },
-    ];
-  }, []);
+  const placeholderData = useMemo(() => [
+    { action: 'Loading Action 1', total: 80 },
+    { action: 'Loading Action 2', total: 65 },
+    { action: 'Loading Action 3', total: 50 },
+    { action: 'Loading Action 4', total: 35 },
+    { action: 'Loading Action 5', total: 20 },
+  ], []);
 
-  // Fetch data
   useEffect(() => {
     if (!axiosInstance) return;
-
     let retryTimer = null;
     let retryCount = 0;
-
     const apiPost = async () => {
       if (retryCount > 5) {
         console.warn('Stop retry');
+        setLoading(false);
+        setError(new Error('Max retries reached'));
         return;
       }
-
       try {
         setData((await axiosInstance.post('/fe/dashboard', {})).data);
         setError(null);
@@ -127,139 +98,23 @@ const RuyiInLive = () => {
         retryCount++;
       }
     };
-
     if ("requestIdleCallback" in window) {
       const id = requestIdleCallback(apiPost);
-      return () => {
-        cancelIdleCallback(id);
-        clearTimeout(retryTimer);
-      }
+      return () => { cancelIdleCallback(id); clearTimeout(retryTimer); };
     } else {
       retryTimer = setTimeout(apiPost, 500);
       return () => clearTimeout(retryTimer);
     }
   }, [axiosInstance]);
 
-  // Process the data for the chart
   const barData = useMemo(() => {
     if (!data || !data.top_commands) return [];
-    
     return Object.entries(data.top_commands)
       .map(([action, { total }]) => ({ action, total }))
       .sort((a, b) => b.total - a.total)
       .slice(0, 5);
   }, [data]);
 
-  // Create placeholder chart during loading
-  useEffect(() => {
-    if (loading && placeholderRef.current) {
-      if (placeholderChartRef.current) {
-        placeholderChartRef.current.destroy();
-      }
-
-      const chart = new Chart({
-        container: placeholderRef.current,
-        autoFit: true,
-        events: {
-          enabled: false
-        }
-      });
-
-      placeholderChartRef.current = chart;
-
-      chart.coordinate({ transform: [{ type: 'transpose' }] });
-      chart
-        .interval().style({
-          fill: colors.placeholderGrey
-        })
-        .data(placeholderData)
-        .transform({ type: 'sortX', reverse: true, by: "y" })
-        .axis('x', {
-          line: false,
-          title: false,
-          label: false,
-          tick: false
-        })
-        .axis('y', { title: false, line: false, tick: false })
-        .encode('x', 'action')
-        .encode('y', 'total')
-        .scale('x', { padding: 0.6 })
-        .style('maxWidth', 200)
-        // No labels for placeholder
-        .interaction({
-          tooltip: {
-            body: false
-          }
-        });
-      chart.interaction('view-scroll', false);
-
-      chart.render();
-    }
-  }, [loading, placeholderData, colors]);
-
-  // Create and update the chart
-  useEffect(() => {
-    if (barData.length && containerRef.current) {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-
-      const chart = new Chart({
-        container: containerRef.current,
-        autoFit: true,
-        events: {
-          enabled: false
-        }
-      });
-
-      chartRef.current = chart;
-
-      chart.coordinate({ transform: [{ type: 'transpose' }] });
-      chart
-        .interval().style({
-          fill: colors.navyBlue
-        })
-        .data(barData)
-        .transform({ type: 'sortX', reverse: true, by: "y" })
-        .axis('x', {
-          line: false,
-          title: false,
-          label: false,
-          tick: false
-        })
-        .axis('y', { title: false, line: false, tick: false })
-        .encode('x', 'action')
-        .encode('y', 'total')
-        .scale('x', { padding: 0.6 })
-        .style('maxWidth', 200)
-        .label({
-          text: 'action',
-          position: "top-left",
-          fill: '#000',
-          dy: -22,
-          fontWeight: 600,
-          fontSize: 12 // Smaller font size for labels
-        })
-        .label({
-          text: 'total',
-          position: "left",
-          fill: 'white',
-          dx: 5,
-          fontWeight: 600,
-          fontSize: 12 // Smaller font size for values
-        })
-        .interaction({
-          tooltip: {
-            body: false
-          }
-        });
-      chart.interaction('view-scroll', false);
-
-      chart.render();
-    }
-  }, [barData, colors]);
-
-  // Styles
   const styles = {
     background: {
       width: '100%',
@@ -268,23 +123,25 @@ const RuyiInLive = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      padding: '1rem 0', // 16px
     },
     container: {
       display: 'flex',
       flexDirection: isMobile ? 'column' : 'row',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-      width: isMobile ? 'calc(100% - 64px)' : 'calc(100% - 64px)', 
-      height: isMobile ? 'auto' : '350px', // Auto height for mobile
+      width: isMobile ? 'calc(100% - 2rem)' /* 32px */ : 'calc(100% - 4rem)' /* 64px */,
+      maxWidth: '100 rem',
+      height: isMobile ? 'auto' : '21.875rem', // 350px
       backgroundColor: colors.lightGray,
-      borderRadius: '12px',
+      borderRadius: '0.75rem', // 12px
       overflow: 'hidden',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+      boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)', // 0 4px 20px
       color: colors.textDark,
-      margin: '0 auto 16px auto',
+      margin: '0 auto 1rem auto', // 16px bottom margin
     },
     leftPanel: {
       width: isMobile ? '100%' : '40%',
-      padding: isMobile ? '30px' : '60px',
+      padding: isMobile ? '1.875rem' /* 30px */ : '2.5rem' /* 40px */,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -295,57 +152,69 @@ const RuyiInLive = () => {
     },
     leftPanelAccent: {
       position: 'absolute',
-      bottom: '-50px',
-      right: '-50px',
-      width: '200px',
-      height: '200px',
+      bottom: '-3.125rem', // -50px
+      right: '-3.125rem', // -50px
+      width: '12.5rem', // 200px
+      height: '12.5rem', // 200px
       borderRadius: '50%',
       background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)`,
       opacity: 0.6,
     },
     rightPanel: {
       width: isMobile ? '100%' : '60%',
-      padding: '20px',
+      padding: '1.25rem', // 20px
       overflowY: 'auto',
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: colors.white,
-      minHeight: isMobile ? '250px' : 'auto',
+      minHeight: isMobile ? '18.75rem' /* 300px */ : 'auto',
     },
     title: {
-      fontSize: '2rem', // Slightly smaller title
+      fontSize: '1.8rem', // Kept as is, assuming it's a relative unit or a specific design choice
       fontWeight: '700',
-      marginBottom: '6px',
-      letterSpacing: '-0.5px',
+      marginBottom: '0.375rem', // 6px
+      letterSpacing: '-0.03125rem', // -0.5px
     },
     subtitle: {
-      fontSize: '1rem', // Smaller subtitle
+      fontSize: '0.9rem', // Kept as is
       lineHeight: '1.5',
-      marginBottom: '18px',
+      marginBottom: '1.125rem', // 18px
       fontWeight: '500',
       opacity: '0.9',
     },
     buttonContainer: {
       display: 'flex',
-      gap: '16px',
+      gap: '0.75rem', // 12px
       flexWrap: 'wrap',
     },
     button: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: colors.creamBeige_light,
-      color: colors.textDark,
       border: 'none',
-      padding: '12px 24px',
-      borderRadius: '9999px', // Pill shape
+      padding: '0.625rem 1.125rem', // 10px 18px
+      borderRadius: '62.4375rem', // 9999px (effectively pill shape)
       fontWeight: '600',
-      fontSize: '1rem',
+      fontSize: '0.9rem', // Kept as is
       cursor: 'pointer',
-      transition: 'all 0.2s ease',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.2s ease-out', // Ensure smooth transition
+      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)', // 0 2px 8px
       textDecoration: 'none',
-      minWidth: '120px',
+      minWidth: '6.25rem', // 100px
+    },
+    // Specific button styles (can be merged with base button style)
+    discussButtonBase: {
+        backgroundColor: colors.creamBeige_light,
+        color: colors.textDark,
+    },
+    sourceButtonBase: {
+        backgroundColor: colors.creamBeige, // Slightly different base color
+        color: colors.textDark,
+    },
+    // Hover effect for buttons
+    buttonHover: {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.2)', // Enhanced shadow on hover
     },
     chartContainer: {
       flex: 1,
@@ -355,30 +224,111 @@ const RuyiInLive = () => {
       backgroundColor: colors.white,
     },
     chartTitle: {
-      fontSize: '14px', // Smaller chart title
+      fontSize: '0.875rem', // 14px
       fontWeight: '600',
-      marginBottom: '14px',
+      marginBottom: '0.875rem', // 14px
       color: colors.navyBlue,
     },
     chartWrapper: {
       width: '100%',
-      height: '250px',
+      height: '15.625rem', // 250px
       position: 'relative',
     },
     placeholderWrapper: {
       width: '100%',
-      height: '250px',
+      height: '15.625rem', // 250px
       position: 'relative',
       opacity: 0.6,
     },
     loadingText: {
       textAlign: 'center',
       color: colors.textGray,
-      fontSize: '13px',
-      marginTop: '8px',
+      fontSize: '0.8125rem', // 13px
+      marginTop: '0.5rem', // 8px
       fontWeight: '500',
+    },
+    errorText: {
+      textAlign: 'center',
+      color: colors.textGray,
+      fontSize: '0.875rem', // 14px
+      padding: '1.25rem', // 20px
+      fontWeight: '500',
+    },
+    nativeChart: {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-around',
+    },
+    nativeChartRow: {
+      display: 'flex',
+      alignItems: 'center',
+      minHeight: '2rem', // 32px
+    },
+    nativeChartBarOuter: {
+      width: '100%',
+      height: '1.75rem', // 28px
+      backgroundColor: colors.lightGray,
+      borderRadius: '0.25rem', // 4px
+      overflow: 'hidden',
+    },
+    nativeChartBarInner: {
+      height: '100%',
+      borderRadius: '0.25rem', // 4px
+      transition: 'width 0.4s ease-out',
+      display: 'flex',
+      alignItems: 'center',
+      position: 'relative',
+    },
+    nativeChartActionLabelInsideBar: {
+      fontSize: '0.75rem', // 12px
+      fontWeight: '600',
+      color: colors.white,
+      paddingLeft: '0.5rem', // 8px
+      paddingRight: '0.5rem', // 8px
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      maxWidth: '100%',
+    },
+    placeholderLabelInsideBar: {
+      height: '0.75rem', // 12px
+      backgroundColor: colors.placeholderTextShade,
+      borderRadius: '0.1875rem', // 3px
+      marginLeft: '0.5rem', // 8px
+    },
+    emptyDataText: {
+      textAlign: 'center',
+      color: colors.textGray,
+      fontSize: '0.875rem', // 14px
+      padding: '1.25rem', // 20px
+      fontWeight: '500',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     }
   };
+
+  const getMaxValue = (currentData) => {
+    if (!currentData || currentData.length === 0) return 100;
+    return Math.max(...currentData.map(item => item.total), 0);
+  };
+
+  // Combine base and hover styles for buttons
+  const discussButtonStyle = {
+    ...styles.button,
+    ...styles.discussButtonBase,
+    ...(isDiscussButtonHovered ? styles.buttonHover : {}),
+  };
+
+  const sourceButtonStyle = {
+    ...styles.button,
+    ...styles.sourceButtonBase,
+    ...(isSourceButtonHovered ? styles.buttonHover : {}),
+  };
+
 
   return (
     <div style={styles.background}>
@@ -388,18 +338,24 @@ const RuyiInLive = () => {
           <h1 style={styles.title}><Translate>RuyiSDK 社区</Translate></h1>
           <p style={styles.subtitle}><Translate>RuyiSDK 社区讨论板块现已开启</Translate></p>
           <div style={styles.buttonContainer}>
-            <a 
+            <a
               href="https://github.com/ruyisdk/ruyisdk/discussions/"
               target="_blank"
-              style={styles.button}
+              rel="noopener noreferrer"
+              style={discussButtonStyle}
+              onMouseEnter={() => setIsDiscussButtonHovered(true)}
+              onMouseLeave={() => setIsDiscussButtonHovered(false)}
             >
               <UsersIcon />
               <Translate>讨论组</Translate>
             </a>
-            <a 
-              href="https://github.com/ruyisdk" 
+            <a
+              href="https://github.com/ruyisdk"
               target="_blank"
-              style={{...styles.button, backgroundColor: colors.creamBeige, color: colors.textDark}}
+              rel="noopener noreferrer"
+              style={sourceButtonStyle}
+              onMouseEnter={() => setIsSourceButtonHovered(true)}
+              onMouseLeave={() => setIsSourceButtonHovered(false)}
             >
               <GithubIcon />
               <Translate>源码库</Translate>
@@ -411,23 +367,68 @@ const RuyiInLive = () => {
         {/* Right Panel */}
         <div style={styles.rightPanel}>
           <div style={styles.chartContainer}>
-            <h2 style={styles.chartTitle}><a href="/Home/StatisticalDataPages"><Translate>大家都在用</Translate></a></h2>
-            
+            <h2 style={styles.chartTitle}>
+              <a href="/Home/StatisticalDataPages" style={{ color: 'inherit', textDecoration: 'none' }}>
+                <Translate>大家都在用</Translate>
+              </a>
+            </h2>
+
             {loading ? (
               <>
-                <div 
-                  ref={placeholderRef} 
-                  style={styles.placeholderWrapper}
-                />
-                <div style={styles.loadingText}>Loading...</div>
+                <div style={styles.placeholderWrapper}>
+                  <div style={styles.nativeChart}>
+                    {placeholderData.map((item, index) => {
+                      const maxValue = getMaxValue(placeholderData);
+                      const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+                      return (
+                        <div key={`placeholder-${index}`} style={styles.nativeChartRow}>
+                          <div style={styles.nativeChartBarOuter}>
+                            <div style={{
+                              ...styles.nativeChartBarInner,
+                              width: `${barWidth}%`,
+                              backgroundColor: colors.placeholderGrey,
+                            }}>
+                              <div style={{
+                                ...styles.placeholderLabelInsideBar,
+                                width: `${Math.min(80, Math.max(20, barWidth * 0.6))}%`
+                              }} />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div style={styles.loadingText}><Translate>Loading...</Translate></div>
               </>
             ) : error ? (
-              <div style={styles.loader}>Failed to load data. Please try again later.</div>
+              <div style={styles.errorText}><Translate>Failed to load data. Please try again later.</Translate></div>
+            ) : barData.length > 0 ? (
+              <div style={styles.chartWrapper}>
+                <div style={styles.nativeChart}>
+                  {barData.map((item) => {
+                    const maxValue = getMaxValue(barData);
+                    const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+                    return (
+                      <div key={item.action} style={styles.nativeChartRow}>
+                        <div style={styles.nativeChartBarOuter}>
+                          <div style={{
+                            ...styles.nativeChartBarInner,
+                            width: `${barWidth}%`,
+                            backgroundColor: colors.navyBlue,
+                          }}>
+                            <span style={styles.nativeChartActionLabelInsideBar} title={item.action}>
+                              {item.action}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             ) : (
-              <div 
-                ref={containerRef} 
-                style={styles.chartWrapper}
-              />
+              <div style={styles.emptyDataText}><Translate>No statistical data available currently.</Translate></div>
             )}
           </div>
         </div>

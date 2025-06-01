@@ -3,6 +3,7 @@ import { Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './mainDisplay.module.css';
+import SlideNews from '../SlideNews';
 
 const Terminal = () => {
   const [currentCommand, setCurrentCommand] = useState(0);
@@ -82,7 +83,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
         } else {
           clearInterval(typeInterval);
           setTyping(false);
-          
+         
           // Small delay after typing is complete before showing output
           setTimeout(() => {
             // Animate the output - now with 2s animation
@@ -95,11 +96,11 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
                 outputIndex++;
               } else {
                 clearInterval(outputInterval);
-                
+               
                 // Wait 3 seconds after command completes, then show 'clear' command
                 setTimeout(() => {
                   setText(prefix + cmd.command + '\n' + cmd.output + '\n' + prefix + 'clear');
-                  
+                 
                   // Slight delay to show 'clear' command, then clear and go to next command
                   setTimeout(() => {
                     setText('');
@@ -112,7 +113,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
           }, 300);
         }
       }, 50); // Typing speed
-      
+     
       return () => clearInterval(typeInterval);
     }
   }, [currentCommand, typing]);
@@ -155,6 +156,11 @@ const BackgroundAnimation = () => {
 const MainDisplay = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+ 
+  // State for button hover effects (added from RuyiInLive)
+  const [isPrimaryButtonHovered, setIsPrimaryButtonHovered] = useState(false);
+  const [isSecondaryButtonHovered, setIsSecondaryButtonHovered] = useState(false);
+ 
   const modalRef = useRef(null);
 
   const handleModalClose = () => {
@@ -189,66 +195,132 @@ const MainDisplay = () => {
       }
     `;
     document.head.appendChild(styleEl);
-    
+   
     return () => {
       document.head.removeChild(styleEl);
     };
   }, []);
 
+  // Button styles with hover effects (adapted from RuyiInLive)
+  const primaryButtonStyle = {
+    background: 'linear-gradient(180deg, #0A2C7E 0%, #071E58 100%)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '24px',
+    padding: '12px 24px',
+    fontSize: '1rem',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-out', // Same as RuyiInLive
+    boxShadow: isPrimaryButtonHovered
+      ? '0 0.25rem 1rem rgba(10, 44, 126, 0.4)' // Enhanced shadow on hover
+      : '0 2px 6px rgba(10, 44, 126, 0.3)',
+    transform: isPrimaryButtonHovered ? 'translateY(-2px)' : 'translateY(0)', // Lift effect
+    textDecoration: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  const secondaryButtonStyle = {
+    background: 'rgba(249, 194, 60, 0.15)',
+    color: '#0A2C7E',
+    border: 'none',
+    borderRadius: '24px',
+    padding: '12px 24px',
+    fontSize: '1rem',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-out', // Same as RuyiInLive
+    boxShadow: isSecondaryButtonHovered
+      ? '0 0.25rem 1rem rgba(249, 194, 60, 0.3)' // Enhanced shadow on hover
+      : '0 0.125rem 0.5rem rgba(249, 194, 60, 0.1)',
+    transform: isSecondaryButtonHovered ? 'translateY(-2px)' : 'translateY(0)', // Lift effect
+    backgroundColor: isSecondaryButtonHovered
+      ? 'rgba(249, 194, 60, 0.25)'
+      : 'rgba(249, 194, 60, 0.15)',
+    textDecoration: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
   return (
-    <div className={styles.container}>
-      {/* Add background animation */}
+    <div>
+      
+      <div className={styles.container}>
       <BackgroundAnimation />
       
-      {/* Main page content */}
-      <div className={styles.mainContent}>
-        <div className={styles.contentRow}>
-          <div className={styles.leftContent}>
-            <h1 className={styles.title}>RuyiSDK</h1>
-            <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
+        {/* Main page content */}
+        <div className={styles.mainContent}>
+          <div className={styles.contentRow}>
+            <div className={styles.leftContent}>
+              <h1 className={styles.title}>RuyiSDK</h1>
+              <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
             
-            <div className={styles.buttonContainer}>
-              <a href="/download" className={styles.primaryButton}><Translate>获取 Ruyi</Translate></a>
-              <a href="/docs/intro" className={styles.secondaryButton}><Translate>查看文档</Translate></a>
+              <div className={styles.buttonContainer}>
+                <a
+                  href="/download"
+                  style={primaryButtonStyle}
+                  onMouseEnter={() => setIsPrimaryButtonHovered(true)}
+                  onMouseLeave={() => setIsPrimaryButtonHovered(false)}
+                >
+                  <Translate>获取 Ruyi</Translate>
+                </a>
+                <a
+                  href="/docs/intro"
+                  style={secondaryButtonStyle}
+                  onMouseEnter={() => setIsSecondaryButtonHovered(true)}
+                  onMouseLeave={() => setIsSecondaryButtonHovered(false)}
+                >
+                  <Translate>查看文档</Translate>
+                </a>
+              </div>
+            </div>
+          
+            {/* Terminal component on the right */}
+            <div className={styles.terminalContainer}>
+              <Terminal />
             </div>
           </div>
-          
-          {/* Terminal component on the right */}
-          <div className={styles.terminalContainer}>
-            <Terminal />
+        </div>
+      
+        {/* Package details modal */}
+        {modalVisible && (
+          <div className={styles.modalOverlay} onClick={handleClickOutside}>
+            <div className={styles.modal} ref={modalRef}>
+              <div className={styles.modalHeader}>
+                <h2>{selectedPackage.name}</h2>
+                <CloseOutlined className={styles.closeIcon} onClick={handleModalClose} />
+              </div>
+              <div className={styles.modalContent}>
+                <p className={styles.packageVersion}>{selectedPackage.version}</p>
+                <p className={styles.packageDescription}>{selectedPackage.description}</p>
+                <div className={styles.packageTags}>
+                  {selectedPackage.tags.map((tag, index) => (
+                    <Tag key={index} color="blue">{tag}</Tag>
+                  ))}
+                </div>
+                <div className={styles.packageStats}>
+                  <div className={styles.statItem}>
+                    <span className={styles.statLabel}>{translate({ id: "下载量", message: "下载量" })}</span>
+                    <span className={styles.statValue}>{selectedPackage.downloads}</span>
+                  </div>
+                </div>
+                <button className={styles.downloadButton}>
+                  {translate({ id: "下载", message: "下载" })}
+                </button>
+              </div>
+            </div>
           </div>
+        )}
+
+        {/* SlideNews component - positioned to take full width */}
+        <div className={styles.slideNewsContainer}>
+          
         </div>
       </div>
-      
-      {/* Package details modal */}
-      {modalVisible && (
-        <div className={styles.modalOverlay} onClick={handleClickOutside}>
-          <div className={styles.modal} ref={modalRef}>
-            <div className={styles.modalHeader}>
-              <h2>{selectedPackage.name}</h2>
-              <CloseOutlined className={styles.closeIcon} onClick={handleModalClose} />
-            </div>
-            <div className={styles.modalContent}>
-              <p className={styles.packageVersion}>{selectedPackage.version}</p>
-              <p className={styles.packageDescription}>{selectedPackage.description}</p>
-              <div className={styles.packageTags}>
-                {selectedPackage.tags.map((tag, index) => (
-                  <Tag key={index} color="blue">{tag}</Tag>
-                ))}
-              </div>
-              <div className={styles.packageStats}>
-                <div className={styles.statItem}>
-                  <span className={styles.statLabel}>{translate({ id: "下载量", message: "下载量" })}</span>
-                  <span className={styles.statValue}>{selectedPackage.downloads}</span>
-                </div>
-              </div>
-              <button className={styles.downloadButton}>
-                {translate({ id: "下载", message: "下载" })}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <SlideNews />
     </div>
   );
 };

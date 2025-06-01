@@ -36,7 +36,7 @@ const NewsShowcase = () => {
   };
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -53,41 +53,217 @@ const NewsShowcase = () => {
   return (
     <div className="newsshowcase-container">
       <style>{`
-        .newsshowcase-container { display: flex; overflow-x: auto; width: 100%; height: calc(600px + 32px); gap: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; margin: 0; padding: 8px 32px 24px; background-color: #f5f5f7; }
-        .newsshowcase-sidebar { width: 320px; height: 600px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; display: flex; flex-direction: column; gap: 1rem; padding: 0rem 1rem 1rem 0; }
-        .newsshowcase-sidebar::-webkit-scrollbar { display: none; }
-        .newsshowcase-title-item { padding: 1rem 1.5rem; background: white; border-radius: 10px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; font-weight: 500; color: #1d1d1f; border: 1px solid rgba(230, 230, 230, 1); user-select: none; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); margin: 0; }
-        .newsshowcase-title-item:hover { transform: scale(1.01); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); }
-        .newsshowcase-title-item.newsshowcase-active { background: #002677; color: #fff; box-shadow: none; transform: scale(1.01); }
-        .newsshowcase-main { flex: 1; height: 600px; position: relative; overflow: hidden; }
-        .cards-wrapper { display: flex; flex-direction: column; width: 100%; height: 100%; }
-        .newsshowcase-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; width: 100%; height: 100%; display: flex; flex-direction: column; margin-bottom: 1rem; border: 1px solid rgba(230, 230, 230, 1); flex-shrink: 0; }
-        .newsshowcase-card:hover { transform: scale(1.01); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); }
-        .newsshowcase-image { width: 100%; height: 350px; object-fit: cover; transition: transform 0.3s ease; }
-        .newsshowcase-card:hover .newsshowcase-image { transform: scale(1.02); }
-        .newsshowcase-content { padding: 2rem; background: white; flex: 1; display: flex; flex-direction: column; position: relative; }
-        .newsshowcase-card-title { font-size: 2rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; line-height: 1.2; letter-spacing: -0.5px; }
-        .newsshowcase-description { font-size: 1rem; color: #333; line-height: 1.6; flex: 1; }
-        .newsshowcase-link-indicator { position: absolute; bottom: 1.5rem; right: 1.5rem; display: inline-flex; align-items: center; color: #0A2C7E; font-weight: bold; font-size: 1rem; opacity: 0; transform: translateX(10px); transition: all 0.3s ease; background: #FDEFC3; padding: 0.5rem 1rem; border-radius: 99rem; border: rgb(255, 228, 138); gap: 0.35rem; }
-        .newsshowcase-card:hover .newsshowcase-link-indicator { opacity: 1; transform: translateX(0); }
-        .newsshowcase-arrow { font-size: 1rem; }
-        @media (max-width: 768px) {
-          .newsshowcase-container { flex-direction: column; height: auto; padding: 1rem; }
-          .newsshowcase-sidebar, .newsshowcase-main { display: none; }
-          .accordion-item { margin-bottom: 1rem; border: 1px solid rgba(230, 230, 230, 1); border-radius: 10px; overflow: hidden; }
-          .accordion-title { padding: 1rem; background: white; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
-          .accordion-title.active { background: #002677; color: #fff; }
-          .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-          .accordion-content.expanded { max-height: 1000px; }
-          .accordion-content .newsshowcase-card { box-shadow: none; border: none; margin: 0; }
-          .accordion-content .newsshowcase-image { height: 200px; }
-          .accordion-content .newsshowcase-content { padding: 1rem; }
+        .newsshowcase-container {
+          display: flex;
+          overflow-x: auto;
+          width: 100%;
+          height: calc(37.5rem + 2rem); /* 600px + 32px */
+          gap: 1rem;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+          margin: 0;
+          padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
+          background-color: #f5f5f7;
+        }
+        .newsshowcase-sidebar {
+          width: 20rem; /* 320px */
+          height: 37.5rem; /* 600px */
+          overflow-y: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 0rem 1rem 1rem 0;
+        }
+        .newsshowcase-sidebar::-webkit-scrollbar {
+          display: none;
+        }
+        .newsshowcase-title-item {
+          padding: 1rem 1.5rem;
+          background: white;
+          border-radius: 0.625rem; /* 10px */
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #1d1d1f;
+          border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
+          user-select: none;
+          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
+          margin: 0;
+        }
+        .newsshowcase-title-item:hover {
+          transform: scale(1.01);
+          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
+        }
+        .newsshowcase-title-item.newsshowcase-active {
+          background: #002677;
+          color: #fff;
+          box-shadow: none;
+          transform: scale(1.01);
+        }
+        .newsshowcase-main {
+          flex: 1;
+          height: 37.5rem; /* 600px */
+          position: relative;
+          overflow: hidden;
+        }
+        .cards-wrapper {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+        }
+        .newsshowcase-card {
+          background: white;
+          border-radius: 0.625rem; /* 10px */
+          overflow: hidden;
+          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1rem; /* Keep if this creates intended scrolling gap, or adjust if part of fixed height calculation */
+          border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
+          flex-shrink: 0;
+        }
+        .newsshowcase-card:hover {
+          transform: scale(1.01);
+          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
+        }
+        .newsshowcase-image {
+          width: 100%;
+          height: 21.875rem; /* 350px */
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+        .newsshowcase-card:hover .newsshowcase-image {
+          transform: scale(1.02);
+        }
+        .newsshowcase-content {
+          padding: 2rem;
+          background: white;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+        .newsshowcase-card-title {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin-bottom: 1rem;
+          line-height: 1.2;
+          letter-spacing: -0.03125rem; /* -0.5px */
+        }
+        .newsshowcase-description {
+          font-size: 1rem;
+          color: #333;
+          line-height: 1.6;
+          flex: 1;
+        }
+        .newsshowcase-link-indicator {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 1.5rem;
+          display: inline-flex;
+          align-items: center;
+          color: #0A2C7E;
+          font-weight: bold;
+          font-size: 1rem;
+          opacity: 0;
+          transform: translateX(0.625rem); /* 10px */
+          transition: all 0.3s ease;
+          background: #FDEFC3;
+          padding: 0.5rem 1rem;
+          border-radius: 99rem;
+          border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
+          gap: 0.5rem; /* Adjusted for consistency */
+        }
+        .newsshowcase-card:hover .newsshowcase-link-indicator {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .newsshowcase-arrow {
+          font-size: 1rem;
+        }
+        @media (max-width: 48rem) { /* 768px */
+          .newsshowcase-container {
+            flex-direction: column;
+            height: auto;
+            padding: 1rem;
+          }
+          .newsshowcase-sidebar, .newsshowcase-main {
+            /* Sidebar and main content area are hidden on mobile, replaced by accordion */
+            display: none;
+          }
+          /* Styles for accordion view on mobile */
+          .accordion-wrapper { /* Added a wrapper for accordion items if needed, or apply to container */
+            display: flex;
+            flex-direction: column;
+            gap: 1rem; /* Consistent gap for accordion items */
+          }
+          .accordion-item {
+            margin-bottom: 1rem; /* This might be redundant if accordion-wrapper has gap */
+            border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
+            border-radius: 0.625rem; /* 10px */
+            overflow: hidden;
+            background: white; /* Added background to item for consistent look */
+          }
+          .accordion-title {
+            padding: 1rem;
+            background: white;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500; /* Match sidebar item weight */
+            color: #1d1d1f; /* Match sidebar item color */
+          }
+          .accordion-title.active {
+            background: #002677;
+            color: #fff;
+          }
+          .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: white; /* Ensure content area has background */
+          }
+          .accordion-content.expanded {
+            max-height: 62.5rem; /* 1000px, for ample space */
+          }
+          .accordion-content .newsshowcase-card {
+            box-shadow: none;
+            border: none;
+            border-radius: 0; /* Remove radius if it's inside an already rounded item */
+            margin: 0;
+          }
+          .accordion-content .newsshowcase-image {
+            height: 12.5rem; /* 200px */
+            border-radius: 0; /* No specific radius needed if card is not rounded */
+          }
+          .accordion-content .newsshowcase-content {
+            padding: 1rem;
+          }
+          .accordion-content .newsshowcase-card-title {
+             font-size: 1.5rem; /* Slightly smaller for accordion */
+          }
+           .accordion-content .newsshowcase-description {
+             font-size: 0.875rem; /* Slightly smaller for accordion */
+          }
           .accordion-content .newsshowcase-link-indicator {
-            position: static;
+            position: static; /* Displayed in flow */
             opacity: 1;
             transform: none;
             margin-top: 1rem;
-            justify-content: center;
+            justify-content: center; /* Center the button */
+            width: fit-content; /* Allow button to size to content */
+            margin-left: auto;   /* Center align if needed */
+            margin-right: auto;  /* Center align if needed */
           }
         }
       `}</style>
@@ -113,11 +289,14 @@ const NewsShowcase = () => {
                   className="newsshowcase-card"
                   onClick={() => handleCardClick(news.link)}
                 >
-                  <img src={news.img} alt=<Translate>{news.title}</Translate> className="newsshowcase-image" />
+                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
                   <div className="newsshowcase-content">
                     <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
                     <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
-                    <div className="newsshowcase-link-indicator"><Translate>前往阅读</Translate><span className="newsshowcase-arrow">→</span></div>
+                    <div className="newsshowcase-link-indicator">
+                      <Translate>前往阅读</Translate>
+                      <span className="newsshowcase-arrow">→</span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -132,18 +311,27 @@ const NewsShowcase = () => {
             <div key={idx} className="accordion-item">
               <div
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
-                onClick={() => handleNewsClick(idx)}
+                onClick={() => {
+                  setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
+                }}
               >
                 <span><Translate>{news.title}</Translate></span>
                 <span>{selectedIndex === idx ? '−' : '+'}</span>
               </div>
               <div className={`accordion-content ${selectedIndex === idx ? 'expanded' : ''}`}>
                 <div className="newsshowcase-card" onClick={() => handleCardClick(news.link)}>
-                  <img src={news.img} alt=<Translate>{news.title}</Translate> className="newsshowcase-image" />
+                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile`})} className="newsshowcase-image" />
                   <div className="newsshowcase-content">
+                    {/* Titles and descriptions are already in the accordion title for brevity,
+                        but can be repeated or summarized here if design prefers.
+                        For this example, keeping the card content consistent.
+                    */}
                     <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
                     <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
-                    <div className="newsshowcase-link-indicator"><Translate>前往阅读</Translate><span className="newsshowcase-arrow">→</span></div>
+                    <div className="newsshowcase-link-indicator">
+                      <Translate>前往阅读</Translate>
+                      <span className="newsshowcase-arrow">→</span>
+                    </div>
                   </div>
                 </div>
               </div>

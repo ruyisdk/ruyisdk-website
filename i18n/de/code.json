@@ -358,6 +358,12 @@
   "actionstart": {
     "message": "Jetzt anfangen"
   },
+  "wechatlink.title": {
+    "message": "Offizieller RuyiSDK WeChat-Account"
+  },
+  "wechatlink.buttonText": {
+    "message": "Jetzt folgen"
+  },
   "RuyiSDK": {
     "message": "RuyiSDK"
   },
