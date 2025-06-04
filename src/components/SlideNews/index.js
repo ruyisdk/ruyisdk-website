@@ -55,13 +55,13 @@ const slideImages = [
     title: <Translate>荔枝派 4A</Translate>,
     subtitle: <Translate>荔枝派 4A 软件生态已并入 RuyiSDK 项目</Translate>,
     content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。当前 RevyOS 的 LicheePi 4A 版本已经更新到 20250420。",
-    Image: "img/RevyOS-logo.svg",
+    Image: "img/licheepi-4a.png",
     Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20250420/",
     ButtonText: "立即跳转",
     titleColor: "#ffffff",         // Custom title color (white)
     subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
     size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: true,                  // Enable blur on background
+    isBlur: false,                 // Enable blur on background
     ispopup: false,                 // Enable click-to-show-popup for this card
   },
 ];
