@@ -176,6 +176,10 @@ const config = {
                 to: '/contact'
               },
               {
+                label: "PLCT 实验室",
+                href: "https://plctlab.org/",
+              },
+              {
                 label: "实习生招聘",
                 href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
               },

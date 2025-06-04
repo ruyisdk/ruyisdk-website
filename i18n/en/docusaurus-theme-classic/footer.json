@@ -49,5 +49,9 @@
   "link.item.label.实习生招聘": {
     "message": "Open Internship",
     "description": "The label of footer link with label=实习生招聘 linking to /StatisticalDataPages"
+  },
+  "link.item.label.PLCT 实验室": {
+    "message": "PLCT Lab",
+    "description": "The label of footer link with label=PLCT Lab linking to /StatisticalDataPages"
   }
 }
