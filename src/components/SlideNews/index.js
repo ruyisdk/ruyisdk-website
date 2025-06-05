@@ -6,7 +6,7 @@ import "react-slideshow-image/dist/styles.css";
 // Card sizes enum
 const CardSizes = {
   L: "large",   // full width, 2x height
-  M: "medium",  // full width, 1x height 
+  M: "medium",  // full width, 1x height
   S: "small",   // half width, 1x height
 };
 
@@ -19,11 +19,11 @@ const slideImages = [
     Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Links: "/docs/IDE/",
     ButtonText: "了解更多",        // 了解更多/立即跳转
-    titleColor: "#ffffff",         // Custom title color (white)
-    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-    size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: false,                 // Apply blur effect to background
-    ispopup: false,                // Disable click-to-show-popup for this card
+    titleColor: "#ffffff",      // Custom title color (white)
+    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
+    size: CardSizes.S,          // Small card (half width, 1x height)
+    isBlur: false,              // Apply blur effect to background
+    ispopup: true,             // Enable click-to-show-popup for this card
   },
   {
     title: <Translate>RevyOS</Translate>,
@@ -32,11 +32,11 @@ const slideImages = [
     Image: "img/RevyOS-logo.svg",
     Links: "https://docs.revyos.dev/",
     ButtonText: "立即跳转",
-    titleColor: "#ffffff",         // Custom title color (white)
-    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-    size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: true,                  // Enable blur on background
-    ispopup: false,                // Disable click-to-show-popup for this card
+    titleColor: "#ffffff",      // Custom title color (white)
+    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
+    size: CardSizes.S,          // Small card (half width, 1x height)
+    isBlur: true,               // Enable blur on background
+    ispopup: false,             // Disable click-to-show-popup for this card
   },
   {
     title: <Translate>Support Matrix</Translate>,
@@ -45,11 +45,11 @@ const slideImages = [
     Image: "img/ruyi-logo-720.svg",
     Links: "https://matrix.ruyisdk.org/",
     ButtonText: "立即跳转",
-    titleColor: "#ffffff",         // Custom title color (white)
-    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-    size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: true,                  // Enable blur on background
-    ispopup: false,                // Disable click-to-show-popup for this card
+    titleColor: "#ffffff",      // Custom title color (white)
+    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
+    size: CardSizes.S,          // Small card (half width, 1x height)
+    isBlur: true,               // Enable blur on background
+    ispopup: false,             // Disable click-to-show-popup for this card
   },
   {
     title: <Translate>荔枝派 4A</Translate>,
@@ -58,11 +58,11 @@ const slideImages = [
     Image: "img/licheepi-4a.png",
     Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20250420/",
     ButtonText: "立即跳转",
-    titleColor: "#ffffff",         // Custom title color (white)
-    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-    size: CardSizes.S,             // Small card (half width, 1x height)
-    isBlur: false,                 // Enable blur on background
-    ispopup: false,                 // Enable click-to-show-popup for this card
+    titleColor: "#ffffff",      // Custom title color (white)
+    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
+    size: CardSizes.S,          // Small card (half width, 1x height)
+    isBlur: false,              // Enable blur on background
+    ispopup: false,             // Enable click-to-show-popup for this card
   },
 ];
 
@@ -218,10 +218,13 @@ export default function SlideNews() {
 
   // Handler for card click - only process popup if ispopup is true
   const handleCardClick = (index, event) => {
-    // Prevent expanding if clicked on a link
+    // Prevent expanding if clicked on a link that should navigate away
     if (event.target.tagName === 'A' || 
         event.target.parentElement.tagName === 'A') {
-      return;
+      // Check if the link is inside a card that is NOT a popup trigger
+      if (!slideImages[index].ispopup) {
+          return;
+      }
     }
     
     // Only show popup if ispopup is true
@@ -288,9 +291,15 @@ export default function SlideNews() {
             {card.subtitle}
           </h2>
           <div className={styles.buttonContainer}>
-            <a target="_blank" href={card.Links} className={styles.primaryButton}>
-              <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
-            </a>
+            {card.ispopup ? (
+              <button className={styles.primaryButton}>
+                <Translate>显示详情</Translate>
+              </button>
+            ) : (
+              <a target="_blank" href={card.Links} className={styles.primaryButton} rel="noopener noreferrer">
+                <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
+              </a>
+            )}
             {card.subLinks && (
               <a
                 href={card.subLinks}
@@ -372,13 +381,17 @@ export default function SlideNews() {
                 <a 
                   href={slideImages[expandedCardIndex].Links} 
                   className={styles.primaryButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
+                  <Translate id="homepage.primarybutton">{slideImages[expandedCardIndex].ButtonText}</Translate>
                 </a>
                 {slideImages[expandedCardIndex].subLinks && (
                   <a
                     href={slideImages[expandedCardIndex].subLinks}
                     className={styles.secondaryButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Translate id="homepage.secondarybutton">
                       现在开始
