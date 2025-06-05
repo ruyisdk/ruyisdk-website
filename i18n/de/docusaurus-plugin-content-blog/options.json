@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "RuyiSDK BLog",
+    "message": "RuyiSDK Blog",
     "description": "The title for the blog used in SEO"
   },
   "description": {
-    "message": "Blog",
+    "message": "Blog for logging the development and community information for RuyiSDK",
     "description": "The description for the blog used in SEO"
   },
   "sidebar.title": {

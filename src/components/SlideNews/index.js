@@ -6,7 +6,7 @@ import "react-slideshow-image/dist/styles.css";
 // Card sizes enum
 const CardSizes = {
   L: "large",   // full width, 2x height
-  M: "medium",  // full width, 1x height 
+  M: "medium",  // full width, 1x height
   S: "small",   // half width, 1x height
 };
 
@@ -54,15 +54,15 @@ const slideImages = [
   {
     title: <Translate>荔枝派 4A</Translate>,
     subtitle: <Translate>荔枝派 4A 软件生态已并入 RuyiSDK 项目</Translate>,
-    content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。当前 RevyOS 的 LicheePi 4A 版本已经更新到 20250420。",
+    content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。",
     Image: "img/licheepi-4a.png",
-    Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20250420/",
-    ButtonText: "立即跳转",
+    Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/",
+    ButtonText: "立即下载",
     titleColor: "#ffffff",         // Custom title color (white)
     subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
     size: CardSizes.S,             // Small card (half width, 1x height)
     isBlur: false,                 // Enable blur on background
-    ispopup: false,                 // Enable click-to-show-popup for this card
+    ispopup: true,                 // Enable click-to-show-popup for this card
   },
 ];
 
@@ -218,10 +218,13 @@ export default function SlideNews() {
 
   // Handler for card click - only process popup if ispopup is true
   const handleCardClick = (index, event) => {
-    // Prevent expanding if clicked on a link
+    // Prevent expanding if clicked on a link that should navigate away
     if (event.target.tagName === 'A' || 
         event.target.parentElement.tagName === 'A') {
-      return;
+      // Check if the link is inside a card that is NOT a popup trigger
+      if (!slideImages[index].ispopup) {
+          return;
+      }
     }
     
     // Only show popup if ispopup is true
@@ -288,9 +291,15 @@ export default function SlideNews() {
             {card.subtitle}
           </h2>
           <div className={styles.buttonContainer}>
-            <a target="_blank" href={card.Links} className={styles.primaryButton}>
-              <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
-            </a>
+            {card.ispopup ? (
+              <button className={styles.primaryButton}>
+                <Translate>显示详情</Translate>
+              </button>
+            ) : (
+              <a target="_blank" href={card.Links} className={styles.primaryButton} rel="noopener noreferrer">
+                <Translate>{card.ButtonText}</Translate>
+              </a>
+            )}
             {card.subLinks && (
               <a
                 href={card.subLinks}
@@ -372,13 +381,17 @@ export default function SlideNews() {
                 <a 
                   href={slideImages[expandedCardIndex].Links} 
                   className={styles.primaryButton}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <Translate id="homepage.primarybutton">{card.ButtonText}</Translate>
+                  <Translate>{slideImages[expandedCardIndex].ButtonText}</Translate>
                 </a>
                 {slideImages[expandedCardIndex].subLinks && (
                   <a
                     href={slideImages[expandedCardIndex].subLinks}
                     className={styles.secondaryButton}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Translate id="homepage.secondarybutton">
                       现在开始
