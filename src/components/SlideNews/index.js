@@ -19,11 +19,11 @@ const slideImages = [
     Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     Links: "/docs/IDE/",
     ButtonText: "了解更多",        // 了解更多/立即跳转
-    titleColor: "#ffffff",      // Custom title color (white)
-    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
-    size: CardSizes.S,          // Small card (half width, 1x height)
-    isBlur: false,              // Apply blur effect to background
-    ispopup: true,             // Enable click-to-show-popup for this card
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: false,                 // Apply blur effect to background
+    ispopup: false,                // Enable click-to-show-popup for this card
   },
   {
     title: <Translate>RevyOS</Translate>,
@@ -32,11 +32,11 @@ const slideImages = [
     Image: "img/RevyOS-logo.svg",
     Links: "https://docs.revyos.dev/",
     ButtonText: "立即跳转",
-    titleColor: "#ffffff",      // Custom title color (white)
-    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
-    size: CardSizes.S,          // Small card (half width, 1x height)
-    isBlur: true,               // Enable blur on background
-    ispopup: false,             // Disable click-to-show-popup for this card
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: true,                  // Enable blur on background
+    ispopup: false,                // Disable click-to-show-popup for this card
   },
   {
     title: <Translate>Support Matrix</Translate>,
@@ -45,11 +45,11 @@ const slideImages = [
     Image: "img/ruyi-logo-720.svg",
     Links: "https://matrix.ruyisdk.org/",
     ButtonText: "立即跳转",
-    titleColor: "#ffffff",      // Custom title color (white)
-    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
-    size: CardSizes.S,          // Small card (half width, 1x height)
-    isBlur: true,               // Enable blur on background
-    ispopup: false,             // Disable click-to-show-popup for this card
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: true,                  // Enable blur on background
+    ispopup: false,                // Disable click-to-show-popup for this card
   },
   {
     title: <Translate>荔枝派 4A</Translate>,
@@ -57,12 +57,12 @@ const slideImages = [
     content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。当前 RevyOS 的 LicheePi 4A 版本已经更新到 20250420。",
     Image: "img/licheepi-4a.png",
     Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20250420/",
-    ButtonText: "立即跳转",
-    titleColor: "#ffffff",      // Custom title color (white)
-    subtitleColor: "#f0f0f0",    // Custom subtitle color (light)
-    size: CardSizes.S,          // Small card (half width, 1x height)
-    isBlur: false,              // Enable blur on background
-    ispopup: false,             // Enable click-to-show-popup for this card
+    ButtonText: "了解更多",
+    titleColor: "#ffffff",         // Custom title color (white)
+    subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+    size: CardSizes.S,             // Small card (half width, 1x height)
+    isBlur: false,                 // Enable blur on background
+    ispopup: true,                 // Enable click-to-show-popup for this card
   },
 ];
 
