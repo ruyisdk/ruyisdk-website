@@ -29,7 +29,7 @@ const Index = () => {
     <Layout
       wrapperClassName="homepage"
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      description="All-in-one integrated development environment for RISC-V architecture"
     >
       <Head>
         <title>{translate({ id: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备", message: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备" })}</title>
