@@ -22,8 +22,7 @@
   height: 45px;
   margin-right: 10px;
   min-width: 250px;
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
+  margin: 0.6em 0.3em;
   font-size: 17px;
   text-align: center;
 }
