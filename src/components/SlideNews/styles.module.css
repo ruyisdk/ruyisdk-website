@@ -269,9 +269,6 @@
   transform: scale(1.05);
 }
 
-/* This class is no longer needed and can be safely removed. */
-/* .expandedCardBackground { ... } */
-
 .expandedCardContent {
   position: relative;
   z-index: 2; /* Sits on top of the image overlay */
@@ -368,7 +365,7 @@
     margin-top: 1rem;
   }
   .primaryButton, .secondaryButton {
-    font-size: 0.8rem;
+    /* REMOVED -> font-size: 0.8rem; */
     padding: 0.5rem 1rem;
   }
   .smallCardsRow {
