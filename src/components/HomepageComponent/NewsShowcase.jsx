@@ -27,6 +27,35 @@ const NewsShowcase = () => {
   const [isMobile, setIsMobile] = useState(false);
   const mainRef = useRef(null);
 
+  /**
+   * Truncates text to a specified maximum length, avoiding word breaks.
+   * It applies different length limits for Chinese Hanzi and other scripts.
+   * @param {string} text The text to truncate.
+   * @param {number} charLimit The character limit for non-Hanzi text.
+   * @param {number} hanziLimit The character limit for Hanzi text.
+   * @returns {string} The truncated text with an ellipsis, or the original text.
+   */
+  const truncateText = (text, charLimit, hanziLimit) => {
+    const hasHanzi = /[\u4e00-\u9fa5]/.test(text);
+    const limit = hasHanzi ? hanziLimit : charLimit;
+
+    if (text.length <= limit) {
+      return text;
+    }
+
+    let truncated = text.substring(0, limit);
+
+    if (!hasHanzi) {
+      // Avoid breaking a word in the middle for non-Hanzi text
+      const lastSpaceIndex = truncated.lastIndexOf(' ');
+      if (lastSpaceIndex !== -1) {
+        truncated = truncated.substring(0, lastSpaceIndex);
+      }
+    }
+    
+    return truncated + '...';
+  };
+
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
   };
@@ -125,7 +154,6 @@ const NewsShowcase = () => {
           height: 100%;
           display: flex;
           flex-direction: column;
-          margin-bottom: 1rem; /* Keep if this creates intended scrolling gap, or adjust if part of fixed height calculation */
           border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
           flex-shrink: 0;
         }
@@ -135,7 +163,8 @@ const NewsShowcase = () => {
         }
         .newsshowcase-image {
           width: 100%;
-          height: 21.875rem; /* 350px */
+          height: 60%;
+          max-height: 60%;
           object-fit: cover;
           transition: transform 0.3s ease;
         }
@@ -250,10 +279,10 @@ const NewsShowcase = () => {
             padding: 1rem;
           }
           .accordion-content .newsshowcase-card-title {
-             font-size: 1.5rem; /* Slightly smaller for accordion */
+            font-size: 1.5rem; /* Slightly smaller for accordion */
           }
-           .accordion-content .newsshowcase-description {
-             font-size: 0.875rem; /* Slightly smaller for accordion */
+          .accordion-content .newsshowcase-description {
+            font-size: 0.875rem; /* Slightly smaller for accordion */
           }
           .accordion-content .newsshowcase-link-indicator {
             position: static; /* Displayed in flow */
@@ -292,7 +321,11 @@ const NewsShowcase = () => {
                   <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
                   <div className="newsshowcase-content">
                     <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
+                    <p className="newsshowcase-description">
+                      <Translate>
+                        {truncateText(news.description, 200, 100)}
+                      </Translate>
+                    </p>
                     <div className="newsshowcase-link-indicator">
                       <Translate>前往阅读</Translate>
                       <span className="newsshowcase-arrow">→</span>
