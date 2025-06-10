@@ -140,7 +140,6 @@ const RuyiInLive = () => {
       fontFamily:
         '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
       width: isMobile ? 'calc(100% - 2rem)' : 'calc(100% - 4rem)',
-      maxWidth: '100rem',
       height: isMobile ? 'auto' : '21.875rem',
       backgroundColor: colors.lightGray,
       borderRadius: '0.75rem',
