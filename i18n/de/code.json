@@ -409,11 +409,11 @@
   "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
     "message": "Begleiten Sie das PLCT-Labor und entdecken Sie die Geheimnisse und Möglichkeiten der Softwarewissenschaft!"
   },
-  "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升": {
-    "message": "Es ist offiziell: riscv64 wird offizielle Architektur in Debian"
+  "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现": {
+    "message": "Ingenieur Yongtai Li bei der AsiaLLVM Developer Conference 2025 in Tokio: Diskussion über die Performance von LLVM und GCC auf RISC-V"
   },
-  "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。": {
-    "message": "Die RISC-V-Architektur ist nun offiziell in Debian unterstützt – ein bedeutender Schritt für das globale Open-Source-Ökosystem."
+  "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。": {
+    "message": "Yongtai Li betonte, dass die LLVM/Flang-Toolchain SPEC CPU für RISC-V vollständig unterstützt. Weitere Optimierungen bei Fortran und spezifischen Passes bleiben jedoch erforderlich. Künftig liegt der Fokus auf der Verfolgung neuer LLVM-Versionen, dem Monitoring von Regressionen und der Optimierung für SPEC CPU."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"

@@ -4,6 +4,12 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
+      title: "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现",
+      description: "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。",
+      img: "img/newsshowcase/AsiaLLVM2025.webp",
+      link: "https://mp.weixin.qq.com/s/WnVS95BvDS4jQS-a8GqjLg"
+    },
+    {
       title: "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径",
       description: "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。",
       img: "img/newsshowcase/OSPP.webp",
@@ -14,12 +20,6 @@ const NewsShowcase = () => {
       description: "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！",
       img: "img/newsshowcase/2025OpenDay.webp",
       link: "https://mp.weixin.qq.com/s/lXXLUuNh_aOBXEh3oXxECw"
-    },
-    {
-      title: "靴子落地：riscv64 成为 Debian 官方支持架构，RISC-V 全球软件生态支持即将迎来一次巨大跃升",
-      description: "RISC-V 架构正式成为 Debian 官方支持平台，标志着 RISC-V 软件生态进入主流、全球开源支持迈入新纪元。",
-      img: "img/newsshowcase/DebianRiscv.png",
-      link: "https://mp.weixin.qq.com/s/G_cZU6t_MPoeDoYCwmGIqg"
     },
   ];
 
