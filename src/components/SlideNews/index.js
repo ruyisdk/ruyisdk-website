@@ -344,7 +344,13 @@ export default function SlideNews() {
           className={styles.expandedCardOverlay}
           onClick={handleOverlayClick}
         >
-          <div className={styles.expandedCard}>
+          <div 
+            className={styles.expandedCard}
+            style={{
+              backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
+            }}
+          >
+            <div className={styles.expandedCardImageOverlay} />
             <button 
               className={styles.closeButton} 
               onClick={handleCloseExpandedCard}
@@ -352,13 +358,6 @@ export default function SlideNews() {
             >
               ×
             </button>
-            
-            <div 
-              className={styles.expandedCardBackground}
-              style={{
-                backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
-              }}
-            />
             
             <div className={styles.expandedCardContent}>
               <h1 className={styles.expandedCardTitle}>

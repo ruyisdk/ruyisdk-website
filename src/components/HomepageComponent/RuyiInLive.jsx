@@ -1,53 +1,61 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
-import Translate, { translate } from '@docusaurus/Translate';
+import React, { useEffect, useMemo, useState } from 'react';
+import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import axios from 'axios';
-
-// Helper for px to rem conversion for clarity during generation, values will be hardcoded
-// const pxToRem = (px) => `${px / 16}rem`;
 
 // Custom SVG icons
 const UsersIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '0.5rem' /* 8px */ }}>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ marginRight: '0.5rem' }}
+  >
     <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" />
-    <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" strokeWidth="2" />
+    <path
+      d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
     <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" />
-    <path d="M21 21v-2a4 4 0 0 0-3-3.85" stroke="currentColor" strokeWidth="2" />
+    <path
+      d="M21 21v-2a4 4 0 0 0-3-3.85"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
   </svg>
 );
 
 const GithubIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '0.5rem' /* 8px */ }}>
-    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.252-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.934.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" fill="currentColor" />
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ marginRight: '0.5rem' }}
+  >
+    <path
+      d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.252-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.934.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+      fill="currentColor"
+    />
   </svg>
 );
 
-const useDashboardClient = () => {
-  const { siteConfig: { customFields } } = useDocusaurusContext();
-  const axiosInstance = useMemo(() => {
-    if (!customFields.apiURL) return null;
-    const instance = axios.create({
-      baseURL: `https://${customFields.apiURL}`,
-      timeout: 10000, // timeout in ms, not typically converted to rem
-      headers: { "Content-Type": "application/json" },
-    });
-    return instance;
-  }, [customFields.apiURL]);
-  return axiosInstance;
-};
-
 const RuyiInLive = () => {
-  const axiosInstance = useDashboardClient();
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // State for button hover effects
   const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
   const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
 
-  const colors = { // Color scheme remains the same
+  const colors = {
     navyBlue: '#002677',
     creamBeige_light: 'rgb(252, 232, 164)',
     creamBeige: '#F8F3E2',
@@ -62,50 +70,51 @@ const RuyiInLive = () => {
   };
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768); // 768px is a common breakpoint, kept as px for JS logic
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const placeholderData = useMemo(() => [
-    { action: 'Loading Action 1', total: 80 },
-    { action: 'Loading Action 2', total: 65 },
-    { action: 'Loading Action 3', total: 50 },
-    { action: 'Loading Action 4', total: 35 },
-    { action: 'Loading Action 5', total: 20 },
-  ], []);
+  const placeholderData = useMemo(
+    () => [
+      { action: 'Loading Action 1', total: 80 },
+      { action: 'Loading Action 2', total: 65 },
+      { action: 'Loading Action 3', total: 50 },
+      { action: 'Loading Action 4', total: 35 },
+      { action: 'Loading Action 5', total: 20 },
+    ],
+    [],
+  );
 
   useEffect(() => {
-    if (!axiosInstance) return;
-    let retryTimer = null;
-    let retryCount = 0;
-    const apiPost = async () => {
-      if (retryCount > 5) {
-        console.warn('Stop retry');
-        setLoading(false);
-        setError(new Error('Max retries reached'));
-        return;
-      }
-      try {
-        setData((await axiosInstance.post('/fe/dashboard', {})).data);
-        setError(null);
-        setLoading(false);
-      } catch (error) {
-        console.error('Dashboard API error, will retry', error);
-        setError(error);
-        retryTimer = setTimeout(apiPost, 2 ** retryCount * 1000);
-        retryCount++;
-      }
-    };
-    if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(apiPost);
-      return () => { cancelIdleCallback(id); clearTimeout(retryTimer); };
-    } else {
-      retryTimer = setTimeout(apiPost, 500);
-      return () => clearTimeout(retryTimer);
+    if (!customFields.apiURL) {
+      console.warn('apiURL not found in Docusaurus customFields.');
+      setLoading(false);
+      setError(new Error('API configuration is missing.'));
+      return;
     }
-  }, [axiosInstance]);
+    const worker = new Worker('/js/dashboardFetcher.js');
+    worker.onmessage = (event) => {
+      const { type, payload } = event.data;
+      if (type === 'success') {
+        setData(payload);
+        setError(null);
+      } else if (type === 'error') {
+        setError(new Error(payload.message));
+      }
+      setLoading(false);
+    };
+    worker.onerror = (err) => {
+      console.error('An error occurred in the dashboard fetcher worker:', err);
+      setError(new Error('Failed to load data due to a worker error.'));
+      setLoading(false);
+    };
+    worker.postMessage({ apiURL: customFields.apiURL });
+    return () => {
+      worker.terminate();
+    };
+  }, [customFields.apiURL]);
 
   const barData = useMemo(() => {
     if (!data || !data.top_commands) return [];
@@ -123,25 +132,25 @@ const RuyiInLive = () => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '1rem 0', // 16px
+      padding: '1rem 0',
     },
     container: {
       display: 'flex',
       flexDirection: isMobile ? 'column' : 'row',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-      width: isMobile ? 'calc(100% - 2rem)' /* 32px */ : 'calc(100% - 4rem)' /* 64px */,
-      maxWidth: '100 rem',
-      height: isMobile ? 'auto' : '21.875rem', // 350px
+      fontFamily:
+        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      width: isMobile ? 'calc(100% - 2rem)' : 'calc(100% - 4rem)',
+      height: isMobile ? 'auto' : '21.875rem',
       backgroundColor: colors.lightGray,
-      borderRadius: '0.75rem', // 12px
+      borderRadius: '0.75rem',
       overflow: 'hidden',
-      boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)', // 0 4px 20px
+      boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)',
       color: colors.textDark,
-      margin: '0 auto 1rem auto', // 16px bottom margin
+      margin: '0 auto 1rem auto',
     },
     leftPanel: {
       width: isMobile ? '100%' : '40%',
-      padding: isMobile ? '1.875rem' /* 30px */ : '2.5rem' /* 40px */,
+      padding: isMobile ? '1.875rem' : '2.5rem',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -152,39 +161,39 @@ const RuyiInLive = () => {
     },
     leftPanelAccent: {
       position: 'absolute',
-      bottom: '-3.125rem', // -50px
-      right: '-3.125rem', // -50px
-      width: '12.5rem', // 200px
-      height: '12.5rem', // 200px
+      bottom: '-3.125rem',
+      right: '-3.125rem',
+      width: '12.5rem',
+      height: '12.5rem',
       borderRadius: '50%',
       background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)`,
       opacity: 0.6,
     },
     rightPanel: {
       width: isMobile ? '100%' : '60%',
-      padding: '1.25rem', // 20px
+      padding: '1.25rem',
       overflowY: 'auto',
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: colors.white,
-      minHeight: isMobile ? '18.75rem' /* 300px */ : 'auto',
+      minHeight: isMobile ? '18.75rem' : 'auto',
     },
     title: {
-      fontSize: '1.8rem', // Kept as is, assuming it's a relative unit or a specific design choice
+      fontSize: '1.8rem',
       fontWeight: '700',
-      marginBottom: '0.375rem', // 6px
-      letterSpacing: '-0.03125rem', // -0.5px
+      marginBottom: '0.375rem',
+      letterSpacing: '-0.03125rem',
     },
     subtitle: {
-      fontSize: '0.9rem', // Kept as is
+      fontSize: '0.9rem',
       lineHeight: '1.5',
-      marginBottom: '1.125rem', // 18px
+      marginBottom: '1.125rem',
       fontWeight: '500',
       opacity: '0.9',
     },
     buttonContainer: {
       display: 'flex',
-      gap: '0.75rem', // 12px
+      gap: '0.75rem',
       flexWrap: 'wrap',
     },
     button: {
@@ -192,29 +201,27 @@ const RuyiInLive = () => {
       alignItems: 'center',
       justifyContent: 'center',
       border: 'none',
-      padding: '0.625rem 1.125rem', // 10px 18px
-      borderRadius: '62.4375rem', // 9999px (effectively pill shape)
+      padding: '0.625rem 1.125rem',
+      borderRadius: '62.4375rem',
       fontWeight: '600',
-      fontSize: '0.9rem', // Kept as is
+      fontSize: '0.9rem',
       cursor: 'pointer',
-      transition: 'all 0.2s ease-out', // Ensure smooth transition
-      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)', // 0 2px 8px
+      transition: 'all 0.2s ease-out',
+      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
       textDecoration: 'none',
-      minWidth: '6.25rem', // 100px
+      minWidth: '6.25rem',
     },
-    // Specific button styles (can be merged with base button style)
     discussButtonBase: {
-        backgroundColor: colors.creamBeige_light,
-        color: colors.textDark,
+      backgroundColor: colors.creamBeige_light,
+      color: colors.textDark,
     },
     sourceButtonBase: {
-        backgroundColor: colors.creamBeige, // Slightly different base color
-        color: colors.textDark,
+      backgroundColor: colors.creamBeige,
+      color: colors.textDark,
     },
-    // Hover effect for buttons
     buttonHover: {
-        transform: 'translateY(-2px)',
-        boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.2)', // Enhanced shadow on hover
+      transform: 'translateY(-2px)',
+      boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.2)',
     },
     chartContainer: {
       flex: 1,
@@ -224,34 +231,34 @@ const RuyiInLive = () => {
       backgroundColor: colors.white,
     },
     chartTitle: {
-      fontSize: '0.875rem', // 14px
+      fontSize: '0.875rem',
       fontWeight: '600',
-      marginBottom: '0.875rem', // 14px
+      marginBottom: '0.875rem',
       color: colors.navyBlue,
     },
     chartWrapper: {
       width: '100%',
-      height: '15.625rem', // 250px
+      height: '15.625rem',
       position: 'relative',
     },
     placeholderWrapper: {
       width: '100%',
-      height: '15.625rem', // 250px
+      height: '15.625rem',
       position: 'relative',
       opacity: 0.6,
     },
     loadingText: {
       textAlign: 'center',
       color: colors.textGray,
-      fontSize: '0.8125rem', // 13px
-      marginTop: '0.5rem', // 8px
+      fontSize: '0.8125rem',
+      marginTop: '0.5rem',
       fontWeight: '500',
     },
     errorText: {
       textAlign: 'center',
       color: colors.textGray,
-      fontSize: '0.875rem', // 14px
-      padding: '1.25rem', // 20px
+      fontSize: '0.875rem',
+      padding: '1.25rem',
       fontWeight: '500',
     },
     nativeChart: {
@@ -264,59 +271,58 @@ const RuyiInLive = () => {
     nativeChartRow: {
       display: 'flex',
       alignItems: 'center',
-      minHeight: '2rem', // 32px
+      minHeight: '2rem',
     },
     nativeChartBarOuter: {
       width: '100%',
-      height: '1.75rem', // 28px
+      height: '1.75rem',
       backgroundColor: colors.lightGray,
-      borderRadius: '0.25rem', // 4px
+      borderRadius: '0.25rem',
       overflow: 'hidden',
     },
     nativeChartBarInner: {
       height: '100%',
-      borderRadius: '0.25rem', // 4px
+      borderRadius: '0.25rem',
       transition: 'width 0.4s ease-out',
       display: 'flex',
       alignItems: 'center',
       position: 'relative',
     },
     nativeChartActionLabelInsideBar: {
-      fontSize: '0.75rem', // 12px
+      fontSize: '0.75rem',
       fontWeight: '600',
       color: colors.white,
-      paddingLeft: '0.5rem', // 8px
-      paddingRight: '0.5rem', // 8px
+      paddingLeft: '0.5rem',
+      paddingRight: '0.5rem',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       maxWidth: '100%',
     },
     placeholderLabelInsideBar: {
-      height: '0.75rem', // 12px
+      height: '0.75rem',
       backgroundColor: colors.placeholderTextShade,
-      borderRadius: '0.1875rem', // 3px
-      marginLeft: '0.5rem', // 8px
+      borderRadius: '0.1875rem',
+      marginLeft: '0.5rem',
     },
     emptyDataText: {
       textAlign: 'center',
       color: colors.textGray,
-      fontSize: '0.875rem', // 14px
-      padding: '1.25rem', // 20px
+      fontSize: '0.875rem',
+      padding: '1.25rem',
       fontWeight: '500',
       height: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    }
+    },
   };
 
   const getMaxValue = (currentData) => {
     if (!currentData || currentData.length === 0) return 100;
-    return Math.max(...currentData.map(item => item.total), 0);
+    return Math.max(...currentData.map((item) => item.total), 0);
   };
 
-  // Combine base and hover styles for buttons
   const discussButtonStyle = {
     ...styles.button,
     ...styles.discussButtonBase,
@@ -329,14 +335,47 @@ const RuyiInLive = () => {
     ...(isSourceButtonHovered ? styles.buttonHover : {}),
   };
 
+  const PlaceholderChart = () => (
+    <div style={styles.placeholderWrapper}>
+      <div style={styles.nativeChart}>
+        {placeholderData.map((item, index) => {
+          const maxValue = getMaxValue(placeholderData);
+          const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+          return (
+            <div key={`placeholder-${index}`} style={styles.nativeChartRow}>
+              <div style={styles.nativeChartBarOuter}>
+                <div
+                  style={{
+                    ...styles.nativeChartBarInner,
+                    width: `${barWidth}%`,
+                    backgroundColor: colors.placeholderGrey,
+                  }}
+                >
+                  <div
+                    style={{
+                      ...styles.placeholderLabelInsideBar,
+                      width: `${Math.min(80, Math.max(20, barWidth * 0.6))}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 
   return (
     <div style={styles.background}>
       <div style={styles.container}>
-        {/* Left Panel */}
         <div style={styles.leftPanel}>
-          <h1 style={styles.title}><Translate>RuyiSDK 社区</Translate></h1>
-          <p style={styles.subtitle}><Translate>RuyiSDK 社区讨论板块现已开启</Translate></p>
+          <h1 style={styles.title}>
+            <Translate>RuyiSDK 社区</Translate>
+          </h1>
+          <p style={styles.subtitle}>
+            <Translate>RuyiSDK 社区讨论板块现已开启</Translate>
+          </p>
           <div style={styles.buttonContainer}>
             <a
               href="https://github.com/ruyisdk/ruyisdk/discussions/"
@@ -364,60 +403,47 @@ const RuyiInLive = () => {
           <div style={styles.leftPanelAccent}></div>
         </div>
 
-        {/* Right Panel */}
         <div style={styles.rightPanel}>
           <div style={styles.chartContainer}>
             <h2 style={styles.chartTitle}>
-              <a href="/Home/StatisticalDataPages" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <a
+                href="/Home/StatisticalDataPages"
+                style={{ color: 'inherit', textDecoration: 'none' }}
+              >
                 <Translate>大家都在用</Translate>
               </a>
             </h2>
 
             {loading ? (
               <>
-                <div style={styles.placeholderWrapper}>
-                  <div style={styles.nativeChart}>
-                    {placeholderData.map((item, index) => {
-                      const maxValue = getMaxValue(placeholderData);
-                      const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
-                      return (
-                        <div key={`placeholder-${index}`} style={styles.nativeChartRow}>
-                          <div style={styles.nativeChartBarOuter}>
-                            <div style={{
-                              ...styles.nativeChartBarInner,
-                              width: `${barWidth}%`,
-                              backgroundColor: colors.placeholderGrey,
-                            }}>
-                              <div style={{
-                                ...styles.placeholderLabelInsideBar,
-                                width: `${Math.min(80, Math.max(20, barWidth * 0.6))}%`
-                              }} />
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                <PlaceholderChart />
+                <div style={styles.loadingText}>
+                  <Translate>Loading...</Translate>
                 </div>
-                <div style={styles.loadingText}><Translate>Loading...</Translate></div>
               </>
             ) : error ? (
-              <div style={styles.errorText}><Translate>Failed to load data. Please try again later.</Translate></div>
+              <PlaceholderChart />
             ) : barData.length > 0 ? (
               <div style={styles.chartWrapper}>
                 <div style={styles.nativeChart}>
                   {barData.map((item) => {
                     const maxValue = getMaxValue(barData);
-                    const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+                    const barWidth =
+                      maxValue > 0 ? (item.total / maxValue) * 100 : 0;
                     return (
                       <div key={item.action} style={styles.nativeChartRow}>
                         <div style={styles.nativeChartBarOuter}>
-                          <div style={{
-                            ...styles.nativeChartBarInner,
-                            width: `${barWidth}%`,
-                            backgroundColor: colors.navyBlue,
-                          }}>
-                            <span style={styles.nativeChartActionLabelInsideBar} title={item.action}>
+                          <div
+                            style={{
+                              ...styles.nativeChartBarInner,
+                              width: `${barWidth}%`,
+                              backgroundColor: colors.navyBlue,
+                            }}
+                          >
+                            <span
+                              style={styles.nativeChartActionLabelInsideBar}
+                              title={item.action}
+                            >
                               {item.action}
                             </span>
                           </div>
@@ -428,7 +454,9 @@ const RuyiInLive = () => {
                 </div>
               </div>
             ) : (
-              <div style={styles.emptyDataText}><Translate>No statistical data available currently.</Translate></div>
+              <div style={styles.emptyDataText}>
+                <Translate>No statistical data available currently.</Translate>
+              </div>
             )}
           </div>
         </div>

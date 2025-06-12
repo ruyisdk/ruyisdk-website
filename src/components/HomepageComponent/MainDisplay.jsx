@@ -5,13 +5,14 @@ import Translate, { translate } from '@docusaurus/Translate';
 import styles from './mainDisplay.module.css';
 import SlideNews from '../SlideNews';
 
+// A terminal simulation that cycles through a set of commands.
 const Terminal = () => {
   const [currentCommand, setCurrentCommand] = useState(0);
   const [typing, setTyping] = useState(true);
   const [text, setText] = useState('');
   const terminalRef = useRef(null);
 
-  // Define commands and their outputs
+  // Define commands and their outputs for the terminal animation.
   const commands = [
     {
       command: 'ruyi update',
@@ -142,7 +143,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
   );
 };
 
-// Background animation component
+// A decorative background animation with moving blobs.
 const BackgroundAnimation = () => {
   return (
     <div className={styles.animationContainer}>
@@ -157,7 +158,7 @@ const MainDisplay = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
  
-  // State for button hover effects (added from RuyiInLive)
+  // State for button hover effects.
   const [isPrimaryButtonHovered, setIsPrimaryButtonHovered] = useState(false);
   const [isSecondaryButtonHovered, setIsSecondaryButtonHovered] = useState(false);
  
@@ -173,7 +174,7 @@ const MainDisplay = () => {
     }
   };
 
-  // Add animation style to the head
+  // Add animation keyframes to the document's head.
   useEffect(() => {
     const styleEl = document.createElement('style');
     styleEl.innerHTML = `
@@ -201,21 +202,21 @@ const MainDisplay = () => {
     };
   }, []);
 
-  // Button styles with hover effects (adapted from RuyiInLive)
+  // Define button styles with hover effects and scalable units.
   const primaryButtonStyle = {
     background: 'linear-gradient(180deg, #0A2C7E 0%, #071E58 100%)',
     color: 'white',
     border: 'none',
-    borderRadius: '24px',
-    padding: '12px 24px',
-    fontSize: '1rem',
+    borderRadius: '1.5rem', // Using rem for scalability
+    padding: '0.75rem 1.5rem', // Using rem for scalability
+    fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', // Fluid font size
     fontWeight: '500',
     cursor: 'pointer',
-    transition: 'all 0.2s ease-out', // Same as RuyiInLive
+    transition: 'all 0.2s ease-out',
     boxShadow: isPrimaryButtonHovered
-      ? '0 0.25rem 1rem rgba(10, 44, 126, 0.4)' // Enhanced shadow on hover
-      : '0 2px 6px rgba(10, 44, 126, 0.3)',
-    transform: isPrimaryButtonHovered ? 'translateY(-2px)' : 'translateY(0)', // Lift effect
+      ? '0 0.25rem 1rem rgba(10, 44, 126, 0.4)'
+      : '0 0.125rem 0.375rem rgba(10, 44, 126, 0.3)',
+    transform: isPrimaryButtonHovered ? 'translateY(-0.125rem)' : 'translateY(0)',
     textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
@@ -226,16 +227,16 @@ const MainDisplay = () => {
     background: 'rgba(249, 194, 60, 0.15)',
     color: '#0A2C7E',
     border: 'none',
-    borderRadius: '24px',
-    padding: '12px 24px',
-    fontSize: '1rem',
+    borderRadius: '1.5rem', // Using rem for scalability
+    padding: '0.75rem 1.5rem', // Using rem for scalability
+    fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', // Fluid font size
     fontWeight: '500',
     cursor: 'pointer',
-    transition: 'all 0.2s ease-out', // Same as RuyiInLive
+    transition: 'all 0.2s ease-out',
     boxShadow: isSecondaryButtonHovered
-      ? '0 0.25rem 1rem rgba(249, 194, 60, 0.3)' // Enhanced shadow on hover
+      ? '0 0.25rem 1rem rgba(249, 194, 60, 0.3)'
       : '0 0.125rem 0.5rem rgba(249, 194, 60, 0.1)',
-    transform: isSecondaryButtonHovered ? 'translateY(-2px)' : 'translateY(0)', // Lift effect
+    transform: isSecondaryButtonHovered ? 'translateY(-0.125rem)' : 'translateY(0)',
     backgroundColor: isSecondaryButtonHovered
       ? 'rgba(249, 194, 60, 0.25)'
       : 'rgba(249, 194, 60, 0.15)',
@@ -247,7 +248,6 @@ const MainDisplay = () => {
 
   return (
     <div>
-      
       <div className={styles.container}>
       <BackgroundAnimation />
       
@@ -315,10 +315,7 @@ const MainDisplay = () => {
           </div>
         )}
 
-        {/* SlideNews component - positioned to take full width */}
-        <div className={styles.slideNewsContainer}>
-          
-        </div>
+        {/* The SlideNews component remains outside the main scaling container */}
       </div>
       <SlideNews />
     </div>
