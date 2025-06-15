@@ -282,6 +282,11 @@ const StatisticalData = () => {
       label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
       children: <TopList data={data?.top_commands || {}}></TopList>,
     },
+    {
+      key: '2',
+      label: translate({ id: "分目录的下载数量", message: "分目录的下载数量" }),
+      children: <TopList data={data?.other_categories_downloads || {}}></TopList>,
+    },
   ];
 
   const CardTwoitems = [
