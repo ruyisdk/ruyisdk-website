@@ -52,7 +52,7 @@ const PersonCard = ({ person }) => {
     <div className={styles.personCardInner}>
       <div style={{ flexShrink: 0, position: 'relative', width: '12rem', height: '12rem' }}>
         <img src={avatarUrl} alt={`${name}'s avatar`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/192x192/e0e0e0/757575?text=Avatar'; }} />
-        <div style={{ position: 'absolute', top: 0, right: 0, height: '100%', width: '4rem', background: `linear-gradient(to right, transparent, rgb(25, 25, 25))`}}></div>
+        <div style={{ position: 'absolute', top: 0, right: 0, height: '100%', width: '4rem', background: `linear-gradient(to right, transparent, rgba(255, 255, 255, 0.66))`}}></div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem', width: '100%', height: '12rem', color: 'black' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
