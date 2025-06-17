@@ -115,9 +115,11 @@ const Text = ({ markdownContent }) => {
 
 // --- Main Page Component ---
 export default function Community() {
-  const coreTeam = [ { id: 1, name: 'Alex Doe', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop', title: 'Lead Developer', titleColor: '#3498db', description: 'Crafting beautiful and intuitive digital experiences.', email: 'alex.doe@example.com', github: '#' }, { id: 2, name: 'Jane Smith', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop', title: 'UX Designer', titleColor: '#9b59b6', description: 'Designing user-centric interfaces that are delightful.', email: 'jane.smith@example.com', github: '#' }, ];
-  const interns = [ { id: 3, name: 'Sam Wilson', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop', title: 'Backend Intern', titleColor: '#e67e22', description: 'Building scalable and resilient cloud infrastructures.', email: 'sam.wilson@example.com', github: '#' }, ];
-  const contributors = [ { id: 4, name: 'Emily White', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop', title: 'Documentation', titleColor: '#2ecc71', description: 'Leading teams to deliver high-impact projects on time.', email: 'emily.white@example.com', github: '#' }, { id: 5, name: 'Chris Green', avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop', title: 'QA Testing', titleColor: '#e74c3c', description: 'Ensuring our releases are stable and bug-free.', email: 'chris.green@example.com', github: '#' }, ];
+  const coreTeam = [ { id: 1, name: 'Alex Doe', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop', title: 'Lead Developer', titleColor: '#3498db', description: 'Crafting beautiful and intuitive digital experiences.', email: 'alex.doe@example.com', github: '#' }, 
+    { id: 2, name: 'Jane Smith', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop', title: 'UX Designer', titleColor: '#9b59b6', description: 'Designing user-centric interfaces that are delightful.', email: 'jane.smith@example.com', github: '#' }, ];
+  const interns = [ { id: 3, name: 'Sam Wilson', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop', title: 'Backend Intern', titleColor: '#e67e22', description: 'Building scalable and resilient cloud infrastructures.', email: 'sam.wilson@example.com', github: '#' }, 
+    { id: 4, name: 'Atri', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop', title: 'Previous Intern', titleColor: '#e67e22', description: 'Building AI-powered software and build emotional connections.', email: 'sam.wilson@example.com', github: '#' },];
+  const contributors = [ { id: 5, name: 'Emily White', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop', title: 'Documentation', titleColor: '#2ecc71', description: 'Leading teams to deliver high-impact projects on time.', email: 'emily.white@example.com', github: '#' }, { id: 5, name: 'Chris Green', avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop', title: 'QA Testing', titleColor: '#e74c3c', description: 'Ensuring our releases are stable and bug-free.', email: 'chris.green@example.com', github: '#' }, ];
   const partnersData = [ { id: 1, name: 'TechCorp', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=TechCorp' }, { id: 2, name: 'Innovate LLC', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=Innovate+LLC' }, { id: 3, name: 'Data Solutions', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=Data+Solutions' }, { id: 4, name: 'CloudNet', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=CloudNet' }, ];
   const communityGuidelines = `## 我们的承诺
 身为社区成员、贡献者和领袖，我们承诺使社区参与者不受骚扰，无论其年龄、体型、可见或不可见的缺陷、族裔、性征、性别认同和表达、经验水平、教育程度、社会与经济地位、国籍、相貌、种族、种姓、肤色、宗教信仰、性倾向或性取向如何。
@@ -180,12 +182,12 @@ export default function Community() {
             <Persons people={coreTeam} />
           </div>
 
-          <h2 className={styles.sectionHeader}>实习员工</h2>
+          <h2 className={styles.sectionHeader}>实习生</h2>
           <div className={styles.glassContainer}>
             <Persons people={interns} />
           </div>
           
-          <h2 className={styles.sectionHeader}>贡献者</h2>
+          <h2 className={styles.sectionHeader}>其他贡献者</h2>
           <div className={styles.glassContainer}>
             <Persons people={contributors} />
           </div>
