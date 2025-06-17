@@ -4,11 +4,8 @@ import Layout from '@theme/Layout';
 import styles from './community.module.css';
 
 // --- Portal Component for Background Blobs ---
-// This component will render the blobs directly into the document body,
-// escaping the influence of the .pageWrapper's filter property.
+// This component will render the blobs directly into the document body.
 const BackgroundBlobs = () => {
-    // A portal can only be created on the client-side where `document` exists.
-    // We use state to wait for the component to mount in the browser.
     const [isClient, setIsClient] = useState(false);
     useEffect(() => {
         setIsClient(true);
@@ -29,7 +26,7 @@ const BackgroundBlobs = () => {
 };
 
 
-// --- Reusable UI Components (Unchanged) ---
+// --- Reusable UI Components ---
 
 const MailIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -52,7 +49,7 @@ const PersonCard = ({ person }) => {
     <div className={styles.personCardInner}>
       <div style={{ flexShrink: 0, position: 'relative', width: '12rem', height: '12rem' }}>
         <img src={avatarUrl} alt={`${name}'s avatar`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/192x192/e0e0e0/757575?text=Avatar'; }} />
-        <div style={{ position: 'absolute', top: 0, right: 0, height: '100%', width: '4rem', background: `linear-gradient(to right, transparent, rgba(255, 255, 255, 0.66))`}}></div>
+        <div style={{ position: 'absolute', top: 0, right: 0, height: '100%', width: '4rem', background: `linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8))`}}></div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '1.5rem', width: '100%', height: '12rem', color: 'black' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
@@ -63,7 +60,7 @@ const PersonCard = ({ person }) => {
           </div>
         </div>
         <div style={{ ...titleStyle, color: 'white', fontSize: '0.875rem', fontWeight: '600', padding: '0.125rem 0.75rem', borderRadius: '9999px', alignSelf: 'flex-start', margin: '0.25rem 0', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>{title}</div>
-        <p style={{ color: '#1a202c', fontSize: '1rem', marginTop: '0.5rem' }}>{description}</p>
+        <p style={{ color: '#4A5568', fontSize: '1rem', marginTop: '0.5rem' }}>{description}</p>
       </div>
     </div>
   );
@@ -77,7 +74,7 @@ const Persons = ({ people }) => (
 
 const CommunityIntro = () => (
     <div className={`${styles.glassContainer} ${styles.communityIntro}`}>
-        <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '1.5rem', color: 'rgb(255, 255, 255)' }}>贡献者社区</h2>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#2D3748' }}>贡献者社区</h2>
         <a href="https://github.com/ruyisdk/ruyisdk/discussions" target="_blank" rel="noopener noreferrer" className={styles.appleButton}>
             加入讨论
         </a>
@@ -100,11 +97,11 @@ const Text = ({ markdownContent }) => {
   const htmlContent = markdownContent
     .split('\n')
     .map(line => {
-      if (line.startsWith('## ')) return `<h2 class="text-2xl font-bold mt-4 mb-2" style="color: rgb(252, 232, 164); font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.5rem;">${line.substring(3)}</h2>`;
-      if (line.startsWith('# ')) return `<h1 class="text-3xl font-bold mt-6 mb-3" style="color: rgb(252, 232, 164); font-size: 1.875rem; margin-top: 1.5rem; margin-bottom: 0.75rem;">${line.substring(2)}</h1>`;
+      if (line.startsWith('## ')) return `<h2 class="text-2xl font-bold mt-4 mb-2" style="color: #2D3748; font-size: 1.5rem; margin-top: 1rem; margin-bottom: 0.5rem;">${line.substring(3)}</h2>`;
+      if (line.startsWith('# ')) return `<h1 class="text-3xl font-bold mt-6 mb-3" style="color: #1A202C; font-size: 1.875rem; margin-top: 1.5rem; margin-bottom: 0.75rem;">${line.substring(2)}</h1>`;
       line = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       line = line.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      return `<p style="margin: 0.5rem 0; color: white;">${line}</p>`;
+      return `<p style="margin: 0.5rem 0; color: #4A5568;">${line}</p>`;
     })
     .join('');
   return (
@@ -167,11 +164,9 @@ export default function Community() {
 
   return (
     <Layout title="Community" description="Meet the RuyiSDK community, contributors, and partners.">
-      {/* Render the blobs via the portal to ensure they are relative to the viewport */}
       <BackgroundBlobs />
       
       <div className={styles.pageWrapper}>
-        {/* The blob divs have been moved to the BackgroundBlobs component */}
         <div className={styles.contentContainer}>
           <h1 className={styles.mainHeader}>We ❤ You ❤ Ruyi</h1>
           
@@ -192,7 +187,6 @@ export default function Community() {
             <Persons people={contributors} />
           </div>
           
-          {/* This is the corrected line */}
           <h2 className={styles.sectionHeader}>合作伙伴</h2>
           <Partners partners={partnersData} />
           
