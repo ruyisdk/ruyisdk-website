@@ -1,19 +1,9 @@
 /*
  * community.module.css
- * Styles for the Community Page
+ * Styles for the Community Page (Light & Elegant Theme)
  */
 
-/* --- Keyframe Animations --- */
-@keyframes ruyiHueRotate {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(15deg);
-  }
-}
-
-/* Updated keyframes for a more centered animation */
+/* --- Keyframe Animations (Unchanged) --- */
 @keyframes blobMove1 {
   0% {
     transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
@@ -54,14 +44,14 @@
 /* --- Main Page Container & Background --- */
 .pageWrapper {
   position: relative;
-  /* NavyBlue background color */
-  background: linear-gradient(135deg, #205dac 100%, #fffcc2 100%);
+  /* UPDATED: Light and elegant gradient background */
+  background: linear-gradient(135deg, #e9e9e9 0%, #EAEFF5 100%);
   padding: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
     'SF Pro Text', 'Helvetica Neue', sans-serif;
-  color: white;
+  /* UPDATED: Dark text color for readability */
+  color: #2D3748; 
   overflow: hidden;
-  animation: ruyiHueRotate 7s infinite alternate;
 }
 
 /* --- Animated Blobs --- */
@@ -70,47 +60,41 @@
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  filter: blur(80px);
-  /* UPDATED: z-index is now -1 to place it behind all page content */
+  filter: blur(90px); /* Increased blur for a softer effect */
   z-index: -1;
 }
 
-/* Updated blob colors to use the new gold color */
+/* UPDATED: Soft, elegant pastel colors for the blobs */
 .blob1 {
-  width: 400px;
-  height: 400px;
-  /* Gold: #FFBD30 with opacity */
-  background: rgba(255, 189, 48, 0.4);
+  width: 450px;
+  height: 450px;
+  background: rgba(168, 218, 220, 0.4); /* Soft Teal */
   opacity: 0.8;
-  animation: blobMove1 12s infinite linear; /* Use linear for smooth rotation */
+  animation: blobMove1 12s infinite linear;
 }
 
 .blob2 {
-  width: 500px;
-  height: 500px;
-  /* A lighter gold with opacity */
-  background: rgba(255, 189, 48, 0.2);
+  width: 550px;
+  height: 550px;
+  background: rgba(221, 190, 221, 0.3); /* Soft Lavender */
   opacity: 0.6;
   animation: blobMove2 14s infinite linear;
 }
 
 .blob3 {
-  width: 300px;
-  height: 300px;
-  /* Gold with a different opacity */
-  background: rgba(255, 189, 48, 0.3);
+  width: 350px;
+  height: 350px;
+  background: rgba(253, 221, 199, 0.4); /* Soft Peach */
   opacity: 0.7;
   animation: blobMove3 10s infinite alternate;
 }
 
 /* --- Content Styling --- */
 .contentContainer {
-  /* UPDATED: Increased max-width for wider screens */
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  /* The z-index here is no longer needed as the blobs are on a lower layer */
   z-index: 1;
 }
 
@@ -120,8 +104,9 @@
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  color: #FFBD30; /* Updated header to use gold */
-  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* UPDATED: A deep, elegant color for the main header */
+  color: #1A202C; 
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Softer shadow */
 }
 
 @media (min-width: 768px) {
@@ -136,18 +121,20 @@
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  color: #ffffff; /* Updated header to use gold */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  /* UPDATED: Dark text for section headers */
+  color: #2D3748;
 }
 
 /* --- Glassmorphism Container --- */
 .glassContainer {
-  background: rgba(255, 255, 255, 0.1);
+  /* UPDATED: Adjusted for light background */
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15); /* Softer, more subtle shadow */
   padding: 2rem;
   position: relative;
   z-index: 1;
@@ -170,18 +157,19 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
+  /* UPDATED: A slightly more opaque white for better contrast */
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   color: black;
 }
 
 .personCardInner:hover {
-  transform: scale(1.03);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px) scale(1.01);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.15);
 }
 
 /* --- Community Intro & Button --- */
@@ -237,4 +225,5 @@
 .textContainer {
   font-size: 1.125rem; /* text-lg */
   line-height: 1.75; /* leading-relaxed */
+  color: #4A5568; /* Default text color */
 }
