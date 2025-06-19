@@ -112,12 +112,16 @@ const Text = ({ markdownContent }) => {
 
 // --- Main Page Component ---
 export default function Community() {
-  const coreTeam = [ { id: 1, name: 'Alex Doe', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop', title: 'Lead Developer', titleColor: '#3498db', description: 'Crafting beautiful and intuitive digital experiences.', email: 'alex.doe@example.com', github: '#' }, 
-    { id: 2, name: 'Jane Smith', avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop', title: 'UX Designer', titleColor: '#9b59b6', description: 'Designing user-centric interfaces that are delightful.', email: 'jane.smith@example.com', github: '#' }, ];
-  const interns = [ { id: 3, name: 'Sam Wilson', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop', title: 'Backend Intern', titleColor: '#e67e22', description: 'Building scalable and resilient cloud infrastructures.', email: 'sam.wilson@example.com', github: '#' }, 
-    { id: 4, name: 'Atri', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop', title: 'Previous Intern', titleColor: '#e67e22', description: 'Building AI-powered software and build emotional connections.', email: 'sam.wilson@example.com', github: '#' },];
-  const contributors = [ { id: 5, name: 'Emily White', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop', title: 'Documentation', titleColor: '#2ecc71', description: 'Leading teams to deliver high-impact projects on time.', email: 'emily.white@example.com', github: '#' }, { id: 5, name: 'Chris Green', avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop', title: 'QA Testing', titleColor: '#e74c3c', description: 'Ensuring our releases are stable and bug-free.', email: 'chris.green@example.com', github: '#' }, ];
-  const partnersData = [ { id: 1, name: 'TechCorp', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=TechCorp' }, { id: 2, name: 'Innovate LLC', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=Innovate+LLC' }, { id: 3, name: 'Data Solutions', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=Data+Solutions' }, { id: 4, name: 'CloudNet', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=CloudNet' }, ];
+  const coreTeam = [ { id: 1, name: 'xijing21', avatarUrl: 'https://avatars.githubusercontent.com/u/84754181?v=4', title: 'RuyiSDK 项目经理', titleColor: '#3498db', description: 'RuyiSDK 项目经理 一小段话', email: '', github: 'https://github.com/xijing21' },
+    { id: 2, name: 'Yurish', avatarUrl: 'https://avatars.githubusercontent.com/u/52316103?v=4', title: 'RuyiSDK 社区经理', titleColor: '#e67e22', description: 'RuyiSDK 社区经理 一小段话', email: '', github: 'https://github.com/FIFCC' },
+    { id: 3, name: 'xen0n', avatarUrl: 'https://avatars.githubusercontent.com/u/1175567?v=4', title: 'RuyiSDK 技术主管', titleColor: '#9b59b6', description: 'RuyiSDK 技术主管 一小段话', email: '', github: 'https://github.com/xen0n' },
+    { id: 4, name: '狐坂澪夜', avatarUrl: 'https://avatars.githubusercontent.com/u/54651938?v=4', title: 'RuyiSDK 测试经理', titleColor: '#e67e22', description: 'RuyiSDK 测试经理 一小段话', email: '', github: 'https://github.com/weilinfox' },  ];
+  const interns = [ { id: 1, name: 'a1gorhythm7', avatarUrl: 'https://avatars.githubusercontent.com/u/198067605?v=4', title: 'P119', titleColor: '#e67e22', description: '', email: '', github: 'https://github.com/a1gorhythm7' }, 
+    { id: 2, name: 'Cyl18', avatarUrl: 'https://avatars.githubusercontent.com/u/14993992?v=4', title: 'P119', titleColor: '#e67e22', description: '', email: '', github: 'https://github.com/Cyl18/' },];
+  const contributors = [ { id: 1, name: 'ArchFeh', avatarUrl: 'https://avatars.githubusercontent.com/u/16155165?v=4', title: '', titleColor: '#2ecc71', description: '', email: '', github: 'https://github.com/ArchFeh' },
+    { id: 2, name: 'hush-coder', avatarUrl: 'https://avatars.githubusercontent.com/u/190342975?v=4', title: '', titleColor: '#2ecc71', description: '', email: '', github: 'https://github.com/hush-coder' },
+    { id: 3, name: 'Kina', avatarUrl: 'https://avatars.githubusercontent.com/u/76783546?v=4', title: '', titleColor: '#2ecc71', description: '', email: '', github: 'https://github.com/delete-cloud' }, ];
+  const partnersData = [ { id: 1, name: 'Milk-V', logoUrl: 'https://www.fedoravforce.org/partner-logo/milkv.png' }, { id: 2, name: 'Sipeed', logoUrl: 'https://www.fedoravforce.org/partner-logo/sipeed.png' }, { id: 3, name: 'Fedora-V Force', logoUrl: 'https://images.fedoravforce.org/images/fvf-logo.png' }, { id: 4, name: 'openEuler RISC-V sig', logoUrl: 'https://placehold.co/200x80/ffffff/000000?text=openEuler+RISC-V+sig' }, { id: 5, name: 'openKylin', logoUrl: 'https://www.openkylin.top/upload/202209/1664440595.png'}, ];
   const communityGuidelines = `## 我们的承诺
 身为社区成员、贡献者和领袖，我们承诺使社区参与者不受骚扰，无论其年龄、体型、可见或不可见的缺陷、族裔、性征、性别认同和表达、经验水平、教育程度、社会与经济地位、国籍、相貌、种族、种姓、肤色、宗教信仰、性倾向或性取向如何。
 我们承诺以有助于建立开放、友善、多样化、包容、健康社区的方式行事和互动。
@@ -177,12 +181,12 @@ export default function Community() {
             <Persons people={coreTeam} />
           </div>
 
-          <h2 className={styles.sectionHeader}>实习生</h2>
+          <h2 className={styles.sectionHeader}>We ❤️ Interns</h2>
           <div className={styles.glassContainer}>
             <Persons people={interns} />
           </div>
           
-          <h2 className={styles.sectionHeader}>其他贡献者</h2>
+          <h2 className={styles.sectionHeader}>贡献者</h2>
           <div className={styles.glassContainer}>
             <Persons people={contributors} />
           </div>
