@@ -5,91 +5,64 @@
 
 /* --- Keyframe Animations (Unchanged) --- */
 @keyframes blobMove1 {
-  0% {
-    transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
-  }
-  50% {
-    transform: translate(-45%, -55%) scale(1.2) rotate(180deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.1) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) scale(1.1) rotate(0deg); }
+  50% { transform: translate(-45%, -55%) scale(1.2) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1.1) rotate(360deg); }
 }
-
 @keyframes blobMove2 {
-  0% {
-    transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
-  }
-  50% {
-    transform: translate(-55%, -45%) scale(0.9) rotate(180deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.2) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) scale(1.2) rotate(0deg); }
+  50% { transform: translate(-55%, -45%) scale(0.9) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1.2) rotate(360deg); }
 }
-
 @keyframes blobMove3 {
-  0% {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) scale(1.1) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
 }
 
-
-/* --- Main Page Container & Background --- */
+/* --- Main Page Container & Background (Unchanged) --- */
 .pageWrapper {
   position: relative;
-  /* UPDATED: Light and elegant gradient background */
   background: linear-gradient(135deg, #e9e9e9 0%, #EAEFF5 100%);
   padding: 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
     'SF Pro Text', 'Helvetica Neue', sans-serif;
-  /* UPDATED: Dark text color for readability */
   color: #2D3748; 
   overflow: hidden;
 }
 
-/* --- Animated Blobs --- */
+/* --- Animated Blobs (Unchanged) --- */
 .blob {
   position: fixed;
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  filter: blur(90px); /* Increased blur for a softer effect */
+  filter: blur(90px);
   z-index: -1;
 }
-
-/* UPDATED: Soft, elegant pastel colors for the blobs */
 .blob1 {
   width: 450px;
   height: 450px;
-  background: rgba(168, 218, 220, 0.4); /* Soft Teal */
+  background: rgba(168, 218, 220, 0.4);
   opacity: 0.8;
   animation: blobMove1 12s infinite linear;
 }
-
 .blob2 {
   width: 550px;
   height: 550px;
-  background: rgba(221, 190, 221, 0.3); /* Soft Lavender */
+  background: rgba(221, 190, 221, 0.3);
   opacity: 0.6;
   animation: blobMove2 14s infinite linear;
 }
-
 .blob3 {
   width: 350px;
   height: 350px;
-  background: rgba(253, 221, 199, 0.4); /* Soft Peach */
+  background: rgba(253, 221, 199, 0.4);
   opacity: 0.7;
   animation: blobMove3 10s infinite alternate;
 }
 
-/* --- Content Styling --- */
+/* --- Content Styling (Unchanged) --- */
 .contentContainer {
   max-width: 1280px;
   margin-left: auto;
@@ -97,24 +70,18 @@
   position: relative;
   z-index: 1;
 }
-
 .mainHeader {
-  font-size: 3rem; /* 5xl */
+  font-size: 3rem;
   font-weight: bold;
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  /* UPDATED: A deep, elegant color for the main header */
   color: #1A202C; 
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Softer shadow */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 @media (min-width: 768px) {
-  .mainHeader {
-    font-size: 4.5rem; /* 7xl */
-  }
+  .mainHeader { font-size: 4.5rem; }
 }
-
 .sectionHeader {
   font-size: 2.5rem;
   font-weight: bold;
@@ -122,62 +89,271 @@
   margin-top: 3rem;
   margin-bottom: 2rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  /* UPDATED: Dark text for section headers */
   color: #2D3748;
 }
 
-/* --- Glassmorphism Container --- */
+/* --- Glassmorphism Container (Unchanged) --- */
 .glassContainer {
-  /* UPDATED: Adjusted for light background */
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-radius: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15); /* Softer, more subtle shadow */
+  box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15);
   padding: 2rem;
   position: relative;
   z-index: 1;
 }
 
-/* --- Person Cards --- */
-.personsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
 
+/* --- Grid Layouts for People Sections (Unchanged) --- */
+.coreGrid, .internGrid, .contributorGrid {
+    display: grid;
+    gap: 2rem;
+    align-content: start;
+}
+.coreGrid {
+    grid-template-columns: 1fr;
+}
+@media (min-width: 1200px) { /* Changed breakpoint for better fit */
+    .coreGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.internGrid {
+    grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+    .internGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 @media (min-width: 1024px) {
-  .personsGrid {
-    grid-template-columns: 1fr 1fr;
-  }
+    .internGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.contributorGrid {
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px) {
+    .contributorGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .contributorGrid {
+        grid-template-columns: repeat(6, 1fr);
+    }
 }
 
-.personCardInner {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  /* UPDATED: A slightly more opaque white for better contrast */
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  color: black;
+
+/* --- Avatar Styles (Unchanged) --- */
+.avatarWrapper {
+    position: relative;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: visible;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.avatarImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.githubIconOnAvatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #1A202C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    transition: transform 0.2s ease-in-out;
+}
+.githubIconOnAvatar:hover {
+    transform: scale(1.1);
+}
+.githubIconSvg {
+    color: white;
+    stroke-width: 2;
 }
 
-.personCardInner:hover {
-  transform: translateY(-5px) scale(1.01);
+
+/* --- Card-Specific Styles (Core Member Card Updated) --- */
+
+/* 1. Core Member Card -- UPDATED for 2-column layout */
+.coreMemberCard {
+    display: flex;
+    flex-direction: column; /* Stacks on mobile by default */
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+@media (min-width: 768px) {
+    .coreMemberCard {
+        flex-direction: row; /* Side-by-side on desktop */
+        align-items: center; /* Vertically align columns */
+        gap: 2rem;
+        padding: 2rem;
+    }
+}
+.coreMemberCard:hover {
+  transform: translateY(-5px);
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.15);
+  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.1);
+}
+/* New Left Column for Avatar/Name/Title */
+.coreMemberLeftColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+@media (min-width: 768px) {
+    .coreMemberLeftColumn {
+        flex-basis: 12rem; /* Give it a fixed base width */
+    }
+}
+.avatarLarge {
+    width: 10rem; 
+    height: 10rem;
+}
+.coreMemberHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.mailIconLink {
+    color: #4A5568;
+    transition: transform 0.2s, color 0.2s;
+}
+.mailIconLink:hover {
+    transform: scale(1.1);
+    color: #007aff;
+}
+.personName {
+    font-size: 1.5rem; /* Adjusted for new layout */
+    font-weight: bold;
+    color: #2D3748;
+    text-align: center;
+}
+.personTitle {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+}
+/* Updated Description Style */
+.personDescription {
+    margin: 0;
+    color: #1A202C; /* Darker, blacker font */
+    font-size: 1.125rem; /* Bigger font */
+    line-height: 1.7; 
+    text-align: center; /* Centered on mobile */
+    font-weight: 400;
+    flex: 1; /* Allow it to take remaining space */
+}
+@media (min-width: 768px) {
+    .personDescription {
+        text-align: left; /* Left-aligned on desktop */
+    }
 }
 
-/* --- Community Intro & Button --- */
+
+/* 2. Intern Card (Unchanged) */
+.internCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+.internCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.1);
+}
+.avatarMedium {
+    width: 8rem;
+    height: 8rem;
+}
+.internInfo {
+    text-align: center;
+    margin-top: 1rem;
+}
+.personNameSmall {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2D3748;
+}
+.personTitleSmall {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.125rem 0.6rem;
+    border-radius: 9999px;
+    margin: 0.5rem auto;
+    display: inline-block;
+}
+.personDescriptionSmall {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* 3. Contributor Card (Unchanged) */
+.contributorCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 0.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.contributorCard:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 15px rgba(100, 108, 120, 0.1);
+}
+.avatarSmall {
+    width: 5rem;
+    height: 5rem;
+}
+.contributorName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+}
+
+
+/* --- Community Intro & Button (Unchanged) --- */
 .communityIntro {
   text-align: center;
   margin-bottom: 3rem;
 }
-
 .appleButton {
   background-color: #007aff;
   color: white;
@@ -189,14 +365,14 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
-
 .appleButton:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-/* --- Partners Section --- */
+/* --- Partners Section (Unchanged) --- */
 .partnersGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -217,13 +393,13 @@
   transform: scale(1.05);
 }
 .partnerLogo {
-  height: 5rem; /* 80px */
+  height: 5rem;
   object-fit: contain;
 }
 
-/* --- Text/Markdown Renderer --- */
+/* --- Text/Markdown Renderer (Unchanged) --- */
 .textContainer {
-  font-size: 1.125rem; /* text-lg */
-  line-height: 1.75; /* leading-relaxed */
-  color: #4A5568; /* Default text color */
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #4A5568;
 }
