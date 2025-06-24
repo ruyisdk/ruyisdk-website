@@ -89,10 +89,20 @@ const NewsShowcase = () => {
           height: calc(37.5rem + 2rem); /* 600px + 32px */
           gap: 1rem;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-          margin: 0;
+          margin: 0 auto; /* Added for centering */
           padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
           background-color: #f5f5f7;
         }
+
+        /* New media query for very wide screens */
+        @media (min-width: 90rem) { /* 1440px or adjust as needed */
+          .newsshowcase-container {
+            max-width: 90rem; /* For example, 1440px */
+            border-radius: 0.625rem; /* 10px - Optional: to make it look like a contained block */
+            box-shadow: 0 0.5rem 1.875rem rgba(255, 255, 255, 0); /* Optional: subtle shadow */
+          }
+        }
+
         .newsshowcase-sidebar {
           width: 20rem; /* 320px */
           height: 37.5rem; /* 600px */
@@ -223,23 +233,22 @@ const NewsShowcase = () => {
             flex-direction: column;
             height: auto;
             padding: 1rem;
+            max-width: 100%; /* Ensure it uses full width on mobile */
           }
           .newsshowcase-sidebar, .newsshowcase-main {
-            /* Sidebar and main content area are hidden on mobile, replaced by accordion */
             display: none;
           }
-          /* Styles for accordion view on mobile */
-          .accordion-wrapper { /* Added a wrapper for accordion items if needed, or apply to container */
+          .accordion-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 1rem; /* Consistent gap for accordion items */
+            gap: 1rem;
           }
           .accordion-item {
-            margin-bottom: 1rem; /* This might be redundant if accordion-wrapper has gap */
-            border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
-            border-radius: 0.625rem; /* 10px */
+            margin-bottom: 1rem;
+            border: 0.0625rem solid rgba(230, 230, 230, 1);
+            border-radius: 0.625rem;
             overflow: hidden;
-            background: white; /* Added background to item for consistent look */
+            background: white;
           }
           .accordion-title {
             padding: 1rem;
@@ -249,8 +258,8 @@ const NewsShowcase = () => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500; /* Match sidebar item weight */
-            color: #1d1d1f; /* Match sidebar item color */
+            font-weight: 500;
+            color: #1d1d1f;
           }
           .accordion-title.active {
             background: #002677;
@@ -260,7 +269,7 @@ const NewsShowcase = () => {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            background: white; /* Ensure content area has background */
+            background: white;
           }
           .accordion-content.expanded {
             max-height: 62.5rem; /* 1000px, for ample space */
@@ -268,31 +277,31 @@ const NewsShowcase = () => {
           .accordion-content .newsshowcase-card {
             box-shadow: none;
             border: none;
-            border-radius: 0; /* Remove radius if it's inside an already rounded item */
+            border-radius: 0;
             margin: 0;
           }
           .accordion-content .newsshowcase-image {
             height: 12.5rem; /* 200px */
-            border-radius: 0; /* No specific radius needed if card is not rounded */
+            border-radius: 0;
           }
           .accordion-content .newsshowcase-content {
             padding: 1rem;
           }
           .accordion-content .newsshowcase-card-title {
-            font-size: 1.5rem; /* Slightly smaller for accordion */
+            font-size: 1.5rem;
           }
           .accordion-content .newsshowcase-description {
-            font-size: 0.875rem; /* Slightly smaller for accordion */
+            font-size: 0.875rem;
           }
           .accordion-content .newsshowcase-link-indicator {
-            position: static; /* Displayed in flow */
+            position: static;
             opacity: 1;
             transform: none;
             margin-top: 1rem;
-            justify-content: center; /* Center the button */
-            width: fit-content; /* Allow button to size to content */
-            margin-left: auto;   /* Center align if needed */
-            margin-right: auto;  /* Center align if needed */
+            justify-content: center;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
           }
         }
       `}</style>
@@ -355,10 +364,6 @@ const NewsShowcase = () => {
                 <div className="newsshowcase-card" onClick={() => handleCardClick(news.link)}>
                   <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile`})} className="newsshowcase-image" />
                   <div className="newsshowcase-content">
-                    {/* Titles and descriptions are already in the accordion title for brevity,
-                        but can be repeated or summarized here if design prefers.
-                        For this example, keeping the card content consistent.
-                    */}
                     <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
                     <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
                     <div className="newsshowcase-link-indicator">
