@@ -187,7 +187,7 @@ export default function Community() {
         }
 
         // --- Load Community Guidelines Markdown ---
-        const mdFilesBaseDir = '/markdown_content/'; // Ensure this matches your static folder
+        const mdFilesBaseDir = '/text/'; // Ensure this matches your static folder
         const mdPublicUrl = `${mdFilesBaseDir}community_guidelines_${detectedLocale}.md`;
 
         console.log('Attempting to fetch markdown from public URL:', mdPublicUrl);
