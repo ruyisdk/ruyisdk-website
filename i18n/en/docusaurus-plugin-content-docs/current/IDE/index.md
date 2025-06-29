@@ -16,6 +16,11 @@ RuyiSDK IDE download address: https://mirror.iscas.ac.cn/ruyisdk/ide
 
 Download the latest version of the IDE from the above address, ensuring to select the installation package that matches your architecture. If you intend to develop in an x86_64 environment, download the latest version of the `linux.gtk.x86_64.tar.gz` package; if you wish to develop on an ARM device, download the `linux.gtk.aarch64.tar.gz` package; and if you want to run it on a RISC-V device, download the `linux.gtk.riscv64.tar.gz` package.
 
+In addition to the IDE itself, you will need to install the RuyiSDK IDE plugin. Currently, integration work is still in progress, so the plugin must be installed manually by copying it into the dropins directory of the RuyiSDK IDE. We plan to improve this experience in future releases to enable easier installation and usage. You can follow the steps below to install and use the plugin:
+
++ Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest)
++ Extract the `org.ruyisdk.ide_*.zip` archive into the `dropins` directory inside your RuyiSDK IDE installation path
+
 ### Launch IDE
 
 After decompressing, execute `./ruyisdk` in the command line to launch RuyiSDK IDE.
