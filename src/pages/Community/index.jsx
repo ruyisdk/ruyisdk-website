@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
 import styles from './community.module.css';
-import peopleData from './peoples.json'; // Import data from the JSON file
-import Translate, { translate } from '@docusaurus/Translate'; // Import Translate
+import Translate, { translate } from '@docusaurus/Translate';
 
 // --- Portal Component for Background Blobs (Unchanged) ---
 const BackgroundBlobs = () => {
@@ -40,7 +39,7 @@ const GithubIcon = ({ className, size = 24 }) => (
     </svg>
 );
 
-// --- Person Cards (CoreMemberCard unchanged) ---
+// --- Person Cards (Unchanged, but will now receive translated props) ---
 
 const AvatarWithGithub = ({ avatarUrl, name, githubUrl, sizeClass = '' }) => (
     <div className={`${styles.avatarWrapper} ${sizeClass}`}>
@@ -160,6 +159,8 @@ export default function Community() {
     ];
 
     const [communityGuidelines, setCommunityGuidelines] = useState('');
+    // Initialize peopleData with a structure that prevents errors before data loads
+    const [peopleData, setPeopleData] = useState({ coreTeam: [], interns: [], contributors: [] });
 
     useEffect(() => {
         if (typeof window === 'undefined') {
@@ -167,42 +168,34 @@ export default function Community() {
             return;
         }
 
-        let detectedLocale = 'en'; // Initialize with a default that is NOT your defaultLocale to easily spot issues
-        const pathParts = window.location.pathname.split('/').filter(Boolean); // Filter(Boolean) removes empty strings
-
-        console.group('Locale Detection Debugging');
-        console.log('Full Pathname:', window.location.pathname);
-        console.log('Filtered Path Parts:', pathParts); // e.g., ['community'] or ['zh-Hans', 'community']
-        
+        let detectedLocale = 'en'; // Initialize with a default.
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
         const configuredLocales = ['zh-Hans', 'en', 'de'];
-        const defaultSiteLocale = 'zh-Hans'; // Get this from docusaurus.config.js defaultLocale
+        const defaultSiteLocale = 'zh-Hans'; // From your docusaurus.config.js
+
+        // --- Determine Locale ---
+        console.group('Locale & Data Loading Debugging');
+        console.log('Full Pathname:', window.location.pathname);
+        console.log('Filtered Path Parts:', pathParts);
 
         if (pathParts.length > 0 && configuredLocales.includes(pathParts[0])) {
-            // Case 1: URL has a locale prefix (e.g., /en/community, /zh-Hans/community)
             detectedLocale = pathParts[0];
-            console.log('Case 1: Locale detected from URL prefix:', detectedLocale);
+            console.log('Locale detected from URL prefix:', detectedLocale);
         } else {
-            // Case 2: No explicit locale prefix in URL (e.g., /community).
-            // This URL structure implies the site's defaultLocale.
             detectedLocale = defaultSiteLocale;
-            console.log('Case 2: No explicit locale prefix in URL. Using site defaultLocale:', detectedLocale);
+            console.log('No explicit locale prefix. Using site defaultLocale:', detectedLocale);
         }
-        console.groupEnd(); // End of debug group
 
-        // --- Important Note on File Path ---
-        // You reported seeing `/text/community_guidelines_en.md` in the console before.
-        // If your markdown files are actually in `static/text/` then adjust the `mdFilesBaseDir` below.
-        // Based on previous instructions, they should be in `static/markdown_content/`.
-        const mdFilesBaseDir = '/text/'; // 
-
+        // --- Load Community Guidelines Markdown ---
+        const mdFilesBaseDir = '/markdown_content/'; // Ensure this matches your static folder
         const mdPublicUrl = `${mdFilesBaseDir}community_guidelines_${detectedLocale}.md`;
 
-        console.log('Final URL for markdown fetch:', mdPublicUrl);
+        console.log('Attempting to fetch markdown from public URL:', mdPublicUrl);
 
         fetch(mdPublicUrl)
             .then(response => {
                 if (!response.ok) {
-                    console.error('Fetch Error: HTTP status not OK.', {
+                    console.error('Markdown Fetch Error: HTTP status not OK.', {
                         url: response.url,
                         status: response.status,
                         statusText: response.statusText,
@@ -212,13 +205,37 @@ export default function Community() {
                 return response.text();
             })
             .then(text => {
-                console.log('Markdown content fetched successfully. First 100 chars:', text.substring(0, Math.min(text.length, 100)) + (text.length > 100 ? '...' : ''));
+                console.log('Markdown content fetched successfully (first 100 chars):', text.substring(0, Math.min(text.length, 100)) + (text.length > 100 ? '...' : ''));
                 setCommunityGuidelines(text);
             })
             .catch(error => {
                 console.error('Error fetching markdown file:', error);
-                setCommunityGuidelines(`Error loading guidelines: ${error.message}. Please check console for details.`);
+                setCommunityGuidelines(`Error loading guidelines: ${error.message}. Please check console.`);
             });
+
+        // --- Load Peoples JSON Data ---
+        let peopleJsonModule;
+        try {
+            switch (detectedLocale) {
+                case 'zh-Hans':
+                    peopleJsonModule = require('./peoples_zh-Hans.json');
+                    break;
+                case 'de':
+                    peopleJsonModule = require('./peoples_de.json');
+                    break;
+                case 'en':
+                default:
+                    peopleJsonModule = require('./peoples_en.json');
+                    break;
+            }
+            console.log('People data loaded successfully for locale:', detectedLocale, peopleJsonModule);
+            setPeopleData(peopleJsonModule);
+        } catch (error) {
+            console.error('Error loading peoples JSON file for locale:', detectedLocale, error);
+            // Fallback to a default empty structure if loading fails
+            setPeopleData({ coreTeam: [], interns: [], contributors: [] });
+        }
+        console.groupEnd(); // End of debug group
 
     }, []); // Empty dependency array: runs once after initial render on client
 
@@ -234,16 +251,19 @@ export default function Community() {
 
                     <h2 className={styles.sectionHeader}><Translate>核心小组</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.coreGrid}`}>
+                        {/* Ensure peopleData.coreTeam is an array before mapping */}
                         {peopleData.coreTeam.map(person => <CoreMemberCard key={person.id} person={person} />)}
                     </div>
 
                     <h2 className={styles.sectionHeader}><Translate>We ❤️ Interns</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.internGrid}`}>
+                        {/* Ensure peopleData.interns is an array before mapping */}
                         {peopleData.interns.map(person => <InternCard key={person.id} person={person} />)}
                     </div>
 
                     <h2 className={styles.sectionHeader}><Translate>贡献者</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.contributorGrid}`}>
+                        {/* Ensure peopleData.contributors is an array before mapping */}
                         {peopleData.contributors.map(person => <ContributorCard key={person.id} person={person} />)}
                     </div>
 
@@ -251,7 +271,6 @@ export default function Community() {
                     <Partners partners={partnersData} />
 
                     <h2 className={styles.sectionHeader}><Translate>贡献者公约</Translate></h2>
-                    {/* Display loading message or the content */}
                     {communityGuidelines ? <Text markdownContent={communityGuidelines} /> : <p>Loading community guidelines...</p>}
                 </div>
             </div>
