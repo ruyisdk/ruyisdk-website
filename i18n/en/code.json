@@ -110,11 +110,11 @@
   },
   "theme.docs.versions.unreleasedVersionLabel": {
     "message": "This is unreleased documentation for {siteTitle} {versionLabel} version.",
-    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+    "description": "The label used to tell the user that he's Browse an unreleased doc version"
   },
   "theme.docs.versions.unmaintainedVersionLabel": {
     "message": "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained.",
-    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+    "description": "The label used to tell the user that he's Browse an unmaintained doc version"
   },
   "theme.docs.versions.latestVersionSuggestionLabel": {
     "message": "For up-to-date documentation, see the {latestVersionLink} ({versionLabel}).",
@@ -468,5 +468,32 @@
   },
   "最后更新时间": {
     "message": "Last Update"
+  },
+  "We ❤️ Interns": {
+    "message": "We ❤️ Interns"
+  },
+  "核心小组": {
+    "message": "Core Team"
+  },
+  "贡献者": {
+    "message": "Contributors"
+  },
+  "合作伙伴": {
+    "message": "Partners"
+  },
+  "贡献者公约": {
+    "message": "Contributor Covenant"
+  },
+  "We ❤ You ❤ Ruyi": {
+    "message": "We ❤️ You ❤️ Ruyi"
+  },
+  "Loading community guidelines...": {
+    "message": "Loading community guidelines..."
+  },
+  "Error loading guidelines. Please check console for network issues.": {
+    "message": "Error loading guidelines. Please check console for network issues."
+  },
+  "Error loading guidelines: Unexpected content type.": {
+    "message": "Error loading guidelines: Unexpected content type."
   }
 }
