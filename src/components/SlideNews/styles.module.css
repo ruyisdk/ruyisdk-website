@@ -5,14 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* New wrapper for the entire SlideNews section to control its background */
+.slideNewsSectionWrapper {
+  background-color: #f5f5f7; /* Light gray for the entire section */
+  padding: 1rem 0; /* Add vertical padding here instead of on verticalSlideContainer */
+  display: flex; /* Use flex to center the content horizontally */
+  justify-content: center; /* Center the verticalSlideContainer */
+  width: 100%; /* Ensure it spans full width */
+}
+
 .verticalSlideContainer {
   display: flex;
   flex-direction: column;
   gap: 1rem; /* 16px */
-  margin: 0;
-  padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
+  margin: 0; /* Remove auto margins as centering is now handled by the wrapper */
+  padding: 0 2rem; /* Keep horizontal padding for internal content, remove vertical */
   position: relative;
-  background-color: #f5f5f7; /* Light gray background from RuyiInLive */
+  /* background-color: #f5f5f7; <-- REMOVE THIS, it's now on the wrapper */
+  width: 100%; /* Ensure it takes full width initially up to max-width */
+}
+
+/* New class for max-width on very wide screens */
+.maxWidthContainer {
+  max-width: 90rem; /* 1440px - Adjust this value as needed */
+  width: 100%; /* Ensure it respects the max-width and still takes 100% of available space below it */
 }
 
 .smallCardsRow {
@@ -315,9 +331,14 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-  .verticalSlideContainer {
-    padding: 0.5rem 1rem 1rem;
+  .slideNewsSectionWrapper {
+    padding: 0.5rem 0; /* Adjust vertical padding for mobile if needed */
   }
+
+  .verticalSlideContainer {
+    padding: 0 1rem; /* Adjusted horizontal padding for mobile */
+  }
+
   .expandedCardOverlay {
     padding: 1rem;
   }
@@ -375,7 +396,7 @@
 
 @media (max-width: 480px) {
   .verticalSlideContainer {
-    padding: 0.5rem 0.75rem 1rem; /* 8px 12px 16px */
+    padding: 0 0.75rem; /* 8px 12px 16px */
   }
   .content {
     padding: 1rem; /* 16px */

@@ -72,17 +72,24 @@ export default function SlideNews() {
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
   });
+  // New state for very wide screens
+  const [isVeryWideScreen, setIsVeryWideScreen] = useState(false);
 
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
+      const currentWidth = window.innerWidth;
       setWindowSize({
-        width: window.innerWidth,
+        width: currentWidth,
       });
+      // Define your "very wide screen" breakpoint here, e.g., 1440px
+      setIsVeryWideScreen(currentWidth >= 1440);
     };
 
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', handleResize);
+      // Call once initially to set the correct state
+      handleResize();
       return () => window.removeEventListener('resize', handleResize);
     }
   }, []);
@@ -94,7 +101,7 @@ export default function SlideNews() {
         setExpandedCardIndex(null);
       }
     };
-    
+
     if (typeof window !== 'undefined') {
       window.addEventListener('keydown', handleEscKey);
       return () => window.removeEventListener('keydown', handleEscKey);
@@ -108,11 +115,12 @@ export default function SlideNews() {
     } else if (typeof document !== 'undefined') {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       if (typeof document !== 'undefined') {
         document.body.style.overflow = '';
       }
+      return undefined; // Add this return statement
     };
   }, [expandedCardIndex]);
 
@@ -121,7 +129,7 @@ export default function SlideNews() {
     const isMobile = windowSize.width < 768;
     let result = [];
     let currentSmallCards = [];
-    
+
     // Process all cards
     slideImages.forEach((card, index) => {
       // On mobile, all cards are full width
@@ -133,7 +141,7 @@ export default function SlideNews() {
         });
         return;
       }
-      
+
       // On desktop, handle according to size
       switch (card.size) {
         case CardSizes.L:
@@ -151,7 +159,7 @@ export default function SlideNews() {
             index
           });
           break;
-          
+
         case CardSizes.M:
           // Before adding a medium card, flush any pending small cards
           if (currentSmallCards.length > 0) {
@@ -167,7 +175,7 @@ export default function SlideNews() {
             index
           });
           break;
-          
+
         case CardSizes.S:
           // Collect small cards
           currentSmallCards.push({
@@ -175,7 +183,7 @@ export default function SlideNews() {
             layoutClass: styles.cardSmall,
             index
           });
-          
+
           // If we have 2 small cards, add them as a row
           if (currentSmallCards.length === 2) {
             result.push({
@@ -185,7 +193,7 @@ export default function SlideNews() {
             currentSmallCards = [];
           }
           break;
-          
+
         default:
           // Treat as medium if size not specified
           if (currentSmallCards.length > 0) {
@@ -202,7 +210,7 @@ export default function SlideNews() {
           });
       }
     });
-    
+
     // Add any remaining small cards
     if (currentSmallCards.length > 0) {
       result.push({
@@ -210,7 +218,7 @@ export default function SlideNews() {
         cards: [...currentSmallCards]
       });
     }
-    
+
     return result;
   };
 
@@ -219,14 +227,14 @@ export default function SlideNews() {
   // Handler for card click - only process popup if ispopup is true
   const handleCardClick = (index, event) => {
     // Prevent expanding if clicked on a link that should navigate away
-    if (event.target.tagName === 'A' || 
+    if (event.target.tagName === 'A' ||
         event.target.parentElement.tagName === 'A') {
       // Check if the link is inside a card that is NOT a popup trigger
       if (!slideImages[index].ispopup) {
           return;
       }
     }
-    
+
     // Only show popup if ispopup is true
     if (slideImages[index].ispopup) {
       setExpandedCardIndex(index);
@@ -248,18 +256,18 @@ export default function SlideNews() {
   // Render a single card
   const renderCard = (card) => {
     // Create the correct card background classes based on blur setting
-    const backgroundClassName = card.isBlur 
+    const backgroundClassName = card.isBlur
       ? `${styles.slideBackground} ${styles.blurredBackground}`
       : styles.slideBackground;
 
     // Determine if card should have clickable styling
-    const cardClassName = card.ispopup 
+    const cardClassName = card.ispopup
       ? `${card.layoutClass} ${styles.clickableCard}`
       : card.layoutClass;
 
     return (
-      <div 
-        key={card.index} 
+      <div
+        key={card.index}
         className={cardClassName}
         onClick={(e) => handleCardClick(card.index, e)}
         style={{
@@ -272,9 +280,9 @@ export default function SlideNews() {
             backgroundImage: `url(${card.Image})`,
           }}
         />
-        
+
         <div className={styles.content}>
-          <h1 
+          <h1
             className={styles.title}
             style={{
               color: card.titleColor || "#ffffff",
@@ -282,7 +290,7 @@ export default function SlideNews() {
           >
             {card.title}
           </h1>
-          <h2 
+          <h2
             className={styles.subtitle}
             style={{
               color: card.subtitleColor || "#f0f0f0",
@@ -318,56 +326,59 @@ export default function SlideNews() {
 
   return (
     <>
-      <div className={styles.verticalSlideContainer}>
-        {organizedCards.map((item, i) => {
-          // For regular cards
-          if (!item.type) {
-            return renderCard(item);
-          }
-          
-          // For rows of small cards
-          if (item.type === 'smallRow') {
-            return (
-              <div key={`row-${i}`} className={styles.smallCardsRow}>
-                {item.cards.map(card => renderCard(card))}
-              </div>
-            );
-          }
-          
-          return null;
-        })}
+      {/* New wrapper div for the light grey background */}
+      <div className={styles.slideNewsSectionWrapper}>
+        <div className={`${styles.verticalSlideContainer} ${isVeryWideScreen ? styles.maxWidthContainer : ''}`}>
+          {organizedCards.map((item, i) => {
+            // For regular cards
+            if (!item.type) {
+              return renderCard(item);
+            }
+
+            // For rows of small cards
+            if (item.type === 'smallRow') {
+              return (
+                <div key={`row-${i}`} className={styles.smallCardsRow}>
+                  {item.cards.map(card => renderCard(card))}
+                </div>
+              );
+            }
+
+            return null;
+          })}
+        </div>
       </div>
 
       {/* Expanded Card Modal */}
       {expandedCardIndex !== null && (
-        <div 
+        <div
           className={styles.expandedCardOverlay}
           onClick={handleOverlayClick}
         >
-          <div 
+          <div
             className={styles.expandedCard}
             style={{
               backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
             }}
           >
             <div className={styles.expandedCardImageOverlay} />
-            <button 
-              className={styles.closeButton} 
+            <button
+              className={styles.closeButton}
               onClick={handleCloseExpandedCard}
               aria-label="Close"
             >
               ×
             </button>
-            
+
             <div className={styles.expandedCardContent}>
               <h1 className={styles.expandedCardTitle}>
                 {slideImages[expandedCardIndex].title}
               </h1>
-              
+
               <h2 className={styles.expandedCardSubtitle}>
                 {slideImages[expandedCardIndex].subtitle}
               </h2>
-              
+
               {slideImages[expandedCardIndex].content && (
                 <div className={styles.expandedCardDescription}>
                   {slideImages[expandedCardIndex].content.split('\n\n').map((paragraph, i) => (
@@ -375,10 +386,10 @@ export default function SlideNews() {
                   ))}
                 </div>
               )}
-              
+
               <div className={styles.expandedCardButtons}>
-                <a 
-                  href={slideImages[expandedCardIndex].Links} 
+                <a
+                  href={slideImages[expandedCardIndex].Links}
                   className={styles.primaryButton}
                   target="_blank"
                   rel="noopener noreferrer"

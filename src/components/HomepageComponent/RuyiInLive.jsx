@@ -51,6 +51,7 @@ const RuyiInLive = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(false); // New state for wide screen
 
   const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
   const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
@@ -70,7 +71,10 @@ const RuyiInLive = () => {
   };
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsWideScreen(window.innerWidth >= 1440); // Set breakpoint for wide screen (e.g., 1440px)
+    };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -125,6 +129,20 @@ const RuyiInLive = () => {
   }, [data]);
 
   const styles = {
+    outerContainer: {
+      display: 'flex',
+      overflowX: 'auto',
+      width: '100%',
+      gap: '1rem',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
+      margin: '0 auto', /* Added for centering */
+      padding: '0rem 0rem 0rem', /* 8px 32px 24px */
+      backgroundColor: '#f5f5f7',
+      // Added styles for wide screen
+      maxWidth: isWideScreen ? '90rem' : '100%', // 1440px or adjust as needed
+      borderRadius: isWideScreen ? '0.625rem' : '0', // 10px
+      boxShadow: 'none', // Changed this line from 'isWideScreen ? '0 0.5rem 1.875rem rgba(0, 0, 0, 0.05)' : 'none'' to 'none'
+    },
     background: {
       width: '100%',
       height: '100%',
@@ -144,7 +162,6 @@ const RuyiInLive = () => {
       backgroundColor: colors.lightGray,
       borderRadius: '0.75rem',
       overflow: 'hidden',
-      boxShadow: '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)',
       color: colors.textDark,
       margin: '0 auto 1rem auto',
     },
@@ -367,97 +384,99 @@ const RuyiInLive = () => {
   );
 
   return (
-    <div style={styles.background}>
-      <div style={styles.container}>
-        <div style={styles.leftPanel}>
-          <h1 style={styles.title}>
-            <Translate>RuyiSDK 社区</Translate>
-          </h1>
-          <p style={styles.subtitle}>
-            <Translate>RuyiSDK 社区讨论板块现已开启</Translate>
-          </p>
-          <div style={styles.buttonContainer}>
-            <a
-              href="https://github.com/ruyisdk/ruyisdk/discussions/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={discussButtonStyle}
-              onMouseEnter={() => setIsDiscussButtonHovered(true)}
-              onMouseLeave={() => setIsDiscussButtonHovered(false)}
-            >
-              <UsersIcon />
-              <Translate>讨论组</Translate>
-            </a>
-            <a
-              href="https://github.com/ruyisdk"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={sourceButtonStyle}
-              onMouseEnter={() => setIsSourceButtonHovered(true)}
-              onMouseLeave={() => setIsSourceButtonHovered(false)}
-            >
-              <GithubIcon />
-              <Translate>源码库</Translate>
-            </a>
-          </div>
-          <div style={styles.leftPanelAccent}></div>
-        </div>
-
-        <div style={styles.rightPanel}>
-          <div style={styles.chartContainer}>
-            <h2 style={styles.chartTitle}>
+    <div style={styles.outerContainer}>
+      <div style={styles.background}>
+        <div style={styles.container}>
+          <div style={styles.leftPanel}>
+            <h1 style={styles.title}>
+              <Translate>RuyiSDK 社区</Translate>
+            </h1>
+            <p style={styles.subtitle}>
+              <Translate>RuyiSDK 社区讨论板块现已开启</Translate>
+            </p>
+            <div style={styles.buttonContainer}>
               <a
-                href="/Home/StatisticalDataPages"
-                style={{ color: 'inherit', textDecoration: 'none' }}
+                href="https://github.com/ruyisdk/ruyisdk/discussions/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={discussButtonStyle}
+                onMouseEnter={() => setIsDiscussButtonHovered(true)}
+                onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
-                <Translate>大家都在用</Translate>
+                <UsersIcon />
+                <Translate>讨论组</Translate>
               </a>
-            </h2>
+              <a
+                href="https://github.com/ruyisdk"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={sourceButtonStyle}
+                onMouseEnter={() => setIsSourceButtonHovered(true)}
+                onMouseLeave={() => setIsSourceButtonHovered(false)}
+              >
+                <GithubIcon />
+                <Translate>源码库</Translate>
+              </a>
+            </div>
+            <div style={styles.leftPanelAccent}></div>
+          </div>
 
-            {loading ? (
-              <>
+          <div style={styles.rightPanel}>
+            <div style={styles.chartContainer}>
+              <h2 style={styles.chartTitle}>
+                <a
+                  href="/Home/StatisticalDataPages"
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                >
+                  <Translate>大家都在用</Translate>
+                </a>
+              </h2>
+
+              {loading ? (
+                <>
+                  <PlaceholderChart />
+                  <div style={styles.loadingText}>
+                    <Translate>Loading...</Translate>
+                  </div>
+                </>
+              ) : error ? (
                 <PlaceholderChart />
-                <div style={styles.loadingText}>
-                  <Translate>Loading...</Translate>
-                </div>
-              </>
-            ) : error ? (
-              <PlaceholderChart />
-            ) : barData.length > 0 ? (
-              <div style={styles.chartWrapper}>
-                <div style={styles.nativeChart}>
-                  {barData.map((item) => {
-                    const maxValue = getMaxValue(barData);
-                    const barWidth =
-                      maxValue > 0 ? (item.total / maxValue) * 100 : 0;
-                    return (
-                      <div key={item.action} style={styles.nativeChartRow}>
-                        <div style={styles.nativeChartBarOuter}>
-                          <div
-                            style={{
-                              ...styles.nativeChartBarInner,
-                              width: `${barWidth}%`,
-                              backgroundColor: colors.navyBlue,
-                            }}
-                          >
-                            <span
-                              style={styles.nativeChartActionLabelInsideBar}
-                              title={item.action}
+              ) : barData.length > 0 ? (
+                <div style={styles.chartWrapper}>
+                  <div style={styles.nativeChart}>
+                    {barData.map((item) => {
+                      const maxValue = getMaxValue(barData);
+                      const barWidth =
+                        maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+                      return (
+                        <div key={item.action} style={styles.nativeChartRow}>
+                          <div style={styles.nativeChartBarOuter}>
+                            <div
+                              style={{
+                                ...styles.nativeChartBarInner,
+                                width: `${barWidth}%`,
+                                backgroundColor: colors.navyBlue,
+                              }}
                             >
-                              {item.action}
-                            </span>
+                              <span
+                                style={styles.nativeChartActionLabelInsideBar}
+                                title={item.action}
+                              >
+                                {item.action}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div style={styles.emptyDataText}>
-                <Translate>No statistical data available currently.</Translate>
-              </div>
-            )}
+              ) : (
+                <div style={styles.emptyDataText}>
+                  <Translate>No statistical data available currently.</Translate>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
