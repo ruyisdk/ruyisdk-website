@@ -108,8 +108,8 @@
   --home-feature-background-2: #e1eefc;
   --home-feature-background-3: #d4f3e7;
   --home-border: #e5e7eb;
-  --home-background: #fff;
-  --home-secondary-background: #f6f7f9;
+  --home-background: #f5f5f7;
+  --home-secondary-background: #f5f5f7;
   --home-text: #1c1e21;
   --home-code-red: #d73a49;
   --home-code-purple: #6f42c1;
@@ -186,6 +186,10 @@ html[data-theme="dark"] {
 // :root {
 //   --doc-sidebar-width: 266px !important;
 // }
+
+body {
+  background-color: #f5f5f7;
+}
 
 ::marker {
   color: var(--ifm-font-color-secondary);
