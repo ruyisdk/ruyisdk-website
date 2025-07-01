@@ -27,7 +27,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
     'SF Pro Text', 'Helvetica Neue', sans-serif;
   color: #2D3748; 
-  overflow: hidden; /* Contains the page blobs */
+  overflow: hidden;
 }
 
 /* Full page background blobs */
@@ -98,22 +98,22 @@
 /* --- CommunityIntro Component Styling --- */
 .communityIntro {
   display: flex;
-  flex-direction: column; /* Mobile-first: stacks columns */
+  flex-direction: column; 
   margin-bottom: 3rem;
-  overflow: hidden; /* Crucial to clip children to the rounded border */
-  padding: 0; /* Override default glassContainer padding */
+  overflow: hidden; 
+  padding: 0; 
 }
 @media (min-width: 996px) {
   .communityIntro {
-    flex-direction: row; /* Side-by-side on desktop */
+    flex-direction: row; 
   }
 }
 
 .communityIntroLeft {
   flex: 1;
-  position: relative; /* Crucial for containing the blobs */
-  overflow: hidden;   /* Also crucial */
-  background-color: #F8F3E2; /* creamBeige */
+  position: relative; 
+  overflow: hidden;   
+  background-color: #F8F3E2; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,7 +123,7 @@
 }
 
 .communityIntroRight {
-  flex: 1.5; /* Takes more space */
+  flex: 1.5; 
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@
 .communityIntroTitle {
   font-size: 2.25rem;
   font-weight: bold;
-  color: #002677; /* navyBlue */
+  color: #002677; 
   text-align: center;
   position: relative; 
   z-index: 2;
@@ -148,7 +148,7 @@
 }
 
 .communityIntroText {
-  color: #86868B; /* textGray */
+  color: #86868B; 
   font-size: 1.1rem;
   line-height: 1.7;
   text-align: center;
@@ -171,7 +171,7 @@
   height: 250px;
   top: 0;
   left: 0;
-  background: rgba(0, 38, 119, 0.2); /* navyBlue */
+  background: rgba(0, 38, 119, 0.2); 
   animation: blobMove1 12s infinite linear;
 }
 .blob2 {
@@ -179,7 +179,7 @@
   height: 300px;
   top: 50%;
   left: 50%;
-  background: rgba(255, 189, 48, 0.25); /* gold */
+  background: rgba(255, 189, 48, 0.25); 
   animation: blobMove2 14s infinite linear;
 }
 .blob3 {
@@ -187,8 +187,36 @@
   height: 200px;
   bottom: 0;
   right: 0;
-  background: rgba(255, 213, 128, 0.3); /* lightGold */
+  background: rgba(255, 213, 128, 0.3); 
   animation: blobMove3 10s infinite alternate;
+}
+
+/* --- UPDATED Button Styles --- */
+.appleButton {
+  background-color: #FFD580; /* lightGold */
+  color: #002677; /* textDark */
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.85rem 2.25rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  align-self: center;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.appleButton:hover {
+  background-color: #FFBD30; /* gold */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 38, 119, 0.15);
+}
+
+@media (min-width: 996px) {
+    .appleButton {
+        align-self: flex-start;
+    }
 }
 
 
@@ -416,26 +444,6 @@
     font-weight: 600;
     color: #374151;
     text-align: center;
-}
-.appleButton {
-  background-color: #007aff;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  display: inline-block;
-  align-self: center;
-}
-@media (min-width: 996px) {
-    .appleButton {
-        align-self: flex-start;
-    }
 }
 .partnersGrid {
   display: grid;
