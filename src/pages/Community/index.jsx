@@ -4,27 +4,6 @@ import Layout from '@theme/Layout';
 import styles from './community.module.css';
 import Translate, { translate } from '@docusaurus/Translate';
 
-// --- Portal Component for Background Blobs (Unchanged) ---
-const BackgroundBlobs = () => {
-    const [isClient, setIsClient] = useState(false);
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    if (!isClient) {
-        return null;
-    }
-
-    return ReactDOM.createPortal(
-        <div>
-            <div className={`${styles.blob} ${styles.blob1}`}></div>
-            <div className={`${styles.blob} ${styles.blob2}`}></div>
-            <div className={`${styles.blob} ${styles.blob3}`}></div>
-        </div>,
-        document.body
-    );
-};
-
 // --- Reusable UI Components (Unchanged) ---
 const MailIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -39,8 +18,7 @@ const GithubIcon = ({ className, size = 24 }) => (
     </svg>
 );
 
-// --- Person Cards (Unchanged, but will now receive translated props) ---
-
+// --- Person Cards (Unchanged) ---
 const AvatarWithGithub = ({ avatarUrl, name, githubUrl, sizeClass = '' }) => (
     <div className={`${styles.avatarWrapper} ${sizeClass}`}>
         <img
@@ -63,7 +41,6 @@ const CoreMemberCard = ({ person }) => {
 
     return (
         <div className={styles.coreMemberCard}>
-            {/* Left Column: Avatar, Name, Title */}
             <div className={styles.coreMemberLeftColumn}>
                 <AvatarWithGithub avatarUrl={avatarUrl} name={name} githubUrl={github} sizeClass={styles.avatarLarge} />
                 <div className={styles.coreMemberHeader}>
@@ -76,8 +53,6 @@ const CoreMemberCard = ({ person }) => {
                 </div>
                 {title && <div className={styles.personTitle} style={titleStyle}>{title}</div>}
             </div>
-
-            {/* Right Column: Description */}
             <p className={styles.personDescription}>{description}</p>
         </div>
     );
@@ -109,28 +84,57 @@ const ContributorCard = ({ person }) => {
     );
 };
 
-// --- Unchanged Components ---
+// --- CommunityIntro Component ---
+const CommunityIntro = () => {
+    const BackgroundBlobs = () => (
+        <>
+            <div className={`${styles.blob} ${styles.blob1}`}></div>
+            <div className={`${styles.blob} ${styles.blob2}`}></div>
+            <div className={`${styles.blob} ${styles.blob3}`}></div>
+        </>
+    );
 
-const CommunityIntro = () => (
-    <div className={`${styles.glassContainer} ${styles.communityIntro}`}>
-        <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '1.5rem', color: '#2D3748' }}><Translate>贡献者社区</Translate></h2>
-        <a href="https://github.com/ruyisdk/ruyisdk/discussions" target="_blank" rel="noopener noreferrer" className={styles.appleButton}>
-            <Translate>加入讨论</Translate>
-        </a>
-    </div>
-);
+    return (
+        <div className={`${styles.glassContainer} ${styles.communityIntro}`}>
+            <div className={styles.communityIntroLeft}>
+                <BackgroundBlobs />
+                <h2 className={styles.communityIntroTitle}><Translate>贡献者社区</Translate></h2>
+            </div>
+            <div className={styles.communityIntroRight}>
+                <p className={styles.communityIntroText}>
+                    <Translate>
+                        RuyiSDK 项目采用开源管理模式，代码托管于 GitHub。我们欢迎广大开发者参与项目，共同推动RISC-V技术的发展。RUYISDK 社区旨在建设一个开放、友善、多样化、包容、健康活跃的社区。我们正在寻找有激情、有才华的您加入我们的团队。在参与社区讨论前，请先查阅社区守则以便更好的在社区内交流。
+                    </Translate>
+                </p>
+                <a href="https://github.com/ruyisdk/ruyisdk/discussions" target="_blank" rel="noopener noreferrer" className={styles.appleButton}>
+                    <Translate>加入讨论</Translate>
+                </a>
+            </div>
+        </div>
+    );
+};
 
+// --- UPDATED Partners Component ---
 const Partners = ({ partners }) => (
     <div className={styles.glassContainer}>
         <div className={styles.partnersGrid}>
             {partners.map(partner => (
-                <div key={partner.id} className={styles.partnerLogoContainer}>
-                    <img src={partner.logoUrl} alt={partner.name} className={styles.partnerLogo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/200x80/ffffff/000000?text=' + partner.name; }} />
-                </div>
+                <a 
+                    key={partner.id} 
+                    href={partner.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.partnerLink}
+                >
+                    <div className={styles.partnerLogoContainer}>
+                        <img src={partner.logoUrl} alt={partner.name} className={styles.partnerLogo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/200x80/ffffff/000000?text=' + partner.name; }} />
+                    </div>
+                </a>
             ))}
         </div>
     </div>
 );
+
 
 const Text = ({ markdownContent }) => {
     const htmlContent = markdownContent
@@ -150,70 +154,54 @@ const Text = ({ markdownContent }) => {
 
 // --- Main Page Component ---
 export default function Community() {
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    // --- UPDATED partnersData array ---
     const partnersData = [
-        { id: 1, name: 'Milk-V', logoUrl: 'https://www.fedoravforce.org/partner-logo/milkv.png' },
-        { id: 2, name: 'Sipeed', logoUrl: 'https://www.fedoravforce.org/partner-logo/sipeed.png' },
-        { id: 3, name: 'Fedora-V Force', logoUrl: 'https://images.fedoravforce.org/images/fvf-logo.png' },
-        { id: 4, name: 'openEuler RISC-V sig', logoUrl: 'https://www.fedoravforce.org/partner-logo/openeuler.png' },
-        { id: 5, name: 'openKylin', logoUrl: 'https://www.openkylin.top/upload/202209/1664440595.png' },
+        { id: 1, name: 'Milk-V', logoUrl: 'https://www.fedoravforce.org/partner-logo/milkv.png', url: 'https://milkv.io/' },
+        { id: 2, name: 'Sipeed', logoUrl: 'https://www.fedoravforce.org/partner-logo/sipeed.png', url: 'https://sipeed.com/' },
+        { id: 3, name: 'Fedora-V Force', logoUrl: 'https://images.fedoravforce.org/images/fvf-logo.png', url: 'https://www.fedoravforce.org/' },
+        { id: 4, name: 'openEuler RISC-V sig', logoUrl: 'https://www.fedoravforce.org/partner-logo/openeuler.png', url: 'https://www.openeuler.org/en/sig/sig-detail/?name=sig-RISC-V' },
+        { id: 5, name: 'openKylin', logoUrl: 'https://www.openkylin.top/upload/202209/1664440595.png', url: 'https://www.openkylin.top/' },
     ];
 
     const [communityGuidelines, setCommunityGuidelines] = useState('');
-    // Initialize peopleData with a structure that prevents errors before data loads
     const [peopleData, setPeopleData] = useState({ coreTeam: [], interns: [], contributors: [] });
 
     useEffect(() => {
         if (typeof window === 'undefined') {
-            console.log('Running on server side, skipping window-dependent logic.');
             return;
         }
 
-        let detectedLocale = 'en'; // Initialize with a default.
+        let detectedLocale = 'en';
         const pathParts = window.location.pathname.split('/').filter(Boolean);
         const configuredLocales = ['zh-Hans', 'en', 'de'];
-        const defaultSiteLocale = 'zh-Hans'; // From your docusaurus.config.js
-
-        // --- Determine Locale ---
-        console.group('Locale & Data Loading Debugging');
-        console.log('Full Pathname:', window.location.pathname);
-        console.log('Filtered Path Parts:', pathParts);
+        const defaultSiteLocale = 'zh-Hans';
 
         if (pathParts.length > 0 && configuredLocales.includes(pathParts[0])) {
             detectedLocale = pathParts[0];
-            console.log('Locale detected from URL prefix:', detectedLocale);
         } else {
             detectedLocale = defaultSiteLocale;
-            console.log('No explicit locale prefix. Using site defaultLocale:', detectedLocale);
         }
 
-        // --- Load Community Guidelines Markdown ---
-        const mdFilesBaseDir = '/text/'; // Ensure this matches your static folder
+        const mdFilesBaseDir = '/text/';
         const mdPublicUrl = `${mdFilesBaseDir}community_guidelines_${detectedLocale}.md`;
-
-        console.log('Attempting to fetch markdown from public URL:', mdPublicUrl);
-
         fetch(mdPublicUrl)
             .then(response => {
                 if (!response.ok) {
-                    console.error('Markdown Fetch Error: HTTP status not OK.', {
-                        url: response.url,
-                        status: response.status,
-                        statusText: response.statusText,
-                    });
                     throw new Error(`HTTP error! Status: ${response.status} for ${response.url}`);
                 }
                 return response.text();
             })
-            .then(text => {
-                console.log('Markdown content fetched successfully (first 100 chars):', text.substring(0, Math.min(text.length, 100)) + (text.length > 100 ? '...' : ''));
-                setCommunityGuidelines(text);
-            })
+            .then(text => setCommunityGuidelines(text))
             .catch(error => {
                 console.error('Error fetching markdown file:', error);
                 setCommunityGuidelines(`Error loading guidelines: ${error.message}. Please check console.`);
             });
 
-        // --- Load Peoples JSON Data ---
         let peopleJsonModule;
         try {
             switch (detectedLocale) {
@@ -228,21 +216,27 @@ export default function Community() {
                     peopleJsonModule = require('./peoples_en.json');
                     break;
             }
-            console.log('People data loaded successfully for locale:', detectedLocale, peopleJsonModule);
             setPeopleData(peopleJsonModule);
         } catch (error) {
             console.error('Error loading peoples JSON file for locale:', detectedLocale, error);
-            // Fallback to a default empty structure if loading fails
             setPeopleData({ coreTeam: [], interns: [], contributors: [] });
         }
-        console.groupEnd(); // End of debug group
+    }, []);
 
-    }, []); // Empty dependency array: runs once after initial render on client
+    const PageBackground = () => {
+        if (!isClient) return null;
+        return ReactDOM.createPortal(
+            <div>
+                <div className={`${styles.pageBlob} ${styles.pageBlob1}`}></div>
+                <div className={`${styles.pageBlob} ${styles.pageBlob2}`}></div>
+            </div>,
+            document.body
+        );
+    };
 
     return (
         <Layout title="Community" description="Meet the RuyiSDK community, contributors, and partners.">
-            <BackgroundBlobs />
-
+            <PageBackground />
             <div className={styles.pageWrapper}>
                 <div className={styles.contentContainer}>
                     <h1 className={styles.mainHeader}>We <Translate>❤</Translate> You <Translate>❤</Translate> Ruyi</h1>
@@ -251,19 +245,16 @@ export default function Community() {
 
                     <h2 className={styles.sectionHeader}><Translate>核心小组</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.coreGrid}`}>
-                        {/* Ensure peopleData.coreTeam is an array before mapping */}
                         {peopleData.coreTeam.map(person => <CoreMemberCard key={person.id} person={person} />)}
                     </div>
 
                     <h2 className={styles.sectionHeader}><Translate>We ❤️ Interns</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.internGrid}`}>
-                        {/* Ensure peopleData.interns is an array before mapping */}
                         {peopleData.interns.map(person => <InternCard key={person.id} person={person} />)}
                     </div>
 
                     <h2 className={styles.sectionHeader}><Translate>贡献者</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.contributorGrid}`}>
-                        {/* Ensure peopleData.contributors is an array before mapping */}
                         {peopleData.contributors.map(person => <ContributorCard key={person.id} person={person} />)}
                     </div>
 
