@@ -32,7 +32,7 @@ const Index = () => {
       description="All-in-one integrated development environment for RISC-V architecture"
     >
       <Head>
-        <title>{translate({ id: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备", message: "RuyiSDK · 为100 万 RISC-V 软件开发人员做好准备" })}</title>
+        <title>{translate({ id: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备", message: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备" })}</title>
       </Head>
 
       <Home />
