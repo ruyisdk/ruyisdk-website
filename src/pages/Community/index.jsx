@@ -239,8 +239,6 @@ export default function Community() {
             <PageBackground />
             <div className={styles.pageWrapper}>
                 <div className={styles.contentContainer}>
-                    <h1 className={styles.mainHeader}>We <Translate>❤</Translate> You <Translate>❤</Translate> Ruyi</h1>
-
                     <CommunityIntro />
 
                     <h2 className={styles.sectionHeader}><Translate>核心小组</Translate></h2>
