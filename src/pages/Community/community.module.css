@@ -1,0 +1,477 @@
+/*
+ * community.module.css
+ * Styles for the Community Page
+ */
+
+/* --- Keyframe Animations (Unchanged) --- */
+@keyframes blobMove1 {
+  0% { transform: translate(-50%, -50%) scale(1.1) rotate(0deg); }
+  50% { transform: translate(-45%, -55%) scale(1.2) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1.1) rotate(360deg); }
+}
+@keyframes blobMove2 {
+  0% { transform: translate(-50%, -50%) scale(1.2) rotate(0deg); }
+  50% { transform: translate(-55%, -45%) scale(0.9) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1.2) rotate(360deg); }
+}
+@keyframes blobMove3 {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) scale(1.1) rotate(180deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+}
+
+/* --- Main Page Wrapper & Background --- */
+.pageWrapper {
+  position: relative;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'SF Pro Text', 'Helvetica Neue', sans-serif;
+  color: #2D3748; 
+  overflow: hidden;
+}
+
+/* Full page background blobs */
+.pageBlob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -2;
+}
+.pageBlob1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(221, 190, 221, 0.2);
+  top: 0;
+  left: 0;
+}
+.pageBlob2 {
+  width: 700px;
+  height: 700px;
+  background: rgba(168, 218, 220, 0.2);
+  bottom: 0;
+  right: 0;
+}
+
+
+/* --- Content Styling --- */
+.contentContainer {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+.mainHeader {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  color: #1A202C; 
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+@media (min-width: 768px) {
+  .mainHeader { font-size: 4.5rem; }
+}
+.sectionHeader {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  color: #2D3748;
+}
+
+/* --- Glassmorphism Container --- */
+.glassContainer {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+/* --- CommunityIntro Component Styling --- */
+.communityIntro {
+  display: flex;
+  flex-direction: column; 
+  margin-bottom: 3rem;
+  overflow: hidden; 
+  padding: 0; 
+}
+@media (min-width: 996px) {
+  .communityIntro {
+    flex-direction: row; 
+  }
+}
+
+.communityIntroLeft {
+  flex: 1;
+  position: relative; 
+  overflow: hidden;   
+  background-color: #F8F3E2; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  z-index: 2; 
+  box-shadow: 4px 0 15px -4px rgba(0, 0, 0, 0.1);
+}
+
+.communityIntroRight {
+  flex: 1.5; 
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2.5rem;
+}
+
+.communityIntroTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #002677; 
+  text-align: center;
+  position: relative; 
+  z-index: 2;
+}
+@media (min-width: 996px) {
+  .communityIntroTitle {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+}
+
+.communityIntroText {
+  color: #86868B; 
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: center;
+}
+@media (min-width: 996px) {
+  .communityIntroText {
+    text-align: left;
+  }
+}
+
+/* --- Blobs scoped to CommunityIntro --- */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px); 
+  z-index: 1; 
+}
+.blob1 {
+  width: 250px;
+  height: 250px;
+  top: 0;
+  left: 0;
+  background: rgba(0, 38, 119, 0.2); 
+  animation: blobMove1 12s infinite linear;
+}
+.blob2 {
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 189, 48, 0.25); 
+  animation: blobMove2 14s infinite linear;
+}
+.blob3 {
+  width: 200px;
+  height: 200px;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 213, 128, 0.3); 
+  animation: blobMove3 10s infinite alternate;
+}
+
+/* --- UPDATED Button Styles --- */
+.appleButton {
+  background-color: #FFD580; /* lightGold */
+  color: #002677; /* textDark */
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.85rem 2.25rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  align-self: center;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.appleButton:hover {
+  background-color: #FFBD30; /* gold */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 38, 119, 0.15);
+}
+
+@media (min-width: 996px) {
+    .appleButton {
+        align-self: flex-start;
+    }
+}
+
+
+/* --- Card & Other Element Styles --- */
+.coreGrid, .internGrid, .contributorGrid, .partnersGrid, .textContainer {
+    padding: 2rem;
+}
+.coreGrid, .internGrid, .contributorGrid {
+    display: grid;
+    gap: 2rem;
+    align-content: start;
+}
+.coreGrid {
+    grid-template-columns: 1fr;
+}
+@media (min-width: 1200px) {
+    .coreGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.internGrid {
+    grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+    .internGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .internGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.contributorGrid {
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px) {
+    .contributorGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .contributorGrid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+.avatarWrapper {
+    position: relative;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: visible;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.avatarImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.githubIconOnAvatar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background-color: #1A202C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    transition: transform 0.2s ease-in-out;
+}
+.githubIconOnAvatar:hover {
+    transform: scale(1.1);
+}
+.githubIconSvg {
+    color: white;
+    stroke-width: 2;
+}
+.coreMemberCard {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+@media (min-width: 768px) {
+    .coreMemberCard {
+        flex-direction: row; 
+        align-items: center; 
+        gap: 2rem;
+        padding: 2rem;
+    }
+}
+.coreMemberCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.1);
+}
+.coreMemberLeftColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+@media (min-width: 768px) {
+    .coreMemberLeftColumn {
+        flex-basis: 12rem;
+    }
+}
+.avatarLarge {
+    width: 10rem; 
+    height: 10rem;
+}
+.coreMemberHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.mailIconLink {
+    color: #4A5568;
+    transition: transform 0.2s, color 0.2s;
+}
+.mailIconLink:hover {
+    transform: scale(1.1);
+    color: #007aff;
+}
+.personName {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    color: #2D3748;
+    text-align: center;
+}
+.personTitle {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.personDescription {
+    margin: 0;
+    color: #1A202C; 
+    font-size: 1.125rem; 
+    line-height: 1.7; 
+    text-align: center; 
+    font-weight: 400;
+    flex: 1;
+}
+@media (min-width: 768px) {
+    .personDescription {
+        text-align: left; 
+    }
+}
+.internCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+.internCard:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(100, 108, 120, 0.1);
+}
+.avatarMedium {
+    width: 8rem;
+    height: 8rem;
+}
+.internInfo {
+    text-align: center;
+    margin-top: 1rem;
+}
+.personNameSmall {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2D3748;
+}
+.personTitleSmall {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.125rem 0.6rem;
+    border-radius: 9999px;
+    margin: 0.5rem auto;
+    display: inline-block;
+}
+.personDescriptionSmall {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+.contributorCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 0.5rem;
+    transition: all 0.3s ease;
+}
+.contributorCard:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 4px 15px rgba(100, 108, 120, 0.1);
+}
+.avatarSmall {
+    width: 5rem;
+    height: 5rem;
+}
+.contributorName {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    text-align: center;
+}
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .partnersGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.partnerLink {
+  display: block;
+  transition: transform 0.3s ease;
+}
+.partnerLink:hover {
+  transform: scale(1.05);
+}
+.partnerLogoContainer {
+  display: flex;
+  justify-content: center;
+}
+.partnerLogo {
+  height: 5rem;
+  object-fit: contain;
+}
+.textContainer {
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
