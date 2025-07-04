@@ -146,10 +146,14 @@ const config = {
                 label: "数据统计",
                 to: "/Home/StatisticalDataPages",
               },
+              {
+                label: "实习生招聘",
+                href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
+              },
             ],
           },
           {
-            title: "更多",
+            title: "关注我们",
             items: [
               {
                 label: "微信公众号",
@@ -165,9 +169,14 @@ const config = {
                 label: "PLCT 实验室",
                 href: "https://plctlab.org/",
               },
+            ],
+          },
+          {
+            title: "更多开发工具",
+            items: [
               {
-                label: "实习生招聘",
-                href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
+                label: "JetBrains IDE Multiarch",
+                href: "https://github.com/Glavo/JetBrains-IDE-Multiarch",
               },
             ],
           },

@@ -275,12 +275,47 @@ const StatisticalData = () => {
       </div>
     );
   };
+  const getCombinedDownloads = (data) => {
+    if (!data) return {};
 
+    const categoryNames = {
+      "downloads": "组件下载量",
+      "pm_downloads": "包管理器下载量",
+      "3rdparty": "第三方下载量",
+      "humans": "文档等",
+      "ide": "IDE下载次数"
+    };
+
+    const combined = {};
+
+    Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
+      combined[categoryNames[key]] = {
+        ...value,
+      };
+    });
+    if (data.downloads) {
+      combined[categoryNames["downloads"]] = {
+        ...data.downloads,
+      };
+    }
+
+    if (data.pm_downloads) {
+      combined[categoryNames["pm_downloads"]] = {
+        ...data.pm_downloads,
+      };
+    }
+    return combined;
+  };
   const CardOneitems = [
     {
       key: '1',
       label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
       children: <TopList data={data?.top_commands || {}}></TopList>,
+    },
+    {
+      key: '2',
+      label: translate({ id: "分目录的下载数量", message: "分目录的下载数量" }),
+      children: <TopList data={getCombinedDownloads(data)} />,
     },
   ];
 
