@@ -30,6 +30,7 @@
     "dotenv-cli": "^8.0.0",
     "jsonp": "^0.2.1",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.525.0",
     "prism-react-renderer": "^2.3.0",
     "qs": "^6.14.0",
     "react": "^18.0.0",
@@ -37,6 +38,7 @@
     "react-player": "^2.16.0",
     "react-scroll": "^1.9.3",
     "react-slideshow-image": "^4.3.1",
+    "react-syntax-highlighter": "^15.6.1",
     "sass": "^1.77.6",
     "video.js": "^8.16.1"
   },
