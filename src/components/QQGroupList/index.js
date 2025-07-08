@@ -49,33 +49,34 @@ const QQGroupList = () => {
   ]
   return (
     <Card style={{
-      backgroundColor: "#282a36",
-      borderLeftColor: "grey",
+      backgroundColor: "#fff",
       borderLeftColor: "#06bcee",
       borderLeftWidth: "4px",
       borderRadius: '1rem',
-      borderColor: "#282a36",
-
+      borderColor: "#e3e3e3",
+      margin: "2rem 0"
     }}
-      title={<span style={{ color: '#e3e3e3' }}>{translate({ id: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊", message: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊" })}</span>}
+      title={<span style={{ color: '#222', fontWeight: 600 }}>{translate({ id: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊", message: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊" })}</span>}
     >
-      <Row gutter={[1, 1]} align={'top'} justify={'start'}>
+      <Row gutter={[16, 16]} align={'top'} justify={'start'}>
         {data.map((data, index) => (
-          <Col xs={12} md={8} lg={6} key={index}>
+          <Col xs={24} sm={12} md={8} lg={6} key={index} style={{marginBottom: "1rem"}}>
             <Card
               hoverable
               size={"small"}
-              headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#e3e3e3" }}
+              headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#222", background: "#f7f7f9" }}
               title={data.title}
               style={{
-                backgroundColor: "#282a36",
-                borderWidth: "0.1rem",
+                backgroundColor: "#f7f7f9",
+                borderWidth: "1px",
                 borderColor: "#e3e3e3",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 flexDirection: "column",
-                borderRadius: "0"
+                borderRadius: "0.75rem",
+                minHeight: "260px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
               }}
               onClick={() => {
                 if (data.value) {
@@ -84,16 +85,16 @@ const QQGroupList = () => {
               }}
             >
               {
-                data.value ? <QRCode value={data.value} size={128} bgColor="#e3e3e3" /> : <div style={{ height: '128px', width: "128px" }}></div>
+                data.value ? <QRCode value={data.value} size={112} bgColor="#fff" /> : <div style={{ height: '112px', width: "112px" }}></div>
               }
               <Divider style={{ borderColor: '#e3e3e3', marginTop: "10px", marginBottom: "0" }}></Divider>
               {data.qqGroupNumber ? <p style={{
-                height: "0.5rem",
+                margin: "0.5rem 0 0 0",
                 width: '100%',
                 textAlign: "center",
-                fontSize: "large",
-                fontWeight: "bolder",
-                color: "#e3e3e3"
+                fontSize: "1.1rem",
+                fontWeight: "bold",
+                color: "#222"
               }}>{data.qqGroupNumber}</p> :
                 <p style={{
                   height: "0.5rem",
@@ -103,6 +104,9 @@ const QQGroupList = () => {
           </Col>
         ))}
       </Row>
+      <div style={{textAlign: "center", margin: "1.5rem 0"}}>
+        <img src="/img/wechat_account_img.png" alt="Our wechat account" style={{maxWidth: "180px", width: "100%", height: "auto", borderRadius: "12px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)"}} />
+      </div>
     </Card>
   );
 };
