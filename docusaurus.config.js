@@ -33,7 +33,8 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "zh-Hans",
+    defaultLocale: "en",
+    // defaultLocale: "zh-Hans",
     locales: ["zh-Hans", "en", "de"],
   },
 
@@ -199,6 +200,7 @@ const config = {
             ],
           },
         ],
+        // links:[],
         copyright: `Copyright © 2024-${new Date().getFullYear()} RuyiSDK`,
       },
       prism: {
