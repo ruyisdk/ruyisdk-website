@@ -6,7 +6,7 @@ export default function Footer(props) {
   const { i18n } = useDocusaurusContext();
   const locale = i18n?.currentLocale;
   const revyosLink = (locale === 'en' || locale === 'de') ? 'https://docs.revyos.dev/en' : 'https://docs.revyos.dev';
-  console.log('当前语言:', locale, 'RevyOS 链接:', revyosLink);
+  // console.log('当前语言:', locale, 'RevyOS 链接:', revyosLink);
   const links = [
     {
       title: "生态",
