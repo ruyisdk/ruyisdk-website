@@ -33,8 +33,8 @@ const config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    // defaultLocale: "zh-Hans",
+    // defaultLocale: "de",
+    defaultLocale: "zh-Hans",
     locales: ["zh-Hans", "en", "de"],
   },
 
@@ -132,71 +132,71 @@ const config = {
       },
       footer: {
         style: "light",
-        links: [
-          {
-            title: "生态",
-            items: [
-              {
-                label: "RuyiSDK",
-                to: "/docs/intro",
-              },
-              {
-                label: "RevyOS",
-                href: "https://docs.revyos.dev/",
-              },
-              {
-                label: "Support Matrix",
-                href: "https://matrix.ruyisdk.org/",
-              },
-            ],
-          },
-          {
-            title: "社区",
-            items: [
-              {
-                label: "讨论组",
-                href: "https://github.com/ruyisdk/ruyisdk/discussions",
-              },
-              {
-                label: "数据统计",
-                to: "/Home/StatisticalDataPages",
-              },
-              {
-                label: "实习生招聘",
-                href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
-              },
-            ],
-          },
-          {
-            title: "关注我们",
-            items: [
-              {
-                label: "微信公众号",
-                className: 'hover-wechat-link',
-                to: '/contact'
-              },
-              {
-                label: "QQ群",
-                className: 'hover-qq-link',
-                to: '/contact'
-              },
-              {
-                label: "PLCT 实验室",
-                href: "https://plctlab.org/",
-              },
-            ],
-          },
-          {
-            title: "更多开发工具",
-            items: [
-              {
-                label: "JetBrains IDE Multiarch",
-                href: "https://github.com/Glavo/JetBrains-IDE-Multiarch",
-              },
-            ],
-          },
-        ],
-        // links:[],
+        // links: [
+        //   {
+        //     title: "生态",
+        //     items: [
+        //       {
+        //         label: "RuyiSDK",
+        //         to: "/docs/intro",
+        //       },
+        //       {
+        //         label: "RevyOS",
+        //         href: "https://docs.revyos.dev/",
+        //       },
+        //       {
+        //         label: "Support Matrix",
+        //         href: "https://matrix.ruyisdk.org/",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     title: "社区",
+        //     items: [
+        //       {
+        //         label: "讨论组",
+        //         href: "https://github.com/ruyisdk/ruyisdk/discussions",
+        //       },
+        //       {
+        //         label: "数据统计",
+        //         to: "/Home/StatisticalDataPages",
+        //       },
+        //       {
+        //         label: "实习生招聘",
+        //         href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     title: "关注我们",
+        //     items: [
+        //       {
+        //         label: "微信公众号",
+        //         className: 'hover-wechat-link',
+        //         to: '/contact'
+        //       },
+        //       {
+        //         label: "QQ群",
+        //         className: 'hover-qq-link',
+        //         to: '/contact'
+        //       },
+        //       {
+        //         label: "PLCT 实验室",
+        //         href: "https://plctlab.org/",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     title: "更多开发工具",
+        //     items: [
+        //       {
+        //         label: "JetBrains IDE Multiarch",
+        //         href: "https://github.com/Glavo/JetBrains-IDE-Multiarch",
+        //       },
+        //     ],
+        //   },
+        // ],
+        links:[],
         copyright: `Copyright © 2024-${new Date().getFullYear()} RuyiSDK`,
       },
       prism: {

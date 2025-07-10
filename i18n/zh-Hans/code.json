@@ -1,0 +1,16 @@
+{
+  "footer.ecosystem": { "message": "生态" },
+  "footer.ruyisdk": { "message": "RuyiSDK" },
+  "footer.revyos": { "message": "RevyOS" },
+  "footer.matrix": { "message": "Support Matrix" },
+  "footer.community": { "message": "社区" },
+  "footer.discussion": { "message": "讨论组" },
+  "footer.stats": { "message": "数据统计" },
+  "footer.intern": { "message": "实习生招聘" },
+  "footer.followus": { "message": "关注我们" },
+  "footer.wechat": { "message": "微信公众号" },
+  "footer.qqgroup": { "message": "QQ群" },
+  "footer.plct": { "message": "PLCT 实验室" },
+  "footer.tools": { "message": "更多开发工具" },
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" }
+}

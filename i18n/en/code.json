@@ -468,5 +468,19 @@
   },
   "最后更新时间": {
     "message": "Last Update"
-  }
+  },
+  "footer.ecosystem": { "message": "Ecosystem" },
+  "footer.ruyisdk": { "message": "RuyiSDK" },
+  "footer.revyos": { "message": "RevyOS" },
+  "footer.matrix": { "message": "Support Matrix" },
+  "footer.community": { "message": "Community" },
+  "footer.discussion": { "message": "Discussion" },
+  "footer.stats": { "message": "Statistics" },
+  "footer.intern": { "message": "Intern Recruitment" },
+  "footer.followus": { "message": "Follow Us" },
+  "footer.wechat": { "message": "WeChat Official Account" },
+  "footer.qqgroup": { "message": "QQ Group" },
+  "footer.plct": { "message": "PLCT Lab" },
+  "footer.tools": { "message": "More Developer Tools" },
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" }
 }

@@ -465,5 +465,19 @@
   },
   "最后更新时间": {
     "message": "Zuletzt aktualisiert"
-  }
+  },
+  "footer.ecosystem": { "message": "Ökosystem" },
+  "footer.revyos": { "message": "RevyOS" },
+  "footer.matrix": { "message": "Support Matrix" },
+  "footer.community": { "message": "Community" },
+  "footer.discussion": { "message": "Diskussion" },
+  "footer.stats": { "message": "Statistiken" },
+  "footer.intern": { "message": "Praktikumsangebote" },
+  "footer.followus": { "message": "Folgen Sie uns" },
+  "footer.wechat": { "message": "WeChat Offizieller Account" },
+  "footer.qqgroup": { "message": "QQ Gruppe" },
+  "footer.plct": { "message": "PLCT Labor" },
+  "footer.tools": { "message": "Weitere Entwickler-Tools" },
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
+  "footer.ruyisdk": { "message": "RuyiSDK" }
 }
