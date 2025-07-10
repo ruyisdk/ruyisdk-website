@@ -57,13 +57,12 @@
 }
 
 .footer__copyright {
-  top: -10px; 
   text-align: center;
-  margin-top: -0.5rem;
+  margin-top: 0.5rem;
   color: #222;
   font-size: 20px;
   line-height: 20px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: normal;
   text-transform: none;
   text-decoration: none;

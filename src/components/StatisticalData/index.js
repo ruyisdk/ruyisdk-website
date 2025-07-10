@@ -312,11 +312,12 @@ const StatisticalData = () => {
       label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
       children: <TopList data={data?.top_commands || {}}></TopList>,
     },
-    {
-      key: '2',
-      label: translate({ id: "分目录的下载数量", message: "分目录的下载数量" }),
-      children: <TopList data={getCombinedDownloads(data)} />,
-    },
+    // 移除分目录的下载数量Tab项
+    // {
+    //   key: '2',
+    //   label: translate({ id: "分目录的下载数量", message: "分目录的下载数量" }),
+    //   children: <TopList data={getCombinedDownloads(data)} />, 
+    // },
   ];
 
   const CardTwoitems = [
@@ -430,6 +431,23 @@ const StatisticalData = () => {
                 }}
               />
             </div>
+
+            {/* 新增分目录的下载数量列表展示 */}
+            {data && (
+              <div style={{ marginTop: "2.5rem", background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "1.5rem 2rem" }}>
+                <h2 style={{ color: "#e3e3e3", fontSize: "1.2rem", fontWeight: 600, marginBottom: "1rem" }}>
+                  {translate({ id: "分目录的下载数量", message: "分目录的下载数量" })}
+                </h2>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {Object.entries(getCombinedDownloads(data)).map(([dir, val]) => (
+                    <li key={dir} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 0", borderBottom: "1px solid #2222" }}>
+                      <span style={{ color: "#e3e3e3", fontWeight: 500 }}>{dir}</span>
+                      <span style={{ color: "#e3e3e3", fontWeight: 700 }}>{val.total}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {data && (
               <p style={{ marginTop: "4rem", color: "#d1d1d1", fontSize: '0.8rem' }}>
