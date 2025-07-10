@@ -104,9 +104,6 @@ const QQGroupList = () => {
           </Col>
         ))}
       </Row>
-      <div style={{textAlign: "center", margin: "1.5rem 0"}}>
-        <img src="/img/wechat_account_img.png" alt="Our wechat account" style={{maxWidth: "180px", width: "100%", height: "auto", borderRadius: "12px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)"}} />
-      </div>
     </Card>
   );
 };
