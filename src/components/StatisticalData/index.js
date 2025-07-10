@@ -481,6 +481,228 @@ const StatisticalData = () => {
             </ConfigProvider>
         </div>
     );
+  };
+  const getCombinedDownloads = (data) => {
+    if (!data) return {};
+
+    const categoryNames = {
+      "downloads": "组件下载量",
+      "pm_downloads": "包管理器下载量",
+      "3rdparty": "第三方下载量",
+      "humans": "文档等",
+      "ide": "IDE下载次数"
+    };
+
+    const combined = {};
+
+    Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
+      combined[categoryNames[key]] = {
+        ...value,
+      };
+    });
+    if (data.downloads) {
+      combined[categoryNames["downloads"]] = {
+        ...data.downloads,
+      };
+    }
+
+    if (data.pm_downloads) {
+      combined[categoryNames["pm_downloads"]] = {
+        ...data.pm_downloads,
+      };
+    }
+    return combined;
+  };
+  const CardOneitems = [
+    {
+      key: '1',
+      label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
+      children: <TopList data={data?.top_commands || {}}></TopList>,
+    },
+    // 移除分目录的下载数量Tab项
+    // {
+    //   key: '2',
+    //   label: translate({ id: "分目录的下载数量", message: "分目录的下载数量" }),
+    //   children: <TopList data={getCombinedDownloads(data)} />, 
+    // },
+  ];
+
+  const CardTwoitems = [
+    {
+      key: '1',
+      label: translate({ id: "最常用包 Top Packages", message: "最常用包" }),
+      children: <TopList data={data?.top_packages || {}} />,
+    }
+  ];
+
+  useEffect(() => {
+    if (!axiosInstance) return;
+
+    let retryTimer = null;
+    let retryCount = 0;
+
+    const apiPost = async () => {
+      if (retryCount > 5) {
+        console.warn('Stop retry')
+        return;
+      }
+
+      try {
+        setData((await axiosInstance.post('/fe/dashboard', {})).data)
+        setError(null);
+      } catch (error) {
+        console.error('Statistical Data API error, will retry', error)
+        setError(error);
+        retryTimer = setTimeout(apiPost, 2 ** retryCount * 1000);
+        retryCount++;
+      }
+    };
+
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(apiPost);
+      return () => {
+        cancelIdleCallback(id);
+        clearTimeout(retryTimer);
+      }
+    } else {
+      retryTimer = setTimeout(apiPost, 500);
+      return () => clearTimeout(retryTimer);
+    }
+  }, [axiosInstance]);
+
+  return (
+    <div
+      ref={containerRef}
+      className={styles.container}
+      style={{
+        pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto'
+      }}
+    >
+      <NavigationDots />
+
+      <ConfigProvider
+        renderEmpty={CustomizeRenderEmpty}
+        theme={{
+          components: {
+            Tabs: {
+              itemSelectedColor: "#0d4977",
+              inkBarColor: "#0d4977"
+            }
+          }
+        }}
+      >
+        <div className={`${styles.card}`}>
+          <Card
+            style={{
+              width: '90%',
+              height: '90vh',
+              backgroundColor: "rgba(0,0,0,0)",
+              border: "none",
+              margin: "0 auto"
+            }}
+          >
+            <div>
+              <h1 style={{ color: "#e3e3e3", marginTop: "2rem" }}>
+                {translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}
+              </h1>
+
+              <Statistic
+                title={
+                  <span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>
+                    {translate({ id: "下载数量 Downloads", message: "组件下载数量" })}
+                  </span>
+                }
+                value={
+                  data?.downloads?.total != null && data?.pm_downloads?.total != null
+                    ? data.downloads.total + data.pm_downloads.total
+                    : translate({ id: "载入中", message: "载入中" }) + "..."
+                }
+                valueStyle={{
+                  color: "#e3e3e3",
+                  fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem",
+                }}
+                style={{ marginTop: "2rem" }}
+              />
+
+              <Statistic
+                title={
+                  <span style={{ color: "#e3e3e3", fontSize: "1.5rem", fontWeight: "bold" }}>
+                    {translate({ id: "安装台数 Installs", message: "包管理器安装台数" })}
+                  </span>
+                }
+                value={data?.installs?.total || translate({ id: "载入中", message: "载入中" }) + "..."}
+                headStyle={{ color: "#e3e3e3" }}
+                valueStyle={{
+                  color: "#e3e3e3",
+                  fontSize: data?.downloads?.total != null ? "3rem" : "1.5rem",
+                }}
+              />
+            </div>
+
+            {/* 新增分目录的下载数量列表展示 */}
+            {data && (
+              <div style={{ marginTop: "2.5rem", background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "1.5rem 2rem" }}>
+                <h2 style={{ color: "#e3e3e3", fontSize: "1.2rem", fontWeight: 600, marginBottom: "1rem" }}>
+                  {translate({ id: "分目录的下载数量", message: "分目录的下载数量" })}
+                </h2>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {Object.entries(getCombinedDownloads(data)).map(([dir, val]) => (
+                    <li key={dir} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.5rem 0", borderBottom: "1px solid #2222" }}>
+                      <span style={{ color: "#e3e3e3", fontWeight: 500 }}>{dir}</span>
+                      <span style={{ color: "#e3e3e3", fontWeight: 700 }}>{val.total}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {data && (
+              <p style={{ marginTop: "4rem", color: "#d1d1d1", fontSize: '0.8rem' }}>
+                {translate({ id: "最后更新时间", message: "数据更新时间" })}:
+                {String(data.last_updated).slice(0, 16).replace("T", " ")}
+              </p>
+            )}
+          </Card>
+        </div>
+
+        <div className={`${styles.card}`}>
+          <Card
+            style={{
+              width: '80%',
+              height: '75vh',
+              border: "none",
+              marginTop: "1rem"
+            }}
+          >
+            <Tabs
+              defaultActiveKey="1"
+              items={CardOneitems}
+              style={{ width: "100%", height: "90vh" }}
+              more={{ icon: <EllipsisOutlined />, trigger: 'click' }}
+            />
+          </Card>
+        </div>
+
+        <div className={`${styles.card}`}>
+          <Card
+            style={{
+              width: '80%',
+              height: '75vh',
+              border: "none",
+              marginTop: "1rem"
+            }}
+          >
+            <Tabs
+              defaultActiveKey="1"
+              items={CardTwoitems}
+              style={{ width: "100%", height: "90vh" }}
+              more={{ icon: <EllipsisOutlined />, trigger: 'click' }}
+            />
+          </Card>
+        </div>
+      </ConfigProvider>
+    </div>
+  );
 }
 
 export default StatisticalData
