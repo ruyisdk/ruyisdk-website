@@ -48,7 +48,7 @@
   },
   "link.item.label.讨论组": {
     "message": "Diskussion",
-    "description": "The label of footer link with label=讨论组 linking to /StatisticalDataPages"
+    "description": "The label of footer link with label=讨论组 linking to GitHub discussions"
   },
   "link.item.label.数据统计": {
     "message": "Datenübersicht",
@@ -56,10 +56,14 @@
   },
   "link.item.label.实习生招聘": {
     "message": "Praktikumsstellen",
-    "description": "The label of footer link with label=实习生招聘 linking to /StatisticalDataPages"
+    "description": "The label of footer link with label=实习生招聘 linking to weloveinterns"
   },
   "link.item.label.PLCT 实验室": {
     "message": "PLCT Lab",
-    "description": "The label of footer link with label=PLCT Lab linking to /StatisticalDataPages"
+    "description": "The label of footer link with label=PLCT Lab linking to plctlab.org"
+  },
+  "link.item.label.Ruyi社区": {
+    "message": "Ruyi Community (Chinesische Website)",
+    "description": "The label of footer link with label=Ruyi Community (Chinesische Website) linking to ruyisdk.cn"
   }
 }

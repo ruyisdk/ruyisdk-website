@@ -61,5 +61,9 @@
   "link.item.label.PLCT 实验室": {
     "message": "PLCT Lab",
     "description": "The label of footer link with label=PLCT Lab linking to /StatisticalDataPages"
+  },
+  "link.item.label.Ruyi社区": {
+    "message": "Ruyi Community (Chinese Website)",
+    "description": "The label of footer link with label=Ruyi Community (Chinese Website) linking to ruyisdk.cn"
   }
 }
