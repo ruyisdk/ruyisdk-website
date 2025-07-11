@@ -60,6 +60,10 @@
   },
   "link.item.label.PLCT 实验室": {
     "message": "PLCT Lab",
-    "description": "The label of footer link with label=PLCT Lab linking to /StatisticalDataPages"
+    "description": "The label of footer link with label=PLCT Lab linking to plctlab.org"
+  },
+  "link.item.label.RISC-V 开发者社区": {
+    "message": "RuyiSDK Community (Chinese Website)",
+    "description": "The label of footer link with label=Ruyi Community (Chinese Website) linking to ruyisdk.cn"
   }
 }

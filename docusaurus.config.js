@@ -153,6 +153,10 @@ const config = {
             title: "社区",
             items: [
               {
+                label: "RISC-V 开发者社区",
+                href: "https://ruyisdk.cn"
+              },
+              {
                 label: "讨论组",
                 href: "https://github.com/ruyisdk/ruyisdk/discussions",
               },
