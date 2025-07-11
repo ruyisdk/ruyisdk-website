@@ -393,11 +393,11 @@ const RuyiInLive = () => {
               <Translate>RuyiSDK 社区</Translate>
             </h1>
             <p style={styles.subtitle}>
-              <Translate>RuyiSDK 社区讨论板块现已开启</Translate>
+              <Translate>RuyiSDK 开发者社区现已开启</Translate>
             </p>
             <div style={styles.buttonContainer}>
               <a
-                href="https://github.com/ruyisdk/ruyisdk/discussions/"
+                href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={discussButtonStyle}
@@ -405,7 +405,7 @@ const RuyiInLive = () => {
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
                 <UsersIcon />
-                <Translate>讨论组</Translate>
+                <Translate>ruyisdk.cn</Translate>
               </a>
               <a
                 href="https://github.com/ruyisdk"
