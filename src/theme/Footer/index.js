@@ -21,6 +21,7 @@ export default function Footer() {
     {
       title: <Translate id="footer.community">社区</Translate>,
       items: [
+        { label: <Translate id="footer.riscv-community">RISC-V 开发者社区</Translate>, href: "https://ruyisdk.cn" },
         { label: <Translate id="footer.discussion">讨论组</Translate>, href: "https://github.com/ruyisdk/ruyisdk/discussions" },
         { label: <Translate id="footer.stats">数据统计</Translate>, to: "/Home/StatisticalDataPages" },
         { label: <Translate id="footer.intern">实习生招聘</Translate>, href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" },

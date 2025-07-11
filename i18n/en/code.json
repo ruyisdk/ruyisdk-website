@@ -475,12 +475,13 @@
   "footer.matrix": { "message": "Support Matrix" },
   "footer.community": { "message": "Community" },
   "footer.discussion": { "message": "Discussion" },
-  "footer.stats": { "message": "Statistics" },
-  "footer.intern": { "message": "Intern Recruitment" },
+  "footer.stats": { "message": "Data Overview" },
+  "footer.intern": { "message": "Open Internship" },
   "footer.followus": { "message": "Follow Us" },
   "footer.wechat": { "message": "WeChat Official Account" },
   "footer.qqgroup": { "message": "QQ Group" },
   "footer.plct": { "message": "PLCT Lab" },
   "footer.tools": { "message": "More Developer Tools" },
-  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" }
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
 }
