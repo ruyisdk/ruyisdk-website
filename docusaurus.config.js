@@ -148,23 +148,27 @@ const config = {
         //       },
         //     ],
         //   },
-        //   {
-        //     title: "社区",
-        //     items: [
-        //       {
-        //         label: "讨论组",
-        //         href: "https://github.com/ruyisdk/ruyisdk/discussions",
-        //       },
-        //       {
-        //         label: "数据统计",
-        //         to: "/Home/StatisticalDataPages",
-        //       },
-        //       {
-        //         label: "实习生招聘",
-        //         href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
-        //       },
-        //     ],
-        //   },
+        //    {
+          //   title: "社区",
+          //   items: [
+          //     {
+          //       label: "RISC-V 开发者社区",
+          //       href: "https://ruyisdk.cn"
+          //     },
+          //     {
+          //       label: "讨论组",
+          //       href: "https://github.com/ruyisdk/ruyisdk/discussions",
+          //     },
+          //     {
+          //       label: "数据统计",
+          //       to: "/Home/StatisticalDataPages",
+          //     },
+          //     {
+          //       label: "实习生招聘",
+          //       href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md",
+          //     },
+          //   ],
+          // },
         //   {
         //     title: "关注我们",
         //     items: [
