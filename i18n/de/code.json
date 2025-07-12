@@ -465,5 +465,20 @@
   },
   "最后更新时间": {
     "message": "Zuletzt aktualisiert"
-  }
+  },
+  "footer.ecosystem": { "message": "Ökosystem" },
+  "footer.revyos": { "message": "RevyOS" },
+  "footer.matrix": { "message": "Support Matrix" },
+  "footer.community": { "message": "Community" },
+  "footer.discussion": { "message": "Diskussion" },
+  "footer.stats": { "message": "Datenübersicht" },
+  "footer.intern": { "message": "Praktikumsstellen" },
+  "footer.followus": { "message": "Folgen Sie uns" },
+  "footer.wechat": { "message": "WeChat-Account" },
+  "footer.qqgroup": { "message": "QQ Gruppe" },
+  "footer.plct": { "message": "PLCT Lab" },
+  "footer.tools": { "message": "Weitere Entwickler-Tools" },
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
+  "footer.ruyisdk": { "message": "RuyiSDK" },
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
 }

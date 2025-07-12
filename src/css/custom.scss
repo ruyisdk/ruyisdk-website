@@ -2125,8 +2125,10 @@ giscus-widget {
   font-weight: bolder;
   font-size: medium;
   position: absolute;
-  left: -50%;
-  top: -10rem;
+  left: 50%;
+  top: auto;
+  bottom: calc(100% + 12px);  /* 12px 间距，可根据需要调整 */
+  transform: translateX(-50%);
   width: 10rem;
   height: 10rem;
   background-size: cover;
@@ -2157,8 +2159,10 @@ giscus-widget {
   font-weight: bolder;
   font-size: medium;
   position: absolute;
-  left: -100%;
-  top: -10rem;
+  left: 50%;
+  top: auto;
+  bottom: calc(100% + 12px);
+  transform: translateX(-50%);
   width: 10rem;
   height: 10rem;
   background-size: cover;

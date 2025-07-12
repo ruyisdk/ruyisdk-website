@@ -9,10 +9,21 @@
   box-sizing: border-box;
   flex-wrap: wrap;
   flex-direction: row;
+  min-width: 1100px;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
 }
 
 .card {
   width: 30%;
+  min-width: 350px;
+  box-sizing: border-box;
+  margin: 0 1.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -28,6 +39,8 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    min-width: 0;
+    overflow-x: unset;
   }
 
   .container::-webkit-scrollbar {
@@ -43,5 +56,6 @@
     justify-content: center;
     align-items: start;
     box-sizing: border-box;
+    min-width: 0;
   }
 }
