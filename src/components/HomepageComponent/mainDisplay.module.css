@@ -8,7 +8,7 @@
 
 /* Main container */
 .container {
-  padding: 2vw 8vw;
+  padding: 2vw 0; /* Only apply vertical padding */
   background-color: #f5f5f7;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
   width: 100%;
@@ -66,7 +66,7 @@
   max-width: 100%;
   width: 100%;
   margin: 0;
-  padding: 40px;
+  padding: 40px 8vw; /* Apply horizontal padding here */
   position: relative;
   z-index: 1;
   flex: 1;
@@ -292,5 +292,19 @@
 
   .buttonContainer {
     justify-content: center;
+  }
+}
+
+/* Apply max-width to the content block on wide screens */
+@media (min-width: 90rem) { /* 1440px */
+  .mainContent {
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contentRow {
+    justify-content: center;
+    gap: 80px;
   }
 }
