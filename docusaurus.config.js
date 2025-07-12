@@ -3,7 +3,6 @@
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
-
 import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
@@ -154,7 +153,7 @@ const config = {
             items: [
               {
                 label: "RISC-V 开发者社区",
-                href: "https://ruyisdk.cn"
+                href: "https://ruyisdk.cn",
               },
               {
                 label: "讨论组",
@@ -175,13 +174,13 @@ const config = {
             items: [
               {
                 label: "微信公众号",
-                className: 'hover-wechat-link',
-                to: '/contact'
+                className: "hover-wechat-link",
+                to: "/contact",
               },
               {
                 label: "QQ群",
-                className: 'hover-qq-link',
-                to: '/contact'
+                className: "hover-qq-link",
+                to: "/contact",
               },
               {
                 label: "PLCT 实验室",

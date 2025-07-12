@@ -4,21 +4,24 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import React from "react";
-import styles from "./styles.module.css";
-import SlideNews from "../../components/SlideNews";
 import MainDisplay from "../../components/HomepageComponent/MainDisplay";
-import RuyiInLive from "../../components/HomepageComponent/RuyiInLive";
 import NewsShowcase from "../../components/HomepageComponent/NewsShowcase";
+import RuyiInLive from "../../components/HomepageComponent/RuyiInLive";
 import WeChatLink from "../../components/HomepageComponent/WeChatLink";
-import DemoBoardsDisplay from "../../components/DemoDisplay"
-import BoardSelector from "../../components/BoardsFinder/BoardSelector";
+import styles from "./styles.module.css";
 
 function Hero() {
   return (
     <div className="homecontainer">
-      <div className={styles.container} style={{ display: "flex", justifyContent: "center", flexDirection: "column", width: "100%" }}>
+      <div
+        className={styles.container}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          width: "100%",
+        }}
+      >
         <MainDisplay />
         <RuyiInLive />
         <NewsShowcase />

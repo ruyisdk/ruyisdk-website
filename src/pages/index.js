@@ -4,23 +4,11 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import React from "react";
-
-import Head from "@docusaurus/Head";
-
-import Layout from "@theme/Layout";
-
 import Home from "./Home";
-
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
-
-import CallToAction from "./CallToAction";
-
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-
+import Head from "@docusaurus/Head";
 import { translate } from "@docusaurus/Translate";
-
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Layout from "@theme/Layout";
 
 const Index = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -32,7 +20,12 @@ const Index = () => {
       description="All-in-one integrated development environment for RISC-V architecture"
     >
       <Head>
-        <title>{translate({ id: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备", message: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备" })}</title>
+        <title>
+          {translate({
+            id: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备",
+            message: "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备",
+          })}
+        </title>
       </Head>
 
       <Home />
