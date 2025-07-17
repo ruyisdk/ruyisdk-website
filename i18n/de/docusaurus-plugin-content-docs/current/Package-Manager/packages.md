@@ -10,11 +10,15 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 Holen Sie sich den Inhalt der entfernten Softwarequelle und aktualisieren Sie den lokalen Paket-Cache. Standardmäßig wird das auf GitHub gehostete Spiegelbild verwendet:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi update`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi update`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Der Paket-Cache wird im Benutzerverzeichnis gespeichert, normalerweise unter ``~/.cache/ruyi/packages-index/``; wenn die Umgebungsvariable ``XDG_CACHE_HOME`` gesetzt ist, befindet sich das Verzeichnis unter ``$XDG_CACHE_HOME/ruyi/packages-index/``.
 
@@ -24,27 +28,39 @@ Da die aktuellen Paketindexinformationen im GitHub-Repository gehostet werden, k
 
 Die Konfigurationsdatei des Ruyi-Paketmanagers wird standardmäßig unter ``~/.config/ruyi/config.toml`` gespeichert, wenn ``XDG_CONFIG_HOME`` konfiguriert ist, befindet sie sich unter ``$XDG_CONFIG_HOME/ruyi/config.toml``. Wenn die Datei nicht existiert, können Sie sie selbst erstellen.
 
+<<<<<<< HEAD
 <CodeBlock lang="~/.config/ruyi/config.toml" code={
 
 `[repo]
 
+=======
+<CodeBlock lang="~/.config/ruyi/config.toml" code={`[repo]
+>>>>>>> 7803df1 (Update de codeblocks)
 local = ""
 
 remote = "https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git"
+<<<<<<< HEAD
 
 branch = "main"`
 
 } />
+=======
+branch = "main"`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Dabei steht ``local`` für das lokale Cache-Verzeichnis, ``remote`` für die Adresse des entfernten Spiegelservers und ``branch`` für den Git-Zweig, in dem sich das Spiegelbild befindet.
 
 Speichern Sie die Konfiguration und versuchen Sie erneut, den lokalen Cache zu aktualisieren:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi update`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi update`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ## Nachrichten lesen
 
@@ -54,10 +70,14 @@ Durch Ausführen von ``ruyi news list`` können Sie ebenfalls diese Seite aufruf
 
 Sie können die folgenden Befehle verwenden, um Nachrichten zu durchsuchen, zu lesen und als gelesen zu markieren:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi news list -h
 
+=======
+<CodeBlock lang="bash" code={`$ ruyi news list -h
+>>>>>>> 7803df1 (Update de codeblocks)
 $ ruyi news list
 
 $ ruyi news list --new        # Nur ungelesene Nachrichten auflisten
@@ -69,10 +89,14 @@ $ ruyi news read -h
 $ ruyi news read 1            # Nachricht mit der ID 1 lesen
 
 $ ruyi news read              # Alle ungelesenen Nachrichten lesen
+<<<<<<< HEAD
 
 $ ruyi news read --quiet      # Nichts ausgeben, nur ungelesene Nachrichten als gelesen markieren`
 
 } />
+=======
+$ ruyi news read --quiet      # Nichts ausgeben, nur ungelesene Nachrichten als gelesen markieren`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Ruyi markiert ungelesene Nachrichten, indem es die Titel in ``~/.local/state/ruyi/news.read.txt`` speichert. Wenn ``XDG_STATE_HOME`` konfiguriert ist, befindet sich der Dateipfad unter ``$XDG_STATE_HOME/ruyi/news.read.txt``.
 
@@ -97,10 +121,14 @@ Verwenden Sie den Befehl ``ruyi list``, um alle verfügbaren Pakete aufzulisten.
 
 Hier ist ein Beispiel auf einer ``x86_64``-Maschine; die tatsächliche Liste wird länger sein:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi list
 
+=======
+<CodeBlock lang="bash" code={`$ ruyi list
+>>>>>>> 7803df1 (Update de codeblocks)
 List of available packages:
 
 
@@ -174,10 +202,14 @@ List of available packages:
 * extra/wps-office
 
   - 12.1.0-r.17900 (latest)
+<<<<<<< HEAD
 
   - 12.1.0-r.17885 ()`
 
 } />
+=======
+  - 12.1.0-r.17885 ()`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Der Befehl ``list`` bietet auch die Parameter ``--verbose`` oder ``-v`` an, um detailliertere Informationen auszugeben, was fast alle Informationen aus der Softwarequelle druckt. Da die Ausgabe sehr lang sein kann, wird empfohlen, die Ausgabe in eine Datei oder in Tools wie ``less`` umzuleiten.
 
@@ -201,6 +233,7 @@ Die neueste Vorabversion. Wenn die Installation von Vorabversionen erlaubt ist u
 
 Wenn Sie tatsächlich eine Vorabversion installieren müssen, können Sie die Konfiguration in der Konfigurationsdatei hinzufügen:
 
+<<<<<<< HEAD
 <CodeBlock lang="~/.config/ruyi/config.toml" code={
 
 `[packages]
@@ -208,6 +241,10 @@ Wenn Sie tatsächlich eine Vorabversion installieren müssen, können Sie die Ko
 prereleases = true`
 
 } />
+=======
+<CodeBlock lang="~/.config/ruyi/config.toml" code={`[packages]
+prereleases = true`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ### ``no binary for current host``
 
@@ -217,11 +254,15 @@ In bestimmten Szenarien sollten Pakete, die nicht für die lokale Architektur be
 
 In diesem Fall können Sie angeben, dass ein Binärpaket für eine bestimmte Architektur installiert werden soll:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi install --host x86_64 wps-office`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi install --host x86_64 wps-office`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ## Installation von Binärpaketen
 
@@ -235,6 +276,7 @@ In der Regel sind die Pakete in den folgenden Kategorien Binärpakete:
 
 Diese Pakete können mit dem ``install``-Befehl installiert werden, z. B. um die GNU upstream gcc-Werkzeugkette zu installieren:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi install gnu-upstream
@@ -252,11 +294,21 @@ Die oben genannte Methode zur Installation durch Angabe des Paketnamens installi
 $ ruyi install 'gnu-upstream(>=0.20231118.0)'`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi install gnu-upstream
+$ ruyi install toolchain/gnu-upstream`} />
+
+Die oben genannte Methode zur Installation durch Angabe des Paketnamens installiert standardmäßig das als latest gekennzeichnete gnu-upstream-Paket. Wenn Sie eine bestimmte ältere Version von gnu-upstream installieren möchten, können Sie dies durch Angabe der Version tun:
+
+<CodeBlock lang="bash" code={`$ ruyi install 'gnu-upstream(0.20231118.0)'
+$ ruyi install 'gnu-upstream(>=0.20231118.0)'`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Die Ausdrücke unterstützen die Operatoren ``<``, ``>``, ``==``, ``<=``, ``>=`` und ``!=``.
 
 Wenn Sie mehrere Pakete installieren möchten:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi install gnu-plct gnu-upsteam llvm-plct llvm-upstream`
@@ -270,6 +322,13 @@ In einigen speziellen Fällen, wie z. B. wenn Sie versehentlich Dateien eines in
 `$ ruyi install --reinstall gnu-upstream`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi install gnu-plct gnu-upsteam llvm-plct llvm-upstream`} />
+
+In einigen speziellen Fällen, wie z. B. wenn Sie versehentlich Dateien eines installierten Pakets gelöscht haben, können Sie das Paket erneut installieren, um es wiederherzustellen:
+
+<CodeBlock lang="bash" code={`$ ruyi install --reinstall gnu-upstream`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Die vom Paketmanager heruntergeladenen Pakete werden unter ``~/.cache/ruyi/distfiles/`` gespeichert. Wenn ``XDG_CACHE_HOME`` angegeben ist, befindet sich der Pfad unter ``$XDG_CACHE_HOME/ruyi/distfiles/``. Diese Pakete liegen normalerweise in komprimierter Form vor und müssen mit Systemwerkzeugen entpackt werden. Wenn die entsprechenden Werkzeuge im System fehlen, wird eine entsprechende Warnung ausgegeben.
 
@@ -285,6 +344,7 @@ Die folgenden Kategorien von Paketen sind offensichtlich Quellpakete:
 
 Quellpakete können mit dem ``extract``-Befehl heruntergeladen und im aktuellen Verzeichnis entpackt werden:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi extract ruyisdk-demo
@@ -294,6 +354,11 @@ $ ls
 README.md  rvv-autovec`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi extract ruyisdk-demo
+$ ls
+README.md  rvv-autovec`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Der ``extract``-Befehl unterstützt die gleichen Versionsausdrücke wie der ``install``-Befehl.
 
@@ -301,11 +366,15 @@ Der ``extract``-Befehl unterstützt die gleichen Versionsausdrücke wie der ``in
 
 Der Ruyi-Paketmanager hat keine Funktion implementiert, um ein bestimmtes Ruyi-Paket zu deinstallieren. Sie können jedoch den folgenden Befehl verwenden, um alle heruntergeladenen und installierten Pakete zu löschen:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi self clean --distfiles --installed-pkgs`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi self clean --distfiles --installed-pkgs`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Wenn Sie darauf bestehen, ein bestimmtes Paket zu löschen, obwohl dies nicht empfohlen wird, können Sie es manuell löschen. Wenn Sie versehentlich einige Dateien gelöscht haben, Ruyi jedoch weiterhin glaubt, dass das Paket installiert ist, können Sie versuchen, es mit ``install --reinstall`` wiederherzustellen.
 

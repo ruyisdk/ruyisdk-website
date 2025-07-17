@@ -42,6 +42,7 @@ Sie können das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/release
 
 Im Folgenden nehmen wir die Architektur ``x86_64`` als Beispiel, um dem heruntergeladenen Binary Ausführungsrechte zu erteilen:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ chmod +x ./ruyi.amd64`
@@ -55,6 +56,13 @@ Installieren Sie die Binärdatei in das Verzeichnis, das im ``PATH`` enthalten i
 `$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ chmod +x ./ruyi.amd64`} />
+
+Installieren Sie die Binärdatei in das Verzeichnis, das im ``PATH`` enthalten ist:
+
+<CodeBlock lang="bash" code={`$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Wenn Ihr ``PATH`` das Verzeichnis ``~/.local/bin/`` enthält, könnte es die empfehlenswertere Wahl sein, ``ruyi`` in ``~/.local/bin/ruyi`` zu installieren. Installationen und Deinstallationen in diesem Verzeichnis benötigen keine Superuser-Rechte.
 
@@ -68,6 +76,7 @@ Derzeit können Arch-Linux-Benutzer den Ruyi-Paketmanager über den System-Paket
 
 Installieren Sie aus dem AUR, Beispiel mit ``yay``, beachten Sie, dass Sie als regulärer Benutzer arbeiten sollten:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ yay -S ruyi`
@@ -93,6 +102,19 @@ Installieren Sie mit ``pacman``:
 $ sudo pacman -S ruyi`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ yay -S ruyi`} />
+
+Um aus dem Arch Linux CN Software-Repository zu installieren, fügen Sie eine Konfiguration hinzu, indem Sie das ISCAS Open Source Mirror verwenden:
+
+<CodeBlock lang="bash" code={`[archlinuxcn]
+Server = https://mirror.iscas.ac.cn/archlinuxcn/$arch`} />
+
+Installieren Sie mit ``pacman``:
+
+<CodeBlock lang="bash" code={`$ sudo pacman -Sy
+$ sudo pacman -S ruyi`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ### Gentoo Linux
 
@@ -100,16 +122,21 @@ Gentoo-Linux-Nutzer können die folgenden Schritte ausführen, um den Ruyi-Paket
 
 1. Installieren Sie `eselect-repository` und den Git-Client:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `sudo emerge --ask app-eselect/eselect-repository dev-vcs/git`
 
 } />
+=======
+<CodeBlock lang="bash" code={`sudo emerge --ask app-eselect/eselect-repository dev-vcs/git`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 2. Stellen Sie sicher, dass das System das Hauptrepository von Gentoo hinzugefügt hat (dies ist in der Regel standardmäßig konfiguriert).
 
 3. Fügen Sie mit `eselect-repository` das Overlay `ruyisdk-overlay` hinzu:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git`
@@ -123,11 +150,19 @@ Gentoo-Linux-Nutzer können die folgenden Schritte ausführen, um den Ruyi-Paket
 `sudo emaint sync -r ruyisdk`
 
 } />
+=======
+<CodeBlock lang="bash" code={`sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git`} />
+
+4. Synchronisieren Sie das Repository
+
+<CodeBlock lang="bash" code={`sudo emaint sync -r ruyisdk`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 5. Test-Keywords akzeptieren (Entmaskieren)
 
 Das Ebuild für Ruyi ist als Testversion (`~amd64`) gekennzeichnet und muss vor der Installation entmaskiert werden.
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `sudo emerge dev-util/ruyi --autounmask-write --autounmask
@@ -135,26 +170,38 @@ Das Ebuild für Ruyi ist als Testversion (`~amd64`) gekennzeichnet und muss vor 
 sudo dispatch-conf`
 
 } />
+=======
+<CodeBlock lang="bash" code={`sudo emerge dev-util/ruyi --autounmask-write --autounmask
+sudo dispatch-conf`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 1. Der erste Befehl generiert die notwendigen Änderungen an `package.accept_keywords`.
 2. Führen Sie `dispatch-conf` aus und geben Sie im Interface `u` (use-new) ein, um die Änderungen zu übernehmen.
 3. Installieren Sie anschließend den Ruyi-Paketmanager:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `sudo emerge --ask dev-util/ruyi`
 
 } />
+=======
+<CodeBlock lang="bash" code={`sudo emerge --ask dev-util/ruyi`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ---
 
 ## Überprüfen Sie Ihre Installation
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi version`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi version`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Der Befehl sollte ordnungsgemäß ausgeführt werden und die Version sowie Copyright-Informationen anzeigen. Wenn dies nicht der Fall ist, überprüfen Sie die Systemumgebung oder versuchen Sie die Installation erneut.
 
@@ -164,11 +211,15 @@ Damit ist der Ruyi-Paketmanager erfolgreich auf Ihrem System installiert. Sie k�
 
 Hilfeinformationen auflisten:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi --help`
 
 } />
+=======
+<CodeBlock lang="bash" code={`$ ruyi --help`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
   </>
 </ReleaseProvider>

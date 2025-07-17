@@ -14,6 +14,7 @@ RuyiSDK bietet derzeit zwei Abbilddateien an: LP64 und ILP32. Diese können übe
 
    Derzeit bietet RuyiSDK für K230D RV64ILP32 (Xuantie neuer 32-Bit-Kernel + 32-Bit-rootfs) und RV64LP64 (konventionelles 64-Bit-System) an. Es wird empfohlen, das RV64ILP32-System zu installieren, um die Vorteile des neuen 32-Bit-Systems in Bezug auf den dynamischen Speicherverbrauch zu erleben.
 
+<<<<<<< HEAD
    <CodeBlock lang="bash" code={
 
    `   The following system configurations are supported by the device variant you have chosen. 
@@ -27,6 +28,13 @@ RuyiSDK bietet derzeit zwei Abbilddateien an: LP64 und ILP32. Diese können übe
         2. Canaan Kendryte K230D CanMV Linux SDK demo, RV64LP64 ABI`
 
    } />
+=======
+   <CodeBlock lang="bash" code={`   The following system configurations are supported by the device variant you have chosen. 
+   Please pick the one you want to put on the device:
+
+     1. Canaan Kendryte K230D CanMV Linux SDK demo, RV64ILP32 ABI
+     2. Canaan Kendryte K230D CanMV Linux SDK demo, RV64LP64 ABI`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ### Quellcode-Kompilierung
 
@@ -36,15 +44,20 @@ Die RuyiSDK-Adresse für K230D lautet: https://github.com/ruyisdk/k230_linux_sdk
 
 Das K230D SDK bietet eine [Kompilierungsanleitung](https://github.com/ruyisdk/k230_linux_sdk/blob/dev/README_zh.md) für das Abbild. Nach der Kompilierung befinden sich die Abbilddateien im Verzeichnis `output`. Je nach ausgeführtem defconfig werden sie in den folgenden Pfaden gespeichert:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `# 64ILP32
 
+=======
+<CodeBlock lang="bash" code={`# 64ILP32
+>>>>>>> 7803df1 (Update de codeblocks)
 output/k230d_canmv_ilp32_defconfig/images/sysimage-sdcard.img
 
 
 
 # 64LP64
+<<<<<<< HEAD
 
 output/k230d_canmv_lp64_defconfig/images/sysimage-sdcard.img`
 
@@ -61,6 +74,15 @@ Nach der Kompilierung entpacken Sie die Datei und brennen sie auf eine TF-Karte.
 sudo dd if=sysimage-sdcard.img of=/dev/sdb bs=1M oflag=sync`
 
 } />
+=======
+output/k230d_canmv_lp64_defconfig/images/sysimage-sdcard.img`} />
+
+Nach der Kompilierung entpacken Sie die Datei und brennen sie auf eine TF-Karte. Stecken Sie die TF-Karte in das Gerät und schalten Sie das Gerät ein, um es zu verwenden.
+
+<CodeBlock lang="bash" code={`# Angenommen, /dev/sdb ist der Geräteknoten der TF-Karte, führen Sie den folgenden Befehl aus, um die TF-Karte zu brennen:
+
+sudo dd if=sysimage-sdcard.img of=/dev/sdb bs=1M oflag=sync`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ## Start
 

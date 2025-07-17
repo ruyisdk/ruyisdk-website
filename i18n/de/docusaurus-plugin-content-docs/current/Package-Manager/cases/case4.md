@@ -27,6 +27,7 @@ Wenn das Flashen des Images mit einem normalen Benutzer fehlschlägt, versucht r
 
 Licheepi 4A wird über ein USB-Kabel mit dem PC verbunden und über fastboot geflasht. Wenn Sie den Flashing-Prozess nur mit einem normalen Benutzer durchführen möchten, müssen möglicherweise udev-Regeln konfiguriert werden. Hier finden Sie ein Beispiel für eine Regel, die nur als Referenz dient:
 
+<<<<<<< HEAD
 <CodeBlock lang="99-custom.rules" code={
 
 `SUBSYSTEM=="usb", ATTR{idVendor}="2345", ATTR{idProduct}=="7654", MODE="0666", GROUP="plugdev"
@@ -34,6 +35,10 @@ Licheepi 4A wird über ein USB-Kabel mit dem PC verbunden und über fastboot gef
 SUBSYSTEM=="usb", ATTR{idVendor}="1234", ATTR{idProduct}=="8888", MODE="0666", GROUP="plugdev"`
 
 } />
+=======
+<CodeBlock lang="/etc/udev/rules.d/99-custom-usb.rules" code={`SUBSYSTEM=="usb", ATTR{idVendor}="2345", ATTR{idProduct}=="7654", MODE="0666", GROUP="plugdev"
+SUBSYSTEM=="usb", ATTR{idVendor}="1234", ATTR{idProduct}=="8888", MODE="0666", GROUP="plugdev"`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 ## Betriebssysteminstallation
 
@@ -41,6 +46,7 @@ Stellen Sie sicher, dass der ruyi-Paketmanager installiert ist und dass `ruyi -V
 
 Der ruyi-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Image auf ein RISC-V-Entwicklungsboard zu installieren, führen Sie einfach den folgenden Befehl aus:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `ruyi device provision`
@@ -54,6 +60,13 @@ Dieser Befehl gibt die derzeit unterstützten RISC-V-Entwicklungsboards zurück.
 `RuyiSDK Device Provisioning Wizard
 
 
+=======
+<CodeBlock lang="bash" code={`ruyi device provision`} />
+
+Dieser Befehl gibt die derzeit unterstützten RISC-V-Entwicklungsboards zurück. Nach der Auswahl des Entwicklungsboards werden alle unterstützten Betriebssysteme für das ausgewählte Board angezeigt:
+
+<CodeBlock lang="bash" code={`RuyiSDK Device Provisioning Wizard
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Dieser Assistent soll Ihnen helfen, ein System auf Ihrem Gerät für Ihre Entwicklungszwecke zu installieren, und das alles mit Leichtigkeit.
 
@@ -93,15 +106,20 @@ Die folgenden Geräte werden derzeit vom Assistenten unterstützt. Bitte wählen
 
 9. StarFive VisionFive2
 
+<<<<<<< HEAD
 
 
 Auswahl? (1-9)`
 
 } />
+=======
+Auswahl? (1-9)`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Im obigen Beispiel, wenn Sie ein Image auf das Sipeed LicheePi 4A installieren möchten, geben Sie einfach die entsprechende Nummer ein: `7`
 
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 
@@ -110,6 +128,9 @@ Im obigen Beispiel, wenn Sie ein Image auf das Sipeed LicheePi 4A installieren m
 
 
 
+=======
+<CodeBlock lang="bash" code={`Auswahl? (1-9) 7
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Das Gerät hat die folgenden Varianten. Bitte wählen Sie diejenige aus, die Ihrer Hardware entspricht:
 
@@ -167,6 +188,7 @@ Wir sind dabei, die folgenden Pakete für Ihr Gerät herunterzuladen und zu inst
 
  * board-image/uboot-revyos-sipeed-lpi4a-16g
 
+<<<<<<< HEAD
 
 
 
@@ -175,5 +197,8 @@ Fortfahren? (y/N)`
 
 
 } />
+=======
+Fortfahren? (y/N)`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Sie müssen lediglich den Anweisungen des Assistenten folgen.

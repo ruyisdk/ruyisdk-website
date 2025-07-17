@@ -28,6 +28,7 @@ Stellen Sie sicher, dass der Ruyi-Paketmanager installiert ist und dass der Test
 
 Der Ruyi-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Abbild für ein beliebiges Modell eines RISC-V-Entwicklungsboards zu installieren, muss lediglich ausgeführt werden:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi device provision`
@@ -41,6 +42,13 @@ Dieser Befehl gibt die derzeit vom Tool unterstützten RISC-V-Entwicklungsboards
 `RuyiSDK Device Provisioning Wizard
 
 
+=======
+<CodeBlock lang="bash" code={`$ ruyi device provision`} />
+
+Dieser Befehl gibt die derzeit vom Tool unterstützten RISC-V-Entwicklungsboards zurück. Wählen Sie das Entwicklungsboard aus, um alle unterstützten Betriebssysteme für das angegebene Entwicklungsboard zu erhalten:
+
+<CodeBlock lang="bash" code={`RuyiSDK Device Provisioning Wizard
+>>>>>>> 7803df1 (Update de codeblocks)
 
 This is a wizard intended to help you install a system on your device for your
 
@@ -136,6 +144,7 @@ The following devices are currently supported by the wizard. Please pick your de
 
   30. WCH CH592X EVB
 
+<<<<<<< HEAD
 
 
 Choice? (1-30)`
@@ -149,6 +158,13 @@ Die Ausgabe sollte der tatsächlichen Situation entsprechen. In diesem Beispiel 
 `Choice? (1-30) 5
 
 
+=======
+Choice? (1-30)`} />
+
+Die Ausgabe sollte der tatsächlichen Situation entsprechen. In diesem Beispiel hat MilkV Duo die Nummer 5.
+
+<CodeBlock lang="bash" code={`Choice? (1-30) 5
+>>>>>>> 7803df1 (Update de codeblocks)
 
 The device has the following variants. Please choose the one corresponding to your hardware at hand:
 
@@ -158,21 +174,29 @@ The device has the following variants. Please choose the one corresponding to yo
 
   2. Milk-V Duo (256M RAM)
 
+<<<<<<< HEAD
 
 
 Choice? (1-2)`
 
 } />
+=======
+Choice? (1-2)`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Beachten Sie, dass MilkV Duo zwei Versionen hat, die die SOCs CV1800B und SG2002 verwenden, wobei die Version mit SG2002 auch als Duo 256M bezeichnet wird.
 
 Hier wählen wir als Beispiel die Version mit 64M RAM, also die Version mit SOC CV1800B.
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `Choice? (1-2) 1
 
 
+=======
+<CodeBlock lang="bash" code={`Choice? (1-2) 1
+>>>>>>> 7803df1 (Update de codeblocks)
 
 The following system configurations are supported by the device variant you have chosen. Please pick the one you want to put on the device:
 
@@ -181,6 +205,7 @@ The following system configurations are supported by the device variant you have
   1. Milk-V Duo Official Arduino SDK (64M RAM, SD card)
 
   2. Milk-V Duo Official buildroot SDK (64M RAM, SD card)
+<<<<<<< HEAD
 
   3. Milk-V Duo Official buildroot SDK (64M RAM, Lite, SD card)`
 
@@ -193,6 +218,13 @@ Wählen Sie hier je nach Bedarf aus, als Beispiel wählen wir ``2``.
 `Choice? (1-3) 2
 
 
+=======
+  3. Milk-V Duo Official buildroot SDK (64M RAM, Lite, SD card)`} />
+
+Wählen Sie hier je nach Bedarf aus, als Beispiel wählen wir ``2``.
+
+<CodeBlock lang="bash" code={`Choice? (1-3) 2
+>>>>>>> 7803df1 (Update de codeblocks)
 
 We are about to download and install the following packages for your device:
 
@@ -200,20 +232,28 @@ We are about to download and install the following packages for your device:
 
  * board-image/buildroot-sdk-milkv-duo
 
+<<<<<<< HEAD
 
 
 Proceed? (y/N)`
 
 } />
+=======
+Proceed? (y/N)`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Ruyi wird darauf hinweisen, welche Pakete im Verzeichnis board-image heruntergeladen werden und fragen, ob fortgefahren werden soll. Geben Sie ``y`` ein, um fortzufahren.
 
 Nach Abschluss des Downloads und der Entpackung werden Sie aufgefordert, den Pfad zum Laufwerk einzugeben:
 
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `For initializing this target device, you should plug into this host system the
 
+=======
+<CodeBlock lang="bash" code={`For initializing this target device, you should plug into this host system the
+>>>>>>> 7803df1 (Update de codeblocks)
 device's storage (e.g. SD card or NVMe SSD), or a removable disk to be
 
 reformatted as a live medium, and note down the corresponding device file
@@ -224,10 +264,14 @@ for partitions. You may consult e.g. sudo blkid output for the
 
 information you will need later.
 
+<<<<<<< HEAD
 
 
 Please give the path for the target's whole disk:`
 
 } />
+=======
+Please give the path for the target's whole disk:`} />
+>>>>>>> 7803df1 (Update de codeblocks)
 
 Zu diesem Zeitpunkt können Sie das gewünschte Laufwerk anschließen, dessen Abbild Sie schreiben möchten, und den absoluten Pfad des Geräts eingeben und auf den Abschluss des Schreibvorgangs warten.
