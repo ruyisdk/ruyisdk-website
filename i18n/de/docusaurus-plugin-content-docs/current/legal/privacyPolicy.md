@@ -1,3 +1,5 @@
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
 # Datenschutzrichtlinie
 
 RuyiSDK ist ein von der Softwareforschungsinstitut der Chinesischen Akademie der Wissenschaften (im Folgenden „ISCAS“ genannt) entwickeltes und gewartetes Entwicklungstoolset für RISC-V-Entwickler. ISCAS legt großen Wert auf Ihre Privatsphäre und verpflichtet sich, Ihre persönlichen Informationen zu schützen. Im Folgenden finden Sie die Datenschutzerklärung von ISCAS RuyiSDK (im Folgenden „wir“ genannt) zur Erhebung und Nutzung persönlicher Informationen (im Folgenden „diese Erklärung“). Bitte lesen Sie diese Erklärung sorgfältig durch, bevor Sie uns persönliche Informationen zur Verfügung stellen. Bei Fragen können Sie sich jederzeit gerne an uns wenden.
@@ -42,10 +44,13 @@ Sie können wählen, ob Sie an der Telemetrie teilnehmen möchten. Wenn Sie nich
 * Stellen Sie sicher, dass die Umgebungsvariable `RUYI_TELEMETRY_OPTOUT=1` vorhanden ist;
 * Fügen Sie in der Konfigurationsdatei `~/.config/ruyi/config.toml` den folgenden Inhalt hinzu:
 
-```toml
-[telemetry]
-mode = "off"
-```
+<CodeBlock lang="toml" code={
+
+`[telemetry]
+
+mode = "off"`
+
+} />
 
 ### 2.4 Löschen von Telemetriedaten
 
