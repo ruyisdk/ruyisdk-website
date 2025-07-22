@@ -49,6 +49,7 @@ Sie können die folgenden Befehle verwenden, um Nachrichten zu durchsuchen, zu l
 $ ruyi news list -h
 $ ruyi news list
 $ ruyi news list --new        # Nur ungelesene Nachrichten auflisten
+
 $ ruyi news read -h
 $ ruyi news read 1            # Nachricht mit der ID 1 lesen
 $ ruyi news read              # Alle ungelesenen Nachrichten lesen
