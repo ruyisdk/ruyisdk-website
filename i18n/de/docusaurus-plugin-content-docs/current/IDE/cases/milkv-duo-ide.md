@@ -31,15 +31,17 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 Dieser Artikel verwendet das Anwendungsbeispiel duo-examples des milkv-duo Entwicklungskits. Verwenden Sie eine der folgenden Methoden, um den Quellcode zu erhalten:
 
- <CodeBlock lang="bash" code={`
- # Methode 1: git clone
+<CodeBlock lang="bash" code={`
 
- git clone https://github.com/milkv-duo/duo-examples.git
+# Methode 1: git clone
+
+git clone https://github.com/milkv-duo/duo-examples.git
 
 
- # Methode 2: ruyi extract Befehl herunterladen
- ruyi extract milkv-duo-examples
- `} />
+# Methode 2: ruyi extract Befehl herunterladen
+ruyi extract milkv-duo-examples
+
+`} />
 
 ### Importieren und Einstellen der Projekteigenschaften
 
@@ -80,6 +82,7 @@ Dieser Artikel verwendet das Anwendungsbeispiel duo-examples des milkv-duo Entwi
    # Eclipse Toolchain Einstellungen
    #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
    TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+
    # Kompilierungsoptionen -O3  
    #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I/home/phebe/milkv/duo/duo-examples/include/system
    #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
@@ -196,14 +199,18 @@ Die Debugging-Ergebnisse des helloworld-Beispiels sind nicht optimal. Um die Fun
 sumdemo.c
 
 <CodeBlock lang="c" code={`
+
 #include <stdio.h>
 
 
 int Sum(int s, int e)
+
 {
+
     int result = 0;
 
     for(int i = s; i <= e; i++)
+
     {
 
         result += i;
@@ -215,19 +222,24 @@ int Sum(int s, int e)
 
 
 int main()
+
 {
+
     int start = 1;
+
     int end = 10;
-    int n;
 
     printf("Ich werde beginnen\\n");
 
-    n = Sum(start, end);
+    int n = Sum(start, end);
 
     printf("Ausführung abgeschlossen, Ergebnis ist: [%d-%d]=%d\\n", start, end, n);
 
     return 0;
+
 }
+
+
 `} />
 
 Makefile:
@@ -302,6 +314,7 @@ clean:
 # Lassen Sie das 'all' Ziel von 'upload' abhängen, um es nach dem Build automatisch hochzuladen
 
 all: upload
+
 `} />
 
 #### Vorbereitung des gdbserver
@@ -312,8 +325,11 @@ Das Original-Buildroot-Image enthält keinen gdbserver. Sie können die ausführ
 2. Kopieren Sie das heruntergeladene gdbserver in den Pfad des milkv duo Geräts:
 
    <CodeBlock lang="bash" code={`
+
    scp gdbserver root@192.168.42.1:/usr/bin/
+
    ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"
+
    `} />
 
 #### Debugging im Terminal
@@ -351,6 +367,7 @@ Die Schritte für das Remote-Debugging mit GDBServer + GDB-Befehlen sind wie fol
    c                                 # continue, setzen Sie die Programmausführung fort, bis der nächste Haltepunkt erreicht wird
    disp result                       # Verfolgen Sie eine Variable, um ihren Wert bei jedem Haltepunkt anzuzeigen
    print result                      # Drucken Sie die interne Variable result
+
    `} />
 
 ![1736326691511](image/1736326691511.png)
@@ -403,9 +420,11 @@ Durch die Konfiguration von ssh-key für den Host und milkv duo zur passwortlose
     2. Fügen Sie den öffentlichen Schlüssel zu milkv duo hinzu:
 
     <CodeBlock lang="bash" code={`
+
     #cat ~/.ssh/id_rsa.pub | ssh username@milkv_duo_ip_address 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 
     cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+
    `} />
 
     3. Überprüfen: ssh root@192.168.42.1
