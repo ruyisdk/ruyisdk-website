@@ -2,6 +2,8 @@
 sidebar_position: 3
 ---
 
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
 # dd-Methode zur Installation auf einem Entwicklungsboard (am Beispiel MilkV Duo)
 
 Derzeit bietet der Ruyi-Paketmanager eine einfachere Möglichkeit zur Installation von Betriebssystemen, die durch die folgenden Schritte und entsprechenden Anleitungen abgeschlossen werden kann.
@@ -26,13 +28,13 @@ Stellen Sie sicher, dass der Ruyi-Paketmanager installiert ist und dass der Test
 
 Der Ruyi-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Abbild für ein beliebiges Modell eines RISC-V-Entwicklungsboards zu installieren, muss lediglich ausgeführt werden:
 
-```bash
+<CodeBlock lang="bash" code={`
 $ ruyi device provision
-```
+`} />
 
 Dieser Befehl gibt die derzeit vom Tool unterstützten RISC-V-Entwicklungsboards zurück. Wählen Sie das Entwicklungsboard aus, um alle unterstützten Betriebssysteme für das angegebene Entwicklungsboard zu erhalten:
 
-```
+<CodeBlock lang="bash" code={`
 RuyiSDK Device Provisioning Wizard
 
 This is a wizard intended to help you install a system on your device for your
@@ -83,12 +85,12 @@ The following devices are currently supported by the wizard. Please pick your de
   29. WCH CH582F EVB
   30. WCH CH592X EVB
 
-Choice? (1-30) 
-```
+Choice? (1-30)
+`} />
 
 Die Ausgabe sollte der tatsächlichen Situation entsprechen. In diesem Beispiel hat MilkV Duo die Nummer 5.
 
-```
+<CodeBlock lang="bash" code={`
 Choice? (1-30) 5
 
 The device has the following variants. Please choose the one corresponding to your hardware at hand:
@@ -97,13 +99,13 @@ The device has the following variants. Please choose the one corresponding to yo
   2. Milk-V Duo (256M RAM)
 
 Choice? (1-2)
-```
+`} />
 
 Beachten Sie, dass MilkV Duo zwei Versionen hat, die die SOCs CV1800B und SG2002 verwenden, wobei die Version mit SG2002 auch als Duo 256M bezeichnet wird.
 
 Hier wählen wir als Beispiel die Version mit 64M RAM, also die Version mit SOC CV1800B.
 
-```
+<CodeBlock lang="bash" code={`
 Choice? (1-2) 1
 
 The following system configurations are supported by the device variant you have chosen. Please pick the one you want to put on the device:
@@ -111,11 +113,11 @@ The following system configurations are supported by the device variant you have
   1. Milk-V Duo Official Arduino SDK (64M RAM, SD card)
   2. Milk-V Duo Official buildroot SDK (64M RAM, SD card)
   3. Milk-V Duo Official buildroot SDK (64M RAM, Lite, SD card)
-```
+`} />
 
 Wählen Sie hier je nach Bedarf aus, als Beispiel wählen wir ``2``.
 
-```
+<CodeBlock lang="bash" code={`
 Choice? (1-3) 2
 
 We are about to download and install the following packages for your device:
@@ -123,13 +125,13 @@ We are about to download and install the following packages for your device:
  * board-image/buildroot-sdk-milkv-duo
 
 Proceed? (y/N)
-```
+`} />
 
 Ruyi wird darauf hinweisen, welche Pakete im Verzeichnis board-image heruntergeladen werden und fragen, ob fortgefahren werden soll. Geben Sie ``y`` ein, um fortzufahren.
 
 Nach Abschluss des Downloads und der Entpackung werden Sie aufgefordert, den Pfad zum Laufwerk einzugeben:
 
-```
+<CodeBlock lang="bash" code={`
 For initializing this target device, you should plug into this host system the
 device's storage (e.g. SD card or NVMe SSD), or a removable disk to be
 reformatted as a live medium, and note down the corresponding device file
@@ -138,6 +140,6 @@ for partitions. You may consult e.g. sudo blkid output for the
 information you will need later.
 
 Please give the path for the target's whole disk:
-```
+`} />
 
 Zu diesem Zeitpunkt können Sie das gewünschte Laufwerk anschließen, dessen Abbild Sie schreiben möchten, und den absoluten Pfad des Geräts eingeben und auf den Abschluss des Schreibvorgangs warten.

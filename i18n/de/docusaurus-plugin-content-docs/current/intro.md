@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
 # Hello Ruyi
 
 Willkommen bei der Einführung zu [RuyiSDK](https://github.com/ruyisdk). Im Folgenden finden Sie die relevanten Inhalte dieses Dokuments:
@@ -35,7 +37,7 @@ RuyiSDK besteht aus den folgenden drei Teilen:
 
 Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstellt:
 
-```
+<CodeBlock lang=" " code={`
 1. Toolchains
 2. Debugging-Tools
 3. Emulatoren
@@ -44,7 +46,7 @@ Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstel
 6. Quellcode
 7. Tools und Systemimages
 8. GUI (TODO)
-```
+`} />
 
 ### [Ruyi IDE](/docs/category/ruyisdk-ide)
 
@@ -100,9 +102,9 @@ Weitere Informationen finden Sie [hier](/docs/Package-Manager/installation).
 
 Der erste Schritt:
 
-```bash
+<CodeBlock lang="bash" code={`
 $ ruyi device provision
-```
+`} />
 
 > Dieser Befehl erkennt die Hardwareinformationen und beginnt automatisch mit der Bereitstellung der RISC-V-Entwicklungsumgebung. Folgen Sie einfach den Anweisungen.
 
