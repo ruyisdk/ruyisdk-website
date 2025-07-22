@@ -72,15 +72,12 @@ ruyi list profiles
 ruyi venv -h
 
 # Erstellen der virtuellen Umgebung venv-sipeed
-
 ruyi venv -t gnu-plct-xthead sipeed-lpi4a venv-sipeed 
 
 # Überprüfen der Tools in der Compilerumgebung
-
 ls venv-sipeed/bin/ 
 
 # Aktivieren der virtuellen Umgebung (die virtuelle Umgebung kann als ein Container verstanden werden, der eine Isolierung der Laufzeitumgebung ermöglicht. Nach der Aktivierung wird in der venv-sipeed-Umgebung die Toolchain der Version gnu-plct-xthead genutzt. Alternativ kann auch eine Umgebungsvariable für /home/sipeed/.local/share/ruyi/binaries/riscv64/gnu-plct-xthead-2.8.0-ruyi.20240222/bin konfiguriert werden, um gcc direkt zu verwenden.)
-
 . venv-sipeed/bin/ruyi-activate 
 
 # Überprüfen, ob gcc in der aktuellen virtuellen Umgebung verfügbar ist
