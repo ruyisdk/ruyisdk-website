@@ -68,6 +68,7 @@ Die folgenden Geräte werden derzeit vom Assistenten unterstützt. Bitte wählen
 9. StarFive VisionFive2
 
 Auswahl? (1-9)
+
 `} />
 
 Im obigen Beispiel, wenn Sie ein Image auf das Sipeed LicheePi 4A installieren möchten, geben Sie einfach die entsprechende Nummer ein: `7`
@@ -97,6 +98,7 @@ Wir sind dabei, die folgenden Pakete für Ihr Gerät herunterzuladen und zu inst
  * board-image/uboot-revyos-sipeed-lpi4a-16g
 
 Fortfahren? (y/N)
+
 `} />
 
 Sie müssen lediglich den Anweisungen des Assistenten folgen.
