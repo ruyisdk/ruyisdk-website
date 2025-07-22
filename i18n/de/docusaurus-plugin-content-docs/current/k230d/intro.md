@@ -20,6 +20,7 @@ RuyiSDK bietet derzeit zwei Abbilddateien an: LP64 und ILP32. Diese können übe
 
      1. Canaan Kendryte K230D CanMV Linux SDK demo, RV64ILP32 ABI
      2. Canaan Kendryte K230D CanMV Linux SDK demo, RV64LP64 ABI
+
    `} />
 
 ### Quellcode-Kompilierung
@@ -33,6 +34,7 @@ Das K230D SDK bietet eine [Kompilierungsanleitung](https://github.com/ruyisdk/k2
 <CodeBlock lang="bash" code={`
 # 64ILP32
 output/k230d_canmv_ilp32_defconfig/images/sysimage-sdcard.img
+
 # 64LP64
 output/k230d_canmv_lp64_defconfig/images/sysimage-sdcard.img
 `} />
