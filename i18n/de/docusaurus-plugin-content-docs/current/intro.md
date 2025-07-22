@@ -37,18 +37,10 @@ RuyiSDK besteht aus den folgenden drei Teilen:
 
 Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstellt:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <CodeBlock lang=" " code={
 
 `1. Toolchains
 
-=======
-<CodeBlock lang="" code={`1. Toolchains
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-<CodeBlock lang="" code={`1. Toolchains
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 2. Debugging-Tools
 
 3. Emulatoren
@@ -60,18 +52,10 @@ Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstel
 6. Quellcode
 
 7. Tools und Systemimages
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 8. GUI (TODO)`
 
 } />
-=======
-8. GUI (TODO)`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-8. GUI (TODO)`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 ### [Ruyi IDE](/docs/category/ruyisdk-ide)
 
@@ -127,19 +111,11 @@ Weitere Informationen finden Sie [hier](/docs/Package-Manager/installation).
 
 Der erste Schritt:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ ruyi device provision`
 
 } />
-=======
-<CodeBlock lang="bash" code={`$ ruyi device provision`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-<CodeBlock lang="bash" code={`$ ruyi device provision`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 > Dieser Befehl erkennt die Hardwareinformationen und beginnt automatisch mit der Bereitstellung der RISC-V-Entwicklungsumgebung. Folgen Sie einfach den Anweisungen.
 

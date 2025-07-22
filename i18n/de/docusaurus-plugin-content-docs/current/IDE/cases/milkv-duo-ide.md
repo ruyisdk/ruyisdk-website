@@ -7,20 +7,10 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 1. Installieren Sie den RuyiSDK Paketmanager [Referenz](/docs/Package-Manager/installation)
 2. Installieren Sie den gnu-milkv-milkv-duo-musl Compiler
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <CodeBlock lang="bash" code={
-=======
-=======
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
-   <CodeBlock lang="bash" code={`   # Überprüfen Sie die Ressourcen des Software-Repositorys
-   ruyi list
->>>>>>> 7803df1 (Update de codeblocks)
 
    `   # Überprüfen Sie die Ressourcen des Software-Repositorys
 
-<<<<<<< HEAD
-<<<<<<< HEAD
       ruyi list
 
    
@@ -49,24 +39,6 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
       ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo`
 
    } />
-=======
-   # Aus den Rückgabedaten können Sie den Installationspfad einsehen, z.B. ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-bin-0.20240731.0+git.67688c7335e7`} />
-3. Erstellen und verwenden Sie die Duo-Kompilierungsumgebung
-
-=======
-   # Aus den Rückgabedaten können Sie den Installationspfad einsehen, z.B. ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-bin-0.20240731.0+git.67688c7335e7`} />
-3. Erstellen und verwenden Sie die Duo-Kompilierungsumgebung
-
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
-   <CodeBlock lang="bash" code={`   # Überprüfen Sie die vordefinierten Umgebungen von ruyi
-   # ruyi list profiles
-
-   # Erstellen Sie eine virtuelle Umgebung: Toolchain ist gnu-milkv-milkv-duo-musl-bin
-   ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo`} />
-<<<<<<< HEAD
->>>>>>> 7803df1 (Update de codeblocks)
-=======
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 ## Entwicklung in der IDE
 
@@ -74,19 +46,11 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 Dieser Artikel verwendet das Anwendungsbeispiel duo-examples des milkv-duo Entwicklungskits. Verwenden Sie eine der folgenden Methoden, um den Quellcode zu erhalten:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `# Methode 1: git clone
 
 
-=======
-<CodeBlock lang="bash" code={`# Methode 1: git clone
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-<CodeBlock lang="bash" code={`# Methode 1: git clone
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 git clone https://github.com/milkv-duo/duo-examples.git
 
@@ -96,19 +60,11 @@ git clone https://github.com/milkv-duo/duo-examples.git
 
 # Methode 2: ruyi extract Befehl herunterladen
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 ruyi extract milkv-duo-examples`
 
 } />
-=======
-ruyi extract milkv-duo-examples`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-ruyi extract milkv-duo-examples`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 ### Importieren und Einstellen der Projekteigenschaften
 
@@ -145,16 +101,7 @@ ruyi extract milkv-duo-examples`} />
    - Um die automatische Kopie vom Build zum Zielprogramm auf das Zielgerät zu realisieren, wurde im Makefile auch das Upload-Ziel hinzugefügt (dies setzt voraus, dass die SSH-Authentifizierung zwischen PC und Zielgerät abgeschlossen ist; bitte beachten Sie die "SSH-Schlüsselkonfiguration" am Ende). Außerdem müssen die entsprechenden Verzeichnisse auf dem Zielgerät im Voraus erstellt werden (der Speicherort kann angepasst werden, aber bitte ändern Sie den Pfad nach dem scp-Befehl, um sicherzustellen, dass er mit der tatsächlichen Umgebung übereinstimmt).
    - Sie können das folgende Makefile weiter anpassen; dieser Artikel bietet nur einen Referenzansatz.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <CodeBlock lang="makefile" code={
-=======
-=======
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
-   <CodeBlock lang="makefile" code={`   # Eclipse Toolchain Einstellungen
-   #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
-   TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
->>>>>>> 7803df1 (Update de codeblocks)
 
    `   # Eclipse Toolchain Einstellungen
 
@@ -178,7 +125,6 @@ ruyi extract milkv-duo-examples`} />
 
       TARGET=helloworld
 
-<<<<<<< HEAD
    
 
       ifeq (,$(TOOLCHAIN_PREFIX))
@@ -246,13 +192,6 @@ ruyi extract milkv-duo-examples`} />
       all: upload`
 
    } />
-=======
-   # Lassen Sie das 'all' Ziel von 'upload' abhängen, um es nach dem Build automatisch hochzuladen
-   all: upload`} />
-<<<<<<< HEAD
->>>>>>> 7803df1 (Update de codeblocks)
-=======
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 6. Öffnen Sie das Terminalfenster in der IDE und erstellen Sie ein SSH-Terminal, um sich bequem in das Zielgerät einzuloggen und relevante Operationen durchzuführen. Wenn nötig, können Sie auch ein zusätzliches lokales Terminalfenster erstellen. Dies hängt von Ihren persönlichen Vorlieben ab. Die spezifischen Schritte sind:
 
    - Fenster > Ansicht anzeigen > Terminal
@@ -327,20 +266,12 @@ Die Debugging-Ergebnisse des helloworld-Beispiels sind nicht optimal. Um die Fun
 
 sumdemo.c
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <CodeBlock lang="c" code={
 
 `#include <stdio.h>
 
 
 
-=======
-<CodeBlock lang="c" code={`#include <stdio.h>
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-<CodeBlock lang="c" code={`#include <stdio.h>
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 
 int Sum(int s, int e)
@@ -395,8 +326,6 @@ int main()
 
     int end = 10;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
     printf("Ich werde beginnen\\n");
@@ -425,36 +354,6 @@ Makefile:
 
 `# Eclipse Toolchain Einstellungen
 
-=======
-    printf("Ich werde beginnen\\n");
-
-    int n = Sum(start, end);
-
-    printf("Ausführung abgeschlossen, Ergebnis ist: [%d-%d]=%d\\n", start, end, n);
-
-    return 0;
-
-}`} />
-
-Makefile:
-
-<CodeBlock lang="makefile" code={`# Eclipse Toolchain Einstellungen
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-    printf("Ich werde beginnen\\n");
-
-    int n = Sum(start, end);
-
-    printf("Ausführung abgeschlossen, Ergebnis ist: [%d-%d]=%d\\n", start, end, n);
-
-    return 0;
-
-}`} />
-
-Makefile:
-
-<CodeBlock lang="makefile" code={`# Eclipse Toolchain Einstellungen
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
 
 TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
@@ -587,19 +486,11 @@ clean:
 
 # Lassen Sie das 'all' Ziel von 'upload' abhängen, um es nach dem Build automatisch hochzuladen
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 all: upload`
 
 } />
-=======
-all: upload`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-all: upload`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 #### Vorbereitung des gdbserver
 
@@ -608,8 +499,6 @@ Das Original-Buildroot-Image enthält keinen gdbserver. Sie können die ausführ
 1. Laden Sie das Original-gdbserver-Executable herunter: https://github.com/milkv-duo/duo-buildroot-sdk/blob/develop/ramdisk/rootfs/public/gdbserver/riscv_musl/usr/bin/gdbserver
 2. Kopieren Sie das heruntergeladene gdbserver in den Pfad des milkv duo Geräts:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <CodeBlock lang="bash" code={
 
    `   scp gdbserver root@192.168.42.1:/usr/bin/
@@ -619,16 +508,6 @@ Das Original-Buildroot-Image enthält keinen gdbserver. Sie können die ausführ
       ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"`
 
    } />
-=======
-   <CodeBlock lang="bash" code={`   scp gdbserver root@192.168.42.1:/usr/bin/
-
-   ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-   <CodeBlock lang="bash" code={`   scp gdbserver root@192.168.42.1:/usr/bin/
-
-   ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 #### Debugging im Terminal
 
@@ -640,8 +519,6 @@ Die Schritte für das Remote-Debugging mit GDBServer + GDB-Befehlen sind wie fol
 
 1. Auf der milkvduo-Geräteseite (im Verzeichnis von helloworld ausführen):
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <CodeBlock lang="bash" code={
 
    `   [root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
@@ -654,22 +531,6 @@ Die Schritte für das Remote-Debugging mit GDBServer + GDB-Befehlen sind wie fol
 2. Auf der PC-Seite (im Verzeichnis von helloworld.c ausführen):
 
    <CodeBlock lang="bash" code={
-=======
-   <CodeBlock lang="bash" code={`   [root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
-   Prozess ./sumdemo erstellt; pid = 1802
-   Lauschen auf Port 2345`} />
-2. Auf der PC-Seite (im Verzeichnis von helloworld.c ausführen):
-=======
-   <CodeBlock lang="bash" code={`   [root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
-   Prozess ./sumdemo erstellt; pid = 1802
-   Lauschen auf Port 2345`} />
-2. Auf der PC-Seite (im Verzeichnis von helloworld.c ausführen):
-
-   <CodeBlock lang="bash" code={`   cd ~/ews-milkvduo-t01/sumdemo
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
-
-   <CodeBlock lang="bash" code={`   cd ~/ews-milkvduo-t01/sumdemo
->>>>>>> 7803df1 (Update de codeblocks)
 
    `   cd ~/ews-milkvduo-t01/sumdemo
 
@@ -677,7 +538,6 @@ Die Schritte für das Remote-Debugging mit GDBServer + GDB-Befehlen sind wie fol
 
       # Überprüfen Sie die gdb-Version und starten Sie das Debugging
 
-<<<<<<< HEAD
       # Hier verwenden wir die ruyi virtuelle Umgebung für das Debugging, aktivieren Sie die virtuelle Umgebung und kompilieren Sie in der virtuellen Umgebung
 
       source ~/venv-milkvduo/bin/ruyi-activate 
@@ -705,15 +565,6 @@ Die Schritte für das Remote-Debugging mit GDBServer + GDB-Befehlen sind wie fol
       print result                      # Drucken Sie die interne Variable result`
 
    } />
-=======
-   # Die folgenden Befehle sind möglicherweise nützlich, verwenden Sie sie nach Bedarf
-   c                                 # continue, setzen Sie die Programmausführung fort, bis der nächste Haltepunkt erreicht wird
-   disp result                       # Verfolgen Sie eine Variable, um ihren Wert bei jedem Haltepunkt anzuzeigen
-   print result                      # Drucken Sie die interne Variable result`} />
-<<<<<<< HEAD
->>>>>>> 7803df1 (Update de codeblocks)
-=======
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 ![1736326691511](image/1736326691511.png)
 
@@ -764,8 +615,6 @@ Durch die Konfiguration von ssh-key für den Host und milkv duo zur passwortlose
 
     2. Fügen Sie den öffentlichen Schlüssel zu milkv duo hinzu:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     <CodeBlock lang="bash" code={
 
     `    #cat ~/.ssh/id_rsa.pub | ssh username@milkv_duo_ip_address 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
@@ -775,16 +624,6 @@ Durch die Konfiguration von ssh-key für den Host und milkv duo zur passwortlose
         cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'`
 
     } />
-=======
-    <CodeBlock lang="bash" code={`    #cat ~/.ssh/id_rsa.pub | ssh username@milkv_duo_ip_address 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
-
-    cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'`} />
->>>>>>> 7803df1 (Update de codeblocks)
-=======
-    <CodeBlock lang="bash" code={`    #cat ~/.ssh/id_rsa.pub | ssh username@milkv_duo_ip_address 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
-
-    cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'`} />
->>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
     3. Überprüfen: ssh root@192.168.42.1
 
