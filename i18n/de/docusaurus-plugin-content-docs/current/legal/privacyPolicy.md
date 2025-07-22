@@ -45,6 +45,7 @@ Sie können wählen, ob Sie an der Telemetrie teilnehmen möchten. Wenn Sie nich
 * Fügen Sie in der Konfigurationsdatei `~/.config/ruyi/config.toml` den folgenden Inhalt hinzu:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <CodeBlock lang="toml" code={
 
 `[telemetry]
@@ -56,6 +57,10 @@ mode = "off"`
 <CodeBlock lang="toml" code={`[telemetry]
 mode = "off"`} />
 >>>>>>> 7803df1 (Update de codeblocks)
+=======
+<CodeBlock lang="toml" code={`[telemetry]
+mode = "off"`} />
+>>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 ### 2.4 Löschen von Telemetriedaten
 

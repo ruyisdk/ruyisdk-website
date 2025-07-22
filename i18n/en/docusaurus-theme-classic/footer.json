@@ -61,6 +61,7 @@
   "link.item.label.PLCT 实验室": {
     "message": "PLCT Lab",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "description": "The label of footer link with label=PLCT Lab linking to plctlab.org"
   },
   "link.item.label.RISC-V 开发者社区": {
@@ -71,6 +72,12 @@
   "link.item.label.Ruyi社区": {
     "message": "Ruyi Community (Chinese Website)",
 >>>>>>> 09deba4 (Add translations)
+=======
+    "description": "The label of footer link with label=PLCT Lab linking to plctlab.org"
+  },
+  "link.item.label.Ruyi社区": {
+    "message": "Ruyi Community (Chinese Website)",
+>>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
     "description": "The label of footer link with label=Ruyi Community (Chinese Website) linking to ruyisdk.cn"
   }
 }

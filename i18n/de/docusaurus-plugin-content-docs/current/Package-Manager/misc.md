@@ -13,6 +13,7 @@ Wenn Sie den vorcompilierten Einzelbinär-Installer für den Ruyi-Paketmanager v
 Wenn Sie den Ruyi-Paketmanager über den System-Paketmanager installiert haben, können Sie ihn direkt über den System-Paketmanager aktualisieren:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
 `$ sudo pacman -Syuu`
@@ -21,6 +22,9 @@ Wenn Sie den Ruyi-Paketmanager über den System-Paketmanager installiert haben, 
 =======
 <CodeBlock lang="bash" code={`$ sudo pacman -Syuu`} />
 >>>>>>> 7803df1 (Update de codeblocks)
+=======
+<CodeBlock lang="bash" code={`$ sudo pacman -Syuu`} />
+>>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 Dieser Befehl führt ein umfassendes Upgrade auf Arch Linux durch. Beachten Sie, dass Arch Linux keine Teil-Upgrades unterstützt.
 
@@ -30,6 +34,7 @@ Wenn Sie den Ruyi-Paketmanager über den System-Paketmanager installiert haben, 
 
 Wenn Sie den vorcompilierten Einzelbinär-Installer für den Ruyi-Paketmanager verwenden, können Sie den Ruyi-Paketmanager mit dem folgenden Befehl deinstallieren:
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
@@ -75,11 +80,27 @@ Ebenso wird dieser Befehl um eine zweite Bestätigung für diese Aktion bitten. 
 
 <CodeBlock lang="bash" code={`$ ruyi self uninstall --purge -y`} />
 >>>>>>> 7803df1 (Update de codeblocks)
+=======
+<CodeBlock lang="bash" code={`$ ruyi self uninstall`} />
+
+Dieser Befehl wird um eine zweite Bestätigung für diese Aktion bitten. Wenn Sie möchten, dass der Ruyi-Paketmanager nicht nachfragt und die Deinstallation direkt ausführt:
+
+<CodeBlock lang="bash" code={`$ ruyi self uninstall -y`} />
+
+Der obige Befehl entfernt nur den Ruyi-Paketmanager selbst. Wenn Sie alle Caches und installierten Pakete für eine saubere Deinstallation entfernen möchten:
+
+<CodeBlock lang="bash" code={`$ ruyi self uninstall --purge`} />
+
+Ebenso wird dieser Befehl um eine zweite Bestätigung für diese Aktion bitten. Wenn Sie möchten, dass der Ruyi-Paketmanager nicht nachfragt und die Deinstallation direkt ausführt:
+
+<CodeBlock lang="bash" code={`$ ruyi self uninstall --purge -y`} />
+>>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 Der Ruyi-Paketmanager wurde so konzipiert, dass er Operationen vermeidet, die Superuser-Rechte erfordern. Wenn der Ruyi-Paketmanager in einem Verzeichnis wie ``/usr/local/bin/`` installiert ist, das Superuser-Rechte für Änderungen benötigt, wird der Befehl ``ruyi self uninstall`` fehlschlagen.
 
 In diesem Fall können Sie alle Caches und installierten Pakete manuell löschen (da sie im Home-Verzeichnis installiert sind, benötigen Sie keine Superuser-Rechte zum Löschen):
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <CodeBlock lang="bash" code={
 
@@ -89,6 +110,9 @@ In diesem Fall können Sie alle Caches und installierten Pakete manuell löschen
 =======
 <CodeBlock lang="bash" code={`$ ruyi self clean --all`} />
 >>>>>>> 7803df1 (Update de codeblocks)
+=======
+<CodeBlock lang="bash" code={`$ ruyi self clean --all`} />
+>>>>>>> 7803df14c8e9d3d8cd0d62575fe9f8861bbbd7bf
 
 Danach können Sie den Ruyi-Paketmanager manuell entfernen.
 
