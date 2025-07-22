@@ -15,6 +15,7 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
    ruyi install gnu-milkv-milkv-duo-bin
 
    # Aus den Rückgabedaten können Sie den Installationspfad einsehen, z.B. ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-bin-0.20240731.0+git.67688c7335e7
+
    `} />
 3. Erstellen und verwenden Sie die Duo-Kompilierungsumgebung
 
