@@ -66,10 +66,10 @@ const config = {
       /* algolia: {
         // The application ID provided by Algolia
         appId: '',
- 
+
         // Public API key: it is safe to commit it
         apiKey: '',
- 
+
         indexName: 'ruyisdk',
 
       }, */
