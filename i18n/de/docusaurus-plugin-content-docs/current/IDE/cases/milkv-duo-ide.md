@@ -39,6 +39,7 @@ git clone https://github.com/milkv-duo/duo-examples.git
 
 
 # Methode 2: ruyi extract Befehl herunterladen
+
 ruyi extract milkv-duo-examples
 
 `} />
@@ -245,6 +246,7 @@ int main()
 Makefile:
 
 <CodeBlock lang="makefile" code={`
+
 # Eclipse Toolchain Einstellungen
 #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
 TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
