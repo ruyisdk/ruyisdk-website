@@ -430,7 +430,7 @@ Durch die Konfiguration von ssh-key für den Host und milkv duo zur passwortlose
 
     cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 
-   `} />
+    `} />
 
     3. Überprüfen: ssh root@192.168.42.1
 
