@@ -22,6 +22,7 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
    <CodeBlock lang="bash" code={`
    # Überprüfen Sie die vordefinierten Umgebungen von ruyi
    # ruyi list profiles
+
    # Erstellen Sie eine virtuelle Umgebung: Toolchain ist gnu-milkv-milkv-duo-musl-bin
    ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo
    `} />
