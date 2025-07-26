@@ -12,11 +12,24 @@
   background-color: #f5f5f7;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+}
+
+/* Inner content block for main content, centered and with max width */
+.innerContent {
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 /* Animation container */
@@ -24,8 +37,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
+  min-width: 100vw;
   overflow: hidden;
   z-index: 0;
   background: linear-gradient(to bottom, rgba(245, 245, 247, 0) 0%, rgba(245, 245, 247, 1) 100%);
@@ -62,16 +76,18 @@
 }
 
 /* Main content area */
+
 .mainContent {
   max-width: 100%;
   width: 100%;
-  margin: 0;
-  padding: 40px 8vw; /* Apply horizontal padding here */
+  margin: 0 auto;
+  padding: 40px 8vw;
   position: relative;
   z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 /* Row for content and terminal */
@@ -82,18 +98,20 @@
   align-items: center;
   gap: 40px;
   width: 100%;
-  height: 100%;
   flex: 1;
+  min-width: 0;
 }
 
 /* Left content area */
 .leftContent {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 220px;
   max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  overflow: hidden;
 }
 
 /* Title styling with clamp() */
@@ -170,23 +188,27 @@
 
 /* Terminal container */
 .terminalContainer {
-  width: clamp(35vw, 35vw, 35vw);
-  flex-shrink: 0;
+  width: 420px;
+  max-width: 100%;
+  min-width: 320px;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  overflow: auto;
 }
 
-/* Terminal styles */
-.terminal {
-  width: 100%;
-  background-color: #1e1f29;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+.animationContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
   overflow: hidden;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  display: flex;
-  flex-direction: column;
-  height: 400px;
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(245, 245, 247, 0) 0%, rgba(245, 245, 247, 1) 100%);
+  pointer-events: none;
 }
 
 .terminalHeader {
@@ -200,6 +222,20 @@
 .terminalButtons {
   display: flex;
   gap: 6px;
+.innerContent {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: rgba(255,255,255,0.96);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.04);
+  padding: 2.5rem 2rem 2rem 2rem;
+}
   margin-right: 16px;
 }
 
@@ -276,18 +312,25 @@
     gap: 40px;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
 
   .leftContent {
     max-width: 100%;
+    min-width: 0;
     justify-content: center;
     text-align: center;
     align-items: center;
+    height: auto;
+    overflow: visible;
   }
 
   .terminalContainer {
     width: 100%;
     max-width: 500px;
+    min-width: 320px;
+    align-items: center;
+    overflow: visible;
   }
 
   .buttonContainer {
@@ -297,6 +340,12 @@
 
 /* Apply max-width to the content block on wide screens */
 @media (min-width: 90rem) { /* 1440px */
+  .container {
+    max-width: 90rem;
+    border-radius: 0.625rem; /* 10px - to match other components */
+    box-shadow: 0 0.5rem 1.875rem rgba(255, 255, 255, 0); /* Optional: subtle shadow to match NewsShowcase */
+  }
+
   .mainContent {
     max-width: 90rem;
     margin-left: auto;

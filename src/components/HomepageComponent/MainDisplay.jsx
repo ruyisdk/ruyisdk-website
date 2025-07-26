@@ -249,72 +249,70 @@ const MainDisplay = () => {
   return (
     <div>
       <div className={styles.container}>
-      <BackgroundAnimation />
-      
-        {/* Main page content */}
-        <div className={styles.mainContent}>
-          <div className={styles.contentRow}>
-            <div className={styles.leftContent}>
-              <h1 className={styles.title}>RuyiSDK</h1>
-              <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
-            
-              <div className={styles.buttonContainer}>
-                <a
-                  href="/download"
-                  style={primaryButtonStyle}
-                  onMouseEnter={() => setIsPrimaryButtonHovered(true)}
-                  onMouseLeave={() => setIsPrimaryButtonHovered(false)}
-                >
-                  <Translate>获取 Ruyi</Translate>
-                </a>
-                <a
-                  href="/docs/intro"
-                  style={secondaryButtonStyle}
-                  onMouseEnter={() => setIsSecondaryButtonHovered(true)}
-                  onMouseLeave={() => setIsSecondaryButtonHovered(false)}
-                >
-                  <Translate>查看文档</Translate>
-                </a>
+        {/* Background animation fills the full width, positioned absolutely */}
+        <BackgroundAnimation />
+        {/* Inner content block for main content, centered and with max width */}
+        <div className={styles.innerContent}>
+          <div className={styles.mainContent}>
+            <div className={styles.contentRow}>
+              <div className={styles.leftContent}>
+                <h1 className={styles.title}>RuyiSDK</h1>
+                <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
+                <div className={styles.buttonContainer}>
+                  <a
+                    href="/download"
+                    style={primaryButtonStyle}
+                    onMouseEnter={() => setIsPrimaryButtonHovered(true)}
+                    onMouseLeave={() => setIsPrimaryButtonHovered(false)}
+                  >
+                    <Translate>获取 Ruyi</Translate>
+                  </a>
+                  <a
+                    href="/docs/intro"
+                    style={secondaryButtonStyle}
+                    onMouseEnter={() => setIsSecondaryButtonHovered(true)}
+                    onMouseLeave={() => setIsSecondaryButtonHovered(false)}
+                  >
+                    <Translate>查看文档</Translate>
+                  </a>
+                </div>
               </div>
-            </div>
-          
-            {/* Terminal component on the right */}
-            <div className={styles.terminalContainer}>
-              <Terminal />
+              {/* Terminal component on the right */}
+              <div className={styles.terminalContainer}>
+                <Terminal />
+              </div>
             </div>
           </div>
-        </div>
-      
-        {/* Package details modal */}
-        {modalVisible && (
-          <div className={styles.modalOverlay} onClick={handleClickOutside}>
-            <div className={styles.modal} ref={modalRef}>
-              <div className={styles.modalHeader}>
-                <h2>{selectedPackage.name}</h2>
-                <CloseOutlined className={styles.closeIcon} onClick={handleModalClose} />
-              </div>
-              <div className={styles.modalContent}>
-                <p className={styles.packageVersion}>{selectedPackage.version}</p>
-                <p className={styles.packageDescription}>{selectedPackage.description}</p>
-                <div className={styles.packageTags}>
-                  {selectedPackage.tags.map((tag, index) => (
-                    <Tag key={index} color="blue">{tag}</Tag>
-                  ))}
+          {/* Package details modal */}
+          {modalVisible && (
+            <div className={styles.modalOverlay} onClick={handleClickOutside}>
+              <div className={styles.modal} ref={modalRef}>
+                <div className={styles.modalHeader}>
+                  <h2>{selectedPackage.name}</h2>
+                  <CloseOutlined className={styles.closeIcon} onClick={handleModalClose} />
                 </div>
-                <div className={styles.packageStats}>
-                  <div className={styles.statItem}>
-                    <span className={styles.statLabel}>{translate({ id: "下载量", message: "下载量" })}</span>
-                    <span className={styles.statValue}>{selectedPackage.downloads}</span>
+                <div className={styles.modalContent}>
+                  <p className={styles.packageVersion}>{selectedPackage.version}</p>
+                  <p className={styles.packageDescription}>{selectedPackage.description}</p>
+                  <div className={styles.packageTags}>
+                    {selectedPackage.tags.map((tag, index) => (
+                      <Tag key={index} color="blue">{tag}</Tag>
+                    ))}
                   </div>
+                  <div className={styles.packageStats}>
+                    <div className={styles.statItem}>
+                      <span className={styles.statLabel}>{translate({ id: "下载量", message: "下载量" })}</span>
+                      <span className={styles.statValue}>{selectedPackage.downloads}</span>
+                    </div>
+                  </div>
+                  <button className={styles.downloadButton}>
+                    {translate({ id: "下载", message: "下载" })}
+                  </button>
                 </div>
-                <button className={styles.downloadButton}>
-                  {translate({ id: "下载", message: "下载" })}
-                </button>
               </div>
             </div>
-          </div>
-        )}
-
+          )}
+        </div>
         {/* The SlideNews component remains outside the main scaling container */}
       </div>
       <SlideNews />
