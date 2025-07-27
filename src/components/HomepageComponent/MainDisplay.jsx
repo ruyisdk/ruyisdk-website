@@ -17,13 +17,13 @@ const Terminal = () => {
     {
       command: 'ruyi update',
       output: `There are 5 new news item(s):
- No.   ID                                  Title
+ No.   ID                             Title
 ─────────────────────────────────────────────────────────
- 1    2025-02-25-ruyi-0.28                Release notes for RuyiSDK 0.28
- 2    2025-03-11-ruyi-0.29                Release notes for RuyiSDK 0.29
- 3    2025-03-25-ruyi-0.30                Release notes for RuyiSDK 0.30
- 4    2025-04-08-ruyi-0.31                Release notes for RuyiSDK 0.31
- 5    2025-04-22-ruyi-0.32                Release notes for RuyiSDK 0.32
+ 1     2025-02-25-ruyi-0.28           Release notes for RuyiSDK 0.28
+ 2     2025-03-11-ruyi-0.29           Release notes for RuyiSDK 0.29
+ 3     2025-03-25-ruyi-0.30           Release notes for RuyiSDK 0.30
+ 4     2025-04-08-ruyi-0.31           Release notes for RuyiSDK 0.31
+ 5     2025-04-22-ruyi-0.32           Release notes for RuyiSDK 0.32
 You can read them with ruyi news read.`,
     },
     {
@@ -53,7 +53,7 @@ You can read them with ruyi news read.`,
       output: `info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst to /home/me/.cache/ruyi/distfiles/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 14.5M  100 14.5M    0     0  1116k      0  0:00:13  0:00:13 --:--:-- 1143k
+100 14.5M  100 14.5M    0     0  1116k       0  0:00:13  0:00:13 --:--:-- 1143k
 info: extracting qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst for package qemu-user-riscv-upstream-8.2.0-ruyi.20240128
 info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me/.local/share/ruyi/binaries/x86_64/qemu-user-riscv-upstream-8.2.0-ruyi.20240128`,
     },
@@ -84,7 +84,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
         } else {
           clearInterval(typeInterval);
           setTyping(false);
-         
+
           // Small delay after typing is complete before showing output
           setTimeout(() => {
             // Animate the output - now with 2s animation
@@ -97,11 +97,11 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
                 outputIndex++;
               } else {
                 clearInterval(outputInterval);
-               
+
                 // Wait 3 seconds after command completes, then show 'clear' command
                 setTimeout(() => {
                   setText(prefix + cmd.command + '\n' + cmd.output + '\n' + prefix + 'clear');
-                 
+
                   // Slight delay to show 'clear' command, then clear and go to next command
                   setTimeout(() => {
                     setText('');
@@ -114,7 +114,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
           }, 300);
         }
       }, 50); // Typing speed
-     
+
       return () => clearInterval(typeInterval);
     }
   }, [currentCommand, typing]);
@@ -157,11 +157,11 @@ const BackgroundAnimation = () => {
 const MainDisplay = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
- 
+
   // State for button hover effects.
   const [isPrimaryButtonHovered, setIsPrimaryButtonHovered] = useState(false);
   const [isSecondaryButtonHovered, setIsSecondaryButtonHovered] = useState(false);
- 
+
   const modalRef = useRef(null);
 
   const handleModalClose = () => {
@@ -196,7 +196,7 @@ const MainDisplay = () => {
       }
     `;
     document.head.appendChild(styleEl);
-   
+
     return () => {
       document.head.removeChild(styleEl);
     };
