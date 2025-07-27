@@ -131,7 +131,7 @@ const config = {
       footer: {
         style: "light",
         links:[],
-        copyright: `Copyright © 2024-${new Date().getFullYear()} RuyiSDK`,
+        copyright: `Copyright © 2024-2025 Institute of Software, CAS`,
       },
       prism: {
         additionalLanguages: ["bash"],
