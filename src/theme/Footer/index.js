@@ -3,6 +3,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
+import ExternalLinkIcon from '@theme/Icon/ExternalLink';
+
 
 export default function Footer() {
   const { i18n, siteConfig } = useDocusaurusContext();
@@ -52,10 +54,19 @@ export default function Footer() {
             <ul className={styles.footer__items}>
               {section.items.map((item, i) => (
                 <li key={i} className={styles.footer__item}>
-                  {item.to ? (
-                    <Link to={item.to} className={item.className || ''}>{item.label}</Link>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className={item.className || ''}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.label} <ExternalLinkIcon />
+                    </a>
                   ) : (
-                    <a href={item.href} className={item.className || ''} target="_blank" rel="noopener noreferrer">{item.label}</a>
+                    <Link to={item.to} className={item.className || ''}>
+                      {item.label}
+                    </Link>
                   )}
                 </li>
               ))}
@@ -64,7 +75,7 @@ export default function Footer() {
         ))}
       </div>
       <div className={styles.footer__copyright}>
-        {siteConfig.themeConfig.footer.copyright}
+        {siteConfig.themeConfig.footer?.copyright}
       </div>
     </footer>
   );
