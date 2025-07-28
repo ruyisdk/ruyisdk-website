@@ -1,23 +1,5 @@
 import styles from "./styles.module.css";
 
-// export default function ButtonSubscription() {
-//   return (
-//     // <form
-//     //   style={{
-//     //     justifyContent: "left",
-//     //     display: "flex",
-//     //   }}
-//     //   accept-charset="UTF-8" action="https://fabform.io/f/pFPStcS" method="POST"
-//     // >
-//     //   <input
-//     //   className={styles.input}
-//     //     type="email"
-//     //     placeholder="Your Email"
-//     //     name="email"
-//     //   />
-//     //   <button className={styles.button} type="submit">{"Subscribe"}</button>
-
-//     // </form>
 
 import React, { useState } from "react";
 

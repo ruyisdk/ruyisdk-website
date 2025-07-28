@@ -1,7 +1,7 @@
 import { Card, Statistic, ConfigProvider, Tabs } from "antd"
 import { SmileOutlined, EllipsisOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
-import useDashboardClient from "./DashboardClient"
+import useDashboardClient from "../../../utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
