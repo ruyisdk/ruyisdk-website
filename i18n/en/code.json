@@ -110,11 +110,11 @@
   },
   "theme.docs.versions.unreleasedVersionLabel": {
     "message": "This is unreleased documentation for {siteTitle} {versionLabel} version.",
-    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+    "description": "The label used to tell the user that he's Browse an unreleased doc version"
   },
   "theme.docs.versions.unmaintainedVersionLabel": {
     "message": "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained.",
-    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+    "description": "The label used to tell the user that he's Browse an unmaintained doc version"
   },
   "theme.docs.versions.latestVersionSuggestionLabel": {
     "message": "For up-to-date documentation, see the {latestVersionLink} ({versionLabel}).",
