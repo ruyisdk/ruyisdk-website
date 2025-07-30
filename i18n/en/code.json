@@ -469,6 +469,21 @@
   "最后更新时间": {
     "message": "Last Update"
   },
+  "我们❤实习生": {
+    "message": "We ❤ Interns"
+  },
+  "核心小组": {
+    "message": "Core Team"
+  },
+  "贡献者": {
+    "message": "Contributors"
+  },
+  "合作伙伴": {
+    "message": "Partners"
+  },
+  "贡献者公约": {
+    "message": "Contributor Covenant"
+  },
   "footer.ecosystem": { "message": "Ecosystem" },
   "footer.ruyisdk": { "message": "RuyiSDK" },
   "footer.revyos": { "message": "RevyOS" },
