@@ -6,18 +6,18 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "title": "RuyiSDK Projektmanager",
       "titleColor": "#3498db",
-      "description": "Verantwortlich für die Planung, Ausführung und Lieferung des RuyiSDK-Projekts, um die Erreichung der Projektziele sicherzustellen. Widmet sich der Koordination von Teamressourcen, der Förderung des Projektfortschritts und der engen Kommunikation mit der Community und Partnern, um eine stabile, effiziente und benutzerfreundliche Entwicklungswerkzeugkette aufzubauen.",
-      "email": "xijing.chen@iscas.ac.cn",
+      "description": "",
+      "email": "",
       "github": "https://github.com/xijing21"
     },
     {
       "id": 2,
-      "name": "Yurish",
+      "name": "FIFCC",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52316103?v=4",
       "title": "RuyiSDK Community Manager",
       "titleColor": "#e67e22",
-      "description": "Engagiert sich für den Aufbau einer aktiven, inklusiven und kollaborativen Entwicklergemeinschaft. Verantwortlich für die Organisation von Community-Veranstaltungen, die Verwaltung von Community-Kanälen, die Beantwortung von Entwickler-Feedback und die Förderung der Zusammenarbeit zwischen Mitwirkenden, um die RuyiSDK-Community zu einem beliebten und vertrauenswürdigen Zuhause für Entwickler zu machen.",
-      "email": "yurish@iscas.ac.cn",
+      "description": "",
+      "email": "",
       "github": "https://github.com/FIFCC"
     },
     {
@@ -26,18 +26,18 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "title": "RuyiSDK Technischer Leiter",
       "titleColor": "#9b59b6",
-      "description": "Leitet die technische Ausrichtung, das Architekturdesign und die Entwicklung der Kernfunktionen von RuyiSDK. Stellt mit fundiertem technischem Fachwissen die führende Position von RuyiSDK im Bereich der RISC-V-Werkzeugketten sicher und bietet Entwicklern die modernsten und leistungsstärksten Funktionen.",
-      "email": "i@xen0n.name",
+      "description": "",
+      "email": "",
       "github": "https://github.com/xen0n"
     },
     {
       "id": 4,
-      "name": "狐坂澪夜",
+      "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "title": "RuyiSDK Test Manager",
       "titleColor": "#e74c3c",
-      "description": "Verantwortlich für die Entwicklung und Ausführung umfassender Teststrategien, um die Qualität und Stabilität der RuyiSDK-Software sicherzustellen. Durch automatisierte Tests, Leistungstests und Community-Feedback wird gewährleistet, dass jede Veröffentlichung den höchsten Standards entspricht und Entwicklern zuverlässige Tools zur Verfügung gestellt werden.",
-      "email": "weilinfox@foxmail.com",
+      "description": "",
+      "email": "",
       "github": "https://github.com/weilinfox"
     }
   ],
@@ -48,7 +48,7 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "title": "P119",
       "titleColor": "#1abc9c",
-      "description": "PLCT Praktikant",
+      "description": "",
       "email": "",
       "github": "https://github.com/a1gorhythm7"
     },
@@ -58,29 +58,11 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
       "title": "P119",
       "titleColor": "#1abc9c",
-      "description": "PLCT Praktikant",
+      "description": "",
       "email": "",
       "github": "https://github.com/Cyl18/"
     }
   ],
   "contributors": [
-    {
-      "id": 1,
-      "name": "ArchFeh",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
-      "github": "https://github.com/ArchFeh"
-    },
-    {
-      "id": 2,
-      "name": "hush-coder",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/190342975?v=4",
-      "github": "https://github.com/hush-coder"
-    },
-    {
-      "id": 3,
-      "name": "Kina",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/76783546?v=4",
-      "github": "https://github.com/delete-cloud"
-    }
   ]
 }

@@ -6,18 +6,18 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "title": "RuyiSDK 项目经理",
       "titleColor": "#3498db",
-      "description": "负责 RuyiSDK 项目的规划、执行和交付，确保项目目标的实现。致力于协调团队资源，推动项目进展，并与社区和合作伙伴保持紧密沟通，共同打造一个稳定、高效且易于使用的开发工具链。",
-      "email": "xijing.chen@iscas.ac.cn",
+      "description": "一小段话",
+      "email": "",
       "github": "https://github.com/xijing21"
     },
     {
       "id": 2,
-      "name": "Yurish",
+      "name": "FIFCC",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52316103?v=4",
       "title": "RuyiSDK 社区经理",
       "titleColor": "#e67e22",
-      "description": "致力于构建一个活跃、包容和互助的开发者社区。负责组织社区活动、管理社区渠道、回应开发者反馈，并促进贡献者之间的协作，让 RuyiSDK 社区成为开发者们喜爱和信赖的家园。",
-      "email": "yurish@iscas.ac.cn",
+      "description": "一小段话",
+      "email": "",
       "github": "https://github.com/FIFCC"
     },
     {
@@ -26,18 +26,18 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "title": "RuyiSDK 技术主管",
       "titleColor": "#9b59b6",
-      "description": "领导 RuyiSDK 的技术方向、架构设计和核心功能开发。凭借深厚的技术积累，确保 RuyiSDK 在 RISC-V 工具链领域的领先地位，并为开发者提供最前沿、最强大的功能支持。",
-      "email": "i@xen0n.name",
+      "description": "一小段话",
+      "email": "",
       "github": "https://github.com/xen0n"
     },
     {
       "id": 4,
-      "name": "狐坂澪夜",
+      "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "title": "RuyiSDK 测试经理",
       "titleColor": "#e74c3c",
-      "description": "负责制定和执行全面的测试策略，确保 RuyiSDK 的软件质量和稳定性。通过自动化测试、性能测试和社区反馈，保障每一次发布都达到最高标准，为开发者提供可靠的工具。",
-      "email": "weilinfox@foxmail.com",
+      "description": "负责 RuyiSDK 的测试，包括 Ruyi 包管理器的测试和 RuyiSDK IDE 的测试；负责 ruyisdk.org 的维护； P119 实习生 mentor；参与 Ruyi 软件包的打包和 RuyiSDK 的文档维护。",
+      "email": "",
       "github": "https://github.com/weilinfox"
     }
   ],
@@ -48,7 +48,7 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "title": "P119",
       "titleColor": "#1abc9c",
-      "description": "PLCT 实习生",
+      "description": "",
       "email": "",
       "github": "https://github.com/a1gorhythm7"
     },
@@ -58,29 +58,11 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
       "title": "P119",
       "titleColor": "#1abc9c",
-      "description": "PLCT 实习生",
+      "description": "",
       "email": "",
       "github": "https://github.com/Cyl18/"
     }
   ],
   "contributors": [
-    {
-      "id": 1,
-      "name": "ArchFeh",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
-      "github": "https://github.com/ArchFeh"
-    },
-    {
-      "id": 2,
-      "name": "hush-coder",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/190342975?v=4",
-      "github": "https://github.com/hush-coder"
-    },
-    {
-      "id": 3,
-      "name": "Kina",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/76783546?v=4",
-      "github": "https://github.com/delete-cloud"
-    }
   ]
 }

@@ -102,7 +102,7 @@ const config = {
           { to: "/blog", label: "博客", position: "right" },
           { to: "/biweekly", label: "双周报", position: "right" },
           { to: "/download", label: "下载", position: "right" },
-          { to: "/community", label: "社区", position: "right" },
+          { to: "/Community", label: "社区", position: "right" },
           {
             label: "关于",
             to: "/contact",

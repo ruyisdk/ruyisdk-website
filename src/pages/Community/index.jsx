@@ -246,7 +246,7 @@ export default function Community() {
                         {peopleData.coreTeam.map(person => <CoreMemberCard key={person.id} person={person} />)}
                     </div>
 
-                    <h2 className={styles.sectionHeader}><Translate>We ❤️ Interns</Translate></h2>
+                    <h2 className={styles.sectionHeader}><Translate>我们❤️实习生</Translate></h2>
                     <div className={`${styles.glassContainer} ${styles.internGrid}`}>
                         {peopleData.interns.map(person => <InternCard key={person.id} person={person} />)}
                     </div>
