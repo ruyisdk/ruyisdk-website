@@ -44,16 +44,6 @@
   "interns": [
     {
       "id": 1,
-      "name": "a1gorhythm7",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
-      "title": "P119",
-      "titleColor": "#1abc9c",
-      "description": "",
-      "email": "",
-      "github": "https://github.com/a1gorhythm7"
-    },
-    {
-      "id": 2,
       "name": "Cyl18",
       "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
       "title": "P119",
@@ -61,6 +51,16 @@
       "description": "",
       "email": "",
       "github": "https://github.com/Cyl18/"
+    },
+    {
+      "id": 2,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "title": "P119",
+      "titleColor": "#1abc9c",
+      "description": "",
+      "email": "",
+      "github": "https://github.com/a1gorhythm7"
     }
   ],
   "contributors": [

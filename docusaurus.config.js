@@ -102,7 +102,21 @@ const config = {
           { to: "/blog", label: "博客", position: "right" },
           { to: "/biweekly", label: "双周报", position: "right" },
           { to: "/download", label: "下载", position: "right" },
-          { to: "/Community", label: "社区", position: "right" },
+          {
+            type: "dropdown",
+            label: "社区",
+            position: "right",
+            items: [
+              {
+                label: "Discussion",
+                href: "https://github.com/ruyisdk/ruyisdk/discussions",
+              },
+              {
+                label: "社区守则",
+                to: "/code_of_conduct",
+              },
+            ],
+          },
           {
             label: "关于",
             to: "/contact",
