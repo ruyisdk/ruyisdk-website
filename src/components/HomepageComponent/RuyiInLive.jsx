@@ -51,7 +51,7 @@ const RuyiInLive = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isWideScreen, setIsWideScreen] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(false); // New state for wide screen
 
   const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
   const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
@@ -73,7 +73,7 @@ const RuyiInLive = () => {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsWideScreen(window.innerWidth >= 1440); // Breakpoint for wide screen
+      setIsWideScreen(window.innerWidth >= 1440); // Set breakpoint for wide screen (e.g., 1440px)
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -135,12 +135,13 @@ const RuyiInLive = () => {
       width: '100%',
       gap: '1rem',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
-      margin: '0 auto',
-      padding: '0rem 0rem 0rem',
+      margin: '0 auto', /* Added for centering */
+      padding: '0rem 0rem 0rem', /* 8px 32px 24px */
       backgroundColor: '#f5f5f7',
-      maxWidth: isWideScreen ? '90rem' : '100%',
-      borderRadius: isWideScreen ? '0.625rem' : '0',
-      boxShadow: 'none',
+      // Added styles for wide screen
+      maxWidth: isWideScreen ? '90rem' : '100%', // 1440px or adjust as needed
+      borderRadius: isWideScreen ? '0.625rem' : '0', // 10px
+      boxShadow: 'none', // Changed this line from 'isWideScreen ? '0 0.5rem 1.875rem rgba(0, 0, 0, 0.05)' : 'none'' to 'none'
     },
     background: {
       width: '100%',
@@ -163,8 +164,6 @@ const RuyiInLive = () => {
       overflow: 'hidden',
       color: colors.textDark,
       margin: '0 auto 1rem auto',
-      // UPDATED: Conditionally apply shadow to restore old layout on narrow screens
-      boxShadow: isWideScreen ? 'none' : '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)',
     },
     leftPanel: {
       width: isMobile ? '100%' : '40%',
