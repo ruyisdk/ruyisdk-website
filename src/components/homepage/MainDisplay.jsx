@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Translate, { translate } from '@docusaurus/Translate';
 import styles from './mainDisplay.module.css';
-import SlideNews from '../SlideNews';
+import SlideNews from '../common/SlideNews';
 
 // A terminal simulation that cycles through a set of commands.
 const Terminal = () => {
