@@ -4,22 +4,22 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
-      title: "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现",
-      description: "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。",
-      img: "img/newsshowcase/AsiaLLVM2025.webp",
-      link: "https://mp.weixin.qq.com/s/WnVS95BvDS4jQS-a8GqjLg"
+      title: "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣",
+      description: "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。",
+      img: "img/newsshowcase/MoonBit.jpg",
+      link: "https://mp.weixin.qq.com/s/2r4cKs5D7JJDqgH4lhdH_A"
     },
     {
-      title: "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径",
-      description: "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。",
-      img: "img/newsshowcase/OSPP.webp",
-      link: "https://mp.weixin.qq.com/s/nnumLWZNUyn2XKjgEHYZBw"
+      title: "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章",
+      description: "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。",
+      img: "img/newsshowcase/hongkongcity.jpeg",
+      link: "https://mp.weixin.qq.com/s/-PGCCl1k919KtcU8Para1w"
     },
     {
-      title: "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！",
-      description: "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！",
-      img: "img/newsshowcase/2025OpenDay.webp",
-      link: "https://mp.weixin.qq.com/s/lXXLUuNh_aOBXEh3oXxECw"
+      title: "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作",
+      description: "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。",
+      img: "img/newsshowcase/opencloud.png",
+      link: "https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw"
     },
   ];
 

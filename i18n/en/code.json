@@ -397,23 +397,23 @@
   "前往阅读": {
     "message": "Read more"
   },
-  "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
-    "message": "Open Source Promotion Plan 2025: Hefei University of Technology—Shihua Liao Shared His Journey to Becoming a GCC Developer"
+  "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣": {
+    "message": "Registration Opens | 2025 MoonBit Global Programming Innovation Challenge Officially Announced"
   },
-  "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
-    "message": "In this talk, Shihua Liao analyzed the key skills and knowledge system required to become a GCC developer. He explained the core concepts and compilation process of GCC, and shared practical programming and debugging insights from his own experience."
+  "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。": {
+    "message": "This is a professional challenge for global developers, aimed at promoting computer software development education and serving the national talent strategy in basic software and AI cloud-native fields. The first competition attracted over 1,888 teams from prestigious universities including Tsinghua University, Cambridge University, Sun Yat-sen University, and Hong Kong University of Science and Technology (Guangzhou)."
   },
-  "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
-    "message": "2025 Public Science Day at the Institute of Software, Chinese Academy of Sciences: PLCT Lab Unveils the Power of RISC-V—Small Architecture, Big Potential!"
+  "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章": {
+    "message": "RISC-V Campus Tour | PLCT Lab Visits City University of Hong Kong, Opening New Chapter in RISC-V Open Source Talent Development"
   },
-  "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
-    "message": "Join the PLCT Lab to explore the mysteries and possibilities of software science!"
+  "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。": {
+    "message": "On July 19, 2025, the 'RISC-V Campus Tour' event was successfully held at City University of Hong Kong, attracting nearly 100 Hong Kong university students. PLCT Lab deeply participated in this event, comprehensively presenting the lab's practices and thoughts in RISC-V software ecosystem development, talent cultivation, and industry collaboration through technical sharing, interactive exchanges, and achievement demonstrations."
   },
-  "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现": {
-    "message": "Engineer Yongtai Li Has Attended the 2025 AsiaLLVM Developer Conference in Tokyo to Discuss LLVM vs. GCC Performance on RISC-V"
+  "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作": {
+    "message": "OpenCloudOS Joins RuyiSDK Developer Community, Both Parties Reach Deep Cooperation"
   },
-  "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。": {
-    "message": "Yongtai Li noted that the LLVM/Flang toolchain now fully supports RISC-V SPEC CPU builds. However, continued effort is needed for Fortran optimization and certain passes. Going forward, focus will be placed on tracking LLVM version updates, monitoring regressions, and following SPEC CPU-related tuning."
+  "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。": {
+    "message": "OpenCloudOS officially joins the RuyiSDK developer community, marking the beginning of deep collaboration between two major open source forces in the RISC-V field. Both parties will carry out comprehensive cooperation in operating system RISC-V architecture technology and ecosystem building, high-performance computing, and developer ecosystem construction."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Review of RuyiSDK's first offline meetup"
