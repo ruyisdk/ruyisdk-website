@@ -332,7 +332,7 @@ const NewsShowcase = () => {
                     <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
                     <p className="newsshowcase-description">
                       <Translate>
-                        {news.description}
+                        {truncateText(news.description, 200, 100)}
                       </Translate>
                     </p>
                     <div className="newsshowcase-link-indicator">
