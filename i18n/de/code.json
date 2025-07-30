@@ -397,23 +397,23 @@
   "前往阅读": {
     "message": "Mehr lesen"
   },
-  "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
-    "message": "Open Source Summer an der Universität Hefei: Liao Shihua über den Weg zum GCC-Entwickler"
+  "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣": {
+    "message": "Anmeldung eröffnet | 2025 MoonBit Global Programming Innovation Challenge offiziell angekündigt"
   },
-  "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
-    "message": "In seinem Vortrag analysierte Liao Shihua die wichtigsten Fähigkeiten und das nötige Wissen, um ein GCC-Entwickler zu werden. Er erläuterte die zentralen Konzepte und den Kompilierungsprozess von GCC und teilte praktische Erfahrungen zum Programmieren und Debugging."
+  "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。": {
+    "message": "Dies ist ein professioneller Wettbewerb für Entwickler weltweit, der darauf abzielt, die Computer-Softwareentwicklung zu fördern und die nationale Talentstrategie in den Bereichen Grundlagen-Software und KI-Cloud-Native zu unterstützen. Der erste Wettbewerb zog über 1.888 Teams von renommierten Universitäten wie der Tsinghua-Universität, der Universität Cambridge, der Sun Yat-sen-Universität und der Hong Kong University of Science and Technology (Guangzhou) an."
   },
-  "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
-    "message": "Tag der offenen Tür 2025 am ISCAS: Das PLCT-Labor enthüllt das Potenzial von RISC-V – 'Kleine Architektur, große Wirkung'"
+  "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章": {
+    "message": "RISC-V Campus-Tour | PLCT-Labor besucht die City University of Hong Kong und eröffnet ein neues Kapitel in der RISC-V Open-Source-Talententwicklung"
   },
-  "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
-    "message": "Begleiten Sie das PLCT-Labor und entdecken Sie die Geheimnisse und Möglichkeiten der Softwarewissenschaft!"
+  "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。": {
+    "message": "Am 19. Juli 2025 wurde die 'RISC-V Campus-Tour' Veranstaltung erfolgreich an der City University of Hong Kong abgehalten und zog fast 100 Hongkonger Universitätsstudenten an. Das PLCT-Labor beteiligte sich intensiv an dieser Veranstaltung und präsentierte den Studenten umfassend die Praktiken und Überlegungen des Labors in der RISC-V-Software-Ökosystem-Entwicklung, Talententwicklung und Industrie-Zusammenarbeit durch technische Präsentationen, interaktive Diskussionen und Erfolgsdemonstrationen."
   },
-  "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现": {
-    "message": "Ingenieur Yongtai Li bei der AsiaLLVM Developer Conference 2025 in Tokio: Diskussion über die Performance von LLVM und GCC auf RISC-V"
+  "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作": {
+    "message": "OpenCloudOS tritt der RuyiSDK-Entwickler-Community bei, beide Parteien erreichen tiefgreifende Zusammenarbeit"
   },
-  "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。": {
-    "message": "Yongtai Li betonte, dass die LLVM/Flang-Toolchain SPEC CPU für RISC-V vollständig unterstützt. Weitere Optimierungen bei Fortran und spezifischen Passes bleiben jedoch erforderlich. Künftig liegt der Fokus auf der Verfolgung neuer LLVM-Versionen, dem Monitoring von Regressionen und der Optimierung für SPEC CPU."
+  "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。": {
+    "message": "OpenCloudOS tritt offiziell der RuyiSDK-Entwickler-Community bei und markiert den Beginn einer tiefgreifenden Zusammenarbeit zwischen zwei großen Open-Source-Kräften im RISC-V-Bereich. Beide Parteien werden umfassende Zusammenarbeit in der RISC-V-Architekturtechnologie und Ökosystem-Entwicklung, Hochleistungsrechnen und Entwickler-Ökosystem-Aufbau durchführen."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
