@@ -466,6 +466,21 @@
   "最后更新时间": {
     "message": "Zuletzt aktualisiert"
   },
+  "我们❤实习生": {
+    "message": "Wir ❤ Praktikanten"
+  },
+  "核心小组": {
+    "message": "Kernteam"
+  },
+  "贡献者": {
+    "message": "Mitwirkende"
+  },
+  "合作伙伴": {
+    "message": "Partner"
+  },
+  "贡献者公约": {
+    "message": "Contributor Covenant"
+  },
   "footer.ecosystem": { "message": "Ökosystem" },
   "footer.revyos": { "message": "RevyOS" },
   "footer.matrix": { "message": "Support Matrix" },
