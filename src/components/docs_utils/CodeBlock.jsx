@@ -50,7 +50,7 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
 
 // --- MAIN COMPONENT: CodeBlock ---
 // With updated bash copy logic.
-const CodeBlock = ({ code = '', lang = 'no', filename }) => {
+const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = true }) => {
     const [theme, setTheme] = useState('dark');
 
     // Effect to detect and observe Docusaurus theme changes
@@ -153,7 +153,9 @@ const CodeBlock = ({ code = '', lang = 'no', filename }) => {
                         <Terminal size={16} style={currentStyles.icon} />
                         <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'bash'}</span>
                     </div>
-                    <CopyButton textToCopy={getCommandsToCopy(code)} themeStyles={currentStyles} />
+                    {showTitleCopyButton && (
+                        <CopyButton textToCopy={getCommandsToCopy(code)} themeStyles={currentStyles} />
+                    )}
                 </div>
                 <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0' }}>
                     {code.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
@@ -167,7 +169,9 @@ const CodeBlock = ({ code = '', lang = 'no', filename }) => {
         <div style={{ ...baseStyles.container, ...currentStyles.container }}>
             <div style={{ ...baseStyles.header, ...currentStyles.header }}>
                 <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || lang}</span>
-                <CopyButton textToCopy={code} themeStyles={currentStyles} />
+                {showTitleCopyButton && (
+                    <CopyButton textToCopy={code} themeStyles={currentStyles} />
+                )}
             </div>
             <SyntaxHighlighter language={lang === 'no' ? 'text' : lang} style={syntaxTheme} customStyle={baseStyles.syntaxHighlighter} wrapLines={true} wrapLongLines={true}>
                 {code}
