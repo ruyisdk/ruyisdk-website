@@ -1,6 +1,6 @@
 .container {
-  background: linear-gradient(135deg, #000000 0%, #000000 30%, #0d4977 100%);
-  height: 100%;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 25%, #2d3748 50%, #1a1f3a 75%, #0a0e27 100%);
+  min-height: 100vh;
   width: 100%;
   margin: 0;
   display: flex;
@@ -11,24 +11,305 @@
   flex-direction: row;
   min-width: 1100px;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
 }
 
 .container::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Webkit */
+  display: none;
 }
 
-.card {
-  width: 30%;
-  min-width: 350px;
-  box-sizing: border-box;
-  margin: 0 1.5rem;
+.mainContent {
+  width: 100%;
+  max-width: 1400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
+/* 统计数据卡片样式 */
+.statsSection {
+  margin-bottom: 2rem;
+}
+
+.statsRow {
+  margin: 0 !important;
+}
+
+.statCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.statCard:hover::before {
+  opacity: 1;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.statIcon {
+  font-size: 2.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statIcon {
+  transform: scale(1.1);
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statTitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  position: relative;
+}
+
+.valueNumber {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #06bcee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.loadingSkeleton {
+  width: 120px;
+  height: 2.5rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 分类数据样式 */
+.categorySection {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.sectionTitle {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.categoryCard:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.categoryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.categoryName {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.categoryValue {
+  color: #06bcee;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.categoryProgress {
+  margin: 0;
+}
+
+.categoryProgress :global(.ant-progress-bg) {
+  background: linear-gradient(90deg, #06bcee 0%, #087ea4 100%);
+}
+
+/* 图表区域样式 */
+.chartsSection {
+  margin-top: 2rem;
+}
+
+.chartCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  height: 500px;
+  transition: all 0.3s ease;
+}
+
+.chartCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chartContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chartTitle {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.chartWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+/* 空状态样式 */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.emptyText {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* 导航点样式 */
+.navigationDots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.activeDot {
+  background: #06bcee;
+  box-shadow: 0 0 10px rgba(6, 188, 238, 0.5);
+}
+
+/* 更新时间样式 */
+.updateTime {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.updateTime p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* 响应式设计 */
 @media (max-width: 1024px) {
   .container {
-    background: linear-gradient(135deg, #000000 0%, #000000 30%, #0d4977 100%);
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 25%, #2d3748 50%, #1a1f3a 75%, #0a0e27 100%);
     height: 100vh;
     margin: 0;
     width: 100%;
@@ -47,15 +328,100 @@
     display: none;
   }
 
-  .card {
-    width: 100%;
-    height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    box-sizing: border-box;
-    min-width: 0;
+  .mainContent {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .statCard {
+    padding: 1.5rem;
+  }
+
+  .statIcon {
+    font-size: 2rem;
+    padding: 0.8rem;
+  }
+
+  .valueNumber {
+    font-size: 2rem;
+  }
+
+  .categoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .chartCard {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 0.5rem;
+    gap: 1.5rem;
+  }
+
+  .statCard {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .statIcon {
+    font-size: 1.8rem;
+    padding: 0.6rem;
+  }
+
+  .valueNumber {
+    font-size: 1.8rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .categoryCard {
+    padding: 1rem;
+  }
+
+  .chartCard {
+    height: 350px;
+  }
+
+  .navigationDots {
+    right: 15px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statCard {
+    padding: 0.8rem;
+  }
+
+  .statIcon {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  .valueNumber {
+    font-size: 1.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.2rem;
+  }
+
+  .categoryCard {
+    padding: 0.8rem;
+  }
+
+  .chartCard {
+    height: 300px;
   }
 }
