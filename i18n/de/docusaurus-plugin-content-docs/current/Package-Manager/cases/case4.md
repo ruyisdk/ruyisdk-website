@@ -51,7 +51,7 @@ Dieser Assistent soll Ihnen helfen, ein System auf Ihrem Gerät für Ihre Entwic
 
 Es werden einige Fragen gestellt, die RuyiSDK helfen, Ihr Gerät und Ihre gewünschte Konfiguration zu verstehen. Anschließend werden Pakete heruntergeladen und auf den Speicher des Geräts geflasht, den Sie zuvor auf diesem Hostsystem verfügbar machen sollten.
 
-Beachten Sie, dass Ruyi nicht als root ausgeführt wird, aber der Zugriff auf Rohdatenträger höchstwahrscheinlich erforderlich ist, um Images zu flashen. Sie sollten daher sicherstellen, dass Ihr Benutzerkonto sudo-Zugriff auf notwendige Befehle wie dd hat. Das Flashen schlägt fehl, wenn die sudo-Konfiguration dies nicht zulässt.
+$ Beachten Sie, dass Ruyi nicht als root ausgeführt wird, aber der Zugriff auf Rohdatenträger höchstwahrscheinlich erforderlich ist, um Images zu flashen. Sie sollten daher sicherstellen, dass Ihr Benutzerkonto sudo-Zugriff auf notwendige Befehle wie dd hat. Das Flashen schlägt fehl, wenn die sudo-Konfiguration dies nicht zulässt.
 
 Fortfahren? (y/N) y
 

@@ -126,26 +126,61 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
             const [isHovered, setIsHovered] = useState(false);
             const match = line.match(commandOnlyRegex);
             const isCommand = !!match;
-            
+
             let commandToCopy = '';
             if (isCommand) {
                 const promptSymbolIndex = line.indexOf(match[1]);
                 commandToCopy = line.substring(promptSymbolIndex + 1).trim();
             }
-            
-            const lineStyle = { ...baseStyles.bashLine, backgroundColor: isHovered ? currentStyles.bashLineHoverBg : 'transparent' };
-            const lineHighlighterStyle = { padding: 0, margin: 0, border: 'none', borderRadius: 0, background: 'transparent', overflow: 'visible', width: '100%', fontFamily: 'inherit', fontSize: '0.9rem', lineHeight: '1.6' };
+
+            // Make line container stretch to content width for horizontal scroll
+            const lineStyle = {
+                ...baseStyles.bashLine,
+                backgroundColor: isHovered ? currentStyles.bashLineHoverBg : 'transparent',
+                minWidth: 'max-content',
+                width: '100%',
+                position: 'relative',
+                paddingRight: '2rem',
+            };
+            const lineHighlighterStyle = {
+                padding: 0,
+                margin: 0,
+                border: 'none',
+                borderRadius: 0,
+                background: 'transparent',
+                overflow: 'visible',
+                width: 'auto',
+                fontFamily: 'inherit',
+                fontSize: '0.9rem',
+                lineHeight: '1.6',
+            };
 
             return (
                 <div style={lineStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <SyntaxHighlighter language="bash" style={syntaxTheme} customStyle={lineHighlighterStyle}>{line}</SyntaxHighlighter>
-                    {isCommand && (<div style={{ opacity: isHovered ? 1 : 0, transition: 'opacity 150ms ease-in-out' }}><CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} /></div>)}
+                    {isCommand && (
+                        <div style={{
+                            position: 'sticky',
+                            right: '1rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: '100%',
+                            opacity: isHovered ? 1 : 0.7,
+                            transition: 'opacity 150ms ease-in-out',
+                            background: 'rgba(30,30,30,0.18)', // semi-transparent for readability
+                            borderRadius: '0.375rem',
+                            padding: '0.1rem 0.2rem',
+                        }}>
+                            <CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} />
+                        </div>
+                    )}
                 </div>
             );
         };
 
         const bashContainerBg = (syntaxTheme['pre[class*="language-"]'] && syntaxTheme['pre[class*="language-"]'].background) || currentStyles.container.backgroundColor;
 
+        // Make the bash container scrollable and allow lines to stretch horizontally
         return (
             <div style={{ ...baseStyles.container, ...currentStyles.container }}>
                 <div style={{ ...baseStyles.header, ...currentStyles.header }}>
@@ -157,8 +192,10 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
                         <CopyButton textToCopy={getCommandsToCopy(code)} themeStyles={currentStyles} />
                     )}
                 </div>
-                <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0' }}>
-                    {code.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
+                <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0', width: '100%' }}>
+                    <div style={{ display: 'table', width: 'max-content', minWidth: '100%' }}>
+                        {code.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
+                    </div>
                 </div>
             </div>
         );
