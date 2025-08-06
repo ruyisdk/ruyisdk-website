@@ -37,12 +37,6 @@ const StatisticalDataPages = () => {
         <div className={styles.content}>
           <StatisticalData />
         </div>
-
-        <div className={styles.footer}>
-          <div className={styles.footerContent}>
-            <p>数据实时更新 • 基于真实用户行为分析</p>
-          </div>
-        </div>
       </div>
     </Layout>
   );

@@ -457,6 +457,9 @@
   "最常用包 Top Packages": {
     "message": "Most Used Packages"
   },
+  "数据更新时间": {
+    "message": "Data Update Time"
+  },
   "数据统计": {
     "message": "Data Statistics"
   },

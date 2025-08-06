@@ -437,7 +437,7 @@ const StatisticalData = () => {
           {data && (
             <div className={styles.updateTime}>
               <p>
-                数据更新时间: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+                {translate({ id: "数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
               </p>
             </div>
           )}
