@@ -12,5 +12,16 @@
   "footer.qqgroup": { "message": "QQ群" },
   "footer.plct": { "message": "PLCT 实验室" },
   "footer.tools": { "message": "更多开发工具" },
-  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" }
+  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
+  "组件下载数量和Github下载数量": { "message": "组件下载数量和Github下载数量" },
+  "包管理器安装台数": { "message": "包管理器安装台数" },
+  "分目录下载统计": { "message": "分目录下载统计" },
+  "组件下载数量": { "message": "组件下载数量" },
+  "包管理器下载量": { "message": "包管理器下载量" },
+  "第三方下载量": { "message": "第三方下载量" },
+  "文档下载量": { "message": "文档下载量" },
+  "IDE下载次数": { "message": "IDE下载次数" },
+  "最常用指令": { "message": "最常用指令" },
+  "最常用包": { "message": "最常用包" },
+  "实时监控 RuyiSDK 生态系统的使用情况和发展趋势": { "message": "实时监控 RuyiSDK 生态系统的使用情况和发展趋势" }
 }

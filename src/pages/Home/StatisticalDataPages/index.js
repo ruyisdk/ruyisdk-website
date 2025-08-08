@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import StatisticalData from '../../../components/common/StatisticalData';
+import { translate } from "@docusaurus/Translate";
 import styles from "./styles.module.css";
 
 const StatisticalDataPages = () => {
@@ -27,10 +28,10 @@ const StatisticalDataPages = () => {
         <div className={styles.header}>
           <h1 className={styles.title}>
             <span className={styles.titleIcon}>📊</span>
-            RuyiSDK 数据总览
+            {translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}
           </h1>
           <p className={styles.subtitle}>
-            实时监控 RuyiSDK 生态系统的使用情况和发展趋势
+            {translate({ id: "实时监控 RuyiSDK 生态系统的使用情况和发展趋势", message: "实时监控 RuyiSDK 生态系统的使用情况和发展趋势" })}
           </p>
         </div>
 

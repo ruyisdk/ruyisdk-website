@@ -448,6 +448,39 @@
   "下载数量 Downloads": {
     "message": "Number of Downloads"
   },
+  "组件下载数量和Github下载数量": {
+    "message": "Component Downloads and GitHub Downloads"
+  },
+  "包管理器安装台数": {
+    "message": "Package Manager Installations"
+  },
+  "分目录下载统计": {
+    "message": "Subdirectory Download Statistics"
+  },
+  "组件下载数量": {
+    "message": "Component Downloads"
+  },
+  "包管理器下载量": {
+    "message": "Package Manager Downloads"
+  },
+  "第三方下载量": {
+    "message": "Third-party Downloads"
+  },
+  "文档下载量": {
+    "message": "Document Downloads"
+  },
+  "IDE下载次数": {
+    "message": "IDE Downloads"
+  },
+  "最常用指令": {
+    "message": "Most Used Commands"
+  },
+  "最常用包": {
+    "message": "Most Used Packages"
+  },
+  "实时监控 RuyiSDK 生态系统的使用情况和发展趋势": {
+    "message": "Real-time monitoring of RuyiSDK ecosystem usage and development trends"
+  },
   "安装台数 Installs": {
     "message": "Number of Installations"
   },

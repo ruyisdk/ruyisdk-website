@@ -180,11 +180,11 @@ const StatisticalData = () => {
   const getCombinedDownloads = (data) => {
     if (!data) return {};
     const categoryNames = {
-      "downloads": "组件下载量",
-      "pm_downloads": "包管理器下载量",
-      "3rdparty": "第三方下载量",
-      "humans": "文档等",
-      "ide": "IDE下载次数"
+      "downloads": translate({ id: "组件下载数量", message: "组件下载数量" }),
+      "pm_downloads": translate({ id: "包管理器下载量", message: "包管理器下载量" }),
+      "3rdparty": translate({ id: "第三方下载量", message: "第三方下载量" }),
+      "humans": translate({ id: "文档下载量", message: "文档下载量" }),
+      "ide": translate({ id: "IDE下载次数", message: "IDE下载次数" })
     };
     const combined = {};
     Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
@@ -199,7 +199,7 @@ const StatisticalData = () => {
     {
       key: '1',
       label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
-      children: <TopList data={data?.top_commands || {}} title="最常用指令" />,
+      children: <TopList data={data?.top_commands || {}} title={translate({ id: "最常用指令", message: "最常用指令" })} />,
     },
   ];
 
@@ -207,7 +207,7 @@ const StatisticalData = () => {
     {
       key: '1',
       label: translate({ id: "最常用包 Top Packages", message: "最常用包" }),
-      children: <TopList data={data?.top_packages || {}} title="最常用包" />,
+      children: <TopList data={data?.top_packages || {}} title={translate({ id: "最常用包", message: "最常用包" })} />,
     }
   ];
 
@@ -332,6 +332,8 @@ const StatisticalData = () => {
   const totalDownloads = data?.downloads?.total != null && data?.pm_downloads?.total != null
     ? data.downloads.total + data.pm_downloads.total
     : 0;
+  
+  const componentAndGithubDownloads = (data?.downloads?.total || 0) + (data?.github_downloads?.total || 0);
 
   const totalInstalls = data?.installs?.total || 0;
 
@@ -357,31 +359,22 @@ const StatisticalData = () => {
         <div className={styles.mainContent}>
           {/* 统计数据卡片 */}
           <div className={styles.statsSection}>
-            <Row gutter={[24, 24]} className={styles.statsRow}>
-              <Col xs={24} sm={12} lg={8}>
+                        <Row gutter={[24, 24]} className={styles.statsRow}>
+              <Col xs={24} sm={12} lg={12}>
                 <AnimatedStatistic
-                  title="组件下载数量"
-                  value={totalDownloads}
+                  title={translate({ id: "组件下载数量和Github下载数量", message: "组件下载数量和Github下载数量" })}
+                  value={componentAndGithubDownloads}
                   icon={<DownloadOutlined />}
                   color="#06bcee"
                   loading={loading}
                 />
               </Col>
-              <Col xs={24} sm={12} lg={8}>
+              <Col xs={24} sm={12} lg={12}>
                 <AnimatedStatistic
-                  title="包管理器安装台数"
+                  title={translate({ id: "包管理器安装台数", message: "包管理器安装台数" })}
                   value={totalInstalls}
                   icon={<DesktopOutlined />}
                   color="#087ea4"
-                  loading={loading}
-                />
-              </Col>
-              <Col xs={24} sm={12} lg={8}>
-                <AnimatedStatistic
-                  title="活跃用户"
-                  value={data?.active_users?.total || 0}
-                  icon={<RiseOutlined />}
-                  color="#0d4977"
                   loading={loading}
                 />
               </Col>
@@ -391,7 +384,7 @@ const StatisticalData = () => {
           {/* 分类下载数据 */}
           {data && (
             <div className={styles.categorySection}>
-              <h3 className={styles.sectionTitle}>分目录下载统计</h3>
+              <h3 className={styles.sectionTitle}>{translate({ id: "分目录下载统计", message: "分目录下载统计" })}</h3>
               <div className={styles.categoryGrid}>
                 {Object.entries(getCombinedDownloads(data)).map(([dir, val], index) => {
                   const percentage = totalDownloads > 0 ? (val.total / totalDownloads) * 100 : 0;
