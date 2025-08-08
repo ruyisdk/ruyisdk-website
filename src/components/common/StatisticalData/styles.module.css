@@ -29,6 +29,54 @@
   gap: 3rem;
 }
 
+/* 安装台数区域样式 */
+.installSection {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.installContainer {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.installContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(6, 188, 238, 0.1) 0%, rgba(8, 126, 164, 0.1) 50%, rgba(13, 73, 119, 0.1) 100%);
+  opacity: 0.3;
+}
+
+.installContent {
+  position: relative;
+  z-index: 1;
+}
+
+.installTitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 2rem 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.installValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+
 /* 统计数据卡片样式 */
 .statsSection {
   margin-bottom: 2rem;

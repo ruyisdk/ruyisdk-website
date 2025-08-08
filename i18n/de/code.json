@@ -448,25 +448,25 @@
   "下载数量 Downloads": {
     "message": "Anzahl der Downloads"
   },
-  "组件下载数量和Github下载数量": {
-    "message": "Komponenten-Downloads und GitHub-Downloads"
+  "ruyi包管理器工具下载数量": {
+    "message": "Ruyi-Paketmanager-Tool-Downloads"
   },
-  "包管理器安装台数": {
-    "message": "Paketmanager-Installationen"
+  "ruyi安装台数": {
+    "message": "Ruyi-Installationen"
   },
-  "分目录下载统计": {
-    "message": "Unterverzeichnis-Download-Statistiken"
+  "详细下载统计": {
+    "message": "Detaillierte Download-Statistiken"
   },
   "组件下载数量": {
     "message": "Komponenten-Downloads"
   },
-  "包管理器下载量": {
-    "message": "Paketmanager-Downloads"
+  "ruyi包管理器下载次数": {
+    "message": "Ruyi-Paketmanager-Downloads"
   },
-  "第三方下载量": {
-    "message": "Drittanbieter-Downloads"
+  "第三方软件下载次数": {
+    "message": "Drittanbieter-Software-Downloads"
   },
-  "文档下载量": {
+  "文档下载数量": {
     "message": "Dokument-Downloads"
   },
   "IDE下载次数": {

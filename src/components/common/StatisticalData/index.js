@@ -5,6 +5,7 @@ import useDashboardClient from "../../../utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
+import FlipCounter from './FlipCounter';
 
 const CustomizeRenderEmpty = () => (
   <div className={styles.emptyState}>
@@ -181,9 +182,9 @@ const StatisticalData = () => {
     if (!data) return {};
     const categoryNames = {
       "downloads": translate({ id: "组件下载数量", message: "组件下载数量" }),
-      "pm_downloads": translate({ id: "包管理器下载量", message: "包管理器下载量" }),
-      "3rdparty": translate({ id: "第三方下载量", message: "第三方下载量" }),
-      "humans": translate({ id: "文档下载量", message: "文档下载量" }),
+      "pm_downloads": translate({ id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" }),
+      "3rdparty": translate({ id: "第三方软件下载次数", message: "第三方软件下载次数" }),
+      "humans": translate({ id: "文档下载数量", message: "文档下载数量" }),
       "ide": translate({ id: "IDE下载次数", message: "IDE下载次数" })
     };
     const combined = {};
@@ -333,7 +334,7 @@ const StatisticalData = () => {
     ? data.downloads.total + data.pm_downloads.total
     : 0;
   
-  const componentAndGithubDownloads = (data?.downloads?.total || 0) + (data?.github_downloads?.total || 0);
+  const componentDownloads = data?.downloads?.total || 0;
 
   const totalInstalls = data?.installs?.total || 0;
 
@@ -356,14 +357,36 @@ const StatisticalData = () => {
           }
         }
       }}>
-        <div className={styles.mainContent}>
-          {/* 统计数据卡片 */}
+                <div className={styles.mainContent}>
+          {/* 安装台数 - 重要指标 */}
+          <div className={styles.installSection}>
+            <div className={styles.installContainer}>
+              <div className={styles.installContent}>
+                <h2 className={styles.installTitle}>
+                  {translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
+                </h2>
+                <div className={styles.installValue}>
+                  {loading ? (
+                    <div className={styles.loadingSkeleton}></div>
+                  ) : (
+                    <FlipCounter
+                      value={totalInstalls}
+                      loading={loading}
+                      standalone={true}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 其他统计数据卡片 */}
           <div className={styles.statsSection}>
-                        <Row gutter={[24, 24]} className={styles.statsRow}>
+            <Row gutter={[24, 24]} className={styles.statsRow}>
               <Col xs={24} sm={12} lg={12}>
                 <AnimatedStatistic
-                  title={translate({ id: "组件下载数量和Github下载数量", message: "组件下载数量和Github下载数量" })}
-                  value={componentAndGithubDownloads}
+                  title={translate({ id: "ruyi包管理器工具下载数量", message: "ruyi包管理器工具下载数量" })}
+                  value={data?.pm_downloads?.total || 0}
                   icon={<DownloadOutlined />}
                   color="#06bcee"
                   loading={loading}
@@ -371,8 +394,8 @@ const StatisticalData = () => {
               </Col>
               <Col xs={24} sm={12} lg={12}>
                 <AnimatedStatistic
-                  title={translate({ id: "包管理器安装台数", message: "包管理器安装台数" })}
-                  value={totalInstalls}
+                  title={translate({ id: "组件下载数量", message: "组件下载数量" })}
+                  value={componentDownloads}
                   icon={<DesktopOutlined />}
                   color="#087ea4"
                   loading={loading}
@@ -384,7 +407,7 @@ const StatisticalData = () => {
           {/* 分类下载数据 */}
           {data && (
             <div className={styles.categorySection}>
-              <h3 className={styles.sectionTitle}>{translate({ id: "分目录下载统计", message: "分目录下载统计" })}</h3>
+              <h3 className={styles.sectionTitle}>{translate({ id: "详细下载统计", message: "详细下载统计" })}</h3>
               <div className={styles.categoryGrid}>
                 {Object.entries(getCombinedDownloads(data)).map(([dir, val], index) => {
                   const percentage = totalDownloads > 0 ? (val.total / totalDownloads) * 100 : 0;
