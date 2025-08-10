@@ -25,6 +25,7 @@ const NewsShowcase = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
   const mainRef = useRef(null);
 
   /**
@@ -58,11 +59,28 @@ const NewsShowcase = () => {
 
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
+    setIsAutoSwitchPaused(true);
+    
+    // Resume auto-switching after 10 seconds of user inactivity
+    setTimeout(() => {
+      setIsAutoSwitchPaused(false);
+    }, 10000);
   };
 
   const handleCardClick = (link) => {
     window.open(link, '_blank');
   };
+
+  // Auto-switch news every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAutoSwitchPaused) {
+        setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
+      }
+    }, 3000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, [newsData.length, isAutoSwitchPaused]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
@@ -355,6 +373,12 @@ const NewsShowcase = () => {
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
                 onClick={() => {
                   setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
+                  setIsAutoSwitchPaused(true);
+                  
+                  // Resume auto-switching after 10 seconds of user inactivity
+                  setTimeout(() => {
+                    setIsAutoSwitchPaused(false);
+                  }, 10000);
                 }}
               >
                 <span><Translate>{news.title}</Translate></span>
