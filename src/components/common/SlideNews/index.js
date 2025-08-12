@@ -178,11 +178,11 @@ export default function SlideNews() {
       Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       Links: "/docs/IDE/",
       ButtonText: "了解更多",        // 了解更多/立即跳转
-      titleColor: "#ffffff",         // Custom title color (white)
+      titleColor: "#ffffff",        // Custom title color (white)
       subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-      size: CardSizes.S,             // Small card (half width, 1x height)
-      isBlur: false,                 // Apply blur effect to background
-      ispopup: false,                // Disable click-to-show-popup for this card
+      size: CardSizes.S,            // Small card (half width, 1x height)
+      isBlur: false,                // Apply blur effect to background
+      ispopup: false,               // Disable click-to-show-popup for this card
     },
     {
       title: <Translate>RevyOS</Translate>,
@@ -191,11 +191,11 @@ export default function SlideNews() {
       Image: "img/RevyOS-logo.svg",
       Links: revyosLink,
       ButtonText: "立即跳转",
-      titleColor: "#ffffff",         // Custom title color (white)
+      titleColor: "#ffffff",        // Custom title color (white)
       subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-      size: CardSizes.S,             // Small card (half width, 1x height)
-      isBlur: true,                  // Enable blur on background
-      ispopup: false,                // Disable click-to-show-popup for this card
+      size: CardSizes.S,            // Small card (half width, 1x height)
+      isBlur: true,                 // Enable blur on background
+      ispopup: false,               // Disable click-to-show-popup for this card
     },
     {
       title: <Translate>Support Matrix</Translate>,
@@ -204,11 +204,11 @@ export default function SlideNews() {
       Image: "img/ruyi-logo-720.svg",
       Links: "https://matrix.ruyisdk.org/",
       ButtonText: "立即跳转",
-      titleColor: "#ffffff",         // Custom title color (white)
+      titleColor: "#ffffff",        // Custom title color (white)
       subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-      size: CardSizes.S,             // Small card (half width, 1x height)
-      isBlur: true,                  // Enable blur on background
-      ispopup: false,                // Disable click-to-show-popup for this card
+      size: CardSizes.S,            // Small card (half width, 1x height)
+      isBlur: true,                 // Enable blur on background
+      ispopup: false,               // Disable click-to-show-popup for this card
     },
     {
       title: <Translate>荔枝派 4A</Translate>,
@@ -217,11 +217,11 @@ export default function SlideNews() {
       Image: "img/licheepi-4a.png",
       Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/",
       ButtonText: "立即下载",
-      titleColor: "#ffffff",         // Custom title color (white)
+      titleColor: "#ffffff",        // Custom title color (white)
       subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
-      size: CardSizes.S,             // Small card (half width, 1x height)
-      isBlur: false,                 // Enable blur on background
-      ispopup: true,                 // Enable click-to-show-popup for this card
+      size: CardSizes.S,            // Small card (half width, 1x height)
+      isBlur: false,                // Enable blur on background
+      ispopup: true,                // Enable click-to-show-popup for this card
     },
   ];
 
@@ -358,13 +358,7 @@ export default function SlideNews() {
           className={styles.expandedCardOverlay}
           onClick={handleOverlayClick}
         >
-          <div
-            className={styles.expandedCard}
-            style={{
-              backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
-            }}
-          >
-            <div className={styles.expandedCardImageOverlay} />
+          <div className={styles.expandedCard}>
             <button
               className={styles.closeButton}
               onClick={handleCloseExpandedCard}
@@ -372,7 +366,18 @@ export default function SlideNews() {
             >
               ×
             </button>
-
+            
+            {/* New header element for the image */}
+            <div
+              className={styles.expandedCardHeader}
+              style={{
+                backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
+              }}
+            >
+              <div className={styles.expandedCardImageOverlay} />
+            </div>
+            
+            {/* Content element is now a sibling to the header */}
             <div className={styles.expandedCardContent}>
               <h1 className={styles.expandedCardTitle}>
                 {slideImages[expandedCardIndex].title}
