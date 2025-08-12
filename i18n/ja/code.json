@@ -354,5 +354,35 @@
   },
   "随时看到来自 RuyiSDK 团队的重大消息": {
     "message": "RuyiSDK チームからの最新ニュースを入手してください"
+  },
+  "ruyisdk.community": {
+    "message": "RuyiSDK コミュニティ"
+  },
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK 開発者コミュニティがオープンしました"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "ソースリポジトリ"
+  },
+  "statistics": {
+    "message": "統計"
+  },
+  "view.more": {
+    "message": "もっと見る"
+  },
+  "active.users": {
+    "message": "アクティブユーザー"
+  },
+  "downloads": {
+    "message": "ダウンロード数"
+  },
+  "installs": {
+    "message": "インストール数"
+  },
+  "no.data": {
+    "message": "現在、統計データは利用できません。"
   }
 }

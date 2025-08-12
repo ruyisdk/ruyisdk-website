@@ -428,10 +428,10 @@ const RuyiInLive = () => {
         <div style={styles.container}>
           <div style={styles.leftPanel}>
             <h1 style={styles.title}>
-              <Translate>RuyiSDK 社区</Translate>
+              <Translate id="ruyisdk.community" />
             </h1>
             <p style={styles.subtitle}>
-              <Translate>RuyiSDK 开发者社区现已开启</Translate>
+              <Translate id="ruyisdk.community.open" />
             </p>
             <div style={styles.buttonContainer}>
               <a
@@ -443,7 +443,7 @@ const RuyiInLive = () => {
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
                 <UsersIcon />
-                <Translate>ruyisdk.cn</Translate>
+                <Translate id="ruyisdk.cn" />
               </a>
               <a
                 href="https://github.com/ruyisdk"
@@ -454,7 +454,7 @@ const RuyiInLive = () => {
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >
                 <GithubIcon />
-                <Translate>源码库</Translate>
+                <Translate id="source.repository" />
               </a>
             </div>
             <div style={styles.leftPanelAccent}></div>
@@ -463,7 +463,7 @@ const RuyiInLive = () => {
           <div style={styles.rightPanel}>
             <div style={styles.rightPanelHeader}>
               <h2 style={styles.rightPanelTitle}>
-                <Translate>数据统计</Translate>
+                <Translate id="statistics" />
               </h2>
               <a
                 href="/Home/StatisticalDataPages"
@@ -471,14 +471,14 @@ const RuyiInLive = () => {
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
                 onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}
               >
-                <Translate>查看更多</Translate>&nbsp;&gt;
+                <Translate id="view.more" />&nbsp;&gt;
               </a>
             </div>
 
             <div style={styles.statsBox}>
-              <StatItem value={data?.active_users?.total} label="活跃用户" loading={loading} />
-              <StatItem value={data?.downloads?.total} label="组件下载数量" loading={loading} />
-              <StatItem value={data?.installs?.total} label="安装台数" loading={loading} />
+              <StatItem value={data?.active_users?.total} label="active.users" loading={loading} />
+              <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
+              <StatItem value={data?.installs?.total} label="installs" loading={loading} />
             </div>
 
             <div style={styles.chartContainer}>
@@ -516,7 +516,7 @@ const RuyiInLive = () => {
                 </div>
               ) : (
                 <div style={styles.emptyDataText}>
-                  <Translate>No statistical data available currently.</Translate>
+                  <Translate id="no.data" />
                 </div>
               )}
             </div>
