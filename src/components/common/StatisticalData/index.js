@@ -1,5 +1,5 @@
 import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } from "antd"
-import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined } from '@ant-design/icons';
+import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "../../../utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
@@ -357,33 +357,49 @@ const StatisticalData = () => {
           }
         }
       }}>
-                <div className={styles.mainContent}>
-          {/* 安装台数 - 重要指标 */}
-          <div className={styles.installSection}>
-            <div className={styles.installContainer}>
-              <div className={styles.installContent}>
-                <h2 className={styles.installTitle}>
-                  {translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
-                </h2>
-                <div className={styles.installValue}>
-                  {loading ? (
-                    <div className={styles.loadingSkeleton}></div>
-                  ) : (
-                    <FlipCounter
-                      value={totalInstalls}
-                      loading={loading}
-                      standalone={true}
-                    />
-                  )}
+        <div className={styles.mainContent}>
+          {/* 移动端：安装台数独立显示 */}
+          {isMobile && (
+            <div className={styles.installSection}>
+              <div className={styles.installContainer}>
+                <div className={styles.installContent}>
+                  <h2 className={styles.installTitle}>
+                    <span className={styles.installIcon}>🖥️</span>
+                    {translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
+                  </h2>
+                  <div className={styles.installValue}>
+                    {loading ? (
+                      <div className={styles.loadingSkeleton}></div>
+                    ) : (
+                      <FlipCounter
+                        value={totalInstalls}
+                        loading={loading}
+                        standalone={true}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* 其他统计数据卡片 */}
+          {/* 统计数据卡片区域 */}
           <div className={styles.statsSection}>
             <Row gutter={[24, 24]} className={styles.statsRow}>
-              <Col xs={24} sm={12} lg={12}>
+              {/* PC端：安装台数作为第一个卡片 */}
+              {!isMobile && (
+                <Col xs={24} sm={12} lg={8}>
+                  <AnimatedStatistic
+                    title={translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
+                    value={totalInstalls}
+                    icon={<CloudServerOutlined />}
+                    color="#06bcee"
+                    loading={loading}
+                  />
+                </Col>
+              )}
+              
+              <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
                 <AnimatedStatistic
                   title={translate({ id: "ruyi包管理器工具下载数量", message: "ruyi包管理器工具下载数量" })}
                   value={data?.pm_downloads?.total || 0}
@@ -392,7 +408,7 @@ const StatisticalData = () => {
                   loading={loading}
                 />
               </Col>
-              <Col xs={24} sm={12} lg={12}>
+              <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
                 <AnimatedStatistic
                   title={translate({ id: "组件下载数量", message: "组件下载数量" })}
                   value={componentDownloads}

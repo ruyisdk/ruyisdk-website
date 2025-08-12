@@ -94,6 +94,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  width: 100%;
 }
 
 .flipDigit {
@@ -171,5 +172,17 @@
   
   .statTitle {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flipDigit {
+    width: 32px;
+    height: 48px;
+  }
+  
+  .flipCardFront,
+  .flipCardBack {
+    font-size: 20px;
   }
 }
