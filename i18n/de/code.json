@@ -550,8 +550,8 @@
   "view.more": {
     "message": "Mehr anzeigen"
   },
-  "active.users": {
-    "message": "Aktive Benutzer"
+  "pm_downloads": {
+    "message": "Ruyi Paketmanager-Tool Downloads"
   },
   "downloads": {
     "message": "Anzahl der Downloads"

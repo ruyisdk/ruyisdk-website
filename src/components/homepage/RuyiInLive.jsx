@@ -476,7 +476,7 @@ const RuyiInLive = () => {
             </div>
 
             <div style={styles.statsBox}>
-              <StatItem value={data?.active_users?.total} label="active.users" loading={loading} />
+              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
               <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
               <StatItem value={data?.installs?.total} label="installs" loading={loading} />
             </div>

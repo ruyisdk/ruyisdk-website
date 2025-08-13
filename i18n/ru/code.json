@@ -373,8 +373,8 @@
   "view.more": {
     "message": "Посмотреть больше"
   },
-  "active.users": {
-    "message": "Активные пользователи"
+  "pm_downloads": {
+    "message": "Загрузки Ruyi Package Manager"
   },
   "downloads": {
     "message": "Количество загрузок"

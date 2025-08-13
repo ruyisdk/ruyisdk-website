@@ -31,8 +31,8 @@
   "view.more": {
     "message": "查看更多"
   },
-  "active.users": {
-    "message": "活跃用户"
+  "pm_downloads": {
+    "message": "包管理器下载量"
   },
   "downloads": {
     "message": "组件下载数量"

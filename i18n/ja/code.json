@@ -373,8 +373,8 @@
   "view.more": {
     "message": "もっと見る"
   },
-  "active.users": {
-    "message": "アクティブユーザー"
+  "pm_downloads": {
+    "message": "Ruyiパッケージマネージャーツールのダウンロード数"
   },
   "downloads": {
     "message": "ダウンロード数"

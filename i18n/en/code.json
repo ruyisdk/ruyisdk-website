@@ -553,8 +553,8 @@
   "view.more": {
     "message": "View More"
   },
-  "active.users": {
-    "message": "Active Users"
+  "pm_downloads": {
+    "message": "Ruyi Package Manager Tool Downloads"
   },
   "downloads": {
     "message": "Number of Downloads"
