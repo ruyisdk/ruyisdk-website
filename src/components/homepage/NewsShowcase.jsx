@@ -53,14 +53,14 @@ const NewsShowcase = () => {
         truncated = truncated.substring(0, lastSpaceIndex);
       }
     }
-    
+
     return truncated + '...';
   };
 
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
     setIsAutoSwitchPaused(true);
-    
+
     // Resume auto-switching after 10 seconds of user inactivity
     setTimeout(() => {
       setIsAutoSwitchPaused(false);
@@ -77,7 +77,7 @@ const NewsShowcase = () => {
       if (!isAutoSwitchPaused) {
         setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
       }
-    }, 3000); // 5 seconds
+    }, 3000); // 3 seconds
 
     return () => clearInterval(interval);
   }, [newsData.length, isAutoSwitchPaused]);
@@ -130,7 +130,7 @@ const NewsShowcase = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          padding: 0rem 1rem 1rem 0;
+          padding: 0.75rem 1rem 1rem 0; /* Updated padding for top alignment */
         }
         .newsshowcase-sidebar::-webkit-scrollbar {
           display: none;
@@ -172,22 +172,28 @@ const NewsShowcase = () => {
           height: 100%;
         }
         .newsshowcase-card {
+          width: 100%;
+          height: 100%;
+          flex-shrink: 0;
+          padding: 0.75rem; 
+          box-sizing: border-box;
+        }
+        .newsshowcase-card-inner {
           background: white;
           border-radius: 0.625rem; /* 10px */
           overflow: hidden;
-          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
+          box-shadow: none; /* Shadow removed */
           cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease; /* transition for box-shadow removed */
           width: 100%;
           height: 100%;
           display: flex;
           flex-direction: column;
           border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
-          flex-shrink: 0;
         }
-        .newsshowcase-card:hover {
-          transform: scale(1.01);
-          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
+        .newsshowcase-card-inner:hover {
+          transform: scale(1.02);
+          /* box-shadow removed from hover state */
         }
         .newsshowcase-image {
           width: 100%;
@@ -196,7 +202,7 @@ const NewsShowcase = () => {
           object-fit: cover;
           transition: transform 0.3s ease;
         }
-        .newsshowcase-card:hover .newsshowcase-image {
+        .newsshowcase-card-inner:hover .newsshowcase-image {
           transform: scale(1.02);
         }
         .newsshowcase-content {
@@ -239,7 +245,7 @@ const NewsShowcase = () => {
           border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
           gap: 0.5rem; /* Adjusted for consistency */
         }
-        .newsshowcase-card:hover .newsshowcase-link-indicator {
+        .newsshowcase-card-inner:hover .newsshowcase-link-indicator {
           opacity: 1;
           transform: translateX(0);
         }
@@ -297,6 +303,7 @@ const NewsShowcase = () => {
             border: none;
             border-radius: 0;
             margin: 0;
+            padding: 0; /* Remove padding for mobile view */
           }
           .accordion-content .newsshowcase-image {
             height: 12.5rem; /* 200px */
@@ -340,22 +347,23 @@ const NewsShowcase = () => {
           <div className="newsshowcase-main" ref={mainRef}>
             <div className="cards-wrapper">
               {newsData.map((news, idx) => (
-                <div
-                  key={idx}
-                  className="newsshowcase-card"
-                  onClick={() => handleCardClick(news.link)}
-                >
-                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
-                  <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description">
-                      <Translate>
-                        {news.description}
-                      </Translate>
-                    </p>
-                    <div className="newsshowcase-link-indicator">
-                      <Translate>前往阅读</Translate>
-                      <span className="newsshowcase-arrow">→</span>
+                <div key={idx} className="newsshowcase-card">
+                  <div
+                    className="newsshowcase-card-inner"
+                    onClick={() => handleCardClick(news.link)}
+                  >
+                    <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
+                    <div className="newsshowcase-content">
+                      <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
+                      <p className="newsshowcase-description">
+                        <Translate>
+                          {news.description}
+                        </Translate>
+                      </p>
+                      <div className="newsshowcase-link-indicator">
+                        <Translate>前往阅读</Translate>
+                        <span className="newsshowcase-arrow">→</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -374,7 +382,7 @@ const NewsShowcase = () => {
                 onClick={() => {
                   setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
                   setIsAutoSwitchPaused(true);
-                  
+
                   // Resume auto-switching after 10 seconds of user inactivity
                   setTimeout(() => {
                     setIsAutoSwitchPaused(false);
