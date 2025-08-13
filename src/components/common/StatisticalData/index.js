@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "../../../utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
-import { Chart } from '@antv/g2';
+import * as echarts from 'echarts';
 import FlipCounter from './FlipCounter';
 
 const CustomizeRenderEmpty = () => (
@@ -82,8 +82,7 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
 };
 
 const TopList = ({ data, title }) => {
-  const containerRef = useRef();
-  const chartRef = useRef();
+  const [isMobile, setIsMobile] = useState(false);
 
   const barData = useMemo(() => {
     return Object.entries(data)
@@ -93,73 +92,313 @@ const TopList = ({ data, title }) => {
   }, [data]);
 
   useEffect(() => {
-    // 确保在客户端环境下执行
-    if (typeof window === 'undefined') return;
-    
-    if (barData.length && containerRef.current) {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
+    // 检测是否为移动端
+    const checkIsMobile = () => {
+      const mobile = window.matchMedia('(max-width: 1024px)').matches;
+      setIsMobile(mobile);
+      console.log('Mobile detected:', mobile); // 添加调试信息
+    };
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
-      const chart = new Chart({
-        container: containerRef.current,
-        autoFit: true,
-        events: { enabled: false }
-      });
+  // 如果没有数据，显示空状态
+  if (!barData.length) {
+    return (
+      <div className={styles.chartContainer}>
+        <h3 className={styles.chartTitle}>{title}</h3>
+        <div className={styles.chartWrapper}>
+          <CustomizeRenderEmpty />
+        </div>
+      </div>
+    );
+  }
 
-      chartRef.current = chart;
-
-      const maxTotal = Math.max(...barData.map(d => d.total), 0);
-
-      chart.coordinate({ transform: [{ type: 'transpose' }] });
-      chart
-        .interval()
-        .style({ 
-          fill: (d, index) => {
-            const colors = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
-            return colors[index % colors.length];
-          }
-        })
-        .data(barData)
-        .transform({ type: 'sortX', reverse: true, by: "y" })
-        .axis('x', { line: false, title: false, label: false, tick: false })
-        .axis('y', { title: false, line: false, tick: false })
-        .encode('x', 'action')
-        .encode('y', 'total')
-        .scale('x', { padding: 0.6 })
-        .style('maxWidth', 200)
-        .label({ 
-          text: 'action', 
-          position: "top-left", 
-          fill: '#fff', 
-          dy: -22, 
-          fontWeight: 600,
-          fontSize: 12
-        })
-        .label({
-          text: 'total',
-          position: (d) => (d.total > maxTotal * 0.1 ? 'left' : 'right'),
-          fill: (d) => (d.total > maxTotal * 0.1 ? 'white' : '#333'),
-          dx: 5,
-          fontWeight: 600,
-          fontSize: 11
-        })
-        .interaction({ tooltip: { body: false } });
-
-      chart.interaction('view-scroll', false);
-      chart.render();
-    }
-  }, [barData]);
+  const maxTotal = Math.max(...barData.map(d => d.total), 0);
 
   return (
     <div className={styles.chartContainer}>
       <h3 className={styles.chartTitle}>{title}</h3>
       <div className={styles.chartWrapper}>
-        {barData.length ? (
-          <div ref={containerRef} className={styles.chart} />
-        ) : (
+        <div className={styles.nativeChart}>
+          {barData.map((item, index) => {
+            const barWidth = maxTotal > 0 ? (item.total / maxTotal) * 100 : 0;
+            const colors = [
+              '#00d4ff', // 亮蓝色 - 最高使用
+              '#0099ff', // 蓝色
+              '#0066ff', // 深蓝色
+              '#0033ff', // 更深的蓝色
+              '#0000ff', // 纯蓝色
+              '#3300ff', // 蓝紫色
+              '#6600ff', // 紫色
+              '#9900ff', // 亮紫色
+              '#cc00ff', // 更亮的紫色
+              '#ff00ff'  // 洋红色
+            ];
+            return (
+              <div key={item.action} className={styles.nativeChartRow}>
+                <div className={styles.nativeChartBarOuter}>
+                  <div
+                    className={styles.nativeChartBarInner}
+                    style={{
+                      width: `${barWidth}%`,
+                      backgroundColor: colors[index % colors.length],
+                    }}
+                  >
+                    {/* 只在PC端显示柱子内部标签 */}
+                    {!isMobile && (
+                      <span className={styles.nativeChartActionLabelInsideBar}>
+                        {item.action}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                
+                {/* 只在PC端显示柱子右侧数值标签 */}
+                {!isMobile && (
+                  <span className={styles.nativeChartValueLabel}>
+                    {item.total}
+                  </span>
+                )}
+                
+                {/* 移动端：标签在柱子下方 */}
+                {isMobile && (
+                  <div className={styles.mobileLabelsContainer}>
+                    <span className={styles.mobileActionLabel}>
+                      {item.action}
+                    </span>
+                    <span className={styles.mobileValueLabel}>
+                      {item.total}
+                    </span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CircularChart = ({ data, title }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const chartRef = useRef();
+  const chartInstance = useRef();
+
+  const chartData = useMemo(() => {
+    return Object.entries(data)
+      .map(([action, { total }]) => ({ action, total }))
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 9); // 显示前9个数据点
+  }, [data]);
+
+  useEffect(() => {
+    // 检测是否为移动端
+    const checkIsMobile = () => {
+      const mobile = window.matchMedia('(max-width: 1024px)').matches;
+      setIsMobile(mobile);
+    };
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  useEffect(() => {
+    // 确保在客户端环境下执行
+    if (typeof window === 'undefined') return;
+    
+    if (chartData.length && chartRef.current) {
+      // 销毁之前的图表实例
+      if (chartInstance.current) {
+        chartInstance.current.dispose();
+      }
+
+      // 创建新的图表实例
+      const chart = echarts.init(chartRef.current);
+      chartInstance.current = chart;
+
+      // 准备数据
+      const seriesData = chartData.map((item, index) => ({
+        name: item.action,
+        value: item.total,
+        itemStyle: {
+          color: [
+            '#06bcee', // 亮蓝色 - ruyi list
+            '#087ea4', // 深蓝色 - ruyi admin format-manifest
+            '#0ea5e9', // 天蓝色 - ruyi update
+            '#0284c7', // 蓝色 - ruyi install
+            '#0369a1', // 深天蓝 - ruyi
+            '#075985', // 深蓝 - ruyi telemetry upload
+            '#0c4a6e', // 深青蓝 - ruyi device provision
+            '#1e40af', // 靛蓝 - ruyi news read
+            '#3730a3'  // 紫蓝 - ruyi version
+          ][index]
+        }
+      }));
+
+      // 配置选项
+      const option = {
+        tooltip: {
+          trigger: isMobile ? 'item' : 'item',
+          formatter: '{a} <br/>{b}: {c} ({d}%)',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          borderColor: '#06bcee',
+          borderWidth: 1,
+          textStyle: {
+            color: '#ffffff'
+          },
+          // 移动端优化：触摸时显示提示
+          confine: true,
+          enterable: isMobile ? false : true
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          top: 'middle',
+          textStyle: {
+            color: '#ffffff',
+            fontSize: isMobile ? 10 : 12
+          },
+          itemWidth: 14,
+          itemHeight: 14,
+          itemGap: 10,
+          itemStyle: {
+            borderWidth: 0
+          },
+          // 移动端优化：增加触摸区域
+          itemGap: isMobile ? 12 : 10,
+          selectedMode: isMobile ? true : true
+        },
+        series: [
+          {
+            name: title,
+            type: 'pie',
+            radius: isMobile ? ['40%', '70%'] : ['50%', '80%'],
+            center: ['60%', '50%'],
+            avoidLabelOverlap: false,
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: isMobile ? false : true, // 移动端不显示标签，避免遮挡
+                fontSize: isMobile ? 14 : 18,
+                fontWeight: 'bold',
+                color: '#ffffff'
+              },
+              itemStyle: {
+                shadowBlur: isMobile ? 8 : 15, // 移动端减少阴影
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(6, 188, 238, 0.5)'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: seriesData,
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function (idx) {
+              return Math.random() * 200;
+            },
+            // 移动端优化：触摸交互
+            select: {
+              disabled: false
+            },
+            selectedOffset: isMobile ? 5 : 10
+          }
+        ],
+        // 移动端优化：触摸手势支持
+        animation: isMobile ? false : true, // 移动端关闭动画提升性能
+        // 移动端优化：触摸事件
+        useUTC: false,
+        // 移动端优化：触摸敏感度
+        hoverLayerThreshold: isMobile ? 10 : 5,
+        // 移动端优化：触摸区域
+        progressive: isMobile ? 1000 : 0,
+        progressiveThreshold: isMobile ? 3000 : 0
+      };
+
+      // 设置配置并渲染
+      chart.setOption(option);
+
+      // 移动端触摸交互优化
+      if (isMobile) {
+        // 为移动端添加触摸事件
+        chart.on('click', function (params) {
+          // 点击扇面时高亮显示
+          if (params.componentType === 'series') {
+            // 重置所有扇面的高亮状态
+            chart.dispatchAction({
+              type: 'downplay'
+            });
+            
+            // 高亮当前点击的扇面
+            chart.dispatchAction({
+              type: 'highlight',
+              seriesIndex: params.seriesIndex,
+              dataIndex: params.dataIndex
+            });
+            
+            // 显示tooltip
+            chart.dispatchAction({
+              type: 'showTip',
+              seriesIndex: params.seriesIndex,
+              dataIndex: params.dataIndex
+            });
+          }
+        });
+
+        // 点击图例时切换显示/隐藏
+        chart.on('legendselectchanged', function (params) {
+          // 图例切换后的处理
+          console.log('Legend changed:', params);
+        });
+      }
+
+      // 响应式处理
+      const handleResize = () => {
+        chart.resize();
+      };
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        chart.dispose();
+      };
+    }
+  }, [chartData, title, isMobile]);
+
+  // 如果没有数据，显示空状态
+  if (!chartData.length) {
+    return (
+      <div className={styles.chartContainer}>
+        <h3 className={styles.chartTitle}>{title}</h3>
+        <div className={styles.chartWrapper}>
           <CustomizeRenderEmpty />
-        )}
+        </div>
+      </div>
+    );
+  }
+
+  const total = chartData.reduce((sum, item) => sum + item.total, 0);
+
+  return (
+    <div className={styles.chartContainer}>
+      <h3 className={styles.chartTitle}>{title}</h3>
+      {isMobile && (
+        <div className={styles.mobileTip}>
+          💡 点击扇面查看详细信息
+        </div>
+      )}
+      <div className={styles.chartWrapper}>
+        <div className={styles.echartsContainer}>
+          {/* ECharts 图表容器 */}
+          <div ref={chartRef} className={styles.echartsChart} />
+        </div>
       </div>
     </div>
   );
@@ -200,7 +439,7 @@ const StatisticalData = () => {
     {
       key: '1',
       label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
-      children: <TopList data={data?.top_commands || {}} title={translate({ id: "最常用指令", message: "最常用指令" })} />,
+      children: <CircularChart data={data?.top_commands || {}} title={translate({ id: "最常用指令", message: "最常用指令" })} />,
     },
   ];
 
@@ -208,7 +447,7 @@ const StatisticalData = () => {
     {
       key: '1',
       label: translate({ id: "最常用包 Top Packages", message: "最常用包" }),
-      children: <TopList data={data?.top_packages || {}} title={translate({ id: "最常用包", message: "最常用包" })} />,
+      children: <CircularChart data={data?.top_packages || {}} title={translate({ id: "最常用包", message: "最常用包" })} />,
     }
   ];
 
@@ -216,7 +455,11 @@ const StatisticalData = () => {
     // 确保在客户端环境下执行
     if (typeof window === 'undefined') return;
     
-    const checkIsMobile = () => setIsMobile(window.matchMedia('(max-width: 1024px)').matches);
+    const checkIsMobile = () => {
+      const mobile = window.matchMedia('(max-width: 1024px)').matches;
+      setIsMobile(mobile);
+      console.log('Mobile detected:', mobile); // 添加调试信息
+    };
     checkIsMobile();
     window.addEventListener('resize', checkIsMobile);
     return () => window.removeEventListener('resize', checkIsMobile);
