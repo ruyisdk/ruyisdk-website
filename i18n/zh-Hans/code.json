@@ -43,10 +43,10 @@
   "no.data": {
     "message": "当前暂无统计数据。"
   },
-  "ruyi包管理器工具下载数量": { "message": "ruyi包管理器工具下载数量" },
-  "ruyi安装台数": { "message": "ruyi安装台数" },
+  "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载数量" },
+  "ruyi安装台数": { "message": "RuyiSDK 安装台数" },
   "详细下载统计": { "message": "详细下载统计" },
-  "组件下载数量": { "message": "组件下载数量" },
+  "组件下载数量": { "message": "RuyiSDK 组件下载数量" },
   "ruyi包管理器下载次数": { "message": "ruyi包管理器下载次数" },
   "第三方软件下载次数": { "message": "第三方软件下载次数" },
   "文档下载数量": { "message": "文档下载数量" },

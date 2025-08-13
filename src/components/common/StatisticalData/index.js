@@ -182,7 +182,7 @@ const StatisticalData = () => {
     if (!data) return {};
     const categoryNames = {
       "downloads": translate({ id: "组件下载数量", message: "组件下载数量" }),
-      "pm_downloads": translate({ id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" }),
+      "pm_downloads": translate({ id: "ruyi包管理器下载次数", message: "Ruyi 包管理器下载次数" }),
       "3rdparty": translate({ id: "第三方软件下载次数", message: "第三方软件下载次数" }),
       "humans": translate({ id: "文档下载数量", message: "文档下载数量" }),
       "ide": translate({ id: "IDE下载次数", message: "IDE下载次数" })
@@ -365,7 +365,7 @@ const StatisticalData = () => {
                 <div className={styles.installContent}>
                   <h2 className={styles.installTitle}>
                     <span className={styles.installIcon}>🖥️</span>
-                    {translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
+                    {translate({ id: "ruyi安装台数", message: "RuyiSDK 安装台数" })}
                   </h2>
                   <div className={styles.installValue}>
                     {loading ? (
@@ -390,7 +390,7 @@ const StatisticalData = () => {
               {!isMobile && (
                 <Col xs={24} sm={12} lg={8}>
                   <AnimatedStatistic
-                    title={translate({ id: "ruyi安装台数", message: "ruyi安装台数" })}
+                    title={translate({ id: "ruyi安装台数", message: "RuyiSDK 安装台数" })}
                     value={totalInstalls}
                     icon={<CloudServerOutlined />}
                     color="#06bcee"
@@ -401,7 +401,7 @@ const StatisticalData = () => {
               
               <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
                 <AnimatedStatistic
-                  title={translate({ id: "ruyi包管理器工具下载数量", message: "ruyi包管理器工具下载数量" })}
+                  title={translate({ id: "ruyi包管理器github下载数量", message: "Ruyi GitHub 下载数量" })}
                   value={data?.pm_downloads?.total || 0}
                   icon={<DownloadOutlined />}
                   color="#06bcee"
@@ -410,7 +410,7 @@ const StatisticalData = () => {
               </Col>
               <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
                 <AnimatedStatistic
-                  title={translate({ id: "组件下载数量", message: "组件下载数量" })}
+                  title={translate({ id: "组件下载数量", message: "RuyiSDK 组件下载数量" })}
                   value={componentDownloads}
                   icon={<DesktopOutlined />}
                   color="#087ea4"
