@@ -116,7 +116,7 @@ const TopList = ({ data, title }) => {
         .interval()
         .style({ 
           fill: (d, index) => {
-            const colors = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
+            const colors = ['#00d4ff', '#0099cc', '#0066ff', '#0033cc', '#0000ff'];
             return colors[index % colors.length];
           }
         })
@@ -132,17 +132,9 @@ const TopList = ({ data, title }) => {
           text: 'action', 
           position: "top-left", 
           fill: '#fff', 
-          dy: -22, 
+          dy: -12, 
           fontWeight: 600,
           fontSize: 12
-        })
-        .label({
-          text: 'total',
-          position: (d) => (d.total > maxTotal * 0.1 ? 'left' : 'right'),
-          fill: (d) => (d.total > maxTotal * 0.1 ? 'white' : '#333'),
-          dx: 5,
-          fontWeight: 600,
-          fontSize: 11
         })
         .interaction({ tooltip: { body: false } });
 
