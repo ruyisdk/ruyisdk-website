@@ -26,7 +26,9 @@ const NewsShowcase = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const mainRef = useRef(null);
+  const containerRef = useRef(null);
 
   /**
    * Truncates text to a specified maximum length, avoiding word breaks.
@@ -71,22 +73,51 @@ const NewsShowcase = () => {
     window.open(link, '_blank');
   };
 
-  // Auto-switch news every 5 seconds
+  // Auto-switch news every 3 seconds, but only when component is visible
   useEffect(() => {
+    if (!isVisible) return; // Don't start auto-switching until component is visible
+    
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
-        setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
+        setSelectedIndex((prevIndex) => {
+          // Handle mobile accordion mode where selectedIndex might be -1
+          const currentIndex = prevIndex === -1 ? 0 : prevIndex;
+          return (currentIndex + 1) % newsData.length;
+        });
       }
-    }, 3000); // 5 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [newsData.length, isAutoSwitchPaused]);
+  }, [newsData.length, isAutoSwitchPaused, isVisible]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer to detect when component is visible
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the component is visible
+        rootMargin: '0px 0px -100px 0px' // Start a bit before the component comes into view
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -97,8 +128,20 @@ const NewsShowcase = () => {
     }
   }, [selectedIndex, isMobile]);
 
+  // Mobile accordion click handler
+  const handleMobileAccordionClick = (idx) => {
+    const newIndex = selectedIndex === idx ? -1 : idx;
+    setSelectedIndex(newIndex);
+    setIsAutoSwitchPaused(true);
+    
+    // Resume auto-switching after 10 seconds of user inactivity
+    setTimeout(() => {
+      setIsAutoSwitchPaused(false);
+    }, 10000);
+  };
+
   return (
-    <div className="newsshowcase-container">
+    <div className="newsshowcase-container" ref={containerRef}>
       <style>{`
         .newsshowcase-container {
           display: flex;
@@ -371,15 +414,7 @@ const NewsShowcase = () => {
             <div key={idx} className="accordion-item">
               <div
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
-                onClick={() => {
-                  setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
-                  setIsAutoSwitchPaused(true);
-                  
-                  // Resume auto-switching after 10 seconds of user inactivity
-                  setTimeout(() => {
-                    setIsAutoSwitchPaused(false);
-                  }, 10000);
-                }}
+                onClick={() => handleMobileAccordionClick(idx)}
               >
                 <span><Translate>{news.title}</Translate></span>
                 <span>{selectedIndex === idx ? '−' : '+'}</span>
