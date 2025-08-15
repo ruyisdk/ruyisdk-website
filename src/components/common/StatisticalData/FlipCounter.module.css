@@ -1,0 +1,188 @@
+.statCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.statCard:hover::before {
+  opacity: 1;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.statIcon {
+  font-size: 2.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statIcon {
+  transform: scale(1.1);
+}
+
+.statContent {
+  flex: 1;
+}
+
+.statTitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+}
+
+.loadingSkeleton {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 独立显示的容器 */
+.standaloneContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 翻页计数器 */
+.flipCounter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.flipDigit {
+  width: 60px;
+  height: 90px;
+  perspective: 600px;
+  position: relative;
+}
+
+.flipCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.flipCard.flipping {
+  animation: flip 0.3s ease-in-out;
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  user-select: none;
+  line-height: 1;
+  backface-visibility: hidden;
+}
+
+.flipCardBack {
+  transform: rotateX(180deg);
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .flipDigit {
+    width: 40px;
+    height: 60px;
+  }
+  
+  .flipCardFront,
+  .flipCardBack {
+    font-size: 24px;
+  }
+  
+  .statCard {
+    padding: 20px;
+  }
+  
+  .statTitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flipDigit {
+    width: 32px;
+    height: 48px;
+  }
+  
+  .flipCardFront,
+  .flipCardBack {
+    font-size: 20px;
+  }
+}

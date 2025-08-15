@@ -448,6 +448,42 @@
   "下载数量 Downloads": {
     "message": "Anzahl der Downloads"
   },
+  "ruyi包管理器工具下载数量": {
+    "message": "Ruyi-Paketmanager-Tool-Downloads"
+  },
+  "ruyi安装台数": {
+    "message": "Ruyi-Installationen"
+  },
+  "详细下载统计": {
+    "message": "Detaillierte Download-Statistiken"
+  },
+  "组件下载数量": {
+    "message": "Komponenten-Downloads"
+  },
+  "ruyi包管理器下载次数": {
+    "message": "Ruyi-Paketmanager-Downloads"
+  },
+  "第三方软件下载次数": {
+    "message": "Drittanbieter-Software-Downloads"
+  },
+  "文档下载数量": {
+    "message": "Dokument-Downloads"
+  },
+  "IDE下载次数": {
+    "message": "IDE-Downloads"
+  },
+  "最常用指令": {
+    "message": "Meistgenutzte Befehle"
+  },
+  "最常用包": {
+    "message": "Meistgenutzte Pakete"
+  },
+  "实时监控 RuyiSDK 生态系统的使用情况和发展趋势": {
+    "message": "Echtzeitüberwachung der Nutzung und Entwicklungstrends des RuyiSDK-Ökosystems"
+  },
+  "数据更新时间": {
+    "message": "Data Update Time:"
+  },
   "安装台数 Installs": {
     "message": "Anzahl der Installationen"
   },
