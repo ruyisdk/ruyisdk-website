@@ -534,5 +534,35 @@
   "footer.plct": { "message": "PLCT Lab" },
   "footer.tools": { "message": "More Developer Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "ruyisdk.community": {
+    "message": "RuyiSDK Community"
+  },
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK Developer Community is now open"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "Source Repository"
+  },
+  "statistics": {
+    "message": "Statistics"
+  },
+  "view.more": {
+    "message": "View More"
+  },
+  "pm_downloads": {
+    "message": "Ruyi Package Manager Tool Downloads"
+  },
+  "downloads": {
+    "message": "Number of Downloads"
+  },
+  "installs": {
+    "message": "Installations"
+  },
+  "no.data": {
+    "message": "No statistical data available currently."
+  }
 }

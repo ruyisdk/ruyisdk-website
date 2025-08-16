@@ -531,5 +531,35 @@
   "footer.tools": { "message": "Weitere Entwickler-Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
   "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "ruyisdk.community": {
+    "message": "RuyiSDK Gemeinschaft"
+  },
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "Quellcode-Repository"
+  },
+  "statistics": {
+    "message": "Statistiken"
+  },
+  "view.more": {
+    "message": "Mehr anzeigen"
+  },
+  "pm_downloads": {
+    "message": "Ruyi Paketmanager-Tool Downloads"
+  },
+  "downloads": {
+    "message": "Anzahl der Downloads"
+  },
+  "installs": {
+    "message": "Installationen"
+  },
+  "no.data": {
+    "message": "Derzeit keine statistischen Daten verfügbar."
+  }
 }
