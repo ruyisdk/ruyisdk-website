@@ -446,7 +446,11 @@ const StatisticalData = () => {
               <h3 className={styles.sectionTitle}>{translate({ id: "详细下载统计", message: "详细下载统计" })}</h3>
               <div className={styles.categoryGrid}>
                 {Object.entries(getCombinedDownloads(data)).map(([dir, val], index) => {
-                  const percentage = totalDownloads > 0 ? (val.total / totalDownloads) * 100 : 0;
+                  // 使用对数变换计算进度条长度，但保持真实数据展示
+                  const logTotal = Math.log10(val.total + 1); // +1 避免 log(0)
+                  const maxLogTotal = Math.log10(Math.max(...Object.values(getCombinedDownloads(data)).map(v => v.total)) + 1);
+                  const logPercentage = maxLogTotal > 0 ? (logTotal / maxLogTotal) * 100 : 0;
+                  
                   return (
                     <div key={dir} className={styles.categoryCard}>
                       <div className={styles.categoryHeader}>
@@ -454,7 +458,7 @@ const StatisticalData = () => {
                         <span className={styles.categoryValue}>{val.total.toLocaleString()}</span>
                       </div>
                       <Progress 
-                        percent={percentage} 
+                        percent={logPercentage} 
                         showInfo={false}
                         strokeColor={{
                           '0%': '#06bcee',
