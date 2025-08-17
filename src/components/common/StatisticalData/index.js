@@ -90,7 +90,9 @@ const TopList = ({ data, title }) => {
       .map(([action, { total }]) => ({ 
         action, 
         total, 
-        logTotal: Math.log10(total + 1) // 添加对数变换后的值，+1避免log(0)
+        // 使用更温和的增长公式，避免柱子过长或过短
+        // 让大数值增长适中，小数值也有合理长度
+        logTotal: Math.pow(total, 0.4) * (1 + total / 2000) * 0.6
       }))
       .sort((a, b) => b.total - a.total)
       .slice(0, 10); // 只显示前10个
@@ -142,8 +144,11 @@ const TopList = ({ data, title }) => {
         .encode('x', 'action')
         .encode('y', 'logTotal')
         .scale('y', { 
-          nice: true,
-          padding: 0.6 
+          nice: false,
+          padding: 0.6,
+          // 调整Y轴范围，考虑数字标签宽度，确保所有柱子+标签都在图表内
+          min: 0,
+          max: Math.max(...barData.map(d => d.logTotal)) * 3.5
         })
         .scale('x', { padding: 0.6 })
         .style('maxWidth', 200)
@@ -157,10 +162,10 @@ const TopList = ({ data, title }) => {
         })
         .label({ 
           text: 'total', 
-          position: "right", 
+          position: "top-right", 
           fill: '#ffffff', 
           dy: 0, 
-          dx: 29,
+          dx: -10,
           fontWeight: 700,
           fontSize: 13
         })
