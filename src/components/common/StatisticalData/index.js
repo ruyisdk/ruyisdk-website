@@ -87,7 +87,11 @@ const TopList = ({ data, title }) => {
 
   const barData = useMemo(() => {
     return Object.entries(data)
-      .map(([action, { total }]) => ({ action, total }))
+      .map(([action, { total }]) => ({ 
+        action, 
+        total, 
+        logTotal: Math.log10(total + 1) // 添加对数变换后的值，+1避免log(0)
+      }))
       .sort((a, b) => b.total - a.total)
       .slice(0, 10); // 只显示前10个
   }, [data]);
@@ -125,7 +129,11 @@ const TopList = ({ data, title }) => {
         .axis('x', { line: false, title: false, label: false, tick: false })
         .axis('y', { title: false, line: false, tick: false })
         .encode('x', 'action')
-        .encode('y', 'total')
+        .encode('y', 'logTotal')
+        .scale('y', { 
+          nice: true,
+          padding: 0.6 
+        })
         .scale('x', { padding: 0.6 })
         .style('maxWidth', 200)
         .label({ 
