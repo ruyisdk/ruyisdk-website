@@ -120,7 +120,18 @@ const TopList = ({ data, title }) => {
         .interval()
         .style({ 
           fill: (d, index) => {
-            const colors = ['#00d4ff', '#0099cc', '#0066ff', '#0033cc', '#0000ff'];
+            const colors = [
+              '#4dd0e1', // 淡青色
+              '#81c784', // 淡绿色
+              '#f48fb1', // 淡粉红
+              '#ffb74d', // 淡橙色
+              '#ba68c8', // 淡紫色
+              '#e57373', // 淡红色
+              '#aed581', // 淡绿色
+              '#ff8a65', // 淡橙红
+              '#7986cb', // 淡蓝紫
+              '#f06292'  // 淡粉红
+            ];
             return colors[index % colors.length];
           }
         })
@@ -147,10 +158,11 @@ const TopList = ({ data, title }) => {
         .label({ 
           text: 'total', 
           position: "right", 
-          fill: '#333', 
+          fill: '#ffffff', 
           dy: 0, 
-          fontWeight: 500,
-          fontSize: 11
+          dx: 29,
+          fontWeight: 700,
+          fontSize: 13
         })
         .interaction({ tooltip: { body: false } });
 
