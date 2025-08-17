@@ -122,18 +122,7 @@ const TopList = ({ data, title }) => {
         .interval()
         .style({ 
           fill: (d, index) => {
-            const colors = [
-              '#667eea', // 深空蓝
-              '#764ba2', // 科技紫
-              '#f093fb', // 霓虹蓝
-              '#4ade80', // 薄荷绿
-              '#fb7185', // 珊瑚橙
-              '#a78bfa', // 薰衣草紫
-              '#64748b', // 石墨灰
-              '#06b6d4', // 青色
-              '#8b5cf6', // 紫色
-              '#ec4899'  // 粉色
-            ];
+            const colors = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
             return colors[index % colors.length];
           }
         })
