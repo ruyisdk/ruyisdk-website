@@ -121,16 +121,16 @@ const TopList = ({ data, title }) => {
         .style({ 
           fill: (d, index) => {
             const colors = [
-              '#4dd0e1', // 淡青色
-              '#81c784', // 淡绿色
-              '#f48fb1', // 淡粉红
-              '#ffb74d', // 淡橙色
-              '#ba68c8', // 淡紫色
-              '#e57373', // 淡红色
-              '#aed581', // 淡绿色
-              '#ff8a65', // 淡橙红
-              '#7986cb', // 淡蓝紫
-              '#f06292'  // 淡粉红
+              '#667eea', // 深空蓝
+              '#764ba2', // 科技紫
+              '#f093fb', // 霓虹蓝
+              '#4ade80', // 薄荷绿
+              '#fb7185', // 珊瑚橙
+              '#a78bfa', // 薰衣草紫
+              '#64748b', // 石墨灰
+              '#06b6d4', // 青色
+              '#8b5cf6', // 紫色
+              '#ec4899'  // 粉色
             ];
             return colors[index % colors.length];
           }
@@ -365,10 +365,10 @@ const StatisticalData = () => {
       <ConfigProvider renderEmpty={CustomizeRenderEmpty} theme={{
         components: { 
           Tabs: { 
-            itemSelectedColor: "#06bcee", 
-            inkBarColor: "#06bcee",
-            itemActiveColor: "#06bcee",
-            itemHoverColor: "#06bcee"
+            itemSelectedColor: "#f093fb", 
+            inkBarColor: "#f093fb",
+            itemActiveColor: "#f093fb",
+            itemHoverColor: "#f093fb"
           },
           Card: {
             borderRadius: 12,
@@ -413,7 +413,7 @@ const StatisticalData = () => {
                     title={translate({ id: "ruyi安装台数", message: "RuyiSDK 安装台数" })}
                     value={totalInstalls}
                     icon={<CloudServerOutlined />}
-                    color="#06bcee"
+                    color="#f093fb"
                     loading={loading}
                   />
                 </Col>
@@ -424,7 +424,7 @@ const StatisticalData = () => {
                   title={translate({ id: "ruyi包管理器github下载数量", message: "Ruyi GitHub 下载数量" })}
                   value={data?.pm_downloads?.total || 0}
                   icon={<DownloadOutlined />}
-                  color="#06bcee"
+                  color="#667eea"
                   loading={loading}
                 />
               </Col>
@@ -433,7 +433,7 @@ const StatisticalData = () => {
                   title={translate({ id: "组件下载数量", message: "RuyiSDK 组件下载数量" })}
                   value={componentDownloads}
                   icon={<DesktopOutlined />}
-                  color="#087ea4"
+                  color="#4ade80"
                   loading={loading}
                 />
               </Col>
@@ -461,8 +461,9 @@ const StatisticalData = () => {
                         percent={logPercentage} 
                         showInfo={false}
                         strokeColor={{
-                          '0%': '#06bcee',
-                          '100%': '#087ea4',
+                          '0%': '#667eea',
+                          '50%': '#764ba2',
+                          '100%': '#f093fb',
                         }}
                         className={styles.categoryProgress}
                       />
