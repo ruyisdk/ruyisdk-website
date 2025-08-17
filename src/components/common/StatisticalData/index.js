@@ -136,6 +136,14 @@ const TopList = ({ data, title }) => {
           fontWeight: 600,
           fontSize: 12
         })
+        .label({ 
+          text: 'total', 
+          position: "right", 
+          fill: '#333', 
+          dy: 0, 
+          fontWeight: 500,
+          fontSize: 11
+        })
         .interaction({ tooltip: { body: false } });
 
       chart.interaction('view-scroll', false);
