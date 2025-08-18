@@ -4,12 +4,6 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
-      title: "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作",
-      description: "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。",
-      img: "img/newsshowcase/opencloud.png",
-      link: "https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw"
-    },
-    {
       title: "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日",
       description: "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。",
       img: "img/newsshowcase/xiangshan_process.jpg",
@@ -20,6 +14,12 @@ const NewsShowcase = () => {
       description: "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。",
       img: "img/newsshowcase/chenglongcan.png",
       link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
+    },
+    {
+      title: "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作",
+      description: "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。",
+      img: "img/newsshowcase/opencloud.png",
+      link: "https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw"
     },
     
   ];
