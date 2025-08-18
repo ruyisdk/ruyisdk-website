@@ -168,8 +168,8 @@ PLCT 审核并合入的代码：
     添加寄存器约束，简化 codegen 逻辑  
     [chromium-review.googlesource.com/c/6760110](https://chromium-review.googlesource.com/c/6760110)
 
-16. **[riscv] Move forward declarations of Set {Hi20|Lo12} Offset**  
-    移动 Set {Hi20|Lo12} Offset 的前置声明  
+16. **[riscv] Move forward declarations of Set Hi20/Lo12 Offset**  
+    移动 Set Hi20/Lo12 Offset 的前置声明  
     [chromium-review.googlesource.com/c/6760071](https://chromium-review.googlesource.com/c/6760071)
 
 17. **[riscv] Implement register constraints for I32x4DotI8x16I7x16AddS**  
