@@ -16,10 +16,10 @@ const NewsShowcase = () => {
       link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
     },
     {
-      title: "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作",
-      description: "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。",
-      img: "img/newsshowcase/opencloud.png",
-      link: "https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw"
+      title: "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣",
+      description: "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。",
+      img: "img/newsshowcase/MoonBit.jpg",
+      link: "https://mp.weixin.qq.com/s/2r4cKs5D7JJDqgH4lhdH_A"
     },
     
   ];
