@@ -7,29 +7,58 @@ import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
-const CustomizeRenderEmpty = () => (
-  <div className={styles.emptyState}>
-    <SmileOutlined className={styles.emptyIcon} />
-    <p className={styles.emptyText}>{translate({ id: "暂无数据", message: "暂无数据" })}</p>
-  </div>
-);
+// Constants
+const CHART_COLORS = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
+const ANIMATION_DURATION = 2000;
+const ANIMATION_STEPS = 60;
+const SCROLL_TIMEOUT = 500;
+const MOBILE_BREAKPOINT = 1024;
+const MAX_RETRY_COUNT = 5;
+const RETRY_DELAY_BASE = 1000;
 
-const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
-  const [displayValue, setDisplayValue] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+// Translation keys
+const TRANSLATIONS = {
+  NO_DATA: { id: "暂无数据", message: "暂无数据" },
+  TOP_COMMANDS: { id: "最常用指令 Top Commands", message: "最常用指令" },
+  TOP_PACKAGES: { id: "最常用包 Top Packages", message: "最常用包" },
+  TOP_COMMANDS_TITLE: { id: "最常用指令", message: "最常用指令" },
+  TOP_PACKAGES_TITLE: { id: "最常用包", message: "最常用包" },
+  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "组件下载数量" },
+  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" },
+  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
+  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
+  IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
+  RUYI_INSTALLS: { id: "ruyi安装台数", message: "ruyi安装台数" },
+  RUYI_GITHUB_DOWNLOADS: { id: "ruyi包管理器github下载数量", message: "Ruyi GitHub下载数量" },
+  DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
+  UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
+};
+
+// Category mapping
+const CATEGORY_NAMES = {
+  downloads: TRANSLATIONS.COMPONENT_DOWNLOADS,
+  pm_downloads: TRANSLATIONS.PM_DOWNLOADS,
+  "3rdparty": TRANSLATIONS.THIRD_PARTY,
+  humans: TRANSLATIONS.DOCS_DOWNLOADS,
+  ide: TRANSLATIONS.IDE_DOWNLOADS
+};
+
+// Utility functions
+const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
   const elementRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // 确保在客户端环境下执行
     if (typeof window === 'undefined') return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          callback?.(entry);
         }
       },
-      { threshold: 0.1 }
+      options
     );
 
     if (elementRef.current) {
@@ -37,13 +66,41 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
     }
 
     return () => observer.disconnect();
+  }, [callback, options]);
+
+  return { elementRef, isVisible };
+};
+
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const checkIsMobile = () => setIsMobile(window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches);
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
+
+  return isMobile;
+};
+
+// Components
+const CustomizeRenderEmpty = () => (
+  <div className={styles.emptyState}>
+    <SmileOutlined className={styles.emptyIcon} />
+    <p className={styles.emptyText}>{translate(TRANSLATIONS.NO_DATA)}</p>
+  </div>
+);
+
+const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const { elementRef, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
     if (isVisible && !loading && typeof value === 'number') {
-      const duration = 2000;
-      const steps = 60;
-      const increment = value / steps;
+      const increment = value / ANIMATION_STEPS;
       let current = 0;
       
       const timer = setInterval(() => {
@@ -54,7 +111,7 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
         } else {
           setDisplayValue(Math.floor(current));
         }
-      }, duration / steps);
+      }, ANIMATION_DURATION / ANIMATION_STEPS);
 
       return () => clearInterval(timer);
     }
@@ -90,79 +147,68 @@ const TopList = ({ data, title }) => {
       .map(([action, { total }]) => ({ 
         action, 
         total, 
-        // 使用更温和的增长公式，避免柱子过长或过短
-        // 让大数值增长适中，小数值也有合理长度
         logTotal: Math.pow(total, 0.4) * (1 + total / 2000) * 0.6
       }))
       .sort((a, b) => b.total - a.total)
-      .slice(0, 10); // 只显示前10个
+      .slice(0, 10);
   }, [data]);
 
   useEffect(() => {
-    // 确保在客户端环境下执行
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !barData.length || !containerRef.current) return;
     
-    if (barData.length && containerRef.current) {
-      if (chartRef.current) {
-        chartRef.current.destroy();
-      }
-
-      const chart = new Chart({
-        container: containerRef.current,
-        autoFit: true,
-        events: { enabled: false }
-      });
-
-      chartRef.current = chart;
-
-      const maxTotal = Math.max(...barData.map(d => d.total), 0);
-
-      chart.coordinate({ transform: [{ type: 'transpose' }] });
-      chart
-        .interval()
-        .style({ 
-          fill: (d, index) => {
-            const colors = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
-            return colors[index % colors.length];
-          }
-        })
-        .data(barData)
-        .transform({ type: 'sortX', reverse: true, by: "y" })
-        .axis('x', { line: false, title: false, label: false, tick: false })
-        .axis('y', { title: false, line: false, tick: false })
-        .encode('x', 'action')
-        .encode('y', 'logTotal')
-        .scale('y', { 
-          nice: false,
-          padding: 0.6,
-          // 调整Y轴范围，考虑数字标签宽度，确保所有柱子+标签都在图表内
-          min: 0,
-          max: Math.max(...barData.map(d => d.logTotal)) * 3.5
-        })
-        .scale('x', { padding: 0.6 })
-        .style('maxWidth', 200)
-        .label({ 
-          text: 'action', 
-          position: "top-left", 
-          fill: '#fff', 
-          dy: -12, 
-          fontWeight: 600,
-          fontSize: 12
-        })
-        .label({ 
-          text: 'total', 
-          position: "top-right", 
-          fill: '#ffffff', 
-          dy: 0, 
-          dx: -10,
-          fontWeight: 700,
-          fontSize: 13
-        })
-        .interaction({ tooltip: { body: false } });
-
-      chart.interaction('view-scroll', false);
-      chart.render();
+    if (chartRef.current) {
+      chartRef.current.destroy();
     }
+
+    const chart = new Chart({
+      container: containerRef.current,
+      autoFit: true,
+      events: { enabled: false }
+    });
+
+    chartRef.current = chart;
+
+    chart.coordinate({ transform: [{ type: 'transpose' }] });
+    chart
+      .interval()
+      .style({ 
+        fill: (d, index) => CHART_COLORS[index % CHART_COLORS.length]
+      })
+      .data(barData)
+      .transform({ type: 'sortX', reverse: true, by: "y" })
+      .axis('x', { line: false, title: false, label: false, tick: false })
+      .axis('y', { title: false, line: false, tick: false })
+      .encode('x', 'action')
+      .encode('y', 'logTotal')
+      .scale('y', { 
+        nice: false,
+        padding: 0.6,
+        min: 0,
+        max: Math.max(...barData.map(d => d.logTotal)) * 3.5
+      })
+      .scale('x', { padding: 0.6 })
+      .style('maxWidth', 200)
+      .label({ 
+        text: 'action', 
+        position: "top-left", 
+        fill: '#fff', 
+        dy: -12, 
+        fontWeight: 600,
+        fontSize: 12
+      })
+      .label({ 
+        text: 'total', 
+        position: "top-right", 
+        fill: '#ffffff', 
+        dy: 0, 
+        dx: -10,
+        fontWeight: 700,
+        fontSize: 13
+      })
+      .interaction({ tooltip: { body: false } });
+
+    chart.interaction('view-scroll', false);
+    chart.render();
   }, [barData]);
 
   return (
@@ -179,6 +225,188 @@ const TopList = ({ data, title }) => {
   );
 };
 
+const NavigationDots = ({ currentSlide, onDotClick, isMobile }) => {
+  if (!isMobile) return null;
+  
+  return (
+    <div className={styles.navigationDots}>
+      {[0, 1, 2].map(index => (
+        <div 
+          key={index}
+          onClick={() => onDotClick(index)}
+          className={`${styles.dot} ${currentSlide === index ? styles.activeDot : ''}`}
+        />
+      ))}
+    </div>
+  );
+};
+
+const MobileInstallSection = ({ totalInstalls, loading }) => (
+  <div className={styles.installSection}>
+    <div className={styles.installContainer}>
+      <div className={styles.installContent}>
+        <h2 className={styles.installTitle}>
+          <span className={styles.installIcon}>🖥️</span>
+          {translate(TRANSLATIONS.RUYI_INSTALLS)}
+        </h2>
+        <div className={styles.installValue}>
+          {loading ? (
+            <div className={styles.loadingSkeleton}></div>
+          ) : (
+            <FlipCounter
+              value={totalInstalls}
+              loading={loading}
+              standalone={true}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const StatsSection = ({ data, loading, isMobile }) => {
+  const totalInstalls = data?.installs?.total || 0;
+  const componentDownloads = data?.downloads?.total || 0;
+  const pmDownloads = data?.pm_downloads?.total || 0;
+
+  return (
+    <div className={styles.statsSection}>
+      <Row gutter={[24, 24]} className={styles.statsRow}>
+        {!isMobile && (
+          <Col xs={24} sm={12} lg={8}>
+            <AnimatedStatistic
+              title={translate(TRANSLATIONS.RUYI_INSTALLS)}
+              value={totalInstalls}
+              icon={<CloudServerOutlined />}
+              color="#f093fb"
+              loading={loading}
+            />
+          </Col>
+        )}
+        
+        <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
+          <AnimatedStatistic
+            title={translate(TRANSLATIONS.RUYI_GITHUB_DOWNLOADS)}
+            value={pmDownloads}
+            icon={<DownloadOutlined />}
+            color="#667eea"
+            loading={loading}
+          />
+        </Col>
+        <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
+          <AnimatedStatistic
+            title={translate(TRANSLATIONS.COMPONENT_DOWNLOADS)}
+            value={componentDownloads}
+            icon={<DesktopOutlined />}
+            color="#4ade80"
+            loading={loading}
+          />
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+const CategorySection = ({ data }) => {
+  const getCombinedDownloads = (data) => {
+    if (!data) return {};
+    const combined = {};
+    Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
+      combined[translate(CATEGORY_NAMES[key])] = { ...value };
+    });
+    if (data.downloads) combined[translate(CATEGORY_NAMES.downloads)] = { ...data.downloads };
+    if (data.pm_downloads) combined[translate(CATEGORY_NAMES.pm_downloads)] = { ...data.pm_downloads };
+    return combined;
+  };
+
+  const combinedDownloads = getCombinedDownloads(data);
+  const maxTotal = Math.max(...Object.values(combinedDownloads).map(v => v.total), 0);
+
+  return (
+    <div className={styles.categorySection}>
+      <h3 className={styles.sectionTitle}>{translate(TRANSLATIONS.DETAILED_STATS)}</h3>
+      <div className={styles.categoryGrid}>
+        {Object.entries(combinedDownloads).map(([dir, val]) => {
+          // 使用更温和的公式来缩小数据差异
+          // 使用对数变换 + 平方根 + 动态缩放因子
+          const logValue = Math.log10(val.total + 1);
+          const sqrtValue = Math.sqrt(val.total);
+          const combinedValue = (logValue * 0.7 + sqrtValue * 0.3) * (1 + val.total / 10000);
+          
+          const maxLogValue = Math.log10(maxTotal + 1);
+          const maxSqrtValue = Math.sqrt(maxTotal);
+          const maxCombinedValue = (maxLogValue * 0.7 + maxSqrtValue * 0.3) * (1 + maxTotal / 10000);
+          
+          const percentage = maxCombinedValue > 0 ? (combinedValue / maxCombinedValue) * 100 : 0;
+          
+          // 调试信息 - 可以在控制台查看
+          console.log(`${dir}: 原始值=${val.total}, 计算值=${combinedValue}, 百分比=${percentage.toFixed(2)}%`);
+          
+          return (
+            <div key={dir} className={styles.categoryCard}>
+              <div className={styles.categoryHeader}>
+                <span className={styles.categoryName}>{dir}</span>
+                <span className={styles.categoryValue}>{val.total.toLocaleString()}</span>
+              </div>
+              <Progress 
+                percent={percentage} 
+                showInfo={false}
+                strokeColor={{
+                  '0%': '#667eea',
+                  '50%': '#764ba2',
+                  '100%': '#f093fb',
+                }}
+                className={styles.categoryProgress}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const ChartsSection = ({ data }) => {
+  const CardOneitems = [{
+    key: '1',
+    label: translate(TRANSLATIONS.TOP_COMMANDS),
+    children: <TopList data={data?.top_commands || {}} title={translate(TRANSLATIONS.TOP_COMMANDS_TITLE)} />,
+  }];
+
+  const CardTwoitems = [{
+    key: '1',
+    label: translate(TRANSLATIONS.TOP_PACKAGES),
+    children: <TopList data={data?.top_packages || {}} title={translate(TRANSLATIONS.TOP_PACKAGES_TITLE)} />,
+  }];
+
+  return (
+    <div className={styles.chartsSection}>
+      <Row gutter={[24, 24]}>
+        <Col xs={24} lg={12}>
+          <Card className={styles.chartCard}>
+            <Tabs defaultActiveKey="1" items={CardOneitems} />
+          </Card>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Card className={styles.chartCard}>
+            <Tabs defaultActiveKey="1" items={CardTwoitems} />
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+const UpdateTime = ({ data }) => (
+  <div className={styles.updateTime}>
+    <p>
+      {translate(TRANSLATIONS.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+    </p>
+  </div>
+);
+
+// Main component
 const StatisticalData = () => {
   const axiosInstance = useDashboardClient();
   const [data, setData] = useState(null);
@@ -190,54 +418,11 @@ const StatisticalData = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const scrollTimeoutRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  
+  const isMobile = useMobileDetection();
 
-  const getCombinedDownloads = (data) => {
-    if (!data) return {};
-    const categoryNames = {
-      "downloads": translate({ id: "组件下载数量", message: "组件下载数量" }),
-      "pm_downloads": translate({ id: "ruyi包管理器下载次数", message: "Ruyi 包管理器下载次数" }),
-      "3rdparty": translate({ id: "第三方软件下载次数", message: "第三方软件下载次数" }),
-      "humans": translate({ id: "文档下载数量", message: "文档下载数量" }),
-      "ide": translate({ id: "IDE下载次数", message: "IDE下载次数" })
-    };
-    const combined = {};
-    Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
-      combined[categoryNames[key]] = { ...value };
-    });
-    if (data.downloads) combined[categoryNames["downloads"]] = { ...data.downloads };
-    if (data.pm_downloads) combined[categoryNames["pm_downloads"]] = { ...data.pm_downloads };
-    return combined;
-  };
-
-  const CardOneitems = [
-    {
-      key: '1',
-      label: translate({ id: "最常用指令 Top Commands", message: "最常用指令" }),
-      children: <TopList data={data?.top_commands || {}} title={translate({ id: "最常用指令", message: "最常用指令" })} />,
-    },
-  ];
-
-  const CardTwoitems = [
-    {
-      key: '1',
-      label: translate({ id: "最常用包 Top Packages", message: "最常用包" }),
-      children: <TopList data={data?.top_packages || {}} title={translate({ id: "最常用包", message: "最常用包" })} />,
-    }
-  ];
-
+  // Scroll handling
   useEffect(() => {
-    // 确保在客户端环境下执行
-    if (typeof window === 'undefined') return;
-    
-    const checkIsMobile = () => setIsMobile(window.matchMedia('(max-width: 1024px)').matches);
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
-
-  useEffect(() => {
-    // 确保在客户端环境下执行
     if (typeof window === 'undefined') return;
     
     const container = containerRef.current;
@@ -252,8 +437,8 @@ const StatisticalData = () => {
     return () => container?.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Footer visibility
   useEffect(() => {
-    // 确保在客户端环境下执行
     if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return;
     
     const footer = document.querySelector('footer');
@@ -267,19 +452,8 @@ const StatisticalData = () => {
     }
   }, []);
 
-  const scrollToCard = (index) => {
-    if (containerRef.current && !isScrolling && !isFooterVisible) {
-      setIsScrolling(true);
-      containerRef.current.scrollTo({
-        top: index * window.innerHeight,
-        behavior: 'smooth'
-      });
-      scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), 500);
-    }
-  };
-
+  // Keyboard navigation
   useEffect(() => {
-    // 确保在客户端环境下执行
     if (typeof window === 'undefined') return;
     
     const handleKeyDown = (e) => {
@@ -299,12 +473,16 @@ const StatisticalData = () => {
     };
   }, [isScrolling, currentSlide, isFooterVisible, isMobile]);
 
+  // Data fetching
   useEffect(() => {
     if (!axiosInstance) return;
+    
     let retryTimer = null;
     let retryCount = 0;
-    const apiPost = async () => {
-      if (retryCount > 5) return;
+    
+    const fetchData = async () => {
+      if (retryCount > MAX_RETRY_COUNT) return;
+      
       try {
         setLoading(true);
         const response = await axiosInstance.post('/fe/dashboard', {});
@@ -312,190 +490,84 @@ const StatisticalData = () => {
         setError(null);
       } catch (error) {
         setError(error);
-        retryTimer = setTimeout(apiPost, 2 ** retryCount * 1000);
+        retryTimer = setTimeout(fetchData, Math.pow(2, retryCount) * RETRY_DELAY_BASE);
         retryCount++;
       } finally {
         setLoading(false);
       }
     };
+
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(apiPost);
+      const id = requestIdleCallback(fetchData);
       return () => {
         cancelIdleCallback(id);
         clearTimeout(retryTimer);
       }
     } else {
-      retryTimer = setTimeout(apiPost, 500);
+      retryTimer = setTimeout(fetchData, 500);
       return () => clearTimeout(retryTimer);
     }
   }, [axiosInstance]);
 
-  const NavigationDots = () => {
-    if (!isMobile) return null;
-    return (
-      <div className={styles.navigationDots}>
-        {[0, 1, 2].map(index => (
-          <div key={index}
-            onClick={() => scrollToCard(index)}
-            className={`${styles.dot} ${currentSlide === index ? styles.activeDot : ''}`}
-          />
-        ))}
-      </div>
-    );
+  const scrollToCard = (index) => {
+    if (containerRef.current && !isScrolling && !isFooterVisible) {
+      setIsScrolling(true);
+      containerRef.current.scrollTo({
+        top: index * window.innerHeight,
+        behavior: 'smooth'
+      });
+      scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), SCROLL_TIMEOUT);
+    }
   };
-
-  const totalDownloads = data?.downloads?.total != null && data?.pm_downloads?.total != null
-    ? data.downloads.total + data.pm_downloads.total
-    : 0;
-  
-  const componentDownloads = data?.downloads?.total || 0;
 
   const totalInstalls = data?.installs?.total || 0;
 
   return (
-    <div ref={containerRef} className={styles.container}
-      style={{ pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto' }}>
-      <NavigationDots />
-      <ConfigProvider renderEmpty={CustomizeRenderEmpty} theme={{
-        components: { 
-          Tabs: { 
-            itemSelectedColor: "#f093fb", 
-            inkBarColor: "#f093fb",
-            itemActiveColor: "#f093fb",
-            itemHoverColor: "#f093fb"
-          },
-          Card: {
-            borderRadius: 12,
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-            borderColor: 'rgba(255, 255, 255, 0.1)'
+    <div 
+      ref={containerRef} 
+      className={styles.container}
+      style={{ pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto' }}
+    >
+      <NavigationDots 
+        currentSlide={currentSlide} 
+        onDotClick={scrollToCard} 
+        isMobile={isMobile} 
+      />
+      
+      <ConfigProvider 
+        renderEmpty={CustomizeRenderEmpty} 
+        theme={{
+          components: { 
+            Tabs: { 
+              itemSelectedColor: "#f093fb", 
+              inkBarColor: "#f093fb",
+              itemActiveColor: "#f093fb",
+              itemHoverColor: "#f093fb"
+            },
+            Card: {
+              borderRadius: 12,
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              borderColor: 'rgba(255, 255, 255, 0.1)'
+            }
           }
-        }
-      }}>
+        }}
+      >
         <div className={styles.mainContent}>
-          {/* 移动端：安装台数独立显示 */}
           {isMobile && (
-            <div className={styles.installSection}>
-              <div className={styles.installContainer}>
-                <div className={styles.installContent}>
-                  <h2 className={styles.installTitle}>
-                    <span className={styles.installIcon}>🖥️</span>
-                    {translate({ id: "ruyi安装台数", message: "RuyiSDK 安装台数" })}
-                  </h2>
-                  <div className={styles.installValue}>
-                    {loading ? (
-                      <div className={styles.loadingSkeleton}></div>
-                    ) : (
-                      <FlipCounter
-                        value={totalInstalls}
-                        loading={loading}
-                        standalone={true}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <MobileInstallSection totalInstalls={totalInstalls} loading={loading} />
           )}
-
-          {/* 统计数据卡片区域 */}
-          <div className={styles.statsSection}>
-            <Row gutter={[24, 24]} className={styles.statsRow}>
-              {/* PC端：安装台数作为第一个卡片 */}
-              {!isMobile && (
-                <Col xs={24} sm={12} lg={8}>
-                  <AnimatedStatistic
-                    title={translate({ id: "ruyi安装台数", message: "RuyiSDK 安装台数" })}
-                    value={totalInstalls}
-                    icon={<CloudServerOutlined />}
-                    color="#f093fb"
-                    loading={loading}
-                  />
-                </Col>
-              )}
-              
-              <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
-                <AnimatedStatistic
-                  title={translate({ id: "ruyi包管理器github下载数量", message: "Ruyi GitHub 下载数量" })}
-                  value={data?.pm_downloads?.total || 0}
-                  icon={<DownloadOutlined />}
-                  color="#667eea"
-                  loading={loading}
-                />
-              </Col>
-              <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
-                <AnimatedStatistic
-                  title={translate({ id: "组件下载数量", message: "RuyiSDK 组件下载数量" })}
-                  value={componentDownloads}
-                  icon={<DesktopOutlined />}
-                  color="#4ade80"
-                  loading={loading}
-                />
-              </Col>
-            </Row>
-          </div>
-
-          {/* 分类下载数据 */}
-          {data && (
-            <div className={styles.categorySection}>
-              <h3 className={styles.sectionTitle}>{translate({ id: "详细下载统计", message: "详细下载统计" })}</h3>
-              <div className={styles.categoryGrid}>
-                {Object.entries(getCombinedDownloads(data)).map(([dir, val], index) => {
-                  // 使用对数变换计算进度条长度，但保持真实数据展示
-                  const logTotal = Math.log10(val.total + 1); // +1 避免 log(0)
-                  const maxLogTotal = Math.log10(Math.max(...Object.values(getCombinedDownloads(data)).map(v => v.total)) + 1);
-                  const logPercentage = maxLogTotal > 0 ? (logTotal / maxLogTotal) * 100 : 0;
-                  
-                  return (
-                    <div key={dir} className={styles.categoryCard}>
-                      <div className={styles.categoryHeader}>
-                        <span className={styles.categoryName}>{dir}</span>
-                        <span className={styles.categoryValue}>{val.total.toLocaleString()}</span>
-                      </div>
-                      <Progress 
-                        percent={logPercentage} 
-                        showInfo={false}
-                        strokeColor={{
-                          '0%': '#667eea',
-                          '50%': '#764ba2',
-                          '100%': '#f093fb',
-                        }}
-                        className={styles.categoryProgress}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* 图表区域 */}
-          <div className={styles.chartsSection}>
-            <Row gutter={[24, 24]}>
-              <Col xs={24} lg={12}>
-                <Card className={styles.chartCard}>
-                  <Tabs defaultActiveKey="1" items={CardOneitems} />
-                </Card>
-              </Col>
-              <Col xs={24} lg={12}>
-                <Card className={styles.chartCard}>
-                  <Tabs defaultActiveKey="1" items={CardTwoitems} />
-                </Card>
-              </Col>
-            </Row>
-          </div>
-
-          {/* 更新时间 */}
-          {data && (
-            <div className={styles.updateTime}>
-              <p>
-                {translate({ id: "数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
-              </p>
-            </div>
-          )}
+          
+          <StatsSection data={data} loading={loading} isMobile={isMobile} />
+          
+          {data && <CategorySection data={data} />}
+          
+          <ChartsSection data={data} />
+          
+          {data && <UpdateTime data={data} />}
         </div>
       </ConfigProvider>
     </div>
   );
-}
+};
 
 export default StatisticalData;
