@@ -403,17 +403,17 @@
   "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。": {
     "message": "This is a professional challenge for global developers, aimed at promoting computer software development education and serving the national talent strategy in basic software and AI cloud-native fields. The first competition attracted over 1,888 teams from prestigious universities including Tsinghua University, Cambridge University, Sun Yat-sen University, and Hong Kong University of Science and Technology (Guangzhou)."
   },
-  "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章": {
-    "message": "RISC-V Campus Tour | PLCT Lab Visits City University of Hong Kong, Opening New Chapter in RISC-V Open Source Talent Development"
+  "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日": {
+    "message": "PLCT Lab Participates in BOSC World RISC-V Day with Xiangshan Nanhu Laptop"
   },
-  "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。": {
-    "message": "On July 19, 2025, the 'RISC-V Campus Tour' event was successfully held at City University of Hong Kong, attracting nearly 100 Hong Kong university students. PLCT Lab deeply participated in this event, comprehensively presenting the lab's practices and thoughts in RISC-V software ecosystem development, talent cultivation, and industry collaboration through technical sharing, interactive exchanges, and achievement demonstrations."
+  "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。": {
+    "message": "On August 8, 2025, World RISC-V Days Beijing Station was successfully held at the Beijing Open Source Chip Research Institute. As the first World RISC-V Day celebration launched by the RISC-V International Foundation, this event brought together industry experts, enterprise representatives and developers from various regions to share insights and exchange cooperation, further promoting the widespread adoption and continuous innovation of RISC-V in China and globally."
   },
-  "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作": {
-    "message": "OpenCloudOS Joins RuyiSDK Developer Community, Both Parties Reach Deep Cooperation"
+  "人物｜程龙灿：做RISC-V世界的 “连接者”": {
+    "message": "Profile | Chenglong Can: Being a 'Connector' in the RISC-V World"
   },
-  "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。": {
-    "message": "OpenCloudOS officially joins the RuyiSDK developer community, marking the beginning of deep collaboration between two major open source forces in the RISC-V field. Both parties will carry out comprehensive cooperation in operating system RISC-V architecture technology and ecosystem building, high-performance computing, and developer ecosystem construction."
+  "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。": {
+    "message": "Chenglong Can, Operations Manager at PLCT Lab, transformed from a testing team member to a community operations expert. With his passion for Linux and technical background, he is committed to making RISC-V technology visible to more people and promoting orderly community development. As a 'connector' in the RISC-V world, he builds bridges between technology and users, allowing the value of the open source ecosystem to be fully realized."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Review of RuyiSDK's first offline meetup"
