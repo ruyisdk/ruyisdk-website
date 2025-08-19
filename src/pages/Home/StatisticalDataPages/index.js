@@ -27,7 +27,6 @@ const StatisticalDataPages = () => {
         
         <div className={styles.header}>
           <h1 className={styles.title}>
-            <span className={styles.titleIcon}>📊</span>
             {translate({ id: "RuyiSDK 数据统计", message: "RuyiSDK 数据统计" })}
           </h1>
         </div>

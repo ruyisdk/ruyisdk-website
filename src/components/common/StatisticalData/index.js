@@ -278,8 +278,8 @@ const StatsSection = ({ data, loading, isMobile }) => {
             <AnimatedStatistic
               title={translate(TRANSLATIONS.RUYI_INSTALLS)}
               value={totalInstalls}
-              icon={<CloudServerOutlined />}
-              color="#f093fb"
+              icon={<DesktopOutlined />}
+              color="#07a0cc"
               loading={loading}
             />
           </Col>
@@ -290,16 +290,16 @@ const StatsSection = ({ data, loading, isMobile }) => {
             title={translate(TRANSLATIONS.RUYI_GITHUB_DOWNLOADS)}
             value={pmDownloads}
             icon={<DownloadOutlined />}
-            color="#667eea"
+            color="#07a0cc"
             loading={loading}
-          />
+            />
         </Col>
         <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
           <AnimatedStatistic
             title={translate(TRANSLATIONS.COMPONENT_DOWNLOADS)}
             value={componentDownloads}
-            icon={<DesktopOutlined />}
-            color="#4ade80"
+            icon={<CloudServerOutlined />}
+            color="#07a0cc"
             loading={loading}
           />
         </Col>
@@ -328,20 +328,33 @@ const CategorySection = ({ data }) => {
       <h3 className={styles.sectionTitle}>{translate(TRANSLATIONS.DETAILED_STATS)}</h3>
       <div className={styles.categoryGrid}>
         {Object.entries(combinedDownloads).map(([dir, val]) => {
-          // 使用更温和的公式来缩小数据差异
-          // 使用对数变换 + 平方根 + 动态缩放因子
+          // 重新设计的合理公式：使用对数压缩 + 线性调整，确保数值差异正确反映
+          // 1. 对数压缩：Math.log10(val.total + 1) 压缩大数值差异
+          // 2. 线性调整：添加适当的线性因子，避免过度压缩
+          // 3. 最小长度保证：确保小数值也有合理的进度条长度
+          
+          // 基础对数压缩
           const logValue = Math.log10(val.total + 1);
-          const sqrtValue = Math.sqrt(val.total);
-          const combinedValue = (logValue * 0.7 + sqrtValue * 0.3) * (1 + val.total / 10000);
+          
+          // 线性调整因子：为较大数值提供额外的增长空间
+          const linearFactor = Math.min(val.total / 10000, 0.3);
+          
+          // 组合计算：对数压缩 + 线性调整
+          const calculatedValue = logValue * (1 + linearFactor);
+          
+          // 最小长度保证：确保小数值至少有10%的进度条长度
+          const minPercentage = 10;
+          const adjustedValue = Math.max(calculatedValue, minPercentage / 100);
           
           const maxLogValue = Math.log10(maxTotal + 1);
-          const maxSqrtValue = Math.sqrt(maxTotal);
-          const maxCombinedValue = (maxLogValue * 0.7 + maxSqrtValue * 0.3) * (1 + maxTotal / 10000);
+          const maxLinearFactor = Math.min(maxTotal / 10000, 0.3);
+          const maxCalculatedValue = maxLogValue * (1 + maxLinearFactor);
           
-          const percentage = maxCombinedValue > 0 ? (combinedValue / maxCombinedValue) * 100 : 0;
+          // 计算百分比，确保最大值是100%，其他值按比例分布
+          const percentage = maxCalculatedValue > 0 ? (adjustedValue / maxCalculatedValue) * 100 : minPercentage;
           
           // 调试信息 - 可以在控制台查看
-          console.log(`${dir}: 原始值=${val.total}, 计算值=${combinedValue}, 百分比=${percentage.toFixed(2)}%`);
+          console.log(`${dir}: 原始值=${val.total}, 对数=${logValue.toFixed(2)}, 线性因子=${linearFactor.toFixed(2)}, 计算值=${calculatedValue.toFixed(2)}, 调整值=${adjustedValue.toFixed(2)}, 百分比=${percentage.toFixed(2)}%`);
           
           return (
             <div key={dir} className={styles.categoryCard}>
@@ -352,11 +365,7 @@ const CategorySection = ({ data }) => {
               <Progress 
                 percent={percentage} 
                 showInfo={false}
-                strokeColor={{
-                  '0%': '#667eea',
-                  '50%': '#764ba2',
-                  '100%': '#f093fb',
-                }}
+                strokeColor="#07a0cc"
                 className={styles.categoryProgress}
               />
             </div>
@@ -539,10 +548,8 @@ const StatisticalData = () => {
         theme={{
           components: { 
             Tabs: { 
-              itemSelectedColor: "#f093fb", 
-              inkBarColor: "#f093fb",
-              itemActiveColor: "#f093fb",
-              itemHoverColor: "#f093fb"
+              itemSelectedColor: "#00b7e7", 
+              inkBarColor: "#00b7e7",
             },
             Card: {
               borderRadius: 12,
