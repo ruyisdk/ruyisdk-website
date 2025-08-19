@@ -191,6 +191,7 @@ const NewsShowcase = () => {
           display: flex;
           flex-direction: column;
           border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
+          position: relative; /* Make this the containing block for absolute children */
         }
         .newsshowcase-card-inner:hover {
           transform: scale(1.02);
@@ -212,7 +213,7 @@ const NewsShowcase = () => {
           flex: 1;
           display: flex;
           flex-direction: column;
-          position: relative;
+          position: static; /* Allow absolute children to anchor to the card container */
         }
         .newsshowcase-card-title {
           font-size: 2rem;
@@ -237,17 +238,19 @@ const NewsShowcase = () => {
           color: #0A2C7E;
           font-weight: bold;
           font-size: 1rem;
-          opacity: 0;
-          transform: translateX(0.625rem); /* 10px */
-          transition: all 0.3s ease;
+          opacity: 1; /* Always visible to "hover/float" at bottom-right */
+          transform: none;
+          transition: all 0.3s ease; /* Keep smoothness for desktop hover scaling */
           background: #FDEFC3;
           padding: 0.5rem 1rem;
           border-radius: 99rem;
           border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
           gap: 0.5rem; /* Adjusted for consistency */
+          z-index: 2; /* Ensure it overlays text */
+          pointer-events: none; /* Don't block card click */
         }
+        /* Optional subtle effect on desktop hover */
         .newsshowcase-card-inner:hover .newsshowcase-link-indicator {
-          opacity: 1;
           transform: translateX(0);
         }
         .newsshowcase-arrow {
@@ -305,6 +308,7 @@ const NewsShowcase = () => {
             border-radius: 0;
             margin: 0;
             padding: 0; /* Remove padding for mobile view */
+            position: relative; /* containing block for absolute indicator */
           }
           .accordion-content .newsshowcase-image {
             height: 12.5rem; /* 200px */
@@ -320,14 +324,13 @@ const NewsShowcase = () => {
             font-size: 0.875rem;
           }
           .accordion-content .newsshowcase-link-indicator {
-            position: static;
-            opacity: 1;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            opacity: 1; /* Always visible on mobile */
             transform: none;
-            margin-top: 1rem;
-            justify-content: center;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
+            z-index: 2;
+            pointer-events: auto; /* allow tapping the indicator on mobile */
           }
         }
       `}</style>
