@@ -397,23 +397,23 @@
   "前往阅读": {
     "message": "Mehr lesen"
   },
-  "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣": {
+ "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣": {
     "message": "Anmeldung eröffnet | 2025 MoonBit Global Programming Innovation Challenge offiziell angekündigt"
   },
   "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。": {
     "message": "Dies ist ein professioneller Wettbewerb für Entwickler weltweit, der darauf abzielt, die Computer-Softwareentwicklung zu fördern und die nationale Talentstrategie in den Bereichen Grundlagen-Software und KI-Cloud-Native zu unterstützen. Der erste Wettbewerb zog über 1.888 Teams von renommierten Universitäten wie der Tsinghua-Universität, der Universität Cambridge, der Sun Yat-sen-Universität und der Hong Kong University of Science and Technology (Guangzhou) an."
   },
-  "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章": {
-    "message": "RISC-V Campus-Tour | PLCT-Labor besucht die City University of Hong Kong und eröffnet ein neues Kapitel in der RISC-V Open-Source-Talententwicklung"
+  "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日": {
+    "message": "PLCT Lab Participates in BOSC World RISC-V Day with Xiangshan Nanhu Laptop"
   },
-  "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。": {
-    "message": "Am 19. Juli 2025 wurde die 'RISC-V Campus-Tour' Veranstaltung erfolgreich an der City University of Hong Kong abgehalten und zog fast 100 Hongkonger Universitätsstudenten an. Das PLCT-Labor beteiligte sich intensiv an dieser Veranstaltung und präsentierte den Studenten umfassend die Praktiken und Überlegungen des Labors in der RISC-V-Software-Ökosystem-Entwicklung, Talententwicklung und Industrie-Zusammenarbeit durch technische Präsentationen, interaktive Diskussionen und Erfolgsdemonstrationen."
+  "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。": {
+    "message": "Am 8. August 2025 fand der World RISC-V Days Beijing Station erfolgreich am Beijing Open Source Chip Research Institute statt. Als erste World RISC-V Day-Feier, die von der RISC-V International Foundation ins Leben gerufen wurde, brachte diese Veranstaltung Branchenexperten, Unternehmensvertreter und Entwickler aus verschiedenen Regionen zusammen, um Einblicke zu teilen und zusammenzuarbeiten und so die breite Einführung und kontinuierliche Innovation von RISC-V in China und weltweit weiter voranzutreiben."
   },
-  "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作": {
-    "message": "OpenCloudOS tritt der RuyiSDK-Entwickler-Community bei, beide Parteien erreichen tiefgreifende Zusammenarbeit"
+  "人物｜程龙灿：做RISC-V世界的 “连接者”": {
+    "message": "Profil | Chenglong Can: Ein 'Vermittler' in der RISC-V-Welt sein"
   },
-  "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。": {
-    "message": "OpenCloudOS tritt offiziell der RuyiSDK-Entwickler-Community bei und markiert den Beginn einer tiefgreifenden Zusammenarbeit zwischen zwei großen Open-Source-Kräften im RISC-V-Bereich. Beide Parteien werden umfassende Zusammenarbeit in der RISC-V-Architekturtechnologie und Ökosystem-Entwicklung, Hochleistungsrechnen und Entwickler-Ökosystem-Aufbau durchführen."
+  "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。": {
+    "message": "Chenglong Can, Betriebsmanager beim PLCT-Labor, entwickelte sich vom Mitglied des Testteams zum Experten für Community-Betrieb. Mit seiner Leidenschaft für Linux und technischem Hintergrund setzt er sich dafür ein, RISC-V-Technologie für mehr Menschen sichtbar zu machen und die geordnete Entwicklung der Community zu fördern. Als 'Vermittler' in der RISC-V-Welt baut er Brücken zwischen Technologie und Nutzern und ermöglicht es, dass der Wert des Open-Source-Ökosystems vollständig realisiert wird."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
@@ -531,5 +531,35 @@
   "footer.tools": { "message": "Weitere Entwickler-Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
   "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "ruyisdk.community": {
+    "message": "RuyiSDK Gemeinschaft"
+  },
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "Quellcode-Repository"
+  },
+  "statistics": {
+    "message": "Statistiken"
+  },
+  "view.more": {
+    "message": "Mehr anzeigen"
+  },
+  "pm_downloads": {
+    "message": "Ruyi Paketmanager-Tool Downloads"
+  },
+  "downloads": {
+    "message": "Anzahl der Downloads"
+  },
+  "installs": {
+    "message": "Installationen"
+  },
+  "no.data": {
+    "message": "Derzeit keine statistischen Daten verfügbar."
+  }
 }

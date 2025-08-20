@@ -355,6 +355,36 @@
   "随时看到来自 RuyiSDK 团队的重大消息": {
     "message": "Будьте в курсе последних новостей от команды RuyiSDK."
   },
+  "ruyisdk.community": {
+    "message": "Сообщество RuyiSDK"
+  },
+  "ruyisdk.community.open": {
+    "message": "Сообщество разработчиков RuyiSDK теперь открыто"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "Репозиторий исходного кода"
+  },
+  "statistics": {
+    "message": "Статистика"
+  },
+  "view.more": {
+    "message": "Посмотреть больше"
+  },
+  "pm_downloads": {
+    "message": "Загрузки Ruyi Package Manager"
+  },
+  "downloads": {
+    "message": "Количество загрузок"
+  },
+  "installs": {
+    "message": "Установки"
+  },
+  "no.data": {
+    "message": "В настоящее время статистические данные недоступны."
+  },
   "组件下载数量和Github下载数量": {
     "message": "Загрузки компонентов и GitHub"
   }

@@ -13,8 +13,21 @@
   "footer.plct": { "message": "PLCT 实验室" },
   "footer.tools": { "message": "更多开发工具" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
-  "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub下载数量" },
-  "ruyi安装台数": { "message": "Ruyi安装台数" },
+
+  "ruyisdk.community": { "message": "RuyiSDK 社区" },
+  "ruyisdk.community.open": { "message": "RuyiSDK 开发者社区现已开启" },
+  "ruyisdk.cn": { "message": "ruyisdk.cn" },
+  "source.repository": { "message": "源码库" },
+  "statistics": { "message": "数据统计" },
+  "view.more": { "message": "查看更多" },
+  "pm_downloads": { "message": "包管理器下载量" },
+  "downloads": { "message": "组件下载数量" },
+  "installs": { "message": "安装台数" },
+  "no.data": { "message": "当前暂无统计数据。" },
+
+  "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载数量" },
+  "ruyi安装台数": { "message": "RuyiSDK 安装台数" },
+
   "详细下载统计": { "message": "详细下载统计" },
   "组件下载数量": { "message": "RuyiSDK组件下载数量" },
   "ruyi包管理器下载次数": { "message": "Ruyi包管理器下载次数" },
