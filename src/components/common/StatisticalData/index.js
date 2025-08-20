@@ -246,7 +246,7 @@ const MobileInstallSection = ({ totalInstalls, loading }) => (
     <div className={styles.installContainer}>
       <div className={styles.installContent}>
         <h2 className={styles.installTitle}>
-          <span className={styles.installIcon}>🖥️</span>
+          <span className={styles.installIcon}>💻</span>
           {translate(TRANSLATIONS.RUYI_INSTALLS)}
         </h2>
         <div className={styles.installValue}>
