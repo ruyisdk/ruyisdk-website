@@ -4,23 +4,24 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
+      title: "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日",
+      description: "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。",
+      img: "img/newsshowcase/xiangshan_process.jpg",
+      link: "https://mp.weixin.qq.com/s/OW8OAXUPN-kWurjVjk2VsQ"
+    },
+    {
+      title: "人物｜程龙灿：做RISC-V世界的 “连接者”",
+      description: "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。",
+      img: "img/newsshowcase/chenglongcan.png",
+      link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
+    },
+    {
       title: "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣",
       description: "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。",
       img: "img/newsshowcase/MoonBit.jpg",
       link: "https://mp.weixin.qq.com/s/2r4cKs5D7JJDqgH4lhdH_A"
     },
-    {
-      title: "RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章",
-      description: "2025年7月19日，'RISC-V 校园行'活动在香港城市大学成功举办，吸引了近百名香港高校学生到场聆听。PLCT实验室深度参与此次活动，通过技术分享、互动交流与成果展示，向香港高校学子全面呈现实验室在 RISC-V 软件生态攻坚、人才培养与产业协同中的实践与思考。",
-      img: "img/newsshowcase/hongkongcity.jpeg",
-      link: "https://mp.weixin.qq.com/s/-PGCCl1k919KtcU8Para1w"
-    },
-    {
-      title: "OpenCloudOS入驻RuyiSDK开发者社区，双方达成深度合作",
-      description: "OpenCloudOS 正式入驻 RuyiSDK 开发者社区，标志着两大开源力量在 RISC-V 领域深度协同的开端。双方将围绕操作系统 RISC-V 架构技术和生态建设、高性能计算及开发者生态建设方面，开展全方位协作。",
-      img: "img/newsshowcase/opencloud.png",
-      link: "https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw"
-    },
+    
   ];
 
   const [selectedIndex, setSelectedIndex] = useState(0);

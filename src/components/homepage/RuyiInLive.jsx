@@ -85,8 +85,6 @@ const RuyiInLive = () => {
       { action: 'Loading Action 1', total: 80 },
       { action: 'Loading Action 2', total: 65 },
       { action: 'Loading Action 3', total: 50 },
-      { action: 'Loading Action 4', total: 35 },
-      { action: 'Loading Action 5', total: 20 },
     ],
     [],
   );
@@ -125,7 +123,7 @@ const RuyiInLive = () => {
     return Object.entries(data.top_commands)
       .map(([action, { total }]) => ({ action, total }))
       .sort((a, b) => b.total - a.total)
-      .slice(0, 5);
+      .slice(0, 3);
   }, [data]);
 
   const styles = {
@@ -163,7 +161,6 @@ const RuyiInLive = () => {
       overflow: 'hidden',
       color: colors.textDark,
       margin: '0 auto 1rem auto',
-      // UPDATED: Conditionally apply shadow to restore old layout on narrow screens
       boxShadow: isWideScreen ? 'none' : '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)',
     },
     leftPanel: {
@@ -189,12 +186,11 @@ const RuyiInLive = () => {
     },
     rightPanel: {
       width: isMobile ? '100%' : '60%',
-      padding: '1.25rem',
-      overflowY: 'auto',
+      padding: isMobile ? '1.5rem' : '1.5rem 2rem', // Adjusted padding
+      overflowY: 'hidden',
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: colors.white,
-      minHeight: isMobile ? '18.75rem' : 'auto',
     },
     title: {
       fontSize: '1.8rem',
@@ -241,43 +237,73 @@ const RuyiInLive = () => {
       transform: 'translateY(-2px)',
       boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.2)',
     },
-    chartContainer: {
-      flex: 1,
+    rightPanelHeader: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      marginBottom: '1rem', // Space below title
+    },
+    rightPanelTitle: {
+      fontSize: '1.1rem',
+      fontWeight: '600',
+      color: colors.textDark,
+    },
+    viewMoreLink: {
+      fontSize: '0.8rem',
+      color: colors.textGray,
+      textDecoration: 'none',
+      transition: 'color 0.2s',
+    },
+    statsBox: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      padding: '1rem',
+      backgroundColor: colors.lightGray,
+      borderRadius: '0.5rem',
+      textAlign: 'center',
+      marginBottom: '1.5rem', // More space below stats
+    },
+    statItem: {
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
-      backgroundColor: colors.white,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
     },
-    chartTitle: {
-      fontSize: '0.875rem',
-      fontWeight: '600',
-      marginBottom: '0.875rem',
+    statValue: {
+      fontSize: '1.75rem',
+      fontWeight: '700',
       color: colors.navyBlue,
+      lineHeight: 1.2,
+      minHeight: '2.1rem',
+    },
+    statLabel: {
+      fontSize: '0.75rem',
+      color: colors.textGray,
+      marginTop: '0.25rem',
+    },
+    statPlaceholder: {
+      height: '1.75rem',
+      width: '4rem',
+      backgroundColor: colors.placeholderGrey,
+      borderRadius: '0.25rem',
+      animation: 'pulse 1.5s infinite ease-in-out',
+    },
+    chartContainer: {
+      flex: 1, // Allow chart to take remaining space
+      display: 'flex',
+      flexDirection: 'column',
     },
     chartWrapper: {
       width: '100%',
-      height: '15.625rem',
+      flex: 1,
       position: 'relative',
     },
     placeholderWrapper: {
       width: '100%',
-      height: '15.625rem',
       position: 'relative',
       opacity: 0.6,
-    },
-    loadingText: {
-      textAlign: 'center',
-      color: colors.textGray,
-      fontSize: '0.8125rem',
-      marginTop: '0.5rem',
-      fontWeight: '500',
-    },
-    errorText: {
-      textAlign: 'center',
-      color: colors.textGray,
-      fontSize: '0.875rem',
-      padding: '1.25rem',
-      fontWeight: '500',
+      flex: 1,
     },
     nativeChart: {
       width: '100%',
@@ -285,6 +311,7 @@ const RuyiInLive = () => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-around',
+      gap: '0.5rem',
     },
     nativeChartRow: {
       display: 'flex',
@@ -384,16 +411,27 @@ const RuyiInLive = () => {
     </div>
   );
 
+  const StatItem = ({ value, label, loading }) => (
+    <div style={styles.statItem}>
+      <div style={styles.statValue}>
+        {loading ? <div style={styles.statPlaceholder}></div> : (value !== null && value !== undefined ? value.toLocaleString() : '---')}
+      </div>
+      <div style={styles.statLabel}>
+        <Translate>{label}</Translate>
+      </div>
+    </div>
+  );
+
   return (
     <div style={styles.outerContainer}>
       <div style={styles.background}>
         <div style={styles.container}>
           <div style={styles.leftPanel}>
             <h1 style={styles.title}>
-              <Translate>RuyiSDK 社区</Translate>
+              <Translate id="ruyisdk.community" />
             </h1>
             <p style={styles.subtitle}>
-              <Translate>RuyiSDK 开发者社区现已开启</Translate>
+              <Translate id="ruyisdk.community.open" />
             </p>
             <div style={styles.buttonContainer}>
               <a
@@ -405,7 +443,7 @@ const RuyiInLive = () => {
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
                 <UsersIcon />
-                <Translate>ruyisdk.cn</Translate>
+                <Translate id="ruyisdk.cn" />
               </a>
               <a
                 href="https://github.com/ruyisdk"
@@ -416,31 +454,35 @@ const RuyiInLive = () => {
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >
                 <GithubIcon />
-                <Translate>源码库</Translate>
+                <Translate id="source.repository" />
               </a>
             </div>
             <div style={styles.leftPanelAccent}></div>
           </div>
 
           <div style={styles.rightPanel}>
-            <div style={styles.chartContainer}>
-              <h2 style={styles.chartTitle}>
-                <a
-                  href="/Home/StatisticalDataPages"
-                  style={{ color: 'inherit', textDecoration: 'none' }}
-                >
-                  <Translate>大家都在用</Translate>
-                </a>
+            <div style={styles.rightPanelHeader}>
+              <h2 style={styles.rightPanelTitle}>
+                <Translate id="statistics" />
               </h2>
+              <a
+                href="/Home/StatisticalDataPages"
+                style={styles.viewMoreLink}
+                onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
+                onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}
+              >
+                <Translate id="view.more" />&nbsp;&gt;
+              </a>
+            </div>
 
-              {loading ? (
-                <>
-                  <PlaceholderChart />
-                  <div style={styles.loadingText}>
-                    <Translate>Loading...</Translate>
-                  </div>
-                </>
-              ) : error ? (
+            <div style={styles.statsBox}>
+              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
+              <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
+              <StatItem value={data?.installs?.total} label="installs" loading={loading} />
+            </div>
+
+            <div style={styles.chartContainer}>
+              {loading || error ? (
                 <PlaceholderChart />
               ) : barData.length > 0 ? (
                 <div style={styles.chartWrapper}>
@@ -474,13 +516,20 @@ const RuyiInLive = () => {
                 </div>
               ) : (
                 <div style={styles.emptyDataText}>
-                  <Translate>No statistical data available currently.</Translate>
+                  <Translate id="no.data" />
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
+      <style>{`
+        @keyframes pulse {
+          0% { background-color: ${colors.placeholderGrey}; }
+          50% { background-color: #d0d0d0; }
+          100% { background-color: ${colors.placeholderGrey}; }
+        }
+      `}</style>
     </div>
   );
 };
