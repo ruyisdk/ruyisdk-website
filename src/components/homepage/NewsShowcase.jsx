@@ -72,19 +72,19 @@ const NewsShowcase = () => {
     window.open(link, '_blank');
   };
 
-  // Auto-switch news every 5 seconds
+  // Auto-switch news every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
         setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
       }
-    }, 3000); // 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [newsData.length, isAutoSwitchPaused]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -103,22 +103,24 @@ const NewsShowcase = () => {
       <style>{`
         .newsshowcase-container {
           display: flex;
+          box-sizing: border-box;
           overflow-x: auto;
-          width: 100%;
-          height: calc(37.5rem + 2rem); /* 600px + 32px */
+          /* Alignment, size, and background updates */
+          width: calc(100% - 4rem);
+          height: calc(37.5rem + 3rem);
+          margin: 0 auto 3vw;
+          padding: 1.5rem;
+          background-color: #e9ecef;
+          border-radius: 1rem;
           gap: 1rem;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-          margin: 0 auto; /* Added for centering */
-          padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
-          background-color: #f5f5f7;
         }
 
-        /* New media query for very wide screens */
-        @media (min-width: 90rem) { /* 1440px or adjust as needed */
+        /* Wide screen alignment updates */
+        @media (min-width: 90rem) { /* 1440px */
           .newsshowcase-container {
-            max-width: 90rem; /* For example, 1440px */
-            border-radius: 0.625rem; /* 10px - Optional: to make it look like a contained block */
-            box-shadow: 0 0.5rem 1.875rem rgba(255, 255, 255, 0); /* Optional: subtle shadow */
+            max-width: 90rem;
+            width: calc(90rem - 4rem);
           }
         }
 
@@ -131,7 +133,6 @@ const NewsShowcase = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          padding: 0.75rem 1rem 1rem 0; /* Updated padding for top alignment */
         }
         .newsshowcase-sidebar::-webkit-scrollbar {
           display: none;
@@ -149,7 +150,14 @@ const NewsShowcase = () => {
           user-select: none;
           box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
           margin: 0;
+          flex-shrink: 0; /* Prevents items from shrinking */
         }
+        
+        /* FIX: Add margin to the last item to prevent its shadow from being clipped */
+        .newsshowcase-sidebar .newsshowcase-title-item:last-child {
+          margin-bottom: 2.5rem;
+        }
+
         .newsshowcase-title-item:hover {
           transform: scale(1.01);
           box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
@@ -251,17 +259,21 @@ const NewsShowcase = () => {
         }
         /* Optional subtle effect on desktop hover */
         .newsshowcase-card-inner:hover .newsshowcase-link-indicator {
-          transform: translateX(0);
+          transform: scale(1.05);
         }
         .newsshowcase-arrow {
           font-size: 1rem;
         }
         @media (max-width: 48rem) { /* 768px */
           .newsshowcase-container {
-            flex-direction: column;
+            /* Mobile view styling */
+            width: 100%;
             height: auto;
             padding: 1rem;
-            max-width: 100%; /* Ensure it uses full width on mobile */
+            max-width: 100%;
+            flex-direction: column;
+            background-color: #f5f5f7; /* Revert background for mobile */
+            border-radius: 0; /* Remove rounded corners for mobile */
           }
           .newsshowcase-sidebar, .newsshowcase-main {
             display: none;
