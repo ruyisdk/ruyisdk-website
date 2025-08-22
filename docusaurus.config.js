@@ -164,6 +164,15 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
+    function unocssPlugin() {
+      return {
+        name: "docusaurus-unocss",
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push("@unocss/postcss");
+          return postcssOptions;
+        },
+      };
+    },
 
     /* [
       "@docusaurus/plugin-google-gtag",
