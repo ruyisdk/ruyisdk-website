@@ -2195,3 +2195,109 @@ giscus-widget {
   border-radius: 4px;
 
 }
+
+/* 平滑滚动配置 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 目录导航样式优化 */
+.table-of-contents {
+  li {
+    margin: 7px var(--ifm-toc-padding-vertical);
+  }
+
+  ul {
+    padding-left: 0.35rem;
+
+    li {
+      margin: 4px var(--ifm-toc-padding-vertical);
+    }
+  }
+
+  .table-of-contents__link {
+    font-size: 12px;
+    display: block;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    code {
+      background: none;
+      padding: 0;
+      border: 0;
+    }
+
+    &:hover {
+      color: var(--ifm-link-color);
+      transform: translateX(2px);
+
+      code {
+        color: var(--ifm-link-color);
+      }
+    }
+  }
+
+  .table-of-contents__link--active {
+    font-weight: 500;
+    margin-left: -16px;
+    padding-left: 12px;
+    color: var(--ifm-font-color-base);
+    border-left: 4px solid var(--brand);
+
+    code {
+      font-weight: 600;
+      color: var(--ifm-font-color-base);
+      white-space: nowrap;
+    }
+
+    &:hover {
+      color: var(--ifm-font-color-base);
+
+      code {
+        color: var(--ifm-font-color-base);
+      }
+    }
+  }
+}
+
+/* 确保目录容器有正确的滚动条样式 */
+div[class^="tableOfContents"] {
+  min-width: 100%;
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  
+  /* 自定义滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--ifm-color-emphasis-300);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--ifm-color-emphasis-400);
+    }
+  }
+}
+
+/* 暗色主题下的目录样式 */
+html[data-theme="dark"] div[class^="tableOfContents"] {
+  .table-of-contents__link {
+    color: var(--ifm-color-emphasis-400);
+    
+    &:hover {
+      color: var(--ifm-color-emphasis-300);
+    }
+  }
+  
+  .table-of-contents__link--active {
+    color: var(--ifm-font-color-base);
+    border-left-color: var(--ifm-color-primary);
+  }
+}
