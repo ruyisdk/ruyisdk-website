@@ -2120,7 +2120,7 @@ giscus-widget {
 }
 
 .hover-wechat-link::after {
-  content: '';
+  content: "";
   color: #000;
   border-radius: 5%;
   text-align: center;
@@ -2129,12 +2129,12 @@ giscus-widget {
   position: absolute;
   left: 50%;
   top: auto;
-  bottom: calc(100% + 12px);  /* 12px 间距，可根据需要调整 */
+  bottom: calc(100% + 12px); /* 12px 间距，可根据需要调整 */
   transform: translateX(-50%);
   width: 10rem;
   height: 10rem;
   background-size: cover;
-  background-image: url('/img/wechat_account_img.png');
+  background-image: url("/img/wechat_account_img.png");
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2154,7 +2154,7 @@ giscus-widget {
 }
 
 .hover-qq-link::after {
-  content: '';
+  content: "";
   color: #000;
   border-radius: 5%;
   text-align: center;
@@ -2168,7 +2168,7 @@ giscus-widget {
   width: 10rem;
   height: 10rem;
   background-size: cover;
-  background-image: url('/img/qqgroup_img.png');
+  background-image: url("/img/qqgroup_img.png");
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
@@ -2195,5 +2195,4 @@ giscus-widget {
 .custom-scroll::-webkit-scrollbar-thumb {
   background: grey;
   border-radius: 4px;
-
 }

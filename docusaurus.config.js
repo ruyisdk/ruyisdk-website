@@ -130,7 +130,7 @@ const config = {
       },
       footer: {
         style: "light",
-        links:[],
+        links: [],
         copyright: `Copyright © 2024-2025 Institute of Software, CAS`,
       },
       prism: {
