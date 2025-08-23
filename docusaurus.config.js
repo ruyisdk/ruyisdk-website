@@ -54,7 +54,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: "./src/css/custom.scss",
+          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
         },
       }),
     ],
