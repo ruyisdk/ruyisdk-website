@@ -27,9 +27,7 @@ const NewsShowcase = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const mainRef = useRef(null);
-  const containerRef = useRef(null);
 
   /**
    * Truncates text to a specified maximum length, avoiding word breaks.
@@ -56,14 +54,14 @@ const NewsShowcase = () => {
         truncated = truncated.substring(0, lastSpaceIndex);
       }
     }
-    
+
     return truncated + '...';
   };
 
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
     setIsAutoSwitchPaused(true);
-    
+
     // Resume auto-switching after 10 seconds of user inactivity
     setTimeout(() => {
       setIsAutoSwitchPaused(false);
@@ -74,51 +72,22 @@ const NewsShowcase = () => {
     window.open(link, '_blank');
   };
 
-  // Auto-switch news every 3 seconds, but only when component is visible
+  // Auto-switch news every 3 seconds
   useEffect(() => {
-    if (!isVisible) return; // Don't start auto-switching until component is visible
-    
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
-        setSelectedIndex((prevIndex) => {
-          // Handle mobile accordion mode where selectedIndex might be -1
-          const currentIndex = prevIndex === -1 ? 0 : prevIndex;
-          return (currentIndex + 1) % newsData.length;
-        });
+        setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [newsData.length, isAutoSwitchPaused, isVisible]);
+  }, [newsData.length, isAutoSwitchPaused]);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Intersection Observer to detect when component is visible
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of the component is visible
-        rootMargin: '0px 0px -100px 0px' // Start a bit before the component comes into view
-      }
-    );
-
-    observer.observe(containerRef.current);
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
   }, []);
 
   useEffect(() => {
@@ -129,58 +98,50 @@ const NewsShowcase = () => {
     }
   }, [selectedIndex, isMobile]);
 
-  // Mobile accordion click handler
-  const handleMobileAccordionClick = (idx) => {
-    const newIndex = selectedIndex === idx ? -1 : idx;
-    setSelectedIndex(newIndex);
-    setIsAutoSwitchPaused(true);
-    
-    // Resume auto-switching after 10 seconds of user inactivity
-    setTimeout(() => {
-      setIsAutoSwitchPaused(false);
-    }, 10000);
-  };
-
   return (
-    <div className="newsshowcase-container" ref={containerRef}>
+    <div className="newsshowcase-container">
       <style>{`
         .newsshowcase-container {
           display: flex;
+          box-sizing: border-box;
           overflow-x: auto;
-          width: 100%;
-          height: calc(37.5rem + 2rem); /* 600px + 32px */
+          /* Alignment, size, and background updates */
+          width: calc(100% - 4rem);
+          height: calc(37.5rem + 3rem);
+          margin: 0 auto 3vw;
+          padding: 1.5rem;
+          background-color: #ffffffff;
+          border-radius: 1rem;
           gap: 1rem;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-          margin: 0 auto; /* Added for centering */
-          padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
-          background-color: #f5f5f7;
         }
 
-        /* New media query for very wide screens */
-        @media (min-width: 90rem) { /* 1440px or adjust as needed */
+        /* Wide screen alignment updates */
+        @media (min-width: 90rem) { /* 1440px */
           .newsshowcase-container {
-            max-width: 90rem; /* For example, 1440px */
-            border-radius: 0.625rem; /* 10px - Optional: to make it look like a contained block */
-            box-shadow: 0 0.5rem 1.875rem rgba(255, 255, 255, 0); /* Optional: subtle shadow */
+            max-width: 90rem;
+            width: calc(90rem - 4rem);
           }
         }
 
         .newsshowcase-sidebar {
           width: 20rem; /* 320px */
           height: 37.5rem; /* 600px */
+          /* Nudge the sidebar down slightly so its items align with the right-side card tops */
+          margin-top: 0.75rem;
           overflow-y: auto;
           scrollbar-width: none;
           -ms-overflow-style: none;
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          padding: 0rem 1rem 1rem 0;
         }
         .newsshowcase-sidebar::-webkit-scrollbar {
           display: none;
         }
         .newsshowcase-title-item {
-          padding: 1rem 1.5rem;
+          /* Reduce top/bottom padding so title items align with right-side card tops */
+          padding: 0.75rem 1.5rem;
           background: white;
           border-radius: 0.625rem; /* 10px */
           cursor: pointer;
@@ -192,7 +153,14 @@ const NewsShowcase = () => {
           user-select: none;
           box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
           margin: 0;
+          flex-shrink: 0; /* Prevents items from shrinking */
         }
+        
+        /* FIX: Add margin to the last item to prevent its shadow from being clipped */
+        .newsshowcase-sidebar .newsshowcase-title-item:last-child {
+          margin-bottom: 2.5rem;
+        }
+
         .newsshowcase-title-item:hover {
           transform: scale(1.01);
           box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
@@ -216,22 +184,29 @@ const NewsShowcase = () => {
           height: 100%;
         }
         .newsshowcase-card {
+          width: 100%;
+          height: 100%;
+          flex-shrink: 0;
+          padding: 0.75rem; 
+          box-sizing: border-box;
+        }
+        .newsshowcase-card-inner {
           background: white;
           border-radius: 0.625rem; /* 10px */
           overflow: hidden;
-          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
+          box-shadow: none; /* Shadow removed */
           cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition: transform 0.3s ease; /* transition for box-shadow removed */
           width: 100%;
           height: 100%;
           display: flex;
           flex-direction: column;
           border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
-          flex-shrink: 0;
+          position: relative; /* Make this the containing block for absolute children */
         }
-        .newsshowcase-card:hover {
-          transform: scale(1.01);
-          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
+        .newsshowcase-card-inner:hover {
+          transform: scale(1.02);
+          /* box-shadow removed from hover state */
         }
         .newsshowcase-image {
           width: 100%;
@@ -240,7 +215,7 @@ const NewsShowcase = () => {
           object-fit: cover;
           transition: transform 0.3s ease;
         }
-        .newsshowcase-card:hover .newsshowcase-image {
+        .newsshowcase-card-inner:hover .newsshowcase-image {
           transform: scale(1.02);
         }
         .newsshowcase-content {
@@ -249,7 +224,7 @@ const NewsShowcase = () => {
           flex: 1;
           display: flex;
           flex-direction: column;
-          position: relative;
+          position: static; /* Allow absolute children to anchor to the card container */
         }
         .newsshowcase-card-title {
           font-size: 2rem;
@@ -274,28 +249,34 @@ const NewsShowcase = () => {
           color: #0A2C7E;
           font-weight: bold;
           font-size: 1rem;
-          opacity: 0;
-          transform: translateX(0.625rem); /* 10px */
-          transition: all 0.3s ease;
+          opacity: 1; /* Always visible to "hover/float" at bottom-right */
+          transform: none;
+          transition: all 0.3s ease; /* Keep smoothness for desktop hover scaling */
           background: #FDEFC3;
           padding: 0.5rem 1rem;
           border-radius: 99rem;
           border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
           gap: 0.5rem; /* Adjusted for consistency */
+          z-index: 2; /* Ensure it overlays text */
+          pointer-events: none; /* Don't block card click */
         }
-        .newsshowcase-card:hover .newsshowcase-link-indicator {
-          opacity: 1;
-          transform: translateX(0);
+        /* Optional subtle effect on desktop hover */
+        .newsshowcase-card-inner:hover .newsshowcase-link-indicator {
+          transform: scale(1.05);
         }
         .newsshowcase-arrow {
           font-size: 1rem;
         }
         @media (max-width: 48rem) { /* 768px */
           .newsshowcase-container {
-            flex-direction: column;
+            /* Mobile view styling */
+            width: 100%;
             height: auto;
             padding: 1rem;
-            max-width: 100%; /* Ensure it uses full width on mobile */
+            max-width: 100%;
+            flex-direction: column;
+            background-color: #f5f5f7; /* Revert background for mobile */
+            border-radius: 0; /* Remove rounded corners for mobile */
           }
           .newsshowcase-sidebar, .newsshowcase-main {
             display: none;
@@ -341,6 +322,8 @@ const NewsShowcase = () => {
             border: none;
             border-radius: 0;
             margin: 0;
+            padding: 0; /* Remove padding for mobile view */
+            position: relative; /* containing block for absolute indicator */
           }
           .accordion-content .newsshowcase-image {
             height: 12.5rem; /* 200px */
@@ -356,14 +339,13 @@ const NewsShowcase = () => {
             font-size: 0.875rem;
           }
           .accordion-content .newsshowcase-link-indicator {
-            position: static;
-            opacity: 1;
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            opacity: 1; /* Always visible on mobile */
             transform: none;
-            margin-top: 1rem;
-            justify-content: center;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
+            z-index: 2;
+            pointer-events: auto; /* allow tapping the indicator on mobile */
           }
         }
       `}</style>
@@ -384,22 +366,23 @@ const NewsShowcase = () => {
           <div className="newsshowcase-main" ref={mainRef}>
             <div className="cards-wrapper">
               {newsData.map((news, idx) => (
-                <div
-                  key={idx}
-                  className="newsshowcase-card"
-                  onClick={() => handleCardClick(news.link)}
-                >
-                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
-                  <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description">
-                      <Translate>
-                        {news.description}
-                      </Translate>
-                    </p>
-                    <div className="newsshowcase-link-indicator">
-                      <Translate>前往阅读</Translate>
-                      <span className="newsshowcase-arrow">→</span>
+                <div key={idx} className="newsshowcase-card">
+                  <div
+                    className="newsshowcase-card-inner"
+                    onClick={() => handleCardClick(news.link)}
+                  >
+                    <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
+                    <div className="newsshowcase-content">
+                      <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
+                      <p className="newsshowcase-description">
+                        <Translate>
+                          {news.description}
+                        </Translate>
+                      </p>
+                      <div className="newsshowcase-link-indicator">
+                        <Translate>前往阅读</Translate>
+                        <span className="newsshowcase-arrow">→</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -415,7 +398,15 @@ const NewsShowcase = () => {
             <div key={idx} className="accordion-item">
               <div
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
-                onClick={() => handleMobileAccordionClick(idx)}
+                onClick={() => {
+                  setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
+                  setIsAutoSwitchPaused(true);
+
+                  // Resume auto-switching after 10 seconds of user inactivity
+                  setTimeout(() => {
+                    setIsAutoSwitchPaused(false);
+                  }, 10000);
+                }}
               >
                 <span><Translate>{news.title}</Translate></span>
                 <span>{selectedIndex === idx ? '−' : '+'}</span>
