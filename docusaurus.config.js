@@ -173,6 +173,14 @@ const config = {
       },
     ], */
   ],
+
+  // 添加自定义脚本
+  scripts: [
+    {
+      src: '/js/toc-smooth-scroll.js',
+      async: true,
+    },
+  ],
 };
 
 export default config;
