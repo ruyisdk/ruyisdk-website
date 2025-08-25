@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import CodeBlock from '@site/src/components/common/docs_utils/CodeBlock';
 
 # dd-Methode zur Installation auf einem Entwicklungsboard (am Beispiel MilkV Duo)
 

@@ -1,0 +1,68 @@
+{
+  "coreTeam": [
+    {
+      "id": 1,
+      "name": "xijing21",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
+      "title": "RuyiSDK 项目经理",
+      "titleColor": "#3498db",
+      "description": "一小段话",
+      "email": "",
+      "github": "https://github.com/xijing21"
+    },
+    {
+      "id": 2,
+      "name": "FIFCC",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/52316103?v=4",
+      "title": "RuyiSDK 社区经理",
+      "titleColor": "#e67e22",
+      "description": "一小段话",
+      "email": "",
+      "github": "https://github.com/FIFCC"
+    },
+    {
+      "id": 3,
+      "name": "xen0n",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
+      "title": "RuyiSDK 技术主管",
+      "titleColor": "#9b59b6",
+      "description": "一小段话",
+      "email": "",
+      "github": "https://github.com/xen0n"
+    },
+    {
+      "id": 4,
+      "name": "weilinfox",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
+      "title": "RuyiSDK 测试经理",
+      "titleColor": "#e74c3c",
+      "description": "负责 RuyiSDK 的测试，包括 Ruyi 包管理器的测试和 RuyiSDK IDE 的测试；负责 ruyisdk.org 的维护； P119 实习生 mentor；参与 Ruyi 软件包的打包和 RuyiSDK 的文档维护。",
+      "email": "",
+      "github": "https://github.com/weilinfox"
+    }
+  ],
+  "interns": [
+    {
+      "id": 1,
+      "name": "Cyl18",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
+      "title": "P119",
+      "titleColor": "#1abc9c",
+      "description": "",
+      "email": "",
+      "github": "https://github.com/Cyl18/"
+    },
+    {
+      "id": 2,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "title": "P119",
+      "titleColor": "#1abc9c",
+      "description": "",
+      "email": "",
+      "github": "https://github.com/a1gorhythm7"
+    }
+  ],
+  "contributors": [
+  ]
+}

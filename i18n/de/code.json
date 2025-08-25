@@ -397,23 +397,23 @@
   "前往阅读": {
     "message": "Mehr lesen"
   },
-  "开源之夏合肥工业大学站，廖仕华分享成为一名GCC开发者的成长路径": {
-    "message": "Open Source Summer an der Universität Hefei: Liao Shihua über den Weg zum GCC-Entwickler"
+ "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣": {
+    "message": "Anmeldung eröffnet | 2025 MoonBit Global Programming Innovation Challenge offiziell angekündigt"
   },
-  "在分享中，廖仕华深入剖析了成为一名 GCC 开发者所需的关键技能和知识体系。他不仅对 GCC 这一重要的编译器工具的核心概念和编译流程进行了清晰的阐述，更结合自身的丰富经验，讲解了开发者需要掌握的编程基础、代码调试技巧。": {
-    "message": "In seinem Vortrag analysierte Liao Shihua die wichtigsten Fähigkeiten und das nötige Wissen, um ein GCC-Entwickler zu werden. Er erläuterte die zentralen Konzepte und den Kompilierungsprozess von GCC und teilte praktische Erfahrungen zum Programmieren und Debugging."
+  "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。": {
+    "message": "Dies ist ein professioneller Wettbewerb für Entwickler weltweit, der darauf abzielt, die Computer-Softwareentwicklung zu fördern und die nationale Talentstrategie in den Bereichen Grundlagen-Software und KI-Cloud-Native zu unterstützen. Der erste Wettbewerb zog über 1.888 Teams von renommierten Universitäten wie der Tsinghua-Universität, der Universität Cambridge, der Sun Yat-sen-Universität und der Hong Kong University of Science and Technology (Guangzhou) an."
   },
-  "2025软件所公众科学日，PLCT实验室揭秘RISC-V\"小架构，大神通\"，科技魅力大放送！": {
-    "message": "Tag der offenen Tür 2025 am ISCAS: Das PLCT-Labor enthüllt das Potenzial von RISC-V – 'Kleine Architektur, große Wirkung'"
+  "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日": {
+    "message": "PLCT Lab Participates in BOSC World RISC-V Day with Xiangshan Nanhu Laptop"
   },
-  "与PLCT实验室一起，共同探寻软件科学的更多奥秘与可能！": {
-    "message": "Begleiten Sie das PLCT-Labor und entdecken Sie die Geheimnisse und Möglichkeiten der Softwarewissenschaft!"
+  "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。": {
+    "message": "Am 8. August 2025 fand der World RISC-V Days Beijing Station erfolgreich am Beijing Open Source Chip Research Institute statt. Als erste World RISC-V Day-Feier, die von der RISC-V International Foundation ins Leben gerufen wurde, brachte diese Veranstaltung Branchenexperten, Unternehmensvertreter und Entwickler aus verschiedenen Regionen zusammen, um Einblicke zu teilen und zusammenzuarbeiten und so die breite Einführung und kontinuierliche Innovation von RISC-V in China und weltweit weiter voranzutreiben."
   },
-  "李永泰工程师赴东京出席2025 AsiaLLVM开发者大会，探讨LLVM与GCC在RISC-V上的性能表现": {
-    "message": "Ingenieur Yongtai Li bei der AsiaLLVM Developer Conference 2025 in Tokio: Diskussion über die Performance von LLVM und GCC auf RISC-V"
+  "人物｜程龙灿：做RISC-V世界的 “连接者”": {
+    "message": "Profil | Chenglong Can: Ein 'Vermittler' in der RISC-V-Welt sein"
   },
-  "李永泰指出，LLVM/Flang 工具链已具备完整的 RISC-V SPEC CPU 构建能力，但在 Fortran 优化及特定 Pass 上仍需持续投入。未来将重点跟踪 LLVM 新版本演进，监测回归问题，并持续关注 LLVM 针对 SPEC CPU 的调优工作。": {
-    "message": "Yongtai Li betonte, dass die LLVM/Flang-Toolchain SPEC CPU für RISC-V vollständig unterstützt. Weitere Optimierungen bei Fortran und spezifischen Passes bleiben jedoch erforderlich. Künftig liegt der Fokus auf der Verfolgung neuer LLVM-Versionen, dem Monitoring von Regressionen und der Optimierung für SPEC CPU."
+  "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。": {
+    "message": "Chenglong Can, Betriebsmanager beim PLCT-Labor, entwickelte sich vom Mitglied des Testteams zum Experten für Community-Betrieb. Mit seiner Leidenschaft für Linux und technischem Hintergrund setzt er sich dafür ein, RISC-V-Technologie für mehr Menschen sichtbar zu machen und die geordnete Entwicklung der Community zu fördern. Als 'Vermittler' in der RISC-V-Welt baut er Brücken zwischen Technologie und Nutzern und ermöglicht es, dass der Wert des Open-Source-Ökosystems vollständig realisiert wird."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
@@ -442,11 +442,47 @@
   "QQ1": {
     "message": "QQ-Gruppe 1"
   },
-  "RuyiSDK 数据总览": {
+  "RuyiSDK 数据统计": {
     "message": "RuyiSDK Datenübersicht"
   },
   "下载数量 Downloads": {
     "message": "Anzahl der Downloads"
+  },
+  "ruyi包管理器工具下载数量": {
+    "message": "Ruyi-Paketmanager-Tool-Downloads"
+  },
+  "ruyi安装台数": {
+    "message": "Ruyi-Installationen"
+  },
+  "详细下载统计": {
+    "message": "Detaillierte Download-Statistiken"
+  },
+  "组件下载数量": {
+    "message": "Komponenten-Downloads"
+  },
+  "ruyi包管理器下载次数": {
+    "message": "Ruyi-Paketmanager-Downloads"
+  },
+  "第三方软件下载次数": {
+    "message": "Drittanbieter-Software-Downloads"
+  },
+  "文档下载数量": {
+    "message": "Dokument-Downloads"
+  },
+  "IDE下载次数": {
+    "message": "IDE-Downloads"
+  },
+  "最常用指令": {
+    "message": "Meistgenutzte Befehle"
+  },
+  "最常用包": {
+    "message": "Meistgenutzte Pakete"
+  },
+  "实时监控 RuyiSDK 生态系统的使用情况和发展趋势": {
+    "message": "Echtzeitüberwachung der Nutzung und Entwicklungstrends des RuyiSDK-Ökosystems"
+  },
+  "数据更新时间": {
+    "message": "Data Update Time:"
   },
   "安装台数 Installs": {
     "message": "Anzahl der Installationen"
@@ -466,6 +502,21 @@
   "最后更新时间": {
     "message": "Zuletzt aktualisiert"
   },
+  "我们❤实习生": {
+    "message": "Wir ❤ Praktikanten"
+  },
+  "核心小组": {
+    "message": "Kernteam"
+  },
+  "贡献者": {
+    "message": "Mitwirkende"
+  },
+  "合作伙伴": {
+    "message": "Partner"
+  },
+  "贡献者公约": {
+    "message": "Contributor Covenant"
+  },
   "footer.ecosystem": { "message": "Ökosystem" },
   "footer.revyos": { "message": "RevyOS" },
   "footer.matrix": { "message": "Support Matrix" },
@@ -480,5 +531,35 @@
   "footer.tools": { "message": "Weitere Entwickler-Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
   "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" }
+  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "ruyisdk.community": {
+    "message": "RuyiSDK Gemeinschaft"
+  },
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
+  },
+  "ruyisdk.cn": {
+    "message": "ruyisdk.cn"
+  },
+  "source.repository": {
+    "message": "Quellcode-Repository"
+  },
+  "statistics": {
+    "message": "Statistiken"
+  },
+  "view.more": {
+    "message": "Mehr anzeigen"
+  },
+  "pm_downloads": {
+    "message": "Ruyi Paketmanager-Tool Downloads"
+  },
+  "downloads": {
+    "message": "Anzahl der Downloads"
+  },
+  "installs": {
+    "message": "Installationen"
+  },
+  "no.data": {
+    "message": "Derzeit keine statistischen Daten verfügbar."
+  }
 }

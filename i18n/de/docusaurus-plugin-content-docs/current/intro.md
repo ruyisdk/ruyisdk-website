@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import CodeBlock from '@site/src/components/common/docs_utils/CodeBlock';
 
 # Hello Ruyi
 
