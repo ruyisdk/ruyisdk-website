@@ -10,23 +10,31 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
 
     const handleCopy = () => {
         if (!textToCopy) return;
-        try {
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            textArea.style.position = 'fixed';
-            textArea.style.top = '-9999px';
-            textArea.style.left = '-9999px';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-
+        // Using Clipboard API for modern browsers
+        navigator.clipboard.writeText(textToCopy).then(() => {
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
-        } catch (err) {
+        }).catch(err => {
             console.error('Failed to copy text: ', err);
-        }
+            // Fallback for older browsers
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '-9999px';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2000);
+            } catch (fallbackErr) {
+                console.error('Fallback copy method failed: ', fallbackErr);
+            }
+        });
     };
 
     const style = {
@@ -48,9 +56,9 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
     );
 };
 
+
 // --- MAIN COMPONENT: CodeBlock ---
-// With updated bash copy logic.
-const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = true }) => {
+const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (lang !== 'bash') }) => {
     const [theme, setTheme] = useState('dark');
 
     // Effect to detect and observe Docusaurus theme changes
@@ -159,17 +167,16 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
                 <div style={lineStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <SyntaxHighlighter language="bash" style={syntaxTheme} customStyle={lineHighlighterStyle}>{line}</SyntaxHighlighter>
                     {isCommand && (
+                        // UPDATE: Elegant copy button style.
+                        // It is now invisible by default and fades in on hover without a background.
                         <div style={{
                             position: 'sticky',
                             right: '1rem',
                             display: 'flex',
                             alignItems: 'center',
                             height: '100%',
-                            opacity: isHovered ? 1 : 0.7,
+                            opacity: isHovered ? 1 : 0,
                             transition: 'opacity 150ms ease-in-out',
-                            background: 'rgba(30,30,30,0.18)', // semi-transparent for readability
-                            borderRadius: '0.375rem',
-                            padding: '0.1rem 0.2rem',
                         }}>
                             <CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} />
                         </div>
@@ -188,6 +195,7 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
                         <Terminal size={16} style={currentStyles.icon} />
                         <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'bash'}</span>
                     </div>
+                    {/* UPDATE: This button is now hidden by default for bash blocks */}
                     {showTitleCopyButton && (
                         <CopyButton textToCopy={getCommandsToCopy(code)} themeStyles={currentStyles} />
                     )}
