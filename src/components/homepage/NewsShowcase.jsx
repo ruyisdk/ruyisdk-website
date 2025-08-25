@@ -27,7 +27,9 @@ const NewsShowcase = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const mainRef = useRef(null);
+  const containerRef = useRef(null);
 
   /**
    * Truncates text to a specified maximum length, avoiding word breaks.
@@ -54,14 +56,14 @@ const NewsShowcase = () => {
         truncated = truncated.substring(0, lastSpaceIndex);
       }
     }
-
+    
     return truncated + '...';
   };
 
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
     setIsAutoSwitchPaused(true);
-
+    
     // Resume auto-switching after 10 seconds of user inactivity
     setTimeout(() => {
       setIsAutoSwitchPaused(false);
@@ -72,22 +74,51 @@ const NewsShowcase = () => {
     window.open(link, '_blank');
   };
 
-  // Auto-switch news every 5 seconds
+  // Auto-switch news every 3 seconds, but only when component is visible
   useEffect(() => {
+    if (!isVisible) return; // Don't start auto-switching until component is visible
+    
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
-        setSelectedIndex((prevIndex) => (prevIndex + 1) % newsData.length);
+        setSelectedIndex((prevIndex) => {
+          // Handle mobile accordion mode where selectedIndex might be -1
+          const currentIndex = prevIndex === -1 ? 0 : prevIndex;
+          return (currentIndex + 1) % newsData.length;
+        });
       }
-    }, 3000); // 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [newsData.length, isAutoSwitchPaused]);
+  }, [newsData.length, isAutoSwitchPaused, isVisible]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer to detect when component is visible
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the component is visible
+        rootMargin: '0px 0px -100px 0px' // Start a bit before the component comes into view
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -98,8 +129,20 @@ const NewsShowcase = () => {
     }
   }, [selectedIndex, isMobile]);
 
+  // Mobile accordion click handler
+  const handleMobileAccordionClick = (idx) => {
+    const newIndex = selectedIndex === idx ? -1 : idx;
+    setSelectedIndex(newIndex);
+    setIsAutoSwitchPaused(true);
+    
+    // Resume auto-switching after 10 seconds of user inactivity
+    setTimeout(() => {
+      setIsAutoSwitchPaused(false);
+    }, 10000);
+  };
+
   return (
-    <div className="newsshowcase-container">
+    <div className="newsshowcase-container" ref={containerRef}>
       <style>{`
         .newsshowcase-container {
           display: flex;
@@ -131,7 +174,7 @@ const NewsShowcase = () => {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-          padding: 0.75rem 1rem 1rem 0; /* Updated padding for top alignment */
+          padding: 0rem 1rem 1rem 0;
         }
         .newsshowcase-sidebar::-webkit-scrollbar {
           display: none;
@@ -173,28 +216,22 @@ const NewsShowcase = () => {
           height: 100%;
         }
         .newsshowcase-card {
-          width: 100%;
-          height: 100%;
-          flex-shrink: 0;
-          padding: 0.75rem; 
-          box-sizing: border-box;
-        }
-        .newsshowcase-card-inner {
           background: white;
           border-radius: 0.625rem; /* 10px */
           overflow: hidden;
-          box-shadow: none; /* Shadow removed */
+          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
           cursor: pointer;
-          transition: transform 0.3s ease; /* transition for box-shadow removed */
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
           width: 100%;
           height: 100%;
           display: flex;
           flex-direction: column;
           border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
+          flex-shrink: 0;
         }
-        .newsshowcase-card-inner:hover {
-          transform: scale(1.02);
-          /* box-shadow removed from hover state */
+        .newsshowcase-card:hover {
+          transform: scale(1.01);
+          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
         }
         .newsshowcase-image {
           width: 100%;
@@ -203,7 +240,7 @@ const NewsShowcase = () => {
           object-fit: cover;
           transition: transform 0.3s ease;
         }
-        .newsshowcase-card-inner:hover .newsshowcase-image {
+        .newsshowcase-card:hover .newsshowcase-image {
           transform: scale(1.02);
         }
         .newsshowcase-content {
@@ -246,7 +283,7 @@ const NewsShowcase = () => {
           border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
           gap: 0.5rem; /* Adjusted for consistency */
         }
-        .newsshowcase-card-inner:hover .newsshowcase-link-indicator {
+        .newsshowcase-card:hover .newsshowcase-link-indicator {
           opacity: 1;
           transform: translateX(0);
         }
@@ -304,7 +341,6 @@ const NewsShowcase = () => {
             border: none;
             border-radius: 0;
             margin: 0;
-            padding: 0; /* Remove padding for mobile view */
           }
           .accordion-content .newsshowcase-image {
             height: 12.5rem; /* 200px */
@@ -348,23 +384,22 @@ const NewsShowcase = () => {
           <div className="newsshowcase-main" ref={mainRef}>
             <div className="cards-wrapper">
               {newsData.map((news, idx) => (
-                <div key={idx} className="newsshowcase-card">
-                  <div
-                    className="newsshowcase-card-inner"
-                    onClick={() => handleCardClick(news.link)}
-                  >
-                    <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
-                    <div className="newsshowcase-content">
-                      <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                      <p className="newsshowcase-description">
-                        <Translate>
-                          {news.description}
-                        </Translate>
-                      </p>
-                      <div className="newsshowcase-link-indicator">
-                        <Translate>前往阅读</Translate>
-                        <span className="newsshowcase-arrow">→</span>
-                      </div>
+                <div
+                  key={idx}
+                  className="newsshowcase-card"
+                  onClick={() => handleCardClick(news.link)}
+                >
+                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
+                  <div className="newsshowcase-content">
+                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
+                    <p className="newsshowcase-description">
+                      <Translate>
+                        {news.description}
+                      </Translate>
+                    </p>
+                    <div className="newsshowcase-link-indicator">
+                      <Translate>前往阅读</Translate>
+                      <span className="newsshowcase-arrow">→</span>
                     </div>
                   </div>
                 </div>
@@ -380,15 +415,7 @@ const NewsShowcase = () => {
             <div key={idx} className="accordion-item">
               <div
                 className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
-                onClick={() => {
-                  setSelectedIndex(prevIndex => prevIndex === idx ? -1 : idx); // Allow toggle
-                  setIsAutoSwitchPaused(true);
-
-                  // Resume auto-switching after 10 seconds of user inactivity
-                  setTimeout(() => {
-                    setIsAutoSwitchPaused(false);
-                  }, 10000);
-                }}
+                onClick={() => handleMobileAccordionClick(idx)}
               >
                 <span><Translate>{news.title}</Translate></span>
                 <span>{selectedIndex === idx ? '−' : '+'}</span>
