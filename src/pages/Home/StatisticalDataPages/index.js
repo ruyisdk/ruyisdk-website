@@ -27,12 +27,8 @@ const StatisticalDataPages = () => {
         
         <div className={styles.header}>
           <h1 className={styles.title}>
-            <span className={styles.titleIcon}>📊</span>
-            {translate({ id: "RuyiSDK 数据总览", message: "RuyiSDK 数据总览" })}
+            {translate({ id: "RuyiSDK 数据统计", message: "RuyiSDK 数据统计" })}
           </h1>
-          <p className={styles.subtitle}>
-            {translate({ id: "实时监控 RuyiSDK 生态系统的使用情况和发展趋势", message: "实时监控 RuyiSDK 生态系统的使用情况和发展趋势" })}
-          </p>
         </div>
 
         <div className={styles.content}>
