@@ -20,7 +20,7 @@ const WeChatLink = ({
 }) => {
   return (
     <div className="w-full py-6 md:hidden">
-      <div className="flex flex-col items-center gap-4 px-4">
+      <div className="flex flex-col items-center gap-4 px-4 py-6">
         <h3 className="text-emphasis mb-1 text-center text-xl font-bold">
           {titleText}
         </h3>
@@ -50,12 +50,11 @@ const WeChatLink = ({
           href={linkUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-emphasis inline-flex min-w-[9.375rem] items-center
-            justify-center rounded-full bg-[rgb(252,232,164)] px-5 py-2.5
-            font-semibold shadow transition duration-200 ease-out
-            hover:-translate-y-0.5 hover:shadow-lg"
+          className="w-[9.375rem] rounded-full bg-[#FCE8A4] px-5 py-2.5
+            font-semibold shadow transition hover:-translate-y-0.5
+            hover:bg-[#F8F3E2] hover:shadow-lg"
         >
-          {buttonText}
+          <div className="text-emphasis text-center">{buttonText}</div>
         </a>
       </div>
     </div>
