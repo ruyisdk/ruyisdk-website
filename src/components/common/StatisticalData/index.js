@@ -191,7 +191,7 @@ const TopList = ({ data, title }) => {
       .label({ 
         text: 'action', 
         position: "top-left", 
-        fill: '#fff', 
+        fill: '#0A2C7E', 
         dy: -12, 
         fontWeight: 600,
         fontSize: 12
@@ -199,7 +199,7 @@ const TopList = ({ data, title }) => {
       .label({ 
         text: 'total', 
         position: "top-right", 
-        fill: '#ffffff', 
+        fill: '#0A2C7E', 
         dy: 0, 
         dx: -10,
         fontWeight: 700,
