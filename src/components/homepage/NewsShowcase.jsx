@@ -4,9 +4,15 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
+      title: "学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创“芯”未来",
+      description: "玄铁携手 PLCT 实验室推出 RISC-V 系列课程，包含三大中级课程与两大高阶进阶课程。由专业讲师团队授课，涵盖 RISC-V 软件生态、编译器开发等领域。提供主流开发板实践机会，结业后可参与技术沙龙、Hackathon 比赛等活动，与行业专家交流，获得职业发展机会。",
+      img: "img/newsshowcase/XuanTie.jpg",
+      link: "https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q"
+    },
+    {
       title: "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日",
       description: "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。",
-      img: "img/newsshowcase/xiangshan_process.jpg",
+      img: "img/newsshowcase/xiangshan.jpg",
       link: "https://mp.weixin.qq.com/s/OW8OAXUPN-kWurjVjk2VsQ"
     },
     {
@@ -15,13 +21,6 @@ const NewsShowcase = () => {
       img: "img/newsshowcase/chenglongcan.png",
       link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
     },
-    {
-      title: "报名启动 | 2025 MoonBit全球编程创新挑战赛官宣",
-      description: "这是一项面向全球开发者的专业挑战赛，旨在推动计算机软件开发相关专业建设，服务国家在基础软件和人工智能云原生领域的人才战略。首届大赛吸引了超过1888支队伍参赛，覆盖了清华大学、剑桥大学、中山大学、香港科技大学（广州）等多所国内外知名高校。",
-      img: "img/newsshowcase/MoonBit.jpg",
-      link: "https://mp.weixin.qq.com/s/2r4cKs5D7JJDqgH4lhdH_A"
-    },
-    
   ];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
