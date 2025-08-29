@@ -54,7 +54,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: "./src/css/custom.scss",
+          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
         },
       }),
     ],
@@ -130,7 +130,7 @@ const config = {
       },
       footer: {
         style: "light",
-        links:[],
+        links: [],
         copyright: `Copyright © 2024-2025 Institute of Software, CAS`,
       },
       prism: {
@@ -164,6 +164,15 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
+    function unocssPlugin() {
+      return {
+        name: "docusaurus-unocss",
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push("@unocss/postcss");
+          return postcssOptions;
+        },
+      };
+    },
 
     /* [
       "@docusaurus/plugin-google-gtag",
