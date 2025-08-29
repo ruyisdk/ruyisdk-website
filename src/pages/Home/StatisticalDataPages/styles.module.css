@@ -7,7 +7,8 @@
   --muted-text: #515154;
 }
 
-.container {
+ .container {
+  color: #000;
   min-height: 100vh;
   background-color: var(--page-bg);
   position: relative;
@@ -18,7 +19,8 @@
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
 }
 
-.header {
+ .header {
+  color: #000;
   position: relative;
   z-index: 2;
   text-align: center;
@@ -27,7 +29,8 @@
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-.title {
+ .title {
+  color: #000;
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--ruyi-blue);
@@ -41,7 +44,8 @@
   font-weight: 400;
 }
 
-.content {
+ .content {
+  color: #000;
   position: relative;
   z-index: 2;
   flex: 1;
@@ -80,42 +84,51 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
+  .container,
+  .header,
+  .title,
+  .content,
+  .subtitle,
+  .footer {
+    color: #000 !important;
+  }
   .title {
     font-size: 2.5rem;
     flex-direction: column;
     gap: 0.5rem;
   }
-  
   .titleIcon {
     font-size: 2.5rem;
   }
-  
   .subtitle {
     font-size: 1rem;
   }
-  
   .header {
     padding: 3rem 1rem 1.5rem;
   }
-  
   .content {
     padding: 1rem;
   }
 }
 
 @media (max-width: 768px) {
+  .container,
+  .header,
+  .title,
+  .content,
+  .subtitle,
+  .footer {
+    color: #000 !important;
+  }
   .title {
     font-size: 2rem;
   }
-  
   .titleIcon {
     font-size: 2rem;
   }
-  
   .subtitle {
     font-size: 0.9rem;
   }
-  
   .floatingOrb {
     width: 200px;
     height: 200px;
@@ -123,18 +136,23 @@
 }
 
 @media (max-width: 480px) {
+  .container,
+  .header,
+  .title,
+  .content,
+  .subtitle,
+  .footer {
+    color: #000 !important;
+  }
   .title {
     font-size: 1.8rem;
   }
-  
   .titleIcon {
     font-size: 1.8rem;
   }
-  
   .header {
     padding: 2rem 1rem 1rem;
   }
-  
   .floatingOrb {
     width: 150px;
     height: 150px;
