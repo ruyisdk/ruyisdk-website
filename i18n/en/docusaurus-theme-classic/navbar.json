@@ -19,6 +19,10 @@
     "message": "Newsletter",
     "description": "Navbar item with label 双周报"
   },
+  "item.label.新闻": {
+    "message": "News",
+    "description": "Navbar item with label 新闻"
+  },
   "item.label.下载": {
     "message": "Download",
     "description": "Navbar item with label 下载"

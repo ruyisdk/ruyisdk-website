@@ -531,7 +531,9 @@
   "footer.tools": { "message": "Weitere Entwickler-Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
   "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "footer.riscv-community": {
+    "message": "RuyiSDK Community (Chinese Website)"
+  },
   "ruyisdk.community": {
     "message": "RuyiSDK Gemeinschaft"
   },
@@ -561,5 +563,11 @@
   },
   "no.data": {
     "message": "Derzeit keine statistischen Daten verfügbar."
+  },
+  "news.biweekly": {
+    "message": "Zweiwöchentlicher RuyiSDK-Bericht"
+  },
+  "news.news": {
+    "message": "RuyiSDK-Neuigkeiten"
   }
 }

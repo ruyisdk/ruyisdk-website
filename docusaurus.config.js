@@ -100,6 +100,7 @@ const config = {
           },
           { to: "/blog", label: "博客", position: "right" },
           { to: "/biweekly", label: "双周报", position: "right" },
+          { to: "/news", label: "新闻", position: "right" },
           { to: "/download", label: "下载", position: "right" },
           {
             type: "dropdown",
@@ -142,6 +143,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
+    "./plugins/unocss",
+    "./plugins/news-generator",
     [
       "@docusaurus/plugin-content-blog",
       {
@@ -164,15 +167,6 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
-    function unocssPlugin() {
-      return {
-        name: "docusaurus-unocss",
-        configurePostCss(postcssOptions) {
-          postcssOptions.plugins.push("@unocss/postcss");
-          return postcssOptions;
-        },
-      };
-    },
 
     /* [
       "@docusaurus/plugin-google-gtag",
