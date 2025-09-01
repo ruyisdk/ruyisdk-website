@@ -142,6 +142,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
+    "./plugins/unocss",
+    "./plugins/news-generator",
     [
       "@docusaurus/plugin-content-blog",
       {
@@ -164,15 +166,6 @@ const config = {
         blogSidebarCount: "ALL",
       },
     ],
-    function unocssPlugin() {
-      return {
-        name: "docusaurus-unocss",
-        configurePostCss(postcssOptions) {
-          postcssOptions.plugins.push("@unocss/postcss");
-          return postcssOptions;
-        },
-      };
-    },
 
     /* [
       "@docusaurus/plugin-google-gtag",

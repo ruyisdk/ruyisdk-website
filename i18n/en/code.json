@@ -534,7 +534,9 @@
   "footer.plct": { "message": "PLCT Lab" },
   "footer.tools": { "message": "More Developer Tools" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
-  "footer.riscv-community": { "message": "RuyiSDK Community (Chinese Website)" },
+  "footer.riscv-community": {
+    "message": "RuyiSDK Community (Chinese Website)"
+  },
   "ruyisdk.community": {
     "message": "RuyiSDK Community"
   },
@@ -564,5 +566,11 @@
   },
   "no.data": {
     "message": "No statistical data available currently."
+  },
+  "news.biweekly": {
+    "message": "RuyiSDK Biweekly"
+  },
+  "news.news": {
+    "message": "RuyiSDK News"
   }
 }
