@@ -100,7 +100,6 @@ const config = {
           },
           { to: "/blog", label: "博客", position: "right" },
           { to: "/biweekly", label: "双周报", position: "right" },
-          { to: "/news", label: "新闻", position: "right" },
           { to: "/download", label: "下载", position: "right" },
           {
             type: "dropdown",
