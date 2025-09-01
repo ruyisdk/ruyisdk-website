@@ -1,109 +1,110 @@
 import React from "react";
-import { Row, Col, QRCode, Card, Divider } from "antd";
+import { QRCode } from "antd";
 import { translate } from "@docusaurus/Translate";
 
 const QQGroupList = () => {
-  const data = [
+  const qqGroups = [
     {
       title: translate({ id: "QQ1", message: "QQ 1群" }),
-      value: 'https://qm.qq.com/q/oAWlZnWV3y',
-      qqGroupNumber: '544940413'
+      value: "https://qm.qq.com/q/oAWlZnWV3y",
+      qqGroupNumber: "544940413",
+      isActive: true,
     },
     {
-      title: ' ',
+      title: translate({ id: "QQ2", message: "QQ 2群" }),
       value: null,
-      qqGroupNumber: null
+      qqGroupNumber: null,
+      isActive: false,
     },
     {
-      title: ' ',
+      title: translate({ id: "QQ3", message: "QQ 3群" }),
       value: null,
-      qqGroupNumber: null
+      qqGroupNumber: null,
+      isActive: false,
     },
     {
-      title: ' ',
+      title: translate({ id: "QQ4", message: "QQ 4群" }),
       value: null,
-      qqGroupNumber: null
+      qqGroupNumber: null,
+      isActive: false,
     },
-    {
-      title: ' ',
-      value: null,
-      qqGroupNumber: null
-    },
-    {
-      title: ' ',
-      value: null,
-      qqGroupNumber: null
-    },
-    {
-      title: ' ',
-      value: null,
-      qqGroupNumber: null
-    },
-    {
-      title: ' ',
-      value: null,
-      qqGroupNumber: null
-    },
-  ]
+  ];
+
   return (
-    <Card style={{
-      backgroundColor: "#fff",
-      borderLeftColor: "#06bcee",
-      borderLeftWidth: "4px",
-      borderRadius: '1rem',
-      borderColor: "#e3e3e3",
-      margin: "2rem 0"
-    }}
-      title={<span style={{ color: '#222', fontWeight: 600 }}>{translate({ id: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊", message: "您可以扫描二维码，或者点击二维码唤起 QQ 加入群聊" })}</span>}
+    <div
+      style={{
+        display: "flex",
+        border: "1px solid #eee",
+        borderRadius: "12px",
+        overflow: "hidden",
+      }}
     >
-      <Row gutter={[16, 16]} align={'top'} justify={'start'}>
-        {data.map((data, index) => (
-          <Col xs={24} sm={12} md={8} lg={6} key={index} style={{marginBottom: "1rem"}}>
-            <Card
-              hoverable
-              size={"small"}
-              headStyle={{ borderBottom: 'none', fontSize: "1rem", color: "#222", background: "#f7f7f9" }}
-              title={data.title}
-              style={{
-                backgroundColor: "#f7f7f9",
-                borderWidth: "1px",
-                borderColor: "#e3e3e3",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-                borderRadius: "0.75rem",
-                minHeight: "260px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-              }}
-              onClick={() => {
-                if (data.value) {
-                  window.open(data.value)
-                }
-              }}
-            >
-              {
-                data.value ? <QRCode value={data.value} size={112} bgColor="#fff" /> : <div style={{ height: '112px', width: "112px" }}></div>
-              }
-              <Divider style={{ borderColor: '#e3e3e3', marginTop: "10px", marginBottom: "0" }}></Divider>
-              {data.qqGroupNumber ? <p style={{
-                margin: "0.5rem 0 0 0",
-                width: '100%',
-                textAlign: "center",
-                fontSize: "1.1rem",
-                fontWeight: "bold",
-                color: "#222"
-              }}>{data.qqGroupNumber}</p> :
-                <p style={{
-                  height: "0.5rem",
-                  width: '100%'
-                }}> </p>}
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Card>
+      {qqGroups.map((group, index) => (
+        <div
+          key={index}
+          style={{
+            flex: 1,
+            textAlign: "center",
+            padding: "1rem",
+            borderRight:
+              index !== qqGroups.length - 1 ? "1px solid #eee" : "none",
+          }}
+        >
+                     {group.isActive && (
+             <div
+               style={{
+                 fontSize: "0.9rem",
+                 fontWeight: "500",
+                 marginBottom: "0.5rem",
+                 color: "#333",
+               }}
+             >
+               {group.title}
+             </div>
+           )}
+
+                     {group.isActive ? (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "120px", // 固定高度，内容垂直居中
+        cursor: "pointer",
+        transition: "transform 0.2s ease",
+      }}
+      onClick={() => {
+        if (group.value) {
+          window.open(group.value, '_blank');
+        }
+      }}
+      onMouseEnter={(e) => {
+        e.target.style.transform = "scale(1.02)";
+      }}
+      onMouseLeave={(e) => {
+        e.target.style.transform = "scale(1)";
+      }}
+    >
+      <QRCode value={group.value} size={95} />
+      <div
+        style={{
+          marginTop: "0.5rem",
+          fontSize: "0.8rem",
+          color: "#666",
+        }}
+      >
+        {group.qqGroupNumber}
+      </div>
+    </div>
+) : (
+  <div style={{ height: "120px" }} /> // 空群占位，保持高度一致
+)}
+
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default QQGroupList
+export default QQGroupList;
