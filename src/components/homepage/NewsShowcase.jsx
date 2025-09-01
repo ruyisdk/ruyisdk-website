@@ -4,7 +4,7 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
-      title: "学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创“芯”未来",
+      title: "学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创\"芯\"未来",
       description: "玄铁携手 PLCT 实验室推出 RISC-V 系列课程，包含三大中级课程与两大高阶进阶课程。由专业讲师团队授课，涵盖 RISC-V 软件生态、编译器开发等领域。提供主流开发板实践机会，结业后可参与技术沙龙、Hackathon 比赛等活动，与行业专家交流，获得职业发展机会。",
       img: "img/newsshowcase/XuanTie.jpg",
       link: "https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q"
@@ -16,7 +16,7 @@ const NewsShowcase = () => {
       link: "https://mp.weixin.qq.com/s/OW8OAXUPN-kWurjVjk2VsQ"
     },
     {
-      title: "人物｜程龙灿：做RISC-V世界的 “连接者”",
+      title: "人物｜程龙灿：做RISC-V世界的 \"连接者\"",
       description: "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。",
       img: "img/newsshowcase/chenglongcan.png",
       link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
@@ -73,9 +73,9 @@ const NewsShowcase = () => {
     window.open(link, '_blank');
   };
 
-  // Auto-switch news every 3 seconds, but only when component is visible
+  // Auto-switch news every 3 seconds, but only when component is visible and not on mobile
   useEffect(() => {
-    if (!isVisible) return; // Don't start auto-switching until component is visible
+    if (!isVisible || isMobile) return; // Don't start auto-switching until component is visible and not on mobile
     
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
@@ -88,7 +88,7 @@ const NewsShowcase = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [newsData.length, isAutoSwitchPaused, isVisible]);
+  }, [newsData.length, isAutoSwitchPaused, isVisible, isMobile]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
@@ -127,18 +127,6 @@ const NewsShowcase = () => {
       wrapper.style.transform = `translateY(-${selectedIndex * 100}%)`;
     }
   }, [selectedIndex, isMobile]);
-
-  // Mobile accordion click handler
-  const handleMobileAccordionClick = (idx) => {
-    const newIndex = selectedIndex === idx ? -1 : idx;
-    setSelectedIndex(newIndex);
-    setIsAutoSwitchPaused(true);
-    
-    // Resume auto-switching after 10 seconds of user inactivity
-    setTimeout(() => {
-      setIsAutoSwitchPaused(false);
-    }, 10000);
-  };
 
   return (
     <div className="newsshowcase-container" ref={containerRef}>
@@ -299,66 +287,64 @@ const NewsShowcase = () => {
           .newsshowcase-sidebar, .newsshowcase-main {
             display: none;
           }
-          .accordion-wrapper {
+          .mobile-cards-wrapper {
             display: flex;
             flex-direction: column;
             gap: 1rem;
           }
-          .accordion-item {
-            margin-bottom: 1rem;
-            border: 0.0625rem solid rgba(230, 230, 230, 1);
+          .mobile-news-card {
+            background: white;
             border-radius: 0.625rem;
             overflow: hidden;
-            background: white;
-          }
-          .accordion-title {
-            padding: 1rem;
-            background: white;
+            box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            color: #1d1d1f;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 0.0625rem solid rgba(230, 230, 230, 1);
           }
-          .accordion-title.active {
-            background: #002677;
-            color: #fff;
+          .mobile-news-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15);
           }
-          .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            background: white;
-          }
-          .accordion-content.expanded {
-            max-height: 62.5rem; /* 1000px, for ample space */
-          }
-          .accordion-content .newsshowcase-card {
-            box-shadow: none;
-            border: none;
-            border-radius: 0;
-            margin: 0;
-          }
-          .accordion-content .newsshowcase-image {
+          .mobile-news-image {
+            width: 100%;
             height: 12.5rem; /* 200px */
-            border-radius: 0;
+            object-fit: cover;
+            transition: transform 0.3s ease;
           }
-          .accordion-content .newsshowcase-content {
+          .mobile-news-card:hover .mobile-news-image {
+            transform: scale(1.02);
+          }
+          .mobile-news-content {
             padding: 1rem;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
           }
-          .accordion-content .newsshowcase-card-title {
+          .mobile-news-title {
             font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            line-height: 1.2;
           }
-          .accordion-content .newsshowcase-description {
+          .mobile-news-description {
             font-size: 0.875rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1rem;
           }
-          .accordion-content .newsshowcase-link-indicator {
-            position: static;
-            opacity: 1;
-            transform: none;
-            margin-top: 1rem;
+          .mobile-news-link-indicator {
+            display: inline-flex;
+            align-items: center;
+            color: #0A2C7E;
+            font-weight: bold;
+            font-size: 1rem;
+            background: #FDEFC3;
+            padding: 0.5rem 1rem;
+            border-radius: 99rem;
+            border: 0.0625rem solid rgb(255, 228, 138);
+            gap: 0.5rem;
             justify-content: center;
             width: fit-content;
             margin-left: auto;
@@ -409,27 +395,20 @@ const NewsShowcase = () => {
       )}
 
       {isMobile && (
-        <div className="accordion-wrapper">
+        <div className="mobile-cards-wrapper">
           {newsData.map((news, idx) => (
-            <div key={idx} className="accordion-item">
-              <div
-                className={`accordion-title ${selectedIndex === idx ? 'active' : ''}`}
-                onClick={() => handleMobileAccordionClick(idx)}
-              >
-                <span><Translate>{news.title}</Translate></span>
-                <span>{selectedIndex === idx ? '−' : '+'}</span>
-              </div>
-              <div className={`accordion-content ${selectedIndex === idx ? 'expanded' : ''}`}>
-                <div className="newsshowcase-card" onClick={() => handleCardClick(news.link)}>
-                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile`})} className="newsshowcase-image" />
-                  <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description"><Translate>{news.description}</Translate></p>
-                    <div className="newsshowcase-link-indicator">
-                      <Translate>前往阅读</Translate>
-                      <span className="newsshowcase-arrow">→</span>
-                    </div>
-                  </div>
+            <div
+              key={idx}
+              className="mobile-news-card"
+              onClick={() => handleCardClick(news.link)}
+            >
+              <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile`})} className="mobile-news-image" />
+              <div className="mobile-news-content">
+                <h2 className="mobile-news-title"><Translate>{news.title}</Translate></h2>
+                <p className="mobile-news-description"><Translate>{news.description}</Translate></p>
+                <div className="mobile-news-link-indicator">
+                  <Translate>前往阅读</Translate>
+                  <span className="newsshowcase-arrow">→</span>
                 </div>
               </div>
             </div>
