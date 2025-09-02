@@ -176,17 +176,18 @@ const TopList = ({ data, title }) => {
       })
       .data(barData)
       .transform({ type: 'sortX', reverse: true, by: "y" })
-      .axis('x', { line: false, title: false, label: false, tick: false })
-      .axis('y', { title: false, line: false, tick: false })
+      .axis('x', { line: false, title: false, label: false, tick: false, grid: false })
+      .axis('y', { title: false, line: false, tick: false, grid: false })
       .encode('x', 'action')
       .encode('y', 'logTotal')
       .scale('y', { 
         nice: false,
         padding: 0.6,
         min: 0,
-        max: Math.max(...barData.map(d => d.logTotal)) * 3.5
+        max: Math.max(...barData.map(d => d.logTotal)) * 3.5,
+        tickCount: 0
       })
-      .scale('x', { padding: 0.6 })
+      .scale('x', { padding: 0.6, tickCount: 0 })
       .style('maxWidth', 200)
       .label({ 
         text: 'action', 

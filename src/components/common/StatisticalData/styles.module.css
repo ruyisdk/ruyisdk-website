@@ -271,6 +271,19 @@
   min-height: 400px;
 }
 
+/* 隐藏坐标轴数字和刻度 */
+.chart :global(.g2-axis-label),
+.chart :global(.g2-axis-tick),
+.chart :global(.g2-axis-line),
+.chart :global(.g2-axis-title),
+.chart :global(.g2-axis-grid) {
+  display: none !important;
+}
+
+.chart :global(.g2-axis) {
+  display: none !important;
+}
+
 /* 空状态样式 */
 .emptyState {
   display: flex;
