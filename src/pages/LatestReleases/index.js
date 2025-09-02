@@ -20,7 +20,7 @@ export default function ReleaseProvider({ children }) {
   );
 }
 
-function useReleaseData() {
+export function useReleaseData() {
   return useContext(ReleaseContext);
 }
 

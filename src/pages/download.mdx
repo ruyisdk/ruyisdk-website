@@ -1,49 +1,98 @@
-import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+import ReleaseProvider, { DownloadRuyi, useReleaseData } from '@site/src/pages/LatestReleases';
+import React, { useEffect, useMemo, useState } from 'react';
+import CodeBlock from '@theme/CodeBlock';
 
 <ReleaseProvider>
   <>
 
-:::tip
+::::tip
 下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
-:::
+::::
 
 ## 下载 RuyiSDK 包管理器
 
 Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
 
-如果输出为 ``x86_64``：
+{(() => {
+  function detectArch() {
+    if (typeof navigator === 'undefined') return 'x86_64';
+    const ua = (navigator.userAgent || '').toLowerCase();
+    const uaArch = (navigator.userAgentData && navigator.userAgentData.architecture) || '';
 
-<DownloadRuyi arch="x86_64" />
+    if (/riscv64|risc-v|riscv/.test(ua) || /riscv64/.test(uaArch)) return 'riscv64';
+    if (/aarch64|arm64/.test(ua) || /arm64/.test(uaArch)) return 'aarch64';
+    return 'x86_64';
+  }
 
-如果输出为 ``aarch64``：
+  function ArchControls() {
+    const data = useReleaseData();
+    const [arch, setArch] = useState(detectArch());
 
-<DownloadRuyi arch="aarch64" />
+    const link = useMemo(() => {
+      if (!data) return '';
+      return data.channels.stable.download_urls[`linux/${arch}`]?.[1] || '';
+    }, [data, arch]);
 
-如果输出为 ``riscv64``：
+    const filename = useMemo(() => {
+      try {
+        if (!link) return '';
+        const url = new URL(link);
+        const last = url.pathname.split('/').filter(Boolean).pop();
+        return last || '';
+      } catch (e) {
+        return link.split('/').pop() || '';
+      }
+    }, [link]);
 
-<DownloadRuyi arch="riscv64" />
+    useEffect(() => {
+      // Update arch if user agent indicates a clearer architecture after hydration
+      setArch(prev => prev); // no-op to satisfy lint; placeholder for future signals
+    }, []);
 
-:::tip
+    return (
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
+          <span>选择架构：</span>
+          <select value={arch} onChange={(e) => setArch(e.target.value)}>
+            <option value="x86_64">x86_64</option>
+            <option value="aarch64">aarch64</option>
+            <option value="riscv64">riscv64</option>
+          </select>
+        </div>
+        <DownloadRuyi arch={arch} />
+
+        <div style={{ marginTop: '16px' }}>
+          <div style={{ margin: '8px 0' }}>下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：</div>
+          {filename ? (
+            <>
+              <CodeBlock language="bash">{`$ chmod +x ./${filename}`}</CodeBlock>
+              <CodeBlock language="bash">{`$ sudo cp -v ${filename} /usr/local/bin/ruyi`}</CodeBlock>
+            </>
+          ) : (
+            <>
+              <CodeBlock language="bash">$ chmod +x ./ruyi</CodeBlock>
+              <CodeBlock language="bash">$ sudo cp -v ruyi /usr/local/bin/ruyi</CodeBlock>
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return <ArchControls />;
+})()}
+
+::::tip
 若页面没有正常显示下载链接，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
-:::
+::::
 
 ### 安装 RuyiSDK 包管理器
 
-下面以 x86_64 架构为例，给下载的二进制添加执行权限：
+上方已根据您的架构自动生成命令。确保二进制安装为 ``ruyi`` 并位于 ``PATH`` 中的目录。
 
-```bash
-$ chmod +x ./ruyi.amd64
-```
-
-安装二进制到 ``PATH`` 包含的目录中：
-
-```bash
-$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
-```
-
-:::tip
+::::tip
 注意二进制文件名必须为 ``ruyi``
-:::
+::::
 
 验证安装：
 
@@ -63,9 +112,9 @@ RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进�
 $ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
 ```
 
-:::tip
+::::tip
 文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
-:::
+::::
 
 ### 安装 RuyiSDK IDE
 
@@ -96,7 +145,7 @@ $ /opt/ruyisdk/ruyisdk/ruyisdk
 插件使用说明：
 
 + 从 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest) 下载最新插件包
-+ 将 ``org.ruyisdk.ide_*.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
++ 将 ``org.ruyisdk.ide_*\.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
 
 ## 开始使用
 
