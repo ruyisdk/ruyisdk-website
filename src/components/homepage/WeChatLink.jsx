@@ -1,7 +1,7 @@
 import { translate } from "@docusaurus/Translate";
 
 // Placeholder QR Code Image URL (replace with your actual QR code URL)
-const DEFAULT_QR_CODE_IMAGE_URL = "/img/wechat_account_img.png";
+const DEFAULT_QR_CODE_IMAGE_URL = "/img/QRCode_img/wechat_account_img.png";
 const DEFAULT_LINK_URL = "http://weixin.qq.com/r/mp/Rx3t9T3E42CcrXmW90hV";
 
 const WeChatLink = ({

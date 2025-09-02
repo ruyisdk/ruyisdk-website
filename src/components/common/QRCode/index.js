@@ -8,6 +8,7 @@ const QRCode = ({
   size = 140,
   borderRadius = 10,
   shadow = "0 2px 8px rgba(0,0,0,0.08)",
+  QRnumber = null, // 二维码下方的号码信息
   style,
   className,
   ...props 
@@ -17,24 +18,44 @@ const QRCode = ({
     return (
       <div 
         style={{ 
-          textAlign: "center", 
+          textAlign: "left", 
           margin: "1rem 0", 
           ...style 
         }} 
         className={className}
         {...props}
       >
-        <img
-          src={src}
-          alt={alt}
-          style={{
-            maxWidth: `${size}px`,
-            width: "100%",
-            height: "auto",
-            borderRadius: `${borderRadius}px`,
-            boxShadow: shadow,
-          }}
-        />
+        <div style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          alignItems: "center",
+          width: `${size}px`
+        }}>
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              maxWidth: `${size}px`,
+              width: "100%",
+              height: "auto",
+              borderRadius: `${borderRadius}px`,
+              boxShadow: shadow,
+            }}
+          />
+          {QRnumber && (
+            <div
+              style={{
+                marginTop: "0.5rem",
+                fontSize: "0.8rem",
+                color: "#666",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              {QRnumber}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -44,29 +65,49 @@ const QRCode = ({
     return (
       <div 
         style={{ 
-          textAlign: "center", 
+          textAlign: "left", 
           margin: "1rem 0", 
           ...style 
         }} 
         className={className}
         {...props}
       >
-        <div
-          style={{
-            display: "inline-block",
-            padding: "8px",
-            borderRadius: `${borderRadius}px`,
-            boxShadow: shadow,
-            backgroundColor: "white",
-          }}
-        >
-          <AntdQRCode 
-            value={value} 
-            size={size - 16} // 减去padding
+        <div style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          alignItems: "center",
+          width: `${size}px`
+        }}>
+          <div
             style={{
-              borderRadius: `${borderRadius - 4}px`,
+              display: "inline-block",
+              padding: "8px",
+              borderRadius: `${borderRadius}px`,
+              boxShadow: shadow,
+              backgroundColor: "white",
             }}
-          />
+          >
+            <AntdQRCode 
+              value={value} 
+              size={size - 16} // 减去padding
+              style={{
+                borderRadius: `${borderRadius - 4}px`,
+              }}
+            />
+          </div>
+          {QRnumber && (
+            <div
+              style={{
+                marginTop: "0.5rem",
+                fontSize: "0.8rem",
+                color: "#666",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              {QRnumber}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -76,7 +117,7 @@ const QRCode = ({
   return (
     <div 
       style={{ 
-        textAlign: "center", 
+        textAlign: "left", 
         margin: "1rem 0",
         color: "#999",
         ...style 
