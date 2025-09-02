@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import { DownloadRuyi, useReleaseData } from '@site/src/pages/LatestReleases';
+import styles from './ArchSelector.module.css';
 
 function detectArchDefault() {
   if (typeof navigator === 'undefined') return 'x86_64';
@@ -33,10 +34,10 @@ export default function ArchSelector() {
   }, [link]);
 
   return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '8px 0' }}>
-        <span>选择架构：</span>
-        <select value={arch} onChange={(e) => setArch(e.target.value)}>
+    <div className={styles.container}>
+      <div className={styles.row}>
+        <span className={styles.label}>选择架构：</span>
+        <select className={styles.select} value={arch} onChange={(e) => setArch(e.target.value)}>
           <option value="x86_64">x86_64</option>
           <option value="aarch64">aarch64</option>
           <option value="riscv64">riscv64</option>
@@ -45,8 +46,8 @@ export default function ArchSelector() {
 
       <DownloadRuyi arch={arch} />
 
-      <div style={{ marginTop: '16px' }}>
-        <div style={{ margin: '8px 0' }}>下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：</div>
+      <div className={styles.commands}>
+        <div className={styles.hint}>下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：</div>
         {filename ? (
           <>
             <CodeBlock language="bash">{`$ chmod +x ./${filename}`}</CodeBlock>
