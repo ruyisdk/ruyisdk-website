@@ -237,7 +237,7 @@
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
-  height: 500px;
+  height: 520px;
   transition: box-shadow 0.18s ease, transform 0.18s ease;
 }
 
@@ -398,7 +398,7 @@
   }
 
   .chartCard {
-    height: 500px;
+    height: 520px;
   }
 }
 
@@ -450,7 +450,7 @@
   }
 
   .chartCard {
-    height: 550px;
+    height: 520px;
   }
 
   .navigationDots {
@@ -487,6 +487,6 @@
   }
 
   .chartCard {
-    height: 500px;
+    height: 520px;
   }
 }
