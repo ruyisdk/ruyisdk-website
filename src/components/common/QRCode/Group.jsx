@@ -27,6 +27,7 @@ const QRGroup = ({
         justifyContent: resolvedJustifyContent,
         alignItems: "flex-start",
         gap: typeof gap === "number" ? `${gap}px` : gap,
+        paddingLeft: typeof gap === "number" ? `${gap * 3}px` : `calc(${gap} * 3)`,
         margin: "1rem 0",
         ...style,
       }}
