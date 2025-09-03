@@ -4,6 +4,9 @@
   color: #222;
   line-height: 20px;
   /* margin: 0 auto; */
+  position: relative;
+  z-index: 10;
+  isolation: isolate;
 }
 
 .footer__links {
