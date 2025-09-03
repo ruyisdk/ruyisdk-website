@@ -5,7 +5,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import { themes as prismThemes } from "prism-react-renderer";
 
-/** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
@@ -39,10 +38,9 @@ const config = {
   presets: [
     [
       "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: "./sidebars.js",
+          sidebarPath: "./src/components/core/sidebars.js",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
         },
@@ -61,18 +59,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      /* algolia: {
-        // The application ID provided by Algolia
-        appId: '',
-
-        // Public API key: it is safe to commit it
-        apiKey: '',
-
-        indexName: 'ruyisdk',
-
-      }, */
       colorMode: {
         defaultMode: "light",
         disableSwitch: true,
@@ -149,34 +136,14 @@ const config = {
       {
         blogTitle: "RuyiSDK 双周报",
         blogSidebarTitle: "所有报告",
-        /**
-         * Required for any multi-instance plugin
-         */
         id: "biweekly",
-        /**
-         * URL route for the blog section of your site.
-         * *DO NOT* include a trailing slash.
-         */
         routeBasePath: "biweekly",
-        /**
-         * Path to data on filesystem relative to site dir.
-         */
         path: "biweekly",
-
         blogSidebarCount: "ALL",
       },
     ],
-
-    /* [
-      "@docusaurus/plugin-google-gtag",
-      {
-        trackingID: "",
-        anonymizeIP: true,
-      },
-    ], */
   ],
-
-  // 添加自定义脚本
+  // add custom script
   scripts: [
     {
       src: '/js/toc-smooth-scroll.js',
