@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const ReleaseContext = createContext(null);
 
@@ -28,11 +29,19 @@ export function DownloadRuyi({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock language="bash">$ wget </CodeBlock>;
+    return (
+      <BrowserOnly fallback={<pre><code>$ wget </code></pre>}>
+        {() => <CodeBlock language="bash">$ wget </CodeBlock>}
+      </BrowserOnly>
+    );
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
 
-  return <CodeBlock language="bash">{`$ wget ${link}`}</CodeBlock>;
+  return (
+    <BrowserOnly fallback={<pre><code>{`$ wget ${link || ''}`}</code></pre>}>
+      {() => <CodeBlock language="bash">{`$ wget ${link}`}</CodeBlock>}
+    </BrowserOnly>
+  );
 }
 

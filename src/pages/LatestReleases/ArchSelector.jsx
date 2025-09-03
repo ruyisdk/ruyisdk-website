@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { DownloadRuyi, useReleaseData } from '@site/src/pages/LatestReleases';
 import styles from './ArchSelector.module.css';
 
@@ -48,17 +49,33 @@ export default function ArchSelector() {
 
       <div className={styles.commands}>
         <div className={styles.hint}>下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：</div>
-        {filename ? (
-          <>
-            <CodeBlock language="bash">{`$ chmod +x ./${filename}`}</CodeBlock>
-            <CodeBlock language="bash">{`$ sudo cp -v ${filename} /usr/local/bin/ruyi`}</CodeBlock>
-          </>
-        ) : (
-          <>
-            <CodeBlock language="bash">$ chmod +x ./ruyi</CodeBlock>
-            <CodeBlock language="bash">$ sudo cp -v ruyi /usr/local/bin/ruyi</CodeBlock>
-          </>
-        )}
+        <BrowserOnly fallback={
+          filename ? (
+            <>
+              <pre><code>{`$ chmod +x ./${filename}`}</code></pre>
+              <pre><code>{`$ sudo cp -v ${filename} /usr/local/bin/ruyi`}</code></pre>
+            </>
+          ) : (
+            <>
+              <pre><code>$ chmod +x ./ruyi</code></pre>
+              <pre><code>$ sudo cp -v ruyi /usr/local/bin/ruyi</code></pre>
+            </>
+          )
+        }>
+          {() => (
+            filename ? (
+              <>
+                <CodeBlock language="bash">{`$ chmod +x ./${filename}`}</CodeBlock>
+                <CodeBlock language="bash">{`$ sudo cp -v ${filename} /usr/local/bin/ruyi`}</CodeBlock>
+              </>
+            ) : (
+              <>
+                <CodeBlock language="bash">$ chmod +x ./ruyi</CodeBlock>
+                <CodeBlock language="bash">$ sudo cp -v ruyi /usr/local/bin/ruyi</CodeBlock>
+              </>
+            )
+          )}
+        </BrowserOnly>
       </div>
     </div>
   );
