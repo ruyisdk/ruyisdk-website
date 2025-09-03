@@ -11,14 +11,21 @@ const QRCode = ({
   QRnumber = null, // 二维码下方的号码信息
   style,
   className,
+  location = "left",
   ...props 
 }) => {
+  const textAlignMap = { left: "left", center: "center", right: "right" };
+  const resolvedTextAlign = textAlignMap[location] || "left";
+  const justifyMap = { left: "flex-start", center: "center", right: "flex-end" };
+  const resolvedJustifyContent = justifyMap[location] || "flex-start";
   // 如果提供了src，使用图片
   if (src) {
     return (
       <div 
         style={{ 
-          textAlign: "left", 
+          textAlign: resolvedTextAlign, 
+          display: "flex",
+          justifyContent: resolvedJustifyContent,
           margin: "1rem 0", 
           ...style 
         }} 
@@ -65,7 +72,9 @@ const QRCode = ({
     return (
       <div 
         style={{ 
-          textAlign: "left", 
+          textAlign: resolvedTextAlign, 
+          display: "flex",
+          justifyContent: resolvedJustifyContent,
           margin: "1rem 0", 
           ...style 
         }} 
@@ -117,7 +126,9 @@ const QRCode = ({
   return (
     <div 
       style={{ 
-        textAlign: "left", 
+        textAlign: resolvedTextAlign, 
+        display: "flex",
+        justifyContent: resolvedJustifyContent,
         margin: "1rem 0",
         color: "#999",
         ...style 
