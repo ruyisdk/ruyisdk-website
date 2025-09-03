@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/pages/LatestReleases';
 
 # Installation
 
@@ -40,15 +40,11 @@ You can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/relea
 
 The following example assumes the ``x86_64`` architecture. Grant execution permissions to the downloaded binary:
 
-```bash
-$ chmod +x ./ruyi.amd64
-```
+<ChmodCommand arch="x86_64" />
 
 Install the binary to a directory included in ``PATH``:
 
-```bash
-$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
-```
+<CpCommand arch="x86_64" />
 
 If your ``PATH`` includes the ``~/.local/bin/`` directory, installing ``ruyi`` to ``~/.local/bin/ruyi`` may be a more recommended choice. Installation and removal in this directory do not require superuser privileges.
 
