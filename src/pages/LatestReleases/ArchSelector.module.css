@@ -1,0 +1,43 @@
+.container {
+  margin: 8px 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.label {
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-base);
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 6px 36px 6px 10px;
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="%23888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat right 10px center;
+  color: var(--ifm-font-color-base);
+  font-size: 0.95rem;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.15);
+}
+
+.commands {
+  margin-top: 16px;
+}
+
+.hint {
+  margin: 8px 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.92rem;
+} 

@@ -1,49 +1,30 @@
-import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+import ReleaseProvider from '@site/src/pages/LatestReleases';
+import ArchSelector from '@site/src/pages/LatestReleases/ArchSelector';
 
 <ReleaseProvider>
   <>
 
-:::tip
+::::tip
 下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
-:::
+::::
 
 ## 下载 RuyiSDK 包管理器
 
 Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
 
-如果输出为 ``x86_64``：
+<ArchSelector />
 
-<DownloadRuyi arch="x86_64" />
-
-如果输出为 ``aarch64``：
-
-<DownloadRuyi arch="aarch64" />
-
-如果输出为 ``riscv64``：
-
-<DownloadRuyi arch="riscv64" />
-
-:::tip
+::::tip
 若页面没有正常显示下载链接，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
-:::
+::::
 
 ### 安装 RuyiSDK 包管理器
 
-下面以 x86_64 架构为例，给下载的二进制添加执行权限：
+上方已根据您的架构自动生成命令。确保二进制安装为 ``ruyi`` 并位于 ``PATH`` 中的目录。
 
-```bash
-$ chmod +x ./ruyi.amd64
-```
-
-安装二进制到 ``PATH`` 包含的目录中：
-
-```bash
-$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
-```
-
-:::tip
+::::tip
 注意二进制文件名必须为 ``ruyi``
-:::
+::::
 
 验证安装：
 
@@ -63,9 +44,9 @@ RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进�
 $ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
 ```
 
-:::tip
+::::tip
 文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
-:::
+::::
 
 ### 安装 RuyiSDK IDE
 
@@ -96,7 +77,7 @@ $ /opt/ruyisdk/ruyisdk/ruyisdk
 插件使用说明：
 
 + 从 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest) 下载最新插件包
-+ 将 ``org.ruyisdk.ide_*.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
++ 将 ``org.ruyisdk.ide_*\.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
 
 ## 开始使用
 
