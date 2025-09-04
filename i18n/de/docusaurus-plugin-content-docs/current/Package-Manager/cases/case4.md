@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-import CodeBlock from '@site/src/components/common/docs_utils/CodeBlock';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 # Fastboot-Methode zum Flashen des Entwicklungsboards (am Beispiel von Licheepi 4A)
 
