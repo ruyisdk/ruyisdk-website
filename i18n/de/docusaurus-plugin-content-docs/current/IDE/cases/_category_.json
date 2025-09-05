@@ -1,8 +1,8 @@
 {
-  "label": "使用案例",
+  "label": "Anwendungsfälle",
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "RuyiSDK IDE 使用案例"
+    "description": "Anwendungsfälle der RuyiSDK-IDE"
   }
 }
