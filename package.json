@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "dev": "dotenv -e .env.development -- cross-env NODE_ENV=development docusaurus start",
-    "start": "dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus start",
-    "build": "dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus build",
+  "dev": "node ./scripts/generate-contributors.js && dotenv -e .env.development -- cross-env NODE_ENV=development docusaurus start",
+  "start": "node ./scripts/generate-contributors.js && dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus start",
+  "build": "node ./scripts/generate-contributors.js && dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus build",
+  "generate-contributors": "node ./scripts/generate-contributors.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

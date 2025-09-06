@@ -83,6 +83,58 @@
   color: #2D3748;
 }
 
+.sectionHeaderSmall {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1A202C;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.leadText {
+  font-size: 1.125rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.hubGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+@media (min-width: 768px) {
+  .hubGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.hubCard {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  border: 1px solid rgba(255,255,255,0.6);
+  text-align: center;
+}
+.hubCardTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.hubCardDesc {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+.linkItem {
+  color: #0066ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 /* --- Glassmorphism Container --- */
 .glassContainer {
   background: rgba(255, 255, 255, 0.45);
@@ -157,6 +209,20 @@
   .communityIntroText {
     text-align: left;
   }
+}
+
+/* Subtitle specific class to force center alignment across breakpoints */
+.subtitleCentered {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Stronger combined selector to override other responsive rules and ensure centering */
+.communityIntroText.subtitleCentered,
+.subtitleCentered.communityIntroText {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* --- Blobs scoped to CommunityIntro --- */
