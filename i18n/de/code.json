@@ -196,6 +196,34 @@
     "message": "Toggle word wrap",
     "description": "The title attribute for toggle word wrapping button of code block lines"
   },
+  "community.partners.subtitle": {
+    "message": "RuyiSDK Partner",
+    "description": "Subtitle displayed under the Partners section"
+  },
+  "community.hub.lead": {
+    "message": "RuyiSDK ist eine offene, einladende Community – mach mit und trage zu RISC-V und Open-Source-Software bei.",
+    "description": "Lead sentence on the Community hub page"
+  },
+  "community.hub.contributors.desc": {
+    "message": "Sehen und danken Sie den Personen und Organisationen, die zum Projekt beitragen.",
+    "description": "Contributors card description"
+  },
+  "community.hub.partners.desc": {
+    "message": "Entdecken Sie unsere Partner und Community-Projekte und finden Sie Kooperationsmöglichkeiten.",
+    "description": "Partners card description"
+  },
+  "community.hub.code.desc": {
+    "message": "Lesen Sie den Verhaltenskodex der Beitragenden, um freundliche und qualitativ hochwertige Zusammenarbeit sicherzustellen.",
+    "description": "Code of conduct card description"
+  },
+  "community.contributors.title": {
+    "message": "Mitwirkende",
+    "description": "Title for contributors page"
+  },
+  "community.partners.title": {
+    "message": "Partner",
+    "description": "Title for partners page"
+  },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
     "description": "The ARIA label to expand the sidebar category"
@@ -536,6 +564,9 @@
   },
   "ruyisdk.community": {
     "message": "RuyiSDK Gemeinschaft"
+  },
+  "community.contributors.subtitle": {
+    "message": "Die RuyiSDK-Community wird von ihren Mitwirkenden getragen."
   },
   "ruyisdk.community.open": {
     "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
