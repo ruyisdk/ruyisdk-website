@@ -107,7 +107,8 @@ const NewsShowcase = () => {
           overflow-x: auto;
           /* Alignment, size, and background updates */
           width: calc(100% - 4rem);
-          height: calc(37.5rem + 3rem);
+          /* Let the container size to its inner content instead of forcing a fixed height */
+          height: auto;
           margin: 0 auto 3vw;
           padding: 1.5rem;
           background-color: #ffffffff;
