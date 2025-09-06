@@ -7,8 +7,8 @@ import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
-// Constants
-const CHART_COLORS = ['#06bcee', '#087ea4', '#0d4977', '#1a365d', '#2d3748'];
+// Constants (palette aligned with homepage)
+const CHART_COLORS = ['#0A2C7E', '#90b3ff', '#F9C23C', '#FDEFC3', '#D9E0F3'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
 const SCROLL_TIMEOUT = 500;
@@ -176,22 +176,23 @@ const TopList = ({ data, title }) => {
       })
       .data(barData)
       .transform({ type: 'sortX', reverse: true, by: "y" })
-      .axis('x', { line: false, title: false, label: false, tick: false })
-      .axis('y', { title: false, line: false, tick: false })
+      .axis('x', { line: false, title: false, label: false, tick: false, grid: false })
+      .axis('y', { title: false, line: false, tick: false, grid: false })
       .encode('x', 'action')
       .encode('y', 'logTotal')
       .scale('y', { 
         nice: false,
         padding: 0.6,
         min: 0,
-        max: Math.max(...barData.map(d => d.logTotal)) * 3.5
+        max: Math.max(...barData.map(d => d.logTotal)) * 3.5,
+        tickCount: 0
       })
-      .scale('x', { padding: 0.6 })
+      .scale('x', { padding: 0.6, tickCount: 0 })
       .style('maxWidth', 200)
       .label({ 
         text: 'action', 
         position: "top-left", 
-        fill: '#fff', 
+        fill: '#0A2C7E', 
         dy: -12, 
         fontWeight: 600,
         fontSize: 12
@@ -199,7 +200,7 @@ const TopList = ({ data, title }) => {
       .label({ 
         text: 'total', 
         position: "top-right", 
-        fill: '#ffffff', 
+        fill: '#0A2C7E', 
         dy: 0, 
         dx: -10,
         fontWeight: 700,
@@ -542,19 +543,27 @@ const StatisticalData = () => {
         onDotClick={scrollToCard} 
         isMobile={isMobile} 
       />
-      
+
+      {/* Decorative header + animated background blobs (homepage-style) */}
+      <div className={styles.backgroundHeader} />
+      <div className={styles.animationContainer} aria-hidden="true">
+        <div className={`${styles.blob} ${styles.blob1}`} />
+        <div className={`${styles.blob} ${styles.blob2}`} />
+        <div className={`${styles.blob} ${styles.blob3}`} />
+      </div>
+
       <ConfigProvider 
         renderEmpty={CustomizeRenderEmpty} 
         theme={{
           components: { 
             Tabs: { 
-              itemSelectedColor: "#00b7e7", 
-              inkBarColor: "#00b7e7",
+                  itemSelectedColor: "#0A2C7E", 
+                  inkBarColor: "#F9C23C",
             },
             Card: {
-              borderRadius: 12,
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-              borderColor: 'rgba(255, 255, 255, 0.1)'
+                  borderRadius: 12,
+                  boxShadow: '0 8px 24px rgba(16, 24, 40, 0.06)',
+                  borderColor: 'rgba(16, 24, 40, 0.04)'
             }
           }
         }}

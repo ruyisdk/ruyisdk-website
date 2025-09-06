@@ -24,6 +24,12 @@
   "downloads": { "message": "组件下载数量" },
   "installs": { "message": "安装台数" },
   "no.data": { "message": "当前暂无统计数据。" },
+  "news.biweekly": {
+    "message": "RuyiSDK 双周报"
+  },
+  "news.news": {
+    "message": "RuyiSDK 新闻"
+  },
 
   "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载数量" },
   "ruyi安装台数": { "message": "RuyiSDK 安装台数" },

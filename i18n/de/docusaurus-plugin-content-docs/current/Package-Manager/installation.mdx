@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 
 import CodeBlock from '@site/src/components/common/docs_utils/CodeBlock';
-import ReleaseProvider, { DownloadRuyi } from '@site/src/pages/LatestReleases';
+import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/pages/LatestReleases';
 
 # Installation
 
@@ -41,15 +41,11 @@ Sie können das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/release
 
 Im Folgenden nehmen wir die Architektur ``x86_64`` als Beispiel, um dem heruntergeladenen Binary Ausführungsrechte zu erteilen:
 
-<CodeBlock lang="bash" code={`
-$ chmod +x ./ruyi.amd64
-`} />
+<ChmodCommand arch="x86_64" />
 
 Installieren Sie die Binärdatei in das Verzeichnis, das im ``PATH`` enthalten ist:
 
-<CodeBlock lang="bash" code={`
-$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
-`} />
+<CpCommand arch="x86_64" />
 
 Wenn Ihr ``PATH`` das Verzeichnis ``~/.local/bin/`` enthält, könnte es die empfehlenswertere Wahl sein, ``ruyi`` in ``~/.local/bin/ruyi`` zu installieren. Installationen und Deinstallationen in diesem Verzeichnis benötigen keine Superuser-Rechte.
 

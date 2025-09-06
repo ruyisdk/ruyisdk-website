@@ -54,7 +54,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: "./src/css/custom.scss",
+          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
         },
       }),
     ],
@@ -130,7 +130,7 @@ const config = {
       },
       footer: {
         style: "light",
-        links:[],
+        links: [],
         copyright: `Copyright © 2024-2025 Institute of Software, CAS`,
       },
       prism: {
@@ -142,6 +142,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
+    "./plugins/unocss",
+    "./plugins/news-generator",
     [
       "@docusaurus/plugin-content-blog",
       {

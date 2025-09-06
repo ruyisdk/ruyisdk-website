@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus, vs as vscLightPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Copy, Check, Terminal } from 'lucide-react';
@@ -10,23 +10,31 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
 
     const handleCopy = () => {
         if (!textToCopy) return;
-        try {
-            const textArea = document.createElement('textarea');
-            textArea.value = textToCopy;
-            textArea.style.position = 'fixed';
-            textArea.style.top = '-9999px';
-            textArea.style.left = '-9999px';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-
+        // Using Clipboard API for modern browsers
+        navigator.clipboard.writeText(textToCopy).then(() => {
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
-        } catch (err) {
+        }).catch(err => {
             console.error('Failed to copy text: ', err);
-        }
+            // Fallback for older browsers
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '-9999px';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2000);
+            } catch (fallbackErr) {
+                console.error('Fallback copy method failed: ', fallbackErr);
+            }
+        });
     };
 
     const style = {
@@ -48,9 +56,9 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
     );
 };
 
+
 // --- MAIN COMPONENT: CodeBlock ---
-// With updated bash copy logic.
-const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = true }) => {
+const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (lang !== 'bash') }) => {
     const [theme, setTheme] = useState('dark');
 
     // Effect to detect and observe Docusaurus theme changes
@@ -105,6 +113,19 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
         bashLine: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' },
     };
 
+    // --- NORMALIZE / CLEAN CODE PROP ---
+    const cleanedCode = useMemo(() => {
+        if (typeof code !== 'string') return '';
+        // Normalize CRLF to LF then split
+        const normalized = code.replace(/\r\n/g, '\n');
+        const lines = normalized.split('\n');
+        // If first line is empty (only a newline at start), drop it
+        if (lines.length > 0 && lines[0].trim() === '') {
+            lines.shift();
+        }
+        return lines.join('\n');
+    }, [code]);
+
     // --- RENDER LOGIC FOR BASH SCRIPTS ---
     if (lang === 'bash') {
         const commandOnlyRegex = /^\s*(?:«[^»]+»\s*)?(\$)\s+/;
@@ -126,26 +147,60 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
             const [isHovered, setIsHovered] = useState(false);
             const match = line.match(commandOnlyRegex);
             const isCommand = !!match;
-            
+
             let commandToCopy = '';
             if (isCommand) {
                 const promptSymbolIndex = line.indexOf(match[1]);
                 commandToCopy = line.substring(promptSymbolIndex + 1).trim();
             }
-            
-            const lineStyle = { ...baseStyles.bashLine, backgroundColor: isHovered ? currentStyles.bashLineHoverBg : 'transparent' };
-            const lineHighlighterStyle = { padding: 0, margin: 0, border: 'none', borderRadius: 0, background: 'transparent', overflow: 'visible', width: '100%', fontFamily: 'inherit', fontSize: '0.9rem', lineHeight: '1.6' };
+
+            // Make line container stretch to content width for horizontal scroll
+            const lineStyle = {
+                ...baseStyles.bashLine,
+                backgroundColor: isHovered ? currentStyles.bashLineHoverBg : 'transparent',
+                minWidth: 'max-content',
+                width: '100%',
+                position: 'relative',
+                paddingRight: '2rem',
+            };
+            const lineHighlighterStyle = {
+                padding: 0,
+                margin: 0,
+                border: 'none',
+                borderRadius: 0,
+                background: 'transparent',
+                overflow: 'visible',
+                width: 'auto',
+                fontFamily: 'inherit',
+                fontSize: '0.9rem',
+                lineHeight: '1.6',
+            };
 
             return (
                 <div style={lineStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <SyntaxHighlighter language="bash" style={syntaxTheme} customStyle={lineHighlighterStyle}>{line}</SyntaxHighlighter>
-                    {isCommand && (<div style={{ opacity: isHovered ? 1 : 0, transition: 'opacity 150ms ease-in-out' }}><CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} /></div>)}
+                    {isCommand && (
+                        // UPDATE: Elegant copy button style.
+                        // It is now invisible by default and fades in on hover without a background.
+                        <div style={{
+                            position: 'sticky',
+                            right: '1rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: '100%',
+                            opacity: isHovered ? 1 : 0,
+                            transition: 'opacity 150ms ease-in-out',
+                        }}>
+                            <CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} />
+                        </div>
+                    )}
                 </div>
             );
         };
 
         const bashContainerBg = (syntaxTheme['pre[class*="language-"]'] && syntaxTheme['pre[class*="language-"]'].background) || currentStyles.container.backgroundColor;
 
+        // Make the bash container scrollable and allow lines to stretch horizontally
         return (
             <div style={{ ...baseStyles.container, ...currentStyles.container }}>
                 <div style={{ ...baseStyles.header, ...currentStyles.header }}>
@@ -153,12 +208,15 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
                         <Terminal size={16} style={currentStyles.icon} />
                         <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'bash'}</span>
                     </div>
+                    {/* UPDATE: This button is now hidden by default for bash blocks */}
                     {showTitleCopyButton && (
-                        <CopyButton textToCopy={getCommandsToCopy(code)} themeStyles={currentStyles} />
+                        <CopyButton textToCopy={getCommandsToCopy(cleanedCode)} themeStyles={currentStyles} />
                     )}
                 </div>
-                <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0' }}>
-                    {code.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
+                    <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0', width: '100%' }}>
+                    <div style={{ display: 'table', width: 'max-content', minWidth: '100%' }}>
+                        {cleanedCode.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
+                    </div>
                 </div>
             </div>
         );
@@ -169,12 +227,12 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = tru
         <div style={{ ...baseStyles.container, ...currentStyles.container }}>
             <div style={{ ...baseStyles.header, ...currentStyles.header }}>
                 <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || lang}</span>
-                {showTitleCopyButton && (
-                    <CopyButton textToCopy={code} themeStyles={currentStyles} />
+                        {showTitleCopyButton && (
+                    <CopyButton textToCopy={cleanedCode} themeStyles={currentStyles} />
                 )}
             </div>
-            <SyntaxHighlighter language={lang === 'no' ? 'text' : lang} style={syntaxTheme} customStyle={baseStyles.syntaxHighlighter} wrapLines={true} wrapLongLines={true}>
-                {code}
+                <SyntaxHighlighter language={lang === 'no' ? 'text' : lang} style={syntaxTheme} customStyle={baseStyles.syntaxHighlighter} wrapLines={true} wrapLongLines={true}>
+                {cleanedCode}
             </SyntaxHighlighter>
         </div>
     );
