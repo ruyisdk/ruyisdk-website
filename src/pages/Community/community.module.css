@@ -271,42 +271,10 @@
 .blob1 {
   width: 250px;
   height: 250px;
-  .statsBar {
-    display: flex;
-    gap: 1.75rem;
-    justify-content: center;
-    align-items: stretch;
-    margin: 1.5rem 0 2rem 0;
-  }
-  .statItem {
-    background: rgba(255,255,255,0.95);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 8px 20px rgba(16,24,40,0.06);
-  }
-  .statIcon {
-    color: #0f172a;
-    margin-bottom: 0.6rem;
-  }
-  .statLabel {
-    font-size: 0.95rem;
-    color: #64748b;
-    margin-bottom: 0.35rem;
-  }
-  .statValue {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #0f172a;
-  }
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  align-self: center;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+  top: 0;
+  left: 0;
+  background: rgba(0, 38, 119, 0.08);
+  animation: blobMove1 12s infinite linear;
 }
 
 .appleButton:hover {
