@@ -419,4 +419,21 @@
   "组件下载数量和Github下载数量": {
     "message": "コンポーネントダウンロードとGitHubダウンロード"
   }
+  ,
+  "community.stats.contributors": {
+    "message": "コントリビューター",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "コミット数",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.unknown": {
+    "message": "N/A",
+    "description": "Fallback label when a stat is unavailable"
+  }
 }

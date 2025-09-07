@@ -324,5 +324,10 @@
       "github": "https://github.com/Glavo",
       "contributions": 1
     }
-  ]
+  ],
+  "totals": {
+    "contributors": 46,
+    "commits": 3550,
+    "pullRequests": 1172
+  }
 }

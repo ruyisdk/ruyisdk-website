@@ -66,4 +66,9 @@
   "IDE下载次数": { "message": "IDE下载次数" },
   "最常用指令": { "message": "最常用指令" },
   "最常用包": { "message": "最常用包" }
+  ,
+  "community.stats.contributors": { "message": "贡献者" },
+  "community.stats.commits": { "message": "提交数" },
+  "community.stats.prs": { "message": "Pull Requests" },
+  "community.stats.unknown": { "message": "暂无" }
 }

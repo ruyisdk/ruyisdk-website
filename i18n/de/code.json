@@ -224,6 +224,22 @@
     "message": "Partner",
     "description": "Title for partners page"
   },
+  "community.stats.contributors": {
+    "message": "Mitwirkende",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "Commits",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.unknown": {
+    "message": "N/A",
+    "description": "Fallback label when a stat is unavailable"
+  },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
     "description": "The ARIA label to expand the sidebar category"

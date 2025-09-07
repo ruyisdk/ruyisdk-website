@@ -35,6 +35,8 @@ const OUT_FILE = path.resolve(__dirname, '../src/pages/Community/generated_contr
 
 async function fetchContributors() {
   const results = [];
+  let totalCommits = 0;
+  let totalPRs = 0;
   for (const r of repos) {
     const url = `${GITHUB_API_BASE}/${r}/contributors?per_page=100`;
     try {
@@ -43,13 +45,33 @@ async function fetchContributors() {
       if (process.env.GITHUB_TOKEN) {
         headers.Authorization = `token ${process.env.GITHUB_TOKEN}`;
       }
-  const res = await fetchFn(url, { headers });
+      // include a user-agent for search API compatibility
+      headers['User-Agent'] = 'ruyisdk-website-generator';
+      const res = await fetchFn(url, { headers });
       if (!res.ok) {
         console.warn(`Failed to fetch ${url}: ${res.status}`);
         continue;
       }
       const json = await res.json();
       if (Array.isArray(json)) results.push(...json);
+      // sum contributions from this repo to estimate commits
+      if (Array.isArray(json)) {
+        const repoSum = json.reduce((s, it) => s + (it.contributions || 0), 0);
+        totalCommits += repoSum;
+      }
+      // Try to fetch pull request count via the search API (returns total_count)
+      try {
+        const searchUrl = `https://api.github.com/search/issues?q=repo:ruyisdk/${r}+type:pr`;
+        const prRes = await fetchFn(searchUrl, { headers });
+        if (prRes && prRes.ok) {
+          const prJson = await prRes.json();
+          if (typeof prJson.total_count === 'number') totalPRs += prJson.total_count;
+        } else {
+          // rate limited or blocked; just skip
+        }
+      } catch (err) {
+        // ignore PR fetch errors per-repo
+      }
     } catch (e) {
       console.warn(`Error fetching contributors for ${r}:`, e.message || e);
     }
@@ -80,6 +102,11 @@ async function fetchContributors() {
     coreTeam: [],
     interns: [],
     contributors: merged,
+    totals: {
+      contributors: map.size,
+      commits: totalCommits,
+      pullRequests: totalPRs,
+    },
   };
 
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
