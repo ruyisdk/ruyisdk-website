@@ -15,20 +15,31 @@ const NewsPage = () => {
     window.open(link, "_blank");
   };
 
+  const filterFutureItems = (items) => {
+    const now = Date.now();
+    return (items || []).filter((item) => {
+      const timestamp = Number(item?.date);
+      return !Number.isFinite(timestamp) || timestamp <= now;
+    });
+  };
+
+  const loadNewsData = async () => {
+    try {
+      const response = await axios.get("/news.json");
+      const { articles, ruyinews, weeklies } = response.data;
+
+      setArticles(filterFutureItems(articles));
+      setRuyinews(filterFutureItems(ruyinews).slice(0, 10));
+      setWeeklies(filterFutureItems(weeklies).slice(0, 10));
+    } catch (error) {
+      console.error("Failed to load data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get("/news.json")
-      .then((response) => {
-        setArticles(response.data.articles || []);
-        setRuyinews((response.data.ruyinews || []).slice(0, 10));
-        setWeeklies((response.data.weeklies || []).slice(0, 10));
-      })
-      .catch((error) => {
-        console.error("Failed to load data:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    loadNewsData();
   }, []);
 
   return (
