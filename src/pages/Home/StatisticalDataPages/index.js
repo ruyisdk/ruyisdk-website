@@ -48,39 +48,41 @@ const StatisticalDataPages = () => {
             {translate({ id: "RuyiSDK 数据统计", message: "RuyiSDK 数据统计" })}
           </h1>
           
-          <div className={styles.githubStats}>
+          <p className={styles.githubStats}>
             <GithubOutlined className={styles.githubIcon} />
-            <span className={styles.githubText}>
-              {loading ? (
-                "Loading GitHub stats..."
-              ) : githubData ? (
-                <>
-                  <span className={styles.statItem}>
-                    <StarOutlined className={styles.statIcon} />
-                    {githubData.stars}
-                  </span>
-                  <span className={styles.statItem}>
-                    <ForkOutlined className={styles.statIcon} />
-                    {githubData.forks}
-                  </span>
-                  <span className={styles.statItem}>
-                    <IssuesCloseOutlined className={styles.statIcon} />
-                    {githubData.issues}
-                  </span>
-                  <span className={styles.statItem}>
-                    <CodeOutlined className={styles.statIcon} />
-                    {githubData.commits}
-                  </span>
-                  <span className={styles.statItem}>
-                    <EyeOutlined className={styles.statIcon} />
-                    {githubData.watchers}
-                  </span>
-                </>
-              ) : (
-                "GitHub stats unavailable"
-              )}
-            </span>
-          </div>
+            {loading ? (
+              <span className={styles.loadingText}>
+                {translate({ id: "加载中...", message: "Loading..." })}
+              </span>
+            ) : githubData ? (
+              <>
+                <span className={styles.statItem}>
+                  <StarOutlined className={styles.starIcon} />
+                  {githubData.stars}
+                </span>
+                <span className={styles.statItem}>
+                  <ForkOutlined className={styles.forkIcon} />
+                  {githubData.forks}
+                </span>
+                <span className={styles.statItem}>
+                  <IssuesCloseOutlined className={styles.issueIcon} />
+                  {githubData.issues}
+                </span>
+                <span className={styles.statItem}>
+                  <CodeOutlined className={styles.commitIcon} />
+                  {githubData.commits}
+                </span>
+                <span className={styles.statItem}>
+                  <EyeOutlined className={styles.watcherIcon} />
+                  {githubData.watchers}
+                </span>
+              </>
+            ) : (
+              <span className={styles.errorText}>
+                {translate({ id: "GitHub数据不可用", message: "GitHub data unavailable" })}
+              </span>
+            )}
+          </p>
         </div>
 
         <div className={styles.content}>

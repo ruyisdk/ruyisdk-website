@@ -37,58 +37,67 @@
   margin: 0 0 1rem;
 }
 
-/* GitHub统计样式 */
+/* GitHub统计样式 - 像文字一样显示 */
 .githubStats {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
   font-size: 0.9rem;
   color: #6a737d;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
 }
 
 .githubStats:hover {
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 0, 0, 0.12);
   transform: translateY(-1px);
 }
 
 .githubIcon {
   color: #24292e;
   font-size: 1rem;
-}
-
-.githubText {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin-right: 0.5rem;
 }
 
 .statItem {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  color: #6a737d;
-  font-size: 0.85rem;
   font-weight: 500;
   white-space: nowrap;
 }
 
-.statIcon {
-  font-size: 0.8rem;
-  opacity: 0.8;
+/* 不同指标的颜色 */
+.starIcon {
+  color: #FFD700; /* 金色 */
+  font-size: 0.9rem;
+}
+
+.forkIcon {
+  color: #1890FF; /* 蓝色 */
+  font-size: 0.9rem;
+}
+
+.issueIcon {
+  color: #FF4D4F; /* 红色 */
+  font-size: 0.9rem;
+}
+
+.commitIcon {
+  color: #52C41A; /* 绿色 */
+  font-size: 0.9rem;
+}
+
+.watcherIcon {
+  color: #722ED1; /* 紫色 */
+  font-size: 0.9rem;
+}
+
+.loadingText, .errorText {
+  color: #6a737d;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .subtitle {
@@ -165,21 +174,16 @@
   }
   
   .githubStats {
-    padding: 0.4rem 0.8rem;
-    gap: 0.4rem;
-  }
-  
-  .githubText {
     gap: 0.8rem;
+    font-size: 0.85rem;
   }
   
   .statItem {
-    font-size: 0.8rem;
     gap: 0.2rem;
   }
   
-  .statIcon {
-    font-size: 0.75rem;
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.8rem;
   }
   
   .githubIcon {
@@ -211,20 +215,16 @@
   }
   
   .githubStats {
-    padding: 0.3rem 0.6rem;
-    gap: 0.3rem;
-  }
-  
-  .githubText {
     gap: 0.6rem;
+    font-size: 0.8rem;
   }
   
   .statItem {
-    font-size: 0.75rem;
+    gap: 0.15rem;
   }
   
-  .statIcon {
-    font-size: 0.7rem;
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.75rem;
   }
   
   .githubIcon {
@@ -256,20 +256,16 @@
   }
   
   .githubStats {
-    padding: 0.2rem 0.4rem;
-    gap: 0.2rem;
-  }
-  
-  .githubText {
     gap: 0.4rem;
+    font-size: 0.75rem;
   }
   
   .statItem {
-    font-size: 0.7rem;
+    gap: 0.1rem;
   }
   
-  .statIcon {
-    font-size: 0.65rem;
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.7rem;
   }
   
   .githubIcon {
