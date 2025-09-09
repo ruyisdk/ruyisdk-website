@@ -8,7 +8,9 @@ import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
 // Constants (palette aligned with homepage)
-const CHART_COLORS = ['#0A2C7E', '#90b3ff', '#F9C23C', '#FDEFC3', '#D9E0F3'];
+// Data visualization palette (muted, high-contrast, colorblind-friendly)
+// Source inspiration: Okabe-Ito + modern analytics palettes
+const CHART_COLORS = ['#4C78A8', '#F58518', '#54A24B', '#E45756', '#72B7B2', '#B279A2', '#FF9DA6', '#9D755D'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
 const SCROLL_TIMEOUT = 500;
@@ -192,7 +194,7 @@ const TopList = ({ data, title }) => {
       .label({ 
         text: 'action', 
         position: "top-left", 
-        fill: '#0A2C7E', 
+        fill: '#2E3A46', 
         dy: -12, 
         fontWeight: 600,
         fontSize: 12
@@ -200,7 +202,7 @@ const TopList = ({ data, title }) => {
       .label({ 
         text: 'total', 
         position: "top-right", 
-        fill: '#0A2C7E', 
+        fill: '#2E3A46', 
         dy: 0, 
         dx: -10,
         fontWeight: 700,
