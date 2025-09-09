@@ -1,3 +1,4 @@
+import WeChatLink from "../components/common/WeChatLink";
 import Articles from "../components/news/Articles";
 import Card from "../components/news/Card";
 import { translate } from "@docusaurus/Translate";
@@ -44,19 +45,19 @@ const NewsPage = () => {
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <div className="flex min-h-0 flex-1 gap-4 bg-gray-50 p-4">
+      <div className="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row">
         {loading ? (
           <p className="text-gray-600">loading...</p>
         ) : (
           <>
             {/* left */}
-            <div className="min-w-0 flex-[3]">
+            <div className="min-w-0 flex-1 md:flex-[3]">
               <Articles items={articles} onClick={handleClick} />
             </div>
 
             {/* right */}
             <div
-              className="sticky top-20 flex h-fit min-w-0 flex-1 flex-col gap-4"
+              className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky md:top-20"
             >
               <Card
                 items={weeklies}
@@ -82,6 +83,7 @@ const NewsPage = () => {
           </>
         )}
       </div>
+      <WeChatLink />
     </Layout>
   );
 };
