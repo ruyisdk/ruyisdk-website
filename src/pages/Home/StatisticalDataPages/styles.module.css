@@ -34,7 +34,61 @@
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--ruyi-blue);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
+}
+
+/* GitHub统计样式 */
+.githubStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  color: #6a737d;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.githubStats:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.githubIcon {
+  color: #24292e;
+  font-size: 1rem;
+}
+
+.githubText {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #6a737d;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.statIcon {
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 .subtitle {
@@ -109,6 +163,28 @@
   .content {
     padding: 1rem;
   }
+  
+  .githubStats {
+    padding: 0.4rem 0.8rem;
+    gap: 0.4rem;
+  }
+  
+  .githubText {
+    gap: 0.8rem;
+  }
+  
+  .statItem {
+    font-size: 0.8rem;
+    gap: 0.2rem;
+  }
+  
+  .statIcon {
+    font-size: 0.75rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -133,6 +209,27 @@
     width: 200px;
     height: 200px;
   }
+  
+  .githubStats {
+    padding: 0.3rem 0.6rem;
+    gap: 0.3rem;
+  }
+  
+  .githubText {
+    gap: 0.6rem;
+  }
+  
+  .statItem {
+    font-size: 0.75rem;
+  }
+  
+  .statIcon {
+    font-size: 0.7rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -156,5 +253,26 @@
   .floatingOrb {
     width: 150px;
     height: 150px;
+  }
+  
+  .githubStats {
+    padding: 0.2rem 0.4rem;
+    gap: 0.2rem;
+  }
+  
+  .githubText {
+    gap: 0.4rem;
+  }
+  
+  .statItem {
+    font-size: 0.7rem;
+  }
+  
+  .statIcon {
+    font-size: 0.65rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.75rem;
   }
 }
