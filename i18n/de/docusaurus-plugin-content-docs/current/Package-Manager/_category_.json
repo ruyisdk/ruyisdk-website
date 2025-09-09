@@ -1,8 +1,8 @@
 {
-  "label": "Ruyi 包管理器",
+  "label": "Ruyi-Paketmanager",
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "5分钟了解什么是ruyi包管理器。"
+    "description": "In 5 Minuten: Was ist der Ruyi-Paketmanager?"
   }
 }

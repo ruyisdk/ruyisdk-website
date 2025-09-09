@@ -15,6 +15,10 @@
     "message": "Anwendungsfälle",
     "description": "The label for category 使用案例 in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.使用案例.link.generated-index.description": {
+    "message": "Anwendungsfälle der RuyiSDK-IDE",
+    "description": "The generated-index page description for the 使用案例 category in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.其他说明": {
     "message": "andere Anweisungen",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
