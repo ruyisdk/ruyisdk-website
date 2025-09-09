@@ -237,7 +237,7 @@
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
-  height: 500px;
+  height: 520px;
   transition: box-shadow 0.18s ease, transform 0.18s ease;
 }
 
@@ -253,7 +253,7 @@
 }
 
 .chartTitle {
-  color: #0A2C7E;
+  color: #2E3A46;
   font-size: 1.2rem;
   font-weight: 600;
   margin: 0 0 0.5rem;
@@ -291,7 +291,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #0A2C7E;
+  color: #2E3A46;
 }
 
 .emptyIcon {
@@ -398,7 +398,7 @@
   }
 
   .chartCard {
-    height: 500px;
+    height: 520px;
   }
 }
 
@@ -450,7 +450,7 @@
   }
 
   .chartCard {
-    height: 550px;
+    height: 520px;
   }
 
   .navigationDots {
@@ -487,6 +487,6 @@
   }
 
   .chartCard {
-    height: 500px;
+    height: 520px;
   }
 }
