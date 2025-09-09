@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import CodeBlock from '@site/src/components/common/docs_utils/CodeBlock';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 # Verwendung der vom Anbieter veröffentlichten Binär-Toolchain zum Bauen (am Beispiel von MilkV Duo)
 

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import { DownloadRuyi, useReleaseData } from '@site/src/pages/LatestReleases';
+import { DownloadRuyi, useReleaseData } from '@site/src/components/docs_utils/LatestReleases';
 import styles from './ArchSelector.module.css';
 
 function detectArchDefault() {
