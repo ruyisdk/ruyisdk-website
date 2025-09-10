@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import CodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const ReleaseContext = createContext(null);
@@ -75,7 +75,7 @@ export function DownloadRuyi({ arch }) {
   if (!data) {
     return (
       <BrowserOnly fallback={<pre><code>$ wget </code></pre>}>
-        {() => <CodeBlock language="bash">$ wget </CodeBlock>}
+        {() => <CodeBlock lang="bash" code={`$ wget`} />}
       </BrowserOnly>
     );
   }
@@ -84,7 +84,7 @@ export function DownloadRuyi({ arch }) {
 
   return (
     <BrowserOnly fallback={<pre><code>{`$ wget ${link || ''}`}</code></pre>}>
-      {() => <CodeBlock language="bash">{`$ wget ${link}`}</CodeBlock>}
+      {() => <CodeBlock lang="bash" code={`$ wget ${link}`} />}
     </BrowserOnly>
   );
 }
@@ -108,13 +108,13 @@ export function ChmodCommand({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock language="bash">$ chmod +x ./ruyi</CodeBlock>;
+    return <CodeBlock lang="bash" code={`$ chmod +x ./ruyi`} />;
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
   const fileName = extractFileName(link);
 
-  return <CodeBlock language="bash">{`$ chmod +x ./${fileName || 'ruyi'}`}</CodeBlock>;
+  return <CodeBlock lang="bash" code={`$ chmod +x ./${fileName || 'ruyi'}`} />;
 }
 
 // 新增：返回完整cp命令的组件
@@ -122,12 +122,12 @@ export function CpCommand({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock language="bash">$ sudo cp -v ruyi /usr/local/bin/ruyi</CodeBlock>;
+    return <CodeBlock lang="bash" code={`$ sudo cp -v ./ruyi /usr/local/bin/ruyi`} />;
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
   const fileName = extractFileName(link);
 
-  return <CodeBlock language="bash">{`$ sudo cp -v ${fileName || 'ruyi'} /usr/local/bin/ruyi`}</CodeBlock>;
+  return <CodeBlock lang="bash" code={`$ sudo cp -v ./${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
 }
 
