@@ -18,14 +18,7 @@ const PATTERNS = {
 };
 
 function extractTitle(content, filename) {
-  // Prefer frontmatter title
-  const fm = content.match(/^---\s*\n([\s\S]*?)\n---/);
-  if (fm) {
-    const m = fm[1].match(/(?:^|\n)title:\s*(?:"([^"]+)"|'([^']+)'|(.+))/);
-    if (m) return (m[1] || m[2] || m[3]).trim();
-  }
-
-  // Fallback: first H1
+  // first H1
   const h1 = content.match(/^#\s+(.+)$/m);
   if (h1) return h1[1].trim();
 
@@ -34,14 +27,53 @@ function extractTitle(content, filename) {
 }
 
 function extractSummary(content) {
-  const withoutFm = content.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "");
-  const withoutHeadings = withoutFm.replace(/^#+\s+.+$/gm, "");
-  const normalized = withoutHeadings
+  // Remove frontmatter
+  let text = content.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "");
+
+  // Remove code blocks (```...```)
+  text = text.replace(/```[\s\S]*?```/g, "");
+
+  // Remove inline code (`...`)
+  text = text.replace(/`[^`]+`/g, "");
+
+  // Remove images (![...](...))
+  text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, "");
+
+  // Remove HTML tags
+  text = text.replace(/<[^>]+>/g, "");
+
+  // Remove links but keep link text ([text](url) -> text)
+  text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+
+  // Remove headings
+  text = text.replace(/^#+\s+.+$/gm, "");
+
+  // Remove bold/italic markdown
+  text = text.replace(/\*\*([^*]+)\*\*/g, "$1");
+  text = text.replace(/\*([^*]+)\*/g, "$1");
+  text = text.replace(/__([^_]+)__/g, "$1");
+  text = text.replace(/_([^_]+)_/g, "$1");
+
+  // Remove extra whitespace and normalize
+  const normalized = text
     .replace(/\r?\n/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  const summary = normalized.slice(0, 150);
-  return summary + (normalized.length > 150 ? "..." : "");
+
+  const summary = normalized.slice(0, 200);
+  return summary + (normalized.length > 200 ? "..." : "");
+}
+
+function extractFirstImage(content) {
+  // Try to find markdown image format: ![alt](src)
+  const markdownImageMatch = content.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  if (markdownImageMatch) return markdownImageMatch[1].trim();
+
+  // Try to find HTML img tag: <img src="..." />
+  const htmlImageMatch = content.match(/<img[^>]+src\s*=\s*["']([^"']+)["']/i);
+  if (htmlImageMatch) return htmlImageMatch[1].trim();
+
+  return null;
 }
 
 function extractDate(filename) {
@@ -64,6 +96,7 @@ function scanFiles(pattern) {
         title: extractTitle(content, filename),
         summary: extractSummary(content),
         date: extractDate(filename),
+        image: extractFirstImage(content),
         filename,
         link: "", // set later
       });
