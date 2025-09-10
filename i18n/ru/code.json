@@ -190,6 +190,34 @@
     "message": "Переключить перенос по строкам",
     "description": "The title attribute for toggle word wrapping button of code block lines"
   },
+  "community.partners.subtitle": {
+    "message": "Партнёры RuyiSDK",
+    "description": "Subtitle displayed under the Partners section"
+  },
+  "community.hub.lead": {
+    "message": "RuyiSDK — открытое, приветливое сообщество. Присоединяйтесь, чтобы внести вклад в RISC-V и open-source проекты.",
+    "description": "Lead sentence on the Community hub page"
+  },
+  "community.hub.contributors.desc": {
+    "message": "Просмотр и благодарность людям и организациям, которые вносят вклад в проект.",
+    "description": "Contributors card description"
+  },
+  "community.hub.partners.desc": {
+    "message": "Узнайте о наших партнёрах и проектах сообщества, найдите возможности для сотрудничества.",
+    "description": "Partners card description"
+  },
+  "community.hub.code.desc": {
+    "message": "Прочтите кодекс поведения участников, чтобы обеспечить дружелюбное и качественное сотрудничество.",
+    "description": "Code of conduct card description"
+  },
+  "community.contributors.title": {
+    "message": "Участники",
+    "description": "Title for contributors page"
+  },
+  "community.partners.title": {
+    "message": "Партнёры",
+    "description": "Title for partners page"
+  },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
     "description": "The ARIA label to expand the sidebar category"
@@ -358,6 +386,9 @@
   "ruyisdk.community": {
     "message": "Сообщество RuyiSDK"
   },
+  "community.contributors.subtitle": {
+    "message": "Сообщество RuyiSDK движимо своими участниками."
+  },
   "ruyisdk.community.open": {
     "message": "Сообщество разработчиков RuyiSDK теперь открыто"
   },
@@ -387,5 +418,22 @@
   },
   "组件下载数量和Github下载数量": {
     "message": "Загрузки компонентов и GitHub"
+  }
+  ,
+  "community.stats.contributors": {
+    "message": "Участники",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "Коммиты",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.unknown": {
+    "message": "N/A",
+    "description": "Fallback label when a stat is unavailable"
   }
 }

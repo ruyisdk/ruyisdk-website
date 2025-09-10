@@ -199,6 +199,34 @@
     "message": "折り返し",
     "description": "The title attribute for toggle word wrapping button of code block lines"
   },
+  "community.partners.subtitle": {
+    "message": "RuyiSDKパートナー",
+    "description": "Subtitle displayed under the Partners section"
+  },
+  "community.hub.lead": {
+    "message": "RuyiSDKはオープンで歓迎的なコミュニティです。RISC-Vやオープンソースに興味のある方はぜひ参加してください。",
+    "description": "Lead sentence on the Community hub page"
+  },
+  "community.hub.contributors.desc": {
+    "message": "プロジェクトに貢献している個人や組織を確認し、感謝を伝えましょう。",
+    "description": "Contributors card description"
+  },
+  "community.hub.partners.desc": {
+    "message": "パートナーや共創プロジェクトを紹介します。協力の機会を見つけてください。",
+    "description": "Partners card description"
+  },
+  "community.hub.code.desc": {
+    "message": "行動規範を確認し、友好的で質の高い協力を促進しましょう。",
+    "description": "Code of conduct card description"
+  },
+  "community.contributors.title": {
+    "message": "貢献者",
+    "description": "Title for contributors page"
+  },
+  "community.partners.title": {
+    "message": "パートナー",
+    "description": "Title for partners page"
+  },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "'{label}'の目次を開く",
     "description": "The ARIA label to expand the sidebar category"
@@ -358,6 +386,9 @@
   "ruyisdk.community": {
     "message": "RuyiSDK コミュニティ"
   },
+    "community.contributors.subtitle": {
+      "message": "RuyiSDKコミュニティは貢献者によって支えられています。"
+    },
   "ruyisdk.community.open": {
     "message": "RuyiSDK 開発者コミュニティがオープンしました"
   },
@@ -387,5 +418,22 @@
   },
   "组件下载数量和Github下载数量": {
     "message": "コンポーネントダウンロードとGitHubダウンロード"
+  }
+  ,
+  "community.stats.contributors": {
+    "message": "コントリビューター",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "コミット数",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.unknown": {
+    "message": "N/A",
+    "description": "Fallback label when a stat is unavailable"
   }
 }

@@ -15,6 +15,30 @@
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
 
   "ruyisdk.community": { "message": "RuyiSDK 社区" },
+  "community.contributors.subtitle": {
+    "message": "RuyiSDK社区由贡献者们共同驱动。"
+  },
+  "community.partners.subtitle": {
+    "message": "RuyiSDK合作伙伴"
+  },
+  "community.hub.lead": {
+    "message": "RuyiSDK 是一个开放且包容的社区，欢迎对 RISC-V 与开源软件感兴趣的每一位贡献者加入。"
+  },
+  "community.hub.contributors.desc": {
+    "message": "查看并感谢为项目做出贡献的个人与组织。"
+  },
+  "community.hub.partners.desc": {
+    "message": "了解我们的合作伙伴与共建项目，发现合作机会。"
+  },
+  "community.hub.code.desc": {
+    "message": "阅读贡献者公约，确保社区内的友好和高质量协作。"
+  },
+  "community.contributors.title": {
+    "message": "贡献者"
+  },
+  "community.partners.title": {
+    "message": "合作伙伴"
+  },
   "ruyisdk.community.open": { "message": "RuyiSDK 开发者社区现已开启" },
   "ruyisdk.cn": { "message": "ruyisdk.cn" },
   "source.repository": { "message": "源码库" },
@@ -42,4 +66,9 @@
   "IDE下载次数": { "message": "IDE下载次数" },
   "最常用指令": { "message": "最常用指令" },
   "最常用包": { "message": "最常用包" }
+  ,
+  "community.stats.contributors": { "message": "贡献者" },
+  "community.stats.commits": { "message": "提交数" },
+  "community.stats.prs": { "message": "Pull Requests" },
+  "community.stats.unknown": { "message": "暂无" }
 }

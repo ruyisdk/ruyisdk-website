@@ -23,7 +23,8 @@
 /* --- Main Page Wrapper & Background --- */
 .pageWrapper {
   position: relative;
-  padding: 2rem;
+  /* reduced top padding to tighten header spacing */
+  padding: 2rem 2rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
     'SF Pro Text', 'Helvetica Neue', sans-serif;
   color: #2D3748; 
@@ -65,8 +66,8 @@
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
   color: #1A202C; 
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -77,10 +78,97 @@
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
-  margin-top: 3rem;
+  /* moderate separation between sections */
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   color: #2D3748;
+}
+
+.sectionHeaderSmall {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1A202C;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.leadText {
+  font-size: 1.125rem;
+  color: #475569;
+  line-height: 1.7;
+  /* wider horizontal margin for readability */
+  margin: 1.5rem 2rem;
+  text-align: center;
+}
+
+/* Stats bar shown above contributors list */
+.statsBar {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 1rem 0 1.5rem 0;
+}
+.statItem {
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+}
+.statIcon {
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+.statLabel {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.hubGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+@media (min-width: 768px) {
+  .hubGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.hubCard {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  border: 1px solid rgba(255,255,255,0.6);
+  text-align: center;
+}
+.hubCardTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.hubCardDesc {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+.linkItem {
+  color: #0066ff;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /* --- Glassmorphism Container --- */
@@ -99,7 +187,7 @@
 .communityIntro {
   display: flex;
   flex-direction: column; 
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
   overflow: hidden; 
   padding: 0; 
 }
@@ -117,7 +205,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem;
+  padding: 2.75rem;
   z-index: 2; 
   box-shadow: 4px 0 15px -4px rgba(0, 0, 0, 0.1);
 }
@@ -128,8 +216,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 2.5rem;
+  gap: 1.75rem;
+  padding: 2.75rem;
 }
 
 .communityIntroTitle {
@@ -150,13 +238,27 @@
 .communityIntroText {
   color: #86868B; 
   font-size: 1.1rem;
-  line-height: 1.7;
+  line-height: 1.8;
   text-align: center;
 }
 @media (min-width: 996px) {
   .communityIntroText {
     text-align: left;
   }
+}
+
+/* Subtitle specific class to force center alignment across breakpoints */
+.subtitleCentered {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+/* Stronger combined selector to override other responsive rules and ensure centering */
+.communityIntroText.subtitleCentered,
+.subtitleCentered.communityIntroText {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 /* --- Blobs scoped to CommunityIntro --- */
@@ -171,40 +273,8 @@
   height: 250px;
   top: 0;
   left: 0;
-  background: rgba(0, 38, 119, 0.2); 
+  background: rgba(0, 38, 119, 0.08);
   animation: blobMove1 12s infinite linear;
-}
-.blob2 {
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  background: rgba(255, 189, 48, 0.25); 
-  animation: blobMove2 14s infinite linear;
-}
-.blob3 {
-  width: 200px;
-  height: 200px;
-  bottom: 0;
-  right: 0;
-  background: rgba(255, 213, 128, 0.3); 
-  animation: blobMove3 10s infinite alternate;
-}
-
-/* --- UPDATED Button Styles --- */
-.appleButton {
-  background-color: #FFD580; /* lightGold */
-  color: #002677; /* textDark */
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 0.85rem 2.25rem;
-  border-radius: 9999px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  align-self: center;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
 }
 
 .appleButton:hover {
@@ -222,12 +292,12 @@
 
 /* --- Card & Other Element Styles --- */
 .coreGrid, .internGrid, .contributorGrid, .partnersGrid, .textContainer {
-    padding: 2rem;
+  padding: 3rem;
 }
 .coreGrid, .internGrid, .contributorGrid {
-    display: grid;
-    gap: 2rem;
-    align-content: start;
+  display: grid;
+  gap: 2.5rem;
+  align-content: start;
 }
 .coreGrid {
     grid-template-columns: 1fr;
@@ -251,7 +321,7 @@
     }
 }
 .contributorGrid {
-    grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 @media (min-width: 640px) {
     .contributorGrid {
