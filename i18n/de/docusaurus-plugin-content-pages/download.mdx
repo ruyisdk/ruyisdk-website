@@ -1,5 +1,6 @@
 import ReleaseProvider from '@site/src/components/docs_utils/LatestReleases';
 import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 <ReleaseProvider>
   <>
@@ -28,9 +29,9 @@ Stellen Sie sicher, dass der Dateiname ``ruyi`` lautet.
 
 Führen Sie den folgenden Befehl aus, um die Installation zu überprüfen:
 
-```bash
+<CodeBlock lang="bash" code={`
 $ ruyi version
-```
+`} />
 
 Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
 

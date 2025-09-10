@@ -1,5 +1,6 @@
 import ReleaseProvider from '@site/src/components/docs_utils/LatestReleases';
 import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 <ReleaseProvider>
   <>
@@ -28,9 +29,9 @@ Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的�
 
 验证安装：
 
-```bash
+<CodeBlock lang="bash" code={`
 $ ruyi version
-```
+`} />
 
 若命令执行并正常打印了 Copyright 信息则安装已经成功；若出现了非预期的失败则需要检查安装过程和系统环境。
 
@@ -40,9 +41,9 @@ RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进�
 
 可以下载适合架构的 tarball：
 
-```bash
+<CodeBlock lang="bash" code={`
 $ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
-```
+`} />
 
 ::::tip
 文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
@@ -55,29 +56,29 @@ $ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(u
 
 首先建立目录：
 
-```bash
+<CodeBlock lang="bash" code={`
 $ sudo mkdir /opt/ruyisdk
-```
+`} />
 
 解包，这个步骤依赖 tar 和 gunzip，已经下载好的 tarball 路径请依据实际更改：
 
-```bash
+<CodeBlock lang="bash" code={`
 $ cd /opt/ruyisdk
 $ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
-```
+`} />
 
 运行 RuyiSDK IDE：
 
-```bash
+<CodeBlock lang="bash" code={`
 $ /opt/ruyisdk/ruyisdk/ruyisdk
-```
+`} />
 
 除了 IDE 本身，您还需要下载 RuyiSDK IDE 插件。目前插件整合到 RuyiSDK IDE 的工程工作还在完善，当前需要手动将插件拷贝到 RuyiSDK IDE dropins 目录使用，未来我们会完善相关工程，提供更加便捷的安装和使用方式。当前您可以参考下方的使用说明来安装和使用。
 
 插件使用说明：
 
 + 从 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest) 下载最新插件包
-+ 将 ``org.ruyisdk.ide_*\.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
++ 将 ``org.ruyisdk.ide_*.zip`` 解包到 RuyiSDK IDE 安装目录下的 `dropins` 目录中
 
 ## 开始使用
 
