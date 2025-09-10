@@ -39,21 +39,21 @@ export default function ArchSelector({ language = 'zh' }) {
       selectArchitecture: '如果输出为：',
       downloadHint: '下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：',
       chmodCommand: '$ chmod +x ./',
-      sudoCpCommand: '$ sudo cp -v ',
+      sudoCpCommand: '$ sudo cp -v ./',
       ruyiPath: '/usr/local/bin/ruyi',
     },
     en: {
       selectArchitecture: 'Select Architecture:',
       downloadHint: 'After downloading, please execute the following commands based on the actual filename in the link above (commands will be automatically updated with architecture):',
       chmodCommand: '$ chmod +x ./',
-      sudoCpCommand: '$ sudo cp -v ',
+      sudoCpCommand: '$ sudo cp -v ./',
       ruyiPath: '/usr/local/bin/ruyi',
     },
     de: {
       selectArchitecture: 'Architektur auswählen:',
       downloadHint: 'Nach dem Download führen Sie bitte die folgenden Befehle basierend auf dem tatsächlichen Dateinamen im obigen Link aus (Befehle werden automatisch mit der Architektur aktualisiert):',
       chmodCommand: '$ chmod +x ./',
-      sudoCpCommand: '$ sudo cp -v ',
+      sudoCpCommand: '$ sudo cp -v ./',
       ruyiPath: '/usr/local/bin/ruyi',
     },
   };
@@ -79,7 +79,7 @@ export default function ArchSelector({ language = 'zh' }) {
           filename ? (
             <>
               <pre><code>{`${currentTranslations.chmodCommand}${filename}`}</code></pre>
-              <pre><code>{`${currentTranslations.sudoCpCommand}${filename}${currentTranslations.ruyiPath}`}</code></pre>
+              <pre><code>{`${currentTranslations.sudoCpCommand}${filename} ${currentTranslations.ruyiPath}`}</code></pre>
             </>
           ) : (
             <>
@@ -92,7 +92,7 @@ export default function ArchSelector({ language = 'zh' }) {
             filename ? (
               <>
                 <CodeBlock lang="bash" code={`${currentTranslations.chmodCommand}${filename}`} />
-                <CodeBlock lang="bash" code={`${currentTranslations.sudoCpCommand}${filename}${currentTranslations.ruyiPath}`} />
+                <CodeBlock lang="bash" code={`${currentTranslations.sudoCpCommand}${filename} ${currentTranslations.ruyiPath}`} />
               </>
             ) : (
               <>
