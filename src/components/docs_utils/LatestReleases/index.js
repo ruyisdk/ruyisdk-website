@@ -122,12 +122,12 @@ export function CpCommand({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock lang="bash" code={`$ sudo cp -v ruyi /usr/local/bin/ruyi`} />;
+    return <CodeBlock lang="bash" code={`$ sudo cp -v ./ruyi /usr/local/bin/ruyi`} />;
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
   const fileName = extractFileName(link);
 
-  return <CodeBlock lang="bash" code={`$ sudo cp -v ${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
+  return <CodeBlock lang="bash" code={`$ sudo cp -v ./${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
 }
 
