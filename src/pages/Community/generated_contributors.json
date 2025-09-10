@@ -10,18 +10,18 @@
       "contributions": 1618
     },
     {
+      "id": 84754181,
+      "name": "xijing21",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
+      "github": "https://github.com/xijing21",
+      "contributions": 243
+    },
+    {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
       "contributions": 239
-    },
-    {
-      "id": 84754181,
-      "name": "xijing21",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
-      "github": "https://github.com/xijing21",
-      "contributions": 228
     },
     {
       "id": 54484233,
@@ -129,6 +129,13 @@
       "contributions": 13
     },
     {
+      "id": 43716472,
+      "name": "NanamiKite",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/43716472?v=4",
+      "github": "https://github.com/NanamiKite",
+      "contributions": 13
+    },
+    {
       "id": 115263660,
       "name": "clairjoestar",
       "avatarUrl": "https://avatars.githubusercontent.com/u/115263660?v=4",
@@ -227,6 +234,13 @@
       "contributions": 3
     },
     {
+      "id": 138308906,
+      "name": "helloworldxing",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/138308906?v=4",
+      "github": "https://github.com/helloworldxing",
+      "contributions": 3
+    },
+    {
       "id": 885662,
       "name": "mengzhuo",
       "avatarUrl": "https://avatars.githubusercontent.com/u/885662?v=4",
@@ -295,11 +309,18 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/1006477?v=4",
       "github": "https://github.com/felixonmars",
       "contributions": 1
+    },
+    {
+      "id": 20694662,
+      "name": "Glavo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/20694662?v=4",
+      "github": "https://github.com/Glavo",
+      "contributions": 1
     }
   ],
   "totals": {
-    "contributors": 42,
-    "commits": 3000,
-    "pullRequests": 1154
+    "contributors": 45,
+    "commits": 3032,
+    "pullRequests": 1197
   }
 }

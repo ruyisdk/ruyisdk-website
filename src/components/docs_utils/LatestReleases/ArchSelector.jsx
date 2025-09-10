@@ -74,12 +74,12 @@ export default function ArchSelector({ language = 'zh' }) {
       <DownloadRuyi arch={arch} />
 
       <div className={styles.commands}>
-        <div className={styles.hint}>下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：</div>
+        <div className={styles.hint}>{currentTranslations.downloadHint}</div>
         <BrowserOnly fallback={
           filename ? (
             <>
-              <pre><code>{`$ chmod +x ./${filename}`}</code></pre>
-              <pre><code>{`$ sudo cp -v ${filename} /usr/local/bin/ruyi`}</code></pre>
+              <pre><code>{`${currentTranslations.chmodCommand}${filename}`}</code></pre>
+              <pre><code>{`${currentTranslations.sudoCpCommand}${filename} ${currentTranslations.ruyiPath}`}</code></pre>
             </>
           ) : (
             <>
