@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import CodeBlock from '@theme/CodeBlock';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import { DownloadRuyi, useReleaseData } from '@site/src/components/docs_utils/LatestReleases';
 import styles from './ArchSelector.module.css';
@@ -36,7 +36,7 @@ export default function ArchSelector({ language = 'zh' }) {
 
   const translations = {
     zh: {
-      selectArchitecture: '选择架构：',
+      selectArchitecture: '如果输出为：',
       downloadHint: '下载完成后，请根据上方链接中的实际文件名执行以下命令（命令会随架构自动更新）：',
       chmodCommand: '$ chmod +x ./',
       sudoCpCommand: '$ sudo cp -v ',
@@ -91,13 +91,13 @@ export default function ArchSelector({ language = 'zh' }) {
           {() => (
             filename ? (
               <>
-                <CodeBlock language="bash">{`${currentTranslations.chmodCommand}${filename}`}</CodeBlock>
-                <CodeBlock language="bash">{`${currentTranslations.sudoCpCommand}${filename}${currentTranslations.ruyiPath}`}</CodeBlock>
+                <CodeBlock lang="bash" code={`${currentTranslations.chmodCommand}${filename}`} />
+                <CodeBlock lang="bash" code={`${currentTranslations.sudoCpCommand}${filename}${currentTranslations.ruyiPath}`} />
               </>
             ) : (
               <>
-                <CodeBlock language="bash">$ chmod +x ./ruyi</CodeBlock>
-                <CodeBlock language="bash">$ sudo cp -v ruyi /usr/local/bin/ruyi</CodeBlock>
+                <CodeBlock lang="bash" code={`$ chmod +x ./ruyi`} />
+                <CodeBlock lang="bash" code={`$ sudo cp -v ruyi /usr/local/bin/ruyi`} />
               </>
             )
           )}
