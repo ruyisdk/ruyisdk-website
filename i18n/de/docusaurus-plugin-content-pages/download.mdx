@@ -1,4 +1,5 @@
-import ReleaseProvider, { DownloadRuyi } from '@site/src/components/docs_utils/LatestReleases';
+import ReleaseProvider from '@site/src/components/docs_utils/LatestReleases';
+import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
 
 <ReleaseProvider>
   <>
@@ -11,35 +12,15 @@ Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingun
 
 Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an. Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
 
-Für ``x86_64``：
-
-<DownloadRuyi arch="x86_64" />
-
-Für ``aarch64``：
-
-<DownloadRuyi arch="aarch64" />
-
-Für ``riscv64``：
-
-<DownloadRuyi arch="riscv64" />
+<ArchSelector language="de"/>
 
 :::tip
 Falls die Seite den Download-Link nicht korrekt anzeigt, können Sie das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie sie auch bei den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
 :::
 
-## Ruyi installieren
+### RuyiSDK-Paketmanager installieren
 
-Nehmen Sie die Binärdatei für x86_64 als Beispiel. Fügen Sie der Datei Ausführungsrechte hinzu:
-
-```bash
-$ chmod +x ./ruyi.amd64
-```
-
-Verschieben Sie die Binärdatei in ein Verzeichnis, das im PATH-Systempfad enthalten ist:
-
-```bash
-$ sudo cp -v ruyi.amd64 /usr/local/bin/ruyi
-```
+Der obige Befehl wurde entsprechend Ihrer Architektur automatisch generiert. Stellen Sie sicher, dass die Binärdatei als ruyi installiert ist und sich in einem Verzeichnis befindet, das im PATH enthalten ist.
 
 :::tip
 Stellen Sie sicher, dass der Dateiname ``ruyi`` lautet.
