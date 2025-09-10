@@ -34,7 +34,70 @@
   font-size: clamp(1.8rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--ruyi-blue);
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
+}
+
+/* GitHub统计样式 - 像文字一样显示 */
+.githubStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #6a737d;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.githubStats:hover {
+  transform: translateY(-1px);
+}
+
+.githubIcon {
+  color: #24292e;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 不同指标的颜色 */
+.starIcon {
+  color: #FFD700; /* 金色 */
+  font-size: 0.9rem;
+}
+
+.forkIcon {
+  color: #1890FF; /* 蓝色 */
+  font-size: 0.9rem;
+}
+
+.issueIcon {
+  color: #FF4D4F; /* 红色 */
+  font-size: 0.9rem;
+}
+
+.commitIcon {
+  color: #52C41A; /* 绿色 */
+  font-size: 0.9rem;
+}
+
+.watcherIcon {
+  color: #722ED1; /* 紫色 */
+  font-size: 0.9rem;
+}
+
+.loadingText, .errorText {
+  color: #6a737d;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .subtitle {
@@ -109,6 +172,23 @@
   .content {
     padding: 1rem;
   }
+  
+  .githubStats {
+    gap: 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .statItem {
+    gap: 0.2rem;
+  }
+  
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.8rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -133,6 +213,23 @@
     width: 200px;
     height: 200px;
   }
+  
+  .githubStats {
+    gap: 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .statItem {
+    gap: 0.15rem;
+  }
+  
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.75rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -156,5 +253,22 @@
   .floatingOrb {
     width: 150px;
     height: 150px;
+  }
+  
+  .githubStats {
+    gap: 0.4rem;
+    font-size: 0.75rem;
+  }
+  
+  .statItem {
+    gap: 0.1rem;
+  }
+  
+  .starIcon, .forkIcon, .issueIcon, .commitIcon, .watcherIcon {
+    font-size: 0.7rem;
+  }
+  
+  .githubIcon {
+    font-size: 0.75rem;
   }
 }
