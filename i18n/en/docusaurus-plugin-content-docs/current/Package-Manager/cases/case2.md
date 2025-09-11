@@ -24,7 +24,7 @@ The coremark source code can be directly downloaded from the Ruyi software repos
 «Ruyi milkv-venv» $ mkdir coremark
 «Ruyi milkv-venv» $ cd coremark
 «Ruyi milkv-venv» $ ruyi extract coremark
-info: downloading https://mirror.iscas.ac.cn/RuyiSDK/dist/coremark-1.01.tar.gz to /home/myon/.cache/ruyi/distfiles/coremark-1.01.tar.gz
+info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/coremark-1.01.tar.gz to /home/myon/.cache/ruyi/distfiles/coremark-1.01.tar.gz
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  391k  100  391k    0     0  1400k      0 --:--:-- --:--:-- --:--:-- 1404k

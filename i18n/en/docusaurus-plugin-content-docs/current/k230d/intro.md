@@ -42,7 +42,7 @@ After the build is completed, please extract the files and burn them to a TF car
 ```bash
 # Assuming /dev/sdb is the TF card device node, execute the following command to burn the TF card:
 
-sudo dd if=sysimage-sdcard.img of=/dev/sdb bs=1M oflag=sync
+$ sudo dd if=sysimage-sdcard.img of=/dev/sdb bs=1M oflag=sync
 ```
 
 ## Booting
