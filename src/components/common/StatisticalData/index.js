@@ -201,12 +201,12 @@ const TopList = ({ data, title }) => {
       })
       .label({ 
         text: 'total', 
-        position: "top-right", 
-        fill: '#2E3A46', 
+        position: "inside", 
+        fill: '#ffffff', 
         dy: 0, 
-        dx: -10,
+        dx: -5,
         fontWeight: 700,
-        fontSize: 13
+        fontSize: 12
       })
       .interaction({ tooltip: { body: false } });
 
