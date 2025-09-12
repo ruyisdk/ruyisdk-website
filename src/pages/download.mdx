@@ -35,6 +35,23 @@ $ ruyi version
 
 若命令执行并正常打印了 Copyright 信息则安装已经成功；若出现了非预期的失败则需要检查安装过程和系统环境。
 
+### 启用自动补全
+
+RuyiSDK 包管理器已经支持 ``bash`` 和 ``zsh`` 的自动补全功能。若要使用命令行自动补全功能，可以在对应的 shell profile（如 ``.bashrc`` 或 ``.zshrc``）引入自动补全脚本：
+
+对于 ``bash`` 用户：
+
+<CodeBlock lang="bash" code={`
+$ eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+对于 ``zsh`` 用户：
+
+<CodeBlock lang="bash" code={`
+#compdef ruyi
+$ eval "$(ruyi --output-completion-script=zsh)"
+`} />
+
 ## 下载 RuyiSDK IDE
 
 RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制。

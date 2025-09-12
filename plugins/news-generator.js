@@ -3,17 +3,47 @@ import { glob } from "glob";
 import { basename, resolve, join } from "path";
 
 const PATTERNS = {
-  articles: {
-    prefix: "https://mp.weixin.qq.com/s/",
-    path: "news/articles/*",
+  "zh-Hans": {
+    articles: {
+      prefix: "https://mp.weixin.qq.com/s/",
+      path: "news/articles/*",
+    },
+    ruyinews: {
+      prefix: "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      path: "news/ruyinews/news/20??*zh_CN.md",
+    },
+    weeklies: {
+      prefix: "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      path: "news/weeklies/20??*.md",
+    },
   },
-  ruyinews: {
-    prefix: "https://github.com/ruyisdk/packages-index/blob/main/news/",
-    path: "news/ruyinews/news/20??*zh_CN.md",
+  en: {
+    articles: {
+      prefix: "https://mp.weixin.qq.com/s/",
+      path: "news/articles/*",
+    },
+    ruyinews: {
+      prefix: "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      path: "news/ruyinews/news/20??*en_US.md",
+    },
+    weeklies: {
+      prefix: "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      path: "news/weeklies/20??*.md",
+    },
   },
-  weeklies: {
-    prefix: "https://github.com/ruyisdk/wechat-articles/blob/main/",
-    path: "news/weeklies/20??*.md",
+  de: {
+    articles: {
+      prefix: "https://mp.weixin.qq.com/s/",
+      path: "news/articles/*",
+    },
+    ruyinews: {
+      prefix: "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      path: "news/ruyinews/news/20??*en_US.md",
+    },
+    weeklies: {
+      prefix: "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      path: "news/weeklies/20??*.md",
+    },
   },
 };
 
@@ -107,26 +137,23 @@ function scanFiles(pattern) {
   return items.sort((a, b) => b.date - a.date);
 }
 
-export default function newsGeneratorPlugin() {
+export default function newsGeneratorPlugin(context, options) {
   return {
     name: "docusaurus-news-generator",
-    async loadContent() {
+    async postBuild({siteConfig = {}, routesPaths = [], outDir}) {
+      const { currentLocale } = context.i18n;
       const data = {};
-      for (const key of Object.keys(PATTERNS)) {
-        const { path: p, prefix } = PATTERNS[key];
-
-        console.log(`Scanning ${key} with pattern: ${p}`);
-        const items = scanFiles(p).map((it) => ({
+      for (const [itemname, item] of Object.entries(PATTERNS[currentLocale])) {
+        const { prefix, path } = item;
+        const scannedItems = scanFiles(path).map((it) => ({
           ...it,
           link: prefix + it.filename,
         }));
-        data[key] = items;
-        console.log(`Found ${items.length} items for ${key}`);
+        data[itemname] = scannedItems;
       }
 
-      const outputPath = join("static", "news.json");
-      writeFileSync(outputPath, JSON.stringify(data, null, 2));
-      console.log(`Generated news.json with:`);
+      writeFileSync(join(outDir, "news.json"), JSON.stringify(data, null, 2));
+      console.log(`[${currentLocale}] Generated news.json with:`);
       console.log(`- ${data.articles.length} articles`);
       console.log(`- ${data.ruyinews.length} ruyi news`);
       console.log(`- ${data.weeklies.length} weeklies`);
