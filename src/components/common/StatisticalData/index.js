@@ -8,9 +8,9 @@ import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
 // Constants (palette aligned with homepage)
-// Data visualization palette (muted, high-contrast, colorblind-friendly)
-// Source inspiration: Okabe-Ito + modern analytics palettes
-const CHART_COLORS = ['#4C78A8', '#F58518', '#54A24B', '#E45756', '#72B7B2', '#B279A2', '#FF9DA6', '#9D755D'];
+// Data visualization palette (blue gradient theme, aligned with page design)
+// Source inspiration: Page theme colors (#0A2C7E, #07a0cc) with gradient variations
+const CHART_COLORS = ['#0A2C7E', '#07a0cc', '#2E5B8A', '#4A7BA7', '#6B9BC4', '#8BB5D1', '#A8C8DE', '#C5DBEB'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
 const SCROLL_TIMEOUT = 500;
