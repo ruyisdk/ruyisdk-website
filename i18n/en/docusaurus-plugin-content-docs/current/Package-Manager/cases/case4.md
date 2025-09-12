@@ -37,7 +37,7 @@ Ensure that the ruyi package manager is installed and that `ruyi -V` outputs the
 The ruyi package manager provides the functionality to install an operating system on a RISC-V development board. To install an image for any model of RISC-V development board, simply execute:
 
 ```bash
-ruyi device provision
+$ ruyi device provision
 ```
 
 This command will return the list of RISC-V development boards currently supported by the tool. After selecting a development board, it will return all operating systems supported by the specified development board:

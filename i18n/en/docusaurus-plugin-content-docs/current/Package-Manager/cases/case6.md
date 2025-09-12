@@ -8,13 +8,13 @@ This case is based on [Building Coremark for MilkV Duo](case2.md)
 
 First, install the necessary dependencies:
 ```shell
-ruyi install llvm-upstream gnu-plct qemu-user-riscv-upstream
+$ ruyi install llvm-upstream gnu-plct qemu-user-riscv-upstream
 ```
 
 Create a virtual environment and activate it:
 ```shell
-ruyi venv -t llvm-upstream --sysroot-from gnu-plct -e qemu-user-riscv-upstream generic venv
-. venv/bin/ruyi-activate
+$ ruyi venv -t llvm-upstream --sysroot-from gnu-plct -e qemu-user-riscv-upstream generic venv
+$ . venv/bin/ruyi-activate
 ```
 
 Unpack coremark and compile it:

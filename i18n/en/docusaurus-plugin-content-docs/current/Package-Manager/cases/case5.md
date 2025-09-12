@@ -10,40 +10,40 @@ First, ensure that you have cmake and ninja installed. If not, you can install t
 
 ```shell
 # Ubuntu/Debian
-sudo apt-get install cmake ninja-build
+$ sudo apt-get install cmake ninja-build
 # Fedora
-sudo dnf install cmake ninja-build
+$ sudo dnf install cmake ninja-build
 ```
 
 Download zlib:
 
 ```shell
-wget https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.2.2.tar.gz
-mkdir zlib-ng
-cd zlib-ng
+$ wget https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.2.2.tar.gz
+$ mkdir zlib-ng
+$ cd zlib-ng
 ```
 
 Install and activate the gnu-plct toolchain for compilation:
 
 ```shell
-ruyi install gnu-plct
-ruyi venv -t gnu-plct generic venv
-. venv/bin/ruyi-activate
+$ ruyi install gnu-plct
+$ ruyi venv -t gnu-plct generic venv
+$ . venv/bin/ruyi-activate
 ```
 
 Extract zlib:
 
 ```shell
-tar -xf ./zlib-ng-2.2.2.tar.gz
-cd zlib-ng-2.2.2
+$ tar -xf ./zlib-ng-2.2.2.tar.gz
+$ cd zlib-ng-2.2.2
 ```
 
 Build zlib using cmake:
 For the rationale behind these parameters, refer to the toolchain.riscv64-plct-linux-gnu.cmake file in the venv directory.
 
 ```shell
-cmake . -G Ninja -DCMAKE_C_COMPILER=riscv64-plct-linux-gnu-gcc -DZLIB_COMPAT=ON -DWITH_GTEST=OFF
-ninja
+$ cmake . -G Ninja -DCMAKE_C_COMPILER=riscv64-plct-linux-gnu-gcc -DZLIB_COMPAT=ON -DWITH_GTEST=OFF
+$ ninja
 ```
 
 Check the compiled file:
@@ -58,31 +58,31 @@ Install meson:
 
 ```shell
 # Ubuntu/Debian
-sudo apt-get install meson
+$ sudo apt-get install meson
 # Fedora
-sudo dnf install meson
+$ sudo dnf install meson
 ```
 
 As above, first install and activate the gnu-plct toolchain for compilation:
 
 ```shell
-ruyi install gnu-plct
-ruyi venv -t gnu-plct generic venv
-. venv/bin/ruyi-activate
+$ ruyi install gnu-plct
+$ ruyi venv -t gnu-plct generic venv
+$ . venv/bin/ruyi-activate
 ```
 
 Download taisei:
 
 ```shell
-git clone --recurse-submodules --depth=1 https://github.com/taisei-project/taisei
-cd taisei
+$ git clone --recurse-submodules --depth=1 https://github.com/taisei-project/taisei
+$ cd taisei
 ```
 
 According to venv/meson-cross.ini, configure and compile with meson for cross-compilation as follows:
 
 ```shell
-meson setup --cross-file /home/cyan/zlib-ng/venv/meson-cross.ini build/
-meson compile -C build/
+$ meson setup --cross-file /home/cyan/zlib-ng/venv/meson-cross.ini build/
+$ meson compile -C build/
 ```
 
 Check the compiled file:
