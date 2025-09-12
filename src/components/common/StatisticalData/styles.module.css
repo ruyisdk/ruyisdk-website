@@ -490,3 +490,48 @@
     height: 520px;
   }
 }
+/* 禁用移动端hover效果以改善滑动体验 */
+@media (max-width: 768px) {
+  /* 禁用所有卡片的hover效果 */
+  .statCard:hover {
+    transform: none !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.04) !important;
+  }
+
+  .statCard:hover .statIcon {
+    transform: none !important;
+  }
+
+  .categoryCard:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: none !important;
+    border-color: #F9C23C !important;
+  }
+
+  .chartCard:hover {
+    transform: none !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.04) !important;
+  }
+
+  .dot:hover {
+    transform: none !important;
+    background: #0A2C7E !important;
+  }
+}
+
+/* 更严格的移动端hover禁用 */
+@media (max-width: 480px) {
+  .statCard:hover,
+  .categoryCard:hover,
+  .chartCard:hover,
+  .dot:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: inherit !important;
+    border-color: inherit !important;
+  }
+
+  .statCard:hover .statIcon {
+    transform: none !important;
+  }
+}
