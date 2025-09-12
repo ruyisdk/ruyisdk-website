@@ -3,10 +3,12 @@ import Articles from "../components/news/Articles";
 import Card from "../components/news/Card";
 import { translate } from "@docusaurus/Translate";
 import Layout from "@theme/Layout";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const NewsPage = () => {
+  const { i18n } = useDocusaurusContext();
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [ruyinews, setRuyinews] = useState([]);
@@ -26,9 +28,9 @@ const NewsPage = () => {
 
   const loadNewsData = async () => {
     try {
-      const response = await axios.get("/news.json");
+      let newsUrl = `/news.${i18n.currentLocale}.json`;
+      let response = await axios.get(newsUrl);
       const { articles, ruyinews, weeklies } = response.data;
-
       setArticles(filterFutureItems(articles));
       setRuyinews(filterFutureItems(ruyinews).slice(0, 10));
       setWeeklies(filterFutureItems(weeklies).slice(0, 10));
@@ -41,7 +43,7 @@ const NewsPage = () => {
 
   useEffect(() => {
     loadNewsData();
-  }, []);
+  }, [i18n.currentLocale]);
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
