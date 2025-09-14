@@ -8,9 +8,9 @@ import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
 // Constants (palette aligned with homepage)
-// Data visualization palette (blue gradient theme, aligned with page design)
-// Source inspiration: Page theme colors (#0A2C7E, #07a0cc) with gradient variations
-const CHART_COLORS = ['#0A2C7E', '#07a0cc', '#2E5B8A', '#4A7BA7', '#6B9BC4', '#8BB5D1', '#A8C8DE', '#C5DBEB'];
+// Data visualization palette (value-based color intensity, blue gradient theme)
+// Source inspiration: Value-proportional color intensity with blue gradient
+const CHART_COLORS = ['#0A2C7E', '#1A3A8E', '#2A4A9E', '#3A5AAE', '#4A6ABE', '#5A7ACE', '#6A8ADE', '#7A9AEE', '#8AAAEE', '#9ABAEE'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
 const SCROLL_TIMEOUT = 500;
@@ -174,7 +174,13 @@ const TopList = ({ data, title }) => {
     chart
       .interval()
       .style({ 
-        fill: (d, index) => CHART_COLORS[index % CHART_COLORS.length]
+        fill: (d, index) => {
+          const maxValue = Math.max(...barData.map(item => item.total));
+          const minValue = Math.min(...barData.map(item => item.total));
+          const normalizedValue = (d.total - minValue) / (maxValue - minValue);
+          const colorIndex = Math.floor((1 - normalizedValue) * (CHART_COLORS.length - 1));
+          return CHART_COLORS[colorIndex];
+        }
       })
       .data(barData)
       .transform({ type: 'sortX', reverse: true, by: "y" })
