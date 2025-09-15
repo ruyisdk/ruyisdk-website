@@ -140,24 +140,20 @@ function scanFiles(pattern) {
 export default function newsGeneratorPlugin(context, options) {
   return {
     name: "docusaurus-news-generator",
-    async loadContent() {
+    async postBuild({siteConfig = {}, routesPaths = [], outDir}) {
       const { currentLocale } = context.i18n;
       const data = {};
       for (const [itemname, item] of Object.entries(PATTERNS[currentLocale])) {
         const { prefix, path } = item;
-
-        console.log(`[${currentLocale}] Scanning ${itemname} with pattern: ${path}`);
         const scannedItems = scanFiles(path).map((it) => ({
           ...it,
           link: prefix + it.filename,
         }));
         data[itemname] = scannedItems;
-        console.log(`[${currentLocale}] Found ${scannedItems.length} items for ${itemname}`);
       }
 
-      const outputPath = join("static", `news.${currentLocale}.json`);
-      writeFileSync(outputPath, JSON.stringify(data, null, 2));
-      console.log(`Generated news.${currentLocale}.json with:`);
+      writeFileSync(join(outDir, "news.json"), JSON.stringify(data, null, 2));
+      console.log(`[${currentLocale}] Generated news.json with:`);
       console.log(`- ${data.articles.length} articles`);
       console.log(`- ${data.ruyinews.length} ruyi news`);
       console.log(`- ${data.weeklies.length} weeklies`);
