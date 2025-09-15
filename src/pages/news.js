@@ -28,7 +28,7 @@ const NewsPage = () => {
 
   const loadNewsData = async () => {
     try {
-      let newsUrl = `/news.${i18n.currentLocale}.json`;
+      let newsUrl = `news.${i18n.currentLocale}.json`;
       let response = await axios.get(newsUrl);
       const { articles, ruyinews, weeklies } = response.data;
       setArticles(filterFutureItems(articles));
