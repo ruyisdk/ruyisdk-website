@@ -2,8 +2,8 @@ import WeChatLink from "../components/common/WeChatLink";
 import Articles from "../components/news/Articles";
 import Card from "../components/news/Card";
 import { translate } from "@docusaurus/Translate";
-import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Layout from "@theme/Layout";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
@@ -28,7 +28,10 @@ const NewsPage = () => {
 
   const loadNewsData = async () => {
     try {
-      let newsUrl = `/${i18n.currentLocale}/news.json`;
+      let newsUrl = "/news.json";
+      if (i18n.currentLocale !== i18n.defaultLocale) {
+        newsUrl = `/${i18n.currentLocale}${newsUrl}`;
+      }
       let response = await axios.get(newsUrl);
       const { articles, ruyinews, weeklies } = response.data;
       setArticles(filterFutureItems(articles));
@@ -59,7 +62,8 @@ const NewsPage = () => {
 
             {/* right */}
             <div
-              className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky md:top-20"
+              className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky
+                md:top-20"
             >
               <Card
                 items={weeklies}
