@@ -186,3 +186,32 @@
     font-size: 20px;
   }
 }
+
+/* 禁用移动端hover效果以改善滑动体验 */
+@media (max-width: 768px) {
+  .statCard:hover {
+    transform: none !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+  }
+
+  .statCard:hover::before {
+    opacity: 0 !important;
+  }
+
+  .statCard:hover .statIcon {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .statCard:hover,
+  .statCard:hover::before {
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0 !important;
+  }
+
+  .statCard:hover .statIcon {
+    transform: none !important;
+  }
+}
