@@ -11,20 +11,23 @@ By downloading and using RuyiSDK, you agree to the license terms and the [privac
 
 ## Download RuyiSDK Package Manager
 
-RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures. Run ``uname -m`` to check your system architecture, then download the appropriate binary.
+RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures.  
+Run ``uname -m`` to check your system architecture, then download the appropriate binary.
 
 <ArchSelector language="en"/>
 
 :::tip
-If the page does not properly display the download link, you can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
+If the page does not properly display the download link, you can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries.  
+You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
 :::
 
 ### Install RuyiSDK Package Manager
 
-The command above has been automatically generated according to your architecture. Make sure that the binary is installed as ruyi and located in a directory included in your PATH.
+The command above has been automatically generated according to your architecture.  
+Make sure that the binary is installed as ``ruyi`` and located in a directory included in your ``PATH``.
 
 :::tip
-Note that the binary file name must be ruyi.
+Note that the binary file name must be ``ruyi``.
 :::
 
 Run the following command to verify the installation:
@@ -33,11 +36,30 @@ Run the following command to verify the installation:
 $ ruyi version
 `} />
 
-If the command outputs the version and copyright information, Ruyi is installed successfully. If it fails, check your system environment and repeat the steps.
+If the command outputs the version and copyright information,  
+Ruyi is installed successfully. If it fails, check your system environment and repeat the steps.
+
+### Enable Autocompletion
+
+RuyiSDK supports command-line autocompletion for ``bash`` and ``zsh``.  
+To enable it, add the corresponding script to your shell profile (e.g. ``.bashrc`` or ``.zshrc``):
+
+For ``bash`` users:
+
+<CodeBlock lang="bash" code={`
+$ eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+For ``zsh`` users:
+
+<CodeBlock lang="bash" code={`
+#compdef ruyi
+$ eval "$(ruyi --output-completion-script=zsh)"
+`} />
 
 ## Download RuyiSDK IDE
 
-RuyiSDK IDE has also released binaries for three architectures: x86_64, riscv64, and aarch64.
+RuyiSDK IDE also provides binaries for x86_64, riscv64, and aarch64 architectures.  
 
 You can download the tarball suitable for your architecture:
 
@@ -46,20 +68,21 @@ $ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(u
 `} />
 
 :::tip
-This document is time-sensitive. If the links point to an outdated version of Ruyi, visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/) for the latest binaries. 
+This document may become outdated.  
+If the example link points to an older version, please check the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/) for the latest binaries.
 :::
 
 ### Install RuyiSDK IDE
 
 The following demonstrates how to install RuyiSDK IDE into the ``/opt/ruyisdk`` directory.
 
-First, create the directory: 
+First, create the directory:
 
 <CodeBlock lang="bash" code={`
 $ sudo mkdir /opt/ruyisdk
 `} />
 
-Unpack the tarball. This step requires tar and gunzip, and ensure the downloaded tarball path is adjusted based on your actual location: 
+Unpack the tarball. This step requires tar and gunzip. Make sure to replace the filename with your actual downloaded tarball:
 
 <CodeBlock lang="bash" code={`
 $ cd /opt/ruyisdk
@@ -72,15 +95,20 @@ Run RuyiSDK IDE:
 $ /opt/ruyisdk/ruyisdk/ruyisdk
 `} />
 
-In addition to the IDE itself, you will need to install the RuyiSDK IDE plugin. Currently, integration work is still in progress, so the plugin must be installed manually by copying it into the dropins directory of the RuyiSDK IDE. We plan to improve this experience in future releases to enable easier installation and usage. You can follow the steps below to install and use the plugin:
+### Install RuyiSDK IDE Plugins
 
-+ Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest)
-+ Extract the `org.ruyisdk.ide_*.zip` archive into the `dropins` directory inside your RuyiSDK IDE installation path
+In addition to the IDE itself, you will also need to install the RuyiSDK IDE plugins.  
+Currently, the integration is still in progress, so plugins must be installed manually by copying them into the ``dropins`` directory of the RuyiSDK IDE.  
+We plan to improve this experience in the future to allow easier installation and usage.  
 
-## Use ruyi
+For now, follow the steps below:
 
-Refer to the [documentation](https://ruyisdk.org/en/docs/intro/) to learn how to use Ruyi effectively.
+1. Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest)  
+2. Extract the ``org.ruyisdk.ide_*.zip`` archive into the ``dropins`` directory inside your RuyiSDK IDE installation path  
+
+## Get Started
+
+Refer to the [documentation](https://ruyisdk.org/en/docs/intro/) to learn more about the powerful features of Ruyi.
 
   </>
 </ReleaseProvider>
-

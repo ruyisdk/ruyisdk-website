@@ -9,36 +9,105 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](https://ruyisdk.org/docs/legal/privacyPolicy/) zu.
 :::
 
-## Ruyi herunterladen
+## RuyiSDK-Paketmanager herunterladen
 
-Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an. Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
+Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an.  
+Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
 
 <ArchSelector language="de"/>
 
 :::tip
-Falls die Seite den Download-Link nicht korrekt anzeigt, können Sie das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie sie auch bei den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
+Falls die Seite den Download-Link nicht korrekt anzeigt, können Sie das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen.  
+Alternativ finden Sie sie auch bei den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
 :::
 
 ### RuyiSDK-Paketmanager installieren
 
-Der obige Befehl wurde entsprechend Ihrer Architektur automatisch generiert. Stellen Sie sicher, dass die Binärdatei als ruyi installiert ist und sich in einem Verzeichnis befindet, das im PATH enthalten ist.
+Der obige Befehl wurde entsprechend Ihrer Architektur automatisch generiert.  
+Stellen Sie sicher, dass die Binärdatei als ``ruyi`` installiert ist und sich in einem Verzeichnis befindet, das im ``PATH`` enthalten ist.
 
 :::tip
 Stellen Sie sicher, dass der Dateiname ``ruyi`` lautet.
 :::
 
-Führen Sie den folgenden Befehl aus, um die Installation zu überprüfen:
+Überprüfen Sie die Installation:
 
 <CodeBlock lang="bash" code={`
 $ ruyi version
 `} />
 
-Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
+Wenn der Befehl die Versions- und Copyrightinformationen ausgibt,  
+wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
 
-## Ruyi verwenden
+### Automatische Vervollständigung aktivieren
 
-Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen können.
+RuyiSDK unterstützt die automatische Vervollständigung für ``bash`` und ``zsh``.  
+Fügen Sie die entsprechenden Skripte in Ihr Shell-Profile (z. B. ``.bashrc`` oder ``.zshrc``) ein:
+
+Für ``bash``-Nutzer:
+
+<CodeBlock lang="bash" code={`
+$ eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+Für ``zsh``-Nutzer:
+
+<CodeBlock lang="bash" code={`
+#compdef ruyi
+$ eval "$(ruyi --output-completion-script=zsh)"
+`} />
+
+## RuyiSDK IDE herunterladen
+
+RuyiSDK IDE wird ebenfalls für die Architekturen x86_64, riscv64 und aarch64 bereitgestellt.  
+
+Sie können das passende Tarball herunterladen:
+
+<CodeBlock lang="bash" code={`
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+:::tip
+Die Dokumentation kann veraltet sein. Falls der Beispiel-Link auf eine alte Version verweist,  
+besuchen Sie bitte das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/), um die aktuellsten Versionen herunterzuladen.
+:::
+
+### RuyiSDK IDE installieren
+
+Im folgenden Beispiel wird die IDE nach ``/opt/ruyisdk`` installiert.
+
+Erstellen Sie das Zielverzeichnis:
+
+<CodeBlock lang="bash" code={`
+$ sudo mkdir /opt/ruyisdk
+`} />
+
+Entpacken Sie das Tarball (passen Sie den Pfad zur heruntergeladenen Datei an):
+
+<CodeBlock lang="bash" code={`
+$ cd /opt/ruyisdk
+$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+Starten Sie die RuyiSDK IDE:
+
+<CodeBlock lang="bash" code={`
+$ /opt/ruyisdk/ruyisdk/ruyisdk
+`} />
+
+### RuyiSDK IDE-Plugins installieren
+
+Neben der IDE selbst müssen Sie auch die Plugins installieren.  
+Aktuell müssen die Plugins manuell in das ``dropins``-Verzeichnis kopiert werden.  
+In Zukunft wird dieser Prozess verbessert, um eine einfachere Installation zu ermöglichen.  
+Derzeit gehen Sie bitte wie folgt vor:
+
+1. Laden Sie das neueste Plugin-Paket von den [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest) herunter.  
+2. Entpacken Sie die Datei ``org.ruyisdk.ide_*.zip`` in das ``dropins``-Verzeichnis der RuyiSDK IDE-Installation.  
+
+## Erste Schritte
+
+Lesen Sie die [Dokumentation](/docs/intro), um mehr über die leistungsstarken Funktionen von Ruyi zu erfahren!
 
   </>
 </ReleaseProvider>
-
