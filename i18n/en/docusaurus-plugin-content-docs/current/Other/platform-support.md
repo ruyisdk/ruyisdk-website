@@ -66,23 +66,28 @@ Tier 1 and Tier 2 supported systems (distributions) can be collectively referred
 The current operating system and distribution support status is as follows. Distributions within each tier are listed in alphabetical order.
 
 **Tier 1:**
-* Debian: The most recent 1 version.
+* Debian: The latest two Long-Term Support (LTS) versions.
     * Debian 12
-* openEuler: The most recent 1 long-term support (LTS) version.
-    * openEuler 24.03 LTS
+    * Debian 13
+* openEuler: The latest two Long-Term Support (LTS) versions and the most recent innovation release.
+    * openEuler 24.03 LTS SP1
+    * openEuler 24.03 LTS SP2
+    * openEuler 25.03
 * RevyOS: Aligned with RevyOS support for LicheePi 4A and Pioneer Box.
-* RedleafOS: The most recent 1 version.
-* Ubuntu: The most recent 2 long-term support (LTS) versions.
+* Ubuntu: The latest two Long-Term Support (LTS) versions.
     * Ubuntu 22.04
     * Ubuntu 24.04
 
 **Tier 2:**
 * Arch Linux: Follows rolling releases.
-* deepin: The most recent 1 version.
-    * deepin 23
+* deepin: The most recent version.
+    * deepin 25
 * Fedora: Versions released within the past year.
-    * Fedora 40
-    * Fedora 41
+    * Fedora 42
+    * Fedora 43
+* OpenCloudOS: The most recent version.
+* openKylin: The most recent version.
+* RedleafOS: The most recent version.
 
 Linux distributions that fall into Tier 1 or Tier 2 in terms of type but whose versions are not within the mentioned scope also belong to this tier.
 
