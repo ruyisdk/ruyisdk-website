@@ -7,14 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1594
+      "contributions": 1646
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 219
+      "contributions": 221
+    },
+    {
+      "id": 84754181,
+      "name": "xijing21",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
+      "github": "https://github.com/xijing21",
+      "contributions": 202
     },
     {
       "id": 54484233,
@@ -28,7 +35,7 @@
       "name": "KevinMX",
       "avatarUrl": "https://avatars.githubusercontent.com/u/17025286?v=4",
       "github": "https://github.com/KevinMX",
-      "contributions": 121
+      "contributions": 154
     },
     {
       "id": 22784008,
@@ -42,7 +49,7 @@
       "name": "ArchFeh",
       "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
       "github": "https://github.com/ArchFeh",
-      "contributions": 68
+      "contributions": 80
     },
     {
       "id": 62790279,
@@ -50,6 +57,13 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/62790279?v=4",
       "github": "https://github.com/stydxm",
       "contributions": 61
+    },
+    {
+      "id": 43362020,
+      "name": "pz9115",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
+      "github": "https://github.com/pz9115",
+      "contributions": 44
     },
     {
       "id": 102520124,
@@ -80,6 +94,13 @@
       "contributions": 24
     },
     {
+      "id": 9902643,
+      "name": "imkiva",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
+      "github": "https://github.com/imkiva",
+      "contributions": 22
+    },
+    {
       "id": 45998863,
       "name": "saicogn",
       "avatarUrl": "https://avatars.githubusercontent.com/u/45998863?v=4",
@@ -108,18 +129,11 @@
       "contributions": 17
     },
     {
-      "id": 84754181,
-      "name": "xijing21",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
-      "github": "https://github.com/xijing21",
-      "contributions": 16
-    },
-    {
       "id": 132031800,
       "name": "JoannaWu84",
       "avatarUrl": "https://avatars.githubusercontent.com/u/132031800?v=4",
       "github": "https://github.com/JoannaWu84",
-      "contributions": 11
+      "contributions": 12
     },
     {
       "id": 115263660,
@@ -134,6 +148,20 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
       "contributions": 10
+    },
+    {
+      "id": 3916635,
+      "name": "shining1984",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/3916635?v=4",
+      "github": "https://github.com/shining1984",
+      "contributions": 9
+    },
+    {
+      "id": 1802104,
+      "name": "lazyparser",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1802104?v=4",
+      "github": "https://github.com/lazyparser",
+      "contributions": 8
     },
     {
       "id": 19223209,
@@ -164,13 +192,6 @@
       "contributions": 4
     },
     {
-      "id": 1802104,
-      "name": "lazyparser",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/1802104?v=4",
-      "github": "https://github.com/lazyparser",
-      "contributions": 4
-    },
-    {
       "id": 126950588,
       "name": "SongYuSheng1216",
       "avatarUrl": "https://avatars.githubusercontent.com/u/126950588?v=4",
@@ -179,9 +200,9 @@
     },
     {
       "id": 58899952,
-      "name": "apr3vau",
+      "name": "calsys456",
       "avatarUrl": "https://avatars.githubusercontent.com/u/58899952?v=4",
-      "github": "https://github.com/apr3vau",
+      "github": "https://github.com/calsys456",
       "contributions": 2
     },
     {
@@ -189,6 +210,13 @@
       "name": "Z572",
       "avatarUrl": "https://avatars.githubusercontent.com/u/37945516?v=4",
       "github": "https://github.com/Z572",
+      "contributions": 2
+    },
+    {
+      "id": 5234560,
+      "name": "YunxiangLuo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/5234560?v=4",
+      "github": "https://github.com/YunxiangLuo",
       "contributions": 2
     },
     {
@@ -242,8 +270,8 @@
     }
   ],
   "totals": {
-    "contributors": 34,
-    "commits": 2603,
-    "pullRequests": 911
+    "contributors": 38,
+    "commits": 2970,
+    "pullRequests": 1099
   }
 }

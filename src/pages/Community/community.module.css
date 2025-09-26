@@ -113,6 +113,15 @@
   /* allow wrapping on small screens */
   flex-wrap: wrap;
 }
+
+/* Keep stats and contributor grid aligned by using the same max width */
+.siteSectionWidth {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .statItem {
   background: rgba(255,255,255,0.9);
   border-radius: 12px;
@@ -220,6 +229,17 @@
   box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15);
   position: relative;
   z-index: 1;
+}
+
+/* Apply the aligned width to the glass container when used for contributors */
+.glassContainer.contributorGrid,
+.statsBar {
+  /* Align stats bar and contributors grid to the same site section width */
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* --- CommunityIntro Component Styling --- */
@@ -360,17 +380,20 @@
     }
 }
 .contributorGrid {
-  grid-template-columns: repeat(2, 1fr);
+  /* Use an auto-fit grid so partial rows are centered naturally */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  justify-content: center; /* centers the grid within the container when there are fewer columns */
+  gap: 2.5rem;
 }
-@media (min-width: 640px) {
-    .contributorGrid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+/* Constrain the grid's max-width so rows with fewer items visually center better on large screens */
 @media (min-width: 1024px) {
-    .contributorGrid {
-        grid-template-columns: repeat(6, 1fr);
-    }
+  .contributorGrid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .avatarWrapper {
     position: relative;
