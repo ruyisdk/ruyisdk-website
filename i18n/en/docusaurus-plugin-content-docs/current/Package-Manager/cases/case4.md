@@ -12,25 +12,44 @@ This document is based on the following environment:
 - Hardware: x86_64 PC
 - Software: Ubuntu 22.04
 
-#### Additional Notes
+### Attach the Device to the Host
 
 The Licheepi 4A supports booting from onboard eMMC or SD card, and there are two different connection methods for flashing:
 
-1. Connect the RISC-V development board to the PC via a USB cable.
-2. Connect the RISC-V development board's SD card to the PC via a card reader.
+1. Connect the development board to the host PC via a USB cable and flash it using the `fastboot` method.
+2. Insert the SD card into the host PC using a card reader, flash it using the `dd` method, and then insert it into the development board.
 
-This example uses the first method. This flashing method is also applicable for flashing images to the onboard eMMC of the MilkV Meles.
+This example uses the first method, `fastboot`, which is also applicable for flashing images to the onboard eMMC of devices such as the MilkV Meles.
 
-If the image flashing fails when using a regular user, ruyi will attempt to escalate privileges using ``sudo``.
+:::info System-Level Configuration for `fastboot`
 
-The Licheepi 4A is connected to the PC via a USB cable and flashed using fastboot. If you wish to complete the flashing process using a regular user, you may need to configure udev rules. Here is an example rule for reference:
+`ruyi` will only prompt the user to attempt `sudo` elevation if a command fails. However, when using `fastboot flash`, the tool will wait indefinitely if no device is detected, without exiting. Therefore, before `ruyi` proceeds with flashing via `fastboot`, it will ask the user to manually confirm that the device appears in the output of `fastboot devices`:
 
+```text
+Some flashing steps require the use of fastboot, in which case you should
+ensure the target device is showing up in fastboot devices output.
+Please confirm it yourself before the flashing begins.
+
+Is the device identified by fastboot now? (y/N)
 ```
+
+When you see this prompt, pause and run `fastboot devices` in a separate terminal window. Only respond with `y` once the device is properly detected; otherwise, the flashing process may hang.
+
+Due to the wide variety of Linux distributions and system configurations, and because the system-level setup required for `fastboot` (such as udev rules) involves low-level details, `ruyi` cannot configure this for you. You’ll need to handle it manually. For security reasons, we also do not recommend running `ruyi` as the root user.
+
+The following configuration is provided for reference only. If adjustments are needed to suit your distribution, please make them accordingly. Consult your distribution’s documentation for further details.
+:::
+
+Connect the LicheePi 4A to the PC via a USB cable to prepare for flashing with `fastboot`. If only want to perform the flashing process as a regular (non-root) user, you may need to configure udev rules. Below is a sample udev configuration for Debian and its derivatives such as Ubuntu (for reference only):
+
+```udev
 SUBSYSTEM=="usb", ATTR{idVendor}="2345", ATTR{idProduct}=="7654", MODE="0666", GROUP="plugdev"
 SUBSYSTEM=="usb", ATTR{idVendor}="1234", ATTR{idProduct}=="8888", MODE="0666", GROUP="plugdev"
 ```
 
-## Installing the Operating System
+After applying the configuration, verify that `fastboot` can detect the device by running `fastboot devices`. If you see an output line like `0123456789abcdef fastboot`, the setup is successful.
+
+### Installing the Operating System
 
 Ensure that the ruyi package manager is installed and that `ruyi -V` outputs the version information correctly. Then, proceed with the following steps.
 
