@@ -106,34 +106,82 @@
 /* Stats bar shown above contributors list */
 .statsBar {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: center;
   align-items: stretch;
   margin: 1rem 0 1.5rem 0;
+  /* allow wrapping on small screens */
+  flex-wrap: wrap;
+}
+
+/* Keep stats and contributor grid aligned by using the same max width */
+.siteSectionWidth {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .statItem {
   background: rgba(255,255,255,0.9);
   border-radius: 12px;
-  padding: 0.75rem 1rem;
-  min-width: 180px;
+  padding: 0.6rem 0.9rem;
+  min-width: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  /* smooth scale (zoom) on hover/focus for accessibility */
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  will-change: transform;
 }
 .statIcon {
   color: #0f172a;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  /* make SVG icons follow font-size (so they scale with text) */
+  font-size: 2rem;
 }
 .statLabel {
-  font-size: 0.9rem;
+  /* label scales a bit with container width using clamp */
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
   color: #64748b;
   margin-bottom: 0.25rem;
 }
 .statValue {
-  font-size: 1.5rem;
+  /* larger responsive number using clamp */
+  font-size: clamp(1.25rem, 3.2vw, 1.6rem);
   font-weight: 700;
   color: #0f172a;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+/* Hover & focus states to 'zoom' the metric card */
+.statItem:hover,
+.statItem:focus-within {
+  transform: scale(1.06);
+  box-shadow: 0 10px 30px rgba(16,24,40,0.12);
+  background: rgba(255,255,255,1);
+}
+
+/* Make sure stat items shrink nicely when space is tight */
+.statItem {
+  flex: 1 1 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Stacked layout for very small widths */
+@media (max-width: 420px) {
+  .statItem {
+    min-width: 120px;
+    padding: 0.5rem 0.6rem;
+    gap: 0.4rem;
+  }
+  .statIcon { font-size: 1.4rem; }
+  .statValue { font-size: 1.1rem; }
 }
 
 .hubGrid {
@@ -181,6 +229,17 @@
   box-shadow: 0 8px 32px 0 rgba(100, 108, 120, 0.15);
   position: relative;
   z-index: 1;
+}
+
+/* Apply the aligned width to the glass container when used for contributors */
+.glassContainer.contributorGrid,
+.statsBar {
+  /* Align stats bar and contributors grid to the same site section width */
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* --- CommunityIntro Component Styling --- */
@@ -321,17 +380,20 @@
     }
 }
 .contributorGrid {
-  grid-template-columns: repeat(2, 1fr);
+  /* Use an auto-fit grid so partial rows are centered naturally */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  justify-content: center; /* centers the grid within the container when there are fewer columns */
+  gap: 2.5rem;
 }
-@media (min-width: 640px) {
-    .contributorGrid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+/* Constrain the grid's max-width so rows with fewer items visually center better on large screens */
 @media (min-width: 1024px) {
-    .contributorGrid {
-        grid-template-columns: repeat(6, 1fr);
-    }
+  .contributorGrid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .avatarWrapper {
     position: relative;
