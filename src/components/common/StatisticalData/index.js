@@ -1,4 +1,5 @@
 import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } from "antd"
+import { useCallback } from "react"
 import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "../../../utils/hooks/useDashboardClient"
@@ -74,6 +75,7 @@ const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
 };
 
 const useMobileDetection = () => {
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -88,6 +90,22 @@ const useMobileDetection = () => {
   return isMobile;
 };
 
+// 防抖hook用于优化图表渲染
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  
+  return debouncedValue;
+};
 // Components
 const CustomizeRenderEmpty = () => (
   <div className={styles.emptyState}>
@@ -143,8 +161,10 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
 const TopList = ({ data, title }) => {
   const containerRef = useRef();
   const chartRef = useRef();
+  const debouncedData = useDebounce(data, 300);
 
   const barData = useMemo(() => {
+    if (!debouncedData) return [];
     return Object.entries(data)
       .map(([action, { total }]) => ({ 
         action, 
@@ -153,7 +173,7 @@ const TopList = ({ data, title }) => {
       }))
       .sort((a, b) => b.total - a.total)
       .slice(0, 10);
-  }, [data]);
+  }, [debouncedData]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !barData.length || !containerRef.current) return;

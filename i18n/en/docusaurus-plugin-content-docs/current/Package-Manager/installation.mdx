@@ -19,7 +19,7 @@ Currently, the RuyiSDK package manager tool provides precompiled binaries for **
 
 These binaries are released on both GitHub Release and the ISCAS mirror site:
 
-- [ruyi GitHub Releases](https://github.com/RuyiSDK/ruyi/releases/)
+- [ruyi GitHub Releases](https://github.com/ruyisdk/ruyi/releases/)
 - [ISCAS Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
 
 Using the ISCAS mirror as an example, the installation process is described below. First, run ``uname -m`` to check the system architecture and download the corresponding binary.
@@ -116,6 +116,26 @@ sudo dispatch-conf
 ```bash
 sudo emerge --ask dev-util/ruyi
 ```
+## Installing via Python Package Manager
+
+The RuyiSDK package manager is now [available on PyPI](https://pypi.org/project/ruyi/)，and can be installed using `pip` or other Python package managers.
+
+```bash
+# If you're using pipx for global installation:
+pipx install ruyi
+
+# If you're installing within a virtual environment:
+# Assuming the virtual environment is located at /path/to/some/venv
+/path/to/some/venv/bin/pip install ruyi
+```
+
+:::info Note for RISC-V Users
+
+RISC-V users can install `ruyi` via `pip`, but please note that some Python libraries required by `ruyi` do not yet offer precompiled packages for the RISC-V architecture on PyPI. As a result, the Python package manager may attempt to compile these dependencies from source during installation, which can be time-consuming or may fail.
+
+If you encounter issues installing `ruyi` on a RISC-V device, we recommend using alternative installation methods.
+
+:::
 
 ---
 
