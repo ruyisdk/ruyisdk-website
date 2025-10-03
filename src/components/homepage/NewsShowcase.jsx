@@ -130,7 +130,7 @@ const NewsShowcase = () => {
 
   return (
     <div
-          className="newsshowcase-container flex w-full h-auto md:h-[44rem] gap-4 font-sans mx-auto px-6 md:px-8 pt-2 pb-10 bg-[#f5f5f7] 2xl:max-w-[90rem] xl:rounded-[0.625rem] md:overflow-visible overflow-x-auto"
+          className="newsshowcase-container flex w-full h-auto md:h-[44rem] gap-4 font-sans mx-auto px-4 md:px-8 pt-2 pb-10 bg-[#f5f5f7] 2xl:max-w-[90rem] xl:rounded-[0.625rem] md:overflow-visible overflow-x-auto"
       ref={containerRef}
     >
 
@@ -182,7 +182,7 @@ const NewsShowcase = () => {
       )}
 
       {isMobile && (
-        <div className="mobile-cards-wrapper flex flex-col gap-4 px-4 w-full">
+  <div className="mobile-cards-wrapper flex flex-col gap-4 px-4 w-full">
           {newsData.map((news, idx) => (
             <div
               key={idx}
