@@ -9,9 +9,9 @@ import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
 // Constants (palette aligned with homepage)
-// Data visualization palette (muted, high-contrast, colorblind-friendly)
-// Source inspiration: Okabe-Ito + modern analytics palettes
-const CHART_COLORS = ['#4C78A8', '#F58518', '#54A24B', '#E45756', '#72B7B2', '#B279A2', '#FF9DA6', '#9D755D'];
+// Data visualization palette (value-based color intensity, blue gradient theme)
+// Source inspiration: Value-proportional color intensity with blue gradient
+const CHART_COLORS = ['#0A2C7E', '#1A3A8E', '#2A4A9E', '#3A5AAE', '#4A6ABE', '#5A7ACE', '#6A8ADE', '#7A9AEE', '#8AAAEE', '#9ABAEE'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
 const SCROLL_TIMEOUT = 500;
@@ -194,7 +194,13 @@ const TopList = ({ data, title }) => {
     chart
       .interval()
       .style({ 
-        fill: (d, index) => CHART_COLORS[index % CHART_COLORS.length]
+        fill: (d, index) => {
+          const maxValue = Math.max(...barData.map(item => item.total));
+          const minValue = Math.min(...barData.map(item => item.total));
+          const normalizedValue = (d.total - minValue) / (maxValue - minValue);
+          const colorIndex = Math.floor((1 - normalizedValue) * (CHART_COLORS.length - 1));
+          return CHART_COLORS[colorIndex];
+        }
       })
       .data(barData)
       .transform({ type: 'sortX', reverse: true, by: "y" })
@@ -221,12 +227,12 @@ const TopList = ({ data, title }) => {
       })
       .label({ 
         text: 'total', 
-        position: "top-right", 
-        fill: '#2E3A46', 
+        position: "inside", 
+        fill: '#ffffff', 
         dy: 0, 
-        dx: -10,
+        dx: -5,
         fontWeight: 700,
-        fontSize: 13
+        fontSize: 12
       })
       .interaction({ tooltip: { body: false } });
 
