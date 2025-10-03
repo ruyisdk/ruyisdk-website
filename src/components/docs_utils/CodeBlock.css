@@ -1,0 +1,79 @@
+/* Next.js-inspired Code Block Styles */
+
+/* Smooth scrollbar for code blocks */
+.code-block-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.code-block-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-block-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.code-block-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .code-block-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='dark'] .code-block-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced copy button animation */
+.copy-button-wrapper {
+  position: relative;
+}
+
+.copy-button-wrapper::after {
+  content: 'Copied!';
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.copy-button-wrapper.copied::after {
+  opacity: 1;
+}
+
+[data-theme='dark'] .copy-button-wrapper::after {
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+/* Better focus styles for accessibility */
+button:focus-visible {
+  outline: 2px solid #0070f3;
+  outline-offset: 2px;
+}
+
+/* Subtle animation for code appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.code-block-animated {
+  animation: fadeIn 300ms ease-out;
+}
+

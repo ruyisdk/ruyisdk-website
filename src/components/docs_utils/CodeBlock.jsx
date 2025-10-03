@@ -2,6 +2,42 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus, vs as vscLightPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Copy, Check, Terminal } from 'lucide-react';
+import './CodeBlock.css';
+
+// --- CUSTOM SYNTAX THEMES (Next.js-inspired) ---
+const customLightTheme = {
+    ...vscLightPlus,
+    'pre[class*="language-"]': {
+        ...vscLightPlus['pre[class*="language-"]'],
+        background: '#ffffff',
+        fontSize: '0.875rem',
+        lineHeight: '1.7',
+    },
+    'code[class*="language-"]': {
+        ...vscLightPlus['code[class*="language-"]'],
+        background: '#ffffff',
+        fontSize: '0.875rem',
+        lineHeight: '1.7',
+        fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    },
+};
+
+const customDarkTheme = {
+    ...vscDarkPlus,
+    'pre[class*="language-"]': {
+        ...vscDarkPlus['pre[class*="language-"]'],
+        background: '#0a0a0a',
+        fontSize: '0.875rem',
+        lineHeight: '1.7',
+    },
+    'code[class*="language-"]': {
+        ...vscDarkPlus['code[class*="language-"]'],
+        background: '#0a0a0a',
+        fontSize: '0.875rem',
+        lineHeight: '1.7',
+        fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    },
+};
 
 // --- HELPER COMPONENT: CopyButton ---
 const CopyButton = ({ textToCopy, themeStyles }) => {
@@ -76,41 +112,116 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
         return () => observer.disconnect();
     }, []);
 
-    // --- DYNAMIC STYLES BASED ON THEME ---
+    // --- DYNAMIC STYLES BASED ON THEME (Next.js-inspired) ---
     const lightThemeStyles = {
-        container: { backgroundColor: '#ffffff', border: '1px solid #e5e7eb' },
-        header: { backgroundColor: '#f3f4f6', borderBottom: '1px solid #e5e7eb' },
-        filename: { color: '#1f2937' },
-        icon: { color: '#4b5563' },
-        copyButton: { color: '#4b5563', transition: 'background-color 150ms ease-in-out', border: 'none', cursor: 'pointer', padding: '0.375rem', borderRadius: '0.375rem' },
-        copyButtonHoverBg: '#e5e7eb',
-        copyButtonHoverColor: '#1f2937',
-        bashLineHoverBg: 'rgba(229, 231, 235, 0.6)',
-        syntaxTheme: vscLightPlus,
+        container: { 
+            backgroundColor: '#fafafa', 
+            border: '1px solid #e5e7eb',
+            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+        },
+        header: { 
+            backgroundColor: '#f5f5f5', 
+            borderBottom: '1px solid #e5e7eb'
+        },
+        filename: { 
+            color: '#171717',
+            fontWeight: 500,
+            letterSpacing: '-0.01em'
+        },
+        icon: { color: '#737373' },
+        copyButton: { 
+            color: '#737373', 
+            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)', 
+            border: 'none', 
+            cursor: 'pointer', 
+            padding: '0.5rem', 
+            borderRadius: '0.375rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        copyButtonHoverBg: '#e5e5e5',
+        copyButtonHoverColor: '#171717',
+        bashLineHoverBg: 'rgba(0, 0, 0, 0.03)',
+        syntaxTheme: customLightTheme,
+        codeBackground: '#ffffff'
     };
 
     const darkThemeStyles = {
-        container: { backgroundColor: '#1e1e1e', border: '1px solid #333333' },
-        header: { backgroundColor: '#252526', borderBottom: '1px solid #333333' },
-        filename: { color: '#cccccc' },
-        icon: { color: '#cccccc' },
-        copyButton: { color: '#cccccc', transition: 'background-color 150ms ease-in-out', border: 'none', cursor: 'pointer', padding: '0.375rem', borderRadius: '0.375rem' },
-        copyButtonHoverBg: '#3c3c3c',
+        container: { 
+            backgroundColor: '#161616', 
+            border: '1px solid #262626',
+            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.3)'
+        },
+        header: { 
+            backgroundColor: '#1a1a1a', 
+            borderBottom: '1px solid #262626'
+        },
+        filename: { 
+            color: '#ededed',
+            fontWeight: 500,
+            letterSpacing: '-0.01em'
+        },
+        icon: { color: '#a3a3a3' },
+        copyButton: { 
+            color: '#a3a3a3', 
+            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)', 
+            border: 'none', 
+            cursor: 'pointer', 
+            padding: '0.5rem', 
+            borderRadius: '0.375rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        copyButtonHoverBg: '#262626',
         copyButtonHoverColor: '#ffffff',
-        bashLineHoverBg: 'rgba(55, 65, 81, 0.4)',
-        syntaxTheme: vscDarkPlus,
+        bashLineHoverBg: 'rgba(255, 255, 255, 0.05)',
+        syntaxTheme: customDarkTheme,
+        codeBackground: '#0a0a0a'
     };
 
     const currentStyles = theme === 'dark' ? darkThemeStyles : lightThemeStyles;
     const syntaxTheme = currentStyles.syntaxTheme;
 
     const baseStyles = {
-        container: { borderRadius: '0.5rem', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace', margin: '1.5rem 0', overflow: 'hidden' },
-        header: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1rem' },
-        headerTextContainer: { display: 'flex', alignItems: 'center', gap: '0.5rem' },
-        filename: { fontSize: '0.875rem' },
-        syntaxHighlighter: { margin: 0, padding: '1rem', fontSize: '0.9rem', lineHeight: '1.6' },
-        bashLine: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem' },
+        container: { 
+            borderRadius: '0.75rem', 
+            fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace', 
+            margin: '1.5rem 0', 
+            overflow: 'hidden',
+            fontSize: '14px'
+        },
+        header: { 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            padding: '0.625rem 1rem',
+            minHeight: '44px'
+        },
+        headerTextContainer: { 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem' 
+        },
+        filename: { 
+            fontSize: '0.8125rem',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif'
+        },
+        syntaxHighlighter: { 
+            margin: 0, 
+            padding: '1rem 1.25rem', 
+            fontSize: '0.875rem', 
+            lineHeight: '1.7',
+            fontWeight: 400
+        },
+        bashLine: { 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            padding: '0 1.25rem',
+            transition: 'background-color 150ms ease'
+        },
     };
 
     // --- NORMALIZE / CLEAN CODE PROP ---
@@ -172,8 +283,9 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
                 overflow: 'visible',
                 width: 'auto',
                 fontFamily: 'inherit',
-                fontSize: '0.9rem',
-                lineHeight: '1.6',
+                fontSize: '0.875rem',
+                lineHeight: '1.7',
+                fontWeight: 400,
             };
 
             return (
@@ -198,7 +310,7 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
             );
         };
 
-        const bashContainerBg = (syntaxTheme['pre[class*="language-"]'] && syntaxTheme['pre[class*="language-"]'].background) || currentStyles.container.backgroundColor;
+        const bashContainerBg = currentStyles.codeBackground;
 
         // Make the bash container scrollable and allow lines to stretch horizontally
         return (
@@ -206,14 +318,19 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
                 <div style={{ ...baseStyles.header, ...currentStyles.header }}>
                     <div style={baseStyles.headerTextContainer}>
                         <Terminal size={16} style={currentStyles.icon} />
-                        <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'bash'}</span>
+                        <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'Terminal'}</span>
                     </div>
                     {/* UPDATE: This button is now hidden by default for bash blocks */}
                     {showTitleCopyButton && (
                         <CopyButton textToCopy={getCommandsToCopy(cleanedCode)} themeStyles={currentStyles} />
                     )}
                 </div>
-                    <div style={{ backgroundColor: bashContainerBg, overflowX: 'auto', padding: '1rem 0', width: '100%' }}>
+                    <div style={{ 
+                        backgroundColor: bashContainerBg, 
+                        overflowX: 'auto', 
+                        padding: '0.75rem 0', 
+                        width: '100%' 
+                    }}>
                     <div style={{ display: 'table', width: 'max-content', minWidth: '100%' }}>
                         {cleanedCode.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
                     </div>
