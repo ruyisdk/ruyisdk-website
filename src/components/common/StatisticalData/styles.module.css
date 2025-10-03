@@ -1,6 +1,6 @@
 .container {
   background-color: #f5f5f7; /* match homepage light grey */
-  min-min-height: 100vh;
+  min-height: 100vh;
   width: 100%;
   margin: 0;
   display: flex;
@@ -306,36 +306,6 @@
   opacity: 0.7;
 }
 
-/* 导航点样式 */
-.navigationDots {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 100;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.dot:hover {
-  background: rgba(255, 255, 255, 0.5);
-  transform: scale(1.2);
-}
-
-.activeDot {
-  background: #06bcee;
-  box-shadow: 0 0 10px rgba(6, 188, 238, 0.5);
-}
 
 /* 更新时间样式 */
 .updateTime {
@@ -450,14 +420,6 @@
     height: 520px;
   }
 
-  .navigationDots {
-    right: 15px;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -510,18 +472,13 @@
     box-shadow: 0 8px 16px rgba(0,0,0,0.04) !important;
   }
 
-  .dot:hover {
-    transform: none !important;
-    background: #0A2C7E !important;
-  }
 }
 
 /* 更严格的移动端hover禁用 */
 @media (max-width: 480px) {
   .statCard:hover,
   .categoryCard:hover,
-  .chartCard:hover,
-  .dot:hover {
+  .chartCard:hover {
     transform: none !important;
     box-shadow: none !important;
     background: inherit !important;
