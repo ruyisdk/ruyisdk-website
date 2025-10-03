@@ -96,6 +96,24 @@ const RuyiInLive = () => {
       setError(new Error('API configuration is missing.'));
       return;
     }
+
+    // In development, avoid spinning a Worker that calls remote APIs to speed up preview and avoid rate limits.
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+      // Use lightweight placeholder data to render immediately.
+      setTimeout(() => {
+        setData({
+          pm_downloads: { total: 1200 },
+          downloads: { total: 5400 },
+          installs: { total: 3200 },
+          top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
+        });
+        setLoading(false);
+        setError(null);
+      }, 0);
+
+      return;
+    }
+
     const worker = new Worker('/js/dashboardFetcher.js');
     worker.onmessage = (event) => {
       const { type, payload } = event.data;
