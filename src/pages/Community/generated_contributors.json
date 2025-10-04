@@ -7,21 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1664
+      "contributions": 1674
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 266
+      "contributions": 269
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 249
+      "contributions": 254
     },
     {
       "id": 54484233,
@@ -35,7 +35,7 @@
       "name": "KevinMX",
       "avatarUrl": "https://avatars.githubusercontent.com/u/17025286?v=4",
       "github": "https://github.com/KevinMX",
-      "contributions": 154
+      "contributions": 156
     },
     {
       "id": 22784008,
@@ -63,21 +63,28 @@
       "name": "pz9115",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
       "github": "https://github.com/pz9115",
-      "contributions": 49
+      "contributions": 50
     },
     {
       "id": 102520124,
       "name": "panglars",
       "avatarUrl": "https://avatars.githubusercontent.com/u/102520124?v=4",
       "github": "https://github.com/panglars",
-      "contributions": 40
+      "contributions": 42
     },
     {
       "id": 207433538,
       "name": "LoneBlade-zhang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/207433538?v=4",
       "github": "https://github.com/LoneBlade-zhang",
-      "contributions": 31
+      "contributions": 32
+    },
+    {
+      "id": 198067605,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "github": "https://github.com/a1gorhythm7",
+      "contributions": 27
     },
     {
       "id": 132126433,
@@ -85,13 +92,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/132126433?v=4",
       "github": "https://github.com/zeyi2",
       "contributions": 27
-    },
-    {
-      "id": 198067605,
-      "name": "a1gorhythm7",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
-      "github": "https://github.com/a1gorhythm7",
-      "contributions": 25
     },
     {
       "id": 9902643,
@@ -320,7 +320,7 @@
   ],
   "totals": {
     "contributors": 45,
-    "commits": 3140,
-    "pullRequests": 1245
+    "commits": 3166,
+    "pullRequests": 1255
   }
 }
