@@ -129,260 +129,47 @@ const NewsShowcase = () => {
   }, [selectedIndex, isMobile]);
 
   return (
-    <div className="newsshowcase-container" ref={containerRef}>
-      <style>{`
-        .newsshowcase-container {
-          display: flex;
-          overflow-x: auto;
-          width: 100%;
-          height: calc(37.5rem + 2rem); /* 600px + 32px */
-          gap: 1rem;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-          margin: 0 auto; /* Added for centering */
-          padding: 0.5rem 2rem 1.5rem; /* 8px 32px 24px */
-          background-color: #f5f5f7;
-        }
-
-        /* New media query for very wide screens */
-        @media (min-width: 90rem) { /* 1440px or adjust as needed */
-          .newsshowcase-container {
-            max-width: 90rem; /* For example, 1440px */
-            border-radius: 0.625rem; /* 10px - Optional: to make it look like a contained block */
-            box-shadow: 0 0.5rem 1.875rem rgba(255, 255, 255, 0); /* Optional: subtle shadow */
-          }
-        }
-
-        .newsshowcase-sidebar {
-          width: 20rem; /* 320px */
-          height: 37.5rem; /* 600px */
-          overflow-y: auto;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          padding: 0rem 1rem 1rem 0;
-        }
-        .newsshowcase-sidebar::-webkit-scrollbar {
-          display: none;
-        }
-        .newsshowcase-title-item {
-          padding: 1rem 1.5rem;
-          background: white;
-          border-radius: 0.625rem; /* 10px */
-          cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          font-size: 1rem;
-          font-weight: 500;
-          color: #1d1d1f;
-          border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
-          user-select: none;
-          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
-          margin: 0;
-        }
-        .newsshowcase-title-item:hover {
-          transform: scale(1.01);
-          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
-        }
-        .newsshowcase-title-item.newsshowcase-active {
-          background: #002677;
-          color: #fff;
-          box-shadow: none;
-          transform: scale(1.01);
-        }
-        .newsshowcase-main {
-          flex: 1;
-          height: 37.5rem; /* 600px */
-          position: relative;
-          overflow: hidden;
-        }
-        .cards-wrapper {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          height: 100%;
-        }
-        .newsshowcase-card {
-          background: white;
-          border-radius: 0.625rem; /* 10px */
-          overflow: hidden;
-          box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1); /* 0 8px 30px */
-          cursor: pointer;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          border: 0.0625rem solid rgba(230, 230, 230, 1); /* 1px */
-          flex-shrink: 0;
-        }
-        .newsshowcase-card:hover {
-          transform: scale(1.01);
-          box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15); /* 0 12px 40px */
-        }
-        .newsshowcase-image {
-          width: 100%;
-          height: 60%;
-          max-height: 60%;
-          object-fit: cover;
-          transition: transform 0.3s ease;
-        }
-        .newsshowcase-card:hover .newsshowcase-image {
-          transform: scale(1.02);
-        }
-        .newsshowcase-content {
-          padding: 2rem;
-          background: white;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-        }
-        .newsshowcase-card-title {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #1a1a1a;
-          margin-bottom: 1rem;
-          line-height: 1.2;
-          letter-spacing: -0.03125rem; /* -0.5px */
-        }
-        .newsshowcase-description {
-          font-size: 1rem;
-          color: #333;
-          line-height: 1.6;
-          flex: 1;
-        }
-        .newsshowcase-link-indicator {
-          position: absolute;
-          bottom: 1.5rem;
-          right: 1.5rem;
-          display: inline-flex;
-          align-items: center;
-          color: #0A2C7E;
-          font-weight: bold;
-          font-size: 1rem;
-          opacity: 0;
-          transform: translateX(0.625rem); /* 10px */
-          transition: all 0.3s ease;
-          background: #FDEFC3;
-          padding: 0.5rem 1rem;
-          border-radius: 99rem;
-          border: 0.0625rem solid rgb(255, 228, 138); /* Assuming 1px solid */
-          gap: 0.5rem; /* Adjusted for consistency */
-        }
-        .newsshowcase-card:hover .newsshowcase-link-indicator {
-          opacity: 1;
-          transform: translateX(0);
-        }
-        .newsshowcase-arrow {
-          font-size: 1rem;
-        }
-        @media (max-width: 48rem) { /* 768px */
-          .newsshowcase-container {
-            flex-direction: column;
-            height: auto;
-            padding: 1rem;
-            max-width: 100%; /* Ensure it uses full width on mobile */
-          }
-          .newsshowcase-sidebar, .newsshowcase-main {
-            display: none;
-          }
-          .mobile-cards-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-          }
-          .mobile-news-card {
-            background: white;
-            border-radius: 0.625rem;
-            overflow: hidden;
-            box-shadow: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 0.0625rem solid rgba(230, 230, 230, 1);
-          }
-          .mobile-news-card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.15);
-          }
-          .mobile-news-image {
-            width: 100%;
-            height: 12.5rem; /* 200px */
-            object-fit: cover;
-            transition: transform 0.3s ease;
-          }
-          .mobile-news-card:hover .mobile-news-image {
-            transform: scale(1.02);
-          }
-          .mobile-news-content {
-            padding: 1rem;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-          }
-          .mobile-news-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-          }
-          .mobile-news-description {
-            font-size: 0.875rem;
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-          }
-          .mobile-news-link-indicator {
-            display: inline-flex;
-            align-items: center;
-            color: #0A2C7E;
-            font-weight: bold;
-            font-size: 1rem;
-            background: #FDEFC3;
-            padding: 0.5rem 1rem;
-            border-radius: 99rem;
-            border: 0.0625rem solid rgb(255, 228, 138);
-            gap: 0.5rem;
-            justify-content: center;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-      `}</style>
+    <div
+          className="newsshowcase-container flex w-full h-auto md:h-[44rem] gap-4 font-sans mx-auto px-4 md:px-8 pt-2 pb-10 bg-[#f5f5f7] 2xl:max-w-[90rem] xl:rounded-[0.625rem] md:overflow-visible overflow-x-auto"
+      ref={containerRef}
+    >
 
       {!isMobile && (
         <>
-          <div className="newsshowcase-sidebar">
+          <div className="newsshowcase-sidebar w-[20rem] min-w-[20rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pr-4">
             {newsData.map((news, idx) => (
               <div
                 key={idx}
-                className={`newsshowcase-title-item ${selectedIndex === idx ? 'newsshowcase-active' : ''}`}
+                className={`newsshowcase-title-item px-4 py-4 rounded-[0.625rem] cursor-pointer transition-transform duration-300 text-base font-medium border border-[rgba(230,230,230,1)] select-none shadow-[0_8px_30px_rgba(0,0,0,0.1)] m-0 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] ${
+                  selectedIndex === idx
+                    ? 'newsshowcase-active bg-[#002677] text-white shadow-none scale-[1.01]'
+                    : 'bg-white text-[#1d1d1f]'
+                }`}
                 onClick={() => handleNewsClick(idx)}
               >
                 <Translate>{news.title}</Translate>
               </div>
             ))}
           </div>
-          <div className="newsshowcase-main" ref={mainRef}>
-            <div className="cards-wrapper">
+          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden" ref={mainRef}>
+            <div className="cards-wrapper flex flex-col w-full h-full md:overflow-visible">
               {newsData.map((news, idx) => (
                 <div
                   key={idx}
-                  className="newsshowcase-card"
+                  className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0"
                   onClick={() => handleCardClick(news.link)}
                 >
-                  <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt`})} className="newsshowcase-image" />
-                  <div className="newsshowcase-content">
-                    <h2 className="newsshowcase-card-title"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description">
-                      <Translate>
-                        {news.description}
-                      </Translate>
+                  <img
+                    src={news.img}
+                    alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt` })}
+                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                  <div className="newsshowcase-content p-8 bg-white flex-1 flex flex-col relative">
+                    <h2 className="newsshowcase-card-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight tracking-tight"><Translate>{news.title}</Translate></h2>
+                    <p className="newsshowcase-description text-base text-[#333] leading-7 flex-1">
+                      <Translate>{news.description}</Translate>
                     </p>
-                    <div className="newsshowcase-link-indicator">
+                    <div className="newsshowcase-link-indicator absolute bottom-6 right-6 inline-flex items-center text-[#0A2C7E] font-bold text-base opacity-0 translate-x-2.5 transition-all duration-300 bg-[#FDEFC3] px-4 py-2 rounded-full border border-[rgb(255,228,138)] gap-2 group-hover:opacity-100 group-hover:translate-x-0">
                       <Translate>前往阅读</Translate>
                       <span className="newsshowcase-arrow">→</span>
                     </div>
@@ -395,18 +182,22 @@ const NewsShowcase = () => {
       )}
 
       {isMobile && (
-        <div className="mobile-cards-wrapper">
+  <div className="mobile-cards-wrapper flex flex-col gap-4 px-4 w-full">
           {newsData.map((news, idx) => (
             <div
               key={idx}
-              className="mobile-news-card"
+              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)]"
               onClick={() => handleCardClick(news.link)}
             >
-              <img src={news.img} alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile`})} className="mobile-news-image" />
-              <div className="mobile-news-content">
-                <h2 className="mobile-news-title"><Translate>{news.title}</Translate></h2>
-                <p className="mobile-news-description"><Translate>{news.description}</Translate></p>
-                <div className="mobile-news-link-indicator">
+              <img
+                src={news.img}
+                alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile` })}
+                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div className="mobile-news-content p-4 bg-white flex flex-col relative">
+                <h2 className="mobile-news-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight"><Translate>{news.title}</Translate></h2>
+                <p className="mobile-news-description text-sm text-[#333] leading-7 mb-4"><Translate>{news.description}</Translate></p>
+                <div className="mobile-news-link-indicator inline-flex items-center text-[#0A2C7E] font-bold text-base bg-[#FDEFC3] px-4 py-2 rounded-full border border-[rgb(255,228,138)] gap-2 justify-center w-fit mx-auto">
                   <Translate>前往阅读</Translate>
                   <span className="newsshowcase-arrow">→</span>
                 </div>

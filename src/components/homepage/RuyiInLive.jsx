@@ -96,6 +96,24 @@ const RuyiInLive = () => {
       setError(new Error('API configuration is missing.'));
       return;
     }
+
+    // In development, avoid spinning a Worker that calls remote APIs to speed up preview and avoid rate limits.
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+      // Use lightweight placeholder data to render immediately.
+      setTimeout(() => {
+        setData({
+          pm_downloads: { total: 1200 },
+          downloads: { total: 5400 },
+          installs: { total: 3200 },
+          top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
+        });
+        setLoading(false);
+        setError(null);
+      }, 0);
+
+      return;
+    }
+
     const worker = new Worker('/js/dashboardFetcher.js');
     worker.onmessage = (event) => {
       const { type, payload } = event.data;
@@ -381,26 +399,22 @@ const RuyiInLive = () => {
   };
 
   const PlaceholderChart = () => (
-    <div style={styles.placeholderWrapper}>
-      <div style={styles.nativeChart}>
+    <div className="w-full h-full relative opacity-60">
+      <div className="w-full h-full flex flex-col justify-around gap-2">
         {placeholderData.map((item, index) => {
           const maxValue = getMaxValue(placeholderData);
           const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
+          const innerLabelWidth = Math.min(80, Math.max(20, barWidth * 0.6));
           return (
-            <div key={`placeholder-${index}`} style={styles.nativeChartRow}>
-              <div style={styles.nativeChartBarOuter}>
+            <div key={`placeholder-${index}`} className="flex items-center min-h-[2rem]">
+              <div className="w-full h-7 bg-[#F5F5F7] rounded-[0.25rem] overflow-hidden">
                 <div
-                  style={{
-                    ...styles.nativeChartBarInner,
-                    width: `${barWidth}%`,
-                    backgroundColor: colors.placeholderGrey,
-                  }}
+                  style={{ width: `${barWidth}%`, backgroundColor: colors.placeholderGrey }}
+                  className="h-full rounded-[0.25rem] transition-all duration-300"
                 >
                   <div
-                    style={{
-                      ...styles.placeholderLabelInsideBar,
-                      width: `${Math.min(80, Math.max(20, barWidth * 0.6))}%`,
-                    }}
+                    style={{ width: `${innerLabelWidth}%` }}
+                    className="h-3 bg-[rgba(0,0,0,0.06)] rounded-[0.1875rem] ml-2 mt-2"
                   />
                 </div>
               </div>
@@ -412,44 +426,53 @@ const RuyiInLive = () => {
   );
 
   const StatItem = ({ value, label, loading }) => (
-    <div style={styles.statItem}>
-      <div style={styles.statValue}>
-        {loading ? <div style={styles.statPlaceholder}></div> : (value !== null && value !== undefined ? value.toLocaleString() : '---')}
+    <div className="flex flex-col items-center justify-center flex-1">
+      <div className="text-[1.75rem] font-bold text-[#002677] min-h-[2.1rem]">
+        {loading ? <div className="h-6 w-16 bg-[#E0E0E0] rounded animate-pulse" /> : (value !== null && value !== undefined ? value.toLocaleString() : '---')}
       </div>
-      <div style={styles.statLabel}>
+      <div className="text-[0.75rem] text-[#86868B] mt-1">
         <Translate>{label}</Translate>
       </div>
     </div>
   );
 
   return (
-    <div style={styles.outerContainer}>
-      <div style={styles.background}>
-        <div style={styles.container}>
-          <div style={styles.leftPanel}>
-            <h1 style={styles.title}>
+    <div className="w-full bg-[#f5f5f7]">
+      <div className={`w-full mx-auto px-4 md:px-8 ${isWideScreen ? 'max-w-[90rem] rounded-[0.625rem]' : ''}`}>
+        <div className="w-full py-4 flex justify-center items-center bg-[#f5f5f7]">
+          <div className={`w-full mx-auto ${isMobile ? 'flex flex-col' : 'flex flex-row'} ${isMobile ? 'h-auto' : 'h-[21.875rem]'} bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677] mx-auto mb-4`}>
+
+          <div
+            className={`${isMobile ? 'w-full' : 'w-2/5'} p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white`}
+            style={{ background: `linear-gradient(135deg, ${colors.navyBlue}, ${colors.navyBlue} 70%, ${colors.navyBlue} 85%)` }}
+          >
+            <h1 className="text-2xl md:text-[1.8rem] font-bold mb-1">
               <Translate id="ruyisdk.community" />
             </h1>
-            <p style={styles.subtitle}>
+            <p className="text-sm md:text-[0.9rem] mb-3 font-medium opacity-90">
               <Translate id="ruyisdk.community.open" />
             </p>
-            <div style={styles.buttonContainer}>
+
+            <div className="flex gap-3 flex-wrap">
               <a
                 href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={discussButtonStyle}
+                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isDiscussButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
+                style={{ background: colors.creamBeige_light, color: colors.textDark, minWidth: '6.25rem' }}
                 onMouseEnter={() => setIsDiscussButtonHovered(true)}
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
                 <UsersIcon />
                 <Translate id="ruyisdk.cn" />
               </a>
+
               <a
                 href="https://github.com/ruyisdk"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={sourceButtonStyle}
+                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isSourceButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
+                style={{ background: colors.creamBeige, color: colors.textDark, minWidth: '6.25rem' }}
                 onMouseEnter={() => setIsSourceButtonHovered(true)}
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >
@@ -457,17 +480,21 @@ const RuyiInLive = () => {
                 <Translate id="source.repository" />
               </a>
             </div>
-            <div style={styles.leftPanelAccent}></div>
+
+            <div
+              className="absolute -bottom-12 -right-12 w-48 h-48 rounded-full opacity-60 pointer-events-none"
+              style={{ background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)` }}
+            />
           </div>
 
-          <div style={styles.rightPanel}>
-            <div style={styles.rightPanelHeader}>
-              <h2 style={styles.rightPanelTitle}>
+          <div className={`${isMobile ? 'w-full' : 'w-3/5'} p-4 md:p-6 overflow-hidden flex flex-col bg-white`}>
+            <div className="flex justify-between items-baseline mb-4">
+              <h2 className="text-lg font-semibold text-[#002677]">
                 <Translate id="statistics" />
               </h2>
               <a
                 href="/Home/StatisticalDataPages"
-                style={styles.viewMoreLink}
+                className="text-sm text-[#86868B] hover:text-[#002677]"
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
                 onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}
               >
@@ -475,34 +502,39 @@ const RuyiInLive = () => {
               </a>
             </div>
 
-            <div style={styles.statsBox}>
+            <div className="flex justify-around p-4 bg-[#F5F5F7] rounded-[0.5rem] text-center mb-6">
               <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
               <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
               <StatItem value={data?.installs?.total} label="installs" loading={loading} />
             </div>
 
-            <div style={styles.chartContainer}>
+            <div className="flex-1">
               {loading || error ? (
                 <PlaceholderChart />
               ) : barData.length > 0 ? (
-                <div style={styles.chartWrapper}>
-                  <div style={styles.nativeChart}>
+                <div className="w-full h-full">
+                  <div className="w-full h-full">
                     {barData.map((item) => {
                       const maxValue = getMaxValue(barData);
                       const barWidth =
                         maxValue > 0 ? (item.total / maxValue) * 100 : 0;
                       return (
-                        <div key={item.action} style={styles.nativeChartRow}>
-                          <div style={styles.nativeChartBarOuter}>
+                        <div key={item.action} className="flex items-center min-h-[2rem]">
+                          <div className="w-full h-7 bg-[#F5F5F7] rounded-[0.25rem] overflow-hidden">
                             <div
                               style={{
-                                ...styles.nativeChartBarInner,
+                                height: '100%',
+                                borderRadius: '0.25rem',
+                                transition: 'width 0.4s ease-out',
+                                display: 'flex',
+                                alignItems: 'center',
+                                position: 'relative',
                                 width: `${barWidth}%`,
                                 backgroundColor: colors.navyBlue,
                               }}
                             >
                               <span
-                                style={styles.nativeChartActionLabelInsideBar}
+                                className="text-[0.75rem] font-semibold text-white px-2 overflow-hidden text-ellipsis whitespace-nowrap"
                                 title={item.action}
                               >
                                 {item.action}
@@ -515,12 +547,13 @@ const RuyiInLive = () => {
                   </div>
                 </div>
               ) : (
-                <div style={styles.emptyDataText}>
+                <div className="text-center text-[#86868B] text-sm p-4">
                   <Translate id="no.data" />
                 </div>
               )}
             </div>
           </div>
+        </div>
         </div>
       </div>
       <style>{`
