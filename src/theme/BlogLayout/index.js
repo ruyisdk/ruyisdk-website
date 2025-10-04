@@ -5,11 +5,15 @@ import BlogSidebar from "@theme/BlogSidebar";
 import useRouteContext from "@docusaurus/useRouteContext";
 import Translate, { translate } from "@docusaurus/Translate";
 import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
+import { useNavbarScroll } from "@site/src/hooks/useNavbarScroll";
 
 export default function BlogLayout(props) {
   const { sidebar, toc, children, ...layoutProps } = props;
   const hasSidebar = sidebar && sidebar.items.length > 0;
   const { plugin } = useRouteContext();
+  
+  // Use the navbar scroll hook to handle sidebar positioning
+  useNavbarScroll();
 
   if (plugin.id === "biweekly") {
     return (

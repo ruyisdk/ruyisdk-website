@@ -589,6 +589,62 @@ body {
 
 /* Blog */
 
+/* Fix for blog sidebar when navbar is hidden on scroll */
+/* Target blog layout containers */
+.blog-wrapper,
+[class*="blog-wrapper"],
+.theme-blog-layout {
+  .col--3 {
+    /* Ensure sidebar takes full height when navbar is hidden */
+    min-height: calc(100vh - var(--ifm-navbar-height, 60px));
+    
+    /* Make sidebar sticky to handle navbar hide/show */
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+  }
+  
+  /* When navbar is hidden, adjust sidebar positioning */
+  .navbar--hidden ~ .main-wrapper & .col--3 {
+    top: 0;
+    min-height: 100vh;
+  }
+}
+
+/* Specific fix for biweekly layout */
+.blog-wrapper .container .row .col--3 {
+  /* Ensure sidebar fills available space */
+  min-height: calc(100vh - var(--ifm-navbar-height, 60px));
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+
+/* Additional CSS-only solution for navbar scroll behavior */
+/* This targets the blog sidebar specifically */
+.blog-wrapper .col--3,
+[class*="blog-wrapper"] .col--3 {
+  /* Use CSS custom properties for dynamic height calculation */
+  --navbar-height: 60px; /* Default navbar height */
+  min-height: calc(100vh - var(--navbar-height));
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  
+  /* Ensure proper z-index for sticky positioning */
+  z-index: 1;
+}
+
+/* Handle different screen sizes */
+@media (max-width: 996px) {
+  .blog-wrapper .col--3,
+  [class*="blog-wrapper"] .col--3 {
+    /* On mobile, sidebar is usually hidden or different layout */
+    position: relative;
+    min-height: auto;
+  }
+}
+
 // .avatar__name {
 //   line-height: 24px;
 
