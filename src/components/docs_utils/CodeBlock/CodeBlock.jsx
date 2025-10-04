@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
+import { normalizeCode, cleanShellPrompt } from './utils';
 import './styles.css';
 
 /**
@@ -34,21 +35,16 @@ const CodeBlock = ({
         return code;
     }, [langs, currentLang, code]);
 
-    // 清理和标准化代码
+    // 清理和标准化代码（用于显示）
     const cleanedCode = useMemo(() => {
-        if (typeof currentCode !== 'string') return '';
-        
-        // CRLF 转 LF
-        const normalized = currentCode.replace(/\r\n/g, '\n');
-        const lines = normalized.split('\n');
-        
-        // 移除开头的空行
-        if (lines.length > 0 && lines[0].trim() === '') {
-            lines.shift();
-        }
-        
-        return lines.join('\n');
+        return normalizeCode(currentCode);
     }, [currentCode]);
+
+    // 生成可复制的代码（bash/zsh 去除 $ 提示符）
+    const copyableCode = useMemo(() => {
+        const normalized = normalizeCode(currentCode);
+        return cleanShellPrompt(normalized, currentLang);
+    }, [currentCode, currentLang]);
 
     // 显示的语言标签
     const displayLang = currentLang === 'no' ? 'text' : currentLang;
@@ -79,7 +75,7 @@ const CodeBlock = ({
             {/* 顶部标题栏 */}
             <Header 
                 title={headerTitle}
-                code={cleanedCode}
+                code={copyableCode}
                 isHovered={isHovered}
                 copiable={copiable}
                 langs={langs}
