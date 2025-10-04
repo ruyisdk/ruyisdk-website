@@ -6,18 +6,40 @@ import './styles.css';
 /**
  * CodeBlock - 代码块核心组件
  * @param {string} code - 代码内容
- * @param {string} lang - 语言类型，默认 'text'
- * @param {string} filename - 可选的文件名
+ * @param {string} lang - 语言类型，默认 'bash'
+ * @param {Array<{lang: string, code: string}>} langs - 多语言版本选项，默认 []
+ * @param {string} filename - 可选的文件名，如果提供则显示在 Header 左侧
+ * @param {string} title - Header 标题，默认 'Terminal'
+ * @param {boolean} copiable - 是否显示复制按钮，默认 true
  */
-const CodeBlock = ({ code = '', lang = 'text', filename }) => {
+const CodeBlock = ({ 
+    code = '', 
+    lang = 'bash', 
+    langs = [],
+    filename = '',
+    title = 'Terminal',
+    copiable = true 
+}) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [currentLang, setCurrentLang] = useState(lang);
+
+    // 获取当前显示的代码
+    const currentCode = useMemo(() => {
+        // 如果有多语言选项，从 langs 中查找对应语言的代码
+        if (langs && langs.length > 0) {
+            const langOption = langs.find(l => l.lang === currentLang);
+            return langOption ? langOption.code : code;
+        }
+        // 否则使用传入的 code
+        return code;
+    }, [langs, currentLang, code]);
 
     // 清理和标准化代码
     const cleanedCode = useMemo(() => {
-        if (typeof code !== 'string') return '';
+        if (typeof currentCode !== 'string') return '';
         
         // CRLF 转 LF
-        const normalized = code.replace(/\r\n/g, '\n');
+        const normalized = currentCode.replace(/\r\n/g, '\n');
         const lines = normalized.split('\n');
         
         // 移除开头的空行
@@ -26,10 +48,25 @@ const CodeBlock = ({ code = '', lang = 'text', filename }) => {
         }
         
         return lines.join('\n');
-    }, [code]);
+    }, [currentCode]);
 
     // 显示的语言标签
-    const displayLang = lang === 'no' ? 'text' : lang;
+    const displayLang = currentLang === 'no' ? 'text' : currentLang;
+
+    // Header 标题逻辑
+    const headerTitle = useMemo(() => {
+        // 如果传了 filename，优先显示 filename
+        if (filename) return filename;
+        
+        // 否则显示 title 或按语言推断
+        if (title && title !== 'Terminal') return title;
+        
+        // 如果是 bash，显示 Terminal
+        if (currentLang === 'bash') return 'Terminal';
+        
+        // 否则显示语言名称
+        return displayLang;
+    }, [filename, title, currentLang, displayLang]);
 
     return (
         <div 
@@ -41,9 +78,13 @@ const CodeBlock = ({ code = '', lang = 'text', filename }) => {
         >
             {/* 顶部标题栏 */}
             <Header 
-                filename={filename || displayLang}
+                title={headerTitle}
                 code={cleanedCode}
                 isHovered={isHovered}
+                copiable={copiable}
+                langs={langs}
+                currentLang={currentLang}
+                onLangChange={setCurrentLang}
             />
             
             {/* 代码内容 */}
