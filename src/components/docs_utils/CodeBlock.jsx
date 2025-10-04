@@ -9,13 +9,13 @@ const customLightTheme = {
     ...vscLightPlus,
     'pre[class*="language-"]': {
         ...vscLightPlus['pre[class*="language-"]'],
-        background: '#ffffff',
+        background: '#fafafa',
         fontSize: '0.875rem',
         lineHeight: '1.7',
     },
     'code[class*="language-"]': {
         ...vscLightPlus['code[class*="language-"]'],
-        background: '#ffffff',
+        background: '#fafafa',
         fontSize: '0.875rem',
         lineHeight: '1.7',
         fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -26,13 +26,13 @@ const customDarkTheme = {
     ...vscDarkPlus,
     'pre[class*="language-"]': {
         ...vscDarkPlus['pre[class*="language-"]'],
-        background: '#0a0a0a',
+        background: '#111111',
         fontSize: '0.875rem',
         lineHeight: '1.7',
     },
     'code[class*="language-"]': {
         ...vscDarkPlus['code[class*="language-"]'],
-        background: '#0a0a0a',
+        background: '#111111',
         fontSize: '0.875rem',
         lineHeight: '1.7',
         fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -40,9 +40,8 @@ const customDarkTheme = {
 };
 
 // --- HELPER COMPONENT: CopyButton ---
-const CopyButton = ({ textToCopy, themeStyles }) => {
+const CopyButton = ({ textToCopy }) => {
     const [isCopied, setIsCopied] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     const handleCopy = () => {
         if (!textToCopy) return;
@@ -73,21 +72,13 @@ const CopyButton = ({ textToCopy, themeStyles }) => {
         });
     };
 
-    const style = {
-        ...themeStyles.copyButton,
-        backgroundColor: isHovered ? themeStyles.copyButtonHoverBg : 'transparent',
-        color: isHovered ? themeStyles.copyButtonHoverColor : themeStyles.copyButton.color,
-    };
-
     return (
         <button
             onClick={handleCopy}
-            style={style}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            className="flex items-center justify-center p-2 rounded-md border-0 cursor-pointer transition-all duration-200 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2"
             aria-label="Copy code"
         >
-            {isCopied ? <Check size={16} style={{ color: '#4ade80' }} /> : <Copy size={16} />}
+            {isCopied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
         </button>
     );
 };
@@ -112,117 +103,7 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
         return () => observer.disconnect();
     }, []);
 
-    // --- DYNAMIC STYLES BASED ON THEME (Next.js-inspired) ---
-    const lightThemeStyles = {
-        container: { 
-            backgroundColor: '#fafafa', 
-            border: '1px solid #e5e7eb',
-            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-        },
-        header: { 
-            backgroundColor: '#f5f5f5', 
-            borderBottom: '1px solid #e5e7eb'
-        },
-        filename: { 
-            color: '#171717',
-            fontWeight: 500,
-            letterSpacing: '-0.01em'
-        },
-        icon: { color: '#737373' },
-        copyButton: { 
-            color: '#737373', 
-            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)', 
-            border: 'none', 
-            cursor: 'pointer', 
-            padding: '0.5rem', 
-            borderRadius: '0.375rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-        },
-        copyButtonHoverBg: '#e5e5e5',
-        copyButtonHoverColor: '#171717',
-        bashLineHoverBg: 'rgba(0, 0, 0, 0.03)',
-        syntaxTheme: customLightTheme,
-        codeBackground: '#ffffff'
-    };
-
-    const darkThemeStyles = {
-        container: { 
-            backgroundColor: '#161616', 
-            border: '1px solid #262626',
-            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.3)'
-        },
-        header: { 
-            backgroundColor: '#1a1a1a', 
-            borderBottom: '1px solid #262626'
-        },
-        filename: { 
-            color: '#ededed',
-            fontWeight: 500,
-            letterSpacing: '-0.01em'
-        },
-        icon: { color: '#a3a3a3' },
-        copyButton: { 
-            color: '#a3a3a3', 
-            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)', 
-            border: 'none', 
-            cursor: 'pointer', 
-            padding: '0.5rem', 
-            borderRadius: '0.375rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-        },
-        copyButtonHoverBg: '#262626',
-        copyButtonHoverColor: '#ffffff',
-        bashLineHoverBg: 'rgba(255, 255, 255, 0.05)',
-        syntaxTheme: customDarkTheme,
-        codeBackground: '#0a0a0a'
-    };
-
-    const currentStyles = theme === 'dark' ? darkThemeStyles : lightThemeStyles;
-    const syntaxTheme = currentStyles.syntaxTheme;
-
-    const baseStyles = {
-        container: { 
-            borderRadius: '0.75rem', 
-            fontFamily: 'ui-monospace, "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace', 
-            margin: '1.5rem 0', 
-            overflow: 'hidden',
-            fontSize: '14px'
-        },
-        header: { 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
-            padding: '0.625rem 1rem',
-            minHeight: '44px'
-        },
-        headerTextContainer: { 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '0.5rem' 
-        },
-        filename: { 
-            fontSize: '0.8125rem',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif'
-        },
-        syntaxHighlighter: { 
-            margin: 0, 
-            padding: '1rem 1.25rem', 
-            fontSize: '0.875rem', 
-            lineHeight: '1.7',
-            fontWeight: 400
-        },
-        bashLine: { 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
-            padding: '0 1.25rem',
-            transition: 'background-color 150ms ease'
-        },
-    };
+    const syntaxTheme = theme === 'dark' ? customDarkTheme : customLightTheme;
 
     // --- NORMALIZE / CLEAN CODE PROP ---
     const cleanedCode = useMemo(() => {
@@ -265,15 +146,6 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
                 commandToCopy = line.substring(promptSymbolIndex + 1).trim();
             }
 
-            // Make line container stretch to content width for horizontal scroll
-            const lineStyle = {
-                ...baseStyles.bashLine,
-                backgroundColor: isHovered ? currentStyles.bashLineHoverBg : 'transparent',
-                minWidth: 'max-content',
-                width: '100%',
-                position: 'relative',
-                paddingRight: '2rem',
-            };
             const lineHighlighterStyle = {
                 padding: 0,
                 margin: 0,
@@ -289,49 +161,41 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
             };
 
             return (
-                <div style={lineStyle} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                <div 
+                    className={`flex items-center justify-between px-5 transition-colors duration-150 min-w-max w-full relative pr-8 ${
+                        isHovered ? 'bg-black/[0.03] dark:bg-white/[0.05]' : 'bg-transparent'
+                    }`}
+                    onMouseEnter={() => setIsHovered(true)} 
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     <SyntaxHighlighter language="bash" style={syntaxTheme} customStyle={lineHighlighterStyle}>{line}</SyntaxHighlighter>
                     {isCommand && (
-                        // UPDATE: Elegant copy button style.
-                        // It is now invisible by default and fades in on hover without a background.
-                        <div style={{
-                            position: 'sticky',
-                            right: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            height: '100%',
-                            opacity: isHovered ? 1 : 0,
-                            transition: 'opacity 150ms ease-in-out',
-                        }}>
-                            <CopyButton textToCopy={commandToCopy} themeStyles={currentStyles} />
+                        <div className={`sticky right-4 flex items-center h-full transition-opacity duration-150 ${
+                            isHovered ? 'opacity-100' : 'opacity-0'
+                        }`}>
+                            <CopyButton textToCopy={commandToCopy} />
                         </div>
                     )}
                 </div>
             );
         };
 
-        const bashContainerBg = currentStyles.codeBackground;
-
         // Make the bash container scrollable and allow lines to stretch horizontally
         return (
-            <div style={{ ...baseStyles.container, ...currentStyles.container }}>
-                <div style={{ ...baseStyles.header, ...currentStyles.header }}>
-                    <div style={baseStyles.headerTextContainer}>
-                        <Terminal size={16} style={currentStyles.icon} />
-                        <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || 'Terminal'}</span>
+            <div className="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30">
+                <div className="flex items-center justify-between px-4 py-2.5 min-h-[44px] bg-neutral-100 border-b border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700">
+                    <div className="flex items-center gap-2">
+                        <Terminal size={16} className="text-neutral-600 dark:text-neutral-400" />
+                        <span className="text-[0.8125rem] font-medium tracking-tight text-neutral-900 dark:text-neutral-100 font-sans">
+                            {filename || 'Terminal'}
+                        </span>
                     </div>
-                    {/* UPDATE: This button is now hidden by default for bash blocks */}
                     {showTitleCopyButton && (
-                        <CopyButton textToCopy={getCommandsToCopy(cleanedCode)} themeStyles={currentStyles} />
+                        <CopyButton textToCopy={getCommandsToCopy(cleanedCode)} />
                     )}
                 </div>
-                    <div style={{ 
-                        backgroundColor: bashContainerBg, 
-                        overflowX: 'auto', 
-                        padding: '0.75rem 0', 
-                        width: '100%' 
-                    }}>
-                    <div style={{ display: 'table', width: 'max-content', minWidth: '100%' }}>
+                <div className="bg-white dark:bg-[#111111] overflow-x-auto py-3 w-full">
+                    <div className="table w-max min-w-full">
                         {cleanedCode.split('\n').map((line, index) => <LineRenderer key={index} line={line} />)}
                     </div>
                 </div>
@@ -341,14 +205,22 @@ const CodeBlock = ({ code = '', lang = 'no', filename, showTitleCopyButton = (la
 
     // --- RENDER LOGIC FOR ALL OTHER CODE ---
     return (
-        <div style={{ ...baseStyles.container, ...currentStyles.container }}>
-            <div style={{ ...baseStyles.header, ...currentStyles.header }}>
-                <span style={{ ...baseStyles.filename, ...currentStyles.filename }}>{filename || lang}</span>
-                        {showTitleCopyButton && (
-                    <CopyButton textToCopy={cleanedCode} themeStyles={currentStyles} />
+        <div className="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30">
+            <div className="flex items-center justify-between px-4 py-2.5 min-h-[44px] bg-neutral-100 border-b border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700">
+                <span className="text-[0.8125rem] font-medium tracking-tight text-neutral-900 dark:text-neutral-100 font-sans">
+                    {filename || lang}
+                </span>
+                {showTitleCopyButton && (
+                    <CopyButton textToCopy={cleanedCode} />
                 )}
             </div>
-                <SyntaxHighlighter language={lang === 'no' ? 'text' : lang} style={syntaxTheme} customStyle={baseStyles.syntaxHighlighter} wrapLines={true} wrapLongLines={true}>
+            <SyntaxHighlighter 
+                language={lang === 'no' ? 'text' : lang} 
+                style={syntaxTheme} 
+                customStyle={{ margin: 0, padding: '1rem 1.25rem', fontSize: '0.875rem', lineHeight: '1.7', fontWeight: 400 }} 
+                wrapLines={true} 
+                wrapLongLines={true}
+            >
                 {cleanedCode}
             </SyntaxHighlighter>
         </div>
