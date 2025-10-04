@@ -647,13 +647,37 @@ body {
   /* default text color */
   color: #000;
 
-  /* also override the “dark” and “light” variants */
+  /* also override the "dark" and "light" variants */
   &.navbar--dark {
     background-color: var(--deepdark);
   }
   &.navbar--light {
     background-color: #fff;
     color: #000;
+  }
+
+  /* Center the navbar content */
+  .navbar__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Center the left items */
+  .navbar__items--left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Center the right items */
+  .navbar__items--right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   /* Brand/logo */
