@@ -56,7 +56,7 @@
   },
 
   "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载数量" },
-  "ruyi安装台数": { "message": "RuyiSDK 安装台数" },
+  "ruyi安装台数": { "message": "RuyiSDK 遥测上传台数" },
 
   "详细下载统计": { "message": "详细下载统计" },
   "组件下载数量": { "message": "RuyiSDK组件下载数量" },
