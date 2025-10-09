@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Translate, { translate } from '@docusaurus/Translate';
-import styles from './mainDisplay.module.css';
 import SlideNews from '../common/SlideNews';
 
 // A terminal simulation that cycles through a set of commands.
@@ -127,17 +126,17 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
   }, [text]);
 
   return (
-    <div className={styles.terminal}>
-      <div className={styles.terminalHeader}>
-        <div className={styles.terminalButtons}>
-          <span className={`${styles.terminalButton} ${styles.closeButton}`}></span>
-          <span className={`${styles.terminalButton} ${styles.minimizeButton}`}></span>
-          <span className={`${styles.terminalButton} ${styles.maximizeButton}`}></span>
+    <div className="flex flex-col h-full w-full bg-[#1e1f29] rounded-lg shadow-xl overflow-hidden">
+      <div className="flex items-center bg-[#282a36] px-3 py-2 border-b border-[#44475a] flex-shrink-0">
+        <div className="flex gap-2 mr-4">
+          <span className="w-3 h-3 rounded-full block bg-[#ff5555]"></span>
+          <span className="w-3 h-3 rounded-full block bg-[#f1fa8c]"></span>
+          <span className="w-3 h-3 rounded-full block bg-[#50fa7b]"></span>
         </div>
-        <div className={styles.terminalTitle}>Terminal</div>
+        <div className="text-[#f8f8f2] text-sm font-medium flex-1 text-center">Terminal</div>
       </div>
-      <div className={styles.terminalContent} ref={terminalRef}>
-        <pre>{text}</pre>
+      <div className="p-4 text-[#f8f8f2] text-sm leading-6 overflow-y-auto flex-1 bg-[#1e1f29] min-h-0" ref={terminalRef}>
+        <pre className="m-0 font-mono whitespace-pre-wrap break-words">{text}</pre>
       </div>
     </div>
   );
@@ -145,11 +144,28 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
 
 // A decorative background animation with moving blobs.
 const BackgroundAnimation = () => {
+  // Colors used in the original CSS :root
+  const ruyiLightBlue = '#D9E0F3';
+  const ruyiLightGold = '#FDEFC3';
+
+  const blobBase = {
+    position: 'absolute',
+    width: '150%',
+    height: '150%',
+    top: '-25%',
+    left: '-25%',
+    borderRadius: '50%',
+    filter: 'blur(50px)',
+    opacity: 0.5,
+    mixBlendMode: 'soft-light',
+    pointerEvents: 'none',
+  };
+
   return (
-    <div className={styles.animationContainer}>
-      <div className={`${styles.blob} ${styles.blob1}`}></div>
-      <div className={`${styles.blob} ${styles.blob2}`}></div>
-      <div className={`${styles.blob} ${styles.blob3}`}></div>
+    <div className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-gradient-to-b from-transparent to-[#f5f5f7] pointer-events-none">
+      <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, ${ruyiLightBlue}, transparent 60%)`, animation: 'blobMove1 15s infinite alternate ease-in-out' }} />
+      <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, ${ruyiLightGold}, transparent 60%)`, animation: 'blobMove2 18s infinite alternate ease-in-out' }} />
+      <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, #90b3ff, transparent 60%)`, animation: 'blobMove3 12s infinite alternate ease-in-out', opacity: 0.4 }} />
     </div>
   );
 };
@@ -248,17 +264,17 @@ const MainDisplay = () => {
 
   return (
     <div>
-      <div className={styles.container}>
-      <BackgroundAnimation />
-      
+      <div className="py-16 bg-[#f5f5f7] font-sans w-full relative overflow-hidden flex flex-col">
+        <BackgroundAnimation />
+
         {/* Main page content */}
-        <div className={styles.mainContent}>
-          <div className={styles.contentRow}>
-            <div className={styles.leftContent}>
-              <h1 className={styles.title}>RuyiSDK</h1>
-              <p className={styles.subtitle}><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
-            
-              <div className={styles.buttonContainer}>
+        <div className="relative z-10 mx-auto max-w-[1280px] w-[90%] px-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center lg:gap-12 gap-10 w-full">
+            <div className="flex-1 lg:min-w-[300px] min-w-0 lg:max-w-[500px] max-w-full flex flex-col lg:block items-center lg:items-start text-center lg:text-left">
+              <h1 className="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold mb-4 text-[#0A2C7E] tracking-tight">RuyiSDK</h1>
+              <p className="text-[clamp(1.125rem,2.5vw,1.5rem)] text-[#515154] mb-10 leading-7 lg:max-w-[40ch] max-w-none"><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
+
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <a
                   href="/download"
                   style={primaryButtonStyle}
@@ -277,39 +293,37 @@ const MainDisplay = () => {
                 </a>
               </div>
             </div>
-          
+
             {/* Terminal component on the right */}
-            <div className={styles.terminalContainer}>
+            <div className="w-full max-w-[600px] h-[420px] relative flex-shrink-0 lg:w-[600px]">
               <Terminal />
             </div>
           </div>
         </div>
-      
+
         {/* Package details modal */}
-        {modalVisible && (
-          <div className={styles.modalOverlay} onClick={handleClickOutside}>
-            <div className={styles.modal} ref={modalRef}>
-              <div className={styles.modalHeader}>
-                <h2>{selectedPackage.name}</h2>
-                <CloseOutlined className={styles.closeIcon} onClick={handleModalClose} />
+        {modalVisible && selectedPackage && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={handleClickOutside}>
+            <div className="bg-white rounded-2xl w-[480px] max-w-[90vw] shadow-2xl overflow-hidden" ref={modalRef}>
+              <div className="flex items-center justify-between p-4 border-b">
+                <h2 className="text-lg font-semibold">{selectedPackage.name}</h2>
+                <CloseOutlined className="text-xl cursor-pointer" onClick={handleModalClose} />
               </div>
-              <div className={styles.modalContent}>
-                <p className={styles.packageVersion}>{selectedPackage.version}</p>
-                <p className={styles.packageDescription}>{selectedPackage.description}</p>
-                <div className={styles.packageTags}>
+              <div className="p-4">
+                <p className="text-sm text-gray-600">{selectedPackage.version}</p>
+                <p className="mt-2 text-gray-700">{selectedPackage.description}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
                   {selectedPackage.tags.map((tag, index) => (
                     <Tag key={index} color="blue">{tag}</Tag>
                   ))}
                 </div>
-                <div className={styles.packageStats}>
-                  <div className={styles.statItem}>
-                    <span className={styles.statLabel}>{translate({ id: "下载量", message: "下载量" })}</span>
-                    <span className={styles.statValue}>{selectedPackage.downloads}</span>
+                <div className="mt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">{translate({ id: "下载量", message: "下载量" })}</span>
+                    <span className="font-medium">{selectedPackage.downloads}</span>
                   </div>
                 </div>
-                <button className={styles.downloadButton}>
-                  {translate({ id: "下载", message: "下载" })}
-                </button>
+                <button className="mt-6 w-full bg-[#0A2C7E] text-white py-3 rounded-lg">{translate({ id: "下载", message: "下载" })}</button>
               </div>
             </div>
           </div>

@@ -13,23 +13,43 @@ const StatisticalDataPages = () => {
     const fetchGitHubStats = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://api.github.com/repos/ruyisdk/ruyi');
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        // In development, avoid hitting GitHub API to speed up dev preview and avoid rate limits.
+        if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+          try {
+            // Use local cached data when available
+            // eslint-disable-next-line global-require, import/no-dynamic-require
+            const local = require('../../../data/github-stats.json');
+            const stats = {
+              stars: local.stars || 0,
+              forks: local.forks || 0,
+              issues: local.issues || 0,
+              commits: local.commits || 0,
+              watchers: local.watchers || 0,
+            };
+            setGithubData(stats);
+          } catch (e) {
+            console.warn('Local github-stats.json not available, skipping GitHub fetch in development.');
+            setGithubData(null);
+          }
+        } else {
+          const response = await fetch('https://api.github.com/repos/ruyisdk/ruyi');
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const repoData = await response.json();
+
+          const stats = {
+            stars: repoData.stargazers_count,
+            forks: repoData.forks_count,
+            issues: repoData.open_issues_count,
+            commits: repoData.size,
+            watchers: repoData.watchers_count
+          };
+
+          setGithubData(stats);
         }
-        
-        const repoData = await response.json();
-        
-        const stats = {
-          stars: repoData.stargazers_count,
-          forks: repoData.forks_count,
-          issues: repoData.open_issues_count,
-          commits: repoData.size,
-          watchers: repoData.watchers_count
-        };
-        
-        setGithubData(stats);
       } catch (err) {
         console.error('Failed to fetch GitHub stats:', err);
       } finally {

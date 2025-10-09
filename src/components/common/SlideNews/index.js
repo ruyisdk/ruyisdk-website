@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
 import Translate, { translate } from "@docusaurus/Translate";
 import "react-slideshow-image/dist/styles.css";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -73,6 +72,24 @@ export default function SlideNews() {
   }, [expandedCardIndex]);
 
   // Layout logic for responsive design and grouping small cards
+
+  // Tailwind class mappings for card layouts and elements (component scope)
+  const classes = {
+    cardLarge: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[480px]',
+    cardMedium: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[240px]',
+    cardSmall: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-[calc(50%_-_0.5rem)] h-[240px] flex-none',
+    mobileCard: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[240px]',
+    clickableCard: 'cursor-pointer',
+    slideBackground: 'absolute inset-0 bg-cover bg-center z-0 bg-black/40 bg-blend-darken',
+    blurredBackground: 'filter blur-[15px] scale-[1.05]',
+    content: 'relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]',
+    title: 'text-2xl font-bold mb-4 tracking-tight text-white drop-shadow-md',
+    subtitle: 'font-medium text-base mb-4 text-white drop-shadow-md',
+    buttonContainer: 'flex gap-3 mt-4 flex-wrap justify-center',
+    primaryButton: 'inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full font-semibold text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[rgb(242,222,154)] hover:-translate-y-0.5',
+    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full font-semibold text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[#E8E3D2] hover:-translate-y-0.5',
+  };
+
   const organizeCards = () => {
     const isMobile = windowSize.width < 768;
     let result = [];
@@ -84,7 +101,7 @@ export default function SlideNews() {
       if (isMobile) {
         result.push({
           ...card,
-          layoutClass: styles.mobileCard,
+          layoutClass: classes.mobileCard,
           index
         });
         return;
@@ -103,7 +120,7 @@ export default function SlideNews() {
           }
           result.push({
             ...card,
-            layoutClass: styles.cardLarge,
+            layoutClass: classes.cardLarge,
             index
           });
           break;
@@ -119,7 +136,7 @@ export default function SlideNews() {
           }
           result.push({
             ...card,
-            layoutClass: styles.cardMedium,
+            layoutClass: classes.cardMedium,
             index
           });
           break;
@@ -128,7 +145,7 @@ export default function SlideNews() {
           // Collect small cards
           currentSmallCards.push({
             ...card,
-            layoutClass: styles.cardSmall,
+            layoutClass: classes.cardSmall,
             index
           });
 
@@ -153,7 +170,7 @@ export default function SlideNews() {
           }
           result.push({
             ...card,
-            layoutClass: styles.cardMedium,
+            layoutClass: classes.cardMedium,
             index
           });
       }
@@ -249,9 +266,9 @@ export default function SlideNews() {
     setExpandedCardIndex(null);
   };
 
-  // Handler for overlay click
+  // Handler for overlay click - close only if clicking the overlay background
   const handleOverlayClick = (event) => {
-    if (event.target.classList.contains(styles.expandedCardOverlay)) {
+    if (event.target === event.currentTarget) {
       setExpandedCardIndex(null);
     }
   };
@@ -260,12 +277,12 @@ export default function SlideNews() {
   const renderCard = (card) => {
     // Create the correct card background classes based on blur setting
     const backgroundClassName = card.isBlur
-      ? `${styles.slideBackground} ${styles.blurredBackground}`
-      : styles.slideBackground;
+      ? `${classes.slideBackground} ${classes.blurredBackground}`
+      : classes.slideBackground;
 
     // Determine if card should have clickable styling
     const cardClassName = card.ispopup
-      ? `${card.layoutClass} ${styles.clickableCard}`
+      ? `${card.layoutClass} ${classes.clickableCard}`
       : card.layoutClass;
 
     return (
@@ -284,9 +301,9 @@ export default function SlideNews() {
           }}
         />
 
-        <div className={styles.content}>
+        <div className={classes.content}>
           <h1
-            className={styles.title}
+            className={classes.title}
             style={{
               color: card.titleColor || "#ffffff",
             }}
@@ -294,27 +311,27 @@ export default function SlideNews() {
             {card.title}
           </h1>
           <h2
-            className={styles.subtitle}
+            className={classes.subtitle}
             style={{
               color: card.subtitleColor || "#f0f0f0",
             }}
           >
             {card.subtitle}
           </h2>
-          <div className={styles.buttonContainer}>
+          <div className={classes.buttonContainer}>
             {card.ispopup ? (
-              <button className={styles.primaryButton}>
+              <button className={classes.primaryButton}>
                 <Translate>显示详情</Translate>
               </button>
             ) : (
-              <a target="_blank" href={card.Links} className={styles.primaryButton} rel="noopener noreferrer">
+              <a target="_blank" href={card.Links} className={classes.primaryButton} rel="noopener noreferrer">
                 <Translate>{card.ButtonText}</Translate>
               </a>
             )}
             {card.subLinks && (
               <a
                 href={card.subLinks}
-                className={styles.secondaryButton}
+                className={classes.secondaryButton}
               >
                 <Translate id="homepage.secondarybutton">
                   现在开始
@@ -330,8 +347,8 @@ export default function SlideNews() {
   return (
     <>
       {/* New wrapper div for the light grey background */}
-      <div className={styles.slideNewsSectionWrapper}>
-        <div className={`${styles.verticalSlideContainer} ${isVeryWideScreen ? styles.maxWidthContainer : ''}`}>
+      <div className="bg-[#f5f5f7] py-4 flex justify-center w-full">
+        <div className={`flex flex-col gap-4 w-full px-8 relative ${isVeryWideScreen ? 'mx-auto max-w-[90rem]' : ''}`}>
           {organizedCards.map((item, i) => {
             // For regular cards
             if (!item.type) {
@@ -341,7 +358,7 @@ export default function SlideNews() {
             // For rows of small cards
             if (item.type === 'smallRow') {
               return (
-                <div key={`row-${i}`} className={styles.smallCardsRow}>
+                <div key={`row-${i}`} className="flex flex-wrap gap-4 w-full">
                   {item.cards.map(card => renderCard(card))}
                 </div>
               );
@@ -355,50 +372,50 @@ export default function SlideNews() {
       {/* Expanded Card Modal */}
       {expandedCardIndex !== null && (
         <div
-          className={styles.expandedCardOverlay}
+          className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-8 overflow-y-auto"
           onClick={handleOverlayClick}
         >
-          <div className={styles.expandedCard}>
+          <div className="flex flex-col relative w-[90%] max-w-[900px] max-h-[90vh] bg-white rounded-[10px] overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.15)]" ref={null}>
             <button
-              className={styles.closeButton}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/20 text-white text-2xl flex items-center justify-center z-10 backdrop-blur-sm"
               onClick={handleCloseExpandedCard}
               aria-label="Close"
             >
               ×
             </button>
-            
+
             {/* New header element for the image */}
             <div
-              className={styles.expandedCardHeader}
+              className="relative h-[25vh] flex-shrink-0 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
               }}
             >
-              <div className={styles.expandedCardImageOverlay} />
+              <div className="absolute inset-0 bg-black/20" />
             </div>
-            
+
             {/* Content element is now a sibling to the header */}
-            <div className={styles.expandedCardContent}>
-              <h1 className={styles.expandedCardTitle}>
+            <div className="relative z-20 p-8 overflow-y-auto bg-white">
+              <h1 className="text-[2.5rem] mb-4 leading-tight font-bold text-[#111]">
                 {slideImages[expandedCardIndex].title}
               </h1>
 
-              <h2 className={styles.expandedCardSubtitle}>
+              <h2 className="text-lg mb-6 text-[#333]">
                 {slideImages[expandedCardIndex].subtitle}
               </h2>
 
               {slideImages[expandedCardIndex].content && (
-                <div className={styles.expandedCardDescription}>
+                <div className="mb-6 leading-7 text-[#333] whitespace-pre-line">
                   {slideImages[expandedCardIndex].content.split('\n\n').map((paragraph, i) => (
                     <p key={i}><Translate>{paragraph}</Translate></p>
                   ))}
                 </div>
               )}
 
-              <div className={styles.expandedCardButtons}>
+              <div className="flex gap-3 mt-6 flex-col sm:flex-row">
                 <a
                   href={slideImages[expandedCardIndex].Links}
-                  className={styles.primaryButton}
+                  className={`inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full font-semibold min-w-[100px] shadow-sm`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -407,7 +424,7 @@ export default function SlideNews() {
                 {slideImages[expandedCardIndex].subLinks && (
                   <a
                     href={slideImages[expandedCardIndex].subLinks}
-                    className={styles.secondaryButton}
+                    className="inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full font-semibold min-w-[100px] shadow-sm"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

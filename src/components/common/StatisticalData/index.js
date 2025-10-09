@@ -460,13 +460,28 @@ const StatisticalData = () => {
   // Data fetching
   useEffect(() => {
     if (!axiosInstance) return;
-    
+
+    // In development, avoid calling remote dashboard API to speed up preview and avoid rate limits.
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+      // Provide lightweight placeholder data
+      const placeholder = {
+        pm_downloads: { total: 1200 },
+        downloads: { total: 5400 },
+        installs: { total: 3200 },
+        top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
+      };
+      setData(placeholder);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     let retryTimer = null;
     let retryCount = 0;
-    
+
     const fetchData = async () => {
       if (retryCount > MAX_RETRY_COUNT) return;
-      
+
       try {
         setLoading(true);
         const response = await axiosInstance.post('/fe/dashboard', {});
