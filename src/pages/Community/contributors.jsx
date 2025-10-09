@@ -122,37 +122,39 @@ export default function ContributorsPage() {
   return (
     <Layout title="Contributors" description="RuyiSDK 贡献者">
       <PageBackground isClient={isClient} />
-      <div className={styles.pageWrapper}>
-        <div className={styles.contentContainer}>
+      <div className={`relative overflow-hidden px-8 py-8 text-gray-800 font-inter`}>
+        <div className="mx-auto relative z-10 max-w-screen-xl">
           {/* Title and intro removed per request */}
 
-          <h2 className={styles.sectionHeader}><Translate id="community.contributors.title">贡献者</Translate></h2>
-          <p className={`${styles.communityIntroText} ${styles.subtitleCentered}`}>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 drop-shadow-sm mt-6 mb-8"><Translate id="community.contributors.title">贡献者</Translate></h2>
+          <p className="text-gray-500 text-lg md:text-xl leading-relaxed text-center mb-7">
             <Translate id="community.contributors.subtitle">RuyiSDK社区由贡献者们共同驱动。</Translate>
           </p>
           {/* Totals / stats bar (populated at build time by generator) */}
-          <div className={styles.statsBar}>
-            <div className={styles.statItem}>
-              <div className={styles.statIcon}><StatIconUser /></div>
-              <div className={styles.statLabel}><Translate id="community.stats.contributors">Contributors</Translate></div>
-              <div className={styles.statValue}>{totals.contributors ?? allPeople.length}</div>
+          <div className="flex flex-wrap gap-4 justify-center items-stretch my-4 md:my-6">
+            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
+              <div className="text-slate-900 mb-1 text-2xl"><StatIconUser /></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.contributors">Contributors</Translate></div>
+              <div className="font-extrabold text-slate-900 text-2xl">{totals.contributors ?? allPeople.length}</div>
             </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIcon}><StatIconCommit /></div>
-              <div className={styles.statLabel}><Translate id="community.stats.commits">Commits</Translate></div>
-              <div className={styles.statValue}>{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">N/A</Translate>}</div>
+            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
+              <div className="text-slate-900 mb-1 text-2xl"><StatIconCommit /></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.commits">Commits</Translate></div>
+              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIcon}><StatIconPR /></div>
-              <div className={styles.statLabel}><Translate id="community.stats.prs">Pull Requests</Translate></div>
-              <div className={styles.statValue}>{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">N/A</Translate>}</div>
+            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
+              <div className="text-slate-900 mb-1 text-2xl"><StatIconPR /></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.prs">Pull Requests</Translate></div>
+              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>
           </div>
 
-          <div className={`${styles.glassContainer} ${styles.contributorGrid}`}>
-            {allPeople.map((p, i) => (
-              <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />
-            ))}
+          <div className={`${styles.glassContainer} p-6 rounded-2xl mt-6`}>
+            <div className={`${styles.contributorGrid}`}>
+              {allPeople.map((p, i) => (
+                <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
