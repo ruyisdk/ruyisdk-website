@@ -68,7 +68,7 @@ const config = {
       image: "img/docusaurus-social-card.jpg",
       navbar: {
         title: "RuyiSDK",
-        hideOnScroll: true,
+        hideOnScroll: false,
         logo: {
           alt: "RuyiSDK Logo",
           src: "img/ruyi-logo-720.svg",

@@ -643,7 +643,8 @@ body {
 
 .navbar {
   /* always white background */
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: saturate(180%) blur(12px);
   /* default text color */
   color: #000;
 
@@ -700,6 +701,11 @@ body {
       color: #333;
     }
   }
+
+  /* Make navbar sticky at top */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Hamburger / toggle icon */
