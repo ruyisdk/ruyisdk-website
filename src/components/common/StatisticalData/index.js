@@ -14,7 +14,6 @@ import FlipCounter from './FlipCounter';
 const CHART_COLORS = ['#0A2C7E', '#1A3A8E', '#2A4A9E', '#3A5AAE', '#4A6ABE', '#5A7ACE', '#6A8ADE', '#7A9AEE', '#8AAAEE', '#9ABAEE'];
 const ANIMATION_DURATION = 2000;
 const ANIMATION_STEPS = 60;
-const SCROLL_TIMEOUT = 500;
 const MOBILE_BREAKPOINT = 1024;
 const MAX_RETRY_COUNT = 5;
 const RETRY_DELAY_BASE = 1000;
@@ -254,21 +253,6 @@ const TopList = ({ data, title }) => {
   );
 };
 
-const NavigationDots = ({ currentSlide, onDotClick, isMobile }) => {
-  if (!isMobile) return null;
-  
-  return (
-    <div className={styles.navigationDots}>
-      {[0, 1, 2].map(index => (
-        <div 
-          key={index}
-          onClick={() => onDotClick(index)}
-          className={`${styles.dot} ${currentSlide === index ? styles.activeDot : ''}`}
-        />
-      ))}
-    </div>
-  );
-};
 
 const MobileInstallSection = ({ totalInstalls, loading }) => (
   <div className={styles.installSection}>
@@ -453,27 +437,9 @@ const StatisticalData = () => {
   const containerRef = useRef();
   const footerRef = useRef(null);
   const [isFooterVisible, setIsFooterVisible] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeoutRef = useRef(null);
   
   const isMobile = useMobileDetection();
 
-  // Scroll handling
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const container = containerRef.current;
-    const handleScroll = () => {
-      if (container) {
-        const pos = container.scrollTop;
-        const slide = Math.round(pos / window.innerHeight);
-        setCurrentSlide(slide);
-      }
-    };
-    container?.addEventListener('scroll', handleScroll);
-    return () => container?.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Footer visibility
   useEffect(() => {
@@ -490,37 +456,32 @@ const StatisticalData = () => {
     }
   }, []);
 
-  // Keyboard navigation
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    
-    const handleKeyDown = (e) => {
-      if (isScrolling || isFooterVisible || !isMobile) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-        e.preventDefault();
-        scrollToCard(Math.min(2, currentSlide + 1));
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        e.preventDefault();
-        scrollToCard(Math.max(0, currentSlide - 1));
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      clearTimeout(scrollTimeoutRef.current);
-    };
-  }, [isScrolling, currentSlide, isFooterVisible, isMobile]);
 
   // Data fetching
   useEffect(() => {
     if (!axiosInstance) return;
-    
+
+    // In development, avoid calling remote dashboard API to speed up preview and avoid rate limits.
+    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
+      // Provide lightweight placeholder data
+      const placeholder = {
+        pm_downloads: { total: 1200 },
+        downloads: { total: 5400 },
+        installs: { total: 3200 },
+        top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
+      };
+      setData(placeholder);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     let retryTimer = null;
     let retryCount = 0;
-    
+
     const fetchData = async () => {
       if (retryCount > MAX_RETRY_COUNT) return;
-      
+
       try {
         setLoading(true);
         const response = await axiosInstance.post('/fe/dashboard', {});
@@ -547,16 +508,6 @@ const StatisticalData = () => {
     }
   }, [axiosInstance]);
 
-  const scrollToCard = (index) => {
-    if (containerRef.current && !isScrolling && !isFooterVisible) {
-      setIsScrolling(true);
-      containerRef.current.scrollTo({
-        top: index * window.innerHeight,
-        behavior: 'smooth'
-      });
-      scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), SCROLL_TIMEOUT);
-    }
-  };
 
   const totalInstalls = data?.installs?.total || 0;
 
@@ -566,11 +517,6 @@ const StatisticalData = () => {
       className={styles.container}
       style={{ pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto' }}
     >
-      <NavigationDots 
-        currentSlide={currentSlide} 
-        onDotClick={scrollToCard} 
-        isMobile={isMobile} 
-      />
 
       {/* Decorative header + animated background blobs (homepage-style) */}
       <div className={styles.backgroundHeader} />
