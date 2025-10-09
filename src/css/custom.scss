@@ -658,9 +658,10 @@ body {
 
   /* Center the navbar content */
   .navbar__inner {
-    max-width: 1200px;
+    /* Align with news cards container (SlideNews/NewsShowcase): max-width 90rem, 2rem side padding */
+    max-width: 90rem;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
