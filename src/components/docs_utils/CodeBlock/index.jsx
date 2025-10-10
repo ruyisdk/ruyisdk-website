@@ -1,39 +1,39 @@
 /**
- * CodeBlock - 主入口文件
+ * CodeBlock - Main entry file
  * 
- * 模块化的代码块组件，专为 RuyiSDK 网站设计
- * 采用 Next.js 风格的 UI，支持语法高亮、复制、多语言切换等功能
+ * Modular code block component designed for RuyiSDK website
+ * Features Next.js style UI with syntax highlighting, copy, multi-language switching
  * 
  * @module CodeBlock
  * 
- * 文件结构：
- * ├── index.jsx          # 主入口（当前文件）
- * ├── CodeBlock.jsx      # 代码渲染核心
- * ├── Header.jsx         # 顶部标题栏
- * ├── CopyButton.jsx     # 复制按钮
- * ├── LangSwitcher.jsx   # 语言切换器
- * ├── Icons.jsx          # 图标组件
- * └── styles.css         # 样式文件
+ * File structure:
+ * ├── index.jsx          # Main entry (current file)
+ * ├── CodeBlock.jsx      # Code rendering core
+ * ├── Header.jsx         # Header component
+ * ├── CopyButton.jsx     # Copy button
+ * ├── LangSwitcher.jsx   # Language switcher
+ * ├── Icons.jsx          # Icon components
+ * └── styles.css         # Styles
  * 
  * Props:
- * @param {string} code - 代码内容
- * @param {string} lang - 语言类型，默认 'bash'
- * @param {Array} langs - 多语言版本选项 [{lang: 'js', code: '...'}, ...]
- * @param {string} filename - 文件名，会覆盖默认标题
- * @param {string} title - 自定义标题，默认 'Terminal'
- * @param {boolean} copiable - 是否显示复制按钮，默认 true
+ * @param {string} code - Code content
+ * @param {string} lang - Language type, defaults to 'bash'
+ * @param {Array} langs - Multi-language options [{lang: 'js', code: '...'}, ...]
+ * @param {string} filename - Filename, overrides default title
+ * @param {string} title - Custom title, defaults to 'Terminal'
+ * @param {boolean} copiable - Whether to show copy button, defaults to true
  * 
- * 使用示例：
+ * Usage examples:
  * ```jsx
  * import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
  * 
- * // 基础使用
+ * // Basic usage
  * <CodeBlock lang="javascript" code={`console.log('Hello');`} />
  * 
- * // 带文件名
+ * // With filename
  * <CodeBlock lang="python" filename="app.py" code={`print('Hello')`} />
  * 
- * // 多语言切换
+ * // Multi-language switching
  * <CodeBlock 
  *   lang="javascript"
  *   langs={[
@@ -43,10 +43,10 @@
  *   ]}
  * />
  * 
- * // 自定义标题，禁用复制
+ * // Custom title, disable copy
  * <CodeBlock 
  *   lang="bash" 
- *   title="示例命令"
+ *   title="Example command"
  *   copiable={false}
  *   code={`$ echo "example"`} 
  * />
@@ -55,10 +55,8 @@
 
 import CodeBlock from './CodeBlock';
 
-// 导出主组件
 export default CodeBlock;
 
-// 导出子组件（供高级用法）
 export { default as Header } from './Header';
 export { default as CopyButton } from './CopyButton';
 export { default as LangSwitcher } from './LangSwitcher';

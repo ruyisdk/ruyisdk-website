@@ -1,13 +1,12 @@
 import React from 'react';
 
 /**
- * LangSwitcher - 语言切换器组件
- * @param {Array<{lang: string, code: string}>} langs - 语言选项数组
- * @param {string} currentLang - 当前选中的语言
- * @param {Function} onLangChange - 语言切换回调
+ * LangSwitcher - Language switcher component
+ * @param {Array<{lang: string, code: string}>} langs - Language options array
+ * @param {string} currentLang - Currently selected language
+ * @param {Function} onLangChange - Language change callback
  */
 const LangSwitcher = ({ langs, currentLang, onLangChange }) => {
-    // 如果没有多个语言选项，不显示切换器
     if (!langs || langs.length === 0) {
         return null;
     }

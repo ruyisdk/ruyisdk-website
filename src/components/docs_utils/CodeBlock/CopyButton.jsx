@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { CopyIcon, CopiedIcon } from './Icons';
 
 /**
- * CopyButton - 复制按钮组件
- * @param {string} textToCopy - 要复制的文本内容
+ * CopyButton - Copy button component
+ * @param {string} textToCopy - Text content to copy
  */
 const CopyButton = ({ textToCopy }) => {
     const [isCopied, setIsCopied] = useState(false);

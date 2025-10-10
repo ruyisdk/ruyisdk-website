@@ -1,6 +1,5 @@
 import React from 'react';
 
-// --- COPY ICON (Next.js style) ---
 export const CopyIcon = () => (
     <svg 
         height="16" 
@@ -18,7 +17,6 @@ export const CopyIcon = () => (
     </svg>
 );
 
-// --- COPIED ICON (Check mark) ---
 export const CopiedIcon = () => (
     <svg 
         height="16" 
