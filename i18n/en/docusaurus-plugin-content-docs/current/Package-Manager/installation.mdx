@@ -2,160 +2,58 @@
 sidebar_position: 2
 ---
 
-import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/components/docs_utils/LatestReleases';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import BinaryPackagesContent from './\_binaryPackages.mdx';
+import LinuxPkgContent from './\_linuxPkg.mdx'; 
+import PythonPipContent from './\_pythonPip.mdx';
 
 # Installation
 
-Let's begin with the installation of the RuyiSDK package manager.
-
-This document uses ``~`` to represent the home directory of the current regular user, and ``/home/foo`` as an example of the absolute path to the home directory when necessary.
-
-<ReleaseProvider>
-  <>
-
-## Installing Using Precompiled Binaries
-
-Currently, the RuyiSDK package manager tool provides precompiled binaries for **Linux** systems in three architectures: **amd64**, **arm64**, and **riscv64**. It does not depend on the system Python, making it widely applicable.
-
-These binaries are released on both GitHub Release and the ISCAS mirror site:
-
-- [ruyi GitHub Releases](https://github.com/ruyisdk/ruyi/releases/)
-- [ISCAS Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
-
-Using the ISCAS mirror as an example, the installation process is described below. First, run ``uname -m`` to check the system architecture and download the corresponding binary.
-
-If the output is ``x86_64``:
-
-<DownloadRuyi arch="x86_64" />
-
-If the output is ``aarch64``:
-
-<DownloadRuyi arch="aarch64" />
-
-If the output is ``riscv64``:
-
-<DownloadRuyi arch="riscv64" />
-
-You can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
-
-The following example assumes the ``x86_64`` architecture. Grant execution permissions to the downloaded binary:
-
-<ChmodCommand arch="x86_64" />
-
-Install the binary to a directory included in ``PATH``:
-
-<CpCommand arch="x86_64" />
-
-If your ``PATH`` includes the ``~/.local/bin/`` directory, installing ``ruyi`` to ``~/.local/bin/ruyi`` may be a more recommended choice. Installation and removal in this directory do not require superuser privileges.
-
-Note that the binary file must be named ``ruyi``.
-
-## Installing Via the System Package Manager
-
-### Arch Linux
-
-Currently, Arch Linux users can install and uninstall the Ruyi package manager using the system package manager. Compared to installing with precompiled binaries, this method offers more convenient maintenance and better performance by utilizing the system Python.
-
-To install from the AUR, using ``yay`` as an example, note that a regular user should be used:
-
-```bash
-$ yay -S ruyi
-```
-
-To install from the Arch Linux CN repository, add the following configuration using the ISCAS open-source mirror as an example:
-
-```bash
-[archlinuxcn]
-Server = https://mirror.iscas.ac.cn/archlinuxcn/$arch
-```
-
-Install using ``pacman``:
-
-```bash
-$ sudo pacman -Sy
-$ sudo pacman -S ruyi
-```
-
-### Gentoo Linux
-
-Gentoo Linux users can follow the steps below to install and configure the Ruyi package manager (`ruyi`) using the officially provided `ruyisdk-overlay`.
-
-1. Install `eselect-repository` and Git client:
-
-```bash
-sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
-```
-
-2. Ensure that the system has added the main Gentoo repository (usually configured by default).
-
-3. Use `eselect-repository` to add `ruyisdk-overlay`.
-
-```bash
-sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git
-```
-
-4. Sync the repository
-
-```bash
-sudo emaint sync -r ruyisdk
-```
-
-5. Accept testing keywords (Unmask)
-
-The ebuild for Ruyi is marked as a testing version (`~amd64`), and needs to be unmasked before installation.
-
-```bash
-sudo emerge dev-util/ruyi --autounmask-write --autounmask
-sudo dispatch-conf
-```
-
-1. The first command will generate the necessary changes to `package.accept_keywords`. 
-2. Run `dispatch-conf` and enter `u` (use-new) in the interface to accept the changes. 
-3. Install the Ruyi package manager.
-
-```bash
-sudo emerge --ask dev-util/ruyi
-```
-## Installing via Python Package Manager
-
-The RuyiSDK package manager is now [available on PyPI](https://pypi.org/project/ruyi/)，and can be installed using `pip` or other Python package managers.
-
-```bash
-# If you're using pipx for global installation:
-pipx install ruyi
-
-# If you're installing within a virtual environment:
-# Assuming the virtual environment is located at /path/to/some/venv
-/path/to/some/venv/bin/pip install ruyi
-```
-
-:::info Note for RISC-V Users
-
-RISC-V users can install `ruyi` via `pip`, but please note that some Python libraries required by `ruyi` do not yet offer precompiled packages for the RISC-V architecture on PyPI. As a result, the Python package manager may attempt to compile these dependencies from source during installation, which can be time-consuming or may fail.
-
-If you encounter issues installing `ruyi` on a RISC-V device, we recommend using alternative installation methods.
-
+:::tip Friendly Reminder
+- By downloading and using RuyiSDK, you agree to the license terms and [privacy policy](https://ruyisdk.org/en/docs/legal/privacyPolicy/).
+- This documentation uses `~` to represent the current user's home directory. When necessary, please use the absolute path (on most Linux systems, this is typically something like `/home/your-username`). You may see `/home/foo` used as a placeholder in examples—please replace it with your actual environment path.
+- Each installation method supports different operating systems and hardware architectures. Before proceeding, make sure your environment matches the `Supported Architectures` listed in the relevant section.
 :::
+
+Let’s begin with installing the RuyiSDK package manager.
+
+There are currently three installation methods available, each suited to different scenarios. Please choose the one that best fits your system and architecture:
+1.  **Install with Precompiled Binary (Recommended)**
+    *   **Highlights**: Broadest OS and hardware support; minimal system requirements.
+    *   **Best for**: Almost all users, especially beginners looking for a quick setup.
+
+2.  **Install via System Package Manager**
+    *   **Highlights**: Installed like any regular software using system commands (e.g., `apt`, `yum`).
+    *   **Prerequisite**: Your Linux distribution must officially include the `ruyi` package.
+
+3.  **Install via Python’s pip Tool**
+    *   **Highlights**: Uses Python’s package manager `pip` for installation.
+    *   **Best for**: Users who already have a Python development environment configured.
+
+Now, choose the method that suits your system and preferences to get started!
+
+<Tabs groupId="ruyi-installation">
+  <TabItem value="BinaryPackages" label="Install with Precompiled Binary" default>
+    <BinaryPackagesContent />
+  </TabItem>
+  <TabItem value="LinuxPkg" label="Install via System Package Manager">
+    <LinuxPkgContent />
+  </TabItem>
+  <TabItem value="PythonPip" label="Install via Python Package Manager">
+    <PythonPipContent />
+  </TabItem>
+</Tabs>
 
 ---
 
-## Verifying Your Installation
-
-```bash
-$ ruyi version
-```
-
-The command should run successfully and print version and Copyright information. If it fails, check your system environment or retry the installation.
-
 ## Getting Started
 
-At this point, the Ruyi package manager has been successfully installed on your system. You can learn how to use it from the help information provided by Ruyi itself or continue reading this document.
+Ruyi has now been successfully installed on your system. You can explore its usage via the built-in help command or continue reading this documentation.
 
-To list the help information:
+To display help information:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi --help
-```
-
-  </>
-</ReleaseProvider>
+`} />

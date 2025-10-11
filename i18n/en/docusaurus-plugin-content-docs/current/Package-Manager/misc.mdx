@@ -2,6 +2,8 @@
 sidebar_position: 6
 ---
 
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
 # More Information
 
 ## Updating the Ruyi Package Manager
@@ -10,9 +12,9 @@ If you installed the Ruyi Package Manager using the precompiled single binary, s
 
 If you installed the Ruyi Package Manager using the system package manager, you can directly upgrade it using the system package manager:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ sudo pacman -Syuu
-```
+`} />
 
 This command will perform a comprehensive upgrade on Arch Linux. Note that Arch Linux does not support partial upgrades.
 
@@ -22,35 +24,35 @@ If you installed the Ruyi Package Manager using the system package manager, plea
 
 If you installed the Ruyi Package Manager using the precompiled single binary, you can use the following command to uninstall the Ruyi Package Manager:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self uninstall
-```
+`} />
 
 This command will prompt for a secondary confirmation of the operation. If you wish for the Ruyi Package Manager to execute without asking:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self uninstall -y
-```
+`} />
 
 The above command only removes the Ruyi Package Manager itself. If you wish to delete all caches and installed packages for a clean uninstallation:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self uninstall --purge
-```
+`} />
 
 Similarly, this command will prompt for a secondary confirmation of the operation. If you wish for the Ruyi Package Manager to execute without asking:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self uninstall --purge -y
-```
+`} />
 
 The Ruyi Package Manager is designed to avoid operations that require superuser privileges. If the Ruyi Package Manager is installed in directories such as ``/usr/local/bin/`` that require superuser privileges to modify, the ``ruyi self uninstall`` command will fail.
 
 In this case, you can manually delete all caches and installed packages (they are installed in the home directory and thus do not require superuser privileges to delete):
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self clean --all
-```
+`} />
 
 Then manually delete the Ruyi Package Manager itself.
 
@@ -89,4 +91,4 @@ We collect the following data:
     * No parameters are exposed
     * Granularity of invocation time is 1 minute
 
-You can view our privacy policy on the RuyiSDK official website.
+You can view our [privacy policy](https://ruyisdk.org/en/docs/legal/privacyPolicy/) on the RuyiSDK official website.
