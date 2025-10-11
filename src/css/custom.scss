@@ -643,17 +643,43 @@ body {
 
 .navbar {
   /* always white background */
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: saturate(180%) blur(12px);
   /* default text color */
   color: #000;
 
-  /* also override the “dark” and “light” variants */
+  /* also override the "dark" and "light" variants */
   &.navbar--dark {
     background-color: var(--deepdark);
   }
   &.navbar--light {
     background-color: #fff;
     color: #000;
+  }
+
+  /* Center the navbar content */
+  .navbar__inner {
+    /* Align with news cards container (SlideNews/NewsShowcase): max-width 90rem, 2rem side padding */
+    max-width: 90rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Center the left items */
+  .navbar__items--left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Center the right items */
+  .navbar__items--right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   /* Brand/logo */
@@ -675,6 +701,11 @@ body {
       color: #333;
     }
   }
+
+  /* Make navbar sticky at top */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Hamburger / toggle icon */
