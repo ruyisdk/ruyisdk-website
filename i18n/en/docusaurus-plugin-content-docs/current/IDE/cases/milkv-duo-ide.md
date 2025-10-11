@@ -4,16 +4,16 @@
 
 1. Install the RuyiSDK package manager [Reference](/docs/Package-Manager/installation)
 
-2. Install the gnu-milkv-milkv-duo-musl compiler
+2. Installing the toolchain: this guide uses the gnu-milkv-milkv-duo-musl compiler as an example (you may adjust the toolchain and version as needed).
 
    ```bash
    # View resources in the software repository
    $ ruyi list --name-contains milkv --category-is toolchain
    
    # Install the specified toolchain
-   $ ruyi install gnu-milkv-milkv-duo-bin
+   $ ruyi install gnu-milkv-milkv-duo-musl-bin
    
-   # From the returned information, you can view the installation path, e.g., ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-bin-0.20240731.0+git.67688c7335e7
+   # From the returned information, you can view the installation path, e.g., ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7
    
    ```
 
@@ -82,11 +82,11 @@ This article uses the application example duo-examples for the milkv-duo develop
      #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
      TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
 
-     # Compilation options -O3  
+     # Compilation options -O3
      #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I/home/phebe/milkv/duo/duo-examples/include/system
      #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
      CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g  #-mcpu=c906fdv -march=rv64imafdcv0p7xthead : One of the two must be set
-     LDFLAGS := 
+     LDFLAGS :=
 
      TARGET=helloworld
 
@@ -135,7 +135,7 @@ This article uses the application example duo-examples for the milkv-duo develop
      ![1735626766840](image/1735626766840.png)
 
      ![1735626979037](image/1735626979037.png)
-   - Pre-create the target file transfer path to match the scp command path in the Makefile. (After building, the target program will appear in the directory.)
+   - Before using the `scp` command in the Makefile, make sure the corresponding directory structure has already been created on the target host. This ensures that files can be transferred to the correct destination path. After the build process completes, the target program will appear in the specified directory.
 
      ![1736776549440](image/1736776549440.png)
 
@@ -238,8 +238,8 @@ TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl
 # Compilation options -O3   -static
 #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I~/milkv/duo/duo-examples/include/system
 #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
-CFLAGS := -march=rv64imafdcv0p7xthead -g 
-LDFLAGS := 
+CFLAGS := -march=rv64imafdcv0p7xthead -g
+LDFLAGS :=
 
 TARGET=sumdemo
 
@@ -314,7 +314,7 @@ Steps for remote debugging using GDBServer + GDB commands:
 
    # Check gdb version, start debugging
    # Use the ruyi virtual environment for debugging, activate the virtual environment, and compile in the virtual environment
-   $ source ~/venv-milkvduo/bin/ruyi-activate 
+   $ source ~/venv-milkvduo/bin/ruyi-activate
    $ riscv64-unknown-linux-musl-gdb --version
    $ riscv64-unknown-linux-musl-gdb ./sumdemo
 

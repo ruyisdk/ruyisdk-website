@@ -12,7 +12,9 @@ RuyiSDK IDE is a graphical integrated development environment primarily designed
 
 ### Download IDE
 
-RuyiSDK IDE download address: https://mirror.iscas.ac.cn/ruyisdk/ide
+RuyiSDK IDE download address: https://mirror.iscas.ac.cn/ruyisdk/ide/
+
+> Note: Be sure to keep the trailing `/` in the URL; omitting it may prevent the directory page from loading properly.
 
 Download the latest version of the IDE from the above address, ensuring to select the installation package that matches your architecture. If you intend to develop in an x86_64 environment, download the latest version of the `linux.gtk.x86_64.tar.gz` package; if you wish to develop on an ARM device, download the `linux.gtk.aarch64.tar.gz` package; and if you want to run it on a RISC-V device, download the `linux.gtk.riscv64.tar.gz` package.
 

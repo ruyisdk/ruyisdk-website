@@ -1,0 +1,56 @@
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
+## Installing via Python Package Manager
+> Supported Architectures: Linux x86_64 arm64
+
+The RuyiSDK package manager is now available on PyPI ([View PyPI Page](https://pypi.org/project/ruyi/)).
+If you're using a Linux system with x86_64 or ARM64 architecture, you can install it via `pip` or `pipx`. For Linux systems with RISC-V64 architecture, we recommend using the **precompiled binary installation** method instead.
+
+:::info Note for RISC-V Users
+Some Python libraries required by `ruyi` currently lack precompiled RISC-V packages on PyPI. When installing via `pip`, the package manager will attempt to build these dependencies from source, which is likely to fail and can be very time-consuming. Therefore, this installation method is not recommended for RISC-V devices.
+
+We suggest using the **precompiled binary installation** method on RISC-V systems.
+
+As Python's support for RISC-V continues to improve, we will periodically review and update compatibility. If you're an adventurous early adopter, feel free to try installing `ruyi` via `pip` and share your findings in the  [RuyiSDK Chinese Community](https://ruyisdk.cn/) .
+:::
+
+### Installing Globally with `pipx`
+`pipx` is a tool for installing Python CLI applications in isolated environments, automatically linking executables to your `PATH`.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ pipx install ruyi
+`} />
+
+Once installed, the `ruyi` command will be added to your `PATH`, typically under `~/.local/bin`. You can verify the installation with:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi version
+`} />
+
+If the command executes and prints copyright information, the installation was successful. If you encounter errors or the command is not found, please review the installation steps and ensure your environment variables are correctly configured.
+
+
+### Installing in a Virtual Environment
+If you prefer to install `ruyi` within a specific virtual environment (e.g., `/path/to/some/venv`), use the following approach. Be sure to replace the path with your actual environment location:
+
+<CodeBlock lang="bash" code={`
+# Run pip using the full path
+# Note: Replace with your actual environment path
+$ /path/to/some/venv/bin/pip install ruyi
+`} />
+
+The `ruyi` executable will be located in the virtual environment’s `bin` directory and **will not** be added to your system `PATH` automatically. You can run it using the full path or activate the virtual environment first:
+
+<CodeBlock lang="bash" code={`
+# Run ruyi using full path
+# Note: Replace with your actual environment path
+$ /path/to/some/venv/bin/ruyi version
+
+# Or activate the virtual environment before running
+# Note: Replace with your actual environment path
+$ source /path/to/some/venv/bin/activate
+$ ruyi version
+
+`} />
+
+If the command executes and prints copyright information, the installation was successful.

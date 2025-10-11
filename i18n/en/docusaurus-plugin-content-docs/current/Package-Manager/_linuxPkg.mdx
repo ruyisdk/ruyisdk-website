@@ -1,0 +1,85 @@
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
+## Installing via System Package Manager
+
+### Arch Linux
+> Supported Architectures: ArchLinux x86_64 arm64 riscv64
+
+Arch Linux users can install and uninstall the Ruyi package manager using the system package manager. Compared to installing precompiled binaries, this method offers easier maintenance and better performance by leveraging the system’s Python environment.
+
+To install from AUR using `yay` (recommended to run as a regular user):
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ yay -S ruyi
+`} />
+
+To install from the Arch Linux CN repository, add the following configuration using the ISCAS mirror as an example:
+
+```ini
+[archlinuxcn]
+Server = https://mirror.iscas.ac.cn/archlinuxcn/$arch
+```
+
+Then install using `pacman`:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ sudo pacman -Sy
+$ sudo pacman -S ruyi
+`} />
+
+
+### Gentoo Linux
+> Supported Architectures: GentooLinux x86_64 arm64 riscv64
+
+Gentoo Linux users can follow the steps below to install and configure the Ruyi package manager (`ruyi`) using the official `ruyisdk-overlay`.
+
+1. Install `eselect-repository` and the Git client:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
+`} />
+
+2. Ensure the main Gentoo repository is added (usually preconfigured by default).
+
+
+3. Add the `ruyisdk-overlay` using `eselect-repository`:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git
+`} />
+
+4. Sync the repository:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ sudo emaint sync -r ruyisdk
+`} />
+
+5. Accept testing keywords (Unmask)
+
+The Ruyi ebuild is marked as testing and needs to be unmasked before installation.
+
+    - First, run the following command to generate the necessary changes to package.accept_keywords:
+    
+        <CodeBlock lang="bash" showTitleCopyButton="true" code={`
+        $ sudo emerge dev-util/ruyi --autounmask-write --autounmask
+        `} />
+    
+    - Then run `dispatch-conf` and enter `u` (use-new) to accept all changes:
+    
+        <CodeBlock lang="bash" showTitleCopyButton="true" code={`
+        $ sudo dispatch-conf
+        `} />
+
+6. Install the Ruyi package manager:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ sudo emerge --ask dev-util/ruyi
+`} />
+
+7. Verify your installation:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi version
+`} />
+
+If the command executes successfully and prints version and copyright information, the installation is complete. If it fails, please check your system environment or retry the installation.
