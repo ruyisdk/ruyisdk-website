@@ -139,20 +139,20 @@ body {
 }
 
 .navbar {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
   color: #000;
-  opacity: 0.3;
 
   &.navbar--dark {
-    background-color: var(--deepdark);
+    background-color: rgba(32, 35, 42, 0.3);
   }
   &.navbar--light {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
     color: #000;
   }
 
   .navbar__brand {
     color: #000;
+    opacity: 1;
 
     &:focus {
       color: #333;
@@ -162,10 +162,24 @@ body {
   .navbar__item,
   .navbar__link {
     color: #000;
+    opacity: 1;
 
     &:hover,
     &:focus {
       color: #333;
+    }
+  }
+
+  .navbar__item--github {
+    opacity: 1;
+    
+    .navbar__link {
+      opacity: 1;
+      
+      svg {
+        opacity: 1;
+        fill: currentColor;
+      }
     }
   }
 }
@@ -174,8 +188,14 @@ body {
   margin-left: auto;
   margin-right: 0;
   order: 2;
-  svg path {
-    stroke: #000;
+  opacity: 1;
+  
+  svg {
+    opacity: 1;
+    
+    path {
+      stroke: #000;
+    }
   }
 }
 
