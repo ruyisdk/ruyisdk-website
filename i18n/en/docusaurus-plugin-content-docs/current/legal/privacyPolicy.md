@@ -17,8 +17,8 @@ To help improve RuyiSDK, we may collect your usage data starting from version 0.
 
 ### 2.1 Data Collection Modes
 
-* **Local Mode**: Data is collected locally and not reported.
-* **On Mode**: Data is collected locally and periodically reported. This is the default mode.
+* **Local Mode**: Data is collected locally and not reported. This is the default mode starting from `ruyi` 0.42.0 (inclusive).
+* **On Mode**: Data is collected locally and periodically reported (typically weekly). The specific upload day is determined by the installation's anonymous ID.
 * **Off Mode**: Data collection is completely stopped.
 
 We hope you agree to data collection to help us understand the usage of RuyiSDK tools and improve the RuyiSDK product. If you do not wish to send your usage data to us, please refer to Section 2.3.
@@ -110,6 +110,6 @@ If you wish to contact us or exercise your relevant rights, please contact us th
 
 Contact Email: contact@ruyisdk.cn
 
-Last Updated: December 3, 2024
+Last Updated: October 13, 2025
 
-Privacy Policy Version: v20241203
+Privacy Policy Version: v20251013

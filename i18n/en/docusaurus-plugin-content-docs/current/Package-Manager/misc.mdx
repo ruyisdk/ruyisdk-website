@@ -63,7 +63,7 @@ Submit an issue in the Ruyi Package Manager repository [here](https://github.com
 ## Telemetry Data Collection
 
 The Ruyi Package Manager collects some operational data from users through telemetry data collection to better understand user usage and improve the Ruyi Package Manager accordingly.
-You can choose whether to enable telemetry data collection by setting the `RUYI_TELEMETRY_OPTOUT` environment variable. `1`, `true`, or `yes` represents disabling telemetry, which is the same as `off` mentioned below; by default, telemetry data collection is enabled.
+You can choose whether to enable telemetry data collection by setting the `RUYI_TELEMETRY_OPTOUT` environment variable. Any of `1`, `true`, `x`, `y`, or `yes` (case-insensitive) disables telemetry and is equivalent to the `off` mode below.
 
 There are three levels of telemetry data collection:
 
@@ -71,7 +71,9 @@ There are three levels of telemetry data collection:
 - `on`: Sends telemetry data to a remote server.
 - `off`: Disables telemetry data collection.
 
-By default, the telemetry data collection level is `on`, meaning that each `ruyi` call records some non-sensitive operational data and some status information of `ruyi`, and sends it weekly to a remote server managed by `RuyiSDK` in mainland China. The upload occurs on a random day determined by an anonymous installation ID.
+Starting from `ruyi` 0.42.0 (inclusive), the default telemetry mode is `local`, which means each `ruyi` invocation records some non-sensitive operational data and some state information locally, but nothing is uploaded automatically. Uploads only happen when you explicitly enable them (for example, by switching to the `on` mode or running `ruyi telemetry upload`).
+
+When the telemetry mode is `on`, collected data is uploaded weekly to servers managed by the RuyiSDK team in the People's Republic of China. The upload day is determined solely by the installation's anonymous ID.
 
 You can edit the `ruyi` configuration file or simply set the telemetry data collection level through environment variables.
 
