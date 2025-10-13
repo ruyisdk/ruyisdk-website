@@ -2,15 +2,17 @@
 sidebar_position: 3
 ---
 
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
 # Managing Ruyi Packages
 
 ## Refreshing Local Package Cache
 
 Fetch the contents of remote package repositories and refresh the local package cache. By default, the mirror hosted on GitHub is used:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi update
-```
+`} />
 
 The package cache will be stored in the user's home directory, typically at ``~/.cache/ruyi/packages-index/``. If the ``XDG_CACHE_HOME`` environment variable is set, the directory will be ``$XDG_CACHE_HOME/ruyi/packages-index/``.
 
@@ -18,9 +20,9 @@ The package cache will be stored in the user's home directory, typically at ``~/
 
 Since the package index is currently hosted in a GitHub repository, if the repository access becomes unstable, you can use the `ruyi config` subcommand to configure the use of the [alternative repository](https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git).
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 # Check the current repository configuration
-$ ruyi config get repo
+$ ruyi config get repo.remote
 
 # Switch the remote repository to the ISCAS mirror
 $ ruyi config set repo.remote https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git
@@ -33,7 +35,7 @@ $ ruyi config set repo.local /your/custom/cache/path
 
 # After completing the configuration changes, refresh the local package cache again
 $ ruyi update
-```
+`} />
 
 ## Reading News
 
@@ -43,7 +45,7 @@ Running ``ruyi news list`` will also bring up this page, but it will display all
 
 You can use the following commands to browse, read news, and mark them as read:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi news list -h
 $ ruyi news list
 $ ruyi news list --new        # List only unread news
@@ -52,7 +54,7 @@ $ ruyi news read -h
 $ ruyi news read 1            # Read news with ID 1
 $ ruyi news read              # Read all unread news
 $ ruyi news read --quiet      # Output nothing, only mark unread news as read
-```
+`} />
 
 Ruyi marks news as read by storing the news titles in ``~/.local/state/ruyi/news.read.txt``, or at ``$XDG_STATE_HOME/ruyi/news.read.txt`` if ``XDG_STATE_HOME`` is configured.
 
@@ -77,7 +79,7 @@ Use the ``ruyi list`` command to list all available packages. Note that even if 
 
 Here is an example on an ``x86_64`` machine; the actual list will be longer:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi list --name-contains ''
 List of available packages:
 
@@ -117,7 +119,7 @@ List of available packages:
 * extra/wps-office
   - 12.1.0-r.17900 (latest)
   - 12.1.0-r.17885 ()
-```
+`} />
 
 The ``list`` command also provides the ``--verbose`` or ``-v`` option to output more detailed information, which will print almost all information from the package repository. Since the full output will be very long, it is recommended to pass a non-empty search field to ``--name-contains``, add other limiting parameters, or redirect the full output to a file or a tool such as ``less``.
 
@@ -154,9 +156,9 @@ In some scenarios, it is appropriate to install packages for non-native architec
 
 In such cases, you can specify the installation of a binary package for a particular architecture:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi install --host x86_64 wps-office
-```
+`} />
 
 ## Installing Binary Packages
 
@@ -170,31 +172,31 @@ Typically, the following sections contain binary packages:
 
 These packages can be installed using the ``install`` command, such as installing the GNU upstream GCC toolchain:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi install gnu-upstream
 $ ruyi install toolchain/gnu-upstream
-```
+`} />
 
 The above method of specifying the package name will by default install the version marked as ``latest``. If you want to install a specific historical version of gnu-upstream, you can specify the version:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi install 'gnu-upstream(0.20231118.0)'
 $ ruyi install 'gnu-upstream(>=0.20231118.0)'
-```
+`} />
 
 The expression supports ``<``, ``>``, ``==``, ``<=``, ``>=``, and ``!=`` operators.
 
 If you want to install multiple packages:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi install gnu-plct gnu-upsteam llvm-plct llvm-upstream
-```
+`} />
 
 In some special cases, such as accidentally deleting files of an installed package, you can reinstall the package to restore it:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi install --reinstall gnu-upstream
-```
+`} />
 
 Packages downloaded by the package manager are stored in ``~/.cache/ruyi/distfiles/``, or at ``$XDG_CACHE_HOME/ruyi/distfiles/`` if ``XDG_CACHE_HOME`` is specified. These packages are typically stored in a compressed format and require system tools to unpack. If the corresponding tools are missing on the system, a warning will be printed.
 
@@ -210,11 +212,11 @@ The following section clearly contains source packages:
 
 Source packages can be downloaded and unpacked into the current directory using the ``extract`` command:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi extract ruyisdk-demo
 $ ls
 README.md  rvv-autovec
-```
+`} />
 
 The ``extract`` command supports the same version expression syntax as ``install``.
 
@@ -222,9 +224,9 @@ The ``extract`` command supports the same version expression syntax as ``install
 
 The Ruyi package manager does not implement the functionality to uninstall specific Ruyi packages. However, you can use the following command to delete all downloaded and installed packages:
 
-```bash
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self clean --distfiles --installed-pkgs
-```
+`} />
 
 If you insist on deleting a specific package, although it is not recommended, you can manually delete them. If you accidentally delete some files but Ruyi still considers the package installed, you can try using ``install --reinstall`` to restore it.
 
