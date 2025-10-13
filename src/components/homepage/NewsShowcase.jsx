@@ -4,23 +4,23 @@ import Translate, { translate } from '@docusaurus/Translate';
 const NewsShowcase = () => {
   const newsData = [
     {
-      title: "学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创\"芯\"未来",
-      description: "玄铁携手 PLCT 实验室推出 RISC-V 系列课程，包含三大中级课程与两大高阶进阶课程。由专业讲师团队授课，涵盖 RISC-V 软件生态、编译器开发等领域。提供主流开发板实践机会，结业后可参与技术沙龙、Hackathon 比赛等活动，与行业专家交流，获得职业发展机会。",
-      img: "img/newsshowcase/XuanTie.jpg",
-      link: "https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q"
+      title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
+      description: "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！",
+      img: "img/newsshowcase/1.png",
+      link: "https://mp.weixin.qq.com/s/bQEtqcFE5r3njDBsAoKiUw"
     },
     {
-      title: "PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日",
-      description: "2025年8月8日，World RISC-V Days 北京站在北京开源芯片研究院圆满举行。作为由RISC-V 国际基金会推出的首届世界 RISC-V 日盛典，此次活动汇集了来自各地的行业专家、企业代表与开发者分享洞见、交流合作，进一步推动 RISC-V 在中国及全球的广泛落地与持续创新。",
-      img: "img/newsshowcase/xiangshan.jpg",
-      link: "https://mp.weixin.qq.com/s/OW8OAXUPN-kWurjVjk2VsQ"
+      title: "openGauss RISC-V SIG深度参与openGauss Meetup成都站，探索开源数据库与RISC-V的融合与实践",
+      description: "2025年9月27日，openGauss Meetup成都站成功举办。openGauss RISC-V SIG核心团队精彩亮相，分享了在RISC-V架构下的重要进展：实现了openGauss容器化部署方案，完成从5.1.0到7.0.0全量版的移植，性能提升显著。目前社区正积极推进技术优化与生态建设，并启动[甲辰计划]实习生招募，诚邀开发者加入，共同推动开源数据库在RISC-V生态的发展。加入我们，探索RISC-V未来！",
+      img: "img/newsshowcase/2.png",
+      link: "https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg"
     },
     {
-      title: "人物｜程龙灿：做RISC-V世界的 \"连接者\"",
-      description: "程龙灿，PLCT实验室运营经理，从测试小队成员转型为社区运营专家。他带着对Linux的热爱和技术储备，致力于让RISC-V技术被更多人看见，推动社区有序发展。作为RISC-V世界的'连接者'，他搭建起技术与用户之间的桥梁，让开源生态的价值得到充分释放。",
-      img: "img/newsshowcase/chenglongcan.png",
-      link: "https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ"
-    },
+      title: "首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人",
+      description: "2025年9月24日，首届[合肥RISC-V开放日]在合肥工业大学成功举行。活动汇聚百余位专家学者，共同探讨RISC-V软硬件生态发展。红帽、PLCT实验室等机构专家分享了在操作系统、AI、教育等领域的创新实践，现场还设置了生态展区，展示openKylin、deepin等社区的最新成果。此次活动为产学研合作搭建了重要平台，有力推动了RISC-V生态的融合发展。",
+      img: "img/newsshowcase/3.png",
+      link: "https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g"
+    }
   ];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
