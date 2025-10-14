@@ -1,0 +1,55 @@
+RuyiSDK 自定义 CodeBlock 使用教程
+
+一、说明
+本项目通过主题覆盖使所有 Markdown 三引号代码块（fenced code blocks）自动使用自定义 CodeBlock 渲染，无需在文档中手动引入组件。
+
+二、基本用法
+在 Markdown 中直接书写三引号代码块：
+
+```bash
+$ ruyi device provision
+$ ruyi device status
+```
+
+三、语言识别
+- 优先使用代码块语法标注的语言，例如 ```bash、```javascript、```python 等。
+- 若未标注，将默认按 bash 渲染。
+
+四、标题与文件名（metastring）
+支持在代码块声明行添加元信息参数：
+
+1) 指定标题：
+```bash title="Terminal"
+$ ruyi device provision
+```
+
+2) 指定文件名：
+```bash filename=provision.sh
+$ ruyi device provision
+```
+
+3) 同时指定标题与文件名：
+```bash title="Provisioning" filename=provision.sh
+$ ruyi device provision
+```
+
+五、复制行为
+- 对于 shell 语言（bash/zsh/sh），复制时会自动去除每行前导的 "$ " 提示符，方便直接粘贴执行。
+- 例如显示为：
+  $ ruyi device provision
+  复制结果为：
+  ruyi device provision
+
+六、其它语言示例
+```javascript
+console.log('Hello RuyiSDK');
+```
+
+```python
+print('Hello RuyiSDK')
+```
+
+七、注意事项
+- 若需要在将来为单个代码块关闭复制按钮、或添加额外开关，可在 metastring 中定义自定义标志（例如 nocopy），并在主题适配器中解析后传递给组件。当前默认是开启复制按钮。
+
+
