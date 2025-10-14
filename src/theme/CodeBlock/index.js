@@ -9,7 +9,9 @@ export default function CodeBlockAdapter(props) {
 
   // Derive language from explicit prop or className like "language-bash"
   const langFromClass = /(?:^|\s)language-([\w-]+)/.exec(className || '');
-  const lang = language || (langFromClass && langFromClass[1]) || 'bash';
+  const derivedLang = language ?? (langFromClass && langFromClass[1]) ?? '';
+  // If language is explicitly empty/absent, fall back to plain text; otherwise use provided
+  const lang = String(derivedLang).trim() === '' ? 'text' : derivedLang;
 
   // Parse metastring for filename/title (supports: filename=xxx title="My Title")
   let filename;
