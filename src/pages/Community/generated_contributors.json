@@ -7,14 +7,14 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1678
+      "contributions": 1720
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 273
+      "contributions": 275
     },
     {
       "id": 84754181,
@@ -77,7 +77,7 @@
       "name": "LoneBlade-zhang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/207433538?v=4",
       "github": "https://github.com/LoneBlade-zhang",
-      "contributions": 35
+      "contributions": 37
     },
     {
       "id": 198067605,
@@ -129,18 +129,18 @@
       "contributions": 17
     },
     {
+      "id": 132031800,
+      "name": "JoannaWu84",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/132031800?v=4",
+      "github": "https://github.com/JoannaWu84",
+      "contributions": 14
+    },
+    {
       "id": 43716472,
       "name": "NanamiKite",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43716472?v=4",
       "github": "https://github.com/NanamiKite",
       "contributions": 13
-    },
-    {
-      "id": 132031800,
-      "name": "JoannaWu84",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/132031800?v=4",
-      "github": "https://github.com/JoannaWu84",
-      "contributions": 12
     },
     {
       "id": 11484206,
@@ -327,7 +327,7 @@
   ],
   "totals": {
     "contributors": 46,
-    "commits": 3182,
-    "pullRequests": 1267
+    "commits": 3230,
+    "pullRequests": 1295
   }
 }
