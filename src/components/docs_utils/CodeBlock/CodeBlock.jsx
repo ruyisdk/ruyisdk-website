@@ -72,10 +72,11 @@ const CodeBlock = ({
                 language={displayLang} 
                 customStyle={{ 
                     margin: 0, 
-                    padding: '1rem 1.25rem', 
+                    padding: '20px 0px 20px 20px', 
                     fontSize: '0.875rem', 
                     lineHeight: '1.7', 
-                    fontWeight: 400 
+                    fontWeight: 400,
+                    backgroundColor: '#FFFFFF'
                 }} 
                 wrapLines={true} 
                 wrapLongLines={true}
