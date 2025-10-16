@@ -1,0 +1,48 @@
+.paginationNavLink {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 8px 0;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.paginationNavLink:hover {
+  text-decoration: none;
+  color: var(--ifm-link-color);
+}
+
+.paginationNavSublabel {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+.paginationNavLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  display: flex;
+  align-items: center;
+}
+
+.paginationNavLink--prev .paginationNavLabel::before {
+  content: "‹";
+  margin-right: 6px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.paginationNavLink--next .paginationNavLabel::after {
+  content: "›";
+  margin-left: 6px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.paginationNavLink:hover .paginationNavLabel {
+  color: var(--ifm-link-color);
+}
