@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
 import ReactDOM from "react-dom";
-import styles from "./community.module.css";
 
 const GithubIcon = ({ className, size = 24 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -31,43 +30,48 @@ const StatIconPR = ({ size = '1em' }) => (
   </svg>
 );
 
-const AvatarWithGithub = ({ avatarUrl, name, githubUrl, sizeClass = "" }) => (
-  <div className={`${styles.avatarWrapper} ${sizeClass}`}>
+const AvatarWithGithub = ({ avatarUrl, name, githubUrl, sizeClass = "w-20 h-20" }) => {
+  const img = (
     <img
       src={avatarUrl}
       alt={`${name}'s avatar`}
-      className={styles.avatarImage}
+      className={`w-full h-full object-cover rounded-full`}
       onError={(e) => {
         e.target.onerror = null;
         e.target.src = `https://placehold.co/192x192/e0e0e0/757575?text=Avatar`;
       }}
     />
-    {githubUrl && (
-      <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={styles.githubIconOnAvatar}>
-        <GithubIcon size={20} className={styles.githubIconSvg} />
-      </a>
-    )}
-  </div>
-);
+  );
 
-const ContributorCard = ({ person }) => {
-  const { name, avatarUrl, github } = person;
+  // If a GitHub URL is provided, wrap the avatar in a link. Otherwise just render the image container.
   return (
-    <div className={styles.contributorCard}>
-      <AvatarWithGithub avatarUrl={avatarUrl} name={name} githubUrl={github} sizeClass={styles.avatarSmall} />
-      <p className={styles.contributorName}>{name}</p>
+    <div className={`relative rounded-full overflow-hidden shadow-lg ${sizeClass}`}>
+      {githubUrl ? (
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name}'s GitHub profile`} className="block w-full h-full">
+          {img}
+        </a>
+      ) : (
+        img
+      )}
     </div>
   );
 };
 
-const PageBackground = ({ isClient }) => {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div className={`${styles.pageBlob} ${styles.pageBlob1}`} />
-      <div className={`${styles.pageBlob} ${styles.pageBlob2}`} />
-    </div>,
-    document.body,
+const ContributorCard = ({ person }) => {
+  const { name, avatarUrl, github } = person;
+  // Responsive avatar sizing: small screens show slightly smaller avatars, scale up on larger viewports
+  const sizeClass = "w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28";
+  return (
+    <div className="flex flex-col items-center justify-center gap-3 p-2 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03]">
+      <AvatarWithGithub avatarUrl={avatarUrl} name={name} githubUrl={github} sizeClass={sizeClass} />
+      {github ? (
+        <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem] hover:underline">
+          {name}
+        </a>
+      ) : (
+        <p className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem]">{name}</p>
+      )}
+    </div>
   );
 };
 
@@ -122,7 +126,7 @@ export default function ContributorsPage() {
   return (
     <Layout title="Contributors" description="RuyiSDK 贡献者">
       <PageBackground isClient={isClient} />
-      <div className={`relative overflow-hidden px-8 py-8 text-gray-800 font-inter`}>
+      <div className={`relative overflow-hidden px-6 py-8 text-gray-800 font-inter` }>
         <div className="mx-auto relative z-10 max-w-screen-xl">
           {/* Title and intro removed per request */}
 
@@ -149,8 +153,8 @@ export default function ContributorsPage() {
             </div>
           </div>
 
-          <div className={`${styles.glassContainer} p-6 rounded-2xl mt-6`}>
-            <div className={`${styles.contributorGrid}`}>
+          <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-items-center items-start">
               {allPeople.map((p, i) => (
                 <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />
               ))}
@@ -159,5 +163,25 @@ export default function ContributorsPage() {
         </div>
       </div>
     </Layout>
+  );
+}
+
+// PageBackground: keep portal but replace CSS-based blobs with inline/Tailwind utilities
+function PageBackground({ isClient }) {
+  if (!isClient) return null;
+  return ReactDOM.createPortal(
+    <div>
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 rounded-full -z-10"
+        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
+      />
+      <div
+        aria-hidden
+        className="fixed bottom-0 right-0 rounded-full -z-10"
+        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
+      />
+    </div>,
+    document.body,
   );
 }
