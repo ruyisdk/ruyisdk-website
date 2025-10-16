@@ -1,6 +1,7 @@
 import React from 'react';
 import CopyButton from './CopyButton';
 import LangSwitcher from './LangSwitcher';
+import { TerminalIcon } from './Icons';
 
 /**
  * Header - Code block header component
@@ -24,11 +25,14 @@ const Header = ({
     return (
         <div className="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-[#FAFAFA]">
             <div className="flex items-center gap-3">
-                <span className="text-[13px] font-normal tracking-normal 
-                                 text-[#666666] dark:text-[#666666]"
-                      style={{ fontFamily: 'Geist, Arial, "Apple Color Emoji", sans-serif' }}>
-                    {title}
-                </span>
+                <div className="flex items-center gap-2">
+                    <TerminalIcon />
+                    <span className="text-[13px] font-normal tracking-normal 
+                                     text-[#666666] dark:text-[#666666]"
+                          style={{ fontFamily: 'Geist, Arial, "Apple Color Emoji", sans-serif' }}>
+                        {title}
+                    </span>
+                </div>
                 
                 <LangSwitcher 
                     langs={langs}
