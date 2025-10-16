@@ -25,6 +25,7 @@ const repos = [
   'ruyisdk-website',
   'support-matrix',
   'ruyi-packaging',
+  'ruyi-package-ci',
   'wechat-articles',
   'docs',
   'ruyisdk-eclipse-plugins',

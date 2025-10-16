@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 275
+      "contributions": 277
     },
     {
       "id": 84754181,
@@ -77,14 +77,14 @@
       "name": "LoneBlade-zhang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/207433538?v=4",
       "github": "https://github.com/LoneBlade-zhang",
-      "contributions": 37
+      "contributions": 38
     },
     {
       "id": 198067605,
       "name": "a1gorhythm7",
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "github": "https://github.com/a1gorhythm7",
-      "contributions": 30
+      "contributions": 31
     },
     {
       "id": 132126433,
@@ -311,6 +311,13 @@
       "contributions": 1
     },
     {
+      "id": 13116853,
+      "name": "RevySR",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/13116853?v=4",
+      "github": "https://github.com/RevySR",
+      "contributions": 1
+    },
+    {
       "id": 1006477,
       "name": "felixonmars",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1006477?v=4",
@@ -326,8 +333,8 @@
     }
   ],
   "totals": {
-    "contributors": 46,
-    "commits": 3230,
-    "pullRequests": 1295
+    "contributors": 47,
+    "commits": 3235,
+    "pullRequests": 1298
   }
 }

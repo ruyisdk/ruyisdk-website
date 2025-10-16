@@ -15,19 +15,29 @@ const StatisticalDataPages = () => {
         // In development, avoid hitting GitHub API to speed up dev preview and avoid rate limits.
         if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
           try {
-            // Use local cached data when available
-            // eslint-disable-next-line global-require, import/no-dynamic-require
-            const local = require('../../../data/github-stats.json');
-            const stats = {
-              stars: local.stars || 0,
-              forks: local.forks || 0,
-              issues: local.issues || 0,
-              commits: local.commits || 0,
-              watchers: local.watchers || 0,
-            };
-            setGithubData(stats);
+            // Try to fetch a local cached JSON from the static /data path at runtime.
+            // Using fetch avoids webpack trying to resolve the file at build time.
+            if (typeof window !== 'undefined' && window.fetch) {
+              const resp = await fetch('/data/github-stats.json');
+              if (resp.ok) {
+                const local = await resp.json();
+                const stats = {
+                  stars: local.stars || 0,
+                  forks: local.forks || 0,
+                  issues: local.issues || 0,
+                  commits: local.commits || 0,
+                  watchers: local.watchers || 0,
+                };
+                setGithubData(stats);
+              } else {
+                console.warn('Local /data/github-stats.json not available (status ' + resp.status + '), skipping GitHub fetch in development.');
+                setGithubData(null);
+              }
+            } else {
+              setGithubData(null);
+            }
           } catch (e) {
-            console.warn('Local github-stats.json not available, skipping GitHub fetch in development.');
+            console.warn('Local github-stats.json not available, skipping GitHub fetch in development.', e);
             setGithubData(null);
           }
         } else {
