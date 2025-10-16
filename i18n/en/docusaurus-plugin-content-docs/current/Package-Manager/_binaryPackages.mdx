@@ -1,0 +1,49 @@
+
+import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/components/docs_utils/LatestReleases';
+import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
+import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+
+<ReleaseProvider>
+  <>
+
+## Installing with Precompiled Binaries
+> Supported Architectures: Linux x86_64 arm64 riscv64
+
+### Download the RuyiSDK Package Manager
+
+The RuyiSDK package manager is currently available as precompiled binaries for **Linux** systems, supporting three architectures: **amd64** (i.e., x86_64), **arm64**, and **riscv64**. It does not rely on the system’s Python environment, making it broadly compatible across setups.
+
+They are simultaneously published on both GitHub Releases and the ISCAS mirror site:
+
+- [ruyi GitHub Releases](https://github.com/ruyisdk/ruyi/releases/)
+- [ISCAS Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
+
+This guide uses the ISCAS mirror as an example. First, run `uname -m` to check your system architecture, then download the corresponding binary.
+
+<ArchSelector language="en"/>
+
+
+### Install the RuyiSDK Package Manager
+
+The command above has been auto-generated based on your system architecture. Make sure the binary is named `ruyi` and placed in a directory included in your `PATH`.
+
+To verify the installation, run:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi version
+`} />
+
+If the command executes and prints the copyright information, the installation was successful. If unexpected output appears, please check your installation steps and system environment.
+
+:::tip Troubleshooting
+- The installed file **must** be named `ruyi` (do not include architecture suffixes).
+- Ensure the `ruyi` binary has executable permissions.
+- se `echo $PATH` to confirm that the directory containing `ruyi` is included in your `PATH` environment variable.
+:::
+:::tip Custom Installation Path
+- If you prefer a custom installation directory, modify the `/usr/local/bin` path in the command accordingly, and ensure your `PATH` includes that directory.
+- Installing `ruyi` to `~/.local/bin/ruyi` is often recommended, as it allows installation and removal without superuser privileges. In this case, make sure `~/.local/bin/` is part of your `PATH`.
+:::
+
+  </>
+</ReleaseProvider>
