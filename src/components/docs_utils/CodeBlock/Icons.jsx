@@ -34,3 +34,9 @@ export const CopiedIcon = () => (
     </svg>
 );
 
+export const TerminalIcon = () => (
+    <span className="text-[13px] font-mono text-[#666666] dark:text-[#666666]">
+        &gt;_
+    </span>
+);
+
