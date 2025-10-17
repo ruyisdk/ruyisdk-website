@@ -509,3 +509,59 @@ html[data-theme="dark"] div[class^="tableOfContents"] {
     border-left-color: var(--ifm-color-primary);
   }
 }
+
+/* Anchor link styles with chain icon */
+.anchor {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* More specific selectors to ensure styles are applied */
+h1.anchor .hash-link,
+h2.anchor .hash-link,
+h3.anchor .hash-link,
+h4.anchor .hash-link,
+h5.anchor .hash-link,
+h6.anchor .hash-link,
+.anchor .hash-link {
+  opacity: 0.3 !important;
+  padding-left: 0.5rem;
+  transition: opacity var(--ifm-transition-fast);
+  user-select: none;
+  text-decoration: none;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.8em;
+  vertical-align: middle;
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='4' cy='8' rx='3' ry='4'/%3E%3Cellipse cx='12' cy='8' rx='3' ry='4'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: brightness(0) saturate(100%);
+}
+
+.hash-link::before {
+  content: '';
+}
+
+.hash-link:focus,
+*:hover > .hash-link {
+  opacity: 1 !important;
+}
+
+.hash-link:hover {
+  opacity: 1 !important;
+  color: var(--ifm-color-primary);
+}
+
+/* Dark theme adjustments for anchor links */
+html[data-theme="dark"] .hash-link {
+  color: var(--ifm-color-emphasis-400);
+  
+  &:hover {
+    color: var(--ifm-color-primary);
+  }
+}

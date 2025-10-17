@@ -26,6 +26,12 @@ export default function Heading({as: As, id, ...props}) {
       )}
       id={id}>
       {props.children}
+      <a
+        className="hash-link"
+        href={`#${id}`}
+        aria-label={`${props.children} permalink`}
+        title={`${props.children} permalink`}
+      />
     </As>
   );
 }
