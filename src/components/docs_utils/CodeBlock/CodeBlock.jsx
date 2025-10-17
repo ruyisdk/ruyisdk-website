@@ -99,7 +99,7 @@ const CodeBlock = ({
 
     // 使用 DOM 操作应用高亮效果
     useEffect(() => {
-        if (codeBlockRef.current && highlightLines.size > 0) {
+        if (codeBlockRef.current) {
             const codeElement = codeBlockRef.current.querySelector('pre code');
             if (codeElement) {
                 const lines = codeElement.querySelectorAll('.token-line, code > span');
@@ -110,18 +110,32 @@ const CodeBlock = ({
                     line.style.display = '';
                     line.style.margin = '';
                     line.style.padding = '';
+                    line.style.borderRadius = '';
                     
-                    // 应用新的高亮样式
+                    // 应用 highlight-start/end 标记的高亮
                     if (highlightLines.has(index)) {
                         line.style.backgroundColor = 'rgb(229, 229, 229)';
                         line.style.display = 'block';
-                        line.style.margin = '0 -20px';
-                        line.style.padding = '0 20px';
+                        line.style.margin = '2px -12px';
+                        line.style.padding = '4px 12px';
+                        line.style.borderRadius = '6px';
+                    }
+                    
+                    // 如果是 Terminal 标题，高亮以 $ 开头的行
+                    if (headerTitle === 'Terminal') {
+                        const text = line.textContent || '';
+                        if (text.trim().startsWith('$')) {
+                            line.style.backgroundColor = 'rgb(229, 229, 229)';
+                            line.style.display = 'block';
+                            line.style.margin = '2px -12px';
+                            line.style.padding = '4px 12px';
+                            line.style.borderRadius = '6px';
+                        }
                     }
                 });
             }
         }
-    }, [highlightLines, cleanedCode]);
+    }, [highlightLines, cleanedCode, headerTitle]);
 
     return (
         <div 
@@ -142,19 +156,19 @@ const CodeBlock = ({
                 onLangChange={setCurrentLang}
             />
             
-            <div className="bg-white dark:bg-neutral-900">
+            <div className="bg-white dark:bg-neutral-900 overflow-x-auto">
                 <SyntaxHighlighter 
                     language={displayLang} 
                     customStyle={{ 
                         margin: 0, 
-                        padding: '20px 0px 20px 20px', 
+                        padding: '20px', 
                         fontSize: '0.875rem', 
                         lineHeight: '1.7', 
                         fontWeight: 400,
                         backgroundColor: 'transparent'
                     }} 
                     wrapLines={true} 
-                    wrapLongLines={true}
+                    wrapLongLines={false}
                 >
                     {cleanedCode}
                 </SyntaxHighlighter>
