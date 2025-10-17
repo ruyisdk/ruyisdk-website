@@ -104,6 +104,18 @@ const CodeBlock = ({
             if (codeElement) {
                 const lines = codeElement.querySelectorAll('.token-line, code > span');
                 
+                // 第一步：确定哪些行需要高亮
+                const highlightedLines = new Set();
+                lines.forEach((line, index) => {
+                    const text = line.textContent || '';
+                    const shouldHighlight = highlightLines.has(index) || 
+                                          (headerTitle === 'Terminal' && text.trim().startsWith('$'));
+                    if (shouldHighlight) {
+                        highlightedLines.add(index);
+                    }
+                });
+                
+                // 第二步：应用样式，考虑连续高亮
                 lines.forEach((line, index) => {
                     // 移除之前的高亮样式和复制按钮
                     line.style.backgroundColor = '';
@@ -119,18 +131,49 @@ const CodeBlock = ({
                         existingBtn.remove();
                     }
                     
-                    const text = line.textContent || '';
-                    const shouldHighlight = highlightLines.has(index) || 
-                                          (headerTitle === 'Terminal' && text.trim().startsWith('$'));
+                    const shouldHighlight = highlightedLines.has(index);
                     
                     // 应用高亮样式
                     if (shouldHighlight) {
+                        const prevHighlighted = highlightedLines.has(index - 1);
+                        const nextHighlighted = highlightedLines.has(index + 1);
+                        
                         line.style.backgroundColor = 'rgb(229, 229, 229)';
                         line.style.display = 'block';
-                        line.style.margin = '2px -12px';
-                        line.style.padding = '4px 12px 4px 12px';
-                        line.style.borderRadius = '6px';
                         line.style.position = 'relative';
+                        
+                        // 根据上下行是否高亮调整样式
+                        let marginTop = '2px';
+                        let marginBottom = '2px';
+                        let paddingTop = '4px';
+                        let paddingBottom = '4px';
+                        let borderRadius = '';
+                        
+                        if (prevHighlighted && nextHighlighted) {
+                            // 中间行：上下都有高亮
+                            marginTop = '0';
+                            marginBottom = '0';
+                            borderRadius = '0';
+                        } else if (prevHighlighted && !nextHighlighted) {
+                            // 最后一行：只有上面有高亮
+                            marginTop = '0';
+                            marginBottom = '2px';
+                            borderRadius = '0 0 6px 6px';
+                        } else if (!prevHighlighted && nextHighlighted) {
+                            // 第一行：只有下面有高亮
+                            marginTop = '2px';
+                            marginBottom = '0';
+                            borderRadius = '6px 6px 0 0';
+                        } else {
+                            // 单独一行：上下都没有高亮
+                            marginTop = '2px';
+                            marginBottom = '2px';
+                            borderRadius = '6px';
+                        }
+                        
+                        line.style.margin = `${marginTop} -12px ${marginBottom} -12px`;
+                        line.style.padding = `${paddingTop} 12px ${paddingBottom} 12px`;
+                        line.style.borderRadius = borderRadius;
                         
                         // 创建行级复制按钮
                         const copyBtn = document.createElement('button');
