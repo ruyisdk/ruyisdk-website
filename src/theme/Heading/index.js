@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
+import { Link } from 'lucide-react';
 export default function Heading({as: As, id, ...props}) {
   const brokenLinks = useBrokenLinks();
   const {
@@ -31,7 +32,9 @@ export default function Heading({as: As, id, ...props}) {
         href={`#${id}`}
         aria-label={`${props.children} permalink`}
         title={`${props.children} permalink`}
-      />
+      >
+        <Link size="0.75em" />
+      </a>
     </As>
   );
 }
