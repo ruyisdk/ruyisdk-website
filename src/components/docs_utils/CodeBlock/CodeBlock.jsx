@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
 import { normalizeCode, cleanShellPrompt } from './utils';
-import './styles.css';
 
 /**
  * CodeBlock - Core code block component
@@ -78,21 +77,23 @@ const CodeBlock = ({
                 onLangChange={setCurrentLang}
             />
             
-            <SyntaxHighlighter 
-                language={displayLang} 
-                customStyle={{ 
-                    margin: 0, 
-                    padding: '20px 0px 20px 20px', 
-                    fontSize: '0.875rem', 
-                    lineHeight: '1.7', 
-                    fontWeight: 400,
-                    backgroundColor: '#FFFFFF'
-                }} 
-                wrapLines={true} 
-                wrapLongLines={true}
-            >
-                {cleanedCode}
-            </SyntaxHighlighter>
+            <div className="bg-white dark:bg-neutral-900">
+                <SyntaxHighlighter 
+                    language={displayLang} 
+                    customStyle={{ 
+                        margin: 0, 
+                        padding: '20px 0px 20px 20px', 
+                        fontSize: '0.875rem', 
+                        lineHeight: '1.7', 
+                        fontWeight: 400,
+                        backgroundColor: 'transparent'
+                    }} 
+                    wrapLines={true} 
+                    wrapLongLines={true}
+                >
+                    {cleanedCode}
+                </SyntaxHighlighter>
+            </div>
         </div>
     );
 };
