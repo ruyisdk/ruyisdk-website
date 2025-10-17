@@ -10,7 +10,7 @@ import { normalizeCode, cleanShellPrompt } from './utils';
  * @param {Array<{lang: string, code: string}>} langs - Multi-language options, defaults to []
  * @param {string} filename - Optional filename, displays in Header if provided
  * @param {string} title - Header title, defaults to empty string
- * @param {boolean} copiable - Whether to show copy button, defaults to true
+ * @param {boolean} copiable - Whether to show copy button, defaults to false
  */
 const CodeBlock = ({ 
     code = '', 
@@ -18,7 +18,7 @@ const CodeBlock = ({
     langs = [],
     filename = '',
     title = '',
-    copiable = true 
+    copiable = false 
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentLang, setCurrentLang] = useState(lang);
