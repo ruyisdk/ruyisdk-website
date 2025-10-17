@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
 import { normalizeCode, cleanShellPrompt } from './utils';
@@ -31,14 +31,50 @@ const CodeBlock = ({
         return code;
     }, [langs, currentLang, code]);
 
-    const cleanedCode = useMemo(() => {
-        return normalizeCode(currentCode);
+    // Parse highlight markers and get line numbers to highlight
+    const { displayCode, highlightLines } = useMemo(() => {
+        const lines = currentCode.split('\n');
+        const toHighlight = new Set();
+        let isHighlighting = false;
+        const filteredLines = [];
+
+        lines.forEach((line, index) => {
+            const trimmedLine = line.trim();
+            
+            if (trimmedLine.includes('highlight-start')) {
+                isHighlighting = true;
+                return; // Don't include this line in output
+            }
+            
+            if (trimmedLine.includes('highlight-end')) {
+                isHighlighting = false;
+                return; // Don't include this line in output
+            }
+            
+            if (trimmedLine.includes('highlight-next-line')) {
+                // Mark next line for highlighting
+                toHighlight.add(filteredLines.length + 1);
+                return; // Don't include this line in output
+            }
+            
+            filteredLines.push(line);
+            
+            if (isHighlighting) {
+                toHighlight.add(filteredLines.length - 1);
+            }
+        });
+
+        return {
+            displayCode: normalizeCode(filteredLines.join('\n')),
+            highlightLines: toHighlight
+        };
     }, [currentCode]);
 
+    const cleanedCode = displayCode;
+
     const copyableCode = useMemo(() => {
-        const normalized = normalizeCode(currentCode);
-        return cleanShellPrompt(normalized, currentLang);
-    }, [currentCode, currentLang]);
+        return cleanShellPrompt(displayCode, currentLang);
+    }, [displayCode, currentLang]);
 
     const displayLang = currentLang === 'no' ? 'text' : currentLang;
 
@@ -59,8 +95,37 @@ const CodeBlock = ({
         return displayLang;
     }, [filename, title, currentLang, displayLang]);
 
+    const codeBlockRef = useRef(null);
+
+    // 使用 DOM 操作应用高亮效果
+    useEffect(() => {
+        if (codeBlockRef.current && highlightLines.size > 0) {
+            const codeElement = codeBlockRef.current.querySelector('pre code');
+            if (codeElement) {
+                const lines = codeElement.querySelectorAll('.token-line, code > span');
+                
+                lines.forEach((line, index) => {
+                    // 移除之前的高亮样式
+                    line.style.backgroundColor = '';
+                    line.style.display = '';
+                    line.style.margin = '';
+                    line.style.padding = '';
+                    
+                    // 应用新的高亮样式
+                    if (highlightLines.has(index)) {
+                        line.style.backgroundColor = 'rgb(229, 229, 229)';
+                        line.style.display = 'block';
+                        line.style.margin = '0 -20px';
+                        line.style.padding = '0 20px';
+                    }
+                });
+            }
+        }
+    }, [highlightLines, cleanedCode]);
+
     return (
         <div 
+            ref={codeBlockRef}
             className="rounded-xl font-mono my-6 overflow-hidden text-sm 
                        bg-neutral-50 border border-neutral-200 shadow-sm 
                        dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"
