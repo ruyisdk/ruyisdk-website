@@ -10,7 +10,7 @@ import './styles.css';
  * @param {string} lang - Language type, defaults to 'bash'
  * @param {Array<{lang: string, code: string}>} langs - Multi-language options, defaults to []
  * @param {string} filename - Optional filename, displays in Header if provided
- * @param {string} title - Header title, defaults to 'Terminal'
+ * @param {string} title - Header title, defaults to empty string
  * @param {boolean} copiable - Whether to show copy button, defaults to true
  */
 const CodeBlock = ({ 
@@ -18,7 +18,7 @@ const CodeBlock = ({
     lang = 'bash', 
     langs = [],
     filename = '',
-    title = 'Terminal',
+    title = '',
     copiable = true 
 }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -44,9 +44,19 @@ const CodeBlock = ({
     const displayLang = currentLang === 'no' ? 'text' : currentLang;
 
     const headerTitle = useMemo(() => {
+        // Priority 1: filename has highest priority
         if (filename) return filename;
-        if (title && title !== 'Terminal') return title;
+        
+        // Priority 2: explicit title has second highest priority
+        if (title && title.trim() !== '') return title;
+        
+        // Priority 3: if language is bash and no title specified, use "Terminal"
         if (currentLang === 'bash') return 'Terminal';
+        
+        // Priority 4: if no language specified and no title, use "text"
+        if (currentLang === 'text' || currentLang === '') return 'text';
+        
+        // Priority 5: fallback to display language
         return displayLang;
     }, [filename, title, currentLang, displayLang]);
 
