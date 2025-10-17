@@ -13,19 +13,22 @@ export default function CodeBlockAdapter(props) {
   // If language is explicitly empty/absent, fall back to plain text; otherwise use provided
   const lang = String(derivedLang).trim() === '' ? 'text' : derivedLang;
 
-  // Parse metastring for filename/title (supports: filename=xxx title="My Title")
+  // Parse metastring for filename/title/copiable (supports: filename=xxx title="My Title" copiable)
   let filename;
   let customTitle = title;
+  let copiable = false;
   if (typeof metastring === 'string' && metastring.trim()) {
     const fileMatch = metastring.match(/(?:^|\s)filename=([^\s"']+)/);
     const titleMatchQuoted = metastring.match(/(?:^|\s)title=("|')(.*?)\1/);
     const titleMatchBare = metastring.match(/(?:^|\s)title=([^\s"']+)/);
+    const copiableMatch = /(?:^|\s)copiable(?:\s|$)/.test(metastring);
 
     if (fileMatch && fileMatch[1]) filename = fileMatch[1];
     if (!customTitle) {
       if (titleMatchQuoted && titleMatchQuoted[2]) customTitle = titleMatchQuoted[2];
       else if (titleMatchBare && titleMatchBare[1]) customTitle = titleMatchBare[1];
     }
+    if (copiableMatch) copiable = true;
   }
 
   return (
@@ -34,6 +37,7 @@ export default function CodeBlockAdapter(props) {
       lang={lang}
       filename={filename}
       title={customTitle}
+      copiable={copiable}
     />
   );
 }
