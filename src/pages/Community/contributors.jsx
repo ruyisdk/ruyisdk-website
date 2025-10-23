@@ -153,8 +153,8 @@ export default function ContributorsPage() {
             </div>
           </div>
 
-          <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-6">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-items-center items-start">
+            <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-6">
+            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-items-center items-start">
               {allPeople.map((p, i) => (
                 <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />
               ))}
