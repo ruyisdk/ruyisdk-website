@@ -3,6 +3,14 @@ const path = require('path');
 
 const OUT_FILE = path.resolve(__dirname, '../src/pages/Community/generated_contributors.json');
 
+// If the output file already exists, do not overwrite it. This allows
+// `build-noupdate` to use a previously generated contributors file without
+// replacing it with dummy data.
+if (fs.existsSync(OUT_FILE)) {
+  console.log(`Skipping local generator because ${OUT_FILE} already exists`);
+  process.exit(0);
+}
+
 // Minimal dummy data shape matching the real generator's output
 const out = {
   coreTeam: [
