@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import { glob } from "glob";
 import { basename, resolve, join } from "path";
+import matter from 'gray-matter';
 
 const PATTERNS = {
   "zh-Hans": {
@@ -115,25 +116,91 @@ function extractDate(filename) {
   return Date.now();
 }
 
-function scanFiles(pattern) {
+function scanFiles(pattern, preferredLocale = null) {
   const files = glob.sync(pattern, { cwd: process.cwd() });
-  const items = [];
+
+  // Group files by base key (filename without locale suffix)
+  // filename format supported: <base>.md or <base>.<locale>.md (e.g., 2025-10-24-1.en.md)
+  const groups = new Map();
+
   for (const file of files) {
     try {
-      const content = readFileSync(resolve(file), "utf-8");
-      const filename = basename(file);
-      items.push({
-        title: extractTitle(content, filename),
-        summary: extractSummary(content),
-        date: extractDate(filename),
-        image: extractFirstImage(content),
-        filename,
-        link: "", // set later
-      });
+      const raw = readFileSync(resolve(file), "utf-8");
+      const parsed = matter(raw);
+      const content = parsed.content || raw;
+      const fm = parsed.data || {};
+      const fname = basename(file);
+
+      // Parse possible locale suffix
+      const m = fname.match(/^(.+?)(?:\.(zh|en|de))?\.md$/i);
+      const baseKey = m ? m[1] : fname.replace(/\.md$/i, "");
+      const localeTag = m && m[2] ? m[2].toLowerCase() : "default";
+
+      // Prefer frontmatter.date if provided, else filename-based date, else now
+      let dateVal = null;
+      if (fm.date) {
+        const mm = String(fm.date).match(/(\d{4})-?(\d{2})-?(\d{2})/);
+        if (mm) {
+          const [, y, mo, d] = mm;
+          dateVal = Date.UTC(Number(y), Number(mo) - 1, Number(d));
+        } else {
+          const dt = new Date(fm.date);
+          if (!Number.isNaN(dt.getTime())) dateVal = dt.getTime();
+        }
+      }
+
+      const computedDate = dateVal || extractDate(fname);
+
+      const title = fm.title || extractTitle(content, fname);
+      const summary = extractSummary(content);
+      const image = fm.image || extractFirstImage(content);
+      const linkFromFrontmatter = fm.link || fm.permalink || fm.url || null;
+
+      const entry = {
+        title,
+        summary,
+        date: computedDate,
+        image,
+        filename: fname,
+        link: linkFromFrontmatter,
+        _locale: localeTag,
+        _baseKey: baseKey,
+      };
+
+      if (!groups.has(baseKey)) groups.set(baseKey, []);
+      groups.get(baseKey).push(entry);
     } catch (error) {
       console.error(`Error processing file ${file}:`, error);
     }
   }
+
+  const items = [];
+
+  // Helper to normalize preferredLocale (context values like 'zh-Hans' -> 'zh')
+  const preferred = (function (p) {
+    if (!p) return null;
+    if (p.toLowerCase().startsWith("zh")) return "zh";
+    if (p.toLowerCase().startsWith("en")) return "en";
+    if (p.toLowerCase().startsWith("de")) return "de";
+    return p.toLowerCase();
+  })(preferredLocale);
+
+  for (const [baseKey, variants] of groups.entries()) {
+    // Try to find best variant: exact locale match, then default, then first available
+    let chosen = null;
+    if (preferred) {
+      chosen = variants.find((v) => v._locale === preferred);
+    }
+    if (!chosen) chosen = variants.find((v) => v._locale === "default");
+    if (!chosen) chosen = variants[0];
+
+    if (chosen) {
+      // Remove internal helper props
+      const { _locale, _baseKey, ...out } = chosen;
+      items.push(out);
+    }
+  }
+
   return items.sort((a, b) => b.date - a.date);
 }
 
@@ -144,13 +211,14 @@ export default function newsGeneratorPlugin(context, options) {
       const { currentLocale } = context.i18n;
       const data = {};
       for (const [itemname, item] of Object.entries(PATTERNS[currentLocale])) {
-        const { prefix, path } = item;
-        const scannedItems = scanFiles(path).map((it) => ({
-          ...it,
-          link: prefix + it.filename,
-        }));
-        data[itemname] = scannedItems;
-      }
+          const { prefix, path } = item;
+      const scannedItems = scanFiles(path, currentLocale).map((it) => ({
+        ...it,
+        // If the frontmatter provided a link, keep it; otherwise build from prefix+filename
+        link: it.link || (prefix + it.filename),
+          }));
+          data[itemname] = scannedItems;
+        }
 
       writeFileSync(join(outDir, "news.json"), JSON.stringify(data, null, 2));
       console.log(`[${currentLocale}] Generated news.json with:`);

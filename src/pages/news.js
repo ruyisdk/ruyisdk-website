@@ -6,6 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useLocation } from '@docusaurus/router';
 
 const NewsPage = () => {
   const { i18n } = useDocusaurusContext();
@@ -44,9 +45,11 @@ const NewsPage = () => {
     }
   };
 
+  const location = useLocation();
+
   useEffect(() => {
     loadNewsData();
-  }, [i18n.currentLocale]);
+  }, [i18n.currentLocale, location.pathname]);
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
