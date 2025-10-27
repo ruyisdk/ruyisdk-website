@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import { glob } from "glob";
-import { basename, resolve, join } from "path";
+import { basename, resolve, join, relative, sep } from "path";
 import matter from 'gray-matter';
 
 const PATTERNS = {
@@ -117,7 +117,27 @@ function extractDate(filename) {
 }
 
 function scanFiles(pattern, preferredLocale = null) {
-  const files = glob.sync(pattern, { cwd: process.cwd() });
+  const CWD = process.cwd();
+  const files = glob.sync(pattern, { cwd: CWD, dot: false, nodir: true });
+
+  // Derive a base directory from the glob pattern (up to the first segment containing wildcard)
+  const baseDirFromPattern = (() => {
+    const segments = pattern.split("/");
+    const baseSegs = [];
+    for (const seg of segments) {
+      if (/[\\*?\[]/.test(seg)) break; // stop at the first segment containing a glob char
+      if (seg) baseSegs.push(seg);
+    }
+    const baseRel = baseSegs.length ? baseSegs.join("/") : ".";
+    return resolve(CWD, baseRel);
+  })();
+
+  // Ensure child path stays within base dir
+  const isPathInside = (childAbs, parentAbs) => {
+    const rel = relative(parentAbs, childAbs);
+    // rel === '' when same dir/file; must also ensure not traversing upwards
+    return rel === "" || (!rel.startsWith("..") && !rel.includes(".." + sep));
+  };
 
   // Group files by base key (filename without locale suffix)
   // filename format supported: <base>.md or <base>.<locale>.md (e.g., 2025-10-24-1.en.md)
@@ -125,7 +145,13 @@ function scanFiles(pattern, preferredLocale = null) {
 
   for (const file of files) {
     try {
-      const raw = readFileSync(resolve(file), "utf-8");
+      const absPath = resolve(CWD, file);
+      // Validate the resolved path stays within the expected base directory
+      if (!isPathInside(absPath, baseDirFromPattern)) {
+        console.warn(`Skipping out-of-scope file: ${file}`);
+        continue;
+      }
+      const raw = readFileSync(absPath, "utf-8");
       const parsed = matter(raw);
       const content = parsed.content || raw;
       const fm = parsed.data || {};
