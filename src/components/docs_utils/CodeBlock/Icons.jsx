@@ -35,7 +35,7 @@ export const CopiedIcon = () => (
 );
 
 export const TerminalIcon = () => (
-    <span className="text-[13px] font-mono text-[#666666] dark:text-[#666666]">
+    <span className="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">
         &gt;_
     </span>
 );
