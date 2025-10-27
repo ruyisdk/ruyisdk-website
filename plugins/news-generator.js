@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, realpathSync } from "fs";
 import { glob } from "glob";
 import { basename, resolve, join, relative, sep } from "path";
 import matter from 'gray-matter';
@@ -132,6 +132,14 @@ function scanFiles(pattern, preferredLocale = null) {
     return resolve(CWD, baseRel);
   })();
 
+  // Canonical base directory (resolves symlinks)
+  let realBaseDir;
+  try {
+    realBaseDir = realpathSync(baseDirFromPattern);
+  } catch {
+    realBaseDir = baseDirFromPattern;
+  }
+
   // Ensure child path stays within base dir
   const isPathInside = (childAbs, parentAbs) => {
     const rel = relative(parentAbs, childAbs);
@@ -146,12 +154,20 @@ function scanFiles(pattern, preferredLocale = null) {
   for (const file of files) {
     try {
       const absPath = resolve(CWD, file);
-      // Validate the resolved path stays within the expected base directory
-      if (!isPathInside(absPath, baseDirFromPattern)) {
+      // Canonicalize the absolute path and validate it stays within the expected base directory
+      let safePath;
+      try {
+        const realAbsPath = realpathSync(absPath);
+        if (!isPathInside(realAbsPath, realBaseDir)) {
+          console.warn(`Skipping out-of-scope file: ${file}`);
+          continue;
+        }
+        safePath = realAbsPath;
+      } catch {
         console.warn(`Skipping out-of-scope file: ${file}`);
         continue;
       }
-      const raw = readFileSync(absPath, "utf-8");
+      const raw = readFileSync(safePath, "utf-8");
       const parsed = matter(raw);
       const content = parsed.content || raw;
       const fm = parsed.data || {};
