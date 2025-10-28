@@ -153,7 +153,20 @@ function scanFiles(pattern, preferredLocale = null) {
 
   for (const file of files) {
     try {
-      const absPath = resolve(CWD, file);
+      // Basic sanity checks on the relative path returned by glob
+      const relPath = String(file).replace(/\\/g, "/");
+      // Only allow simple safe characters in path segments
+      if (!/^[0-9A-Za-z._\-\/]+$/.test(relPath)) {
+        console.warn(`Skipping file with invalid characters: ${file}`);
+        continue;
+      }
+      // Only accept markdown files
+      if (!/\.md$/i.test(relPath)) {
+        console.warn(`Skipping non-markdown file: ${file}`);
+        continue;
+      }
+
+      const absPath = resolve(CWD, relPath);
       // Canonicalize the absolute path and validate it stays within the expected base directory
       let safePath;
       try {
@@ -167,6 +180,7 @@ function scanFiles(pattern, preferredLocale = null) {
         console.warn(`Skipping out-of-scope file: ${file}`);
         continue;
       }
+      // Safe read: path is canonicalized, whitelisted by base dir, extension is .md, and characters are validated.
       const raw = readFileSync(safePath, "utf-8");
       const parsed = matter(raw);
       const content = parsed.content || raw;
