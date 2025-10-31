@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Translate, { translate } from "@docusaurus/Translate";
 import "react-slideshow-image/dist/styles.css";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import SectionContainer from '../../homepage/SectionContainer';
 
 // Card sizes enum
 const CardSizes = {
@@ -346,9 +347,9 @@ export default function SlideNews() {
 
   return (
     <>
-      {/* New wrapper div for the light grey background */}
-      <div className="bg-[#f5f5f7] py-4 flex justify-center w-full">
-        <div className={`flex flex-col gap-4 w-full px-8 relative ${isVeryWideScreen ? 'mx-auto max-w-[90rem]' : ''}`}>
+      {/* Unified wrapper for the light grey background and width */}
+      <SectionContainer>
+        <div className={`flex flex-col gap-4 w-full relative`}>
           {organizedCards.map((item, i) => {
             // For regular cards
             if (!item.type) {
@@ -367,7 +368,7 @@ export default function SlideNews() {
             return null;
           })}
         </div>
-      </div>
+      </SectionContainer>
 
       {/* Expanded Card Modal */}
       {expandedCardIndex !== null && (
