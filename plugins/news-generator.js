@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, realpathSync } from "fs";
 import { glob } from "glob";
-import { basename, resolve, join, relative, sep } from "path";
+import { basename, resolve, join, relative, sep, isAbsolute } from "path";
 import matter from 'gray-matter';
 
 const PATTERNS = {
@@ -125,7 +125,7 @@ function scanFiles(pattern, preferredLocale = null) {
     throw new Error(`Unsafe pattern detected: ${pattern}`);
   }
   // Ensure pattern is relative (not absolute)
-  if (resolve(pattern) !== pattern) {
+  if (isAbsolute(pattern)) {
     throw new Error(`Pattern must be relative: ${pattern}`);
   }
 
