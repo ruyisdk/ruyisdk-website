@@ -117,6 +117,18 @@ function extractDate(filename) {
 }
 
 function scanFiles(pattern, preferredLocale = null) {
+  // Validate pattern for security: prevent path traversal and ensure it's a relative path
+  if (!pattern || typeof pattern !== 'string') {
+    throw new Error('Invalid pattern: must be a non-empty string');
+  }
+  if (pattern.includes('..') || pattern.startsWith('/') || pattern.startsWith('\\') || pattern.includes('~') || sep === '\\' && pattern.includes('\\\\')) {
+    throw new Error(`Unsafe pattern detected: ${pattern}`);
+  }
+  // Ensure pattern is relative (not absolute)
+  if (resolve(pattern) !== pattern) {
+    throw new Error(`Pattern must be relative: ${pattern}`);
+  }
+
   const CWD = process.cwd();
   const files = glob.sync(pattern, { cwd: CWD, dot: false, nodir: true });
 
