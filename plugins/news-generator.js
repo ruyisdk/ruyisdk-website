@@ -155,8 +155,14 @@ function scanFiles(pattern, preferredLocale = null) {
     try {
       // Basic sanity checks on the relative path returned by glob
       const relPath = String(file).replace(/\\/g, "/");
-      // Only allow simple safe characters in path segments
-      if (!/^[0-9A-Za-z._\-\/]+$/.test(relPath)) {
+      // Disallow control characters outright
+      if ([...relPath].some((ch) => /[\u0000-\u001F\u007F]/.test(ch))) {
+        console.warn(`Skipping file with control characters: ${file}`);
+        continue;
+      }
+      // Allow Unicode letters/numbers/marks/punctuation/space separator and common filename chars, keep slashes as separators
+      // Prevent path traversal and control characters (validated above); additional baseDir checks are below.
+      if (!/^[\p{L}\p{N}\p{M}\p{P}\p{Zs}._\-\/]+$/u.test(relPath)) {
         console.warn(`Skipping file with invalid characters: ${file}`);
         continue;
       }
@@ -184,11 +190,11 @@ function scanFiles(pattern, preferredLocale = null) {
       const raw = readFileSync(safePath, "utf-8");
       const parsed = matter(raw);
       const content = parsed.content || raw;
-      const fm = parsed.data || {};
-      const fname = basename(file);
+  const fm = parsed.data || {};
+  const fname = basename(file);
 
-      // Parse possible locale suffix
-      const m = fname.match(/^(.+?)(?:\.(zh|en|de))?\.md$/i);
+  // Parse possible locale suffix (generic: 2-5 letters, case-insensitive)
+  const m = fname.match(/^(.+?)(?:\.([a-z]{2,5}))?\.md$/i);
       const baseKey = m ? m[1] : fname.replace(/\.md$/i, "");
       const localeTag = m && m[2] ? m[2].toLowerCase() : "default";
 
