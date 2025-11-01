@@ -1,6 +1,7 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, realpathSync } from "fs";
 import { glob } from "glob";
-import { basename, resolve, join } from "path";
+import { basename, resolve, join, relative, sep, isAbsolute } from "path";
+import matter from 'gray-matter';
 
 const PATTERNS = {
   "zh-Hans": {
@@ -115,25 +116,165 @@ function extractDate(filename) {
   return Date.now();
 }
 
-function scanFiles(pattern) {
-  const files = glob.sync(pattern, { cwd: process.cwd() });
-  const items = [];
+function scanFiles(pattern, preferredLocale = null) {
+  // Validate pattern for security: prevent path traversal and ensure it's a relative path
+  if (!pattern || typeof pattern !== 'string') {
+    throw new Error('Invalid pattern: must be a non-empty string');
+  }
+  if (pattern.includes('..') || pattern.startsWith('/') || pattern.startsWith('\\') || pattern.includes('~') || sep === '\\' && pattern.includes('\\\\')) {
+    throw new Error(`Unsafe pattern detected: ${pattern}`);
+  }
+  // Ensure pattern is relative (not absolute)
+  if (isAbsolute(pattern)) {
+    throw new Error(`Pattern must be relative: ${pattern}`);
+  }
+
+  const CWD = process.cwd();
+  const files = glob.sync(pattern, { cwd: CWD, dot: false, nodir: true });
+
+  // Derive a base directory from the glob pattern (up to the first segment containing wildcard)
+  const baseDirFromPattern = (() => {
+    const segments = pattern.split("/");
+    const baseSegs = [];
+    for (const seg of segments) {
+      if (/[\\*?\[]/.test(seg)) break; // stop at the first segment containing a glob char
+      if (seg) baseSegs.push(seg);
+    }
+    const baseRel = baseSegs.length ? baseSegs.join("/") : ".";
+    return resolve(CWD, baseRel);
+  })();
+
+  // Canonical base directory (resolves symlinks)
+  let realBaseDir;
+  try {
+    realBaseDir = realpathSync(baseDirFromPattern);
+  } catch {
+    realBaseDir = baseDirFromPattern;
+  }
+
+  // Ensure child path stays within base dir
+  const isPathInside = (childAbs, parentAbs) => {
+    const rel = relative(parentAbs, childAbs);
+    // rel === '' when same dir/file; must also ensure not traversing upwards
+    return rel === "" || (!rel.startsWith("..") && !rel.includes(".." + sep));
+  };
+
+  // Group files by base key (filename without locale suffix)
+  // filename format supported: <base>.md or <base>.<locale>.md (e.g., 2025-10-24-1.en.md)
+  const groups = new Map();
+
   for (const file of files) {
     try {
-      const content = readFileSync(resolve(file), "utf-8");
-      const filename = basename(file);
-      items.push({
-        title: extractTitle(content, filename),
-        summary: extractSummary(content),
-        date: extractDate(filename),
-        image: extractFirstImage(content),
-        filename,
-        link: "", // set later
-      });
+      // Basic sanity checks on the relative path returned by glob
+      const relPath = String(file).replace(/\\/g, "/");
+      // Disallow control characters outright
+      if ([...relPath].some((ch) => /[\u0000-\u001F\u007F]/.test(ch))) {
+        console.warn(`Skipping file with control characters: ${file}`);
+        continue;
+      }
+      // Allow Unicode letters/numbers/marks/punctuation/space separator and common filename chars, keep slashes as separators
+      // Prevent path traversal and control characters (validated above); additional baseDir checks are below.
+      if (!/^[\p{L}\p{N}\p{M}\p{P}\p{Zs}._\-\/]+$/u.test(relPath)) {
+        console.warn(`Skipping file with invalid characters: ${file}`);
+        continue;
+      }
+      // Only accept markdown files
+      if (!/\.md$/i.test(relPath)) {
+        console.warn(`Skipping non-markdown file: ${file}`);
+        continue;
+      }
+
+      const absPath = resolve(CWD, relPath);
+      // Canonicalize the absolute path and validate it stays within the expected base directory
+      let safePath;
+      try {
+        const realAbsPath = realpathSync(absPath);
+        if (!isPathInside(realAbsPath, realBaseDir)) {
+          console.warn(`Skipping out-of-scope file: ${file}`);
+          continue;
+        }
+        safePath = realAbsPath;
+      } catch {
+        console.warn(`Skipping out-of-scope file: ${file}`);
+        continue;
+      }
+      // Safe read: path is canonicalized, whitelisted by base dir, extension is .md, and characters are validated.
+      const raw = readFileSync(safePath, "utf-8");
+      const parsed = matter(raw);
+      const content = parsed.content || raw;
+  const fm = parsed.data || {};
+  const fname = basename(file);
+
+  // Parse possible locale suffix (generic: 2-5 letters, case-insensitive)
+  const m = fname.match(/^(.+?)(?:\.([a-z]{2,5}))?\.md$/i);
+      const baseKey = m ? m[1] : fname.replace(/\.md$/i, "");
+      const localeTag = m && m[2] ? m[2].toLowerCase() : "default";
+
+      // Prefer frontmatter.date if provided, else filename-based date, else now
+      let dateVal = null;
+      if (fm.date) {
+        const mm = String(fm.date).match(/(\d{4})-?(\d{2})-?(\d{2})/);
+        if (mm) {
+          const [, y, mo, d] = mm;
+          dateVal = Date.UTC(Number(y), Number(mo) - 1, Number(d));
+        } else {
+          const dt = new Date(fm.date);
+          if (!Number.isNaN(dt.getTime())) dateVal = dt.getTime();
+        }
+      }
+
+      const computedDate = dateVal || extractDate(fname);
+
+      const title = fm.title || extractTitle(content, fname);
+      const summary = extractSummary(content);
+      const image = fm.image || extractFirstImage(content);
+      const linkFromFrontmatter = fm.link || fm.permalink || fm.url || null;
+
+      const entry = {
+        title,
+        summary,
+        date: computedDate,
+        image,
+        filename: fname,
+        link: linkFromFrontmatter,
+        _locale: localeTag,
+        _baseKey: baseKey,
+      };
+
+      if (!groups.has(baseKey)) groups.set(baseKey, []);
+      groups.get(baseKey).push(entry);
     } catch (error) {
       console.error(`Error processing file ${file}:`, error);
     }
   }
+
+  const items = [];
+
+  // Helper to normalize preferredLocale (context values like 'zh-Hans' -> 'zh')
+  const preferred = (function (p) {
+    if (!p) return null;
+    if (p.toLowerCase().startsWith("zh")) return "zh";
+    if (p.toLowerCase().startsWith("en")) return "en";
+    if (p.toLowerCase().startsWith("de")) return "de";
+    return p.toLowerCase();
+  })(preferredLocale);
+
+  for (const [baseKey, variants] of groups.entries()) {
+    // Try to find best variant: exact locale match, then default, then first available
+    let chosen = null;
+    if (preferred) {
+      chosen = variants.find((v) => v._locale === preferred);
+    }
+    if (!chosen) chosen = variants.find((v) => v._locale === "default");
+    if (!chosen) chosen = variants[0];
+
+    if (chosen) {
+      // Remove internal helper props
+      const { _locale, _baseKey, ...out } = chosen;
+      items.push(out);
+    }
+  }
+
   return items.sort((a, b) => b.date - a.date);
 }
 
@@ -144,13 +285,14 @@ export default function newsGeneratorPlugin(context, options) {
       const { currentLocale } = context.i18n;
       const data = {};
       for (const [itemname, item] of Object.entries(PATTERNS[currentLocale])) {
-        const { prefix, path } = item;
-        const scannedItems = scanFiles(path).map((it) => ({
-          ...it,
-          link: prefix + it.filename,
-        }));
-        data[itemname] = scannedItems;
-      }
+          const { prefix, path } = item;
+      const scannedItems = scanFiles(path, currentLocale).map((it) => ({
+        ...it,
+        // If the frontmatter provided a link, keep it; otherwise build from prefix+filename
+        link: it.link || (prefix + it.filename),
+          }));
+          data[itemname] = scannedItems;
+        }
 
       writeFileSync(join(outDir, "news.json"), JSON.stringify(data, null, 2));
       console.log(`[${currentLocale}] Generated news.json with:`);
