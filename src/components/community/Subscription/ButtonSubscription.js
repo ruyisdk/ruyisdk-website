@@ -24,8 +24,11 @@ function ButtonSubscription() {
     <form
       onSubmit={onSubmit}
       style={{
-        justifyContent: "left",
         display: "flex",
+        gap: "0.5rem",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        width: "100%",
       }}
     >
       <input
@@ -33,9 +36,21 @@ function ButtonSubscription() {
         placeholder="Enter your email"
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
+        style={{
+          flex: "1 1 auto",
+          minWidth: 0, // allow input to shrink properly in flex container
+        }}
       />
-      <button type="submit" isLoading={loading} className={styles.button}>
-        Subscribe
+      <button
+        type="submit"
+        disabled={loading}
+        className={styles.button}
+        style={{
+          flex: "0 0 auto",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {loading ? "Submitting..." : "Subscribe"}
       </button>
     </form>
   );

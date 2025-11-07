@@ -4,6 +4,7 @@ import Card from "../components/news/Card";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
+import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
@@ -65,6 +66,10 @@ const NewsPage = () => {
               className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky
                 md:top-20"
             >
+              {/* subscription button for news page */}
+              <div className="p-2">
+                <ButtonSubscription />
+              </div>
               <Card
                 items={weeklies}
                 label={translate({
