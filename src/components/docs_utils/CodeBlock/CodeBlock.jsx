@@ -3,25 +3,41 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
 import { normalizeCode, cleanShellPrompt } from './utils';
 
-/**
- * CodeBlock - Core code block component
- * @param {string} code - Code content
- * @param {string} lang - Language type, defaults to 'bash'
- * @param {Array<{lang: string, code: string}>} langs - Multi-language options, defaults to []
- * @param {string} filename - Optional filename, displays in Header if provided
- * @param {string} title - Header title, defaults to empty string
- * @param {boolean} copiable - Whether to show copy button, defaults to false
- */
 const CodeBlock = ({ 
     code = '', 
     lang = 'bash', 
     langs = [],
     filename = '',
     title = '',
-    copiable = false 
+    copiable = false,
+    input = ''
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentLang, setCurrentLang] = useState(lang);
+
+    const inputLines = useMemo(() => {
+        if (!input) return new Set();
+        
+        const lines = new Set();
+        const parts = input.split(',');
+        
+        parts.forEach(part => {
+            part = part.trim();
+            if (part.includes('-')) {
+                const [start, end] = part.split('-').map(n => parseInt(n.trim(), 10));
+                for (let i = start; i <= end; i++) {
+                    lines.add(i - 1);
+                }
+            } else {
+                const lineNum = parseInt(part, 10);
+                if (!isNaN(lineNum)) {
+                    lines.add(lineNum - 1);
+                }
+            }
+        });
+        
+        return lines;
+    }, [input]);
 
     const currentCode = useMemo(() => {
         if (langs && langs.length > 0) {
@@ -113,9 +129,16 @@ const CodeBlock = ({
             
             const highlightedLines = new Set();
             allLines.forEach((line, index) => {
-                const text = line.textContent || '';
-                const shouldHighlight = highlightLines.has(index) || 
-                                      (headerTitle === 'Terminal' && text.trim().startsWith('$'));
+                let shouldHighlight = false;
+                
+                if (input) {
+                    shouldHighlight = inputLines.has(index);
+                } else {
+                    const text = line.textContent || '';
+                    shouldHighlight = highlightLines.has(index) || 
+                                    (headerTitle === 'Terminal' && text.trim().startsWith('$'));
+                }
+                
                 if (shouldHighlight) {
                     highlightedLines.add(index);
                 }
@@ -123,6 +146,14 @@ const CodeBlock = ({
             
             allLines.forEach((line, index) => {
                 const shouldHighlight = highlightedLines.has(index);
+                
+                if (!shouldHighlight && input) {
+                    line.style.color = 'rgb(107, 114, 128)';
+                    line.style.fontFamily = 'monospace';
+                    line.querySelectorAll('*').forEach(child => {
+                        child.style.color = 'inherit';
+                    });
+                }
                 
                 if (shouldHighlight) {
                     const prevHighlighted = highlightedLines.has(index - 1);
@@ -188,8 +219,9 @@ const CodeBlock = ({
                         e.stopPropagation();
                         let textToCopy = line.textContent || '';
                         
-                        if (textToCopy.trim().startsWith('$')) {
-                            textToCopy = textToCopy.replace(/^\s*\$\s*/, '');
+                        const dollarIndex = textToCopy.indexOf('$');
+                        if (dollarIndex !== -1) {
+                            textToCopy = textToCopy.substring(dollarIndex + 1).trimStart();
                         }
                         
                         try {
@@ -241,7 +273,7 @@ const CodeBlock = ({
         }, 100);
         
         return () => clearTimeout(timeoutId);
-    }, [highlightLines, displayCode, headerTitle]);
+    }, [highlightLines, displayCode, headerTitle, input, inputLines]);
 
     return (
         <div 
