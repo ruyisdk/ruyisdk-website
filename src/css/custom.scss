@@ -571,3 +571,20 @@ html[data-theme="dark"] .hash-link {
     color: var(--ifm-color-primary);
   }
 }
+
+/* Remove sidebar border */
+aside[class*="docSidebarContainer"] {
+  border-right: none !important;
+}
+
+aside.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+
+.theme-doc-sidebar-container {
+  border-right: none !important;
+}
+
+div[class*="sidebar"] {
+  border-right: none !important;
+}
