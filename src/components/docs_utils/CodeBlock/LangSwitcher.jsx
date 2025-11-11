@@ -1,11 +1,4 @@
 import React from 'react';
-
-/**
- * LangSwitcher - Language switcher component
- * @param {Array<{lang: string, code: string}>} langs - Language options array
- * @param {string} currentLang - Currently selected language
- * @param {Function} onLangChange - Language change callback
- */
 const LangSwitcher = ({ langs, currentLang, onLangChange }) => {
     if (!langs || langs.length === 0) {
         return null;
