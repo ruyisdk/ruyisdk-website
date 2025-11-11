@@ -145,6 +145,13 @@ const CodeBlock = ({
                     line.querySelectorAll('*').forEach(child => {
                         child.style.color = 'inherit';
                     });
+                } else if (shouldHighlight) {
+                    // Reset styles for highlighted lines
+                    line.style.color = '';
+                    line.style.fontFamily = '';
+                    line.querySelectorAll('*').forEach(child => {
+                        child.style.color = '';
+                    });
                 }
                 
                 if (shouldHighlight) {
@@ -180,6 +187,12 @@ const CodeBlock = ({
                     line.style.margin = `${marginTop} -12px ${marginBottom} -12px`;
                     line.style.padding = `4px 12px`;
                     line.style.borderRadius = borderRadius;
+                    
+                    // Remove existing copy button if any
+                    const existingBtn = line.querySelector('.line-copy-button');
+                    if (existingBtn) {
+                        existingBtn.remove();
+                    }
                     
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'line-copy-button';
@@ -260,11 +273,21 @@ const CodeBlock = ({
                     copyBtn.addEventListener('mouseleave', handleBtnMouseLeave);
                     
                     line.appendChild(copyBtn);
+                } else {
+                    // Remove copy button if line is not highlighted
+                    const existingBtn = line.querySelector('.line-copy-button');
+                    if (existingBtn) {
+                        existingBtn.remove();
+                    }
                 }
             });
         }, 100);
         
-        return () => clearTimeout(timeoutId);
+        return () => {
+            clearTimeout(timeoutId);
+            // This won't clean up if timeout already fired, but that's okay
+            // because the next render will clean up old buttons
+        };
     }, [highlightLines, displayCode, headerTitle, input, inputLines]);
 
     return (
