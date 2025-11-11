@@ -165,6 +165,36 @@ const CodeBlock = ({
                 }
             });
             
+            // Detect device type for padding calculation
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const rightPadding = isMobile ? 56 : 48;
+            const leftPadding = isMobile ? 12 : 20;
+            
+            // First pass: reset styles to measure pure content width (no padding)
+            allLines.forEach((line) => {
+                line.style.width = 'auto';
+                line.style.display = 'inline-block';
+                line.style.padding = '0';
+            });
+            
+            // Calculate max content width of ALL lines (pure code content)
+            let maxContentWidth = 0;
+            allLines.forEach((line) => {
+                if (line) {
+                    // Force layout recalculation
+                    line.offsetHeight;
+                    // Get pure content width
+                    const rect = line.getBoundingClientRect();
+                    const contentWidth = Math.max(line.scrollWidth, rect.width, line.offsetWidth);
+                    if (contentWidth > maxContentWidth) {
+                        maxContentWidth = contentWidth;
+                    }
+                }
+            });
+            
+            // Calculate final width: max content width + button space
+            const maxLineWidth = maxContentWidth + rightPadding + leftPadding;
+            
             allLines.forEach((line, index) => {
                 const shouldHighlight = highlightedLines.has(index);
                 
@@ -186,38 +216,44 @@ const CodeBlock = ({
                 if (shouldHighlight) {
                     const prevHighlighted = highlightedLines.has(index - 1);
                     const nextHighlighted = highlightedLines.has(index + 1);
+                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
                     
-                    line.style.backgroundColor = 'rgb(229, 229, 229)';
+                    line.style.backgroundColor = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgb(235, 244, 255)';
                     line.style.display = 'block';
                     line.style.position = 'relative';
-                    line.style.width = '100%';
                     
-                    let marginTop = '2px';
-                    let marginBottom = '2px';
-                    let borderRadius = '';
+                    // Only add spacing before first and after last highlighted line
+                    let marginTop = '0';
+                    let marginBottom = '0';
                     
-                    if (prevHighlighted && nextHighlighted) {
-                        marginTop = '0';
-                        marginBottom = '0';
-                        borderRadius = '0';
-                    } else if (prevHighlighted && !nextHighlighted) {
-                        marginTop = '0';
-                        marginBottom = '2px';
-                        borderRadius = '0 0 6px 6px';
-                    } else if (!prevHighlighted && nextHighlighted) {
-                        marginTop = '2px';
-                        marginBottom = '0';
-                        borderRadius = '6px 6px 0 0';
-                    } else {
-                        marginTop = '2px';
-                        marginBottom = '2px';
-                        borderRadius = '6px';
+                    if (!prevHighlighted) {
+                        marginTop = '2px'; // First highlighted line
+                    }
+                    if (!nextHighlighted) {
+                        marginBottom = '2px'; // Last highlighted line
                     }
                     
-                    line.style.margin = `${marginTop} -12px ${marginBottom} -12px`;
-                    line.style.padding = `4px 48px 4px 12px`; // Extra right padding for copy button
-                    line.style.borderRadius = borderRadius;
-                    line.style.minHeight = '32px';
+                    // All highlighted lines use the same width (max width)
+                    const rightPaddingPx = isMobile ? '56px' : '48px';
+                    const leftPaddingPx = isMobile ? '12px' : '20px';
+                    const horizontalMargin = isMobile ? '0' : '-20px';
+                    
+                    line.style.margin = `${marginTop} ${horizontalMargin} ${marginBottom} ${horizontalMargin}`;
+                    line.style.padding = `4px ${rightPaddingPx} 4px ${leftPaddingPx}`;
+                    line.style.boxSizing = 'border-box';
+                    
+                    // All highlighted lines use max width from entire code block
+                    line.style.display = 'block';
+                    if (maxLineWidth > 0) {
+                        // Width includes padding (border-box), so use maxLineWidth directly
+                        line.style.width = `${maxLineWidth}px`;
+                    } else {
+                        line.style.width = 'fit-content';
+                    }
+                    line.style.minWidth = isMobile ? '100%' : 'calc(100% + 40px)';
+                    
+                    line.style.borderRadius = '0';
+                    line.style.minHeight = isMobile ? '40px' : '32px';
                     line.style.lineHeight = '1.7';
                     
                     // Remove existing copy button if any
@@ -228,28 +264,33 @@ const CodeBlock = ({
                     
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'line-copy-button';
+                    
+                    // Larger icon for mobile
+                    const iconSize = isMobile ? '18' : '16';
                     copyBtn.innerHTML = `
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
+                        <svg width="${iconSize}" height="${iconSize}" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 0.5C1.7835 0.5 1 1.2835 1 2.25V9.75C1 10.7165 1.7835 11.5 2.75 11.5H3.75H4.5V10H3.75H2.75C2.61193 10 2.5 9.88807 2.5 9.75V2.25C2.5 2.11193 2.61193 2 2.75 2H8.25C8.38807 2 8.5 2.11193 8.5 2.25V3H10V2.25C10 1.2835 9.2165 0.5 8.25 0.5H2.75ZM7.75 4.5C6.7835 4.5 6 5.2835 6 6.25V13.75C6 14.7165 6.7835 15.5 7.75 15.5H13.25C14.2165 15.5 15 14.7165 15 13.75V6.25C15 5.2835 14.2165 4.5 13.25 4.5H7.75ZM7.5 6.25C7.5 6.11193 7.61193 6 7.75 6H13.25C13.3881 6 13.5 6.11193 13.5 6.25V13.75C13.5 13.8881 13.3881 14 13.25 14H7.75C7.61193 14 7.5 13.8881 7.5 13.75V6.25Z"/>
                         </svg>
                     `;
-                    // Check if mobile device
-                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    
+                    // Mobile-optimized styling
+                    const btnSize = isMobile ? '36px' : '28px';
+                    const btnRight = isMobile ? '8px' : '8px';
+                    const btnPadding = isMobile ? '6px' : '4px';
                     
                     copyBtn.style.cssText = `
                         position: absolute;
-                        right: 8px;
+                        right: ${btnRight};
                         top: 50%;
                         transform: translateY(-50%);
                         background: ${isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
                         border: 1px solid ${isDark ? 'rgba(82, 82, 82, 0.8)' : 'rgba(203, 213, 225, 0.8)'};
                         outline: none;
                         cursor: pointer;
-                        padding: 4px;
-                        border-radius: 6px;
+                        padding: ${btnPadding};
+                        border-radius: ${isMobile ? '8px' : '6px'};
                         color: rgb(107, 114, 128);
-                        opacity: ${isMobile ? '0.9' : '0'};
+                        opacity: ${isMobile ? '0.85' : '0'};
                         transition: all 0.2s ease;
                         display: flex;
                         align-items: center;
@@ -258,12 +299,14 @@ const CodeBlock = ({
                         pointer-events: auto;
                         user-select: none;
                         -webkit-user-select: none;
-                        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+                        -webkit-tap-highlight-color: transparent;
                         touch-action: manipulation;
-                        width: 28px;
-                        height: 28px;
+                        width: ${btnSize};
+                        height: ${btnSize};
+                        min-width: ${btnSize};
+                        min-height: ${btnSize};
                         flex-shrink: 0;
-                        box-shadow: ${isDark ? '0 2px 4px rgba(0, 0, 0, 0.4)' : '0 2px 4px rgba(0, 0, 0, 0.15)'};
+                        box-shadow: ${isDark ? '0 2px 6px rgba(0, 0, 0, 0.5)' : '0 2px 6px rgba(0, 0, 0, 0.2)'};
                     `;
                     
                     let isProcessing = false;
@@ -297,7 +340,7 @@ const CodeBlock = ({
                         copyToClipboard(textToCopy).then(() => {
                             // Show success icon
                             copyBtn.innerHTML = `
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
+                                <svg width="${iconSize}" height="${iconSize}" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5607 3.99999L15.0303 4.53032L6.23744 13.3232C5.55403 14.0066 4.44599 14.0066 3.76257 13.3232L4.2929 12.7929L3.76257 13.3232L0.969676 10.5303L0.439346 9.99999L1.50001 8.93933L2.03034 9.46966L4.82323 12.2626C4.92086 12.3602 5.07915 12.3602 5.17678 12.2626L13.9697 3.46966L14.5 2.93933L15.5607 3.99999Z"/>
                                 </svg>
                             `;
@@ -306,7 +349,7 @@ const CodeBlock = ({
                             // Reset after 1.5s
                             setTimeout(() => {
                                 copyBtn.innerHTML = `
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
+                                    <svg width="${iconSize}" height="${iconSize}" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 0.5C1.7835 0.5 1 1.2835 1 2.25V9.75C1 10.7165 1.7835 11.5 2.75 11.5H3.75H4.5V10H3.75H2.75C2.61193 10 2.5 9.88807 2.5 9.75V2.25C2.5 2.11193 2.61193 2 2.75 2H8.25C8.38807 2 8.5 2.11193 8.5 2.25V3H10V2.25C10 1.2835 9.2165 0.5 8.25 0.5H2.75ZM7.75 4.5C6.7835 4.5 6 5.2835 6 6.25V13.75C6 14.7165 6.7835 15.5 7.75 15.5H13.25C14.2165 15.5 15 14.7165 15 13.75V6.25C15 5.2835 14.2165 4.5 13.25 4.5H7.75ZM7.5 6.25C7.5 6.11193 7.61193 6 7.75 6H13.25C13.3881 6 13.5 6.11193 13.5 6.25V13.75C13.5 13.8881 13.3881 14 13.25 14H7.75C7.61193 14 7.5 13.8881 7.5 13.75V6.25Z"/>
                                     </svg>
                                 `;
@@ -332,44 +375,51 @@ const CodeBlock = ({
                     };
                     
                     const handleBtnMouseEnter = () => {
-                        copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 0.9)' : 'rgba(229, 229, 229, 0.8)';
-                        copyBtn.style.opacity = '1';
-                        copyBtn.style.transform = 'translateY(-50%) scale(1.05)';
+                        if (!isMobile) {
+                            copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 0.9)' : 'rgba(229, 229, 229, 0.8)';
+                            copyBtn.style.opacity = '1';
+                            copyBtn.style.transform = 'translateY(-50%) scale(1.05)';
+                        }
                     };
                     
                     const handleBtnMouseLeave = () => {
-                        copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
-                        copyBtn.style.transform = 'translateY(-50%) scale(1)';
                         if (!isMobile) {
+                            copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                            copyBtn.style.transform = 'translateY(-50%) scale(1)';
                             copyBtn.style.opacity = '0';
-                        } else {
-                            copyBtn.style.opacity = '0.9';
                         }
                     };
                     
                     const handleTouchStart = (e) => {
-                        copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 0.9)' : 'rgba(229, 229, 229, 0.8)';
-                        copyBtn.style.transform = 'translateY(-50%) scale(0.95)';
+                        if (isMobile) {
+                            copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 1)' : 'rgba(200, 200, 200, 1)';
+                            copyBtn.style.transform = 'translateY(-50%) scale(0.92)';
+                            copyBtn.style.opacity = '1';
+                        }
                     };
                     
                     const handleTouchEnd = (e) => {
-                        copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
-                        copyBtn.style.transform = 'translateY(-50%) scale(1)';
+                        if (isMobile) {
+                            setTimeout(() => {
+                                copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                                copyBtn.style.transform = 'translateY(-50%) scale(1)';
+                                copyBtn.style.opacity = '0.85';
+                            }, 100);
+                        }
                     };
                     
-                    // Mouse events for desktop
-                    line.addEventListener('mouseenter', handleMouseEnter);
-                    line.addEventListener('mouseleave', handleMouseLeave);
-                    copyBtn.addEventListener('mouseenter', handleBtnMouseEnter);
-                    copyBtn.addEventListener('mouseleave', handleBtnMouseLeave);
-                    
-                    // Click events (works on both desktop and mobile)
-                    copyBtn.addEventListener('click', handleCopy);
-                    
-                    // Touch events for mobile
                     if (isMobile) {
+                        // Mobile: touch events only
                         copyBtn.addEventListener('touchstart', handleTouchStart, { passive: true });
                         copyBtn.addEventListener('touchend', handleTouchEnd, { passive: true });
+                        copyBtn.addEventListener('click', handleCopy);
+                    } else {
+                        // Desktop: mouse events
+                        line.addEventListener('mouseenter', handleMouseEnter);
+                        line.addEventListener('mouseleave', handleMouseLeave);
+                        copyBtn.addEventListener('mouseenter', handleBtnMouseEnter);
+                        copyBtn.addEventListener('mouseleave', handleBtnMouseLeave);
+                        copyBtn.addEventListener('click', handleCopy);
                     }
                     
                     line.appendChild(copyBtn);
