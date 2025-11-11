@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
 import { normalizeCode, cleanShellPrompt } from './utils';
@@ -99,6 +99,35 @@ const CodeBlock = ({
     }, [filename, title, currentLang, displayLang]);
 
     const codeBlockRef = useRef(null);
+    
+    // Use Docusaurus-style copy to clipboard logic
+    const copyToClipboard = useCallback(async (text) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            return Promise.resolve();
+        } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            return new Promise((resolve, reject) => {
+                const successful = document.execCommand('copy');
+                textArea.remove();
+                
+                if (successful) {
+                    resolve();
+                } else {
+                    reject(err);
+                }
+            });
+        }
+    }, []);
 
     useEffect(() => {
         if (!codeBlockRef.current) return;
@@ -161,6 +190,7 @@ const CodeBlock = ({
                     line.style.backgroundColor = 'rgb(229, 229, 229)';
                     line.style.display = 'block';
                     line.style.position = 'relative';
+                    line.style.width = '100%';
                     
                     let marginTop = '2px';
                     let marginBottom = '2px';
@@ -185,8 +215,10 @@ const CodeBlock = ({
                     }
                     
                     line.style.margin = `${marginTop} -12px ${marginBottom} -12px`;
-                    line.style.padding = `4px 12px`;
+                    line.style.padding = `4px 48px 4px 12px`; // Extra right padding for copy button
                     line.style.borderRadius = borderRadius;
+                    line.style.minHeight = '32px';
+                    line.style.lineHeight = '1.7';
                     
                     // Remove existing copy button if any
                     const existingBtn = line.querySelector('.line-copy-button');
@@ -197,80 +229,148 @@ const CodeBlock = ({
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'line-copy-button';
                     copyBtn.innerHTML = `
-                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 0.5C1.7835 0.5 1 1.2835 1 2.25V9.75C1 10.7165 1.7835 11.5 2.75 11.5H3.75H4.5V10H3.75H2.75C2.61193 10 2.5 9.88807 2.5 9.75V2.25C2.5 2.11193 2.61193 2 2.75 2H8.25C8.38807 2 8.5 2.11193 8.5 2.25V3H10V2.25C10 1.2835 9.2165 0.5 8.25 0.5H2.75ZM7.75 4.5C6.7835 4.5 6 5.2835 6 6.25V13.75C6 14.7165 6.7835 15.5 7.75 15.5H13.25C14.2165 15.5 15 14.7165 15 13.75V6.25C15 5.2835 14.2165 4.5 13.25 4.5H7.75ZM7.5 6.25C7.5 6.11193 7.61193 6 7.75 6H13.25C13.3881 6 13.5 6.11193 13.5 6.25V13.75C13.5 13.8881 13.3881 14 13.25 14H7.75C7.61193 14 7.5 13.8881 7.5 13.75V6.25Z"/>
                         </svg>
                     `;
+                    // Check if mobile device
+                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    
                     copyBtn.style.cssText = `
                         position: absolute;
-                        right: 12px;
+                        right: 8px;
                         top: 50%;
                         transform: translateY(-50%);
-                        background: transparent;
-                        border: none;
+                        background: ${isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
+                        border: 1px solid ${isDark ? 'rgba(82, 82, 82, 0.8)' : 'rgba(203, 213, 225, 0.8)'};
+                        outline: none;
                         cursor: pointer;
                         padding: 4px;
-                        border-radius: 4px;
+                        border-radius: 6px;
                         color: rgb(107, 114, 128);
-                        opacity: 0;
-                        transition: opacity 0.2s, background-color 0.2s;
+                        opacity: ${isMobile ? '0.9' : '0'};
+                        transition: all 0.2s ease;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         z-index: 10;
+                        pointer-events: auto;
+                        user-select: none;
+                        -webkit-user-select: none;
+                        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);
+                        touch-action: manipulation;
+                        width: 28px;
+                        height: 28px;
+                        flex-shrink: 0;
+                        box-shadow: ${isDark ? '0 2px 4px rgba(0, 0, 0, 0.4)' : '0 2px 4px rgba(0, 0, 0, 0.15)'};
                     `;
                     
+                    let isProcessing = false;
+                    
                     const handleCopy = async (e) => {
+                        e.preventDefault();
                         e.stopPropagation();
-                        let textToCopy = line.textContent || '';
                         
-                        const dollarIndex = textToCopy.indexOf('$');
-                        if (dollarIndex !== -1) {
-                            textToCopy = textToCopy.substring(dollarIndex + 1).trimStart();
+                        if (isProcessing) return;
+                        isProcessing = true;
+                        
+                        // Clone the line and remove the copy button to get clean text
+                        const lineClone = line.cloneNode(true);
+                        const btnInClone = lineClone.querySelector('.line-copy-button');
+                        if (btnInClone) {
+                            btnInClone.remove();
                         }
                         
-                        try {
-                            await navigator.clipboard.writeText(textToCopy);
+                        let textToCopy = lineClone.textContent || '';
+                        
+                        // Remove PS1 prompt ($ and everything before it)
+                        const dollarIndex = textToCopy.indexOf('$');
+                        if (dollarIndex !== -1) {
+                            textToCopy = textToCopy.substring(dollarIndex + 1);
+                        }
+                        
+                        // Trim leading and trailing whitespace
+                        textToCopy = textToCopy.trim();
+                        
+                        // Use Docusaurus copyToClipboard
+                        copyToClipboard(textToCopy).then(() => {
+                            // Show success icon
                             copyBtn.innerHTML = `
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5607 3.99999L15.0303 4.53032L6.23744 13.3232C5.55403 14.0066 4.44599 14.0066 3.76257 13.3232L4.2929 12.7929L3.76257 13.3232L0.969676 10.5303L0.439346 9.99999L1.50001 8.93933L2.03034 9.46966L4.82323 12.2626C4.92086 12.3602 5.07915 12.3602 5.17678 12.2626L13.9697 3.46966L14.5 2.93933L15.5607 3.99999Z"/>
                                 </svg>
                             `;
                             copyBtn.style.color = 'rgb(34, 197, 94)';
+                            
+                            // Reset after 1.5s
                             setTimeout(() => {
                                 copyBtn.innerHTML = `
-                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 0.5C1.7835 0.5 1 1.2835 1 2.25V9.75C1 10.7165 1.7835 11.5 2.75 11.5H3.75H4.5V10H3.75H2.75C2.61193 10 2.5 9.88807 2.5 9.75V2.25C2.5 2.11193 2.61193 2 2.75 2H8.25C8.38807 2 8.5 2.11193 8.5 2.25V3H10V2.25C10 1.2835 9.2165 0.5 8.25 0.5H2.75ZM7.75 4.5C6.7835 4.5 6 5.2835 6 6.25V13.75C6 14.7165 6.7835 15.5 7.75 15.5H13.25C14.2165 15.5 15 14.7165 15 13.75V6.25C15 5.2835 14.2165 4.5 13.25 4.5H7.75ZM7.5 6.25C7.5 6.11193 7.61193 6 7.75 6H13.25C13.3881 6 13.5 6.11193 13.5 6.25V13.75C13.5 13.8881 13.3881 14 13.25 14H7.75C7.61193 14 7.5 13.8881 7.5 13.75V6.25Z"/>
                                     </svg>
                                 `;
                                 copyBtn.style.color = 'rgb(107, 114, 128)';
+                                isProcessing = false;
                             }, 1500);
-                        } catch (err) {
+                        }).catch((err) => {
                             console.error('Copy failed:', err);
-                        }
+                            isProcessing = false;
+                        });
                     };
                     
                     const handleMouseEnter = () => {
-                        copyBtn.style.opacity = '1';
+                        if (!isMobile) {
+                            copyBtn.style.opacity = '1';
+                        }
                     };
                     
                     const handleMouseLeave = () => {
-                        copyBtn.style.opacity = '0';
+                        if (!isMobile) {
+                            copyBtn.style.opacity = '0';
+                        }
                     };
                     
                     const handleBtnMouseEnter = () => {
-                        copyBtn.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+                        copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 0.9)' : 'rgba(229, 229, 229, 0.8)';
+                        copyBtn.style.opacity = '1';
+                        copyBtn.style.transform = 'translateY(-50%) scale(1.05)';
                     };
                     
                     const handleBtnMouseLeave = () => {
-                        copyBtn.style.backgroundColor = 'transparent';
+                        copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                        copyBtn.style.transform = 'translateY(-50%) scale(1)';
+                        if (!isMobile) {
+                            copyBtn.style.opacity = '0';
+                        } else {
+                            copyBtn.style.opacity = '0.9';
+                        }
                     };
                     
+                    const handleTouchStart = (e) => {
+                        copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 0.9)' : 'rgba(229, 229, 229, 0.8)';
+                        copyBtn.style.transform = 'translateY(-50%) scale(0.95)';
+                    };
+                    
+                    const handleTouchEnd = (e) => {
+                        copyBtn.style.backgroundColor = isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+                        copyBtn.style.transform = 'translateY(-50%) scale(1)';
+                    };
+                    
+                    // Mouse events for desktop
                     line.addEventListener('mouseenter', handleMouseEnter);
                     line.addEventListener('mouseleave', handleMouseLeave);
-                    copyBtn.addEventListener('click', handleCopy);
                     copyBtn.addEventListener('mouseenter', handleBtnMouseEnter);
                     copyBtn.addEventListener('mouseleave', handleBtnMouseLeave);
+                    
+                    // Click events (works on both desktop and mobile)
+                    copyBtn.addEventListener('click', handleCopy);
+                    
+                    // Touch events for mobile
+                    if (isMobile) {
+                        copyBtn.addEventListener('touchstart', handleTouchStart, { passive: true });
+                        copyBtn.addEventListener('touchend', handleTouchEnd, { passive: true });
+                    }
                     
                     line.appendChild(copyBtn);
                 } else {
