@@ -129,15 +129,7 @@ const CodeBlock = ({
             
             const highlightedLines = new Set();
             allLines.forEach((line, index) => {
-                let shouldHighlight = false;
-                
-                if (input) {
-                    shouldHighlight = inputLines.has(index);
-                } else {
-                    const text = line.textContent || '';
-                    shouldHighlight = highlightLines.has(index) || 
-                                    (headerTitle === 'Terminal' && text.trim().startsWith('$'));
-                }
+                const shouldHighlight = input ? inputLines.has(index) : highlightLines.has(index);
                 
                 if (shouldHighlight) {
                     highlightedLines.add(index);
