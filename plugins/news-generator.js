@@ -142,11 +142,83 @@ export default function newsGeneratorPlugin(context, options) {
     name: "docusaurus-news-generator",
     async postBuild({siteConfig = {}, routesPaths = [], outDir}) {
       const { currentLocale } = context.i18n;
+      // Helpers to produce localized titles for the news sidebar
+      const toArabicDigits = (str = "") =>
+        str.replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xfee0));
+
+      const zeroPad = (n, w = 2) => String(n).padStart(w, "0");
+
+      const extractIssueNumber = (title = "") => {
+        const t = toArabicDigits(title);
+        const m = t.match(/第\s*(\d{1,4})\s*期/);
+        return m ? Number(m[1]) : null;
+      };
+
+      const extractDateFromText = (title = "") => {
+        const t = toArabicDigits(title);
+        // Chinese date: YYYY 年 MM 月 DD 日
+        let m = t.match(/(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日?/);
+        if (m) {
+          const [, y, mo, d] = m.map((x) => Number(x));
+          return { y, mo, d };
+        }
+        // ISO-like date: YYYY-MM-DD
+        m = t.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+        if (m) {
+          const [, y, mo, d] = m.map((x) => Number(x));
+          return { y, mo, d };
+        }
+        return null;
+      };
+
+      const localizeBiweeklyTitle = (title, locale) => {
+        // If not Chinese-styled title, keep as-is
+        const issue = extractIssueNumber(title);
+        const date = extractDateFromText(title);
+        if (!issue && !date) return title;
+
+        const num = issue != null ? zeroPad(issue, 3) : null;
+        const y = date?.y, mo = date ? zeroPad(date.mo) : null, d = date ? zeroPad(date.d) : null;
+
+        if (locale === "en") {
+          if (num && y && mo && d) return `RuyiSDK Biweekly ${num}: ${y}-${mo}-${d}`;
+          if (num) return `RuyiSDK Biweekly ${num}`;
+          if (y && mo && d) return `RuyiSDK Biweekly: ${y}-${mo}-${d}`;
+          return title;
+        }
+        if (locale === "de") {
+          if (num && y && mo && d) return `RuyiSDK Zweiwochenbericht ${num}: ${d}.${mo}.${y}`;
+          if (num) return `RuyiSDK Zweiwochenbericht ${num}`;
+          if (y && mo && d) return `RuyiSDK Zweiwochenbericht: ${d}.${mo}.${y}`;
+          return title;
+        }
+        return title;
+      };
+
+      const localizeRuyiNewsTitle = (title, locale) => {
+        // Attempt to translate common pattern: "RuyiSDK 0.39 版本更新说明"
+        const t = toArabicDigits(title);
+        const m = t.match(/RuyiSDK\s+([0-9.]+)\s*版本?更新说明/);
+        if (m) {
+          const version = m[1];
+          if (locale === "en") return `RuyiSDK ${version} Release Notes`;
+          if (locale === "de") return `RuyiSDK ${version} Versionshinweise`;
+        }
+        return title;
+      };
+
+      const localizeTitle = (title, itemname, locale) => {
+        if (locale === "zh-Hans") return title;
+        if (itemname === "weeklies") return localizeBiweeklyTitle(title, locale);
+        if (itemname === "ruyinews") return localizeRuyiNewsTitle(title, locale);
+        return title;
+      };
       const data = {};
       for (const [itemname, item] of Object.entries(PATTERNS[currentLocale])) {
         const { prefix, path } = item;
         const scannedItems = scanFiles(path).map((it) => ({
           ...it,
+          title: localizeTitle(it.title, itemname, currentLocale),
           link: prefix + it.filename,
         }));
         data[itemname] = scannedItems;
