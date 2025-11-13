@@ -65,30 +65,33 @@ const NewsPage = () => {
           ) : (
             <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row">
               {/* left */}
-              <div className="min-w-0 flex-1 md:flex-[3]">
+              <div className="min-w-0 flex-1 md:flex-[3] md:pr-72">
                 <Articles items={articles} onClick={handleClick} />
               </div>
 
-              {/* right */}
-              <div className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky md:top-20">
-                {/* subscription button for news page */}
-                <div className="p-2">
-                  <ButtonSubscription />
+              {/* right (will be fixed on md+ screens) */}
+              <div className="relative">
+                <div className="md:fixed md:top-20 md:right-6 md:w-64 lg:right-12">
+                  <div className="p-2">
+                    <ButtonSubscription />
+                  </div>
+                  <div className="space-y-4">
+                    <Card
+                      items={weeklies}
+                      label={translate({ id: "news.biweekly", message: "RuyiSDK 周报" })}
+                      color="bg-blue-500"
+                      borderColor="border-blue-500"
+                      onClick={handleClick}
+                    />
+                    <Card
+                      items={ruyinews}
+                      label={translate({ id: "news.news", message: "RuyiSDK 新闻" })}
+                      color="bg-green-500"
+                      borderColor="border-green-500"
+                      onClick={handleClick}
+                    />
+                  </div>
                 </div>
-                <Card
-                  items={weeklies}
-                  label={translate({ id: "news.biweekly", message: "RuyiSDK 周报" })}
-                  color="bg-blue-500"
-                  borderColor="border-blue-500"
-                  onClick={handleClick}
-                />
-                <Card
-                  items={ruyinews}
-                  label={translate({ id: "news.news", message: "RuyiSDK 新闻" })}
-                  color="bg-green-500"
-                  borderColor="border-green-500"
-                  onClick={handleClick}
-                />
               </div>
             </div>
           )}
