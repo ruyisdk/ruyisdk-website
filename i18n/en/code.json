@@ -441,23 +441,23 @@
   "前往阅读": {
     "message": "Read more"
   },
+  "邱吉博士成为 PLCT Lab 新负责人": {
+    "message": "Dr. Qiu Ji Becomes the New Leader of PLCT Lab"
+  },
+  "技术总监邱吉将会承担起领导 PLCT Lab 的重任，成为第二任团队负责人。PLCT Lab 在邱吉博士的带领下，将会继续在编译器、虚拟机等领域稳扎稳打，成为国内基础软件领域的压舱石。": {
+    "message": "The technical director, Qiu Ji, will take on the responsibility of leading the PLCT Lab and become the second team leader. Under the leadership of Dr. Qiu Ji, PLCT Lab will continue to focus on compiler and virtual machine research, becoming a key pillar in the domestic basic software field."
+  },
+  "喜报：Steam 可以在 RISC-V 上稳定运行了！Box64 再次立大功": {
+    "message": "喜报：Steam 可以在 RISC-V 上稳定运行了！Box64 再次立大功"
+  },
+  "Box64新版本v0.3.8 发布，本版本RISC-V 后端得到了大量的兼容性修复，Linux Steam （终于）可以稳定运行了！": {
+    "message": "Box64 v0.3.8 has been released, and the RISC-V backend has received extensive compatibility fixes, allowing Linux Steam (finally) to run stably."
+  },
   "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误": {
     "message": "Learn, Compete, and Intern: Arrange your schedule wisely and make the most of your holidays."
   },
   "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！": {
     "message": "Happy holidays! The PLCT Lab and XuanTie RV Academy have jointly launched the \"RISC-V Learning + Practice Guide\" to help you improve your skills during the holidays. The XuanTie RISC-V Academy provides free series courses covering three levels: beginner, intermediate, and advanced. Taught by experienced experts, these courses cover various aspects of RISC-V, including software development, hardware acceleration, and system architecture. Now, we are also launching the \"CIE-XuanTie Cup RISC-V Application Innovation Competition\" with three major tracks: hardware acceleration, server components, and smart hardware. Challenge yourself to apply your knowledge and win prizes! Join the RISC-V learning feast and make the most of your holidays!"
-  },
-  "openGauss RISC-V SIG深度参与openGauss Meetup成都站，探索开源数据库与RISC-V的融合与实践": {
-    "message": "openGauss RISC-V SIG Deeply Participates in the openGauss Meetup Chengdu Station, Exploring the Fusion and Practice of Open Source Databases and RISC-V"
-  },
-  "2025年9月27日，openGauss Meetup成都站成功举办。openGauss RISC-V SIG核心团队精彩亮相，分享了在RISC-V架构下的重要进展：实现了openGauss容器化部署方案，完成从5.1.0到7.0.0全量版的移植，性能提升显著。目前社区正积极推进技术优化与生态建设，并启动[甲辰计划]实习生招募，诚邀开发者加入，共同推动开源数据库在RISC-V生态的发展。加入我们，探索RISC-V未来！": {
-    "message": "On September 27, 2025, the openGauss Meetup Chengdu Station was successfully held. The core team of the openGauss RISC-V SIG made a dazzling appearance, sharing their important progress in the RISC-V architecture: implemented the openGauss container deployment solution and completed the migration from 5.1.0 to 7.0.0, with significant performance improvements. Currently, the community is actively promoting technical optimization and ecosystem building, and launching the [Jichen Plan] internship recruitment, inviting developers to join, and contributing to the development of the open source database in the RISC-V ecosystem. Join us to explore the future of RISC-V!"
-  },
-  "首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人": {
-    "message": "The First \"Hefei RISC-V Open Day\" was held successfully at Hefei University of Technology, with a successful outcome."
-  },
-  "2025年9月24日，首届[合肥RISC-V开放日]在合肥工业大学成功举行。活动汇聚百余位专家学者，共同探讨RISC-V软硬件生态发展。红帽、PLCT实验室等机构专家分享了在操作系统、AI、教育等领域的创新实践，现场还设置了生态展区，展示openKylin、deepin等社区的最新成果。此次活动为产学研合作搭建了重要平台，有力推动了RISC-V生态的融合发展。": {
-    "message": "On September 24, 2025, the first [Hefei RISC-V Open Day] was held successfully at Hefei University of Technology. The event gathered over 100 experts and scholars to discuss the development of the RISC-V software and hardware ecosystem. Red Hat, PLCT Lab, and other institutions shared their innovative practices in operating systems, AI, and education, and set up an ecosystem exhibition to showcase the latest results of openKylin and deepin. This event established a crucial platform for industry-university-research cooperation and promoted the harmonious development of the RISC-V ecosystem."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Review of RuyiSDK's first offline meetup"

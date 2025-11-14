@@ -441,23 +441,23 @@
   "前往阅读": {
     "message": "Mehr lesen"
   },
+  "邱吉博士成为 PLCT Lab 新负责人": {
+    "message": "Dr. Qiu Ji Becomes the New Leader of PLCT Lab"
+  },
+  "技术总监邱吉将会承担起领导 PLCT Lab 的重任，成为第二任团队负责人。PLCT Lab 在邱吉博士的带领下，将会继续在编译器、虚拟机等领域稳扎稳打，成为国内基础软件领域的压舱石。": {
+    "message": "Der technische Direktor, Qiu Ji, wird die Verantwortung für die Führung des PLCT Lab übernehmen und wird zum zweiten Teamleiter. Unter der Leitung von Dr. Qiu Ji wird das PLCT Lab weiterhin auf Compiler und Virtual Machine-Forschung konzentrieren und wird zu einem wichtigen Fundament im nationalen Grundsoftware-Feld."
+  },
+  "喜报：Steam 可以在 RISC-V 上稳定运行了！Box64 再次立大功": {
+    "message": "Glückwunsch: Steam kann jetzt stabil auf RISC-V laufen! Box64 hat es wieder geschafft."
+  },
+  "Box64新版本v0.3.8 发布，本版本RISC-V 后端得到了大量的兼容性修复，Linux Steam （终于）可以稳定运行了！": {
+    "message": "Die neue Version v0.3.8 von Box64 wurde veröffentlicht, und das RISC-V-Backend hat durch umfangreiche Kompatibilitätsreparaturen erheblich verbessert, sodass Linux Steam (endlich) stabil läuft."
+  },
   "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误": {
     "message": "Lernen, Wettbewerbe und Praktika: Planen Sie Ihren Zeitplan bewusst und machen Sie das Beste aus Ihren Ferien."
   },
   "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！": {
     "message": "Alles Gute zum Feiertag! Das PLCT-Labor und die XuanTie-RV-Akademie haben zusammen das \"RISC-V-Lernen und Praxisleitfaden\" gestartet, um Ihnen bei der Verbesserung Ihrer Fähigkeiten während der Feiertage zu helfen. Die XuanTie-RISC-V-Akademie bietet kostenlose Kurse für drei Ebenen: Anfänger, Mittelstufe und Fortgeschrittene. Die Kurse werden von erfahrenen Experten gehalten und decken verschiedene Aspekte von RISC-V ab, einschließlich Softwareentwicklung, Hardwarebeschleunigung und Systemarchitektur. Jetzt starten wir auch die \"CIE-XuanTie-Cup RISC-V-Anwendungskompetitionswettbewerb\" mit drei großen Themenbereichen: Hardwarebeschleunigung, Serverkomponenten und intelligente Hardware. Machen Sie sich selbst Mut, um Ihre Fähigkeiten zu nutzen und Preise zu gewinnen! Kommen Sie zu diesem RISC-V-Lernfest und machen Sie das Beste aus Ihren Ferien!"
-  },
-  "openGauss RISC-V SIG深度参与openGauss Meetup成都站，探索开源数据库与RISC-V的融合与实践": {
-    "message": "openGauss RISC-V SIG Deeply Participates in the openGauss Meetup Chengdu Station, Exploring the Fusion and Practice of Open Source Databases and RISC-V"
-  },
-  "2025年9月27日，openGauss Meetup成都站成功举办。openGauss RISC-V SIG核心团队精彩亮相，分享了在RISC-V架构下的重要进展：实现了openGauss容器化部署方案，完成从5.1.0到7.0.0全量版的移植，性能提升显著。目前社区正积极推进技术优化与生态建设，并启动[甲辰计划]实习生招募，诚邀开发者加入，共同推动开源数据库在RISC-V生态的发展。加入我们，探索RISC-V未来！": {
-    "message": "Am 27. September 2025 fand die openGauss Meetup Chengdu Station erfolgreich statt. Die Core-Team des openGauss RISC-V SIG machten eine großartige Präsentation, in der sie ihre wichtigen Fortschritte im RISC-V-Architektur teilten: Die Implementierung der openGauss-Container-Bereitstellungslösung und die Migration von 5.1.0 bis 7.0.0 erfolgten erfolgreich mit deutlichen Leistungssteigerungen. Derzeit setzt sich die Community aktiv für das Technische Optimieren und das Ökosystembauen, und startet die [Jichen-Plan] Praktikumsanmeldung, um Entwickler einzuladen, um zusammenzuarbeiten, und das Entwickeln des open-source-Datenbanken in der RISC-V-Ökosystem zu fördern. Kommen Sie zu uns, um die Zukunft von RISC-V zu erkunden!"
-  },
-  "首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人": {
-    "message": "Das Erste \"Hefei RISC-V Open Day\" wurde erfolgreich an der Hefei University of Technology veranstaltet, mit einem erfolgreichen Ausgang."
-  },
-  "2025年9月24日，首届[合肥RISC-V开放日]在合肥工业大学成功举行。活动汇聚百余位专家学者，共同探讨RISC-V软硬件生态发展。红帽、PLCT实验室等机构专家分享了在操作系统、AI、教育等领域的创新实践，现场还设置了生态展区，展示openKylin、deepin等社区的最新成果。此次活动为产学研合作搭建了重要平台，有力推动了RISC-V生态的融合发展。": {
-    "message": "Am 24. September 2025 fand das Erste [Hefei RISC-V Open Day] erfolgreich an der Hefei University of Technology statt. Das Event sammelte über 100 Experten und Wissenschaftler, um die Entwicklung des RISC-V-Software- und Hardware-Ökosystems zu diskutieren. Red Hat, PLCT Lab und andere Institutionen teilten ihre innovative Praxis in Betriebssystemen, KI und Bildung und setzten ein Ökosystem-Ausstellung für die neuesten Ergebnisse von openKylin und deepin. Dieses Event stellt ein wichtiges Bindeglied für Produktions- und Forschungskooperationen dar und trägt dazu bei, das RISC-V-Ökosystem zu fördern."
   },
   "RuyiSDK首次线下Meetup回顾": {
     "message": "Rückblick auf RuyiSDKs erstes Offline-Meetup"
