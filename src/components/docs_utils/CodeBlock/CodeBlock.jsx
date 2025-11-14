@@ -198,6 +198,9 @@ const CodeBlock = ({
             allLines.forEach((line, index) => {
                 const shouldHighlight = highlightedLines.has(index);
                 
+                // Ensure all lines display as block to preserve line breaks
+                line.style.display = 'block';
+                
                 if (!shouldHighlight && input) {
                     line.style.color = 'rgb(107, 114, 128)';
                     line.style.fontFamily = 'monospace';
@@ -219,7 +222,6 @@ const CodeBlock = ({
                     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
                     
                     line.style.backgroundColor = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgb(235, 244, 255)';
-                    line.style.display = 'block';
                     line.style.position = 'relative';
                     
                     // Only add spacing before first and after last highlighted line
@@ -243,7 +245,6 @@ const CodeBlock = ({
                     line.style.boxSizing = 'border-box';
                     
                     // All highlighted lines use max width from entire code block
-                    line.style.display = 'block';
                     if (maxLineWidth > 0) {
                         // Width includes padding (border-box), so use maxLineWidth directly
                         line.style.width = `${maxLineWidth}px`;
