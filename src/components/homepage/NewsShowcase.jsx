@@ -32,36 +32,6 @@ const NewsShowcase = () => {
   const [isVisible, setIsVisible] = useState(false);
   const mainRef = useRef(null);
   const containerRef = useRef(null);
-  // Keyboard navigation state and refs
-  const [focusedIndex, setFocusedIndex] = useState(selectedIndex);
-  const buttonRefs = useRef([]);
-
-  // Handle keyboard navigation for sidebar buttons
-  const handleKeyDown = (e, idx) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const nextIdx = idx < newsData.length - 1 ? idx + 1 : 0;
-      setFocusedIndex(nextIdx);
-      setSelectedIndex(nextIdx);
-      // move DOM focus
-      buttonRefs.current[nextIdx]?.focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const prevIdx = idx > 0 ? idx - 1 : newsData.length - 1;
-      setFocusedIndex(prevIdx);
-      setSelectedIndex(prevIdx);
-      buttonRefs.current[prevIdx]?.focus();
-    } else if (e.key === 'Enter' || e.key === ' ') {
-      // Activate the item on Enter or Space
-      e.preventDefault();
-      handleNewsClick(idx);
-    }
-  };
-
-  // Keep focusedIndex in sync when selectedIndex changes programmatically
-  useEffect(() => {
-    setFocusedIndex(selectedIndex);
-  }, [selectedIndex]);
 
   /**
    * Truncates text to a specified maximum length, avoiding word breaks.
@@ -181,22 +151,17 @@ const NewsShowcase = () => {
         <>
           <div className="newsshowcase-sidebar w-[20rem] min-w-[20rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pr-4">
             {newsData.map((news, idx) => (
-              <button
+              <div
                 key={idx}
-                type="button"
-                aria-pressed={selectedIndex === idx}
-                tabIndex={focusedIndex === idx ? 0 : -1}
-                ref={el => (buttonRefs.current[idx] = el)}
                 className={`newsshowcase-title-item px-4 py-4 rounded-[0.625rem] cursor-pointer transition-transform duration-300 text-base font-medium border border-[rgba(230,230,230,1)] select-none shadow-[0_8px_30px_rgba(0,0,0,0.1)] m-0 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] ${
                   selectedIndex === idx
                     ? 'newsshowcase-active bg-[#002677] text-white shadow-none scale-[1.01]'
                     : 'bg-white text-[#1d1d1f]'
                 }`}
-                onClick={() => { setFocusedIndex(idx); handleNewsClick(idx); }}
-                onKeyDown={e => handleKeyDown(e, idx)}
+                onClick={() => handleNewsClick(idx)}
               >
                 <Translate>{news.title}</Translate>
-              </button>
+              </div>
             ))}
           </div>
           <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden" ref={mainRef}>
@@ -212,7 +177,7 @@ const NewsShowcase = () => {
                   <img
                     src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
                     alt={news.title}
-                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
                   />
                   <div className="newsshowcase-content p-8 bg-white flex-1 flex flex-col relative">
                     <h2 className="newsshowcase-card-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight tracking-tight"><Translate>{news.title}</Translate></h2>
@@ -244,7 +209,7 @@ const NewsShowcase = () => {
               <img
                 src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
                 alt={news.title}
-                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
               />
               <div className="mobile-news-content p-4 bg-white flex flex-col relative">
                 <h2 className="mobile-news-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight"><Translate>{news.title}</Translate></h2>
