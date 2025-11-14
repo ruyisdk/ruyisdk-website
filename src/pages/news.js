@@ -7,6 +7,7 @@ import Layout from "@theme/Layout";
 import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 const NewsPage = () => {
   const { i18n } = useDocusaurusContext();
@@ -14,6 +15,7 @@ const NewsPage = () => {
   const [articles, setArticles] = useState([]);
   const [ruyinews, setRuyinews] = useState([]);
   const [weeklies, setWeeklies] = useState([]);
+  const [isClient, setIsClient] = useState(false);
 
   const handleClick = (link) => {
     window.open(link, "_blank");
@@ -49,54 +51,75 @@ const NewsPage = () => {
     loadNewsData();
   }, [i18n.currentLocale]);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <div className="flex min-h-0 flex-1 flex-col gap-4 p-4 md:flex-row">
-        {loading ? (
-          <p className="text-gray-600">loading...</p>
-        ) : (
-          <>
-            {/* left */}
-            <div className="min-w-0 flex-1 md:flex-[3]">
-              <Articles items={articles} onClick={handleClick} />
-            </div>
-
-            {/* right */}
-            <div
-              className="flex h-fit min-w-0 flex-1 flex-col gap-4 md:sticky
-                md:top-20"
-            >
-              {/* subscription button for news page */}
-              <div className="p-2">
-                <ButtonSubscription />
+      <PageBackground isClient={isClient} />
+      <div className="relative overflow-hidden px-6 py-8 text-gray-800 font-inter">
+        <div className="mx-auto relative z-10 max-w-screen-xl">
+          {loading ? (
+            <p className="text-gray-600">loading...</p>
+          ) : (
+            <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row">
+              {/* left */}
+              <div className="min-w-0 flex-1 md:flex-[3] md:pr-72">
+                <Articles items={articles} onClick={handleClick} />
               </div>
-              <Card
-                items={weeklies}
-                label={translate({
-                  id: "news.biweekly",
-                  message: "RuyiSDK 周报",
-                })}
-                color="bg-blue-500"
-                borderColor="border-blue-500"
-                onClick={handleClick}
-              />
-              <Card
-                items={ruyinews}
-                label={translate({
-                  id: "news.news",
-                  message: "RuyiSDK 新闻",
-                })}
-                color="bg-green-500"
-                borderColor="border-green-500"
-                onClick={handleClick}
-              />
+
+              {/* right (will be fixed on md+ screens) */}
+              <div className="relative">
+                <div className="md:fixed md:top-20 md:right-6 md:w-64 lg:right-12">
+                  <div className="p-2">
+                    <ButtonSubscription />
+                  </div>
+                  <div className="space-y-4">
+                    <Card
+                      items={weeklies}
+                      label={translate({ id: "news.biweekly", message: "RuyiSDK 周报" })}
+                      color="bg-blue-500"
+                      borderColor="border-blue-500"
+                      onClick={handleClick}
+                    />
+                    <Card
+                      items={ruyinews}
+                      label={translate({ id: "news.news", message: "RuyiSDK 新闻" })}
+                      color="bg-green-500"
+                      borderColor="border-green-500"
+                      onClick={handleClick}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          </>
-        )}
+          )}
+          <WeChatLink />
+        </div>
       </div>
-      <WeChatLink />
     </Layout>
   );
 };
 
 export default NewsPage;
+
+// Background blobs similar to Contributors page
+function PageBackground({ isClient }) {
+  if (!isClient) return null;
+  return ReactDOM.createPortal(
+    <div>
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 rounded-full -z-10"
+        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
+      />
+      <div
+        aria-hidden
+        className="fixed bottom-0 right-0 rounded-full -z-10"
+        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
+      />
+    </div>,
+    document.body,
+  );
+}
