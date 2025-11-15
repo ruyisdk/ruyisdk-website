@@ -45,38 +45,44 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
         {currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`hover:scale-101 cursor-pointer rounded-lg shadow-md
+            className={`group hover:scale-101 cursor-pointer rounded-lg shadow-md
             transition duration-200 hover:shadow-lg ${article.active
                 ? "bg-blue-500 text-white"
                 : "bg-white text-black hover:bg-gray-100"
               } `}
             onClick={() => onClick(article.link)}
+            style={{ height: '28vh' }}
           >
-            <div className="flex flex-col">
-              {/* Image section */}
-              {article.image && (
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="h-64 w-full rounded-t-lg object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-              )}
-
-              {/* Content section */}
-              <div className="space-y-3 p-6">
+            {/* Use column layout on small screens, switch to row with image on right at md+ */}
+            <div className="flex flex-col md:flex-row items-stretch h-full">
+              {/* Content section (left on md+) */}
+              <div className="space-y-3 p-6 flex-1 overflow-hidden flex flex-col justify-between">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-3xl font-bold">{article.title}</span>
-                  <span className="whitespace-nowrap text-lg opacity-70">
+                  <span className="flex-1 text-2xl md:text-3xl font-bold truncate">{article.title}</span>
+                  <span className="whitespace-nowrap text-sm md:text-lg opacity-70 ml-3">
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-lg opacity-80 line-clamp-3">
+                <p className="text-base md:text-lg opacity-80 line-clamp-3 overflow-hidden">
                   {article.summary}
                 </p>
               </div>
+
+              {/* Image section (right on md+) */}
+              {article.image && (
+                <div className="flex-shrink-0 md:ml-4 md:mr-0 h-24 md:w-56 md:h-full">
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full h-full object-cover object-center rounded-b-lg md:rounded-r-lg md:rounded-bl-none transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = '/img/placeholder-news.svg';
+                      e.target.className = 'w-full h-full object-cover object-center rounded-b-lg md:rounded-r-lg md:rounded-bl-none';
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         ))}
