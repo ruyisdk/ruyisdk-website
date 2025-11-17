@@ -25,7 +25,8 @@ The ruyi package manager primarily provides the following functionalities.
 | `ruyi install 'gnu-upstream(0.20231118.0)'`                                                  | Install specified version of GNU upstream toolchain.          | Install historical versions by specifying version number.                      |
 | `ruyi install 'gnu-upstream(==0.20231118.0)'`                                                | Install specific version of GNU upstream toolchain.          | Version matching format should be `<op><ver>`.               |
 | `ruyi install --reinstall gnu-upstream`                                                      | Reinstall GNU upstream toolchain.             |                                     |
-| `ruyi extract ruyisdk-demo`                                                                  | Download and unpack ruyisdk-demo source package.      | Unpacks to current directory.                            |
+| `ruyi uninstall gnu-upstream` | Uninstall an installed package. | You can also use `ruyi remove` or `ruyi rm`. |
+| `ruyi extract ruyisdk-demo`                                                                  | Download and unpack ruyisdk-demo source package.      | By default, unpacks into a directory named after the package and version. |
 | `ruyi venv --toolchain gnu-upstream --emulator qemu-user-riscv-upstream generic ./ruyi_venv` | Create virtual environment with toolchain and emulator in specified directory.      | Uses predefined generic configuration.                   |
 | `ruyi version`                                                                               | Display version of ruyi package manager.              |                                     |
 | `ruyi self uninstall`                                                                        | Uninstall ruyi package manager.               | Command will prompt for confirmation.                          |

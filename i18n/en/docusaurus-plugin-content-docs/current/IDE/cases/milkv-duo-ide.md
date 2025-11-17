@@ -33,39 +33,46 @@
 
 This article uses the application example duo-examples for the milkv-duo development board. Use either of the following methods to obtain the source code:
 
-   ```bash
+```bash
    # Method 1: git clone
    $ git clone https://github.com/milkv-duo/duo-examples.git
 
    # Method 2: ruyi extract command
    $ ruyi extract milkv-duo-examples
-   ```
+```
 
 ### Importing and Setting Project Properties
 
 1. File > New > Project
 
-   ![1735624096763](image//1735624096763.png)
+   ![1735624096763](image/1735624096763.png)
+
 2. Select C/C++ > Makefile Project with Existing Code > Next
 
-   ![1735623999135](image//1735623999135.png)
+   ![1735623999135](image/1735623999135.png)
+
 3. Import the prepared source code:
 
    - Click Browse > Target source code path
+
    - Toolchain for Indexer Settings：Select RISC-V Cross GCC
+
    - Finish
 
-     ![1735624436834](image//1735624436834.png)
+     ![1735624436834](image/1735624436834.png)
+
 4. Project hello-world > Right-click > Properties to configure related properties
 
    1. Configure the toolchain path for the project
 
-      ![1735624925007](image//1735624925007.png)
+      ![1735624925007](image/1735624925007.png)
 
       Select the path where the compiler was installed by ruyi install (default is under ~/.local/share/ruyi/binaries/x86_64/), or the bin directory under the created virtual environment.
+
    2. Set compilation properties
 
-      ![1735625245878](image//1735625245878.png)
+      ![1735625245878](image/1735625245878.png)
+
 5. Edit the Makefile
 
    - The project's built-in Makefile relies on the envsetup.sh script to pre-set environment variables. In the [vendor documentation practice](https://github.com/milkv-duo/duo-examples/blob/main/README-zh.md), we learned that the compiler prefix, compilation options, and linking parameters were pre-set. For convenience, these are written directly into the Makefile. Note that the TOOLCHAIN_PREFIX path needs to be modified as needed.
@@ -77,52 +84,38 @@ This article uses the application example duo-examples for the milkv-duo develop
    - To automate copying the target program to the target device, the Makefile also includes an upload target (this assumes SSH authentication between the PC and the target device; refer to the "SSH Key Configuration" section at the end). Additionally, the relevant directory must be pre-created on the target device (the storage path is customizable, but ensure the scp command path matches the actual environment).
    - You can further modify the Makefile below; this is just a reference.
 
-     ```makefile
-     # Eclipse toolchain settings
-     #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
-     TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+```makefile
+# Eclipse toolchain settings
+#TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
+TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
 
-     # Compilation options -O3
-     #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I/home/phebe/milkv/duo/duo-examples/include/system
-     #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
-     CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g  #-mcpu=c906fdv -march=rv64imafdcv0p7xthead : One of the two must be set
-     LDFLAGS :=
+CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g
+LDFLAGS := 
 
-     TARGET=helloworld
+TARGET = helloworld
 
-     ifeq (,$(TOOLCHAIN_PREFIX))
-     $(error TOOLCHAIN_PREFIX is not set)
-     endif
+CC = $(TOOLCHAIN_PREFIX)gcc
 
-     ifeq (,$(CFLAGS))
-     $(error CFLAGS is not set)
-     endif
+SOURCE = $(wildcard *.c)
+OBJS = $(patsubst %.c,%.o,$(SOURCE))
 
-     CC = $(TOOLCHAIN_PREFIX)gcc
+all: $(TARGET)
 
-     SOURCE = $(wildcard *.c)
-     OBJS = $(patsubst %.c,%.o,$(SOURCE))
+$(TARGET): $(OBJS)
+   $(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
-     # Default target
-     all: $(TARGET)
+%.o: %.c
+   $(CC) $(CFLAGS) -o $@ -c $<
 
-     $(TARGET): $(OBJS)
-        $(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+upload: $(TARGET)
+   scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
 
-     %.o: %.c
-        $(CC) $(CFLAGS) -o $@ -c $<
+clean:
+   rm -f *.o $(TARGET)
 
-     # Upload target
-     upload: $(TARGET)
-        scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
+.PHONY: all clean upload
+```
 
-     .PHONY: clean upload
-     clean:
-        rm -f *.o $(TARGET)
-
-     # Make 'all' target depend on 'upload' to automatically upload after building
-     all: upload
-     ```
 6. Open a Terminal window in the IDE, create an SSH Terminal to log into the target device and perform related operations. If needed, you can also create a Local Terminal window for combined use. This depends on personal preference. Specific steps:
 
    - Window > Show View > Terminal
@@ -175,7 +168,7 @@ Refer to the image below (the image is a screenshot in Debug mode; since the con
 
 - C/C++ Application: Also defaults to the target program name (Search Project to specify)
 
-- Connect: New > SSH
+- Connect：New >  SSH
 
 - Remote Absolute File Path for C/C++ Application: Enter the absolute path of the target program on the RISC-V device (must match the path in the Makefile upload scp command)
 
@@ -187,8 +180,8 @@ Refer to the image below (the image is a screenshot in Debug mode; since the con
 
 Running effect demonstration:
 
-- [Successful remote run with Skip download to target path checked](image/run1.gif)
-- [Error when running without Skip download to target path checked](image/run1.gif)
+- ![Successful remote run with Skip download to target path checked](image/run1.gif)
+- ![Error when running without Skip download to target path checked](image/run1.gif)
 
   > milkv duo img currently does not support sftp: https://github.com/milkv-duo/duo-buildroot-sdk/issues/167. This issue will be resolved when the milkvduo image supports sftp-server.
   >
@@ -231,50 +224,41 @@ int main()
 **Makefile：**
 
 ```makefile
-# Eclipse toolchain settings
-#TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
+# Toolchain prefix
 TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
 
-# Compilation options -O3   -static
-#CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I~/milkv/duo/duo-examples/include/system
-#LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
-CFLAGS := -march=rv64imafdcv0p7xthead -g
-LDFLAGS :=
+# Compile options
+CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g
+LDFLAGS := 
 
-TARGET=sumdemo
+# Target filename
+TARGET = sumdemo
 
-ifeq (,$(TOOLCHAIN_PREFIX))
-$(error TOOLCHAIN_PREFIX is not set)
-endif
-
-ifeq (,$(CFLAGS))
-$(error CFLAGS is not set)
-endif
-
+# Compiler
 CC = $(TOOLCHAIN_PREFIX)gcc
-SOURCE = $(wildcard*.c)
-OBJS = $(patsubst%.c,%.o,$(SOURCE))
 
+# Source and object files
+SOURCE = $(wildcard *.c)
+OBJS = $(patsubst %.c,%.o,$(SOURCE))
 
 # Default target
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-   $(CC)$(CFLAGS) -o $@$(OBJS)$(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 %.o: %.c
-   $(CC)$(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 # Upload target
 upload: $(TARGET)
-   scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
+	scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
 
-.PHONY: clean upload
+# Clean
 clean:
-   rm -f *.o $(TARGET)
+	rm -f *.o $(TARGET)
 
-# Make 'all' target depend on 'upload' to automatically upload after building
-all: upload
+.PHONY: all clean upload
 ```
 
 #### Preparing gdbserver
@@ -318,20 +302,20 @@ Steps for remote debugging using GDBServer + GDB commands:
    $ riscv64-unknown-linux-musl-gdb --version
    $ riscv64-unknown-linux-musl-gdb ./sumdemo
 
-   $ target remote 192.168.42.1:2345   # Port number must match the gdbserver side
+   $ target remote 192.168.42.1:2345   #Port number must match the gdbserver side
 
-   $ break sumdemo.c:8                 # Set a breakpoint at line 8
+   $ break sumdemo.c:8                 #Set a breakpoint at line 8
 
    # The following are commonly used; use as needed
-   $ c                                 # Continue, resume program execution until the next breakpoint
-   $ disp result                       # Track a variable, display its value each time it stops
-   $ print result                      # Print the internal variable result
+   $ c                                 #Continue, resume program execution until the next breakpoint
+   $ disp result                       #Track a variable, display its value each time it stops
+   $ print result                      #Print the internal variable result
 
    ```
 
    ![1736326691511](image/1736326691511.png)
 
-   [Local Terminal + SSH Terminal | GDBServer + GDB Debugging Demonstration](image/gdb-terminal-1.gif)
+   ![Local Terminal + SSH Terminal | GDBServer+GDB Debugging Demonstration](image/gdb-terminal-1.gif)
 
 #### C/C++ Remote Application
 
@@ -369,8 +353,8 @@ Refer to the image below to configure the relevant parameters. Key points:
 
 Running effect demonstration:
 
-- [Error when running without Skip download to target path checked](image/gdb-withdownload.gif)
-- [Successful run with Skip download to target path checked](image/gdb-withoutdownload.gif)
+- ![Error when running without Skip download to target path checked](image/gdb-withdownload.gif)
+- ![Successful run with Skip download to target path checked](image/gdb-withoutdownload.gif)
 
 ## Additional Notes
 
@@ -385,7 +369,7 @@ By configuring SSH key-based passwordless login between the host and the Milk-V 
     2. Add the public key to the Milk-V Duo:
 
 ```bash
-$ cat ~/.ssh/milkvduo.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+$ cat ~/.ssh/xxxx.pub | ssh root@192.168.42.1 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 ```
 
     3. Verify: `ssh root@192.168.42.1`
