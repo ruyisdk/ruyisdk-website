@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const NewsShowcase = () => {
+  const { siteConfig } = useDocusaurusContext();
+  const baseUrl = siteConfig?.baseUrl || '/';
   const newsData = [
     {
       title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
@@ -69,8 +72,18 @@ const NewsShowcase = () => {
     }, 10000);
   };
 
-  const handleCardClick = (link) => {
-    window.open(link, '_blank');
+  // Helper to resolve image URL: keep absolute URLs, otherwise prefix Docusaurus baseUrl
+  const resolveImg = (src) => {
+    if (!src) return null;
+    try {
+      // absolute URL
+      // eslint-disable-next-line no-new
+      new URL(src);
+      return src;
+    } catch {}
+    // not absolute: prefix with site baseUrl
+    if (src.startsWith('/')) return baseUrl + src.slice(1);
+    return baseUrl + src;
   };
 
   // Auto-switch news every 3 seconds, but only when component is visible and not on mobile
@@ -154,15 +167,17 @@ const NewsShowcase = () => {
           <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden" ref={mainRef}>
             <div className="cards-wrapper flex flex-col w-full h-full md:overflow-visible">
               {newsData.map((news, idx) => (
-                <div
+                <a
                   key={idx}
-                  className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0"
-                  onClick={() => handleCardClick(news.link)}
+                  href={news.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline"
                 >
                   <img
-                    src={news.img}
-                    alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt` })}
-                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
+                    alt={news.title}
+                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
                   />
                   <div className="newsshowcase-content p-8 bg-white flex-1 flex flex-col relative">
                     <h2 className="newsshowcase-card-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight tracking-tight"><Translate>{news.title}</Translate></h2>
@@ -174,7 +189,7 @@ const NewsShowcase = () => {
                       <span className="newsshowcase-arrow">→</span>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
@@ -184,15 +199,17 @@ const NewsShowcase = () => {
       {isMobile && (
   <div className="mobile-cards-wrapper flex flex-col gap-4 px-4 w-full">
           {newsData.map((news, idx) => (
-            <div
+            <a
               key={idx}
-              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)]"
-              onClick={() => handleCardClick(news.link)}
+              href={news.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline"
             >
               <img
-                src={news.img}
-                alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile` })}
-                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
+                alt={news.title}
+                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
               />
               <div className="mobile-news-content p-4 bg-white flex flex-col relative">
                 <h2 className="mobile-news-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight"><Translate>{news.title}</Translate></h2>
@@ -202,7 +219,7 @@ const NewsShowcase = () => {
                   <span className="newsshowcase-arrow">→</span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       )}
