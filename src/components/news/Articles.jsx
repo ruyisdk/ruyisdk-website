@@ -39,46 +39,38 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
     <div className="flex flex-col gap-4">
       {/* articles */}
       <div
-        className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"
-          }`}
+        className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"}`}
       >
         {currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`group hover:scale-101 cursor-pointer rounded-lg shadow-md
-            transition duration-200 hover:shadow-lg ${article.active
-                ? "bg-blue-500 text-white"
-                : "bg-white text-black hover:bg-gray-100"
-              } `}
+            className={`cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-md transition duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden`}
             onClick={() => onClick(article.link)}
             style={{ height: '28vh' }}
           >
-            {/* Use column layout on small screens, switch to row with image on right at md+ */}
-            <div className="flex flex-col md:flex-row items-stretch h-full">
+            <div className="flex flex-col md:flex-row">
               {/* Content section (left on md+) */}
-              <div className="space-y-3 p-6 flex-1 overflow-hidden flex flex-col justify-between">
+              <div className="flex-1 p-6">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="flex-1 text-2xl md:text-3xl font-bold truncate">{article.title}</span>
-                  <span className="whitespace-nowrap text-sm md:text-lg opacity-70 ml-3">
+                  <span className="text-2xl md:text-3xl font-bold text-gray-800">{article.title}</span>
+                  <span className="whitespace-nowrap text-base md:text-lg text-gray-600">
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-base md:text-lg opacity-80 line-clamp-3 overflow-hidden">
+                <p className="mt-3 text-base md:text-lg text-gray-700/90 line-clamp-3">
                   {article.summary}
                 </p>
               </div>
 
               {/* Image section (right on md+) */}
               {article.image && (
-                <div className="flex-shrink-0 md:ml-4 md:mr-0 h-24 md:w-56 md:h-full">
+                <div className="w-full md:w-64 lg:w-72 flex-shrink-0">
                   <img
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-full object-cover object-center rounded-b-lg md:rounded-r-lg md:rounded-bl-none transition-transform duration-300 group-hover:scale-105"
+                    className="h-48 md:h-full w-full object-cover"
                     onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = '/img/placeholder-news.svg';
-                      e.target.className = 'w-full h-full object-cover object-center rounded-b-lg md:rounded-r-lg md:rounded-bl-none';
+                      e.target.style.display = 'none';
                     }}
                   />
                 </div>
@@ -98,10 +90,8 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
             ← 上一页
           </Button>
 
-          <div
-            className="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2"
-          >
-            <span className="text-sm text-gray-600">
+          <div className="flex items-center gap-2 rounded-lg bg-white/70 backdrop-blur px-4 py-2 shadow-sm">
+            <span className="text-sm text-gray-700">
               {currentPage + 1} / {totalPages}
             </span>
           </div>
