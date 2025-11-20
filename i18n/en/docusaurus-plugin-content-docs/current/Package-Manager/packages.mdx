@@ -119,7 +119,7 @@ List of available packages:
 * extra/wps-office
   - 12.1.0-r.17900 (latest)
   - 12.1.0-r.17885 ()
-`} />
+    `} />
 
 The ``list`` command also provides the ``--verbose`` or ``-v`` option to output more detailed information, which will print almost all information from the package repository. Since the full output will be very long, it is recommended to pass a non-empty search field to ``--name-contains``, add other limiting parameters, or redirect the full output to a file or a tool such as ``less``.
 
@@ -210,25 +210,57 @@ The following section clearly contains source packages:
 
 - source: Source packages
 
-Source packages can be downloaded and unpacked into the current directory using the ``extract`` command:
+A source package can be downloaded and extracted using the `extract` command. By default, `extract` will unpack the requested package into a separate directory named after the package and its version.
 
 <CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi extract ruyisdk-demo
+$ cd ruyisdk-demo-0.20231114.0
 $ ls
 README.md  rvv-autovec
+`} />
+
+If you need to extract directly into the current working directory (the default behavior in earlier versions), you can use the `--extract-without-subdir` option.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi extract --extract-without-subdir ruyisdk-demo
+$ ls
+README.md  rvv-autovec
+`} />
+
+If you need to extract the contents to another directory, you can specify the target directory using the `--dest-dir` or `-d` option.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi extract -d /path/to/destination ruyisdk-demo
+`} />
+
+If you only need to download the source package without extracting it, you can use the `--fetch-only` or `-f` option.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi extract -f ruyisdk-demo
 `} />
 
 The ``extract`` command supports the same version expression syntax as ``install``.
 
 ## Uninstalling Packages
 
-The Ruyi package manager does not implement the functionality to uninstall specific Ruyi packages. However, you can use the following command to delete all downloaded and installed packages:
+You can use the `ruyi uninstall` command to remove an installed package.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi uninstall gnu-upstream
+`} />
+
+This command also has shorter aliases available: `ruyi remove` or `ruyi rm`.
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ ruyi remove gnu-upstream
+$ ruyi rm gnu-upstream
+`} />
+
+If you need to delete all downloaded and installed packages, you can use the following command:
 
 <CodeBlock lang="bash" showTitleCopyButton="true" code={`
 $ ruyi self clean --distfiles --installed-pkgs
 `} />
-
-If you insist on deleting a specific package, although it is not recommended, you can manually delete them. If you accidentally delete some files but Ruyi still considers the package installed, you can try using ``install --reinstall`` to restore it.
 
 Note that if a toolchain package is deleted, any virtual environments that depend on it will become invalid, and there will be no warning when activating such a compilation environment.
 
