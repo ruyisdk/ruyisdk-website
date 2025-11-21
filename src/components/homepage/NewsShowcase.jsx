@@ -7,22 +7,22 @@ const NewsShowcase = () => {
   const baseUrl = siteConfig?.baseUrl || '/';
   const newsData = [
     {
+      title:"邱吉博士成为 PLCT Lab 新负责人",
+      description: "技术总监邱吉将会承担起领导 PLCT Lab 的重任，成为第二任团队负责人。PLCT Lab 在邱吉博士的带领下，将会继续在编译器、虚拟机等领域稳扎稳打，成为国内基础软件领域的压舱石。",
+      img: "img/newsshowcase/1.png",
+      link: "https://mp.weixin.qq.com/s/mov2BI7LkWeQjsq7KKy5rw"
+    },
+    {
+      title: "喜报：Steam 可以在 RISC-V 上稳定运行了！Box64 再次立大功",
+      description: "Box64新版本v0.3.8 发布，本版本RISC-V 后端得到了大量的兼容性修复，Linux Steam （终于）可以稳定运行了！",
+      img: "img/newsshowcase/2.png",
+      link: "https://mp.weixin.qq.com/s/zIuQ-2k4B98wEmNbHG5CUA"
+    },
+    {
       title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
       description: "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！",
-      img: "img/newsshowcase/1.png",
-      link: "https://mp.weixin.qq.com/s/bQEtqcFE5r3njDBsAoKiUw"
-    },
-    {
-      title: "openGauss RISC-V SIG深度参与openGauss Meetup成都站，探索开源数据库与RISC-V的融合与实践",
-      description: "2025年9月27日，openGauss Meetup成都站成功举办。openGauss RISC-V SIG核心团队精彩亮相，分享了在RISC-V架构下的重要进展：实现了openGauss容器化部署方案，完成从5.1.0到7.0.0全量版的移植，性能提升显著。目前社区正积极推进技术优化与生态建设，并启动[甲辰计划]实习生招募，诚邀开发者加入，共同推动开源数据库在RISC-V生态的发展。加入我们，探索RISC-V未来！",
-      img: "img/newsshowcase/2.png",
-      link: "https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg"
-    },
-    {
-      title: "首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人",
-      description: "2025年9月24日，首届[合肥RISC-V开放日]在合肥工业大学成功举行。活动汇聚百余位专家学者，共同探讨RISC-V软硬件生态发展。红帽、PLCT实验室等机构专家分享了在操作系统、AI、教育等领域的创新实践，现场还设置了生态展区，展示openKylin、deepin等社区的最新成果。此次活动为产学研合作搭建了重要平台，有力推动了RISC-V生态的融合发展。",
       img: "img/newsshowcase/3.png",
-      link: "https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g"
+      link: "https://mp.weixin.qq.com/s/bQEtqcFE5r3njDBsAoKiUw"
     }
   ];
 
