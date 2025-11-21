@@ -105,7 +105,7 @@ const config = {
           },
           {
             label: "关于",
-            to: "/contact",
+            to: "/about",
             position: "right",
           },
           {
