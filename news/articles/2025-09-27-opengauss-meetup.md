@@ -1,7 +1,7 @@
 ---
 date: 2025-09-27
 link: https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg
-image: /img/newsshowcase/2.png
+image: /img/newsshowcase/3.png
 ---
 
 
