@@ -439,7 +439,7 @@ const CodeBlock = ({
             // This won't clean up if timeout already fired, but that's okay
             // because the next render will clean up old buttons
         };
-    }, [highlightLines, displayCode, headerTitle, input, inputLines]);
+    }, [highlightLines, displayCode, input, inputLines]);
 
     return (
         <div 
