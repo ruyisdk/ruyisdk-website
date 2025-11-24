@@ -202,18 +202,15 @@ const CodeBlock = ({
                 line.style.display = 'block';
                 
                 if (!shouldHighlight && input) {
+                    // For non-highlighted lines, make them gray
                     line.style.color = 'rgb(107, 114, 128)';
                     line.style.fontFamily = 'monospace';
                     line.querySelectorAll('*').forEach(child => {
                         child.style.color = 'inherit';
                     });
                 } else if (shouldHighlight) {
-                    // Reset styles for highlighted lines
                     line.style.color = '';
                     line.style.fontFamily = '';
-                    line.querySelectorAll('*').forEach(child => {
-                        child.style.color = '';
-                    });
                 }
                 
                 if (shouldHighlight) {
