@@ -6,7 +6,7 @@ image: /img/newsshowcase/1.png
 
 # 学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创"芯"未来
 
-![alt](/img/newsshowcase/1.png)
+![alt](/img/newsshowcase/3.png)
 
 玄铁携手 PLCT 实验室推出 RISC-V 系列课程，包含三大中级课程与两大高阶进阶课程。由专业讲师团队授课，涵盖 RISC-V 软件生态、编译器开发等领域。提供主流开发板实践机会，结业后可参与技术沙龙、Hackathon 比赛等活动，与行业专家交流，获得职业发展机会。
 
