@@ -170,6 +170,18 @@ body {
   right: 0;
   background-color: #fff;
   transform: translate3d(-100%, 0, 0);
+  
+  // Mobile navigation menu font settings, consistent with documentation left sidebar
+  .menu__link,
+  .menu__link--sublist {
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+  }
+  
+  // Level-2 menu items with sublists should use the same font size as level-3
+  .theme-doc-sidebar-item-link-level-2 > a.menu__link--sublist {
+    font-size: 14px !important;
+  }
 }
 
 .footer {
@@ -557,21 +569,27 @@ div[class*="sidebar"] {
   color: #666666 !important;
 }
 
-.theme-doc-sidebar-item-link-level-1 > a {
+// Menu items with sublists should not be bold
+.menu__link--sublist {
+  font-weight: normal !important;
+  font-size: 14px !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 > :is(a, button) {
+  background-color: transparent !important;
+  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  font-size: 16px !important;
+  color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-link-level-2 > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
   font-size: 14px !important;
   color: #666666 !important;
 }
 
-.theme-doc-sidebar-item-link-level-2 > a {
-  background-color: transparent !important;
-  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-  font-size: 14px !important;
-  color: #666666 !important;
-}
-
-.theme-doc-sidebar-item-link-level-3 > a {
+.theme-doc-sidebar-item-link-level-3 > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
   font-size: 14px !important;
@@ -591,26 +609,6 @@ div[class*="sidebar"] {
   background-color: transparent !important;
 }
 
-/* Dark theme sidebar colors */
-html[data-theme="dark"] {
-  .menu__link {
-    color: #999999 !important;
-  }
-  
-  .menu__link--active {
-    color: #999999 !important;
-  }
-  
-  .menu__link:hover {
-    color: #999999 !important;
-  }
-  
-  .theme-doc-sidebar-item-link-level-1 > a,
-  .theme-doc-sidebar-item-link-level-2 > a,
-  .theme-doc-sidebar-item-link-level-3 > a {
-    color: #999999 !important;
-  }
-}
 
 /* Docusaurus sidebar category arrows */
 .menu__caret,
@@ -767,7 +765,6 @@ main[class*="docMainContainer"] {
   overflow-y: auto;             // 保持可滚
 }
 
-/* 隐藏 WebKit 滚动条 */
 .docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar {
   width: 0;
   height: 0;
