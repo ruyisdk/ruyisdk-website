@@ -851,3 +851,23 @@ html[data-theme="dark"] {
     }
   }
 }
+
+/* Docs right sidebar watermark (separate block below the TOC) */
+.theme-doc-toc-desktop {
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    margin: 1.75rem 0.75rem 0;
+    height: 18rem;
+    background-image: url("/img/favicon.ico");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 60%;
+    background-color: color-mix(in srgb, var(--ifm-background-color) 90%, white);
+    background-blend-mode: overlay;
+    border-radius: 0.75rem;
+    opacity: 0.65;
+  }
+}
