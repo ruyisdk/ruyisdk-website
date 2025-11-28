@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import SectionContainer from './SectionContainer';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Added for baseUrl resolution
 
 const NewsShowcase = () => {
+  const { siteConfig } = useDocusaurusContext(); // Access global site config
+  const baseUrl = siteConfig?.baseUrl || '/'; // Fallback to '/'
   const newsData = [
     {
       title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
@@ -70,8 +73,18 @@ const NewsShowcase = () => {
     }, 10000);
   };
 
-  const handleCardClick = (link) => {
-    window.open(link, '_blank');
+  // Resolve image path: keep absolute URLs, otherwise prefix with Docusaurus baseUrl
+  const resolveImg = (src) => {
+    if (!src) return null;
+    try {
+      // Absolute URL will succeed constructing URL
+      // eslint-disable-next-line no-new
+      new URL(src);
+      return src;
+    } catch {}
+    // Not absolute: normalize leading slash and prefix baseUrl
+    if (src.startsWith('/')) return baseUrl + src.slice(1);
+    return baseUrl + src;
   };
 
   // Auto-switch news every 3 seconds, but only when component is visible and not on mobile
@@ -132,13 +145,17 @@ const NewsShowcase = () => {
   return (
     <SectionContainer>
     <div
-          className="newsshowcase-container flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 md:overflow-visible overflow-x-auto"
+          /* Unified container: restored negative top margin to reduce gap; removed inner horizontal padding to align width with other sections */
+          className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 md:overflow-visible overflow-x-auto"
       ref={containerRef}
     >
 
       {!isMobile && (
         <>
-          <div className="newsshowcase-sidebar w-[20rem] min-w-[20rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pr-4">
+          <div
+            /* Sidebar: widened to 25rem with negative margins and padding to allow shadows to render without clipping, while maintaining 23rem content width and alignment */
+            className="newsshowcase-sidebar w-[25rem] min-w-[25rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pb-8 pt-6 -ml-4 -mr-4 pl-4 pr-4"
+          >
             {newsData.map((news, idx) => (
               <div
                 key={idx}
@@ -153,29 +170,33 @@ const NewsShowcase = () => {
               </div>
             ))}
           </div>
-          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden" ref={mainRef}>
+          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden -mx-4 px-4" ref={mainRef}>
             <div className="cards-wrapper flex flex-col w-full h-full md:overflow-visible">
               {newsData.map((news, idx) => (
-                <div
-                  key={idx}
-                  className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0"
-                  onClick={() => handleCardClick(news.link)}
-                >
-                  <img
-                    src={news.img}
-                    alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAlt` })}
-                    className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                  <div className="newsshowcase-content p-8 bg-white flex-1 flex flex-col relative">
-                    <h2 className="newsshowcase-card-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight tracking-tight"><Translate>{news.title}</Translate></h2>
-                    <p className="newsshowcase-description text-base text-[#333] leading-7 flex-1">
-                      <Translate>{news.description}</Translate>
-                    </p>
-                    <div className="newsshowcase-link-indicator absolute bottom-6 right-6 inline-flex items-center text-[#0A2C7E] font-bold text-base opacity-0 translate-x-2.5 transition-all duration-300 bg-[#FDEFC3] px-4 py-2 rounded-full border border-[rgb(255,228,138)] gap-2 group-hover:opacity-100 group-hover:translate-x-0">
-                      <Translate>前往阅读</Translate>
-                      <span className="newsshowcase-arrow">→</span>
+                <div key={idx} className="w-full h-full pb-8 pt-6 flex-shrink-0">
+                  <a
+                    href={news.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    /* Card: added isolate for stacking context, inner paddings from finetune */
+                    className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate"
+                  >
+                    <img
+                      src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
+                      alt={news.title}
+                      className="newsshowcase-image w-full h-[60%] max-h-[60%] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
+                    />
+                    <div className="newsshowcase-content p-8 bg-white flex-1 flex flex-col relative">
+                      <h2 className="newsshowcase-card-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight tracking-tight"><Translate>{news.title}</Translate></h2>
+                      <p className="newsshowcase-description text-base text-[#333] leading-7 flex-1">
+                        <Translate>{news.description}</Translate>
+                      </p>
+                      <div className="newsshowcase-link-indicator absolute bottom-6 right-6 inline-flex items-center text-[#0A2C7E] font-bold text-base opacity-0 translate-x-2.5 transition-all duration-300 bg-[#FDEFC3] px-4 py-2 rounded-full border border-[rgb(255,228,138)] gap-2 group-hover:opacity-100 group-hover:translate-x-0">
+                        <Translate>前往阅读</Translate>
+                        <span className="newsshowcase-arrow">→</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               ))}
             </div>
@@ -184,17 +205,19 @@ const NewsShowcase = () => {
       )}
 
       {isMobile && (
-  <div className="mobile-cards-wrapper flex flex-col gap-4 w-full">
+  <div className="mobile-cards-wrapper flex flex-col gap-4 w-full">{/* Mobile: removed outer padding to align width */}
           {newsData.map((news, idx) => (
-            <div
+            <a
               key={idx}
-              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)]"
-              onClick={() => handleCardClick(news.link)}
+              href={news.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline"
             >
               <img
-                src={news.img}
-                alt={translate({ message: news.title, id: `newsShowcase.news.${idx}.titleAltMobile` })}
-                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
+                alt={news.title}
+                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
               />
               <div className="mobile-news-content p-4 bg-white flex flex-col relative">
                 <h2 className="mobile-news-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight"><Translate>{news.title}</Translate></h2>
@@ -204,7 +227,7 @@ const NewsShowcase = () => {
                   <span className="newsshowcase-arrow">→</span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       )}
