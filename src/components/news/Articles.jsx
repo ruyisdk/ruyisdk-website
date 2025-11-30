@@ -44,38 +44,42 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
         {currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-md transition duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden`}
+            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
             onClick={() => onClick(article.link)}
-            style={{ height: '28vh' }}
           >
-            <div className="flex flex-col md:flex-row">
-              {/* Content section (left on md+) */}
-              <div className="flex-1 p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-2xl md:text-3xl font-bold text-gray-800">{article.title}</span>
-                  <span className="whitespace-nowrap text-base md:text-lg text-gray-600">
+            {/* Content section */}
+            <div className="flex-1 p-6 flex flex-col justify-between order-2 md:order-1">
+              <div>
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 group-hover:text-emphasis transition-colors line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <span className="whitespace-nowrap text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="mt-3 text-base md:text-lg text-gray-700/90 line-clamp-3">
+                <p className="text-gray-600 line-clamp-3 leading-relaxed">
                   {article.summary}
                 </p>
               </div>
-
-              {/* Image section (right on md+) */}
-              {article.image && (
-                <div className="w-full md:w-64 lg:w-72 flex-shrink-0">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="h-48 md:h-full w-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </div>
-              )}
+              <div className="mt-4 flex items-center text-emphasis font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                Read more →
+              </div>
             </div>
+
+            {/* Image section */}
+            {article.image && (
+              <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
