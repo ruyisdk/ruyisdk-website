@@ -33,6 +33,34 @@ const repos = [
 
 const GITHUB_API_BASE = 'https://api.github.com/repos/ruyisdk';
 const OUT_FILE = path.resolve(__dirname, '../src/pages/Community/generated_contributors.json');
+const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_filter.md');
+
+function loadFilters() {
+  const patterns = [];
+  try {
+    if (!fs.existsSync(FILTER_FILE)) return patterns;
+    const raw = fs.readFileSync(FILTER_FILE, 'utf8');
+    raw.split(/\r?\n/).forEach((line) => {
+      const s = (line || '').trim();
+      if (!s || s.startsWith('#')) return;
+      try {
+        patterns.push(new RegExp(s, 'i'));
+      } catch (e) {
+        console.warn(`[contributors] Invalid regex in filter file skipped: ${s}`);
+      }
+    });
+  } catch (e) {
+    console.warn('[contributors] Failed to read filter file:', e.message || e);
+  }
+  return patterns;
+}
+
+function isFiltered(name, patterns) {
+  if (!name || !patterns || patterns.length === 0) return false;
+  return patterns.some((re) => {
+    try { return re.test(name); } catch { return false; }
+  });
+}
 
 async function fetchContributors() {
   const results = [];
@@ -233,13 +261,30 @@ async function fetchContributors() {
 
   const merged = Array.from(map.values()).sort((a, b) => (b.contributions || 0) - (a.contributions || 0));
 
+  // Apply filters from settings/community/contributor_filter.md
+  const filters = loadFilters();
+  let filtered = merged;
+  if (filters.length) {
+    const before = merged.length;
+    const removed = [];
+    filtered = merged.filter((c) => {
+      const hit = isFiltered(c.name || '', filters);
+      if (hit) removed.push(c.name);
+      return !hit;
+    });
+    if (removed.length) {
+      console.log(`[contributors] Excluded by filter (${removed.length}): ${removed.join(', ')}`);
+    }
+    console.log(`[contributors] ${before} -> ${filtered.length} after filtering`);
+  }
+
   // write minimal shape same as peoples_*.json expects
   const out = {
     coreTeam: [],
     interns: [],
-    contributors: merged,
+    contributors: filtered,
     totals: {
-      contributors: map.size,
+      contributors: filtered.length,
       commits: totalCommits,
       pullRequests: totalPRs,
     },
@@ -247,7 +292,7 @@ async function fetchContributors() {
 
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2), 'utf8');
-  console.log(`Wrote ${OUT_FILE} with ${merged.length} contributors`);
+  console.log(`Wrote ${OUT_FILE} with ${filtered.length} contributors`);
 }
 
 fetchContributors().catch((err) => {
