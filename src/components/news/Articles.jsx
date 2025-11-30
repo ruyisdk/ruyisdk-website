@@ -62,9 +62,6 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
                   {article.summary}
                 </p>
               </div>
-              <div className="mt-4 flex items-center text-emphasis font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                Read more →
-              </div>
             </div>
 
             {/* Image section */}
