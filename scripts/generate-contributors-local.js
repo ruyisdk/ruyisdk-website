@@ -2,6 +2,34 @@ const fs = require('fs');
 const path = require('path');
 
 const OUT_FILE = path.resolve(__dirname, '../src/pages/Community/generated_contributors.json');
+const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_filter.md');
+
+function loadFilters() {
+  const patterns = [];
+  try {
+    if (!fs.existsSync(FILTER_FILE)) return patterns;
+    const raw = fs.readFileSync(FILTER_FILE, 'utf8');
+    raw.split(/\r?\n/).forEach((line) => {
+      const s = (line || '').trim();
+      if (!s || s.startsWith('#')) return;
+      try {
+        patterns.push(new RegExp(s, 'i'));
+      } catch (e) {
+        console.warn(`[contributors-local] Invalid regex in filter file skipped: ${s}`);
+      }
+    });
+  } catch (e) {
+    console.warn('[contributors-local] Failed to read filter file:', e.message || e);
+  }
+  return patterns;
+}
+
+function isFiltered(name, patterns) {
+  if (!name || !patterns || patterns.length === 0) return false;
+  return patterns.some((re) => {
+    try { return re.test(name); } catch { return false; }
+  });
+}
 
 // If the output file already exists, do not overwrite it. This allows
 // `build-noupdate` to use a previously generated contributors file without
@@ -45,6 +73,16 @@ const out = {
     pullRequests: 12,
   },
 };
+
+// Apply filters for local dummy data for parity with real generator
+const filters = loadFilters();
+if (filters.length) {
+  const before = out.contributors.length + out.coreTeam.length;
+  out.coreTeam = out.coreTeam.filter((p) => !isFiltered(p.name, filters));
+  out.contributors = out.contributors.filter((p) => !isFiltered(p.name, filters));
+  out.totals.contributors = out.coreTeam.length + out.contributors.length;
+  console.log(`[contributors-local] ${before} -> ${out.totals.contributors} after filtering`);
+}
 
 fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
 fs.writeFileSync(OUT_FILE, JSON.stringify(out, null, 2), 'utf8');
