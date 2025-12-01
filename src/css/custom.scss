@@ -165,6 +165,15 @@ body {
   justify-content: space-between;
 }
 
+// Remove centering on mobile devices
+@media (max-width: 768px) {
+  .navbar__inner {
+    max-width: none;
+    margin: 0;
+    padding: 0 1rem;
+  }
+}
+
 .navbar__items--left {
   display: flex;
   align-items: center;
