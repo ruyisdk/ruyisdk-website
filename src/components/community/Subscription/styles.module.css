@@ -2,13 +2,14 @@
   font-size: 12px;
   background-color: var(--home-button-primary);
   color: var(--home-button-primary-text);
-  margin: 0.6em 0.3em;
+  margin: 0.6em 0;
   padding: 0.6em 1.2em;
   border-radius: 99rem;
   border: none;
   height: 45px;
   font-weight: bold;
   font-size: 17px;
+  box-sizing: border-box;
 }
 
 .input {
@@ -18,13 +19,15 @@
   box-shadow: none;
   outline: none;
   color: inherit;
-  text-indent: 9px;
+  padding-left: 12px;
   height: 45px;
-  margin-right: 10px;
-  min-width: 250px;
-  margin: 0.6em 0.3em;
+  margin: 0.6em 0;
+  min-width: 0; /* allow input to shrink inside flex containers */
   font-size: 17px;
-  text-align: center;
+  text-align: left;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 20vw; /* limit input max width on large screens */
 }
 
 .button:hover {

@@ -240,6 +240,44 @@
     "message": "N/A",
     "description": "Fallback label when a stat is unavailable"
   },
+  "about.intro.title": {
+    "message": "About"
+  },
+  "about.project.title": {
+    "message": "Project overview"
+  },
+  "about.project.description": {
+    "message": "RUYISDK is a full-featured, integrated development environment tailored for RISC-V developers. Led by the Institute of Software, Chinese Academy of Sciences (ISCAS), RUYISDK aims to provide a one-stop development solution for RISC-V developers. The project was planned in the second half of 2022 and adopted a biweekly agile release cadence starting in early 2024. Since its inception we continually refine the product to provide high-quality support to the RISC-V community."
+  },
+  "about.goals.title": { "message": "Core goals" },
+  "about.goals.item1": {
+    "message": "Ensure that developers using (almost) any RISC-V board or module can obtain hardware documentation, firmware/software updates, and debugging support through RUYISDK."
+  },
+  "about.goals.item2": {
+    "message": "Allow developers to specify common RISC-V ISA extension combinations and generate the required OS, toolchains, language runtimes/VMs, libraries, and application frameworks via the RUYISDK system."
+  },
+  "about.goals.item3": { "message": "Foster and operate an active, inclusive developer community." },
+  "about.products.title": { "message": "Our products" },
+  "about.products.revyos": { "message": "RISC-V OS (XuanTie-optimized): RevyOS" },
+  "about.products.ruyi": { "message": "RISC-V package manager: ruyi" },
+  "about.products.provision": { "message": "RISC-V OS installer: ruyi device provision" },
+  "about.products.ide": { "message": "RISC-V IDE: RuyiSDK IDE" },
+  "about.products.toolchains": { "message": "RISC-V toolchains: PLCT-GCC, PLCT-LLVM" },
+  "about.products.software.title": { "message": "Notable upstream software integrated into RuyiSDK:" },
+  "about.opensource.title": { "message": "Open source & community" },
+  "about.opensource.description1": { "message": "The RUYISDK project is managed openly and hosted on GitHub. We welcome contributors and collaborators to advance the RISC-V ecosystem together." },
+  "about.opensource.description2": { "message": "The RUYISDK community aims to be open, friendly, diverse, inclusive, and healthy." },
+  "about.opensource.description3": { "message": "We are recruiting passionate and talented contributors — send CVs to: wuwei2016@iscas.ac.cn." },
+  "about.opensource.description4": { "message": "Before participating in community discussions, please read the Code of Conduct to help maintain a constructive community." },
+  "about.opensource.codeOfConduct": { "message": "Code of Conduct" },
+  "about.contact.title": { "message": "Contact" },
+  "about.contact.emailLabel": { "message": "Email:" },
+  "about.contact.websiteLabel": { "message": "Website:" },
+  "about.contact.wechatLabel": { "message": "WeChat Official Account:" },
+  "about.contact.qqLabel": { "message": "QQ group:" },
+  "about.qr.title": { "message": "Community QR codes" },
+  "about.qr.wechat": { "message": "Scan to follow the RuyiSDK official WeChat account:" },
+  "about.qr.qq": { "message": "Join the RUYISDK QQ group:" },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
     "description": "The ARIA label to expand the sidebar category"
