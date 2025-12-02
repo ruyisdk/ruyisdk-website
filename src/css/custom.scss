@@ -154,6 +154,38 @@ body {
   }
 }
 
+/* Center the navbar content */
+.navbar__inner {
+  /* Align with news cards container (SlideNews/NewsShowcase): max-width 90rem, 2rem side padding */
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Remove centering on mobile devices
+@media (max-width: 768px) {
+  .navbar__inner {
+    max-width: none;
+    margin: 0;
+    padding: 0 1rem;
+  }
+}
+
+.navbar__items--left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__items--right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .navbar-sidebar__brand .navbar__brand {
   display: none;
 }
