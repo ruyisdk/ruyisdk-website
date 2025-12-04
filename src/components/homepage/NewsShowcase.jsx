@@ -2,11 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import SectionContainer from './SectionContainer';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Added for baseUrl resolution
+import axios from 'axios';
 
 const NewsShowcase = () => {
-  const { siteConfig } = useDocusaurusContext(); // Access global site config
+  const { siteConfig, i18n } = useDocusaurusContext(); // Access global site config and i18n
   const baseUrl = siteConfig?.baseUrl || '/'; // Fallback to '/'
-  const newsData = [
+  const defaultNewsData = [
     {
       title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
       description: "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！",
@@ -31,6 +32,8 @@ const NewsShowcase = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  // items we display, by default show the current hardcoded entries
+  const [newsData, setNewsData] = useState(defaultNewsData);
   const mainRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -103,6 +106,47 @@ const NewsShowcase = () => {
 
     return () => clearInterval(interval);
   }, [newsData.length, isAutoSwitchPaused, isVisible, isMobile]);
+
+  // Load /news.json to populate the showcase with latest articles
+  useEffect(() => {
+    let isMounted = true;
+    async function loadNews() {
+      try {
+        // use the i18n from component scope
+        let newsUrl = "/news.json";
+        if (i18n?.currentLocale && i18n.currentLocale !== i18n.defaultLocale) {
+          newsUrl = `/${i18n.currentLocale}${newsUrl}`;
+        }
+        const res = await axios.get(newsUrl);
+        const items = (res?.data?.articles || []).filter((item) => {
+          const timestamp = Number(item?.date);
+          const now = Date.now();
+          return !Number.isFinite(timestamp) || timestamp <= now;
+        });
+        // Already sorted descending by date in news-generator; use first 3
+        const three = items.slice(0, 3).map((it) => ({
+          title: it.title,
+          description: it.summary,
+          img: it.image,
+          link: it.link,
+        }));
+        if (isMounted && three.length > 0) {
+          setNewsData(three);
+          setSelectedIndex(0);
+        }
+      } catch (err) {
+        // keep default newsData on failure
+        // When dev server is running before plugin generates news.json many times this will fail; ignore.
+        // eslint-disable-next-line no-console
+        console.error('Failed to load /news.json for NewsShowcase', err?.message || err);
+      }
+    }
+
+    loadNews();
+    return () => { isMounted = false; };
+    // We intentionally don't add useDocusaurusContext to dep array because it is a hook.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
