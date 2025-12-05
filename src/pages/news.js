@@ -63,15 +63,15 @@ const NewsPage = () => {
           {loading ? (
             <p className="text-gray-600">loading...</p>
           ) : (
-            <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
               {/* left */}
-              <div className="min-w-0 flex-1 md:flex-[3] md:pr-72">
+              <div className="md:col-span-8 lg:col-span-9">
                 <Articles items={articles} onClick={handleClick} />
               </div>
 
-              {/* right (will be fixed on md+ screens) */}
-              <div className="relative">
-                <div className="md:fixed md:top-20 md:right-6 md:w-64 lg:right-12">
+              {/* right */}
+              <div className="md:col-span-4 lg:col-span-3">
+                <div className="sticky top-24 space-y-6">
                   <div className="p-2">
                     <ButtonSubscription />
                   </div>

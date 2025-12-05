@@ -82,16 +82,16 @@ const config = {
           {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
-            position: "right",
+            position: "left",
             label: "文档",
           },
-          { to: "/blog", label: "博客", position: "right" },
-          { to: "/biweekly", label: "双周报", position: "right" },
-          { to: "/download", label: "下载", position: "right" },
+          { to: "/blog", label: "博客", position: "left" },
+          { to: "/biweekly", label: "双周报", position: "left" },
+          { to: "/download", label: "下载", position: "left" },
           {
             type: "dropdown",
             label: "社区",
-            position: "right",
+            position: "left",
             items: [
               {
                 label: "Discussion",

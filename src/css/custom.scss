@@ -85,51 +85,6 @@ html[data-theme="light"] {
   --ifm-link-color: #357da1;
 }
 
-html[data-theme="dark"] {
-  --ifm-code-background: rgba(255, 255, 255, 0.06);
-  --ifm-toc-border-color: var(--dark);
-  --ifm-color-emphasis-300: var(--dark);
-
-  --logo: #58c4dc;
-  --home-hero-floor-background: #151517;
-  --home-hero-floor-background-bottom: #1b1b1d;
-  --home-button-primary: #58c4dc;
-  --home-button-primary-text: #1b1b1d;
-  --home-button-primary-hover: #71d6ec;
-  --home-button-secondary: #1b1b1d;
-  --home-button-secondary-text: #f6f7f9;
-  --home-button-secondary-border: #4e5668;
-  --home-button-secondary-hover: #2b2b2d;
-  --home-hero-devices-border: #404756;
-  --home-hero-devices-stop: #4a5160;
-  --home-hero-devices-skeleton-element: #404756;
-  --home-hero-devices-background: #242426;
-  --home-hero-devices-icon: #fff;
-  --home-hero-devices-icon-border: #404756;
-  --home-hero-floor: #30363d;
-  --home-hero-grid-icon-background: #1e2025;
-  --home-hero-grid-icon: #282c36;
-  --home-hero-grid-grid: #30363d;
-  --home-section-top: #1b1b1d;
-  --home-section-bottom: #111113;
-  --home-secondary-text: #c0c1c4;
-  --home-feature-background-1: #333049;
-  --home-feature-background-2: #1c3950;
-  --home-feature-background-3: #1d413e;
-  --home-border: #404756;
-  --home-background: #242426;
-  --home-secondary-background: #2c2c2e;
-  --home-text: #e3e3e3;
-  --home-code-red: #f46b78;
-  --home-code-purple: #a77cf7;
-  --home-code-green: #74e68f;
-
-  @media (max-width: 900px) {
-    --home-hero-grid-icon: transparent;
-    --home-hero-grid-icon-background: transparent;
-  }
-}
-
 body {
   background-color: #f5f5f7;
 }
@@ -199,6 +154,38 @@ body {
   }
 }
 
+/* Center the navbar content */
+.navbar__inner {
+  /* Align with news cards container (SlideNews/NewsShowcase): max-width 90rem, 2rem side padding */
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Remove centering on mobile devices
+@media (max-width: 768px) {
+  .navbar__inner {
+    max-width: none;
+    margin: 0;
+    padding: 0 1rem;
+  }
+}
+
+.navbar__items--left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__items--right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .navbar-sidebar__brand .navbar__brand {
   display: none;
 }
@@ -215,6 +202,18 @@ body {
   right: 0;
   background-color: #fff;
   transform: translate3d(-100%, 0, 0);
+  
+  // Mobile navigation menu font settings, consistent with documentation left sidebar
+  .menu__link,
+  .menu__link--sublist {
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+  }
+  
+  // Level-2 menu items with sublists should use the same font size as level-3
+  .theme-doc-sidebar-item-link-level-2 > a.menu__link--sublist {
+    font-size: 14px !important;
+  }
 }
 
 .footer {
@@ -572,10 +571,7 @@ html[data-theme="dark"] .hash-link {
   }
 }
 
-/* Remove sidebar border */
-aside[class*="docSidebarContainer"] {
-  border-right: none !important;
-}
+
 
 aside.theme-doc-sidebar-container {
   border-right: none !important;
@@ -587,14 +583,6 @@ aside.theme-doc-sidebar-container {
 
 div[class*="sidebar"] {
   border-right: none !important;
-}
-
-/* Remove sidebar menu item background highlight */
-.menu__link {
-  background-color: transparent !important;
-  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-  font-size: 14px !important;
-  color: #666666 !important;
 }
 
 .menu__link--active {
@@ -613,21 +601,27 @@ div[class*="sidebar"] {
   color: #666666 !important;
 }
 
-.theme-doc-sidebar-item-link-level-1 > a {
+// Menu items with sublists should not be bold
+.menu__link--sublist {
+  font-weight: normal !important;
+  font-size: 14px !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 > :is(a, button) {
+  background-color: transparent !important;
+  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  font-size: 16px !important;
+  color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-link-level-2 > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
   font-size: 14px !important;
   color: #666666 !important;
 }
 
-.theme-doc-sidebar-item-link-level-2 > a {
-  background-color: transparent !important;
-  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-  font-size: 14px !important;
-  color: #666666 !important;
-}
-
-.theme-doc-sidebar-item-link-level-3 > a {
+.theme-doc-sidebar-item-link-level-3 > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
   font-size: 14px !important;
@@ -647,26 +641,6 @@ div[class*="sidebar"] {
   background-color: transparent !important;
 }
 
-/* Dark theme sidebar colors */
-html[data-theme="dark"] {
-  .menu__link {
-    color: #999999 !important;
-  }
-  
-  .menu__link--active {
-    color: #999999 !important;
-  }
-  
-  .menu__link:hover {
-    color: #999999 !important;
-  }
-  
-  .theme-doc-sidebar-item-link-level-1 > a,
-  .theme-doc-sidebar-item-link-level-2 > a,
-  .theme-doc-sidebar-item-link-level-3 > a {
-    color: #999999 !important;
-  }
-}
 
 /* Docusaurus sidebar category arrows */
 .menu__caret,
@@ -806,48 +780,54 @@ main[class*="docMainContainer"] {
   }
 }
 
-/* Dark theme - Only for docs pages */
-html[data-theme="dark"] {
-  .docs-wrapper,
-  .theme-doc-wrapper,
-  [class*="docMainContainer"],
-  main[class*="docMainContainer"] {
-    h1,
-    article h1,
-    .markdown h1,
-    .theme-doc-markdown h1 {
-      color: #e3e3e3 !important;
-    }
+/* doc css here */
+.docs-wrapper div[class*="docRoot"] {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: calc(var(--ifm-navbar-height) + 24px) 32px 80px;
+  display: flex;
+  gap: 32px;
+}
 
-    h1 a,
-    h2 a,
-    h3 a,
-    h4 a,
-    h5 a,
-    h6 a,
-    .anchor a,
-    .hash-link {
-      color: #e3e3e3 !important;
-      
-      &:hover {
-        color: #e3e3e3 !important;
-      }
-    }
-    
-    h2,
-    h3,
-    h4 {
-      color: #e3e3e3 !important;
-    }
+.docs-wrapper aside.theme-doc-sidebar-container { flex: 0 0 220px; }
+.docs-wrapper [class*="docItemCol"] { max-width: 760px; }
+.docs-wrapper .col.col--3 { flex: 0 0 200px; }
 
-    p,
-    article p,
-    .markdown p,
-    .theme-doc-markdown p,
-    article,
-    .markdown,
-    .theme-doc-markdown {
-      color: #e3e3e3 !important;
-    }
+.docs-wrapper div[class*="sidebarViewport"] {
+  overflow-y: auto;             // 保持可滚
+}
+
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Firefox */
+.docs-wrapper div[class*="sidebarViewport"] {
+  scrollbar-width: none;
+}
+
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar-track,
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Docs right sidebar watermark (separate block below the TOC) */
+.theme-doc-toc-desktop {
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    margin: 1.75rem 0.75rem 0;
+    height: 18rem;
+    background-image: url("/img/ruyi-logo-720.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 60%;
+    background-color: color-mix(in srgb, var(--ifm-background-color) 90%, white);
+    background-blend-mode: overlay;
+    border-radius: 0.75rem;
+    opacity: 0.65;
   }
 }
