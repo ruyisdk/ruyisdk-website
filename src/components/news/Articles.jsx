@@ -46,7 +46,7 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
             key={`${currentPage}-${index}`}
             className={`cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-md transition duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden`}
             onClick={() => onClick(article.link)}
-            style={{ height: '28vh' }}
+            style={{ minHeight: '28vh' }}
           >
             <div className="flex flex-col md:flex-row">
               {/* Content section (left on md+) */}

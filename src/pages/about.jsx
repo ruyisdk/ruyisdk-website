@@ -38,7 +38,7 @@ export default function AboutPage() {
     >
       <PageBackground isClient={isClient} />
       <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center">
+        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site flex flex-col items-center">
           {/* 顶部居中的 Logo 与名称 */}
           <div className="flex flex-col items-center justify-center mb-10">
             <div className="w-20 h-20 sm:w-24 sm:h-24 mb-4 flex items-center justify-center rounded-2xl bg-white/80 shadow-lg border border-white/70">

@@ -127,7 +127,7 @@ export default function ContributorsPage() {
     <Layout title="Contributors" description="RuyiSDK 贡献者">
       <PageBackground isClient={isClient} />
       <div className={`relative overflow-hidden px-6 py-8 text-gray-800 font-inter` }>
-        <div className="mx-auto relative z-10 max-w-screen-xl">
+        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
           {/* Title and intro removed per request */}
 
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 drop-shadow-sm mt-6 mb-8"><Translate id="community.contributors.title">贡献者</Translate></h2>
