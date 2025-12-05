@@ -3,16 +3,6 @@ import CopyButton from './CopyButton';
 import LangSwitcher from './LangSwitcher';
 import { TerminalIcon } from './Icons';
 
-/**
- * Header - Code block header component
- * @param {string} title - Title text
- * @param {string} code - Code content
- * @param {boolean} isHovered - Whether in hover state
- * @param {boolean} copiable - Whether to show copy button, defaults to true
- * @param {Array} langs - Multi-language options array
- * @param {string} currentLang - Current language
- * @param {Function} onLangChange - Language change callback
- */
 const Header = ({ 
     title, 
     code, 
