@@ -44,7 +44,7 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
         {currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-md transition duration-200 hover:-translate-y-1 hover:shadow-lg overflow-hidden`}
+            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
             onClick={() => onClick(article.link)}
             style={{ minHeight: '28vh' }}
           >
@@ -57,25 +57,25 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="mt-3 text-base md:text-lg text-gray-700/90 line-clamp-3">
+                <p className="text-gray-600 line-clamp-3 leading-relaxed">
                   {article.summary}
                 </p>
               </div>
-
-              {/* Image section (right on md+) */}
-              {article.image && (
-                <div className="w-full md:w-64 lg:w-72 flex-shrink-0">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="h-48 md:h-full w-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </div>
-              )}
             </div>
+
+            {/* Image section */}
+            {article.image && (
+              <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden">
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
