@@ -46,15 +46,14 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
             key={`${currentPage}-${index}`}
             className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
             onClick={() => onClick(article.link)}
+            style={{ minHeight: '28vh' }}
           >
-            {/* Content section */}
-            <div className="flex-1 p-6 flex flex-col justify-between order-2 md:order-1">
-              <div>
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 group-hover:text-emphasis transition-colors line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <span className="whitespace-nowrap text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+            <div className="flex flex-col md:flex-row">
+              {/* Content section (left on md+) */}
+              <div className="flex-1 p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-2xl md:text-3xl font-bold text-gray-800">{article.title}</span>
+                  <span className="whitespace-nowrap text-base md:text-lg text-gray-600">
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>

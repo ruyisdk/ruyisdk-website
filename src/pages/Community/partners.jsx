@@ -53,7 +53,7 @@ export default function PartnersPage() {
     <Layout title="Community Partners" description="社区共建计划">
       <PageBackground isClient={isClient} />
       <div className="relative overflow-hidden px-6 py-8 text-gray-800">
-        <div className="mx-auto relative z-10 max-w-screen-xl">
+        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mt-6 mb-4"><Translate id="community.partners.title">合作伙伴</Translate></h2>
           <p className="text-gray-500 text-lg text-center mb-6"><Translate id="community.partners.subtitle">RuyiSDK合作伙伴</Translate></p>
           <Partners partners={partnersData} />

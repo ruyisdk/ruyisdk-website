@@ -115,7 +115,7 @@ const StatisticalDataPages = () => {
         </div>
 
         <div className="relative z-20 flex-1 flex justify-center items-start pt-10 pb-16 px-6">
-          <div className="w-full max-w-[1280px] mx-auto">
+          <div className="w-full max-w-site mx-auto">
             <StatisticalData />
           </div>
         </div>
