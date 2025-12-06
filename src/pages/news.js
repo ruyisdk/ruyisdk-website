@@ -78,7 +78,7 @@ const NewsPage = () => {
                   <div className="space-y-4">
                     <Card
                       items={weeklies}
-                      label={translate({ id: "news.biweekly", message: "RuyiSDK 周报" })}
+                      label={translate({ id: "news.biweekly", message: "Biweekly" })}
                       color="bg-blue-500"
                       borderColor="border-blue-500"
                       onClick={handleClick}

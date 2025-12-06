@@ -131,10 +131,10 @@ const config = {
     "docusaurus-plugin-sass",
     "./plugins/unocss",
     "./plugins/news-generator",
-    [
+        [
       "@docusaurus/plugin-content-blog",
       {
-        blogTitle: "RuyiSDK 双周报",
+        blogTitle: "双周报",
         blogSidebarTitle: "所有报告",
         id: "biweekly",
         routeBasePath: "biweekly",
