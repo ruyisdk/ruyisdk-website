@@ -1,7 +1,8 @@
 import Button from "../common/Button";
 import React, { useState, useMemo } from "react";
+import LoadingSkeleton from "./LoadingSkeleton";
 
-const Articles = ({ items, onClick, pageSize = 10 }) => {
+const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -38,10 +39,16 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
   return (
     <div className="flex flex-col gap-4">
       {/* articles */}
-      <div
-        className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"}`}
-      >
-        {currentPageItems.map((article, index) => (
+      <div className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"}`}>
+        {loading && <LoadingSkeleton type="articles" count={pageSize > 0 ? pageSize : 3} />}
+
+        {!loading && currentPageItems.length === 0 && (
+          <div className="rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-4 shadow-sm text-gray-600">
+            暂无文章
+          </div>
+        )}
+
+        {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
             className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
@@ -57,9 +64,7 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-gray-600 line-clamp-3 leading-relaxed">
-                  {article.summary}
-                </p>
+                <p className="text-gray-600 line-clamp-3 leading-relaxed">{article.summary}</p>
               </div>
             </div>
 
