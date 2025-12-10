@@ -199,22 +199,7 @@ const CodeBlock = ({
                 // Ensure all lines display as block to preserve line breaks
                 line.style.display = 'block';
                 
-                if (!shouldHighlight && input) {
-                    // For non-highlighted lines, remove syntax highlighting and make them gray
-                    line.style.color = 'rgb(107, 114, 128)';
-                    line.style.fontFamily = 'monospace';
-                    // Remove syntax highlighting from all child elements
-                    line.querySelectorAll('*').forEach(child => {
-                        // Remove syntax highlighting by overriding colors
-                        child.style.color = 'rgb(107, 114, 128)';
-                        // Remove background colors from syntax highlighting
-                        child.style.backgroundColor = '';
-                        // Remove other syntax highlighting styles
-                        child.style.fontWeight = '';
-                        child.style.fontStyle = '';
-                        child.style.textDecoration = '';
-                    });
-                } else if (shouldHighlight) {
+                if (shouldHighlight) {
                     // For highlighted lines, preserve syntax highlighting
                     line.style.color = '';
                     line.style.fontFamily = '';
