@@ -16,7 +16,7 @@ export default function BlogLayout(props) {
       <Layout {...layoutProps}>
         <div className="container margin-vert--lg">
           <h1 class="hero__title">
-            <Translate>RuyiSDK 双周报</Translate>
+            <Translate>双周报</Translate>
           </h1>
           <p class="hero__subtitle">
             <Translate>每两周获得最新开发进展</Translate>
