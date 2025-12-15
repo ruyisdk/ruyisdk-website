@@ -79,12 +79,6 @@ const config = {
             type: "localeDropdown",
             position: "right",
           },
-          {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "文档",
-          },
           { to: "/blog", label: "博客", position: "left" },
           { to: "/biweekly", label: "双周报", position: "left" },
           { to: "/download", label: "下载", position: "left" },
@@ -94,8 +88,8 @@ const config = {
             position: "left",
             items: [
               {
-                label: "Discussion",
-                href: "https://github.com/ruyisdk/ruyisdk/discussions",
+                label: "贡献者",
+                to: "/Community/contributors",
               },
               {
                 label: "社区守则",
@@ -106,7 +100,13 @@ const config = {
           {
             label: "关于",
             to: "/about",
+            position: "left",
+          },
+          {
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
             position: "right",
+            label: "文档",
           },
           {
             href: "https://github.com/ruyisdk",
