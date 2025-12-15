@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 337
+      "contributions": 340
     },
     {
       "id": 84754181,
@@ -66,18 +66,18 @@
       "contributions": 54
     },
     {
+      "id": 198067605,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "github": "https://github.com/a1gorhythm7",
+      "contributions": 47
+    },
+    {
       "id": 207433538,
       "name": "LoneBlade-zhang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/207433538?v=4",
       "github": "https://github.com/LoneBlade-zhang",
       "contributions": 46
-    },
-    {
-      "id": 198067605,
-      "name": "a1gorhythm7",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
-      "github": "https://github.com/a1gorhythm7",
-      "contributions": 45
     },
     {
       "id": 102520124,
@@ -175,6 +175,13 @@
       "name": "shining1984",
       "avatarUrl": "https://avatars.githubusercontent.com/u/3916635?v=4",
       "github": "https://github.com/shining1984",
+      "contributions": 9
+    },
+    {
+      "id": 192414661,
+      "name": "exceed-zk",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/192414661?v=4",
+      "github": "https://github.com/exceed-zk",
       "contributions": 9
     },
     {
@@ -354,8 +361,8 @@
     }
   ],
   "totals": {
-    "contributors": 50,
-    "commits": 3417,
-    "pullRequests": 1400
+    "contributors": 51,
+    "commits": 3431,
+    "pullRequests": 1406
   }
 }
