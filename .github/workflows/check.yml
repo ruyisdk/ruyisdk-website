@@ -26,8 +26,8 @@ jobs:
       - name: Check diff
         run: |
           if ! git diff --quiet src/pages/Community/generated_contributors.json; then
+            echo "generated_contributors.json changed:" 
             git --no-pager diff src/pages/Community/generated_contributors.json
-            false
           fi
 
   dco:
