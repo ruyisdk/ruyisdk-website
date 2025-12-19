@@ -1,0 +1,45 @@
+{
+  "channels": {
+    "stable": {
+      "version": "0.43.0",
+      "channel": "stable",
+      "release_date": "2025-11-26T09:50:52Z",
+      "download_urls": {
+        "linux/aarch64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.43.0/ruyi-0.43.0.arm64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.43.0/ruyi-0.43.0.arm64"
+        ],
+        "linux/riscv64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.43.0/ruyi-0.43.0.riscv64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.43.0/ruyi-0.43.0.riscv64"
+        ],
+        "linux/x86_64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.43.0/ruyi-0.43.0.amd64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.43.0/ruyi-0.43.0.amd64"
+        ]
+      }
+    },
+    "testing": {
+      "version": "0.44.0-alpha.20251118",
+      "channel": "testing",
+      "release_date": "2025-11-18T15:11:27Z",
+      "download_urls": {
+        "linux/aarch64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.arm64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.arm64"
+        ],
+        "linux/riscv64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.riscv64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.riscv64"
+        ],
+        "linux/x86_64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.amd64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.44.0-alpha.20251118/ruyi-0.44.0-alpha.20251118.amd64"
+        ]
+      }
+    }
+  },
+  "generatedAt": "2025-12-19T03:31:01.424Z",
+  "source": "https://api.ruyisdk.cn/releases/latest-pm",
+  "stub": false
+}

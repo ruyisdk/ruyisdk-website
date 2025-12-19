@@ -190,7 +190,7 @@ const NewsShowcase = () => {
     <SectionContainer>
     <div
           /* Unified container: restored negative top margin to reduce gap; removed inner horizontal padding to align width with other sections */
-          className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 md:overflow-visible overflow-x-auto"
+          className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 overflow-x-hidden md:overflow-visible"
       ref={containerRef}
     >
 
@@ -198,7 +198,7 @@ const NewsShowcase = () => {
         <>
           <div
             /* Sidebar: widened to 25rem with negative margins and padding to allow shadows to render without clipping, while maintaining 23rem content width and alignment */
-            className="newsshowcase-sidebar w-[25rem] min-w-[25rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pb-8 pt-6 -ml-4 -mr-4 pl-4 pr-4"
+            className="newsshowcase-sidebar w-[25rem] min-w-[25rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pb-8 pt-6 px-4"
           >
             {newsData.map((news, idx) => (
               <div
@@ -214,7 +214,7 @@ const NewsShowcase = () => {
               </div>
             ))}
           </div>
-          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden -mx-4 px-4" ref={mainRef}>
+          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden px-4" ref={mainRef}>
             <div className="cards-wrapper flex flex-col w-full h-full md:overflow-visible">
               {newsData.map((news, idx) => (
                 <div key={idx} className="w-full h-full pb-8 pt-6 flex-shrink-0">
