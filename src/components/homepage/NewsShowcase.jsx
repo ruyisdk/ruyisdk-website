@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import SectionContainer from './SectionContainer';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Added for baseUrl resolution
+import axios from 'axios';
 
 const NewsShowcase = () => {
-  const { siteConfig } = useDocusaurusContext();
-  const baseUrl = siteConfig?.baseUrl || '/';
-  const newsData = [
+  const { siteConfig, i18n } = useDocusaurusContext(); // Access global site config and i18n
+  const baseUrl = siteConfig?.baseUrl || '/'; // Fallback to '/'
+  const defaultNewsData = [
     {
       title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
       description: "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！",
@@ -30,6 +32,8 @@ const NewsShowcase = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  // items we display, by default show the current hardcoded entries
+  const [newsData, setNewsData] = useState(defaultNewsData);
   const mainRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -72,16 +76,16 @@ const NewsShowcase = () => {
     }, 10000);
   };
 
-  // Helper to resolve image URL: keep absolute URLs, otherwise prefix Docusaurus baseUrl
+  // Resolve image path: keep absolute URLs, otherwise prefix with Docusaurus baseUrl
   const resolveImg = (src) => {
     if (!src) return null;
     try {
-      // absolute URL
+      // Absolute URL will succeed constructing URL
       // eslint-disable-next-line no-new
       new URL(src);
       return src;
     } catch {}
-    // not absolute: prefix with site baseUrl
+    // Not absolute: normalize leading slash and prefix baseUrl
     if (src.startsWith('/')) return baseUrl + src.slice(1);
     return baseUrl + src;
   };
@@ -102,6 +106,47 @@ const NewsShowcase = () => {
 
     return () => clearInterval(interval);
   }, [newsData.length, isAutoSwitchPaused, isVisible, isMobile]);
+
+  // Load /news.json to populate the showcase with latest articles
+  useEffect(() => {
+    let isMounted = true;
+    async function loadNews() {
+      try {
+        // use the i18n from component scope
+        let newsUrl = "/news.json";
+        if (i18n?.currentLocale && i18n.currentLocale !== i18n.defaultLocale) {
+          newsUrl = `/${i18n.currentLocale}${newsUrl}`;
+        }
+        const res = await axios.get(newsUrl);
+        const items = (res?.data?.articles || []).filter((item) => {
+          const timestamp = Number(item?.date);
+          const now = Date.now();
+          return !Number.isFinite(timestamp) || timestamp <= now;
+        });
+        // Already sorted descending by date in news-generator; use first 3
+        const three = items.slice(0, 3).map((it) => ({
+          title: it.title,
+          description: it.summary,
+          img: it.image,
+          link: it.link,
+        }));
+        if (isMounted && three.length > 0) {
+          setNewsData(three);
+          setSelectedIndex(0);
+        }
+      } catch (err) {
+        // keep default newsData on failure
+        // When dev server is running before plugin generates news.json many times this will fail; ignore.
+        // eslint-disable-next-line no-console
+        console.error('Failed to load /news.json for NewsShowcase', err?.message || err);
+      }
+    }
+
+    loadNews();
+    return () => { isMounted = false; };
+    // We intentionally don't add useDocusaurusContext to dep array because it is a hook.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
@@ -142,14 +187,19 @@ const NewsShowcase = () => {
   }, [selectedIndex, isMobile]);
 
   return (
+    <SectionContainer>
     <div
-          className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] font-sans mx-auto pb-10 bg-[#f5f5f7] 2xl:max-w-[90rem] xl:rounded-[0.625rem] md:overflow-visible overflow-x-auto"
+          /* Unified container: restored negative top margin to reduce gap; removed inner horizontal padding to align width with other sections */
+          className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 overflow-x-hidden md:overflow-visible"
       ref={containerRef}
     >
 
       {!isMobile && (
         <>
-          <div className="newsshowcase-sidebar w-[23rem] min-w-[23rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 px-8 pb-8 pt-6">
+          <div
+            /* Sidebar: widened to 25rem with negative margins and padding to allow shadows to render without clipping, while maintaining 23rem content width and alignment */
+            className="newsshowcase-sidebar w-[25rem] min-w-[25rem] h-[42rem] md:h-[42rem] overflow-y-auto flex flex-col gap-4 pb-8 pt-6 px-4"
+          >
             {newsData.map((news, idx) => (
               <div
                 key={idx}
@@ -164,14 +214,15 @@ const NewsShowcase = () => {
               </div>
             ))}
           </div>
-          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden" ref={mainRef}>
+          <div className="newsshowcase-main flex-1 h-[42rem] md:h-[42rem] relative overflow-hidden px-4" ref={mainRef}>
             <div className="cards-wrapper flex flex-col w-full h-full md:overflow-visible">
               {newsData.map((news, idx) => (
-                <div key={idx} className="w-full h-full px-8 pb-8 pt-6 flex-shrink-0">
+                <div key={idx} className="w-full h-full pb-8 pt-6 flex-shrink-0">
                   <a
                     href={news.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    /* Card: added isolate for stacking context, inner paddings from finetune */
                     className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate"
                   >
                     <img
@@ -198,7 +249,7 @@ const NewsShowcase = () => {
       )}
 
       {isMobile && (
-  <div className="mobile-cards-wrapper flex flex-col gap-4 p-6 w-full">
+  <div className="mobile-cards-wrapper flex flex-col gap-4 w-full">{/* Mobile: removed outer padding to align width */}
           {newsData.map((news, idx) => (
             <a
               key={idx}
@@ -225,6 +276,7 @@ const NewsShowcase = () => {
         </div>
       )}
     </div>
+    </SectionContainer>
   );
 };
 
