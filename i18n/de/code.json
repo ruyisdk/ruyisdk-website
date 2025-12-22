@@ -644,5 +644,90 @@
   },
   "news.news": {
     "message": "RuyiSDK-Neuigkeiten"
+  },
+
+  "downloads.meta.title": {
+    "message": "Download"
+  },
+  "downloads.meta.description": {
+    "message": "RuyiSDK Paketmanager und IDE herunterladen"
+  },
+  "downloads.title": {
+    "message": "RuyiSDK herunterladen"
+  },
+  "downloads.subtitle": {
+    "message": "Laden Sie den RuyiSDK-Paketmanager und die IDE herunter und starten Sie Ihre RISC-V-Entwicklung."
+  },
+
+  "downloads.pm.title": {
+    "message": "RuyiSDK Paketmanager"
+  },
+  "downloads.pm.description": {
+    "message": "Der Ruyi-Paketmanager ist die Kernkomponente von RuyiSDK und bietet Paketverwaltung sowie Umgebungs-Konfiguration."
+  },
+  "downloads.pm.noData": {
+    "message": "In diesem Build konnten keine aktuellen Versionsinformationen abgerufen werden. Nutzen Sie die Links unten, um die neueste Version zu erhalten."
+  },
+  "downloads.pm.latestOnly": {
+    "message": "Es wird nur ein Link zur neuesten Version angeboten (keine Architektur-Auswahl)."
+  },
+
+  "downloads.badge.stable": {
+    "message": "Stabil"
+  },
+  "downloads.label.version": {
+    "message": "Version"
+  },
+  "downloads.label.mirror": {
+    "message": "Mirror"
+  },
+  "downloads.label.githubReleases": {
+    "message": "GitHub Releases"
+  },
+  "downloads.label.pypi": {
+    "message": "PyPI"
+  },
+
+  "downloads.otherMethods": {
+    "message": "Weitere Links:"
+  },
+  "downloads.viewDocs": {
+    "message": "Vollständige Installationsdoku ansehen"
+  },
+
+  "downloads.ide.title": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.ide.description": {
+    "message": "Downloads und Release-Links rund um die IDE."
+  },
+  "downloads.ide.latestOnly": {
+    "message": "Nur Links zur neuesten Version"
+  },
+
+  "downloads.ide.entry.mirror": {
+    "message": "IDE-Mirror-Verzeichnis"
+  },
+  "downloads.ide.entry.mirror.desc": {
+    "message": "Neueste IDE-Builds/Releases abrufen."
+  },
+  "downloads.ide.entry.vscode": {
+    "message": "RuyiSDK VS Code Extension (Releases)"
+  },
+  "downloads.ide.entry.vscode.desc": {
+    "message": "Release-Seite der VS-Code-basierten RuyiSDK-Erweiterung."
+  },
+  "downloads.ide.entry.eclipse": {
+    "message": "RuyiSDK Eclipse (Releases)"
+  },
+  "downloads.ide.entry.eclipse.desc": {
+    "message": "Release-Seite des Eclipse-basierten RuyiSDK-Projekts."
+  },
+
+  "downloads.agreement": {
+    "message": "Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der {privacyLink} zu."
+  },
+  "downloads.privacy": {
+    "message": "Datenschutzerklärung"
   }
 }

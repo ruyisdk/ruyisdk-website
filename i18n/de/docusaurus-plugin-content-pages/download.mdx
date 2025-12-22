@@ -1,6 +1,4 @@
 import ReleaseProvider from '@site/src/components/docs_utils/LatestReleases';
-import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 <ReleaseProvider>
   <>
@@ -9,35 +7,25 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](https://ruyisdk.org/docs/legal/privacyPolicy/) zu.
 :::
 
-## Ruyi herunterladen
+## RuyiSDK Paketmanager herunterladen
 
-Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an. Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
+Links zur neuesten Version (keine Architektur-Auswahl auf dieser Seite):
 
-<ArchSelector language="de"/>
+- [ISCAS Mirror (Release-Verzeichnis)](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
+- [GitHub Releases](https://github.com/ruyisdk/ruyi/releases)
+- [PyPI](https://pypi.org/project/ruyi/)
 
-:::tip
-Falls die Seite den Download-Link nicht korrekt anzeigt, können Sie das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie sie auch bei den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
-:::
+## RuyiSDK IDE herunterladen
 
-### RuyiSDK-Paketmanager installieren
+IDE-bezogene Links:
 
-Der obige Befehl wurde entsprechend Ihrer Architektur automatisch generiert. Stellen Sie sicher, dass die Binärdatei als ruyi installiert ist und sich in einem Verzeichnis befindet, das im PATH enthalten ist.
+- [IDE-Mirror-Verzeichnis](https://mirror.iscas.ac.cn/ruyisdk/ide/)
+- [RuyiSDK VS Code Extension (Releases)](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases)
+- [RuyiSDK Eclipse (Releases)](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases)
 
-:::tip
-Stellen Sie sicher, dass der Dateiname ``ruyi`` lautet.
-:::
+## Erste Schritte
 
-Führen Sie den folgenden Befehl aus, um die Installation zu überprüfen:
-
-<CodeBlock lang="bash" code={`
-$ ruyi version
-`} />
-
-Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
-
-## Ruyi verwenden
-
-Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen können.
+Lesen Sie die [Dokumentation](/de/docs/intro), um zu erfahren, wie Sie Ruyi effektiv nutzen können.
 
   </>
 </ReleaseProvider>

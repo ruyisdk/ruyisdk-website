@@ -1,6 +1,4 @@
 import ReleaseProvider from '@site/src/components/docs_utils/LatestReleases';
-import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 <ReleaseProvider>
   <>
@@ -11,71 +9,19 @@ By downloading and using RuyiSDK, you agree to the license terms and the [privac
 
 ## Download RuyiSDK Package Manager
 
-RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures. Run ``uname -m`` to check your system architecture, then download the appropriate binary.
+Latest download entries (no per-architecture selection on this page):
 
-<ArchSelector language="en"/>
-
-:::tip
-If the page does not properly display the download link, you can visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) for the latest binaries. You can also find them on [GitHub releases](https://github.com/ruyisdk/ruyi/releases).
-:::
-
-### Install RuyiSDK Package Manager
-
-The command above has been automatically generated according to your architecture. Make sure that the binary is installed as ruyi and located in a directory included in your PATH.
-
-:::tip
-Note that the binary file name must be ruyi.
-:::
-
-Run the following command to verify the installation:
-
-<CodeBlock lang="bash" code={`
-$ ruyi version
-`} />
-
-If the command outputs the version and copyright information, Ruyi is installed successfully. If it fails, check your system environment and repeat the steps.
+- [ISCAS mirror (release directory)](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
+- [GitHub Releases](https://github.com/ruyisdk/ruyi/releases)
+- [PyPI](https://pypi.org/project/ruyi/)
 
 ## Download RuyiSDK IDE
 
-RuyiSDK IDE has also released binaries for three architectures: x86_64, riscv64, and aarch64.
+IDE related entries:
 
-You can download the tarball suitable for your architecture:
-
-<CodeBlock lang="bash" code={`
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
-`} />
-
-:::tip
-This document is time-sensitive. If the links point to an outdated version of Ruyi, visit the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/) for the latest binaries. 
-:::
-
-### Install RuyiSDK IDE
-
-The following demonstrates how to install RuyiSDK IDE into the ``/opt/ruyisdk`` directory.
-
-First, create the directory: 
-
-<CodeBlock lang="bash" code={`
-$ sudo mkdir /opt/ruyisdk
-`} />
-
-Unpack the tarball. This step requires tar and gunzip, and ensure the downloaded tarball path is adjusted based on your actual location: 
-
-<CodeBlock lang="bash" code={`
-$ cd /opt/ruyisdk
-$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
-`} />
-
-Run RuyiSDK IDE:
-
-<CodeBlock lang="bash" code={`
-$ /opt/ruyisdk/ruyisdk/ruyisdk
-`} />
-
-In addition to the IDE itself, you will need to install the RuyiSDK IDE plugin. Currently, integration work is still in progress, so the plugin must be installed manually by copying it into the dropins directory of the RuyiSDK IDE. We plan to improve this experience in future releases to enable easier installation and usage. You can follow the steps below to install and use the plugin:
-
-+ Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest)
-+ Extract the `org.ruyisdk.ide_*.zip` archive into the `dropins` directory inside your RuyiSDK IDE installation path
+- [IDE mirror directory](https://mirror.iscas.ac.cn/ruyisdk/ide/)
+- [RuyiSDK VS Code Extension (Releases)](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases)
+- [RuyiSDK Eclipse (Releases)](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases)
 
 ## Use ruyi
 
