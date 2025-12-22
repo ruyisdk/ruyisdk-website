@@ -58,30 +58,47 @@ const NewsPage = () => {
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
       <PageBackground isClient={isClient} />
-      <div className="relative overflow-hidden px-6 py-8 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl">
+      <div className="relative overflow-visible px-6 py-8 text-gray-800 font-inter">
+        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
           {loading ? (
-            <p className="text-gray-600">loading...</p>
+            <div className="flex w-full justify-center items-center py-12">
+              <div className="skeleton-card w-full max-w-4xl">
+                <div className="skeleton-title skeleton w-2/5 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <div className="skeleton-line skeleton mb-3 h-6"></div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-5/6"></div>
+                    <div className="skeleton-line skeleton mb-3 h-40"></div>
+                  </div>
+                  <div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-3/4"></div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-2/3"></div>
+                    <div className="skeleton-line skeleton mb-3 h-40"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row md:gap-x-8 md:gap-y-6">
               {/* left */}
-              <div className="md:col-span-8 lg:col-span-9">
-                <Articles items={articles} onClick={handleClick} />
+                <div className="min-w-0 flex-1 md:flex-[3] md:pr-0 lg:pr-0">
+                <Articles items={articles} loading={loading} onClick={handleClick} />
               </div>
 
-              {/* right */}
-              <div className="md:col-span-4 lg:col-span-3">
-                <div className="sticky top-24 space-y-6">
+              {/* right (will be fixed on md+ screens) */}
+                <div className="relative md:w-64 md:flex-initial">
+                <div className="md:sticky md:top-6 self-start md:w-64">
                   <div className="p-2">
                     <ButtonSubscription />
                   </div>
                   <div className="space-y-4">
                     <Card
                       items={weeklies}
-                      label={translate({ id: "news.biweekly", message: "RuyiSDK 周报" })}
+                      label={translate({ id: "news.biweekly", message: "Biweekly" })}
                       color="bg-blue-500"
                       borderColor="border-blue-500"
                       onClick={handleClick}
+                      loading={loading}
                     />
                     <Card
                       items={ruyinews}
@@ -89,6 +106,7 @@ const NewsPage = () => {
                       color="bg-green-500"
                       borderColor="border-green-500"
                       onClick={handleClick}
+                      loading={loading}
                     />
                   </div>
                 </div>

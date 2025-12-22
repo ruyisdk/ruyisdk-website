@@ -6,7 +6,7 @@ export default function CommunityHub() {
   return (
     <Layout title="Community" description="RuyiSDK 社区页面">
       <div className="relative overflow-hidden px-6 py-8 text-gray-800">
-        <div className="mx-auto relative z-10 max-w-screen-xl">
+        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
           <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mt-6 mb-4">
             <Translate>RuyiSDK 社区</Translate>
           </h1>

@@ -1,7 +1,8 @@
 import Button from "../common/Button";
 import React, { useState, useMemo } from "react";
+import LoadingSkeleton from "./LoadingSkeleton";
 
-const Articles = ({ items, onClick, pageSize = 10 }) => {
+const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -38,29 +39,32 @@ const Articles = ({ items, onClick, pageSize = 10 }) => {
   return (
     <div className="flex flex-col gap-4">
       {/* articles */}
-      <div
-        className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"}`}
-      >
-        {currentPageItems.map((article, index) => (
+      <div className={`flex flex-col gap-4 transition ${isTransitioning ? "scale-98" : "scale-100"}`}>
+        {loading && <LoadingSkeleton type="articles" count={pageSize > 0 ? pageSize : 3} />}
+
+        {!loading && currentPageItems.length === 0 && (
+          <div className="rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-4 shadow-sm text-gray-600">
+            暂无文章
+          </div>
+        )}
+
+        {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
             className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
             onClick={() => onClick(article.link)}
+            style={{ minHeight: '28vh' }}
           >
-            {/* Content section */}
-            <div className="flex-1 p-6 flex flex-col justify-between order-2 md:order-1">
-              <div>
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 group-hover:text-emphasis transition-colors line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <span className="whitespace-nowrap text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+            <div className="flex flex-col md:flex-row">
+              {/* Content section (left on md+) */}
+              <div className="flex-1 p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-2xl md:text-3xl font-bold text-gray-800">{article.title}</span>
+                  <span className="whitespace-nowrap text-base md:text-lg text-gray-600">
                     {new Date(article.date).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-gray-600 line-clamp-3 leading-relaxed">
-                  {article.summary}
-                </p>
+                <p className="text-gray-600 line-clamp-3 leading-relaxed">{article.summary}</p>
               </div>
             </div>
 
