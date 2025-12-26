@@ -604,7 +604,14 @@ div[class*="sidebar"] {
 }
 
 // Menu items with sublists should not be bold
-.menu__link--sublist {
+// Level 1 categories use 14px, level 2+ categories use 14px
+.theme-doc-sidebar-item-category-level-1 .menu__link--sublist {
+  font-weight: normal !important;
+  font-size: 14px !important;
+}
+
+.theme-doc-sidebar-item-category-level-2 .menu__link--sublist,
+.theme-doc-sidebar-item-category-level-3 .menu__link--sublist {
   font-weight: normal !important;
   font-size: 14px !important;
 }
@@ -612,7 +619,7 @@ div[class*="sidebar"] {
 .theme-doc-sidebar-item-link-level-1 > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
   color: #666666 !important;
 }
 
@@ -624,6 +631,21 @@ div[class*="sidebar"] {
 }
 
 .theme-doc-sidebar-item-link-level-3 > :is(a, button) {
+  background-color: transparent !important;
+  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  font-size: 14px !important;
+  color: #666666 !important;
+}
+
+// Category items (both level 1 and level 2)
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > :is(a, button) {
+  background-color: transparent !important;
+  font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+  font-size: 14px !important;
+  color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > :is(a, button) {
   background-color: transparent !important;
   font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
   font-size: 14px !important;
@@ -644,38 +666,152 @@ div[class*="sidebar"] {
 }
 
 
-/* Docusaurus sidebar category arrows */
-.menu__caret,
+/* Sidebar menu hierarchical styling */
+.menu__link--sublist {
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Hide all Docusaurus native arrows */
+.menu__caret {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Hide arrow pseudo-elements */
 .menu__link--sublist-caret:after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
-  background-size: 16px !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  width: 16px !important;
-  height: 16px !important;
-  min-width: 16px !important;
-  filter: none !important;
-  mask: none !important;
-  -webkit-mask: none !important;
-  transform: none !important;
-  transition: transform 0.2s ease !important;
+  display: none !important;
 }
 
-.menu__list-item--collapsed .menu__caret,
-.menu__list-item--collapsed .menu__link--sublist-caret:after {
-  transform: rotate(0deg) !important;
+.menu__link--sublist::after {
+  display: none !important;
 }
 
-.menu__list-item:not(.menu__list-item--collapsed) .menu__caret,
-.menu__list-item:not(.menu__list-item--collapsed) .menu__link--sublist-caret:after {
-  transform: rotate(90deg) !important;
+/* Level 1 - Top level categories (e.g., "Ruyi 包管理器") */
+.theme-doc-sidebar-item-category-level-1 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  
+  .menu__list-item-collapsible {
+    .menu__link--sublist {
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      color: #333333 !important;
+      padding-left: 0.75rem !important;
+      padding-top: 0.5rem !important;
+      padding-bottom: 0.5rem !important;
+      border-left: 3px solid transparent !important;
+      transition: all 0.2s ease !important;
+      
+      &:hover {
+        color: #000000 !important;
+        background-color: rgba(0, 0, 0, 0.03) !important;
+      }
+    }
+    
+    // Shrink arrow for level 1
+    .menu__caret {
+      width: 12px !important;
+      height: 12px !important;
+      min-width: 12px !important;
+      min-height: 12px !important;
+      
+      svg {
+        width: 12px !important;
+        height: 12px !important;
+      }
+    }
+  }
+  
+  > .menu__list {
+    margin-left: 0.5rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    padding-left: 0.75rem;
+  }
 }
 
-/* Dark theme arrows */
-html[data-theme="dark"] {
-  .menu__caret,
-  .menu__link--sublist-caret:after {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") !important;
+/* Level 2 - Second level categories (e.g., "使用案例") */
+.theme-doc-sidebar-item-category-level-2 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.125rem;
+  
+  .menu__list-item-collapsible {
+    .menu__link--sublist {
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      color: #555555 !important;
+      padding-left: 0.5rem !important;
+      padding-top: 0.375rem !important;
+      padding-bottom: 0.375rem !important;
+      border-left: 2px solid transparent !important;
+      transition: all 0.2s ease !important;
+      
+      &:hover {
+        color: #333333 !important;
+        background-color: rgba(0, 0, 0, 0.02) !important;
+      }
+    }
+  }
+  
+  > .menu__list {
+    margin-left: 0.5rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    padding-left: 0.5rem;
+  }
+}
+
+/* Level 1 links */
+.theme-doc-sidebar-item-link-level-1 {
+  .menu__link {
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    color: #444444 !important;
+    padding-left: 0.75rem !important;
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+    
+    &:hover {
+      color: #000000 !important;
+      background-color: rgba(0, 0, 0, 0.02) !important;
+    }
+  }
+}
+
+/* Level 2 links */
+.theme-doc-sidebar-item-link-level-2 {
+  .menu__link {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+    padding-left: 1.5rem !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    
+    &:hover {
+      color: #333333 !important;
+      background-color: rgba(0, 0, 0, 0.02) !important;
+    }
+  }
+}
+
+/* Level 3 links */
+.theme-doc-sidebar-item-link-level-3 {
+  .menu__link {
+    font-weight: 400 !important;
+    font-size: 13px !important;
+    color: #777777 !important;
+    padding-left: 2.25rem !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    
+    &:hover {
+      color: #444444 !important;
+      background-color: rgba(0, 0, 0, 0.02) !important;
+    }
   }
 }
 
