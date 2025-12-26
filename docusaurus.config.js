@@ -149,6 +149,10 @@ const config = {
       src: '/js/toc-smooth-scroll.js',
       async: true,
     },
+    {
+      src: '/js/menu-title-click.js',
+      defer: false,
+    },
   ],
 };
 

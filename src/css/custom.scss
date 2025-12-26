@@ -672,14 +672,19 @@ div[class*="sidebar"] {
   user-select: none !important;
 }
 
-/* Hide all Docusaurus native arrows */
+/* Hide all Docusaurus native arrows visually but keep them functional */
 .menu__caret {
-  display: none !important;
-  visibility: hidden !important;
   opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 /* Hide arrow pseudo-elements */
@@ -689,6 +694,22 @@ div[class*="sidebar"] {
 
 .menu__link--sublist::after {
   display: none !important;
+}
+
+/* Make entire title area clickable for expand/collapse */
+.menu__link--sublist {
+  cursor: pointer !important;
+  user-select: none !important;
+  position: relative !important;
+}
+
+/* Make collapsible container clickable */
+.menu__list-item-collapsible {
+  cursor: pointer !important;
+  
+  .menu__link--sublist {
+    pointer-events: auto !important;
+  }
 }
 
 /* Level 1 - Top level categories (e.g., "Ruyi 包管理器") */
