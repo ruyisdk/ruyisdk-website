@@ -65,7 +65,6 @@ function PageBackground({ isClient }) {
 }
 
 function PackageManagerSection({ releaseData }) {
-  const version = releaseData?.channels?.stable?.version || 'latest';
   const hasReleaseData = Boolean(releaseData?.channels?.stable);
 
   return (
@@ -102,12 +101,9 @@ function PackageManagerSection({ releaseData }) {
               <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wide rounded-full">
                 <Translate id="downloads.badge.stable">稳定版</Translate>
               </span>
-              <span className="text-gray-500 text-sm font-medium">
-                <Translate id="downloads.label.version">版本</Translate> {version}
-              </span>
             </div>
             <p className="m-0 text-gray-600">
-              <Translate id="downloads.pm.latestOnly">仅提供最新版下载入口（不区分架构）。</Translate>
+              <Translate id="downloads.pm.latestOnly">前往下载页面</Translate>
             </p>
           </div>
 
@@ -214,7 +210,7 @@ function IDESection() {
               <Translate id="downloads.badge.stable">稳定版</Translate>
             </span>
             <span className="text-gray-500 text-sm font-medium">
-              <Translate id="downloads.ide.latestOnly">仅提供最新版入口</Translate>
+              <Translate id="downloads.ide.latestOnly">前往下载页面</Translate>
             </span>
           </div>
 
@@ -227,10 +223,35 @@ function IDESection() {
                 rel="noopener noreferrer"
                 className="group bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-lg transition-all"
               >
-                <div className="font-bold text-gray-900 mb-1 group-hover:underline" style={{ color: COLOR_VARS.contrast }}>
-                  {item.title}
+                <div className="flex items-center justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <div className="font-bold text-gray-900 mb-1 group-hover:underline" style={{ color: COLOR_VARS.contrast }}>
+                      {item.title}
+                    </div>
+                    <div className="text-sm text-gray-600 leading-relaxed">{item.description}</div>
+                  </div>
+
+                  <span
+                    aria-hidden
+                    className="shrink-0 inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white border border-gray-200 shadow-sm group-hover:shadow-md transition-all"
+                    style={{ color: COLOR_VARS.blue }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 3v10" />
+                      <path d="M7 11l5 5 5-5" />
+                      <path d="M4 21h16" />
+                    </svg>
+                  </span>
                 </div>
-                <div className="text-sm text-gray-600 leading-relaxed">{item.description}</div>
               </a>
             ))}
           </div>

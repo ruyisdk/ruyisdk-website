@@ -669,7 +669,7 @@
     "message": "In diesem Build konnten keine aktuellen Versionsinformationen abgerufen werden. Nutzen Sie die Links unten, um die neueste Version zu erhalten."
   },
   "downloads.pm.latestOnly": {
-    "message": "Es wird nur ein Link zur neuesten Version angeboten (keine Architektur-Auswahl)."
+    "message": "Zur Download-Seite"
   },
 
   "downloads.badge.stable": {
@@ -702,7 +702,7 @@
     "message": "Downloads und Release-Links rund um die IDE."
   },
   "downloads.ide.latestOnly": {
-    "message": "Nur Links zur neuesten Version"
+    "message": "Zur Download-Seite"
   },
 
   "downloads.ide.entry.mirror": {
