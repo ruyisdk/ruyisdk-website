@@ -7,7 +7,6 @@ const CodeBlock = ({
     code = '', 
     lang = 'bash', 
     langs = [],
-    filename = '',
     title = '',
     copiable = false,
     input = ''
@@ -91,12 +90,11 @@ const CodeBlock = ({
     const displayLang = currentLang === 'no' ? 'text' : currentLang;
 
     const headerTitle = useMemo(() => {
-        if (filename) return filename;
         if (title && title.trim() !== '') return title;
         if (currentLang === 'bash') return 'Terminal';
         if (currentLang === 'text' || currentLang === '') return 'text';
         return displayLang;
-    }, [filename, title, currentLang, displayLang]);
+    }, [title, currentLang, displayLang]);
 
     const codeBlockRef = useRef(null);
     
@@ -201,19 +199,10 @@ const CodeBlock = ({
                 // Ensure all lines display as block to preserve line breaks
                 line.style.display = 'block';
                 
-                if (!shouldHighlight && input) {
-                    line.style.color = 'rgb(107, 114, 128)';
-                    line.style.fontFamily = 'monospace';
-                    line.querySelectorAll('*').forEach(child => {
-                        child.style.color = 'inherit';
-                    });
-                } else if (shouldHighlight) {
-                    // Reset styles for highlighted lines
+                if (shouldHighlight) {
+                    // For highlighted lines, preserve syntax highlighting
                     line.style.color = '';
                     line.style.fontFamily = '';
-                    line.querySelectorAll('*').forEach(child => {
-                        child.style.color = '';
-                    });
                 }
                 
                 if (shouldHighlight) {
@@ -439,7 +428,7 @@ const CodeBlock = ({
             // This won't clean up if timeout already fired, but that's okay
             // because the next render will clean up old buttons
         };
-    }, [highlightLines, displayCode, headerTitle, input, inputLines]);
+    }, [highlightLines, displayCode, input, inputLines]);
 
     return (
         <div 
