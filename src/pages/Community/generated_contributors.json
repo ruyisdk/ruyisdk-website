@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 345
+      "contributions": 347
     },
     {
       "id": 84754181,
@@ -91,6 +91,13 @@
       "name": "zeyi2",
       "avatarUrl": "https://avatars.githubusercontent.com/u/132126433?v=4",
       "github": "https://github.com/zeyi2",
+      "contributions": 28
+    },
+    {
+      "id": 29089388,
+      "name": "pzhlkj6612",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
+      "github": "https://github.com/pzhlkj6612",
       "contributions": 28
     },
     {
@@ -362,7 +369,7 @@
   ],
   "totals": {
     "contributors": 51,
-    "commits": 3476,
-    "pullRequests": 1431
+    "commits": 3484,
+    "pullRequests": 1436
   }
 }

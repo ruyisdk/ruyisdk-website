@@ -682,7 +682,7 @@
     "message": "This build couldn't fetch the latest version info. Use the links below to get the latest release."
   },
   "downloads.pm.latestOnly": {
-    "message": "Only the latest download entry is provided (no per-architecture selection)."
+    "message": "Go to download page"
   },
 
   "downloads.badge.stable": {
@@ -715,7 +715,7 @@
     "message": "IDE-related downloads and release links."
   },
   "downloads.ide.latestOnly": {
-    "message": "Only latest entries are provided"
+    "message": "Go to download page"
   },
 
   "downloads.ide.entry.mirror": {
