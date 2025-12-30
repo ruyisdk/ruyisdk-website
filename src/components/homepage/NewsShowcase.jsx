@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Translate, { translate } from '@docusaurus/Translate';
+import Translate from '@docusaurus/Translate';
 import SectionContainer from './SectionContainer';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Added for baseUrl resolution
 import axios from 'axios';
@@ -7,33 +7,13 @@ import axios from 'axios';
 const NewsShowcase = () => {
   const { siteConfig, i18n } = useDocusaurusContext(); // Access global site config and i18n
   const baseUrl = siteConfig?.baseUrl || '/'; // Fallback to '/'
-  const defaultNewsData = [
-    {
-      title: "学习+比赛+实习，一起安排! 机会难得，假期放松与学习两不误",
-      description: "节日快乐！PLCT实验室与玄铁RV学院联合推出「RISC-V学习+实践指南」，助你假期提升技能。玄铁RISC-V学院提供免费系列课程，涵盖初、中、高三级学习路径，由资深专家授课。现同步开启“CIE-玄铁杯 RISC-V 应用创新比赛”，设硬件加速、服务器组件、智能硬件三大赛题，等你来挑战！学以致用，赢取佳绩，快来加入这场RISC-V学习盛宴吧！",
-      img: "img/newsshowcase/1.png",
-      link: "https://mp.weixin.qq.com/s/bQEtqcFE5r3njDBsAoKiUw"
-    },
-    {
-      title: "openGauss RISC-V SIG深度参与openGauss Meetup成都站，探索开源数据库与RISC-V的融合与实践",
-      description: "2025年9月27日，openGauss Meetup成都站成功举办。openGauss RISC-V SIG核心团队精彩亮相，分享了在RISC-V架构下的重要进展：实现了openGauss容器化部署方案，完成从5.1.0到7.0.0全量版的移植，性能提升显著。目前社区正积极推进技术优化与生态建设，并启动[甲辰计划]实习生招募，诚邀开发者加入，共同推动开源数据库在RISC-V生态的发展。加入我们，探索RISC-V未来！",
-      img: "img/newsshowcase/2.png",
-      link: "https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg"
-    },
-    {
-      title: "首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人",
-      description: "2025年9月24日，首届[合肥RISC-V开放日]在合肥工业大学成功举行。活动汇聚百余位专家学者，共同探讨RISC-V软硬件生态发展。红帽、PLCT实验室等机构专家分享了在操作系统、AI、教育等领域的创新实践，现场还设置了生态展区，展示openKylin、deepin等社区的最新成果。此次活动为产学研合作搭建了重要平台，有力推动了RISC-V生态的融合发展。",
-      img: "img/newsshowcase/3.png",
-      link: "https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g"
-    }
-  ];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoSwitchPaused, setIsAutoSwitchPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  // items we display, by default show the current hardcoded entries
-  const [newsData, setNewsData] = useState(defaultNewsData);
+  // items we display; empty until fetched
+  const [newsData, setNewsData] = useState([]);
   const mainRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -92,7 +72,7 @@ const NewsShowcase = () => {
 
   // Auto-switch news every 3 seconds, but only when component is visible and not on mobile
   useEffect(() => {
-    if (!isVisible || isMobile) return; // Don't start auto-switching until component is visible and not on mobile
+    if (!isVisible || isMobile || newsData.length < 2) return; // Don't start auto-switching until component is visible and not on mobile
     
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
@@ -124,21 +104,22 @@ const NewsShowcase = () => {
           return !Number.isFinite(timestamp) || timestamp <= now;
         });
         // Already sorted descending by date in news-generator; use first 3
-        const three = items.slice(0, 3).map((it) => ({
+        const selected = items.slice(0, 3).map((it) => ({
           title: it.title,
           description: it.summary,
           img: it.image,
           link: it.link,
         }));
-        if (isMounted && three.length > 0) {
-          setNewsData(three);
+        if (isMounted) {
+          setNewsData(selected);
           setSelectedIndex(0);
         }
       } catch (err) {
-        // keep default newsData on failure
-        // When dev server is running before plugin generates news.json many times this will fail; ignore.
-        // eslint-disable-next-line no-console
-        console.error('Failed to load /news.json for NewsShowcase', err?.message || err);
+        if (isMounted) {
+          // If nothing was fetched, display nothing.
+          setNewsData([]);
+          setSelectedIndex(0);
+        }
       }
     }
 
@@ -146,7 +127,7 @@ const NewsShowcase = () => {
     return () => { isMounted = false; };
     // We intentionally don't add useDocusaurusContext to dep array because it is a hook.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [i18n?.currentLocale, i18n?.defaultLocale]);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768); // 768px breakpoint
@@ -185,6 +166,10 @@ const NewsShowcase = () => {
       wrapper.style.transform = `translateY(-${selectedIndex * 100}%)`;
     }
   }, [selectedIndex, isMobile]);
+
+  if (newsData.length === 0) {
+    return null;
+  }
 
   return (
     <SectionContainer>
