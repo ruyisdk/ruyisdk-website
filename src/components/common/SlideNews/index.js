@@ -231,7 +231,7 @@ export default function SlideNews() {
     {
       title: <Translate>荔枝派 4A</Translate>,
       subtitle: <Translate>荔枝派 4A 软件生态已并入 RuyiSDK 项目</Translate>,
-      content: "矽速科技（Sipeed）与PLCT实验室联合宣布，RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。",
+      content: "RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。",
       Image: "img/licheepi-4a.png",
       Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/",
       ButtonText: "立即下载",
