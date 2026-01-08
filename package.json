@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "check:news-images": "node ./scripts/check-news-images.js",
+    "check:news-images:strict": "node ./scripts/check-news-images.js --strict",
     "generate-contributors": "node ./scripts/generate-contributors.js",
     "generate-latest-pm": "node ./scripts/generate-latest-pm.js",
     "generate-latest-pm-local": "node ./scripts/generate-latest-pm-local.js",
