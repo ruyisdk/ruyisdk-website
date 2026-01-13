@@ -1,36 +1,85 @@
+.form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
 .button {
-  font-size: 12px;
-  background-color: var(--home-button-primary);
-  color: var(--home-button-primary-text);
+  background: linear-gradient(180deg, #0A2C7E 0%, #071E58 100%);
+  color: #fff;
   margin: 0.6em 0;
-  padding: 0.6em 1.2em;
-  border-radius: 99rem;
+  padding: 0 1.25rem;
+  border-radius: 1.5rem;
   border: none;
   height: 45px;
-  font-weight: bold;
-  font-size: 17px;
+  font-weight: 500;
+  font-size: 1rem;
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0.125rem 0.375rem rgba(10, 44, 126, 0.3);
 }
 
 .input {
-  background: #dfdfdf;
-  border: none;
-  border-radius: 99rem;
-  box-shadow: none;
+  background: rgba(10, 44, 126, 0.06);
+  border: 1px solid rgba(10, 44, 126, 0.18);
+  border-radius: 1.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(10, 44, 126, 0.06);
   outline: none;
-  color: inherit;
-  padding-left: 12px;
+  color: #0A2C7E;
+  padding: 0 1rem;
   height: 45px;
   margin: 0.6em 0;
   min-width: 0; /* allow input to shrink inside flex containers */
-  font-size: 17px;
+  font-size: 1rem;
   text-align: left;
   box-sizing: border-box;
   width: 100%;
-  max-width: 20vw; /* limit input max width on large screens */
+  max-width: 28rem; /* avoid overly-wide input on desktop; still responsive */
+}
+
+.input::placeholder {
+  color: rgba(10, 44, 126, 0.6);
+}
+
+.input:focus {
+  box-shadow: 0 0 0 4px rgba(10, 44, 126, 0.12);
 }
 
 .button:hover {
-  color: var(--home-button-primary-text);
-  background-color: var(--home-button-primary-hover);
+  color: #fff;
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.25rem 1rem rgba(10, 44, 126, 0.4);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 0.125rem 0.375rem rgba(10, 44, 126, 0.2);
+}
+
+@media (max-width: 420px) {
+  .form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input {
+    max-width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
 }
