@@ -1,0 +1,31 @@
+name: Update Submodules
+
+on:
+  schedule:
+    # Run every Thursday at 12:00 PM Beijing Time (04:00 UTC)
+    - cron: '0 4 * * 4' 
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Token is required for pushing changes
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          # Fetch submodules recursively
+          submodules: recursive 
+      
+      - name: Pull latest changes for all submodules
+        run: |
+          git submodule update --remote --merge
+          
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update submodules to latest"
+          title: "Auto-update: Submodules to latest"
+          body: "This is an automatically generated PR to sync the latest code from all submodules."
+          branch: auto-update-submodules

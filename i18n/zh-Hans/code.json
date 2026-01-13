@@ -55,18 +55,18 @@
     "message": "RuyiSDK 新闻"
   },
 
-  "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载数量" },
+  "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载量" },
   "ruyi安装台数": { "message": "RuyiSDK 遥测上传台数" },
 
   "详细下载统计": { "message": "详细下载统计" },
-  "组件下载数量": { "message": "RuyiSDK组件下载数量" },
-  "ruyi包管理器下载次数": { "message": "Ruyi包管理器下载次数" },
-  "第三方软件下载次数": { "message": "第三方软件下载次数" },
-  "文档下载数量": { "message": "文档下载数量" },
-  "IDE下载次数": { "message": "IDE下载次数" },
+  "组件下载数量": { "message": "RuyiSDK组件下载量" },
+  "ruyi包管理器下载次数": { "message": "Ruyi包管理器下载量" },
+  "第三方软件下载次数": { "message": "第三方软件下载量" },
+  "文档下载数量": { "message": "文档资源下载量" },
+  "IDE下载次数": { "message": "RuyiSDK IDE下载量" },
+  "vscode下载次数": { "message": "VSCode插件下载量" },
   "最常用指令": { "message": "最常用指令" },
-  "最常用包": { "message": "最常用包" }
-  ,
+  "最常用包": { "message": "最常用包" },
   "community.stats.contributors": { "message": "贡献者" },
   "community.stats.commits": { "message": "提交数" },
   "community.stats.prs": { "message": "Pull Requests" },

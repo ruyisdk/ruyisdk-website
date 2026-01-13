@@ -34,7 +34,7 @@ export default function Footer() {
       items: [
         { label: <Translate id="footer.wechat">微信公众号</Translate>, className: 'hover-wechat-link', to: '/contact' },
         { label: <Translate id="footer.qqgroup">QQ群</Translate>, className: 'hover-qq-link', to: '/contact' },
-        { label: <Translate id="footer.plct">PLCT 实验室</Translate>, href: "https://plctlab.org/" },
+     // { label: <Translate id="footer.plct">PLCT 实验室</Translate>, href: "https://plctlab.org/" },
       ],
     },
     {

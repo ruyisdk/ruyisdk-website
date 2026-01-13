@@ -51,26 +51,25 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
         {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row`}
+            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row md:items-stretch md:aspect-[4/1]`}
             onClick={() => onClick(article.link)}
-            style={{ minHeight: '28vh' }}
           >
-            <div className="flex flex-col md:flex-row">
-              {/* Content section (left on md+) */}
-              <div className="flex-1 p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-2xl md:text-3xl font-bold text-gray-800">{article.title}</span>
-                  <span className="whitespace-nowrap text-base md:text-lg text-gray-600">
-                    {new Date(article.date).toLocaleDateString()}
-                  </span>
-                </div>
-                <p className="text-gray-600 line-clamp-3 leading-relaxed">{article.summary}</p>
+            {/* Content section (left on md+) */}
+            <div className="min-w-0 flex flex-1 flex-col p-6 md:h-full">
+              <div className="flex min-w-0 items-start justify-between gap-4">
+                <span className="min-w-0 flex-1 break-words line-clamp-2 text-2xl md:text-3xl font-bold text-gray-800">
+                  {article.title}
+                </span>
+                <span className="flex-shrink-0 whitespace-nowrap text-base md:text-lg text-gray-600">
+                  {new Date(article.date).toLocaleDateString()}
+                </span>
               </div>
+              <p className="mt-2 text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
             </div>
 
             {/* Image section */}
             {article.image && (
-              <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden">
+              <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
                 <img
                   src={article.image}
                   alt={article.title}
