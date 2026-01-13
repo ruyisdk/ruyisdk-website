@@ -435,5 +435,23 @@
   "community.stats.unknown": {
     "message": "N/A",
     "description": "Fallback label when a stat is unavailable"
+  },
+  "subscription.emailPlaceholder": {
+    "message": "メールアドレスを入力"
+  },
+  "subscription.emailAriaLabel": {
+    "message": "メールアドレス"
+  },
+  "subscription.subscribe": {
+    "message": "購読"
+  },
+  "subscription.submitting": {
+    "message": "送信中..."
+  },
+  "subscription.failed": {
+    "message": "購読に失敗しました。もう一度お試しください。"
+  },
+  "subscription.responseReceived": {
+    "message": "購読リクエストへの応答を受信しました。"
   }
 }

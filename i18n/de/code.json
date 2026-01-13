@@ -729,5 +729,23 @@
   },
   "downloads.privacy": {
     "message": "Datenschutzerklärung"
+  },
+  "subscription.emailPlaceholder": {
+    "message": "E-Mail eingeben"
+  },
+  "subscription.emailAriaLabel": {
+    "message": "E-Mail-Adresse"
+  },
+  "subscription.subscribe": {
+    "message": "Abonnieren"
+  },
+  "subscription.submitting": {
+    "message": "Wird gesendet..."
+  },
+  "subscription.failed": {
+    "message": "Abonnement fehlgeschlagen. Bitte erneut versuchen."
+  },
+  "subscription.responseReceived": {
+    "message": "Antwort zur Anmeldung erhalten."
   }
 }

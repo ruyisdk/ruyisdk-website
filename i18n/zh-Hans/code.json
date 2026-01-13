@@ -99,5 +99,12 @@
   "about.contact.qqLabel": { "message": "技术交流群 QQ 群：" },
   "about.qr.title": { "message": "社区二维码" },
   "about.qr.wechat": { "message": "微信扫一扫关注 RuyiSDK 官方公众号：" },
-  "about.qr.qq": { "message": "加入 RUYISDK 技术交流群 QQ 群：" }
+  "about.qr.qq": { "message": "加入 RUYISDK 技术交流群 QQ 群：" },
+
+  "subscription.emailPlaceholder": { "message": "请输入邮箱" },
+  "subscription.emailAriaLabel": { "message": "邮箱地址" },
+  "subscription.subscribe": { "message": "订阅" },
+  "subscription.submitting": { "message": "提交中..." },
+  "subscription.failed": { "message": "订阅失败，请重试。" },
+  "subscription.responseReceived": { "message": "已收到订阅响应。" }
 }
