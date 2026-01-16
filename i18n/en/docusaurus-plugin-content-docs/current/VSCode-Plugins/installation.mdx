@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+---
+
+# Installation
+
+## Prerequisites
+
+- VS Code version: 1.88.0 or later
+- Supported platforms: Windows / macOS / Linux (x86_64, aarch64, riscv64 desktop environments)
+- Network: Access to GitHub or mirror sites to sync Ruyi packages.
+- RuyiSDK core: If not installed, the extension will guide you through one‑click installation; manual installation and configuration are also possible. See [installation](/en/docs/Package-Manager/installation).
+
+## Getting the Extension
+
+- Install directly from the VS Code Extension Marketplace by searching for “RuyiSDK”.
+- Offline installation: download the latest .vsix from [https://github.com/ruyisdk/ruyisdk-vscode-extension/releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases)，then select “Install from VSIX” in VS Code.
+
+## First Use
+
+1. Click the **Ruyi** icon in the sidebar to open the extension homepage.
+2. If `ruyi` is not installed, follow the prompt for one‑click installation or run `Ruyi: Detect Ruyi Installation` from the command palette.
+3. In the **Packages** view, install the required toolchain (e.g., `gnu-upstream`).
+4. In the **Virtual Environments** view, click `+`, select a Profile and toolchain, create a virtual environment, and activate it by clicking its name.
+
+## Settings
+
+- `ruyi.checkForUpdates`：Automatically check for Ruyi updates when running detection commands (default: `true`).
+- `ruyi.ruyiPath`：Custom path to the Ruyi executable (leave empty for auto‑detection).
+- `ruyi.telemetry`：Enable or disable telemetry data collection (if unset, you will be prompted on first use).
+
+For more concepts and CLI behavior, see [Ruyi Package Manager](/en/docs/Package-Manager/).

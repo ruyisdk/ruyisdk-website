@@ -45,11 +45,11 @@ This article uses the application example duo-examples for the milkv-duo develop
 
 1. File > New > Project
 
-   ![1735624096763](image/1735624096763.png)
+   ![1735624096763](image/milkv-duo-ide/1735624096763.png)
 
 2. Select C/C++ > Makefile Project with Existing Code > Next
 
-   ![1735623999135](image/1735623999135.png)
+   ![1735623999135](image/milkv-duo-ide/1735623999135.png)
 
 3. Import the prepared source code:
 
@@ -59,19 +59,19 @@ This article uses the application example duo-examples for the milkv-duo develop
 
    - Finish
 
-     ![1735624436834](image/1735624436834.png)
+     ![1735624436834](image/milkv-duo-ide/1735624436834.png)
 
 4. Project hello-world > Right-click > Properties to configure related properties
 
    1. Configure the toolchain path for the project
 
-      ![1735624925007](image/1735624925007.png)
+      ![1735624925007](image/milkv-duo-ide/1735624925007.png)
 
       Select the path where the compiler was installed by ruyi install (default is under ~/.local/share/ruyi/binaries/x86_64/), or the bin directory under the created virtual environment.
 
    2. Set compilation properties
 
-      ![1735625245878](image/1735625245878.png)
+      ![1735625245878](image/milkv-duo-ide/1735625245878.png)
 
 5. Edit the Makefile
 
@@ -121,16 +121,16 @@ clean:
    - Window > Show View > Terminal
    - Terminal: Open a new Terminal View/Open a Terminal > SSH Terminal > Enter Host, User, Password (milkvduo's root password is: milkv) as shown below:
 
-     ![1735626678903](image/1735626678903.png)
+     ![1735626678903](image/milkv-duo-ide/1735626678903.png)
 
-     ![1735626740680](image/1735626740680.png)
+     ![1735626740680](image/milkv-duo-ide/1735626740680.png)
 
-     ![1735626766840](image/1735626766840.png)
+     ![1735626766840](image/milkv-duo-ide/1735626766840.png)
 
-     ![1735626979037](image/1735626979037.png)
+     ![1735626979037](image/milkv-duo-ide/1735626979037.png)
    - Before using the `scp` command in the Makefile, make sure the corresponding directory structure has already been created on the target host. This ensures that files can be transferred to the correct destination path. After the build process completes, the target program will appear in the specified directory.
 
-     ![1736776549440](image/1736776549440.png)
+     ![1736776549440](image/milkv-duo-ide/1736776549440.png)
 
 ### Executing the Build
 
@@ -138,10 +138,10 @@ After preparing the above configurations and modifications, right-click the proj
 
 1. The Console window shows no errors.
 
-   ![1736776684233](image/1736776684233.png)
+   ![1736776684233](image/milkv-duo-ide/1736776684233.png)
 2. The SSH Terminal window shows the successfully transferred helloworld target program.
 
-   ![1736776707622](image/1736776707622.png)
+   ![1736776707622](image/milkv-duo-ide/1736776707622.png)
 
 ### Transferring the Target Program to the Target Device
 
@@ -156,7 +156,7 @@ There are multiple ways to run the target program in the IDE. Choose based on yo
 
 You can view and run the helloworld target program in the SSH Terminal window:
 
-   ![1736777304796](image/1736777304796.png)
+   ![1736777304796](image/milkv-duo-ide/1736777304796.png)
 
 #### C/C++ Remote Application
 
@@ -174,14 +174,14 @@ Refer to the image below (the image is a screenshot in Debug mode; since the con
 
 - Skip download to target path: It is recommended to check this in the current version and use the upload target in the Makefile to transfer the target program from the host to the target board. This is because, without checking, the IDE requires the RSE (Remote System Explorer) plugin, and the target device system must support sftp-server. Currently, milkvduo does not support sftp-server, so this feature is temporarily unavailable.
 
-  ![1736321809187](image/1736321809187.png)
+  ![1736321809187](image/milkv-duo-ide/1736321809187.png)
 
-  ![1736320799175](image/1736320799175.png)
+  ![1736320799175](image/milkv-duo-ide/1736320799175.png)
 
 Running effect demonstration:
 
-- ![Successful remote run with Skip download to target path checked](image/run1.gif)
-- ![Error when running without Skip download to target path checked](image/run1.gif)
+- ![Successful remote run with Skip download to target path checked](image/milkv-duo-ide/run1.gif)
+- ![Error when running without Skip download to target path checked](image/milkv-duo-ide/run1.gif)
 
   > milkv duo img currently does not support sftp: https://github.com/milkv-duo/duo-buildroot-sdk/issues/167. This issue will be resolved when the milkvduo image supports sftp-server.
   >
@@ -313,9 +313,9 @@ Steps for remote debugging using GDBServer + GDB commands:
 
    ```
 
-   ![1736326691511](image/1736326691511.png)
+   ![1736326691511](image/milkv-duo-ide/1736326691511.png)
 
-   ![Local Terminal + SSH Terminal | GDBServer+GDB Debugging Demonstration](image/gdb-terminal-1.gif)
+   ![Local Terminal + SSH Terminal | GDBServer+GDB Debugging Demonstration](image/milkv-duo-ide/gdb-terminal-1.gif)
 
 #### C/C++ Remote Application
 
@@ -335,26 +335,26 @@ Refer to the image below to configure the relevant parameters. Key points:
 
 - Debugger > GDB > GDBserver setting: Specify GDBServer and communication port
 
-  ![1736320771077](image/1736320771077.png)
+  ![1736320771077](image/milkv-duo-ide/1736320771077.png)
 
-  ![1736320799175](image/1736320799175.png)
+  ![1736320799175](image/milkv-duo-ide/1736320799175.png)
 
-  ![1736320837701](image/1736320837701.png)
+  ![1736320837701](image/milkv-duo-ide/1736320837701.png)
 
-  ![1736324370390](image/1736324370390.png)
+  ![1736324370390](image/milkv-duo-ide/1736324370390.png)
 
   As with running, since milkv duo currently does not support sftp-server, the remote transfer function for the target program is unavailable, and execution will result in the following error.
 
-  ![1736320589408](image/1736320589408.png)
+  ![1736320589408](image/milkv-duo-ide/1736320589408.png)
 
   Checking Skip download to target path skips downloading the target program, bypassing this issue. Use the upload definition in the Makefile to complete the target program transfer from the host to the target device during the build phase.
 
-  ![1736321809187](image/1736321809187.png)
+  ![1736321809187](image/milkv-duo-ide/1736321809187.png)
 
 Running effect demonstration:
 
-- ![Error when running without Skip download to target path checked](image/gdb-withdownload.gif)
-- ![Successful run with Skip download to target path checked](image/gdb-withoutdownload.gif)
+- ![Error when running without Skip download to target path checked](image/milkv-duo-ide/gdb-withdownload.gif)
+- ![Successful run with Skip download to target path checked](image/milkv-duo-ide/gdb-withoutdownload.gif)
 
 ## Additional Notes
 

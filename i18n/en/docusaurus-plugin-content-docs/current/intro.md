@@ -15,7 +15,7 @@ Welcome to the introduction of [RuyiSDK](https://github.com/ruyisdk). Below are 
 
 ## Introduction
 
-RuyiSDK is an open-source project initiated by [PLCT Lab](https://plctlab.org/), aiming to provide RISC-V developers with a convenient and comprehensive development environment. It offers the latest hardware information and software support, such as hardware compatibility details for supported devices. On the software side, it provides system images (e.g., [RevyOS](https://github.com/ruyisdk/revyos)), toolchains, package managers, and more.
+RuyiSDK is an open-source project led by the Institute of Software, Chinese Academy of Sciences (ISCAS). The project aims to provide RISC-V developers with a convenient and comprehensive development environment. It offers up-to-date hardware information and software support—for example, supported devices include corresponding hardware details; on the software side, it provides images (such as [RevyOS](https://github.com/ruyisdk/revyos)), toolchains, package managers, and more.
 
 The ultimate goal is to create a robust and user-friendly development environment for RISC-V developers, promoting RISC-V as a mainstream architecture. Additionally, it aims to build and maintain a thriving community for developer collaboration. Ultimately, RuyiSDK aspires to go global, offering development convenience to RISC-V developers worldwide.
 
