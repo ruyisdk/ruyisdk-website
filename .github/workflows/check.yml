@@ -23,7 +23,22 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+
+      - name: Detect generationcontribute.json change
+        id: gencontrib
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA='${{ github.event.pull_request.base.sha }}'
+          HEAD_SHA='${{ github.event.pull_request.head.sha }}'
+          if git diff --name-only "$BASE_SHA" "$HEAD_SHA" | grep -E '(^|/)generationcontribute\.json$' >/dev/null; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check diff
+        if: steps.gencontrib.outputs.changed == 'true'
         run: |
           git diff src/pages/Community/generated_contributors.json > generated_contributors.patch
           if file generated_contributors.patch | grep diff; then
