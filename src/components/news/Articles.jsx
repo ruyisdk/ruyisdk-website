@@ -56,15 +56,15 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
           >
             {/* Content section (left on md+) */}
             <div className="min-w-0 flex flex-1 flex-col p-6 md:h-full">
-              <div className="flex min-w-0 items-start justify-between gap-4">
-                <span className="min-w-0 flex-1 break-words line-clamp-2 text-2xl md:text-3xl font-bold text-gray-800">
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug md:text-3xl font-bold text-gray-800">
                   {article.title}
                 </span>
-                <span className="flex-shrink-0 whitespace-nowrap text-base md:text-lg text-gray-600">
+                <span className="flex-shrink-0 whitespace-nowrap text-sm md:text-base text-gray-600">
                   {new Date(article.date).toLocaleDateString()}
                 </span>
               </div>
-              <p className="mt-2 text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
+              <p className="mt-2 text-sm md:text-base text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
             </div>
 
             {/* Image section */}
@@ -73,7 +73,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
                     e.target.style.display = 'none';
                   }}
