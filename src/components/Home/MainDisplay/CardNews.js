@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Translate, { translate } from "@docusaurus/Translate";
 import "react-slideshow-image/dist/styles.css";
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import SectionContainer from '../../homepage/SectionContainer';
+import SectionContainer from '../common/SectionContainer';
 
 // Card sizes enum
 const CardSizes = {
@@ -11,7 +11,7 @@ const CardSizes = {
   S: "small",   // half width, 1x height
 };
 
-export default function SlideNews() {
+export default function CardNews() {
   const { i18n } = useDocusaurusContext();
   const locale = i18n?.currentLocale;
   const revyosLink = (locale === 'en' || locale === 'de') ? 'https://docs.revyos.dev/en' : 'https://docs.revyos.dev';

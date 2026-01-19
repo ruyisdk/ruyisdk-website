@@ -35,6 +35,10 @@
     "message": "Gemeinschaft",
     "description": "Navbar item with label 社区"
   },
+  "item.label.贡献者": {
+    "message": "Mitwirkende",
+    "description": "Navbar item with label 贡献者"
+  },
   "item.label.关于": {
     "message": "Kontaktiere uns",
     "description": "Navbar item with label 关于"

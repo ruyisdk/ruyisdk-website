@@ -52,7 +52,7 @@ Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstel
 
 Diese IDE ist ein Entwicklungstoolkit, das speziell für die RISC-V-Architektur entwickelt wurde. Entwickler können es einfach über den Ruyi-Paketmanager beziehen und es für die Codeerstellung und das Debugging in realen Entwicklungsszenarien verwenden. Mit dem Paketmanager können Entwickler die Toolchain, Debugging-Tools und Emulatoren aus dem Toolkit beziehen. Entwickler können den Emulator oder RISC-V-Entwicklungsboards verwenden, um ihre Programme zu schreiben und zu debuggen.
 
-### [Community](/contact)
+### [Community](/About)
 
 In unserer Community bieten wir eine Vielzahl von technischen Artikeln, Codebeispielen, Tutorial-Videos und veranstalten regelmäßig Offline-Events, um Feedback von Nutzern zu erhalten. Online steht ein Forum zur Verfügung, in dem Entwickler sich austauschen können.
 

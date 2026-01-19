@@ -1,13 +1,14 @@
-import WeChatLink from "../components/common/WeChatLink";
-import Articles from "../components/news/Articles";
-import Card from "../components/news/Card";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+
+import WeChatLink from "@site/src/components/common/WeChatLink";
+import Articles from "@site/src/components/News/Articles";
+import Card from "@site/src/components/News/Card";
+import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
   const { i18n } = useDocusaurusContext();

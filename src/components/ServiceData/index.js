@@ -2,7 +2,7 @@ import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } fr
 import { useCallback } from "react"
 import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
-import useDashboardClient from "../../../utils/hooks/useDashboardClient"
+import useDashboardClient from "@site/src/utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
@@ -429,7 +429,7 @@ const UpdateTime = ({ data }) => (
 );
 
 // Main component
-const StatisticalData = () => {
+const ServiceData = () => {
   const axiosInstance = useDashboardClient();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -560,4 +560,4 @@ const StatisticalData = () => {
   );
 };
 
-export default StatisticalData;
+export default ServiceData;
