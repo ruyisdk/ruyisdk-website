@@ -300,7 +300,7 @@ const StatsSection = ({ data, loading, isMobile }) => {
         
         <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
           <AnimatedStatistic
-            title={translate(TRANSLATIONS.RUYI_GITHUB_DOWNLOADS)}
+            title={translate(TRANSLATIONS.PM_DOWNLOADS)}
             value={pmDownloads}
             icon={<DownloadOutlined />}
             color="#07a0cc"

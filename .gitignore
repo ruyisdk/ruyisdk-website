@@ -25,3 +25,7 @@ yarn-error.log*
 
 # news
 static/news.*.json
+
+# IDE
+.vscode/
+.idea/
