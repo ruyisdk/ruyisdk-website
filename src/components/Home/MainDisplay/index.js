@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Tag } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import Translate, { translate } from '@docusaurus/Translate';
-import SlideNews from '../common/SlideNews';
+
+import CardNews from './CardNews';
 
 // A terminal simulation that cycles through a set of commands.
 const Terminal = () => {
@@ -329,9 +330,9 @@ const MainDisplay = () => {
           </div>
         )}
 
-        {/* The SlideNews component remains outside the main scaling container */}
+        {/* The CardNews component remains outside the main scaling container */}
       </div>
-      <SlideNews />
+      <CardNews />
     </div>
   );
 };

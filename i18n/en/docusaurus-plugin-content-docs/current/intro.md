@@ -50,7 +50,7 @@ This package manager is an online software repository that provides the followin
 
 This IDE is a development toolbox designed for the RISC-V architecture. Developers can easily obtain it through the Ruyi package manager, enabling efficient code writing and debugging for real-world development scenarios. Using the package manager, developers can access toolchains, debugging tools, and simulators, allowing them to write and debug programs either on simulators or RISC-V development boards.
 
-### [Community](/contact)
+### [Community](/About)
 
 Our community offers a wealth of technical articles, code, tutorial videos, and offline events to gather user feedback. Additionally, an online forum is available for developers to exchange technical knowledge.
 

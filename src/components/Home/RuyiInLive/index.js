@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import SectionContainer from './SectionContainer';
+import SectionContainer from '../common/SectionContainer';
 
 // Custom SVG icons
 const UsersIcon = () => (
@@ -494,7 +494,7 @@ const RuyiInLive = () => {
                 <Translate id="statistics" />
               </h2>
               <a
-                href="/Home/StatisticalDataPages"
+                href="/Dashboard"
                 className="text-sm text-[#86868B] hover:text-[#002677]"
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
                 onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}

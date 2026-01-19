@@ -93,13 +93,13 @@ const config = {
               },
               {
                 label: "社区守则",
-                to: "/code_of_conduct",
+                to: "/CodeofConduct",
               },
             ],
           },
           {
             label: "关于",
-            to: "/about",
+            to: "/About",
             position: "left",
           },
           {
@@ -118,7 +118,7 @@ const config = {
       footer: {
         style: "light",
         links: [],
-        copyright: `Copyright © 2024-2025 Institute of Software, CAS`,
+        copyright: `Copyright © 2024-2026 Institute of Software, CAS`,
       },
       prism: {
         additionalLanguages: ["bash"],
