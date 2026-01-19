@@ -742,5 +742,23 @@
   },
   "downloads.privacy": {
     "message": "privacy statement"
+  },
+  "subscription.emailPlaceholder": {
+    "message": "Enter your email"
+  },
+  "subscription.emailAriaLabel": {
+    "message": "Email address"
+  },
+  "subscription.subscribe": {
+    "message": "Subscribe"
+  },
+  "subscription.submitting": {
+    "message": "Submitting..."
+  },
+  "subscription.failed": {
+    "message": "Subscription failed. Please try again."
+  },
+  "subscription.responseReceived": {
+    "message": "Subscription response received."
   }
 }

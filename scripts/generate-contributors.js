@@ -81,7 +81,7 @@ async function fetchContributors() {
         if (res && res.status === 202) {
           // GitHub is computing the stats; wait and retry with jitter
           const wait = jitter(backoff);
-          // console.log(`Stats for ${url} returning 202 (attempt ${attempt}), retrying in ${wait}ms`);
+          console.log(`Stats for ${url} returning 202 (attempt ${attempt}), retrying in ${wait}ms`);
           await new Promise((resT) => setTimeout(resT, wait));
           backoff = Math.min(20000, backoff * 1.8);
           continue;

@@ -1,7 +1,8 @@
 import styles from "./styles.module.css";
 
-
 import React, { useState } from "react";
+
+import { translate } from "@docusaurus/Translate";
 
 import jsonp from "jsonp";
 
@@ -31,11 +32,21 @@ function ButtonSubscription() {
       { param: "c" },
       (err, data) => {
         if (err) {
-          alert("Subscription failed. Please try again.");
+          alert(
+            translate({
+              id: "subscription.failed",
+              message: "Subscription failed. Please try again.",
+            }),
+          );
         } else if (data && data.msg) {
           alert(data.msg);
         } else {
-          alert("Subscription response received.");
+          alert(
+            translate({
+              id: "subscription.responseReceived",
+              message: "Subscription response received.",
+            }),
+          );
         }
         setLoading(false);
       }
@@ -43,22 +54,13 @@ function ButtonSubscription() {
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      style={{
-        display: "flex",
-        gap: "0.5rem",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        width: "100%",
-      }}
-    >
+    <form onSubmit={onSubmit} className={styles.form}>
       {/* input background: default when empty, stronger red while invalid, stronger green when valid */}
       <input
         type="email"
         value={email}
-        placeholder="Enter your email"
-        aria-label="Email address"
+        placeholder={translate({ id: "subscription.emailPlaceholder", message: "Enter your email" })}
+        aria-label={translate({ id: "subscription.emailAriaLabel", message: "Email address" })}
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
         style={{
@@ -90,15 +92,10 @@ function ButtonSubscription() {
             type="submit"
             disabled={disabled}
             className={styles.button}
-            style={{
-              flex: "0 0 auto",
-              whiteSpace: "nowrap",
-              opacity: disabled ? 0.6 : 1,
-              cursor: disabled ? "not-allowed" : "pointer",
-              transition: "opacity 160ms ease, transform 120ms ease",
-            }}
           >
-            {loading ? "Submitting..." : "Subscribe"}
+            {loading
+              ? translate({ id: "subscription.submitting", message: "Submitting..." })
+              : translate({ id: "subscription.subscribe", message: "Subscribe" })}
           </button>
         );
       })()}
