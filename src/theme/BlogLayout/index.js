@@ -4,7 +4,7 @@ import Layout from "@theme/Layout";
 import BlogSidebar from "@theme/BlogSidebar";
 import useRouteContext from "@docusaurus/useRouteContext";
 import Translate, { translate } from "@docusaurus/Translate";
-import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
+import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 export default function BlogLayout(props) {
   const { sidebar, toc, children, ...layoutProps } = props;

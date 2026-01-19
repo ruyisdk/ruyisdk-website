@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUT_FILE = path.resolve(__dirname, '../src/pages/Community/generated_contributors.json');
+const OUT_FILE = path.resolve(__dirname, '../src/components//Community/generated_contributors.json');
 const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_filter.md');
 
 function loadFilters() {

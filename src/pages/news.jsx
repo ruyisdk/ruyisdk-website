@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
 import WeChatLink from "@site/src/components/common/WeChatLink";
 import Articles from "@site/src/components/News/Articles";
 import Card from "@site/src/components/News/Card";
-import ButtonSubscription from "@site/src/components/community/Subscription/ButtonSubscription";
+import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
   const { i18n } = useDocusaurusContext();

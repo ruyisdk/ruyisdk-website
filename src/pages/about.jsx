@@ -4,9 +4,10 @@ import ReactDOM from "react-dom";
 import Translate from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { QRCode, QRGroup } from "@site/src/components/common";
-import AboutEn from "./about.en.mdx";
-import AboutZh from "./about.zh-Hans.mdx";
-import AboutDe from "./about.de.mdx";
+
+import AboutEn from "@site/src/components/About/about.en.mdx";
+import AboutZh from "@site/src/components/About/about.zh-Hans.mdx";
+import AboutDe from "@site/src/components/About/about.de.mdx";
 
 // 与 /Community/contributors 页面保持相同的背景风格
 function PageBackground({ isClient }) {
