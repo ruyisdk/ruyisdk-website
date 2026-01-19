@@ -83,7 +83,7 @@ export default function ContributorsPage() {
   try {
     // This will be present after running the generate script during build/dev start
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    const generated = require('./generated_contributors.json');
+    const generated = require('@site/src/components/Community/generated_contributors.json');
     if (generated && Array.isArray(generated.contributors)) {
       initialPeopleData = generated;
     }
@@ -101,12 +101,12 @@ export default function ContributorsPage() {
     if (!peopleData || !(peopleData.contributors || []).length) {
       try {
         // eslint-disable-next-line import/no-dynamic-require, global-require
-        const module = require(`./peoples_${detectedLocale === 'zh-Hans' ? 'zh-Hans' : detectedLocale}.json`);
+        const module = require(`@site/src/components/Community/peoples_${detectedLocale === 'zh-Hans' ? 'zh-Hans' : detectedLocale}.json`);
         setPeopleData(module);
       } catch (e) {
         try {
           // eslint-disable-next-line import/no-dynamic-require, global-require
-          const module = require('./peoples_en.json');
+          const module = require('@site/src/components/Community/peoples_en.json');
           setPeopleData(module);
         } catch (err) {
           setPeopleData({ coreTeam: [], interns: [], contributors: [] });

@@ -89,17 +89,17 @@ const config = {
             items: [
               {
                 label: "贡献者",
-                to: "/Community/contributors",
+                to: "/contributors",
               },
               {
                 label: "社区守则",
-                to: "/CodeofConduct",
+                to: "/code_of_conduct",
               },
             ],
           },
           {
             label: "关于",
-            to: "/About",
+            to: "/about",
             position: "left",
           },
           {
