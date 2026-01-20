@@ -509,7 +509,9 @@ const ServiceData = () => {
   }, [axiosInstance]);
 
 
-  const totalInstalls = data?.installs?.total || 0;
+  // TODO: why we count this again????
+  // so data is not in this scope, so you use ? to fix compile error
+  const pmDownloads = data?.downloads_by_categories_v1["pm:github"].total + data?.downloads_by_categories_v1["pm:mirror"].total + data?.downloads_by_categories_v1["pm:pypi"].total;
 
   return (
     <div 
