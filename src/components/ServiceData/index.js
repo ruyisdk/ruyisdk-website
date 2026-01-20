@@ -423,7 +423,7 @@ const ChartsSection = ({ data }) => {
 const UpdateTime = ({ data }) => (
   <div className={styles.updateTime}>
     <p>
-      {translate(TRANSLATIONS.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+      {translate(TRANSLATION_KEY.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
     </p>
   </div>
 );
