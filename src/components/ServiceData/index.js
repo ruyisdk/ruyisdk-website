@@ -253,7 +253,7 @@ const TopList = ({ data, title }) => {
 };
 
 
-const MobileInstallSection = ({ totalInstalls, loading }) => (
+const MobileInstallSection = ({ pmDownloads, loading }) => (
   <div className={styles.installSection}>
     <div className={styles.installContainer}>
       <div className={styles.installContent}>
@@ -544,7 +544,7 @@ const ServiceData = () => {
       >
         <div className={styles.mainContent}>
           {isMobile && (
-            <MobileInstallSection totalInstalls={totalInstalls} loading={loading} />
+            <MobileInstallSection pmDownloads={pmDownloads} loading={loading} />
           )}
           
           <StatsSection data={data} loading={loading} isMobile={isMobile} />
