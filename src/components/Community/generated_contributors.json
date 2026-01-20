@@ -7,21 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1801
+      "contributions": 1854
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 366
+      "contributions": 377
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 280
+      "contributions": 282
     },
     {
       "id": 54484233,
@@ -63,21 +63,21 @@
       "name": "pz9115",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
       "github": "https://github.com/pz9115",
-      "contributions": 56
-    },
-    {
-      "id": 198067605,
-      "name": "a1gorhythm7",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
-      "github": "https://github.com/a1gorhythm7",
-      "contributions": 52
+      "contributions": 57
     },
     {
       "id": 29089388,
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 48
+      "contributions": 54
+    },
+    {
+      "id": 198067605,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "github": "https://github.com/a1gorhythm7",
+      "contributions": 54
     },
     {
       "id": 207433538,
@@ -122,6 +122,20 @@
       "contributions": 20
     },
     {
+      "id": 11484206,
+      "name": "U2FsdGVkX1",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
+      "github": "https://github.com/U2FsdGVkX1",
+      "contributions": 17
+    },
+    {
+      "id": 132031800,
+      "name": "JoannaWu84",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/132031800?v=4",
+      "github": "https://github.com/JoannaWu84",
+      "contributions": 17
+    },
+    {
       "id": 82703986,
       "name": "Ruixi-Cheng",
       "avatarUrl": "https://avatars.githubusercontent.com/u/82703986?v=4",
@@ -134,20 +148,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/32459390?v=4",
       "github": "https://github.com/Arielfoever",
       "contributions": 17
-    },
-    {
-      "id": 11484206,
-      "name": "U2FsdGVkX1",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
-      "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 16
-    },
-    {
-      "id": 132031800,
-      "name": "JoannaWu84",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/132031800?v=4",
-      "github": "https://github.com/JoannaWu84",
-      "contributions": 16
     },
     {
       "id": 43716472,
@@ -369,7 +369,7 @@
   ],
   "totals": {
     "contributors": 52,
-    "commits": 3557,
-    "pullRequests": 1482
+    "commits": 3636,
+    "pullRequests": 1499
   }
 }
