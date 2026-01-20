@@ -554,6 +554,9 @@
   "IDE下载次数": {
     "message": "IDE Downloads"
   },
+  "vscode下载次数": {
+    "message": "VSCode Plugin Downloads"
+  },
   "最常用指令": {
     "message": "Most Used Commands"
   },
