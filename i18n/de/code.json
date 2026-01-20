@@ -544,6 +544,9 @@
   "IDE下载次数": {
     "message": "IDE-Downloads"
   },
+  "vscode下载次数": {
+    "message": "VS Code-Plugin-Downloads"
+  },
   "最常用指令": {
     "message": "Meistgenutzte Befehle"
   },

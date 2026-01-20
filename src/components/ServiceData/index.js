@@ -30,6 +30,7 @@ const TRANSLATIONS = {
   THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
   DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
   IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
+  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
   RUYI_INSTALLS: { id: "ruyi安装台数", message: "ruyi安装台数" },
   RUYI_GITHUB_DOWNLOADS: { id: "ruyi包管理器github下载数量", message: "Ruyi GitHub下载数量" },
   DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
@@ -42,6 +43,7 @@ const CATEGORY_NAMES = {
   pm_downloads: TRANSLATIONS.PM_DOWNLOADS,
   "3rdparty": TRANSLATIONS.THIRD_PARTY,
   humans: TRANSLATIONS.DOCS_DOWNLOADS,
+  vscode: TRANSLATIONS.VSCODE_DOWNLOADS,
   ide: TRANSLATIONS.IDE_DOWNLOADS
 };
 
@@ -325,11 +327,12 @@ const CategorySection = ({ data }) => {
   const getCombinedDownloads = (data) => {
     if (!data) return {};
     const combined = {};
-    Object.entries(data.other_categories_downloads || {}).forEach(([key, value]) => {
-      combined[translate(CATEGORY_NAMES[key])] = { ...value };
-    });
-    if (data.downloads) combined[translate(CATEGORY_NAMES.downloads)] = { ...data.downloads };
-    if (data.pm_downloads) combined[translate(CATEGORY_NAMES.pm_downloads)] = { ...data.pm_downloads };
+    combined[translate(CATEGORY_NAMES.downloads)] = { ...data.downloads_by_categories_v1.pkg };
+    combined[translate(CATEGORY_NAMES.pm_downloads)] = { total: data.downloads_by_categories_v1["pm:github"].total + data.downloads_by_categories_v1["pm:mirror"].total + data.downloads_by_categories_v1["pm:pypi"].total };
+    combined[translate(CATEGORY_NAMES.ide)] = { total: data.downloads_by_categories_v1["ide:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:github"].total };
+    combined[translate(CATEGORY_NAMES.vscode)] = { total: data.downloads_by_categories_v1["ide:plugin:vscode:mirror"].total + data.downloads_by_categories_v1["ide:plugin:vscode:github"].total };
+    combined[translate(CATEGORY_NAMES["3rdparty"])] = { ...data.downloads_by_categories_v1["3rdparty"] };
+    combined[translate(CATEGORY_NAMES.humans)] = { ...data.downloads_by_categories_v1.humans };
     return combined;
   };
 
