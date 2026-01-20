@@ -18,6 +18,7 @@ const Dashboard = () => {
             // Try to fetch a local cached JSON from the static /data path at runtime.
             // Using fetch avoids webpack trying to resolve the file at build time.
             if (typeof window !== 'undefined' && window.fetch) {
+              // TODO: what's this? no such route
               const resp = await fetch('/data/github-stats.json');
               if (resp.ok) {
                 const local = await resp.json();
@@ -53,6 +54,7 @@ const Dashboard = () => {
             stars: repoData.stargazers_count,
             forks: repoData.forks_count,
             issues: repoData.open_issues_count,
+            // TODO: repo size, not commit count
             commits: repoData.size,
             watchers: repoData.watchers_count
           };
@@ -85,23 +87,23 @@ const Dashboard = () => {
               </span>
             ) : githubData ? (
               <>
-                <span className="flex items-center gap-1 font-medium whitespace-nowrap">
+                <span className="flex items-center gap-1 font-medium whitespace-nowrap" title="Stars">
                   <StarOutlined className="text-[#FFD700] text-sm" />
                   {githubData.stars}
                 </span>
-                <span className="flex items-center gap-1 font-medium whitespace-nowrap">
+                <span className="flex items-center gap-1 font-medium whitespace-nowrap" title="Forks">
                   <ForkOutlined className="text-[#1890FF] text-sm" />
                   {githubData.forks}
                 </span>
-                <span className="flex items-center gap-1 font-medium whitespace-nowrap">
+                <span className="flex items-center gap-1 font-medium whitespace-nowrap" title="Open Issues">
                   <IssuesCloseOutlined className="text-[#FF4D4F] text-sm" />
                   {githubData.issues}
                 </span>
-                <span className="flex items-center gap-1 font-medium whitespace-nowrap">
+                <span className="flex items-center gap-1 font-medium whitespace-nowrap" title="Commits">
                   <CodeOutlined className="text-[#52C41A] text-sm" />
                   {githubData.commits}
                 </span>
-                <span className="flex items-center gap-1 font-medium whitespace-nowrap">
+                <span className="flex items-center gap-1 font-medium whitespace-nowrap" title="Watchers">
                   <EyeOutlined className="text-[#722ED1] text-sm" />
                   {githubData.watchers}
                 </span>
