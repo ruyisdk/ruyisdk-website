@@ -19,32 +19,29 @@ const MAX_RETRY_COUNT = 5;
 const RETRY_DELAY_BASE = 1000;
 
 // Translation keys
-const TRANSLATIONS = {
+const TRANSLATION_KEY = {
+  // top commands/packages
   NO_DATA: { id: "暂无数据", message: "暂无数据" },
   TOP_COMMANDS: { id: "最常用指令 Top Commands", message: "最常用指令" },
   TOP_PACKAGES: { id: "最常用包 Top Packages", message: "最常用包" },
   TOP_COMMANDS_TITLE: { id: "最常用指令", message: "最常用指令" },
   TOP_PACKAGES_TITLE: { id: "最常用包", message: "最常用包" },
-  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "组件下载数量" },
-  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" },
-  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
-  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
-  IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
-  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
+
+  // data overview
   RUYI_INSTALLS: { id: "ruyi安装台数", message: "ruyi安装台数" },
   RUYI_GITHUB_DOWNLOADS: { id: "ruyi包管理器github下载数量", message: "Ruyi GitHub下载数量" },
-  DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
-  UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
-};
 
-// Category mapping
-const CATEGORY_NAMES = {
-  downloads: TRANSLATIONS.COMPONENT_DOWNLOADS,
-  pm_downloads: TRANSLATIONS.PM_DOWNLOADS,
-  "3rdparty": TRANSLATIONS.THIRD_PARTY,
-  humans: TRANSLATIONS.DOCS_DOWNLOADS,
-  vscode: TRANSLATIONS.VSCODE_DOWNLOADS,
-  ide: TRANSLATIONS.IDE_DOWNLOADS
+  // download data
+  DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
+  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "组件下载数量" },
+  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" },
+  IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
+  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
+  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
+  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
+
+  // update time
+  UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
 };
 
 // Utility functions
@@ -111,7 +108,7 @@ const useDebounce = (value, delay) => {
 const CustomizeRenderEmpty = () => (
   <div className={styles.emptyState}>
     <SmileOutlined className={styles.emptyIcon} />
-    <p className={styles.emptyText}>{translate(TRANSLATIONS.NO_DATA)}</p>
+    <p className={styles.emptyText}>{translate(TRANSLATION_KEY.NO_DATA)}</p>
   </div>
 );
 
@@ -262,14 +259,14 @@ const MobileInstallSection = ({ totalInstalls, loading }) => (
       <div className={styles.installContent}>
         <h2 className={styles.installTitle}>
           <span className={styles.installIcon}>💻</span>
-          {translate(TRANSLATIONS.RUYI_INSTALLS)}
+          {translate(TRANSLATION_KEY.PM_DOWNLOADS)}
         </h2>
         <div className={styles.installValue}>
           {loading ? (
             <div className={styles.loadingSkeleton}></div>
           ) : (
             <FlipCounter
-              value={totalInstalls}
+              value={pmDownloads}
               loading={loading}
               standalone={true}
             />
@@ -291,9 +288,9 @@ const StatsSection = ({ data, loading, isMobile }) => {
         {!isMobile && (
           <Col xs={24} sm={12} lg={8}>
             <AnimatedStatistic
-              title={translate(TRANSLATIONS.RUYI_INSTALLS)}
-              value={totalInstalls}
-              icon={<DesktopOutlined />}
+              title={translate(TRANSLATION_KEY.PM_DOWNLOADS)}
+              value={pmDownloads}
+              icon={<DownloadOutlined />}
               color="#07a0cc"
               loading={loading}
             />
@@ -302,18 +299,18 @@ const StatsSection = ({ data, loading, isMobile }) => {
         
         <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
           <AnimatedStatistic
-            title={translate(TRANSLATIONS.PM_DOWNLOADS)}
-            value={pmDownloads}
-            icon={<DownloadOutlined />}
+            title={translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS)}
+            value={componentDownloads}
+            icon={<CloudServerOutlined />}
             color="#07a0cc"
             loading={loading}
             />
         </Col>
         <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
           <AnimatedStatistic
-            title={translate(TRANSLATIONS.COMPONENT_DOWNLOADS)}
-            value={componentDownloads}
-            icon={<CloudServerOutlined />}
+            title={translate(TRANSLATION_KEY.RUYI_INSTALLS)}
+            value={totalInstalls}
+            icon={<DesktopOutlined />}
             color="#07a0cc"
             loading={loading}
           />
@@ -327,12 +324,12 @@ const CategorySection = ({ data }) => {
   const getCombinedDownloads = (data) => {
     if (!data) return {};
     const combined = {};
-    combined[translate(CATEGORY_NAMES.downloads)] = { ...data.downloads_by_categories_v1.pkg };
-    combined[translate(CATEGORY_NAMES.pm_downloads)] = { total: data.downloads_by_categories_v1["pm:github"].total + data.downloads_by_categories_v1["pm:mirror"].total + data.downloads_by_categories_v1["pm:pypi"].total };
-    combined[translate(CATEGORY_NAMES.ide)] = { total: data.downloads_by_categories_v1["ide:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:github"].total };
-    combined[translate(CATEGORY_NAMES.vscode)] = { total: data.downloads_by_categories_v1["ide:plugin:vscode:mirror"].total + data.downloads_by_categories_v1["ide:plugin:vscode:github"].total };
-    combined[translate(CATEGORY_NAMES["3rdparty"])] = { ...data.downloads_by_categories_v1["3rdparty"] };
-    combined[translate(CATEGORY_NAMES.humans)] = { ...data.downloads_by_categories_v1.humans };
+    combined[translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS)] = { ...data.downloads_by_categories_v1.pkg };
+    combined[translate(TRANSLATION_KEY.PM_DOWNLOADS)] = { total: data.downloads_by_categories_v1["pm:github"].total + data.downloads_by_categories_v1["pm:mirror"].total + data.downloads_by_categories_v1["pm:pypi"].total };
+    combined[translate(TRANSLATION_KEY.IDE_DOWNLOADS)] = { total: data.downloads_by_categories_v1["ide:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:github"].total };
+    combined[translate(TRANSLATION_KEY.VSCODE_DOWNLOADS)] = { total: data.downloads_by_categories_v1["ide:plugin:vscode:mirror"].total + data.downloads_by_categories_v1["ide:plugin:vscode:github"].total };
+    combined[translate(TRANSLATION_KEY.THIRD_PARTY)] = { ...data.downloads_by_categories_v1["3rdparty"] };
+    combined[translate(TRANSLATION_KEY.DOCS_DOWNLOADS)] = { ...data.downloads_by_categories_v1.humans };
     return combined;
   };
 
@@ -341,7 +338,7 @@ const CategorySection = ({ data }) => {
 
   return (
     <div className={styles.categorySection}>
-      <h3 className={styles.sectionTitle}>{translate(TRANSLATIONS.DETAILED_STATS)}</h3>
+      <h3 className={styles.sectionTitle}>{translate(TRANSLATION_KEY.DETAILED_STATS)}</h3>
       <div className={styles.categoryGrid}>
         {Object.entries(combinedDownloads).map(([dir, val]) => {
           // 重新设计的合理公式：使用对数压缩 + 线性调整，确保数值差异正确反映
@@ -395,14 +392,14 @@ const CategorySection = ({ data }) => {
 const ChartsSection = ({ data }) => {
   const CardOneitems = [{
     key: '1',
-    label: translate(TRANSLATIONS.TOP_COMMANDS),
-    children: <TopList data={data?.top_commands || {}} title={translate(TRANSLATIONS.TOP_COMMANDS_TITLE)} />,
+    label: translate(TRANSLATION_KEY.TOP_COMMANDS),
+    children: <TopList data={data?.top_commands || {}} title={translate(TRANSLATION_KEY.TOP_COMMANDS_TITLE)} />,
   }];
 
   const CardTwoitems = [{
     key: '1',
-    label: translate(TRANSLATIONS.TOP_PACKAGES),
-    children: <TopList data={data?.top_packages || {}} title={translate(TRANSLATIONS.TOP_PACKAGES_TITLE)} />,
+    label: translate(TRANSLATION_KEY.TOP_PACKAGES),
+    children: <TopList data={data?.top_packages || {}} title={translate(TRANSLATION_KEY.TOP_PACKAGES_TITLE)} />,
   }];
 
   return (
