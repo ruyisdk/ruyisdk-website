@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RuyiSDK 网站焕新记 · 收尾</title>
+  <meta name="color-scheme" content="light" />
+  <style>
+    :root{--bg:#f5f5f7;--ink:#1a1a1a;--muted:#767676;--primary:#06bcee;--ruyi-gold:#E6C23A;--ruyi-gold-dark:#Caa033;--dark:#20232a;--card:rgba(255,255,255,.72);--border:rgba(0,0,0,.10);--shadow:0 30px 90px rgba(0,0,0,.12);--radius:28px;--w:1180px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;color:var(--ink);
+      background:radial-gradient(900px 520px at 20% 15%, rgba(6,188,238,.25), transparent 60%),radial-gradient(900px 620px at 82% 85%, rgba(8,126,164,.18), transparent 62%),linear-gradient(180deg,#ffffff 0%,var(--bg) 100%);
+      overflow:hidden}
+    .noise::before{content:"";position:fixed;inset:-20px;pointer-events:none;opacity:.06;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.9) 0 1px, transparent 1px 3px);mix-blend-mode:soft-light;filter:blur(.3px);transform:rotate(.4deg);z-index:-1}
+
+    .blobs{position:fixed;inset:0;z-index:-2;pointer-events:none}
+    .blob{position:absolute;border-radius:999px;filter:blur(70px);opacity:.33}
+    .b1{width:560px;height:560px;left:-180px;top:-160px;background:rgba(6,188,238,.78);animation:float1 9s ease-in-out infinite}
+    .b2{width:680px;height:680px;right:-260px;bottom:-260px;background:rgba(8,126,164,.64);animation:float2 11s ease-in-out infinite}
+    @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+    @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-25px)}}
+
+    .wrap{max-width:var(--w);margin:0 auto;height:100%;padding:34px 18px 22px;display:flex;flex-direction:column}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.02em}
+    .dot{width:12px;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--ruyi-gold));box-shadow:0 0 0 6px rgba(6,188,238,.12)}
+    .meta{display:flex;align-items:center;gap:10px}
+    .pill{font-size:12px;font-weight:900;color:var(--dark);background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.10);padding:6px 10px;border-radius:999px;backdrop-filter:blur(10px)}
+
+    .hero{flex:1;display:flex;align-items:center}
+    .panel{width:100%;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:28px 26px}
+    h1{margin:0;font-size:clamp(42px,6vw,72px);line-height:1.02;letter-spacing:-.04em}
+    .lead{margin:14px 0 0;font-size:16px;line-height:1.75;color:var(--muted);max-width:92ch}
+
+    .grid{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{grid-column:span 4;background:rgba(255,255,255,.86);border:1px solid rgba(0,0,0,.10);border-radius:22px;padding:16px 16px 14px;box-shadow:0 14px 40px rgba(0,0,0,.08)}
+    .k{margin:0 0 6px;font-weight:950;letter-spacing:-.02em}
+    .v{margin:0;color:rgba(32,35,42,.78);line-height:1.65}
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(32,35,42,.70);font-size:13px;padding:12px 4px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--primary),var(--ruyi-gold));color:white;font-weight:900;padding:10px 14px;border-radius:999px;border:0;box-shadow:0 14px 50px rgba(6,188,238,.24)}
+    .btn2{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.12);padding:10px 14px;border-radius:999px;font-weight:900}
+
+    @media (max-width:980px){.card{grid-column:span 12}.hero{align-items:flex-start;padding-top:18px}}
+  </style>
+</head>
+<body class="noise">
+  <div class="blobs" aria-hidden><div class="blob b1"></div><div class="blob b2"></div></div>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="dot"></span>RuyiSDK · 官网焕新记</div>
+      <div class="meta"><span class="pill" id="progress">—</span><a class="pill" href="index.html">目录</a></div>
+    </div>
+
+    <div class="hero">
+      <div class="panel">
+        <h1>感谢聆听！</h1>
+        <p class="lead">核心收获：用统一视觉系统把“页面堆叠”收敛为“产品体验”，并用构建期数据生成与内容组织降低维护成本。</p>
+
+        <div class="grid">
+          <div class="card">
+            <p class="k">一致性</p>
+            <p class="v">主页 / Community / 关于：同一套背景语言、卡片风格、标题层级。</p>
+          </div>
+          <div class="card">
+            <p class="k">信息密度</p>
+            <p class="v">首页新增新闻展示模块；重要入口从 docs 抽离。</p>
+          </div>
+          <div class="card">
+            <p class="k">维护效率</p>
+            <p class="v">新闻独立目录、构建期脚本生成数据、离线构建模式。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="btn2" id="prev" href="09-other.html">← 上一页</a>
+      <span>←/→ 或 Space 翻页 · Esc 目录</span>
+      <a class="btn" href="index.html">返回目录 →</a>
+    </div>
+  </div>
+
+  <script>
+    const deck = ['00-cover.html','01-oldsite.html','01-handover.html','02-stack.html','03-content-i18n.html','04-ux-baseline.html','05-needs.html','06-deliver-pages.html','07-deliver-docs-news.html','08-deliver-visual.html','09-other.html','10-close.html'];
+    const here = location.pathname.split('/').pop() || '10-close.html';
+    const idx = Math.max(0, deck.indexOf(here));
+    document.getElementById('progress').textContent = `${idx+1}/${deck.length}`;
+
+    const prev = deck[idx-1];
+    const next = deck[idx+1];
+
+    function go(file){ if(!file) return; location.href = file; }
+
+    window.addEventListener('keydown', (e)=>{
+      if (e.key === 'ArrowLeft') return go(prev);
+      if (e.key === 'ArrowRight' || e.key === ' ') return go(next);
+      if (e.key === 'Escape') return go('index.html');
+    });
+
+    window.addEventListener('click', (e)=>{
+      if (e.target.closest('a,button')) return;
+      const x = e.clientX / Math.max(1, window.innerWidth);
+      if (x < 0.18) go(prev);
+    });
+  </script>
+</body>
+</html>

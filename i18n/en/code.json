@@ -687,6 +687,45 @@
   "downloads.pm.latestOnly": {
     "message": "Go to download page"
   },
+  "downloads.pm.selector.title": {
+    "message": "Start Locally"
+  },
+  "downloads.pm.selector.subtitle": {
+    "message": "Select your preferences and start downloading. Changing the architecture will automatically start the download and redirect to the thank-you page."
+  },
+  "downloads.pm.selector.channel": {
+    "message": "Build"
+  },
+  "downloads.pm.selector.channel.stable": {
+    "message": "Stable"
+  },
+  "downloads.pm.selector.os": {
+    "message": "Your OS"
+  },
+  "downloads.pm.selector.os.linux": {
+    "message": "Linux"
+  },
+  "downloads.pm.selector.arch": {
+    "message": "Architecture"
+  },
+  "downloads.pm.selector.source": {
+    "message": "Source"
+  },
+  "downloads.pm.selector.source.mirror": {
+    "message": "Fast Mirror"
+  },
+  "downloads.pm.selector.source.github": {
+    "message": "GitHub"
+  },
+  "downloads.pm.selector.download": {
+    "message": "Download"
+  },
+  "downloads.pm.selector.download.note": {
+    "message": "If the download doesn't start, use the direct link."
+  },
+  "downloads.pm.selector.download.link": {
+    "message": "Direct download link"
+  },
 
   "downloads.badge.stable": {
     "message": "Stable"
@@ -695,7 +734,7 @@
     "message": "Version"
   },
   "downloads.label.mirror": {
-    "message": "Mirror"
+    "message": "Fast Mirror"
   },
   "downloads.label.githubReleases": {
     "message": "GitHub Releases"
@@ -745,6 +784,57 @@
   },
   "downloads.privacy": {
     "message": "privacy statement"
+  },
+  "downloads.thanks.meta.title": {
+    "message": "Thanks for downloading"
+  },
+  "downloads.thanks.meta.description": {
+    "message": "Thanks for downloading the RuyiSDK Package Manager"
+  },
+  "downloads.thanks.title": {
+    "message": "Thanks for downloading"
+  },
+  "downloads.thanks.subtitle": {
+    "message": "Your download has started. If your browser blocked it, please check your download settings."
+  },
+  "downloads.thanks.details": {
+    "message": "Download details"
+  },
+  "downloads.thanks.field.source": {
+    "message": "Source"
+  },
+  "downloads.thanks.field.arch": {
+    "message": "Architecture"
+  },
+  "downloads.thanks.field.version": {
+    "message": "Version"
+  },
+  "downloads.thanks.field.file": {
+    "message": "File"
+  },
+  "downloads.thanks.gotoInstallDocs": {
+    "message": "View installation docs"
+  },
+  "downloads.thanks.gotoParent": {
+    "message": "Go to parent directory"
+  },
+  "downloads.thanks.back": {
+    "message": "Back to downloads"
+  },
+  "downloads.thanks.more": {
+    "message": "Next steps:"
+  },
+  "downloads.thanks.more.install": {
+    "message": "Read the installation docs and finish setup"
+  },
+  "downloads.thanks.source.mirror": {
+    "message": "Fast Mirror"
+  },
+  "downloads.thanks.source.github": {
+    "message": "GitHub Releases"
+  },
+  "downloads.thanks.source.unknown": {
+    "message": "Download source"
   },
   "subscription.emailPlaceholder": {
     "message": "Enter your email"

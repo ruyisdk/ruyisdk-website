@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RuyiSDK 网站焕新记 · 内容与 i18n</title>
+  <meta name="color-scheme" content="light" />
+  <style>
+    :root{--bg:#f5f5f7;--ink:#1a1a1a;--muted:#767676;--primary:#06bcee;--ruyi-gold:#E6C23A;--ruyi-gold-dark:#Caa033;--dark:#20232a;--card:rgba(255,255,255,.72);--border:rgba(0,0,0,.10);--shadow:0 30px 90px rgba(0,0,0,.12);--radius:28px;--w:1180px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;color:var(--ink);
+      background:radial-gradient(900px 520px at 20% 15%, rgba(6,188,238,.22), transparent 60%),radial-gradient(900px 620px at 82% 85%, rgba(8,126,164,.16), transparent 62%),linear-gradient(180deg,#ffffff 0%,var(--bg) 100%);
+      overflow:hidden}
+    .noise::before{content:"";position:fixed;inset:-20px;pointer-events:none;opacity:.06;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.9) 0 1px, transparent 1px 3px);mix-blend-mode:soft-light;filter:blur(.3px);transform:rotate(.4deg);z-index:-1}
+    .wrap{max-width:var(--w);margin:0 auto;height:100%;padding:32px 18px 22px;display:flex;flex-direction:column}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.02em}
+    .dot{width:12px;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--ruyi-gold));box-shadow:0 0 0 6px rgba(6,188,238,.12)}
+    .meta{display:flex;align-items:center;gap:10px}
+    .pill{font-size:12px;font-weight:900;color:var(--dark);background:rgba(255,255,255,.72);border:1px solid rgba(0,0,0,.10);padding:6px 10px;border-radius:999px;backdrop-filter:blur(10px)}
+
+    .panel{flex:1;margin-top:18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(12px);padding:28px 26px;display:flex;flex-direction:column}
+    h1{margin:0;font-size:clamp(34px,4.6vw,52px);line-height:1.06;letter-spacing:-.03em}
+    .lead{margin:12px 0 0;font-size:16px;line-height:1.7;color:var(--muted);max-width:90ch}
+
+    .grid{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .card{grid-column:span 6;background:rgba(255,255,255,.86);border:1px solid rgba(0,0,0,.10);border-radius:22px;padding:16px 16px 14px;box-shadow:0 14px 40px rgba(0,0,0,.08)}
+    .k{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px}
+    .k b{font-weight:950;letter-spacing:-.02em}
+    .tag{font-size:12px;font-weight:900;color:var(--ruyi-gold);background:rgba(253,239,195,.10);border:1px solid rgba(255,228,138,.18);padding:5px 10px;border-radius:999px}
+
+    ul{margin:0;padding-left:18px;color:rgba(32,35,42,.82);line-height:1.7}
+    li{margin:6px 0}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-weight:800}
+
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;color:rgba(32,35,42,.70);font-size:13px;padding:12px 4px}
+    a{color:inherit;text-decoration:none}
+    .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--primary),var(--ruyi-gold));color:white;font-weight:900;padding:10px 14px;border-radius:999px;border:0;box-shadow:0 14px 50px rgba(6,188,238,.24)}
+    .btn2{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.78);border:1px solid rgba(0,0,0,.12);padding:10px 14px;border-radius:999px;font-weight:900}
+
+    @media (max-width:980px){.card{grid-column:span 12}}
+  </style>
+</head>
+<body class="noise">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="dot"></span>RuyiSDK · 官网焕新记</div>
+      <div class="meta"><span class="pill" id="progress">—</span><a class="pill" href="index.html">目录</a></div>
+    </div>
+
+    <div class="panel">
+      <h1>内容与 i18n（接手点 f828a17）</h1>
+      <p class="lead">内容分层清晰，但维护成本会随着页面增多被放大：尤其是“新闻/更新”与多语言同步。</p>
+
+      <div class="grid">
+        <div class="card">
+          <p class="k"><b>内容组织</b><span class="tag">structure</span></p>
+          <ul>
+            <li><code>docs/</code>：文档主内容</li>
+            <li><code>blog/</code>：博客内容（含双周报配置）</li>
+            <li><code>src/pages/</code>：站点页面（例如 download/contact/code_of_conduct）</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="k"><b>侧边栏</b><span class="tag">docs</span></p>
+          <ul>
+            <li><code>sidebars.js</code>：文档结构与侧栏配置</li>
+            <li>目录结构清晰，但“重要页面”混在 docs 时容易被忽略</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="k"><b>多语言存储</b><span class="tag">i18n</span></p>
+          <ul>
+            <li><code>i18n/&lt;lang&gt;/docusaurus-plugin-content-docs/current/…</code></li>
+            <li><code>i18n/&lt;lang&gt;/docusaurus-theme-classic/navbar.json</code> / <code>footer.json</code></li>
+            <li>同一信息更新时，翻译同步容易成为瓶颈</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p class="k"><b>社区治理内容</b><span class="tag">governance</span></p>
+          <ul>
+            <li><code>CODE_OF_CONDUCT.md</code></li>
+            <li><code>CONTRIBUTING.md</code> / <code>CONTRIBUTING.zh.md</code></li>
+            <li>适合被“Community 入口页”聚合展示</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <a class="btn2" id="prev" href="02-stack.html">← 上一页</a>
+      <span>←/→ 或 Space 翻页 · Esc 目录</span>
+      <a class="btn" id="next" href="04-ux-baseline.html">下一页 →</a>
+    </div>
+  </div>
+
+  <script>
+    const deck = ['00-cover.html','01-oldsite.html','01-handover.html','02-stack.html','03-content-i18n.html','04-ux-baseline.html','05-needs.html','06-deliver-pages.html','07-deliver-docs-news.html','08-deliver-visual.html','09-other.html','10-close.html'];
+    const here = location.pathname.split('/').pop() || '03-content-i18n.html';
+    const idx = Math.max(0, deck.indexOf(here));
+    document.getElementById('progress').textContent = `${idx+1}/${deck.length}`;
+
+    const prev = deck[idx-1];
+    const next = deck[idx+1];
+    const prevEl = document.getElementById('prev');
+    const nextEl = document.getElementById('next');
+    if (prev) prevEl.href = prev; else prevEl.style.visibility = 'hidden';
+    if (next) nextEl.href = next; else nextEl.style.visibility = 'hidden';
+
+    function go(file){ if(!file) return; location.href = file; }
+
+    window.addEventListener('keydown', (e)=>{
+      if (e.key === 'ArrowLeft') return go(prev);
+      if (e.key === 'ArrowRight' || e.key === ' ') return go(next);
+      if (e.key === 'Escape') return go('index.html');
+    });
+
+    window.addEventListener('click', (e)=>{
+      if (e.target.closest('a,button')) return;
+      const x = e.clientX / Math.max(1, window.innerWidth);
+      if (x > 0.62) go(next);
+      else if (x < 0.18) go(prev);
+    });
+  </script>
+</body>
+</html>

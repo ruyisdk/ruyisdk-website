@@ -674,6 +674,45 @@
   "downloads.pm.latestOnly": {
     "message": "Zur Download-Seite"
   },
+  "downloads.pm.selector.title": {
+    "message": "Lokal starten"
+  },
+  "downloads.pm.selector.subtitle": {
+    "message": "Wählen Sie Ihre Präferenzen und starten Sie den Download. Beim Wechsel der Architektur startet der Download automatisch und führt zur Dankeseite."
+  },
+  "downloads.pm.selector.channel": {
+    "message": "Build"
+  },
+  "downloads.pm.selector.channel.stable": {
+    "message": "Stabil"
+  },
+  "downloads.pm.selector.os": {
+    "message": "Ihr Betriebssystem"
+  },
+  "downloads.pm.selector.os.linux": {
+    "message": "Linux"
+  },
+  "downloads.pm.selector.arch": {
+    "message": "Architektur"
+  },
+  "downloads.pm.selector.source": {
+    "message": "Quelle"
+  },
+  "downloads.pm.selector.source.mirror": {
+    "message": "Schneller Mirror"
+  },
+  "downloads.pm.selector.source.github": {
+    "message": "GitHub"
+  },
+  "downloads.pm.selector.download": {
+    "message": "Download"
+  },
+  "downloads.pm.selector.download.note": {
+    "message": "Wenn der Download nicht startet, verwenden Sie den Direktlink."
+  },
+  "downloads.pm.selector.download.link": {
+    "message": "Direkter Download-Link"
+  },
 
   "downloads.badge.stable": {
     "message": "Stabil"
@@ -682,7 +721,7 @@
     "message": "Version"
   },
   "downloads.label.mirror": {
-    "message": "Mirror"
+    "message": "Schneller Mirror"
   },
   "downloads.label.githubReleases": {
     "message": "GitHub Releases"
@@ -732,6 +771,57 @@
   },
   "downloads.privacy": {
     "message": "Datenschutzerklärung"
+  },
+  "downloads.thanks.meta.title": {
+    "message": "Danke für den Download"
+  },
+  "downloads.thanks.meta.description": {
+    "message": "Danke für den Download des RuyiSDK-Paketmanagers"
+  },
+  "downloads.thanks.title": {
+    "message": "Danke für den Download"
+  },
+  "downloads.thanks.subtitle": {
+    "message": "Ihr Download wurde gestartet. Falls der Browser ihn blockiert hat, prüfen Sie die Download-Einstellungen."
+  },
+  "downloads.thanks.details": {
+    "message": "Download-Details"
+  },
+  "downloads.thanks.field.source": {
+    "message": "Quelle"
+  },
+  "downloads.thanks.field.arch": {
+    "message": "Architektur"
+  },
+  "downloads.thanks.field.version": {
+    "message": "Version"
+  },
+  "downloads.thanks.field.file": {
+    "message": "Datei"
+  },
+  "downloads.thanks.gotoInstallDocs": {
+    "message": "Installationsdoku ansehen"
+  },
+  "downloads.thanks.gotoParent": {
+    "message": "Zum übergeordneten Verzeichnis"
+  },
+  "downloads.thanks.back": {
+    "message": "Zurück zur Download-Seite"
+  },
+  "downloads.thanks.more": {
+    "message": "Nächste Schritte:"
+  },
+  "downloads.thanks.more.install": {
+    "message": "Installationsdoku lesen und Einrichtung abschließen"
+  },
+  "downloads.thanks.source.mirror": {
+    "message": "Schneller Mirror"
+  },
+  "downloads.thanks.source.github": {
+    "message": "GitHub Releases"
+  },
+  "downloads.thanks.source.unknown": {
+    "message": "Download-Quelle"
   },
   "subscription.emailPlaceholder": {
     "message": "E-Mail eingeben"
