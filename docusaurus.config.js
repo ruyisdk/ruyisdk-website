@@ -52,7 +52,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
+          customCss: ["./src/css/custom.scss", "./src/css/tailwind.css"],
         },
       }),
     ],
@@ -129,8 +129,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
-    "./plugins/unocss",
-    "./plugins/news-generator",
+    "./src/plugins/tailwind-postcss.js",
+    "./src/plugins/news-generator.js",
         [
       "@docusaurus/plugin-content-blog",
       {
