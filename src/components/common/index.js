@@ -2,3 +2,4 @@
 export { default as CodeBlock } from '../docs_utils/CodeBlock';
 export { default as QRCode } from './QRCode';
 export { default as QRGroup } from './QRCode/Group.jsx'; 
+export { default as PageBackground } from './PageBackground';
