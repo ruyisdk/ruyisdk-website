@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const API_URL = process.env.RUYI_LATEST_PM_API || 'https://api.ruyisdk.cn/releases/latest-pm';
-const OUT_FILE = path.join(__dirname, '..', 'src', 'generated', 'latest_pm.json');
+const OUT_FILE = path.join(__dirname, '..', 'static', 'data', 'latest_pm.json');
 
 function minimalStub() {
   return {
