@@ -39,7 +39,8 @@
       }
     }
   },
-  "generatedAt": "2026-01-29T08:51:56.040Z",
-  "source": "https://api.ruyisdk.cn/releases/latest-pm",
-  "stub": false
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T10:43:54.763Z",
+    "source": "https://api.ruyisdk.cn/releases/latest-pm"
+  }
 }
