@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import ReactDOM from 'react-dom';
-import latestPm from '@site/src/generated/latest_pm.json';
+import latestPm from '@site/static/data/latest_pm.json';
 
 // NOTE: /downloads must be self-contained. The global theme does not guarantee
 // that --ruyi-* CSS variables exist, so we provide safe fallbacks to existing
