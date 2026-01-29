@@ -14,15 +14,18 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 22.4.1
-          cache: npm
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
       - name: Build website
-        run: npm run build
+        run: pnpm run build
       - name: Check diff
         run: |
           git diff src/components/Community/generated_contributors.json > generated_contributors.patch
