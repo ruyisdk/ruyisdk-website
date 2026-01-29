@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "xijing21",
+        "id": 84754181,
+        "avatar_url": "https://avatars.githubusercontent.com/u/84754181?v=4",
+        "html_url": "https://github.com/xijing21"
+      }
+    },
+    {
+      "total": 186,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:49.758Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyi-backend/stats/contributors"
+  }
+}

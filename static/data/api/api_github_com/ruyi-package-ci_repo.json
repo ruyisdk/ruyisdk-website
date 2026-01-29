@@ -1,0 +1,13 @@
+{
+  "data": {
+    "stargazers_count": 1,
+    "forks_count": 3,
+    "subscribers_count": 0,
+    "open_issues_count": 0,
+    "prs_count": 3
+  },
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:34.551Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyi-package-ci"
+  }
+}

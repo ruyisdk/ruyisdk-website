@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "total": 8,
+      "author": {
+        "login": "Cyl18",
+        "id": 14993992,
+        "avatar_url": "https://avatars.githubusercontent.com/u/14993992?v=4",
+        "html_url": "https://github.com/Cyl18"
+      }
+    },
+    {
+      "total": 96,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:50.691Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyi-packaging/stats/contributors"
+  }
+}
