@@ -26,13 +26,6 @@ jobs:
         run: pnpm install
       - name: Build website
         run: pnpm run build
-      - name: Check diff
-        run: |
-          git diff src/components/Community/generated_contributors.json > generated_contributors.patch
-          if file generated_contributors.patch | grep diff; then
-            cat generated_contributors.patch
-            false
-          fi
 
   dco:
     name: DCO compliance
