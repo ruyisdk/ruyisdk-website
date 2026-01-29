@@ -262,6 +262,10 @@ async function summarizeData() {
       forks: forks,
       watches: watches,
     },
+    ruyisdk_org_data: {
+      generatedAt: new Date().toISOString(),
+      source: 'https://ruyisdk.org/contributors',
+    },
   };
 
   fs.writeFileSync(SUM_FILE, JSON.stringify(out, null, 2), 'utf8');
