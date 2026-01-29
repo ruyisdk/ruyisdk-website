@@ -11,7 +11,6 @@
     "dev": "dotenv -e .env.development -- cross-env NODE_ENV=development docusaurus start",
     "start": "dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus start",
     "build": "dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus build",
-    "build-noupdate": "dotenv -e .env.production -- cross-env NODE_ENV=production docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
