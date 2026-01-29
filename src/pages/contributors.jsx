@@ -14,7 +14,7 @@ export default function ContributorsPage() {
   try {
     // This will be present after running the generate script during build/dev start
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    const generated = require('@site/src/components/Community/generated_contributors.json');
+    const generated = require('@site/static/data/generated_contributors.json');
     if (generated && Array.isArray(generated.contributors)) {
       initialPeopleData = generated;
     }
@@ -29,6 +29,7 @@ export default function ContributorsPage() {
     const detectedLocale = typeof window !== 'undefined' ? (window.location.pathname.split('/').filter(Boolean)[0] || 'zh-Hans') : 'zh-Hans';
 
     // If generated data isn't available, use local peoples_*.json fallback
+    // TODO: core teams, should remove these code
     if (!peopleData || !(peopleData.contributors || []).length) {
       try {
         // eslint-disable-next-line import/no-dynamic-require, global-require

@@ -32,7 +32,7 @@ const repos = [
 ];
 
 const GITHUB_API_BASE = 'https://api.github.com/repos/ruyisdk';
-const OUT_FILE = path.resolve(__dirname, '../src/components//Community/generated_contributors.json');
+const OUT_FILE = path.resolve(__dirname, '../static/data/generated_contributors.json');
 const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_filter.md');
 
 function loadFilters() {
