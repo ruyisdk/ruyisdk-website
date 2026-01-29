@@ -1,33 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
-import ReactDOM from "react-dom";
 import Translate from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { QRCode, QRGroup } from "@site/src/components/common";
+import PageBackground from "@site/src/components/common/PageBackground";
 
 import AboutEn from "@site/src/components/About/about.en.mdx";
 import AboutZh from "@site/src/components/About/about.zh-Hans.mdx";
 import AboutDe from "@site/src/components/About/about.de.mdx";
-
-// 与 /Community/contributors 页面保持相同的背景风格
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
-      />
-    </div>,
-    document.body,
-  );
-}
 
 export default function AboutPage() {
   const [isClient, setIsClient] = useState(false);

@@ -3,9 +3,9 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 
 import WeChatLink from "@site/src/components/common/WeChatLink";
+import PageBackground from "@site/src/components/common/PageBackground";
 import Articles from "@site/src/components/News/Articles";
 import Card from "@site/src/components/News/Card";
 import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
@@ -122,23 +122,3 @@ const NewsPage = () => {
 };
 
 export default NewsPage;
-
-// Background blobs similar to Contributors page
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
-      />
-    </div>,
-    document.body,
-  );
-}

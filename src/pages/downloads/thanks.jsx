@@ -48,7 +48,7 @@ function triggerDownload(url) {
   const parsed = safeParseUrl(url);
   if (!parsed) return;
 
-  const allowedHosts = new Set(['mirror.iscas.ac.cn', 'github.com']);
+  const allowedHosts = new Set(['mirror.iscas.ac.cn', 'fast-mirror.isrc.ac.cn', 'mirror.isrc.ac.cn', 'github.com']);
   if (!allowedHosts.has(parsed.hostname)) return;
 
   const iframe = document.createElement('iframe');
@@ -129,8 +129,8 @@ export default function DownloadThanksPage() {
   }, [isClient, download]);
 
   const sourceLabel =
-    source === 'mirror'
-      ? translate({ id: 'downloads.thanks.source.mirror', message: '镜像站' })
+    source === 'mirror' || source === 'fast-mirror'
+      ? translate({ id: 'downloads.thanks.source.mirror', message: '极速镜像' })
       : source === 'github'
         ? translate({ id: 'downloads.thanks.source.github', message: 'GitHub Releases' })
         : translate({ id: 'downloads.thanks.source.unknown', message: '下载源' });
