@@ -5,6 +5,8 @@
 [submodule "news/weeklies"]
 	path = news/weeklies
 	url = https://github.com/ruyisdk/wechat-articles.git
+	branch = main
 [submodule "news/ruyinews"]
 	path = news/ruyinews
 	url = https://github.com/ruyisdk/packages-index.git
+	branch = main

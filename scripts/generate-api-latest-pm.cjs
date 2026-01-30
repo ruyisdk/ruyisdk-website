@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_URL = process.env.RUYI_LATEST_PM_API || 'https://api.ruyisdk.cn/releases/latest-pm';
+const API_URL = 'https://api.ruyisdk.cn/releases/latest-pm';
 const OUT_FILE = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'releases_latest_pm.json');
 
 async function main() {
