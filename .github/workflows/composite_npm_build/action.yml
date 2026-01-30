@@ -1,0 +1,20 @@
+name: PNPM build
+description: Build website with pnpm
+
+runs:
+  using: "composite"
+  steps:
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22.4.1
+        cache: pnpm
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
+    - name: Build website
+      shell: bash
+      run: pnpm run build

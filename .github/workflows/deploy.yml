@@ -16,18 +16,8 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22.4.1
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install
-      - name: Build website
-        run: pnpm run build
+      - name: PNPM Build
+        uses: ./.github/workflows/composite_npm_build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
