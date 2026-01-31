@@ -1,0 +1,88 @@
+/* Fallback CSS for chart & orbit layout that Tailwind cannot express easily */
+
+/* Hide axis numbers, ticks and lines from g2 within chart */
+.sd-chart .g2-axis-label,
+.sd-chart .g2-axis-tick,
+.sd-chart .g2-axis-line,
+.sd-chart .g2-grid {
+  display: none;
+}
+
+/* Orbit layout: center + positioned items */
+.sd-orbit {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd-orbit .orbitCenter {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  background: #f5f7fb;
+  border: 1px solid rgba(10,44,126,0.12);
+  box-shadow: 0 12px 30px rgba(10,44,126,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.sd-orbit .logoRing {
+  width: 110px;
+  height: 110px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(10,44,126,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 4px rgba(7,160,204,0.08);
+}
+
+.sd-orbit .orbitItem {
+  position: absolute;
+  min-width: 180px;
+  padding: 0.85rem 1.1rem;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(10,44,126,0.12);
+  box-shadow: 0 10px 24px rgba(10,44,126,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sd-orbit .orbitItem1 { top: 0; left: 50%; transform: translate(-50%, 0); }
+.sd-orbit .orbitItem2 { top: 18%; right: 3%; }
+.sd-orbit .orbitItem3 { top: 50%; right: -2%; transform: translate(0, -50%); }
+.sd-orbit .orbitItem4 { bottom: 0; left: 50%; transform: translate(-50%, 0); }
+.sd-orbit .orbitItem5 { bottom: 18%; left: 3%; }
+.sd-orbit .orbitItem6 { top: 50%; left: -2%; transform: translate(0, -50%); }
+
+@media (max-width: 960px) {
+  .sd-orbit {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .sd-orbit .orbitCenter {
+    position: relative;
+    grid-column: 1 / 3;
+    margin-bottom: 0.5rem;
+  }
+
+  .sd-orbit .orbitItem {
+    position: relative;
+    transform: none;
+    inset: auto;
+    min-width: unset;
+  }
+}
