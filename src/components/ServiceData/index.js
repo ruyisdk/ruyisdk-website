@@ -1,4 +1,4 @@
-import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Tooltip } from "antd"
+import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } from "antd"
 import { useCallback } from "react"
 import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
@@ -322,61 +322,68 @@ const StatsSection = ({ data, loading, isMobile }) => {
 
 const CategorySection = ({ data }) => {
   const getCombinedDownloads = (data) => {
-    if (!data) {
-      return {
-        component: 0,
-        pm: 0,
-        ide: 0,
-        vscode: 0,
-        thirdParty: 0,
-        docs: 0,
-      };
-    }
-
-    const downloads = data?.downloads_by_categories_v1 ?? {};
-    return {
-      component: downloads.pkg?.total ?? 0,
-      pm: (downloads["pm:github"]?.total ?? 0) + (downloads["pm:mirror"]?.total ?? 0) + (downloads["pm:pypi"]?.total ?? 0),
-      ide: (downloads["ide:eclipse:mirror"]?.total ?? 0) + (downloads["ide:plugin:eclipse:mirror"]?.total ?? 0) + (downloads["ide:plugin:eclipse:github"]?.total ?? 0),
-      vscode: (downloads["ide:plugin:vscode:mirror"]?.total ?? 0) + (downloads["ide:plugin:vscode:github"]?.total ?? 0),
-      thirdParty: downloads["3rdparty"]?.total ?? 0,
-      docs: downloads.humans?.total ?? 0,
-    };
+    if (!data) return {};
+    const combined = {};
+    combined[translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS)] = { ...data.downloads_by_categories_v1.pkg };
+    combined[translate(TRANSLATION_KEY.PM_DOWNLOADS)] = { total: data.downloads_by_categories_v1["pm:github"].total + data.downloads_by_categories_v1["pm:mirror"].total + data.downloads_by_categories_v1["pm:pypi"].total };
+    combined[translate(TRANSLATION_KEY.IDE_DOWNLOADS)] = { total: data.downloads_by_categories_v1["ide:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:mirror"].total + data.downloads_by_categories_v1["ide:plugin:eclipse:github"].total };
+    combined[translate(TRANSLATION_KEY.VSCODE_DOWNLOADS)] = { total: data.downloads_by_categories_v1["ide:plugin:vscode:mirror"].total + data.downloads_by_categories_v1["ide:plugin:vscode:github"].total };
+    combined[translate(TRANSLATION_KEY.THIRD_PARTY)] = { ...data.downloads_by_categories_v1["3rdparty"] };
+    combined[translate(TRANSLATION_KEY.DOCS_DOWNLOADS)] = { ...data.downloads_by_categories_v1.humans };
+    return combined;
   };
 
   const combinedDownloads = getCombinedDownloads(data);
-
-  const statItems = [
-    { key: 'component', label: translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS), value: combinedDownloads.component },
-    { key: 'pm', label: translate(TRANSLATION_KEY.PM_DOWNLOADS), value: combinedDownloads.pm },
-    { key: 'ide', label: translate(TRANSLATION_KEY.IDE_DOWNLOADS), value: combinedDownloads.ide },
-    { key: 'vscode', label: translate(TRANSLATION_KEY.VSCODE_DOWNLOADS), value: combinedDownloads.vscode },
-    { key: 'thirdParty', label: translate(TRANSLATION_KEY.THIRD_PARTY), value: combinedDownloads.thirdParty },
-    { key: 'docs', label: translate(TRANSLATION_KEY.DOCS_DOWNLOADS), value: combinedDownloads.docs },
-  ];
+  const maxTotal = Math.max(...Object.values(combinedDownloads).map(v => v.total), 0);
 
   return (
     <div className={styles.categorySection}>
       <h3 className={styles.sectionTitle}>{translate(TRANSLATION_KEY.DETAILED_STATS)}</h3>
-      <div className={styles.categoryOrbit}>
-        <div className={styles.orbitCenter}>
-          <div className={styles.logoRing}>
-            <img
-              className={styles.logoImage}
-              src="/img/ruyi-logo-720.svg"
-              alt="RuyiSDK Logo"
-            />
-          </div>
-        </div>
-        {statItems.map((item, index) => (
-          <div
-            key={item.key}
-            className={`${styles.orbitItem} ${styles[`orbitItem${index + 1}`]}`}
-          >
-            <span className={styles.orbitLabel}>{item.label}</span>
-            <span className={styles.orbitValue}>{Number(item.value || 0).toLocaleString()}</span>
-          </div>
-        ))}
+      <div className={styles.categoryGrid}>
+        {Object.entries(combinedDownloads).map(([dir, val]) => {
+          // 重新设计的合理公式：使用对数压缩 + 线性调整，确保数值差异正确反映
+          // 1. 对数压缩：Math.log10(val.total + 1) 压缩大数值差异
+          // 2. 线性调整：添加适当的线性因子，避免过度压缩
+          // 3. 最小长度保证：确保小数值也有合理的进度条长度
+          
+          // 基础对数压缩
+          const logValue = Math.log10(val.total + 1);
+          
+          // 线性调整因子：为较大数值提供额外的增长空间
+          const linearFactor = Math.min(val.total / 10000, 0.3);
+          
+          // 组合计算：对数压缩 + 线性调整
+          const calculatedValue = logValue * (1 + linearFactor);
+          
+          // 最小长度保证：确保小数值至少有10%的进度条长度
+          const minPercentage = 10;
+          const adjustedValue = Math.max(calculatedValue, minPercentage / 100);
+          
+          const maxLogValue = Math.log10(maxTotal + 1);
+          const maxLinearFactor = Math.min(maxTotal / 10000, 0.3);
+          const maxCalculatedValue = maxLogValue * (1 + maxLinearFactor);
+          
+          // 计算百分比，确保最大值是100%，其他值按比例分布
+          const percentage = maxCalculatedValue > 0 ? (adjustedValue / maxCalculatedValue) * 100 : minPercentage;
+          
+          // 调试信息 - 可以在控制台查看
+          console.log(`${dir}: 原始值=${val.total}, 对数=${logValue.toFixed(2)}, 线性因子=${linearFactor.toFixed(2)}, 计算值=${calculatedValue.toFixed(2)}, 调整值=${adjustedValue.toFixed(2)}, 百分比=${percentage.toFixed(2)}%`);
+          
+          return (
+            <div key={dir} className={styles.categoryCard}>
+              <div className={styles.categoryHeader}>
+                <span className={styles.categoryName}>{dir}</span>
+                <span className={styles.categoryValue}>{val.total.toLocaleString()}</span>
+              </div>
+              <Progress 
+                percent={percentage} 
+                showInfo={false}
+                strokeColor="#07a0cc"
+                className={styles.categoryProgress}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
