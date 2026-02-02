@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CloudServerOutlined } from '@ant-design/icons';
-import './FlipCounter.css';
+import styles from './FlipCounter.module.css';
 
 const FlipDigit = ({ digit }) => {
   const [currentDigit, setCurrentDigit] = useState(digit);
@@ -17,12 +17,12 @@ const FlipDigit = ({ digit }) => {
   }, [digit, currentDigit]);
 
   return (
-    <div className="flipDigit">
-      <div className={`flipCard ${isFlipping ? 'flipping' : ''}`}>
-        <div className="flipCardFront">
+    <div className={styles.flipDigit}>
+      <div className={`${styles.flipCard} ${isFlipping ? styles.flipping : ''}`}>
+        <div className={styles.flipCardFront}>
           <span>{currentDigit}</span>
         </div>
-        <div className="flipCardBack">
+        <div className={styles.flipCardBack}>
           <span>{digit}</span>
         </div>
       </div>
@@ -83,8 +83,8 @@ const FlipCounter = ({ value, title, icon, color, loading, standalone = false })
 
   if (standalone) {
     return (
-      <div className="standaloneContainer" ref={elementRef}>
-        <div className="flipCounter">
+      <div className={styles.standaloneContainer} ref={elementRef}>
+        <div className={styles.flipCounter}>
           {digits.map((digit, index) => (
             <FlipDigit 
               key={index} 
@@ -97,17 +97,17 @@ const FlipCounter = ({ value, title, icon, color, loading, standalone = false })
   }
 
   return (
-    <div className="statCard" ref={elementRef} data-stat={title}>
-      <div className="statIcon" style={{ color }}>
+    <div className={styles.statCard} ref={elementRef} data-stat={title}>
+      <div className={styles.statIcon} style={{ color }}>
         {<CloudServerOutlined />}
       </div>
-      <div className="statContent">
-        <h3 className="statTitle">{title}</h3>
-        <div className="statValue">
+      <div className={styles.statContent}>
+        <h3 className={styles.statTitle}>{title}</h3>
+        <div className={styles.statValue}>
           {loading ? (
-            <div className="loadingSkeleton"></div>
+            <div className={styles.loadingSkeleton}></div>
           ) : (
-            <div className="flipCounter">
+            <div className={styles.flipCounter}>
               {digits.map((digit, index) => (
                 <FlipDigit 
                   key={index} 

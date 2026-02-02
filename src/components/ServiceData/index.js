@@ -4,7 +4,7 @@ import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, Deskto
 import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "@site/src/utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
-import "./styles.tailwind.css";
+import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
 
@@ -106,9 +106,9 @@ const useDebounce = (value, delay) => {
 };
 // Components
 const CustomizeRenderEmpty = () => (
-  <div className="flex flex-col items-center justify-center p-8">
-    <SmileOutlined className="text-4xl text-[#0A2C7E] mb-2" />
-    <p className="text-sm text-[#6a737d]">{translate(TRANSLATION_KEY.NO_DATA)}</p>
+  <div className={styles.emptyState}>
+    <SmileOutlined className={styles.emptyIcon} />
+    <p className={styles.emptyText}>{translate(TRANSLATION_KEY.NO_DATA)}</p>
   </div>
 );
 
@@ -136,17 +136,17 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
   }, [isVisible, value, loading]);
 
   return (
-    <div className="bg-white border border-[rgba(0,0,0,0.06)] rounded-lg p-8 flex items-center gap-6 transition-transform duration-150 ease-in-out hover:-translate-y-1 hover:shadow-lg relative overflow-hidden h-full min-h-[160px]" ref={elementRef} data-stat={title}>
-      <div className="text-3xl p-4 rounded-lg bg-[rgba(10,44,126,0.06)] border border-[rgba(10,44,126,0.08)]" style={{ color }}>
+    <div className={styles.statCard} ref={elementRef} data-stat={title}>
+      <div className={styles.statIcon} style={{ color }}>
         {icon}
       </div>
-      <div className="flex-1 flex flex-col justify-center">
-        <h3 className="text-[#0A2C7E] text-base font-medium mb-2">{title}</h3>
-        <div className="relative flex items-center justify-center min-h-[60px]">
+      <div className={styles.statContent}>
+        <h3 className={styles.statTitle}>{title}</h3>
+        <div className={styles.statValue}>
           {loading ? (
-            <div className="w-[120px] h-10 bg-[rgba(0,0,0,0.06)] rounded"></div>
+            <div className={styles.loadingSkeleton}></div>
           ) : (
-            <span className="text-[#07a0cc] text-4xl font-extrabold">
+            <span className={styles.valueNumber}>
               {typeof value === 'number' ? displayValue.toLocaleString() : value}
             </span>
           )}
@@ -239,11 +239,11 @@ const TopList = ({ data, title }) => {
   }, [barData]);
 
   return (
-    <div className="mb-6">
-      <h3 className="text-[#2E3A46] text-lg font-semibold text-center mb-2">{title}</h3>
-      <div className="flex-1 relative">
+    <div className={styles.chartContainer}>
+      <h3 className={styles.chartTitle}>{title}</h3>
+      <div className={styles.chartWrapper}>
         {barData.length ? (
-          <div ref={containerRef} className="w-full h-full min-h-[400px] sd-chart" />
+          <div ref={containerRef} className={styles.chart} />
         ) : (
           <CustomizeRenderEmpty />
         )}
@@ -254,16 +254,16 @@ const TopList = ({ data, title }) => {
 
 
 const MobileInstallSection = ({ pmDownloads, loading }) => (
-  <div className="mb-12 text-center">
-    <div className="bg-white/90 border border-[rgba(0,0,0,0.06)] rounded-[24px] p-8 relative overflow-hidden">
-      <div className="relative z-10">
-        <h2 className="text-[#0A2C7E] text-xl font-semibold tracking-wide uppercase flex items-center justify-center gap-2">
-          <span className="text-2xl drop-shadow-lg">💻</span>
+  <div className={styles.installSection}>
+    <div className={styles.installContainer}>
+      <div className={styles.installContent}>
+        <h2 className={styles.installTitle}>
+          <span className={styles.installIcon}>💻</span>
           {translate(TRANSLATION_KEY.PM_DOWNLOADS)}
         </h2>
-        <div className="flex items-center justify-center min-h-[90px]">
+        <div className={styles.installValue}>
           {loading ? (
-            <div className="w-[120px] h-10 bg-[rgba(0,0,0,0.06)] rounded"></div>
+            <div className={styles.loadingSkeleton}></div>
           ) : (
             <FlipCounter
               value={pmDownloads}
@@ -283,8 +283,8 @@ const StatsSection = ({ data, loading, isMobile }) => {
   const pmDownloads = data?.pm_downloads?.total || 0;
 
   return (
-    <div className="mb-8">
-      <Row gutter={[24, 24]}>
+    <div className={styles.statsSection}>
+      <Row gutter={[24, 24]} className={styles.statsRow}>
         {!isMobile && (
           <Col xs={24} sm={12} lg={8}>
             <AnimatedStatistic
@@ -356,13 +356,13 @@ const CategorySection = ({ data }) => {
   ];
 
   return (
-    <div className="bg-white border border-[rgba(0,0,0,0.06)] rounded-lg p-6">
-      <h3 className="text-[#0A2C7E] text-xl font-semibold text-center mb-4">{translate(TRANSLATION_KEY.DETAILED_STATS)}</h3>
-      <div className="sd-orbit">
-        <div className="orbitCenter">
-          <div className="logoRing">
+    <div className={styles.categorySection}>
+      <h3 className={styles.sectionTitle}>{translate(TRANSLATION_KEY.DETAILED_STATS)}</h3>
+      <div className={styles.categoryOrbit}>
+        <div className={styles.orbitCenter}>
+          <div className={styles.logoRing}>
             <img
-              className="logoImage"
+              className={styles.logoImage}
               src="/img/ruyi-logo-720.svg"
               alt="RuyiSDK Logo"
             />
@@ -371,10 +371,10 @@ const CategorySection = ({ data }) => {
         {statItems.map((item, index) => (
           <div
             key={item.key}
-            className={`orbitItem orbitItem${index + 1}`}
+            className={`${styles.orbitItem} ${styles[`orbitItem${index + 1}`]}`}
           >
-            <span className="orbitLabel">{item.label}</span>
-            <span className="orbitValue">{Number(item.value || 0).toLocaleString()}</span>
+            <span className={styles.orbitLabel}>{item.label}</span>
+            <span className={styles.orbitValue}>{Number(item.value || 0).toLocaleString()}</span>
           </div>
         ))}
       </div>
@@ -396,15 +396,15 @@ const ChartsSection = ({ data }) => {
   }];
 
   return (
-    <div className="mt-8">
+    <div className={styles.chartsSection}>
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={12}>
-          <Card className="bg-white border border-[rgba(0,0,0,0.06)] rounded-lg h-[520px] transition-shadow hover:shadow-xl">
+          <Card className={styles.chartCard}>
             <Tabs defaultActiveKey="1" items={CardOneitems} />
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card className="bg-white border border-[rgba(0,0,0,0.06)] rounded-lg h-[520px] transition-shadow hover:shadow-xl">
+          <Card className={styles.chartCard}>
             <Tabs defaultActiveKey="1" items={CardTwoitems} />
           </Card>
         </Col>
@@ -414,7 +414,7 @@ const ChartsSection = ({ data }) => {
 };
 
 const UpdateTime = ({ data }) => (
-  <div className="text-right text-sm text-[#6a737d]">
+  <div className={styles.updateTime}>
     <p>
       {translate(TRANSLATION_KEY.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
     </p>
@@ -509,9 +509,17 @@ const ServiceData = () => {
   return (
     <div 
       ref={containerRef} 
-      className="min-h-screen w-full m-0 relative mx-auto max-w-[1400px] px-4 sm:px-8 lg:px-12 py-10 flex flex-col gap-12"
+      className={styles.container}
       style={{ pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto' }}
     >
+
+      {/* Decorative header + animated background blobs (homepage-style) */}
+      <div className={styles.backgroundHeader} />
+      <div className={styles.animationContainer} aria-hidden="true">
+        <div className={`${styles.blob} ${styles.blob1}`} />
+        <div className={`${styles.blob} ${styles.blob2}`} />
+        <div className={`${styles.blob} ${styles.blob3}`} />
+      </div>
 
       <ConfigProvider 
         renderEmpty={CustomizeRenderEmpty} 
@@ -529,7 +537,7 @@ const ServiceData = () => {
           }
         }}
       >
-        
+        <div className={styles.mainContent}>
           {isMobile && (
             <MobileInstallSection pmDownloads={pmDownloads} loading={loading} />
           )}
@@ -541,6 +549,7 @@ const ServiceData = () => {
           <ChartsSection data={data} />
           
           {data && <UpdateTime data={data} />}
+        </div>
       </ConfigProvider>
     </div>
   );
