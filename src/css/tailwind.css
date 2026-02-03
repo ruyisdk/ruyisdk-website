@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@source "../../src";
+@source "../../docs";
+@source "../../blog";
+@source "../../docusaurus.config.js";
+
+
