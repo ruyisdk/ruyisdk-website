@@ -52,7 +52,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
+          customCss: ["./src/css/tailwind.css", "./src/css/custom.scss"],
         },
       }),
     ],
@@ -129,9 +129,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
-    "./plugins/unocss",
     "./plugins/news-generator",
-        [
+    [
       "@docusaurus/plugin-content-blog",
       {
         blogTitle: "双周报",

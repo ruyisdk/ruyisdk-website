@@ -84,11 +84,11 @@ export default function CardNews() {
     slideBackground: 'absolute inset-0 bg-cover bg-center z-0 bg-black/40 bg-blend-darken',
     blurredBackground: 'filter blur-[15px] scale-[1.05]',
     content: 'relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]',
-    title: 'text-2xl font-bold mb-4 tracking-tight text-white drop-shadow-md',
-    subtitle: 'font-medium text-base mb-4 text-white drop-shadow-md',
+    title: 'text-base mb-3 tracking-tight text-white drop-shadow-md',
+    subtitle: 'text-sm mb-3 text-white drop-shadow-md',
     buttonContainer: 'flex gap-3 mt-4 flex-wrap justify-center',
-    primaryButton: 'inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full font-semibold text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[rgb(242,222,154)] hover:-translate-y-0.5',
-    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full font-semibold text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[#E8E3D2] hover:-translate-y-0.5',
+    primaryButton: 'inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[rgb(242,222,154)] hover:-translate-y-0.5',
+    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[#E8E3D2] hover:-translate-y-0.5',
   };
 
   const organizeCards = () => {
@@ -397,7 +397,7 @@ export default function CardNews() {
 
             {/* Content element is now a sibling to the header */}
             <div className="relative z-20 p-8 overflow-y-auto bg-white">
-              <h1 className="text-[2.5rem] mb-4 leading-tight font-bold text-[#111]">
+              <h1 className="text-[2.5rem] mb-4 leading-tight text-[#111]">
                 {slideImages[expandedCardIndex].title}
               </h1>
 
@@ -416,7 +416,7 @@ export default function CardNews() {
               <div className="flex gap-3 mt-6 flex-col sm:flex-row">
                 <a
                   href={slideImages[expandedCardIndex].Links}
-                  className={`inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full font-semibold min-w-[100px] shadow-sm`}
+                  className={`inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full min-w-[100px] shadow-sm`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -425,7 +425,7 @@ export default function CardNews() {
                 {slideImages[expandedCardIndex].subLinks && (
                   <a
                     href={slideImages[expandedCardIndex].subLinks}
-                    className="inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full font-semibold min-w-[100px] shadow-sm"
+                    className="inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full min-w-[100px] shadow-sm"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

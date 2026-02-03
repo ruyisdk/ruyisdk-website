@@ -272,7 +272,7 @@ const MainDisplay = () => {
         <div className="relative z-10 mx-auto max-w-[1280px] w-[90%] px-8 box-border">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:gap-12 gap-10 w-full">
             <div className="flex-1 lg:min-w-[300px] min-w-0 lg:max-w-[500px] max-w-full flex flex-col lg:block items-center lg:items-start text-center lg:text-left">
-              <h1 className="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold mb-4 text-[#0A2C7E] tracking-tight">RuyiSDK</h1>
+              <h1 className="text-[clamp(15rem,27vw,21rem)] font-extrabold mb-4 text-[#0A2C7E] tracking-tight">RuyiSDK</h1>
               <p className="text-[clamp(1.125rem,2.5vw,1.5rem)] text-[#515154] mb-10 leading-7 lg:max-w-[40ch] max-w-none"><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
