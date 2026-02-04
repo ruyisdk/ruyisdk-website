@@ -43,6 +43,14 @@
   ],
   "ruyinews": [
     {
+      "title": "Release notes for RuyiSDK 0.45",
+      "summary": "RuyiSDK 0.45 is now released. The corresponding package manager version is also 0.45.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: https://github.com/ruyis...",
+      "date": 1769472000000,
+      "image": null,
+      "filename": "2026-01-27-ruyi-0.45.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2026-01-27-ruyi-0.45.en_US.md"
+    },
+    {
       "title": "Release notes for RuyiSDK 0.44",
       "summary": "RuyiSDK 0.44 is now released. The corresponding package manager version is also 0.44.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
       "date": 1767052800000,
@@ -372,6 +380,30 @@
     }
   ],
   "weeklies": [
+    {
+      "title": "Zweiwochenbericht 062: 10.02.2026",
+      "summary": "",
+      "date": 1770681600000,
+      "image": null,
+      "filename": "20260210-ruyisdk-biweekly-62.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260210-ruyisdk-biweekly-62.md"
+    },
+    {
+      "title": "Zweiwochenbericht 061: 27.01.2026",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期包管理器、 VSCode 和 Eclipse 插件都提供了新的版本，包管理器主要新增了本地部分的中文支持（部分插件中文支持还在完善），RuyiSDK IDE VSCode 插件 和 Eclipse 插件也均对虚拟环境的支持进行了完善，更多更新详见下方，欢迎大家下载体验。 每个组件都提供了多种下载或安装方式，您可以任意选择一种： Ruyi 包管理器 ...",
+      "date": 1769472000000,
+      "image": null,
+      "filename": "20260127-ruyisdk-biweekly-61.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260127-ruyisdk-biweekly-61.md"
+    },
+    {
+      "title": "Zweiwochenbericht 060: 13.01.2026",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 若您在开发中需要部署 GNU/LLVM 工具链、QEMU 模拟器，或为 RISC-V 开发板烧录镜像，欢迎使用 RuyiSDK 包管理器 Ruyi（最新版 v0.44.0）。我们也为您提供了 VSCode 和 Eclipse 插件，助您一键获取所需工具，快速搭建开发环境。RuyiSDK 拥有丰富的工具链生态，并提供基于虚拟环境的隔离构建能力，希望能为您...",
+      "date": 1768262400000,
+      "image": null,
+      "filename": "20260113-ruyisdk-biweekly-60.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260113-ruyisdk-biweekly-60.md"
+    },
     {
       "title": "Zweiwochenbericht 059: 30.12.2025",
       "summary": "各位 RuyiSDK 的小伙伴们，大家好！辞旧迎新之际，先祝福大家元旦快乐，万事如意！ Ruyi 包管理器 0.44.0 版本已于今日发布，我们新增Milk-V Megrez设备支持并完善RV32的manual profile命名，修复了遥测功能的若干细节，旨在提供更多设备支持和更好的服务。 同时，RuyiSDK VS Code 插件和 Eclipse 插件也均发布了 0.1.0 版本。目前这两个...",
