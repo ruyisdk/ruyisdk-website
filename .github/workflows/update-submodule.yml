@@ -14,6 +14,9 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Compute run url
+        run: echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v3
         with:
           submodules: recursive
@@ -33,7 +36,10 @@ jobs:
           commit-message: "cron: auto update submodules"
           signoff: true
           title: "Auto-update: Submodules to latest"
-          body: "Auto generated PR to sync submodules."
+          body: |
+            Auto generated PR to sync submodules.
+            
+            **Action run:** ${{ env.RUN_URL }}
           labels: automat
           branch: create-pull-request/submodules
 
