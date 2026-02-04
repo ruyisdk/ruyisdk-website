@@ -1,0 +1,55 @@
+name: Update API Data
+
+on:
+  schedule:
+    # # Run every Tuesday/Thursday at 03:00 Beijing Time (19:00 UTC)
+    - cron: '0 19 * * 2,4'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Compute run url
+        run: echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.4.1
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Update github api
+        run: pnpm run generate-github
+      - name: Update github api
+        run: pnpm run generate-latest-pm
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: static/data
+          commit-message: "cron: auto update api data"
+          signoff: true
+          title: "Auto-update: API data to latest"
+          body: |
+            Auto generated PR to sync api data.
+            
+            **Action run:** ${{ env.RUN_URL }}
+          labels: automat
+          branch: create-pull-request/submodules
+
+      - name: PNPM Build
+        uses: ./.github/workflows/composite_npm_build
