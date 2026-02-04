@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ruyisdk.org/en/blog</id>
+    <title>RuyiSDK Blog</title>
+    <updated>2025-12-30T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ruyisdk.org/en/blog"/>
+    <subtitle>RuyiSDK Blog</subtitle>
+    <icon>https://ruyisdk.org/en/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.44]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44</id>
+        <link href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44"/>
+        <updated>2025-12-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.44 is now released. The corresponding package manager version is also 0.44.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.44 is now released. The corresponding package manager version is also 0.44.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://pypi.org/project/ruyi/0.44.0/" target="_blank" rel="noopener noreferrer">PyPI</a>: <code>pip install ruyi</code></li>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.44.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.44.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.44.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.44.0/</a></li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+RISC-V users can install <code>ruyi</code> using <code>pip</code>, but since some Python libraries
+depended on by <code>ruyi</code> do not yet provide pre-compiled packages for the RISC-V
+architecture on PyPI, the Python package manager will attempt to compile and
+install these dependencies from source code when installing <code>ruyi</code>, which may
+be very time-consuming or fail to compile.</p>
+<p>If you encounter problems installing <code>ruyi</code> on a RISC-V device, it is recommended
+to use other installation methods.</p>
+</blockquote>
+<blockquote>
+<p>[!NOTE]
+Please note: <a href="https://github.com/ruyisdk/ruyi/issues/414" target="_blank" rel="noopener noreferrer">It is known</a> that installing <code>ruyi</code> with <code>pipx</code> will
+cause subsequently created Ruyi virtual environments to be unusable. This will
+be fixed in the next version. Until then, please do not use <code>pipx</code> to install
+<code>ruyi</code>.</p>
+</blockquote>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Telemetry changes:<!-- -->
+<ul>
+<li>Fixed the issue where proactive <code>ruyi telemetry upload</code> would not work
+when telemetry mode is <code>local</code>.</li>
+<li>For RuyiSDK operational needs, if your telemetry mode is <code>on</code> and the
+last upload was at least 7 days ago, <code>ruyi</code> will upload telemetry data on
+your next invocation, regardless of the scheduled upload day.</li>
+<li>For RuyiSDK operational needs, if you chose to disable data collection
+and upload on first run, <code>ruyi</code> will still perform a one-time upload
+containing an unsaved random ID and the current <code>ruyi</code> version.
+If you do not wish for this upload to happen, please ensure
+<code>RUYI_TELEMETRY_OPTOUT=1</code> is set before using <code>ruyi</code>.</li>
+</ul>
+</li>
+</ul>
+<p>For low-frequency users of <code>ruyi</code>, this update may allow the RuyiSDK team to
+observe more specific behavior patterns regarding your installation ID than
+before. The RuyiSDK team has not conducted any such data mining so far.</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>New device support:<!-- -->
+<ul>
+<li>Milk-V Megrez: Compatible with RockOS. Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for the contribution!</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Renamed the <code>manual</code> profile for RV32 (for manual management of compilation flags) to <code>manual-rv32</code> to avoid conflict with the RV64 profile of the same name. Thanks to <a href="https://github.com/Cyl18" target="_blank" rel="noopener noreferrer">@Cyl18</a> for <a href="https://github.com/ruyisdk/packages-index/issues/149" target="_blank" rel="noopener noreferrer">reporting</a>!</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ide">IDE<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#ide" aria-label="IDE permalink" title="IDE permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="vscode">VSCode<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#vscode" aria-label="VSCode permalink" title="VSCode permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>RuyiSDK Management:<!-- -->
+<ul>
+<li>Added automatic RuyiSDK detection: supports one-click installation of missing RuyiSDK.</li>
+<li>Improved multi-version management: supports managing multiple installation paths and flexible switching between different versions.</li>
+</ul>
+</li>
+<li>Virtual Environments:<!-- -->
+<ul>
+<li>Added visual management: supports viewing and operating all virtual environments through a tree view.</li>
+<li>Added workspace awareness: supports intelligent detection and association of virtual environments based on the current workspace.</li>
+</ul>
+</li>
+<li>Package Management:<!-- -->
+<ul>
+<li>Added search functionality: supports quick retrieval and browsing of the RuyiSDK software repository.</li>
+<li>Optimized installation experience: supports one-click extraction and quick installation of toolchains and emulators.</li>
+<li>Added version selection: supports manually specifying specific package versions during installation.</li>
+<li>Improved system integration: added file explorer context menu to support direct extraction of RuyiSDK packages.</li>
+</ul>
+</li>
+<li>News and Updates:<!-- -->
+<ul>
+<li>Added news system: supports real-time viewing of official RuyiSDK news and updates.</li>
+<li>Added offline mode: supports caching news content to ensure readability while offline.</li>
+<li>Improved status tracking: supports automatic recording and persistence of news read status.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="eclipse">Eclipse<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#eclipse" aria-label="Eclipse permalink" title="Eclipse permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Introduce Maven for build process and dependency management; implement CI to enforce DCO (Developer Certificate of Origin) compliance and automate plugin deployment to GitHub Pages.</li>
+<li>Refactor the plugin directory structure and optimize existing documentation.</li>
+<li>Establish code style constraints and conduct a comprehensive review of all code.</li>
+<li>Add and test the "News" and "Venv" modules.</li>
+<li>Menu Bar: Add entry points for the News and Venv modules under the "RuyiSDK" menu.</li>
+<li>Release: Version 0.1.0.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="pre-release-testing-and-known-issues">Pre-release testing and known issues<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/12/30/ruyi-0.44#pre-release-testing-and-known-issues" aria-label="Pre-release testing and known issues permalink" title="Pre-release testing and known issues permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>RuyiSDK 0.44.0 has passed our <a href="https://gitee.com/yunxiangluo/ruyisdk-test/blob/master/20251222/README.md" target="_blank" rel="noopener noreferrer">pre-release tests</a>.
+Testing was conducted against 0.44.0-beta.20251219, and 0.44.0 is planned to be released based on 0.44.0-beta.20251219.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.43]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/11/26/ruyi-0.43</id>
+        <link href="https://ruyisdk.org/en/blog/2025/11/26/ruyi-0.43"/>
+        <updated>2025-11-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.43 is now released. The corresponding package manager version is also 0.43.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.43 is now released. The corresponding package manager version is also 0.43.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://pypi.org/project/ruyi/0.43.0/" target="_blank" rel="noopener noreferrer">PyPI</a>: <code>pip install ruyi</code></li>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.43.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.43.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.43.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.43.0/</a></li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+RISC-V users can install <code>ruyi</code> using <code>pip</code>, but since some Python libraries
+depended on by <code>ruyi</code> do not yet provide pre-compiled packages for the RISC-V
+architecture on PyPI, the Python package manager will attempt to compile and
+install these dependencies from source code when installing <code>ruyi</code>, which may
+be very time-consuming or fail to compile.</p>
+<p>If you encounter problems installing <code>ruyi</code> on a RISC-V device, it is recommended
+to use other installation methods.</p>
+</blockquote>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/11/26/ruyi-0.43#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Running <code>ruyi</code> as <code>root</code> is now allowed in container environments, to facilitate usage in controlled scenarios such as CI.</li>
+<li>Metadata such as package name and version number of the used RuyiSDK packages are now recorded in newly created Ruyi virtual environments, for consumption by RuyiSDK ecosystem components such as RuyiSDK IDE.</li>
+<li>Engineering iteration:<!-- -->
+<ul>
+<li>Added support for Python 3.14 runtime environment.</li>
+<li>Removed <code>ruyi</code>'s dependency on <code>packaging</code>. Packagers are requested to update their dependency declarations.</li>
+<li>Added an integration test framework as a supplement to <code>ruyi-litester</code>, helping to continuously ensure that <code>ruyi</code>'s functionality is not broken in niche scenarios.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/11/26/ruyi-0.43#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>New package:<!-- -->
+<ul>
+<li><code>source/riscv-gnu-toolchain-plct</code>: Source code repository collection for <code>toolchain/gnu-plct</code>.</li>
+</ul>
+</li>
+<li>New device support:<!-- -->
+<ul>
+<li>Milk-V Jupiter: Compatible with various Bianbu images.</li>
+<li>Sipeed LicheePi 3A: Compatible with various Bianbu images.</li>
+<li>SpacemiT MUSE Book: Compatible with various Bianbu images.</li>
+<li>SpacemiT MUSE Box: Compatible with various Bianbu images.</li>
+<li>XiangShan Nanhu Laptop: Compatible with RedleafOS.</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Removed Armbian support for Pine64 Star64: Upstream has stopped maintenance and no longer provides system image downloads.</li>
+<li>Bianbu Desktop and Bianbu Minimal for various SpacemiT K1 devices: Added images suitable for eMMC storage devices.</li>
+<li>Added Bianbu Desktop Lite for various SpacemiT K1 devices.</li>
+</ul>
+</li>
+</ul>
+<p>Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for the contribution!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="pre-release-testing-and-known-issues">Pre-release testing and known issues<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/11/26/ruyi-0.43#pre-release-testing-and-known-issues" aria-label="Pre-release testing and known issues permalink" title="Pre-release testing and known issues permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>RuyiSDK 0.43.0 has passed our <a href="https://gitee.com/yunxiangluo/ruyisdk-test/blob/master/20251119/README.md" target="_blank" rel="noopener noreferrer">pre-release tests</a>.
+Testing was conducted against 0.43.0-beta.20251118, and 0.43.0 is planned to be released based on 0.43.0-beta.20251118.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.42]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/10/24/ruyi-0.42</id>
+        <link href="https://ruyisdk.org/en/blog/2025/10/24/ruyi-0.42"/>
+        <updated>2025-10-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.42 is now released. The corresponding package manager version is also 0.42.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.42 is now released. The corresponding package manager version is also 0.42.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://pypi.org/project/ruyi/0.42.0/" target="_blank" rel="noopener noreferrer">PyPI</a>: <code>pip install ruyi</code></li>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.42.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.42.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.42.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.42.0/</a></li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+RISC-V users can install <code>ruyi</code> using <code>pip</code>, but since some Python libraries
+depended on by <code>ruyi</code> do not yet provide pre-compiled packages for the RISC-V
+architecture on PyPI, the Python package manager will attempt to compile and
+install these dependencies from source code when installing <code>ruyi</code>, which may
+be very time-consuming or fail to compile.</p>
+<p>If you encounter problems installing <code>ruyi</code> on a RISC-V device, it is recommended
+to use other installation methods.</p>
+</blockquote>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/10/24/ruyi-0.42#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Default telemetry mode is now changed to <code>local</code> -- collecting data but not automatically uploading.<!-- -->
+<ul>
+<li>Accordingly, when running <code>ruyi</code> for the first time in the terminal interface, <code>ruyi</code> will ask for your data collection preference and help you write it to the user configuration file.</li>
+</ul>
+</li>
+<li><code>ruyi extract</code> command default behavior changes and other improvements:<!-- -->
+<ul>
+<li><code>ruyi extract</code> now extracts the requested package content into a separate directory named after the package name and version. Previously, it would extract directly to the current working directory, which could clutter the user's directory if the user did not read the documentation in advance. If the previous behavior is still needed, the newly added <code>--extract-without-subdir</code> option can be passed.</li>
+<li><code>ruyi extract</code> now supports the <code>--dest-dir</code> or <code>-d</code> option to specify a directory other than the current working directory for extraction.</li>
+<li><code>ruyi extract</code> also adds the <code>--fetch-only</code> or <code>-f</code> option, consistent with the corresponding option in <code>ruyi install</code>.</li>
+</ul>
+</li>
+<li>Polished command-line user experience:<!-- -->
+<ul>
+<li>In supported terminals, <code>ruyi</code> will highlight important manual operations in bold red style.</li>
+<li>Before running <code>ruyi</code> for the first time, attempting command-line auto-completion will no longer incorrectly print prompt messages.</li>
+<li><code>ruyi install -f</code>, used to download packages without installing or extracting them, now supports downloading source-type packages.</li>
+<li>If a user downloads the single-binary distribution of <code>ruyi</code> but forgets to rename it to <code>ruyi</code>, <code>ruyi</code> will remind the user to do so at runtime.</li>
+</ul>
+</li>
+<li>Fixed some issues:<!-- -->
+<ul>
+<li>When the value of <code>repo.local</code> is an empty string or equal to the default value, it will no longer be judged as a custom software source local path.</li>
+<li>Fixed an issue where <code>ruyi update</code> needed to be run twice to reflect changes after changing <code>repo.remote</code> when automatically managing the software source remote branch.</li>
+<li><code>ruyi clean --all</code> will no longer leave package installation status records.</li>
+<li>User configuration files are no longer allowed to override configuration items that are not user-facing.</li>
+</ul>
+</li>
+<li>Updated documentation:<!-- -->
+<ul>
+<li>Documented the system global search path for the <code>ruyi</code> configuration file for reference by packagers, system administrators, etc. Thanks to <a href="https://github.com/bkmgit" target="_blank" rel="noopener noreferrer">@bkmgit</a> for the contribution!</li>
+</ul>
+</li>
+<li>Engineering iteration:<!-- -->
+<ul>
+<li><code>ruyi</code>'s dependency on <code>packaging</code> is no longer necessary and will be removed in version 0.43.0. Packagers are requested to update dependency declarations at that time.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/10/24/ruyi-0.42#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Entity database updates:<!-- -->
+<ul>
+<li>Profiles used by Ruyi virtual environments are now exposed via the <code>profile-v1</code> entity type, such as <code>profile-v1:generic</code>.</li>
+</ul>
+</li>
+<li>Engineering iteration:<!-- -->
+<ul>
+<li>Fixed some configuration issues with third-party software source mirror addresses. Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for the contribution!</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="pre-release-testing-and-known-issues">Pre-release testing and known issues<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/10/24/ruyi-0.42#pre-release-testing-and-known-issues" aria-label="Pre-release testing and known issues permalink" title="Pre-release testing and known issues permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>RuyiSDK 0.42.0 has passed our <a href="https://gitee.com/yunxiangluo/ruyisdk-test/blob/master/20251020/README.md" target="_blank" rel="noopener noreferrer">pre-release tests</a>.
+Testing was conducted against 0.42.0-alpha.20251013, 0.42.0-beta.20251015, and 0.42.0-beta.20251017, and 0.42.0 is planned to be released based on 0.42.0-beta.20251017.
+The following table lists the new unresolved defects in version 0.42.0-beta.20251017:</p>
+<table><thead><tr><th>Issue</th><th>Severity</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/116" target="_blank" rel="noopener noreferrer">A large number of old revyos images were deleted #116</a></td><td>Minor</td><td>Built-in self-healing; expected to be fixed before 0.43.0</td></tr></tbody></table>
+<p>Due to the deletion of a large number of historical images by RevyOS, there are inconsistencies between the RevyOS upstream, the operating system support matrix, and the Ruyi package manager software repository.
+The fix details have been confirmed and are scheduled to be implemented before version 0.43.0.</p>
+<p>You can also refer to the table below to track the progress of fixing historical legacy issues:</p>
+<table><thead><tr><th>Issue</th><th>Severity</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://github.com/ruyisdk/docs/issues/95" target="_blank" rel="noopener noreferrer">Usage notes regarding fastboot #95</a></td><td>Major</td><td>Filed <a href="https://github.com/ruyisdk/ruyisdk/issues/52" target="_blank" rel="noopener noreferrer">new issue</a> for tracking; planned fix in version 0.43.0</td></tr><tr><td><a href="https://github.com/ruyisdk/docs/issues/96" target="_blank" rel="noopener noreferrer">Usage notes regarding pip installation #96</a></td><td>Major</td><td>Has plans for overall renovation of documentation and concrete schedule</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/37" target="_blank" rel="noopener noreferrer">Some packages fail to download #37</a></td><td>Minor</td><td>Has follow-up comments; already under fix</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/101" target="_blank" rel="noopener noreferrer">BananaPi BPI-F3 eMMC storage variant did not refer to any combo #101</a></td><td>Minor</td><td>Built-in self-healing; see updates in issue comments</td></tr></tbody></table>
+<p>These legacy issues do not negatively impact the core functionality of the Ruyi package manager, but may affect user experience, so it is recommended to be aware of them before downloading and updating your Ruyi package manager version.
+Issues related to packages-index will mainly affect the <code>ruyi device provision</code> function. Please do not use the <code>BananaPi BPI-F3 (eMMC storage)</code> image for the <code>BananaPi BPI-F3</code> board and the <code>Armbian for Pine64 Star64</code> image for the <code>Pine64 Star64</code> board. Relevant defects can be resolved via <code>ruyi update</code> after they are fixed.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.41]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/09/30/ruyi-0.41</id>
+        <link href="https://ruyisdk.org/en/blog/2025/09/30/ruyi-0.41"/>
+        <updated>2025-09-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.41 is now released. The corresponding package manager version is also 0.41.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.41 is now released. The corresponding package manager version is also 0.41.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.41.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.41.0</a></li>
+<li><a href="https://pypi.org/project/ruyi/0.41.0/" target="_blank" rel="noopener noreferrer">https://pypi.org/project/ruyi/0.41.0/</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.41.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.41.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/09/30/ruyi-0.41#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>ruyi update</code> now prints informational messages before and after accessing the network.</li>
+<li>If running a <code>ruyi</code> command triggers repository synchronization, an informational message is printed.</li>
+<li><code>ruyi news</code> (when invoked without a subcommand) now informs you of unread news.</li>
+<li>On the first run of the one-file distribution of <code>ruyi</code> in bash or zsh, you will be prompted to configure shell completions.</li>
+<li>The RuyiSDK device provisioner now checks whether the target device file for the <code>dd</code> command is currently mounted, and will refuse mounted devices.</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Reintroduced Python project metadata compatible with Poetry 1.0.7 to facilitate distro packaging.</li>
+<li>Automated packaging for Debian, deepin, and Ubuntu is now performed for every <code>ruyi</code> tag to aid testing.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/09/30/ruyi-0.41#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>New packages:<!-- -->
+<ul>
+<li><code>source/jdk23u</code>: OpenJDK 23 source.</li>
+<li><code>source/llvm</code>: LLVM source.</li>
+<li><code>source/llvm-plct</code>: PLCT-maintained LLVM source with RVP extension support.</li>
+<li><code>source/opencv</code>: OpenCV source.</li>
+<li><code>source/qemu</code>: QEMU source.</li>
+<li><code>source/qemu-plct</code>: PLCT-maintained QEMU source with RVP extension support.</li>
+<li><code>source/v8</code>: V8 JavaScript engine.</li>
+</ul>
+</li>
+<li>Package updates:<!-- -->
+<ul>
+<li><code>toolchain/gnu-plct</code>: PLCT-maintained GNU toolchain, version 0.20250912.0.</li>
+<li><code>toolchain/llvm-plct</code>: PLCT-maintained LLVM toolchain, version 21.1.0.</li>
+<li><code>toolchain/llvm-upstream</code>: Upstream LLVM toolchain, version 21.1.1.</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li><code>board-image/freebsd-riscv64-mini-live</code>: removed unusable legacy versions and added updated ones.</li>
+<li><code>board-image/openbsd-riscv64-live</code>: removed unusable legacy versions and added updated ones.</li>
+<li><code>board-image/ubuntu-server-riscv64-sifive-unmatched</code>: removed unusable legacy versions and added updated ones.</li>
+<li>Added a new <code>manual</code> profile to the <code>ruyi</code> virtual environment. This profile does not configure any compiler flags on your behalf and is suitable when you need to control <code>-march</code>, <code>-mabi</code>, or <code>-mcpu</code> yourself.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Dropped support for <code>ruyi</code> 0.33.0 and earlier to reduce maintenance burden.</li>
+<li>Systematically configured mirror lists for third-party software sources.</li>
+</ul>
+</li>
+</ul>
+<p>Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for their contributions!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="pre-release-testing-and-known-issues">Pre-release testing and known issues<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/09/30/ruyi-0.41#pre-release-testing-and-known-issues" aria-label="Pre-release testing and known issues permalink" title="Pre-release testing and known issues permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>RuyiSDK 0.41.0 has passed our <a href="https://gitee.com/yunxiangluo/ruyisdk-test/blob/master/20250922/README.md" target="_blank" rel="noopener noreferrer">pre-release tests</a>.
+Testing was conducted against 0.41.0-beta.20250922 and 0.41.0-beta.20250926, and 0.41.0 is planned to be released based on 0.41.0-beta.20250926.
+The following defect present in 0.41.0-beta.20250922 was fixed in 0.41.0-beta.20250926:</p>
+<table><thead><tr><th>Issue</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://github.com/ruyisdk/ruyi/issues/352" target="_blank" rel="noopener noreferrer">[Feature Request] Provide information prompts when automatically running ruyi update #352</a></td><td>Fixed</td><td>Fixed in 0.41.0-beta.20250926</td></tr></tbody></table>
+<p>This version of RuyiSDK contains some known issues that do not negatively impact core functionality.
+Please be aware of the issues and double-check before you upgrade, to avoid potentially degraded user experience or loss.</p>
+<table><thead><tr><th>Issue</th><th>Severity</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://github.com/ruyisdk/docs/issues/95" target="_blank" rel="noopener noreferrer">Usage notes regarding fastboot #95</a></td><td>Major</td><td>Filed <a href="https://github.com/ruyisdk/ruyisdk/issues/52" target="_blank" rel="noopener noreferrer">new issue</a> for tracking; planned fix in version 0.42.0</td></tr><tr><td><a href="https://github.com/ruyisdk/docs/issues/96" target="_blank" rel="noopener noreferrer">Usage notes regarding pip installation #96</a></td><td>Major</td><td>Has plans for overall renovation of documentation and concrete schedule</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/37" target="_blank" rel="noopener noreferrer">Some packages fail to download #37</a></td><td>Minor</td><td>Has follow-up comments; already under fix</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/101" target="_blank" rel="noopener noreferrer">BananaPi BPI-F3 eMMC storage variant did not refer to any combo #101</a></td><td>Minor</td><td>Built-in self-healing; see updates in issue comments</td></tr></tbody></table>
+<p>Issues in the packages-index primarily affect the <code>ruyi device provision</code> workflow. For now, please avoid the <code>BananaPi BPI-F3 (eMMC storage)</code> image for the BananaPi BPI-F3 board and the <code>Armbian for Pine64 Star64</code> image for the Pine64 Star64 board. Fixes will be delivered via <code>ruyi update</code> when available.</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.40]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/09/11/ruyi-0.40</id>
+        <link href="https://ruyisdk.org/en/blog/2025/09/11/ruyi-0.40"/>
+        <updated>2025-09-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.40 is now released. The corresponding package manager version is also 0.40.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.40 is now released. The corresponding package manager version is also 0.40.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.40.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.40.0</a></li>
+<li><a href="https://pypi.org/project/ruyi/0.40.0/" target="_blank" rel="noopener noreferrer">https://pypi.org/project/ruyi/0.40.0/</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.40.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.40.0/</a></li>
+</ul>
+<p>We focused on QA process improvements for this release and have doubled up on our pre-release compatibility and documentation tests. The release was delayed by 2 days compared to our regular release cadence as a result.</p>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/09/11/ruyi-0.40#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Debian built by fishwaldo for Sipeed LicheeRV Nano: added versions 1.2.0 and 1.3.0.</li>
+<li>RevyOS for Milk-V Pioneer: updated version 0.20250901.0.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Fixed data structure of <code>board-image/debian-desktop-sdk-milkv-mars-cm-sd</code>, and added a CI check to ensure no regression of this kind.</li>
+</ul>
+</li>
+</ul>
+<p>Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for their contributions!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="pre-release-testing-and-known-issues">Pre-release testing and known issues<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/09/11/ruyi-0.40#pre-release-testing-and-known-issues" aria-label="Pre-release testing and known issues permalink" title="Pre-release testing and known issues permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>RuyiSDK 0.40 has passed <a href="https://gitee.com/yunxiangluo/ruyisdk-test/blob/master/20250903/README.md" target="_blank" rel="noopener noreferrer">our pre-release tests</a>.</p>
+<p>This version of RuyiSDK contains some known issues that does not negatively impact core functionality.
+Please be aware of the issues and double-check before you upgrade, to avoid potentially degraded user experience or loss.</p>
+<table><thead><tr><th>Issue</th><th>Severity</th><th>Notes</th></tr></thead><tbody><tr><td><a href="https://github.com/ruyisdk/docs/issues/93" target="_blank" rel="noopener noreferrer">Inconsistent format for code blocks #93</a></td><td>Fixed</td><td>See updates in issue comments</td></tr><tr><td><a href="https://github.com/ruyisdk/docs/issues/94" target="_blank" rel="noopener noreferrer">Casing of RuyiSDK in links #94</a></td><td>Fixed</td><td>See updates in issue comments</td></tr><tr><td><a href="https://github.com/ruyisdk/docs/issues/95" target="_blank" rel="noopener noreferrer">Usage notes regarding fastboot #95</a></td><td>Major</td><td>Filed <a href="https://github.com/ruyisdk/ruyisdk/issues/52" target="_blank" rel="noopener noreferrer">new issue</a> for tracking; planned fix in version 0.42.0</td></tr><tr><td><a href="https://github.com/ruyisdk/docs/issues/96" target="_blank" rel="noopener noreferrer">Usage notes regarding pip installation #96</a></td><td>Major</td><td>Has plans for overall renovation of documentation and concrete schedule</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/37" target="_blank" rel="noopener noreferrer">Some packages fail to download #37</a></td><td>Minor</td><td>Has follow-up comments; already under fix</td></tr><tr><td><a href="https://github.com/ruyisdk/packages-index/issues/101" target="_blank" rel="noopener noreferrer">BananaPi BPI-F3 eMMC storage variant did not refer to any combo #101</a></td><td>Minor</td><td>Has follow-up comments; OTA fix to be developed</td></tr></tbody></table>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.39]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/08/12/ruyi-0.39</id>
+        <link href="https://ruyisdk.org/en/blog/2025/08/12/ruyi-0.39"/>
+        <updated>2025-08-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.39 is now released. The corresponding package manager version is also 0.39.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.39 is now released. The corresponding package manager version is also 0.39.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.39.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.39.0</a></li>
+<li><a href="https://pypi.org/project/ruyi/0.39.0/" target="_blank" rel="noopener noreferrer">https://pypi.org/project/ruyi/0.39.0/</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.39.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.39.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/08/12/ruyi-0.39#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><code>ruyi</code> is now <a href="https://pypi.org/project/ruyi/" target="_blank" rel="noopener noreferrer">published on PyPI</a>. Now you can install the RuyiSDK package manager with <code>pip install ruyi</code> or a similar command, as long as you have a Python environment.</li>
+<li>If you provide your own local RuyiSDK software repository by overriding its local path, and the remote URL of that repo's current branch differs from the corresponding <code>ruyi</code> configuration, <code>ruyi update</code> will now exit with an error instead of overwriting your remote URL.</li>
+<li>Continued polishing of shell completions:<!-- -->
+<ul>
+<li>Optimized <code>ruyi</code> startup latency in normal (non-completion) mode.</li>
+<li>If the software repository has never been synchronized locally, <code>ruyi</code> no longer attempt to sync it during command-line completion.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>End-to-end integration tests now run for every PR to ensure typical CLI usage does not regress.</li>
+<li>Shell completion scripts are now included in the <code>ruyi</code> source distribution under <code>contrib/shell-completions</code>, making it easier for distro packagers to integrate.</li>
+<li>Preparing for Ubuntu 22.04 LTS packaging: the test suite now runs with pytest 6.2.5.</li>
+<li>When building <code>ruyi</code>'s one-file distribution, prebuilt <code>cffi</code> and <code>pygit2</code> are used for the RISC-V build to reduce build times.</li>
+<li>Simplified the <code>ruyi</code> release process: tagging and the release workflow are now automated.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/08/12/ruyi-0.39#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Package updates:<!-- -->
+<ul>
+<li><code>source/milkv-duo-examples</code>: Milk-V Duo example code, version 20241219.</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li>RevyOS U-Boot for Milk-V Meles (4/8/16G variants): caught up with upstream versions.</li>
+<li>RevyOS for Milk-V Pioneer and Milk-V Meles: added missing versions.</li>
+<li>Buildroot SDK for Sipeed LicheeRV Nano: caught up with upstream versions.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Formatted all package manifests and added a CI check to ensure new packages follow the unified coding style.</li>
+</ul>
+</li>
+</ul>
+<p>Thanks to <a href="https://github.com/Cyl18" target="_blank" rel="noopener noreferrer">@Cyl18</a> and <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for their contributions!</p>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.38]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/07/22/ruyi-0.38</id>
+        <link href="https://ruyisdk.org/en/blog/2025/07/22/ruyi-0.38"/>
+        <updated>2025-07-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.38 is now released. The corresponding package manager version is also 0.38.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.38 is now released. The corresponding package manager version is also 0.38.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.38.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.38.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.38.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.38.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/07/22/ruyi-0.38#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added <code>ruyi device flash</code> as an easier-to-remember alias for the RuyiSDK device provisioner. Thanks to <a href="https://ruyisdk.cn/u/Sequel" target="_blank" rel="noopener noreferrer">@Sequel</a> from the RuyiSDK community forum for the feedback!</li>
+<li>When <code>ruyi</code> needs to invoke an external command but cannot find it, it will now wait for you to install it and retry, if the current terminal is interactive. You can install the required command in another terminal, then return to the terminal where <code>ruyi</code> is running and press Enter to continue. You can also press Ctrl+C to exit. Thanks to <a href="https://ruyisdk.cn/u/Sequel" target="_blank" rel="noopener noreferrer">@Sequel</a> from the RuyiSDK community forum for the feedback!</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/07/22/ruyi-0.38#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Added historical versions of RevyOS for Sipeed LicheePi 4A. Thanks to <a href="https://github.com/Cyl18" target="_blank" rel="noopener noreferrer">@Cyl18</a> for the contribution!</li>
+<li>Added versions 1.1.2 and 1.1.4 of Arduino for Milk-V Duo. Thanks to <a href="https://github.com/Cyl18" target="_blank" rel="noopener noreferrer">@Cyl18</a> for the contribution!</li>
+</ul>
+</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.37]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/07/08/ruyi-0.37</id>
+        <link href="https://ruyisdk.org/en/blog/2025/07/08/ruyi-0.37"/>
+        <updated>2025-07-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.37 is now released. The corresponding package manager version is also 0.37.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.37 is now released. The corresponding package manager version is also 0.37.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.37.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.37.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.37.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.37.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/07/08/ruyi-0.37#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>
+<p>Added basic command-line completion support, initially for Bash and Zsh. Thanks to <a href="https://github.com/wychlw" target="_blank" rel="noopener noreferrer">@wychlw</a> for the contribution!</p>
+<p>To enable command-line completion for <code>ruyi</code>, source the completion script in your shell
+profile, e.g. <code>.bashrc</code> or <code>.zshrc</code>:</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">sh</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-sh" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span># For zsh users: replace "bash" with "zsh"
+</span></span><span>eval "$(ruyi --output-completion-script=bash)"
+</span><span></span></code></pre></div></div>
+<p>Currently, subcommands of <code>ruyi</code> and package name arguments for commands like <code>ruyi install</code> are supported.</p>
+</li>
+<li>
+<p><code>ruyi self clean</code> no longer crashes if the news read-state file does not exist. Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for <a href="https://github.com/ruyisdk/ruyi/issues/319" target="_blank" rel="noopener noreferrer">reporting</a> the bug!</p>
+</li>
+<li>
+<p>Python tracebacks are no longer shown to the user when fetching a remote Git repository fails.</p>
+</li>
+<li>
+<p>FTP passive mode is now only enabled for <code>curl</code> or <code>wget</code> when the download URL protocol is FTP. This fixes an issue where some RuyiSDK users were unable to download any files due to <a href="https://github.com/curl/curl/issues/17545" target="_blank" rel="noopener noreferrer">a bug in cURL 8.14.1</a>. Thanks to <a href="https://github.com/weilinfox" target="_blank" rel="noopener noreferrer">@weilinfox</a> for <a href="https://github.com/ruyisdk/ruyi/issues/316" target="_blank" rel="noopener noreferrer">reporting</a> the <code>ruyi</code> bug!</p>
+</li>
+<li>
+<p>Refactored the handling of bundled resources in <code>ruyi</code>, decoupling it from the virtual environment mechanism. This allows for bundling other non-venv-related resources in the future, such as command-line completion scripts, internationalization string files, etc. A CI check is also in place to ensure the compressed resources included in <code>ruyi</code> are always in sync with the original files.</p>
+</li>
+<li>
+<p>Added support status for OpenCloudOS 9.4, openEuler 24.03 LTS SP2, openEuler 25.03, and openKylin 2.0. The Python dependencies for <code>ruyi</code> are partially missing on these distributions, but the versions of other dependencies are sufficient. We expect to have full support for them by October 2025.</p>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/07/08/ruyi-0.37#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Entity database updates:<!-- -->
+<ul>
+<li>Added the SpacemiT X60 micro-architecture.</li>
+<li>Added the SpacemiT K1 processor model.</li>
+<li>Added device variants for BananaPi BPI-F3 with eMMC and SD storage.</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Updated the Buildroot SDK for Milk-V Duo (64 &amp; 256M RAM variants) and Duo S (SD storage variant). Thanks to <a href="https://github.com/Cyl18" target="_blank" rel="noopener noreferrer">@Cyl18</a> for the contribution!</li>
+<li>Added support for the SD storage variant of BananaPi BPI-F3, with Bianbu Desktop and Bianbu Minimal systems provided by SpacemiT. Thanks to <a href="https://github.com/wychlw" target="_blank" rel="noopener noreferrer">@wychlw</a> for the contribution!</li>
+</ul>
+</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.36]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/06/24/ruyi-0.36</id>
+        <link href="https://ruyisdk.org/en/blog/2025/06/24/ruyi-0.36"/>
+        <updated>2025-06-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.36 is now released. The corresponding package manager version is also 0.36.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.36 is now released. The corresponding package manager version is also 0.36.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.36.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.36.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.36.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.36.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/06/24/ruyi-0.36#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>After each <code>ruyi update</code>, you will now be informed of which installed packages have newer versions available. Since some projects may require precise toolchain versions, you can choose to update with <code>ruyi install</code> and recreate relevant virtual environments as needed.</li>
+<li>You can now uninstall installed packages using <code>ruyi uninstall</code>. Shorter aliases <code>ruyi remove</code> and <code>ruyi rm</code> are also available.</li>
+<li>The <code>ruyi list</code> output now shows whether each package's installation files are fully downloaded.</li>
+<li>When both machine-readable output (porcelain mode) and debug output (<code>RUYI_DEBUG=y</code>) are enabled, the initial log lines will no longer be output in wrong format.</li>
+<li>Startup performance of the <code>ruyi</code> tool has been improved, saving 200-300ms per run (depending on your machine). This paves the way for low-latency command-line completion in the future. A CI lint is also in place to ensure future code changes do not regress this optimization.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/06/24/ruyi-0.36#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Updated <code>toolchain/gnu-plct</code>: The GNU RISC-V toolchain maintained and built by PLCT, now including GNU binutils 2.45 (pre-release snapshot), GCC 15.1.0 and glibc 2.40.</li>
+<li>Updated RISC-V microarchitecture definitions in the entity database, adding:<!-- -->
+<ul>
+<li>Xiangshan Kunminghu</li>
+<li>Xuantie C908, C908V, C910V2, C920, C920V2</li>
+<li>MIPS P8700</li>
+<li>8-wide Tenstorrent Ascalon</li>
+</ul>
+</li>
+<li>Corrected the RISC-V ISA string of Xuantie C910 to the standard form accepted by upstream GCC.</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.35]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/06/10/ruyi-0.35</id>
+        <link href="https://ruyisdk.org/en/blog/2025/06/10/ruyi-0.35"/>
+        <updated>2025-06-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.35 is now released. The corresponding package manager version is also 0.35.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.35 is now released. The corresponding package manager version is also 0.35.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.35.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.35.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.35.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.35.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/06/10/ruyi-0.35#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Package installation status is now tracked. This information is also reflected in the <code>ruyi list</code> output, and filtering packages by installation status is also supported by passing the <code>--is-installed y/n</code> parameter to <code>ruyi list</code>.</li>
+<li><code>ruyi entity list</code> can now take one or more <code>-t</code> / <code>--entity-type</code> parameters to list entities of specific type(s).</li>
+<li><code>ruyi entity list</code> now supports porcelain mode output for machine-readable results.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/06/10/ruyi-0.35#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added historical versions for Milk-V Duo (128M &amp; 256M) board images.</li>
+<li>Fixed configuration for Milk-V Duo (128M &amp; 256M) board images version 2.0.0.</li>
+<li>Updated multiple RevyOS images for Milk-V Meles.</li>
+<li>Fixed configuration for RevyOS image version 1.20250123.0 for Milk-V Meles.</li>
+<li>Updated some documentation links.</li>
+<li>Cleaned up legacy configuration data for the RuyiSDK device provisioner that was deprecated in RuyiSDK 0.33.</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.34]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/05/27/ruyi-0.34</id>
+        <link href="https://ruyisdk.org/en/blog/2025/05/27/ruyi-0.34"/>
+        <updated>2025-05-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.34 is now released. The corresponding package manager version is also 0.34.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.34 is now released. The corresponding package manager version is also 0.34.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.34.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.34.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.34.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.34.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/05/27/ruyi-0.34#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Supported partial extraction of tarballs, to accommodate certain vendors' practice of bundling multiple software packages into a single distribution archive through their official channels.</li>
+<li>Target-tuple-independent commands, such as vendor-specific flashing tools can now be additionally provided in virtual environments with <code>ruyi venv --extra-commands-from</code>.</li>
+<li><code>ruyi admin format-manifest</code> now preserves header and footer comments.</li>
+<li>Telemetry feature updates:<!-- -->
+<ul>
+<li>When <code>ruyi</code> is invoked for the first time in a terminal, the user will now be asked once for a one-time immediate upload of installation information.</li>
+<li>Fixed an issue where telemetry events were not recorded in <code>ruyi</code>'s proxying mode.</li>
+<li>Added support for recording package installation actions at the software repository level, allowing first-party or third-party RuyiSDK repository maintainers to understand the usage of their software.</li>
+</ul>
+</li>
+<li>Refactored the entry point of the <code>ruyi</code> command-line tool and <code>ruyi</code>'s logging mechanism, eliminating most global variable usage to facilitate reuse of <code>ruyi</code> by other Python components in the RuyiSDK ecosystem in the future.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/05/27/ruyi-0.34#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The latest version of the RuyiSDK package manager is required for some packages
+updated in this release to be properly parsed and work. Therefore, we strongly
+recommend that you upgrade your <code>ruyi</code> to the latest version besides doing your
+routine <code>ruyi update</code>.</p>
+<p>Reminder: Support for legacy versions of the device provisioner is now
+deprecated. Please update your RuyiSDK package manager as soon as possible.
+This support will be removed in RuyiSDK 0.35 (the next version).</p>
+<ul>
+<li>Software repository format updates:<!-- -->
+<ul>
+<li>The ID of the official repository is explicitly defined as <code>ruyisdk</code>, for coexistence with future third-party repositories.</li>
+<li>Terminology update: Renamed "flavors" that refer to non-standard behaviors to "quirks".</li>
+<li>A new optional field <code>commands</code> is added to <code>binary</code> metadata to allow packages to declare executable commands they contain.</li>
+<li>A new optional field <code>prefixes_to_unpack</code> is added to <code>distfile</code> metadata to support partial extraction of tarballs.</li>
+</ul>
+</li>
+<li>Improved device support:<!-- -->
+<ul>
+<li><code>board-image/revyos-sipeed-lpi4a</code>: Updated the RevyOS image for Sipeed LicheePi 4A to 20250420 and fixed the 20250323 version.</li>
+<li>Swapped the names of the version 1.0.7 "Python" and non-"Python" images for Milk-V Duo series.</li>
+</ul>
+</li>
+<li>Added packages:<!-- -->
+<ul>
+<li><code>board-util/wlink</code>: Community-developed independent implementation of WCH-Link flashing and debugging tool.</li>
+<li><code>source/wch-ch32v103-evt</code>: WCH CH32V103 EVT official code example package.</li>
+<li><code>source/wch-ch32v20x-evt</code>: WCH CH32V20x EVT official code example package.</li>
+<li><code>source/wch-ch32v307-evt</code>: WCH CH32V30x &amp; CH32V317 EVT official code example package.</li>
+<li><code>toolchain/gnu-wch-mrs-toolchain-gcc12-bin</code>: The GCC 12.x toolchain in the official 2.1.0 version of WCH MounRiver Studio (MRS) toolchain. The package is x86_64-only.</li>
+<li><code>toolchain/gnu-wch-mrs-toolchain-gcc8-bin</code>: The GCC 8.x toolchain in the official 2.1.0 version of WCH MounRiver Studio (MRS) toolchain. The package is x86_64-only.</li>
+</ul>
+</li>
+<li>Updated packages:<!-- -->
+<ul>
+<li><code>toolchain/gnu-plct-xthead</code>: Version 3.0.1 of the Xuantie (formerly T-Head) toolchain built by PLCT using official Xuantie sources, with GCC 14.1.1.</li>
+</ul>
+</li>
+<li>Entity database updates:<!-- -->
+<ul>
+<li>Added entity definitions for WCH micro-architectures and CPUs.</li>
+<li>Fixed CPU information for WCH boards.</li>
+</ul>
+</li>
+<li>Plugin system updates:<!-- -->
+<ul>
+<li>Added initial support for RISC-V 32-bit profiles.</li>
+</ul>
+</li>
+<li>Fixed formatting errors in some package declarations.</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.33]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/05/13/ruyi-0.33</id>
+        <link href="https://ruyisdk.org/en/blog/2025/05/13/ruyi-0.33"/>
+        <updated>2025-05-13T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.33 is now released. The corresponding package manager version is also 0.33.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.33 is now released. The corresponding package manager version is also 0.33.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.33.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.33.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.33.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.33.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/05/13/ruyi-0.33#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Migrated the device provisioner's data source to the entity database, to reduce maintenance costs and avoid potential merge conflicts in case of frequent updates.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/05/13/ruyi-0.33#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Added support for the 16GB RAM model of Milk-V Meles, with RevyOS.</li>
+</ul>
+</li>
+<li>Entity database updates:<!-- -->
+<ul>
+<li>Device entity definition update: device model variants have now been split into a separate entity type <code>device-variant</code>.</li>
+<li>Added a new "applicable system for device" informational entity <code>image-combo</code>.</li>
+</ul>
+</li>
+<li>Support for legacy versions of the device provisioner is now deprecated. Please update your RuyiSDK package manager as soon as possible. The support will be removed in RuyiSDK 0.35.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="server-side-components">Server-side Components<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/05/13/ruyi-0.33#server-side-components" aria-label="Server-side Components permalink" title="Server-side Components permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added an API for reading news items from the official software repository.</li>
+<li>Added an API for querying RuyiSDK release notes by version tag.</li>
+<li>Extended download statistics coverage to all subdirectories under the current directory structure of the official software repository.</li>
+<li>Improved the build process of service containers.</li>
+</ul>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.32]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32</id>
+        <link href="https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32"/>
+        <updated>2025-04-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.32 is now released. The corresponding package manager version is also 0.32.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.32 is now released. The corresponding package manager version is also 0.32.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.32.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.32.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.32.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-project-management">RuyiSDK Project Management<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32#ruyisdk-project-management" aria-label="RuyiSDK Project Management permalink" title="RuyiSDK Project Management permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>For compliance, all pull requests to RuyiSDK now require a DCO (Developer Certificate of Origin).</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added contribution guidelines to make it easier for community members to contribute to the project.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Improved device support:<!-- -->
+<ul>
+<li>Added special flashing strategy support for SpacemiT K1 devices.</li>
+<li>Fixed an issue where the device provisioner failed to call <code>fastboot</code>.</li>
+<li>Updated the Buildroot SDK image for Sipeed LicheeRV Nano.</li>
+<li>Updated the RevyOS image version for Sipeed LicheePi 4A and fixed issues.</li>
+<li>Updated the RevyOS image for Milk-V Meles.</li>
+</ul>
+</li>
+<li>Renamed package <code>board-image/revyos-sg2042-milkv-pioneer</code> to <code>board-image/revyos-milkv-pioneer</code> to comply with current package naming conventions.</li>
+<li>Entity database updates:<!-- -->
+<ul>
+<li>Device entity definitions are now on par with the device provisioner's support range. Added device definitions for vendors including Milk-V, Sipeed, Canaan, StarFive, WCH, etc.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="server-side-components">Server-side Components<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/04/22/ruyi-0.32#server-side-components" aria-label="Server-side Components permalink" title="Server-side Components permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Optimized ruyisdk.org's statistics page for performance.</li>
+<li>Integrated download counts from GitHub Releases channel into the RuyiSDK package manager download statistics on the official website, making the statistical data more accurate and comprehensive.</li>
+<li>Migrated the mirror synchronization script which resided in the RuyiSDK package manager repository and required manual set-up to server-side.</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.31]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/04/08/ruyi-0.31</id>
+        <link href="https://ruyisdk.org/en/blog/2025/04/08/ruyi-0.31"/>
+        <updated>2025-04-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.31 is now released. The corresponding package manager version is also 0.31.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.31 is now released. The corresponding package manager version is also 0.31.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.31.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.31.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.31.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.31.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/04/08/ruyi-0.31#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>The RuyiSDK device installer now allows you to select a non-default (latest) version when multiple versions of a requested software package are available. This feature can be helpful if your development board requires an older system version.</li>
+<li>Added an experimental mode flag: the environment variable <code>RUYI_EXPERIMENTAL</code>, for enabling experimental features for which we do not yet guarantee compatibility.</li>
+<li>Added experimental feature: Entity Database.<!-- -->
+<ul>
+<li>This feature helps RuyiSDK provide useful information related to your devices. For example, you can now use <code>ruyi list --related-to-entity device:sipeed-lpi4a</code> to query various software packages applicable to the Sipeed LicheePi 4A.</li>
+<li>Initial support includes four entity types: CPU microarchitecture (such as Xiangshan Nanhu, Xuantie C910, etc.), CPU models (such as Xiangshan Nanhu, Xuantie TH1520, etc.), device models (such as Sipeed LicheePi 4A, etc.), and software packages.</li>
+<li>These features are in preview, and incompatible changes may be made in the future to adapt to requirements, so they are only available when experimental mode is enabled. If you have use cases, please keep your <code>ruyi</code> and software repository up to date.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>To avoid releases being affected by temporary outages of physical CI resources, the RISC-V build tasks have also been temporarily migrated to free public runners provided by GitHub Actions.</li>
+<li>Upgraded the Python version used to build the one-file <code>ruyi</code> distribution to 3.13.2.</li>
+</ul>
+</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.30]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/03/25/ruyi-0.30</id>
+        <link href="https://ruyisdk.org/en/blog/2025/03/25/ruyi-0.30"/>
+        <updated>2025-03-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.30 is now released. The corresponding package manager version is also 0.30.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.30 is now released. The corresponding package manager version is also 0.30.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.30.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.30.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.30.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.30.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/03/25/ruyi-0.30#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Fixed an issue where <code>ruyi list --category-contains</code> was not working.</li>
+<li>Fixed an issue where performing <code>ruyi install</code> immediately after a fresh installation of <code>ruyi</code> would cause a crash.</li>
+<li>Repository format updates:<!-- -->
+<ul>
+<li>Added an experimental structured device model description database based on the current device installer configuration data, with initial support for describing the CPU and microarchitecture capabilities of each device model.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Migrated AArch64 build tasks to free public runners provided by GitHub Actions, to reduce maintenance costs for the RuyiSDK team.</li>
+<li>Fixed the CI open source license check task.</li>
+</ul>
+</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.29]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/03/11/ruyi-0.29</id>
+        <link href="https://ruyisdk.org/en/blog/2025/03/11/ruyi-0.29"/>
+        <updated>2025-03-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.29 is now released. The corresponding package manager version is also 0.29.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.29 is now released. The corresponding package manager version is also 0.29.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.29.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.29.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.29.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.29.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/03/11/ruyi-0.29#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Fixed the porcelain mode support for the <code>ruyi news list</code> command.</li>
+<li>Added porcelain mode support for the <code>ruyi news read</code> command, with the return format matching that of <code>ruyi news list</code>.</li>
+<li>Repository format updates:<!-- -->
+<ul>
+<li>No longer supports global configurations and package descriptions in JSON format. The official RuyiSDK repository has been migrated since version 0.18 and is not expected to be affected by this change. If you have not yet upgraded your <code>ruyi</code> version, it is recommended that you reinstall <code>ruyi</code> and recreate your virtual environments (if any).</li>
+<li>An optional <code>upstream_version</code> field is allowed in package manifests, which is used to record the corresponding upstream version for that version. Since the RuyiSDK repository uses semantic versioning, some form of mapping is often required for upstream versioning schemes that do not conform to semantic versioning; this field helps tools in the RuyiSDK ecosystem understand such mapping relationships.</li>
+<li>Made backward-compatible provisions for future support of package-level shared metadata.</li>
+</ul>
+</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.28]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/02/25/ruyi-0.28</id>
+        <link href="https://ruyisdk.org/en/blog/2025/02/25/ruyi-0.28"/>
+        <updated>2025-02-25T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.28 is now released. The corresponding package manager version is also 0.28.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.28 is now released. The corresponding package manager version is also 0.28.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.28.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.28.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.28.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.28.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/02/25/ruyi-0.28#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>When running commands that do not rely on repository data, the repository will no longer be pulled if it is not yet locally present.</li>
+<li><code>ruyi list</code> now supports basic filtering queries: use <code>--category-is</code> to query packages under a specific category, and use <code>--name-contains</code> to query packages whose names contain specific text.</li>
+<li><code>ruyi list</code> without any parameters is no longer supported due to the ever-increasing number of packages. If you have scripts that rely on the previous behavior, please modify them according to the prompts.</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/02/25/ruyi-0.28#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added the following packages:<!-- -->
+<ul>
+<li><code>source/wiringx</code>: Official source code for the wiringX project. wiringX is a modular GPIO support component.</li>
+</ul>
+</li>
+<li>Updated the following packages:<!-- -->
+<ul>
+<li><code>board-image/bianbu-bpi-f3</code></li>
+<li><code>board-image/revyos-milkv-meles</code></li>
+<li><code>board-image/revyos-sg2042-milkv-pioneer</code></li>
+</ul>
+</li>
+<li>Fixed the file type marker for the <code>boot</code> partition of <code>board-image/revyos-milkv-meles</code>.</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.27]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/02/11/ruyi-0.27</id>
+        <link href="https://ruyisdk.org/en/blog/2025/02/11/ruyi-0.27"/>
+        <updated>2025-02-11T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.27 is now released. The corresponding package manager version is also 0.27.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.27 is now released. The corresponding package manager version is also 0.27.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.27.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.27.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.27.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.27.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/02/11/ruyi-0.27#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added the <code>ruyi telemetry upload</code> command. If you are okay with sharing with us your usage data, now in non-persistent environments such as CI builds, you can ensure with the command that telemetry data is uploaded before the task ends and the environment is cleaned up.</li>
+<li>Added support for specifying service levels for software package versions. If a particular version of a software package has known issues, <code>ruyi</code> will display a prompt when installing or extracting that version. This information can be maintained by packagers in the software source. In the future, filtering packages by service level will also be supported: it will be possible to skip versions with known issues, or only use verified versions, etc.</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Added support for pygit2 1.17.0. The one-file distribution of <code>ruyi</code> has been switched to this version.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/02/11/ruyi-0.27#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Updated the following packages:<!-- -->
+<ul>
+<li><code>board-image/buildroot-sdk-milkv-duo</code></li>
+<li><code>board-image/buildroot-sdk-milkv-duo256m</code></li>
+<li><code>board-image/buildroot-sdk-milkv-duos-sd</code></li>
+<li><code>board-image/uboot-revyos-sipeed-lpi4a-16g</code></li>
+<li><code>board-image/uboot-revyos-sipeed-lpi4a-8g</code></li>
+</ul>
+</li>
+<li>Fixed issues with some packages being unable to download normally after receiving automated version upgrades.</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.26]]></title>
+        <id>https://ruyisdk.org/en/blog/2025/01/14/ruyi-0.26</id>
+        <link href="https://ruyisdk.org/en/blog/2025/01/14/ruyi-0.26"/>
+        <updated>2025-01-14T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.26 is now released. The corresponding package manager version is also 0.26.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.26 is now released. The corresponding package manager version is also 0.26.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.26.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.26.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.26.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/01/14/ruyi-0.26#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added a <code>--verbose</code> (<code>-v</code>) option to <code>ruyi telemetry status</code>, allowing users to continue viewing their telemetry data upload plans after running <code>ruyi telemetry consent</code>.</li>
+<li>Fixed an issue where the toolchain <code>-mcpu</code> value might not be correctly mapped when creating a virtual environment using a vendor toolchain. If you are affected, please recreate your virtual environment after running <code>ruyi update</code>.</li>
+<li>Continued work on platform compatibility guarantees:<!-- -->
+<ul>
+<li>Added a platform compatibility technical document that clarifies the baseline versions of third-party dependencies currently supported by <code>ruyi</code>.</li>
+<li>Ensured via CI that all changes to <code>ruyi</code> do not affect <code>ruyi</code> passing the test suite on Ubuntu 22.04.</li>
+</ul>
+</li>
+<li>Engineering changes:<!-- -->
+<ul>
+<li>Fixed an issue where a layer of subdirectory structure was missing in the source package.</li>
+<li>Updated Poetry to version 2.0, along with updating the Python project metadata (<code>pyproject.toml</code>) for <code>ruyi</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-software-repository">RuyiSDK Software Repository<a class="hash-link" href="https://ruyisdk.org/en/blog/2025/01/14/ruyi-0.26#ruyisdk-software-repository" aria-label="RuyiSDK Software Repository permalink" title="RuyiSDK Software Repository permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Updated <code>board-image/revyos-sipeed-lpi4a</code>.</li>
+<li>Supported the new profile API to work with <code>ruyi</code> 0.26.0 changes, ensuring correct <code>-mcpu</code> configuration for virtual environments.</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Release notes for RuyiSDK 0.25]]></title>
+        <id>https://ruyisdk.org/en/blog/2024/12/31/ruyi-0.25</id>
+        <link href="https://ruyisdk.org/en/blog/2024/12/31/ruyi-0.25"/>
+        <updated>2024-12-31T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[RuyiSDK 0.25 is now released. The corresponding package manager version is also 0.25.0.]]></summary>
+        <content type="html"><![CDATA[<p>RuyiSDK 0.25 is now released. The corresponding package manager version is also 0.25.0.
+You can download the RuyiSDK package manager from one of the following locations:</p>
+<ul>
+<li><a href="https://github.com/ruyisdk/ruyi/releases/tag/0.25.0" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyi/releases/tag/0.25.0</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/0.25.0/</a></li>
+</ul>
+<p>This update mainly consists of the following changes. Happy hacking!</p>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ruyisdk-package-manager">RuyiSDK Package Manager<a class="hash-link" href="https://ruyisdk.org/en/blog/2024/12/31/ruyi-0.25#ruyisdk-package-manager" aria-label="RuyiSDK Package Manager permalink" title="RuyiSDK Package Manager permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>Added the <code>ruyi config</code> subcommand, making it easier for users to query and modify RuyiSDK package manager configurations via command line or script. This command's usage was inspired by <code>git config</code>, see <code>ruyi config --help</code> output for details.</li>
+<li>Added the <code>ruyi telemetry</code> subcommand, making it easier for users to query and change telemetry preferences via command line or script. See <code>ruyi telemetry --help</code> output for details.<!-- -->
+<ul>
+<li>Specifically: Before expressing your telemetry preferences, you will receive a reminder every time you run <code>ruyi</code>. You can now turn off telemetry data collection with <code>ruyi telemetry off</code> or explicitly accept telemetry data collection and upload with <code>ruyi telemetry consent</code>.</li>
+</ul>
+</li>
+<li>Fixed an issue with Debian package extraction when used with arpy 1.x.</li>
+<li>Added two specification documents: RuyiSDK official software source package version specification, and RuyiSDK board model and system image naming specification. You can read these in the <code>docs/</code> directory of the RuyiSDK package manager repository.</li>
+</ul>]]></content>
+        <author>
+            <name>xen0n</name>
+            <uri>https://github.com/xen0n</uri>
+        </author>
+    </entry>
+</feed>

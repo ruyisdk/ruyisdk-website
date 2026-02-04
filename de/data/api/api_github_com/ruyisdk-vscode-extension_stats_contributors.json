@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "pzhlkj6612",
+        "id": 29089388,
+        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
+        "html_url": "https://github.com/pzhlkj6612"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "MalachiteN",
+        "id": 53076703,
+        "avatar_url": "https://avatars.githubusercontent.com/u/53076703?v=4",
+        "html_url": "https://github.com/MalachiteN"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "lazyparser",
+        "id": 1802104,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1802104?v=4",
+        "html_url": "https://github.com/lazyparser"
+      }
+    },
+    {
+      "total": 3,
+      "author": {
+        "login": "Master-Hash",
+        "id": 56669192,
+        "avatar_url": "https://avatars.githubusercontent.com/u/56669192?v=4",
+        "html_url": "https://github.com/Master-Hash"
+      }
+    },
+    {
+      "total": 3,
+      "author": {
+        "login": "Daqiush",
+        "id": 153296776,
+        "avatar_url": "https://avatars.githubusercontent.com/u/153296776?v=4",
+        "html_url": "https://github.com/Daqiush"
+      }
+    },
+    {
+      "total": 7,
+      "author": {
+        "login": "ddsfda99",
+        "id": 168000702,
+        "avatar_url": "https://avatars.githubusercontent.com/u/168000702?v=4",
+        "html_url": "https://github.com/ddsfda99"
+      }
+    },
+    {
+      "total": 8,
+      "author": {
+        "login": "Platohykj",
+        "id": 147904598,
+        "avatar_url": "https://avatars.githubusercontent.com/u/147904598?v=4",
+        "html_url": "https://github.com/Platohykj"
+      }
+    },
+    {
+      "total": 12,
+      "author": {
+        "login": "Rhapsodier",
+        "id": 200599239,
+        "avatar_url": "https://avatars.githubusercontent.com/u/200599239?v=4",
+        "html_url": "https://github.com/Rhapsodier"
+      }
+    },
+    {
+      "total": 15,
+      "author": {
+        "login": "iexplore123",
+        "id": 51986002,
+        "avatar_url": "https://avatars.githubusercontent.com/u/51986002?v=4",
+        "html_url": "https://github.com/iexplore123"
+      }
+    },
+    {
+      "total": 48,
+      "author": {
+        "login": "U2FsdGVkX1",
+        "id": 11484206,
+        "avatar_url": "https://avatars.githubusercontent.com/u/11484206?v=4",
+        "html_url": "https://github.com/U2FsdGVkX1"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T13:55:23.786Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
+  }
+}

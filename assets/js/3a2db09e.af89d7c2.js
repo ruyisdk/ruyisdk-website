@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkruyisdk=globalThis.webpackChunkruyisdk||[]).push([[8121],{68070(s){s.exports=JSON.parse('{"tags":[{"label":"K230D","permalink":"/blog/tags/k230d","description":"\u5609\u6960\u52d8\u667aK230D:\xa0\u9996\u6b3e\u57fa\u4e8e\u65b032\u4f4d\xa0RuyiSDK\xa0\u7684AIoT\u91cf\u4ea7\u82af\u7247","count":1}]}')}}]);

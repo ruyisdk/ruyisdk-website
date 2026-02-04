@@ -1,0 +1,170 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "Z572",
+        "id": 37945516,
+        "avatar_url": "https://avatars.githubusercontent.com/u/37945516?v=4",
+        "html_url": "https://github.com/Z572"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "felixonmars",
+        "id": 1006477,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1006477?v=4",
+        "html_url": "https://github.com/felixonmars"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "mengzhuo",
+        "id": 885662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
+        "html_url": "https://github.com/mengzhuo"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "a1gorhythm7",
+        "id": 198067605,
+        "avatar_url": "https://avatars.githubusercontent.com/u/198067605?v=4",
+        "html_url": "https://github.com/a1gorhythm7"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "LoneBlade-zhang",
+        "id": 207433538,
+        "avatar_url": "https://avatars.githubusercontent.com/u/207433538?v=4",
+        "html_url": "https://github.com/LoneBlade-zhang"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "ChunyuLiao",
+        "id": 26795311,
+        "avatar_url": "https://avatars.githubusercontent.com/u/26795311?v=4",
+        "html_url": "https://github.com/ChunyuLiao"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "iexplore123",
+        "id": 51986002,
+        "avatar_url": "https://avatars.githubusercontent.com/u/51986002?v=4",
+        "html_url": "https://github.com/iexplore123"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "jason-hue",
+        "id": 64242055,
+        "avatar_url": "https://avatars.githubusercontent.com/u/64242055?v=4",
+        "html_url": "https://github.com/jason-hue"
+      }
+    },
+    {
+      "total": 3,
+      "author": {
+        "login": "Cyl18",
+        "id": 14993992,
+        "avatar_url": "https://avatars.githubusercontent.com/u/14993992?v=4",
+        "html_url": "https://github.com/Cyl18"
+      }
+    },
+    {
+      "total": 4,
+      "author": {
+        "login": "pzhlkj6612",
+        "id": 29089388,
+        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
+        "html_url": "https://github.com/pzhlkj6612"
+      }
+    },
+    {
+      "total": 5,
+      "author": {
+        "login": "pz9115",
+        "id": 43362020,
+        "avatar_url": "https://avatars.githubusercontent.com/u/43362020?v=4",
+        "html_url": "https://github.com/pz9115"
+      }
+    },
+    {
+      "total": 5,
+      "author": {
+        "login": "trdthg",
+        "id": 69898423,
+        "avatar_url": "https://avatars.githubusercontent.com/u/69898423?v=4",
+        "html_url": "https://github.com/trdthg"
+      }
+    },
+    {
+      "total": 6,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
+      }
+    },
+    {
+      "total": 6,
+      "author": {
+        "login": "mollybuild",
+        "id": 26591790,
+        "avatar_url": "https://avatars.githubusercontent.com/u/26591790?v=4",
+        "html_url": "https://github.com/mollybuild"
+      }
+    },
+    {
+      "total": 7,
+      "author": {
+        "login": "Sebastianhayashi",
+        "id": 172239551,
+        "avatar_url": "https://avatars.githubusercontent.com/u/172239551?v=4",
+        "html_url": "https://github.com/Sebastianhayashi"
+      }
+    },
+    {
+      "total": 8,
+      "author": {
+        "login": "helloworldxing",
+        "id": 138308906,
+        "avatar_url": "https://avatars.githubusercontent.com/u/138308906?v=4",
+        "html_url": "https://github.com/helloworldxing"
+      }
+    },
+    {
+      "total": 35,
+      "author": {
+        "login": "xijing21",
+        "id": 84754181,
+        "avatar_url": "https://avatars.githubusercontent.com/u/84754181?v=4",
+        "html_url": "https://github.com/xijing21"
+      }
+    },
+    {
+      "total": 50,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:54.330Z",
+    "source": "https://api.github.com/repos/ruyisdk/docs/stats/contributors"
+  }
+}

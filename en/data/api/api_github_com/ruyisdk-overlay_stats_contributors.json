@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "total": 71,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:52.633Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyisdk-overlay/stats/contributors"
+  }
+}

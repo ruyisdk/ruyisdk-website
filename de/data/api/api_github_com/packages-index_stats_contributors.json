@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "pzhlkj6612",
+        "id": 29089388,
+        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
+        "html_url": "https://github.com/pzhlkj6612"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "U2FsdGVkX1",
+        "id": 11484206,
+        "avatar_url": "https://avatars.githubusercontent.com/u/11484206?v=4",
+        "html_url": "https://github.com/U2FsdGVkX1"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "lanthora",
+        "id": 20885085,
+        "avatar_url": "https://avatars.githubusercontent.com/u/20885085?v=4",
+        "html_url": "https://github.com/lanthora"
+      }
+    },
+    {
+      "total": 7,
+      "author": {
+        "login": "Cyl18",
+        "id": 14993992,
+        "avatar_url": "https://avatars.githubusercontent.com/u/14993992?v=4",
+        "html_url": "https://github.com/Cyl18"
+      }
+    },
+    {
+      "total": 16,
+      "author": {
+        "login": "wychlw",
+        "id": 54484233,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54484233?v=4",
+        "html_url": "https://github.com/wychlw"
+      }
+    },
+    {
+      "total": 74,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
+      }
+    },
+    {
+      "total": 320,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T13:55:16.797Z",
+    "source": "https://api.github.com/repos/ruyisdk/packages-index/stats/contributors"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "Glavo",
+        "id": 20694662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/20694662?v=4",
+        "html_url": "https://github.com/Glavo"
+      }
+    },
+    {
+      "total": 3,
+      "author": {
+        "login": "helloworldxing",
+        "id": 138308906,
+        "avatar_url": "https://avatars.githubusercontent.com/u/138308906?v=4",
+        "html_url": "https://github.com/helloworldxing"
+      }
+    },
+    {
+      "total": 9,
+      "author": {
+        "login": "exceed-zk",
+        "id": 192414661,
+        "avatar_url": "https://avatars.githubusercontent.com/u/192414661?v=4",
+        "html_url": "https://github.com/exceed-zk"
+      }
+    },
+    {
+      "total": 13,
+      "author": {
+        "login": "NanamiKite",
+        "id": 43716472,
+        "avatar_url": "https://avatars.githubusercontent.com/u/43716472?v=4",
+        "html_url": "https://github.com/NanamiKite"
+      }
+    },
+    {
+      "total": 15,
+      "author": {
+        "login": "xijing21",
+        "id": 84754181,
+        "avatar_url": "https://avatars.githubusercontent.com/u/84754181?v=4",
+        "html_url": "https://github.com/xijing21"
+      }
+    },
+    {
+      "total": 47,
+      "author": {
+        "login": "pzhlkj6612",
+        "id": 29089388,
+        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
+        "html_url": "https://github.com/pzhlkj6612"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:55.969Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyisdk-eclipse-plugins/stats/contributors"
+  }
+}

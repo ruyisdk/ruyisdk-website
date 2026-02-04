@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-IDE/cases/milkv-duo-ide" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.4.0">
+<title data-rh="true">Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试 | RuyiSDK</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://ruyisdk.org/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://ruyisdk.org/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://ruyisdk.org/docs/IDE/cases/milkv-duo-ide"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" property="og:locale:alternate" content="de"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试 | RuyiSDK"><meta data-rh="true" name="description" content="编译环境搭建"><meta data-rh="true" property="og:description" content="编译环境搭建"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruyisdk.org/docs/IDE/cases/milkv-duo-ide"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/docs/IDE/cases/milkv-duo-ide" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/en/docs/IDE/cases/milkv-duo-ide" hreflang="en"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/de/docs/IDE/cases/milkv-duo-ide" hreflang="de"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/docs/IDE/cases/milkv-duo-ide" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="RuyiSDK RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="RuyiSDK Atom Feed">
+
+
+
+
+
+
+<link rel="alternate" type="application/rss+xml" href="/biweekly/rss.xml" title="RuyiSDK RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/biweekly/atom.xml" title="RuyiSDK Atom Feed">
+<script src="/js/toc-smooth-scroll.js" async></script>
+<script src="/js/menu-title-click.js"></script><link rel="stylesheet" href="/assets/css/styles.77b6ae10.css">
+<script src="/assets/js/runtime~main.f072c518.js" defer="defer"></script>
+<script src="/assets/js/main.1245a571.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_FB60" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="navbar navbar--fixed-top navbar--primary"><div class="navbar__inner"><div class="navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/ruyi-logo-720.svg" alt="RuyiSDK Logo" class="themedComponent_yc2b themedComponent--light_oZU5"><img src="/img/ruyi-logo-720.svg" alt="RuyiSDK Logo" class="themedComponent_yc2b themedComponent--dark_Kz2s"></div><b class="navbar__title text--truncate">RuyiSDK</b></a><a class="navbar__item navbar__link" href="/blog">博客</a><a class="navbar__item navbar__link" href="/biweekly">双周报</a><a class="navbar__item navbar__link" href="/download">下载</a><div class="navbar__item dropdown dropdown--hoverable"><a aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link" href="/docs/IDE/cases/milkv-duo-ide">社区</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/contributors">贡献者</a></li><li><a class="dropdown__link" href="/code_of_conduct">社区守则</a></li></ul></div><a class="navbar__item navbar__link" href="/about">关于</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link" href="/docs/IDE/cases/milkv-duo-ide"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_cY1Z"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>简体中文</a><ul class="dropdown__menu"><li><a href="/docs/IDE/cases/milkv-duo-ide" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="zh-Hans">简体中文</a></li><li><a href="/en/docs/IDE/cases/milkv-duo-ide" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="en">English</a></li><li><a href="/de/docs/IDE/cases/milkv-duo-ide" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="de">Deutsch</a></li></ul></div><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">文档</a><a href="https://github.com/ruyisdk" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="navbarSearchContainer_OGtK"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_eExm"><div class="docsWrapper_uDrV"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_tZ8p" type="button"></button><div class="docRoot_TZex"><aside class="theme-doc-sidebar-container docSidebarContainer_FSAa"><div class="sidebarViewport_R27k"><div class="sidebar_Lfur"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_sxaJ"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Hello Ruyi</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/ruyi-包管理器">Ruyi 包管理器</a><button aria-label="展开侧边栏分类 &#x27;Ruyi 包管理器&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/docs/category/ruyisdk-ide">RuyiSDK IDE</a><button aria-label="折叠侧边栏分类 &#x27;RuyiSDK IDE&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/IDE/">概览</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" tabindex="0" href="/docs/category/ide-使用案例">IDE 使用案例</a><button aria-label="折叠侧边栏分类 &#x27;IDE 使用案例&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/IDE/cases/milkv-duo-ide">Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/IDE/cases/sipeed-lpi4a-ide-hello-world">Sipeed Lichee Pi 4A: 在 RuyiSDK IDE 中构建 Hello World 项目</a></li></ul></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/ruyisdk-vscode-插件">RuyiSDK VSCode 插件</a><button aria-label="展开侧边栏分类 &#x27;RuyiSDK VSCode 插件&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/其他说明">其他说明</a><button aria-label="展开侧边栏分类 &#x27;其他说明&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/k230d">K230D</a><button aria-label="展开侧边栏分类 &#x27;K230D&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/docs/category/法律信息">法律信息</a><button aria-label="展开侧边栏分类 &#x27;法律信息&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_wU0b"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_dhZi"><div class="docItemContainer_Nqf9"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Y69c" aria-label="页面路径"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_glXv"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/ruyisdk-ide"><span itemprop="name">RuyiSDK IDE</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/ide-使用案例"><span itemprop="name">IDE 使用案例</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_dmoQ theme-doc-toc-mobile tocMobile_EJEp"><button type="button" class="clean-btn tocCollapsibleButton_Laby">本页总览</button></div><div class="theme-doc-markdown markdown"><h1>Milkv Duo ：使用 riscv64-unknown-linux-musl-bin 工具链编译、运行、调试</h1>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="编译环境搭建">编译环境搭建<a class="hash-link" href="#编译环境搭建" aria-label="编译环境搭建 permalink" title="编译环境搭建 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ol>
+<li>
+<p>安装 RuyiSDK 包管理器 <a href="/docs/Package-Manager/installation">参考</a></p>
+</li>
+<li>
+<p>安装编译工具链，本文以 <code>gnu-milkv-milkv-duo-musl</code> 编译器举例（您可以根据需要修改工具链及版本）：</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:slategray"># 查看软件源的资源</span><span>
+</span></span><span>$ ruyi list --name-contains milkv --category-is toolchain
+</span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 安装指定的工具链</span><span>
+</span></span><span><span>$ ruyi </span><span class="token" style="color:#DD4A68">install</span><span> gnu-milkv-milkv-duo-musl-bin
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 从返回信息中可以查看安装的路径，如 ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7</span><span>
+</span></span><span></span></code></pre></div></div>
+</li>
+<li>
+<p>创建和使用Duo编译环境</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:slategray"># 查看ruyi预配置环境</span><span>
+</span></span><span>$ ruyi list profiles
+</span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 创建一个虚拟环境：工具链为gnu-milkv-milkv-duo-musl-bin</span><span>
+</span></span><span>$ ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo
+</span><span></span></code></pre></div></div>
+</li>
+</ol>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="在ide中开发">在IDE中开发<a class="hash-link" href="#在ide中开发" aria-label="在IDE中开发 permalink" title="在IDE中开发 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="源码准备">源码准备<a class="hash-link" href="#源码准备" aria-label="源码准备 permalink" title="源码准备 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>本文以 milkv-duo 开发板的应用示例 duo-examples 为例。使用下面任一方式获取源码：</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:slategray"># 方法一：git clone</span><span>
+</span></span><span><span>$ </span><span class="token" style="color:#DD4A68">git</span><span> clone https://github.com/milkv-duo/duo-examples.git
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 方法二：ruyi extract 命令下载</span><span>
+</span></span><span>$ ruyi extract milkv-duo-examples
+</span><span></span></code></pre></div></div>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="导入并设置工程属性">导入并  设置工程属性<a class="hash-link" href="#导入并设置工程属性" aria-label="导入并设置工程属性 permalink" title="导入并设置工程属性 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>
+<p>File &gt; New &gt; Project</p>
+<p><img decoding="async" loading="lazy" alt="1735624096763" src="/assets/images/1735624096763-6dc6a1c9dba44c24a9a4068646cc8379.png" width="845" height="381" class="img_U9Vl"></p>
+</li>
+<li>
+<p>选择 C/C++ &gt; Makefile Project with Existing Code &gt; Next</p>
+<p><img decoding="async" loading="lazy" alt="1735623999135" src="/assets/images/1735623999135-b9ee8d8e5a8e5dd8d65e1dd126d70cbf.png" width="615" height="621" class="img_U9Vl"></p>
+</li>
+<li>
+<p>导入准备好的源码：</p>
+<ul>
+<li>
+<p>点击 Browse &gt;  目标源码路径</p>
+</li>
+<li>
+<p>Toolchain for Indexer Settings ：选择 RISC-V Cross GCC</p>
+</li>
+<li>
+<p>Finish</p>
+<p><img decoding="async" loading="lazy" alt="1735624436834" src="/assets/images/1735624436834-91ecc5d885fd62e0d5f54521925da5d9.png" width="615" height="651" class="img_U9Vl"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>工程 hello-world &gt; 右键 &gt; Properties  配置相关属性</p>
+<ol>
+<li>
+<p>为工程配置工具链路径</p>
+<p><img decoding="async" loading="lazy" alt="1735624925007" src="/assets/images/1735624925007-4702f45bb5a5e63309a5e4fe97979de7.png" width="1285" height="865" class="img_U9Vl"></p>
+<p>选择之前ruyi install 安装编译器的路径（默认在~/.local/share/ruyi/binaries/x86_64/ 路径下），或者创建的虚拟环境下的bin目录；</p>
+</li>
+<li>
+<p>设置编译属性</p>
+<p><img decoding="async" loading="lazy" alt="1735625245878" src="/assets/images/1735625245878-4ed00ff12a8f9173d4cea6a5935a239a.png" width="1301" height="869" class="img_U9Vl"></p>
+</li>
+</ol>
+</li>
+<li>
+<p>编辑 Makefile</p>
+<ul>
+<li>
+<p>项目自带的 Makefile 的正确运行依赖于 envsetup.sh 脚本对环境变量的预先设置。之前在<a href="https://github.com/milkv-duo/duo-examples/blob/main/README-zh.md" target="_blank" rel="noopener noreferrer">厂商文档操作实践</a>中，我们了解到预先设置了编译器前缀、编译选项、链接参数等信息，为了方便，将这些信息写到 Makefile 中指定。注意 TOOLCHAIN_PREFIX 路径需要按需修改。</p>
+</li>
+<li>
+<p>编译参数：</p>
+<ul>
+<li>-mcpu=c906fdv ：指定交叉编译时目标 CPU 的型号</li>
+<li>-march=rv64imafdcv0p7xthead ：指定交叉编译时目标架构</li>
+<li>-g ：生成调试信息</li>
+</ul>
+</li>
+<li>
+<p>为了实现从构建到目标程序的自动拷贝到目标设备，Makefile中还增加了upload目标（这是建立在PC和目标设备完成SSH认证的前提下，请参考文末“SSH秘钥配置”），同时还需要预先在目标设备上建好相关的目录（存放路径自定义，但请修改scp命令后的路径确保和实际环境一致）。</p>
+</li>
+<li>
+<p>您还可以在下面 Makefile 的基础上继续修改，本文只是提供一种参考。</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">makefile</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-makefile" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:slategray"># Eclipse 工具链设置</span><span>
+</span></span><span><span></span><span class="token" style="color:slategray">#TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-</span><span>
+</span></span><span><span>TOOLCHAIN_PREFIX </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+</span></span><span>
+</span><span><span>CFLAGS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> -mcpu</span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span>c906fdv -march</span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span>rv64imafdcv0p7xthead -g
+</span></span><span><span>LDFLAGS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> 
+</span></span><span>
+</span><span><span>TARGET </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> helloworld
+</span></span><span>
+</span><span><span>CC </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TOOLCHAIN_PREFIX</span><span class="token" style="color:#999">)</span><span>gcc
+</span></span><span>
+</span><span><span>SOURCE </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span class="token" style="color:#DD4A68">wildcard</span><span> *.c</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span>OBJS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span class="token" style="color:#DD4A68">patsubst</span><span> %.c,%.o,</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>SOURCE</span><span class="token" style="color:#999">)</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#905">all</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#e90">$</span><span class="token target" style="color:#905">(TARGET)</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>OBJS</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CC</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CFLAGS</span><span class="token" style="color:#999">)</span><span> -o </span><span class="token" style="color:#e90">$@</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>OBJS</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>LDFLAGS</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#905">%.o</span><span class="token" style="color:#999">:</span><span> %.c
+</span></span><span><span>   </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CC</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CFLAGS</span><span class="token" style="color:#999">)</span><span> -o </span><span class="token" style="color:#e90">$@</span><span> -c </span><span class="token" style="color:#e90">$&lt;</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#905">upload</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span></span><span class="token target" style="color:#905">   scp </span><span class="token target" style="color:#e90">$</span><span class="token target" style="color:#905">(TARGET) root@192.168.42.1</span><span class="token" style="color:#999">:</span><span>/root/target/</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#905">clean</span><span class="token" style="color:#999">:</span><span>
+</span></span><span><span>   rm -f *.o </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token builtin-target" style="color:#690">.PHONY</span><span class="token" style="color:#999">:</span><span> all clean upload
+</span></span><span></span></code></pre></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p>在IDE中打开 Terminal 视窗，创建一个 SSH Terminal，方便在IDE中登录目标设备并进行相关操作。如果需要，同时也可以再创建一个 Local Terminal 窗口配合使用。这个根据个人习惯自行选择。具体操作：</p>
+<ul>
+<li>
+<p>Window &gt; Show View &gt; Terminal</p>
+</li>
+<li>
+<p>Terminal: Open a new Terminal View/Open a Terminal &gt; SSH Terminal &gt; 对照下图输入Host、User、Password（milkvduo的root密码是：milkv）</p>
+<p><img decoding="async" loading="lazy" alt="1735626678903" src="/assets/images/1735626678903-c96fe363723450c4a8e1e1e7d6fe4fbf.png" width="545" height="537" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1735626740680" src="/assets/images/1735626740680-12ce3f29f2603c912607801a9e7128ce.png" width="937" height="333" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1735626766840" src="/assets/images/1735626766840-d38056ea55735d53071b5eb8293ffe43.png" width="355" height="555" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1735626979037" src="/assets/images/1735626979037-2eeda4af40ff487e912a1b66b14fb2be.png" width="933" height="295" class="img_U9Vl"></p>
+</li>
+<li>
+<p>使用 Makefile 中的 <code>scp</code> 命令前，需要在目标主机上提前创建好对应的目录结构，这样文件能够正确被传输到目标目录。构建完  成后，目录下将会出现目标程序。</p>
+<p><img decoding="async" loading="lazy" alt="1736776549440" src="/assets/images/1736776549440-6a9a87ae4ad22e22b9f5f5071768290f.png" width="681" height="303" class="img_U9Vl"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="执行构建">执行构建<a class="hash-link" href="#执行构建" aria-label="执行构建 permalink" title="执行构建 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>准备好上述配置和修改之后，右键工程，点 “Build Project”，构建成功则：</p>
+<ol>
+<li>
+<p>Console 窗口无错误</p>
+<p><img decoding="async" loading="lazy" alt="1736776684233" src="/assets/images/1736776684233-b536fb0e06d0fd5a19b72d63e3307547.png" width="973" height="396" class="img_U9Vl"></p>
+</li>
+<li>
+<p>SSH Terminal窗口已经能够看到成功传输的helloworld目标程序</p>
+<p><img decoding="async" loading="lazy" alt="1736776707622" src="/assets/images/1736776707622-698cad9f139e63a66a3392f5193286d7.png" width="691" height="298" class="img_U9Vl"></p>
+</li>
+</ol>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="将目标程序传输到目标设备">将目标程序传输到目标设备<a class="hash-link" href="#将目标程序传输到目标设备" aria-label="将目标程序传输到目标设备 permalink" title="将目标程序传输到目标设备 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>如果 Makefile 中定义了 upload 目标，则在上面 &quot;Build Project&quot; 时，已经完成了目标程序的传输。</li>
+<li>如果 Makefile 中未定义 upload 目标，则可以手动执行 <code>scp helloworld root@192.168.42.1:/root/target/</code> 命令完成目标程序的传输。</li>
+</ul>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="运行目标程序并回显执行结果">运行目标程序并回显执行结果<a class="hash-link" href="#运行目标程序并回显执行结果" aria-label="运行目标程序并回显执行结果 permalink" title="运行目标程序并回显执行结果 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>在IDE中有多种方式可以支持运行目标程序，可以按照习惯和需求选择。这里列举了一些我尝试通过的方式，更多方式欢迎一起探索。</p>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ssh-terminal">SSH Terminal<a class="hash-link" href="#ssh-terminal" aria-label="SSH Terminal permalink" title="SSH Terminal permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>可以在 SSH Terminal 窗口中查看 helloworld 目标程序，并运行：</p>
+<p><img decoding="async" loading="lazy" alt="1736777304796" src="/assets/images/1736777304796-9de9b5cab0b9f6442ac969a29af8bd3f.png" width="641" height="316" class="img_U9Vl"></p>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="cc-remote-application">C/C++ Remote Application<a class="hash-link" href="#cc-remote-application" aria-label="C/C++ Remote Application permalink" title="C/C++ Remote Application permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>操作：右键项目 &gt; Run As  &gt; Run Configurations  &gt;  C/C++ Remote Application</p>
+<p>对照下面的图（图是Debug模式下截图，由于配置是一样的，借Debug的图说明配置要点），参考着配置相关参数，重点如下：</p>
+<ul>
+<li>
+<p>Project：默认，即target程序名</p>
+</li>
+<li>
+<p>C/C++ Application : 也默认是target程序名（Search Project查询指定）</p>
+</li>
+<li>
+<p>Connect：New &gt;  SSH</p>
+</li>
+<li>
+<p>Remote Absolute File Path for C/C++ Application : 输入在RISC-V设备上目标程序的绝对地址（本例中需要与Makefile upload的scp命令中的路径一致）</p>
+</li>
+<li>
+<p>Skip download to target path：当前版本这里建议勾选，并搭配在Makefile中定义upload目标来实现目标程序从主机传输到目标开发板上。这是因为不勾选的情况下，需要IDE安装RSE（Remote System Explorer）插件，并且要求目标设备系统支持 sftp-server。目前 milkvduo 上不支持 sftp-server，所以暂时不支持该功能。</p>
+<p><img decoding="async" loading="lazy" alt="1736321809187" src="/assets/images/1736321809187-6bc23f44ec61d6c10f9972d1db79214b.png" width="1751" height="877" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1736320799175" src="/assets/images/1736320799175-287e0e03b0b9c5922b92b9b2961c1c67.png" width="643" height="518" class="img_U9Vl"></p>
+</li>
+</ul>
+<p>运行效果展示：</p>
+<ul>
+<li>
+<p><img decoding="async" loading="lazy" alt="勾选Skip download to target path远程运行成功效果" src="/assets/images/run1-20b03660694655ff32bc183948eaac7d.gif" width="2367" height="1234" class="img_U9Vl"></p>
+</li>
+<li>
+<p><img decoding="async" loading="lazy" alt="不勾选Skip download to target path运行报错效果" src="/assets/images/run1-20b03660694655ff32bc183948eaac7d.gif" width="2367" height="1234" class="img_U9Vl"></p>
+<blockquote>
+<p>milkv duo img 目前不支持sftp：<a href="https://github.com/milkv-duo/duo-buildroot-sdk/issues/167" target="_blank" rel="noopener noreferrer">https://github.com/milkv-duo/duo-buildroot-sdk/issues/167</a>  当milvduo镜像支持 sftp-server 后该问题能够解决。</p>
+</blockquote>
+</li>
+</ul>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="调试">调试<a class="hash-link" href="#调试" aria-label="调试 permalink" title="调试 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="准备调试示例">准备调试示例<a class="hash-link" href="#准备调试示例" aria-label="准备调试示例 permalink" title="准备调试示例 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>helloworld的示例调试效果不佳，为了体现调试、打断点、单步跟踪等功能，这里换了另一个示例。</p>
+<p><strong>sumdemo.c</strong></p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">c</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-c" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token macro directive-hash" style="color:#905">#</span><span class="token macro directive" style="color:#07a">include</span><span class="token macro" style="color:#905"> </span><span class="token macro" style="color:#690">&lt;stdio.h&gt;</span><span>
+</span></span><span>
+</span><span><span></span><span class="token" style="color:#07a">int</span><span> </span><span class="token" style="color:#DD4A68">Sum</span><span class="token" style="color:#999">(</span><span class="token" style="color:#07a">int</span><span> s</span><span class="token" style="color:#999">,</span><span> </span><span class="token" style="color:#07a">int</span><span> e</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span></span><span class="token" style="color:#999">{</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">int</span><span> result </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#905">0</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">for</span><span class="token" style="color:#999">(</span><span class="token" style="color:#07a">int</span><span> i </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> s</span><span class="token" style="color:#999">;</span><span> i </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">&lt;=</span><span> e</span><span class="token" style="color:#999">;</span><span> i</span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">++</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#999">{</span><span>
+</span></span><span><span>      result </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">+=</span><span> i</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#999">}</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">return</span><span> result</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span></span><span class="token" style="color:#999">}</span><span>
+</span></span><span>
+</span><span>
+</span><span><span></span><span class="token" style="color:#07a">int</span><span> </span><span class="token" style="color:#DD4A68">main</span><span class="token" style="color:#999">(</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span></span><span class="token" style="color:#999">{</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">int</span><span> start </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#905">1</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">int</span><span> end </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#905">10</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#DD4A68">printf</span><span class="token" style="color:#999">(</span><span class="token" style="color:#690">&quot;I will begin\n&quot;</span><span class="token" style="color:#999">)</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">int</span><span> n </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#DD4A68">Sum</span><span class="token" style="color:#999">(</span><span>start</span><span class="token" style="color:#999">,</span><span> end</span><span class="token" style="color:#999">)</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#DD4A68">printf</span><span class="token" style="color:#999">(</span><span class="token" style="color:#690">&quot;running done, result is: [%d-%d]=%d\n&quot;</span><span class="token" style="color:#999">,</span><span> start</span><span class="token" style="color:#999">,</span><span> end</span><span class="token" style="color:#999">,</span><span> n</span><span class="token" style="color:#999">)</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span>   </span><span class="token" style="color:#07a">return</span><span> </span><span class="token" style="color:#905">0</span><span class="token" style="color:#999">;</span><span>
+</span></span><span><span></span><span class="token" style="color:#999">}</span><span>
+</span></span><span>
+</span><span>
+</span><span></span></code></pre></div></div>
+<p><strong>Makefile：</strong></p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">makefile</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-makefile" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:slategray"># 工具链前缀</span><span>
+</span></span><span><span>TOOLCHAIN_PREFIX </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 编译选项</span><span>
+</span></span><span><span>CFLAGS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> -mcpu</span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span>c906fdv -march</span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span>rv64imafdcv0p7xthead -g
+</span></span><span><span>LDFLAGS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">:=</span><span> 
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 目标文件名</span><span>
+</span></span><span><span>TARGET </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> sumdemo
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 编译器</span><span>
+</span></span><span><span>CC </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TOOLCHAIN_PREFIX</span><span class="token" style="color:#999">)</span><span>gcc
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 源文件与目标 文件</span><span>
+</span></span><span><span>SOURCE </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span class="token" style="color:#DD4A68">wildcard</span><span> *.c</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span>OBJS </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span class="token" style="color:#DD4A68">patsubst</span><span> %.c,%.o,</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>SOURCE</span><span class="token" style="color:#999">)</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 默认目标</span><span>
+</span></span><span><span></span><span class="token target" style="color:#905">all</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#e90">$</span><span class="token target" style="color:#905">(TARGET)</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>OBJS</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span>	</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CC</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CFLAGS</span><span class="token" style="color:#999">)</span><span> -o </span><span class="token" style="color:#e90">$@</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>OBJS</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>LDFLAGS</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token target" style="color:#905">%.o</span><span class="token" style="color:#999">:</span><span> %.c
+</span></span><span><span>	</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CC</span><span class="token" style="color:#999">)</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>CFLAGS</span><span class="token" style="color:#999">)</span><span> -o </span><span class="token" style="color:#e90">$@</span><span> -c </span><span class="token" style="color:#e90">$&lt;</span><span>
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 上传目标</span><span>
+</span></span><span><span></span><span class="token target" style="color:#905">upload</span><span class="token" style="color:#999">:</span><span> </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span><span></span><span class="token target" style="color:#905">	scp </span><span class="token target" style="color:#e90">$</span><span class="token target" style="color:#905">(TARGET) root@192.168.42.1</span><span class="token" style="color:#999">:</span><span>/root/target/</span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 清理</span><span>
+</span></span><span><span></span><span class="token target" style="color:#905">clean</span><span class="token" style="color:#999">:</span><span>
+</span></span><span><span>	rm -f *.o </span><span class="token" style="color:#e90">$</span><span class="token" style="color:#999">(</span><span>TARGET</span><span class="token" style="color:#999">)</span><span>
+</span></span><span>
+</span><span><span></span><span class="token builtin-target" style="color:#690">.PHONY</span><span class="token" style="color:#999">:</span><span> all clean upload
+</span></span><span></span></code></pre></div></div>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="准备gdbserver">准备gdbserver<a class="hash-link" href="#准备gdbserver" aria-label="准备gdbserver permalink" title="准备gdbserver permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>原厂 buildroot 镜像不自带 gdbsever，可拷贝原厂gdbserver可执行文件或使用 RuyiSDK 添加 gdbsever 后重新构建的镜像。</p>
+<ol>
+<li>
+<p>下载原厂gdbserver可执行程序：<a href="https://github.com/milkv-duo/duo-buildroot-sdk/blob/develop/ramdisk/rootfs/public/gdbserver/riscv_musl/usr/bin/gdbserver" target="_blank" rel="noopener noreferrer">https://github.com/milkv-duo/duo-buildroot-sdk/blob/develop/ramdisk/rootfs/public/gdbserver/riscv_musl/usr/bin/gdbserver</a></p>
+</li>
+<li>
+<p>将上述下载的gdbserver拷贝到milkv duo设备的path路径下：</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span>$ </span><span class="token" style="color:#DD4A68">scp</span><span> gdbserver root@192.168.42.1:/usr/bin/
+</span></span><span><span>$ </span><span class="token" style="color:#DD4A68">ssh</span><span> root@192.168.42.1 </span><span class="token" style="color:#690">&quot;chmod +x /usr/bin/gdbserver&quot;</span><span>
+</span></span><span></span></code></pre></div></div>
+</li>
+</ol>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="terminal中调试">Terminal中调试<a class="hash-link" href="#terminal中调试" aria-label="Terminal中调试 permalink" title="Terminal中调试 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>这种操作跟使用操作系统的Terminal调试无差别，习惯使用命令的可以尝试。</p>
+<p>Terminal支持 Local Terminal 和 SSH Terminal等多种方式，可以同时开一个Local Terminal 和 一个 SSH Terminal 连到milkv duo上，进行操作。</p>
+<p>GDBServer + GDB命令远程调试的步骤如下：</p>
+<ol>
+<li>
+<p>milkvduo设备端（helloworld所在目录下操作）:</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span class="token" style="color:#999">[</span><span>root@milkv-duo</span><span class="token" style="color:#999">]</span><span>~/target</span><span class="token" style="color:slategray"># gdbserver :2345 ./sumdemo</span><span>
+</span></span><span><span>Process ./sumdemo created</span><span class="token" style="color:#999">;</span><span> pid </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">=</span><span> </span><span class="token" style="color:#905">1802</span><span>
+</span></span><span><span>Listening on port </span><span class="token" style="color:#905">2345</span><span>
+</span></span><span></span></code></pre></div></div>
+</li>
+<li>
+<p>PC端（helloworld.c所在目录下操作）：</p>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span>$ </span><span class="token" style="color:#DD4A68">cd</span><span> ~/ews-milkvduo-t01/sumdemo
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 查看gdb版本，启动调试</span><span>
+</span></span><span><span></span><span class="token" style="color:slategray"># 这里使用 ruyi 虚拟环境进行调试，激活虚拟环境，在虚拟环境下编译</span><span>
+</span></span><span><span>$ </span><span class="token" style="color:#DD4A68">source</span><span> ~/venv-milkvduo/bin/ruyi-activate
+</span></span><span>$ riscv64-unknown-linux-musl-gdb --version
+</span><span>$ riscv64-unknown-linux-musl-gdb ./sumdemo
+</span><span>
+</span><span><span>$ target remote </span><span class="token" style="color:#905">192.168</span><span>.42.1:2345   </span><span class="token" style="color:slategray">#端口号需要跟gdbserver端一致</span><span>
+</span></span><span>
+</span><span><span>$ </span><span class="token" style="color:#DD4A68">break</span><span> sumdemo.c:8                 </span><span class="token" style="color:slategray">#在第8行设置断点</span><span>
+</span></span><span>
+</span><span><span></span><span class="token" style="color:slategray"># 下面几个可能常用，请按需灵活使用</span><span>
+</span></span><span><span>$ c                                 </span><span class="token" style="color:slategray">#contuinu，继续程序的运行,直到遇到下一个断点</span><span>
+</span></span><span><span>$ disp result                       </span><span class="token" style="color:slategray">#跟踪查看某个变量,每次停下来都显示它的值</span><span>
+</span></span><span><span>$ print result                      </span><span class="token" style="color:slategray">#打印内部变量result</span><span>
+</span></span><span>
+</span><span></span></code></pre></div></div>
+<p><img decoding="async" loading="lazy" alt="1736326691511" src="/assets/images/1736326691511-602fefed9971143b123fa9bc87fcc1d6.png" width="2288" height="1250" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="Local Terminal + SSH Terminal | GDBSerer+GDB 调试展示" src="/assets/images/gdb-terminal-1-16261d0bad6c2994f0614e94a40bc46c.gif" width="2367" height="1234" class="img_U9Vl"></p>
+</li>
+</ol>
+<h4 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="cc-remote-application-1">C/C++ Remote Application<a class="hash-link" href="#cc-remote-application-1" aria-label="C/C++ Remote Application permalink" title="C/C++ Remote Application permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<p>对照下面的图，参考着配置相关参数，重点如下：</p>
+<ul>
+<li>
+<p>Project：默认，即 target 程序名</p>
+</li>
+<li>
+<p>C/C++ Application : 也默认是target程序名（Search Project查询指定）</p>
+</li>
+<li>
+<p>Connect：New &gt;  SSH</p>
+</li>
+<li>
+<p>Remote Absolute File Path for C/C++ Application : 输入在RISC-V设备上目标程序的绝对地址（本例中需要与Makefile upload的scp命令中的路径一致）</p>
+</li>
+<li>
+<p>Skip download to target path：当前版本这里建议勾选，并搭配在Makefile中定义upload目标来实现目标程序从主机传输到目标开发板  上。这是因为不勾选的情况下，需要IDE安装RSE（Remote System Explorer）插件，并且要求目标设备系统支持 sftp-server。目前 milkvduo 上不支持 sftp-server，所以暂时不支持该功能。</p>
+</li>
+<li>
+<p>Debugger &gt; Main &gt; GDB Debugger : 指定GDB的路径。本例中使用的是 <code>~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-gdb</code></p>
+</li>
+<li>
+<p>Debugger &gt; GDB &gt; GDBserver setting: 指定GDBServer 及通信端口</p>
+<p><img decoding="async" loading="lazy" alt="1736320771077" src="/assets/images/1736320771077-b2eba9e5920439bb66683be650cc92b7.png" width="1453" height="877" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1736320799175" src="/assets/images/1736320799175-287e0e03b0b9c5922b92b9b2961c1c67.png" width="643" height="518" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1736320837701" src="/assets/images/1736320837701-601118532bad335c4446308336a7a312.png" width="1455" height="877" class="img_U9Vl"></p>
+<p><img decoding="async" loading="lazy" alt="1736324370390" src="/assets/images/1736324370390-53dce551f739f76108dee5230fec28f0.png" width="1746" height="875" class="img_U9Vl"></p>
+<p>跟运行一样，由于目前 milkv duo 不支持 sftp-server，因此目标程序的远端传输功能不可用，执行会报如下的错误。</p>
+<p><img decoding="async" loading="lazy" alt="1736320589408" src="/assets/images/1736320589408-f58e692d1667d546d2ec1d2a0ecd31a8.png" width="571" height="313" class="img_U9Vl"></p>
+<p>勾选 Skip download to target path 跳过下载目标程序，就能绕过这个问题。配合Makefile中的upload定义，在构建阶段就完成目标程序从主机传输到目标设备中。</p>
+<p><img decoding="async" loading="lazy" alt="1736321809187" src="/assets/images/1736321809187-6bc23f44ec61d6c10f9972d1db79214b.png" width="1751" height="877" class="img_U9Vl"></p>
+</li>
+</ul>
+<p>运行效果展示：</p>
+<ul>
+<li><img decoding="async" loading="lazy" alt="不勾选Skip download to target path远程运行报错效果" src="/assets/images/gdb-withdownload-42ab9ed9dc98bbdfb17db1d37056954b.gif" width="2367" height="1234" class="img_U9Vl"></li>
+<li><img decoding="async" loading="lazy" alt="勾选Skip download to target path运行成功效果" src="/assets/images/gdb-withoutdownload-cc4c7c349461da64f9bc5d27eb0ff876.gif" width="2367" height="1234" class="img_U9Vl"></li>
+</ul>
+<h2 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="补充说明">补充说明<a class="hash-link" href="#补充说明" aria-label="补充说明 permalink" title="补充说明 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 class="anchor [scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]" id="ssh秘钥配置">SSH秘钥配置<a class="hash-link" href="#ssh秘钥配置" aria-label="SSH秘钥配置 permalink" title="SSH秘钥配置 permalink"><svg xmlns="http://www.w3.org/2000/svg" width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>这里详细说明下 SSH 秘钥配置：</p>
+<p>通过为 host 和 milkv duo 配置 ssh-key 免密登录，从而实现构建后自动将二进制文件连接并传输到milkv duo的指定路径下。</p>
+<ol>
+<li>
+<p>在 host上执行<code>ssh-keygen</code></p>
+</li>
+<li>
+<p>将公钥添加到milkv duo  上：</p>
+</li>
+</ol>
+<div class="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"><div class="flex items-center justify-between pl-4 pr-3 py-0 min-h-[48px] bg-neutral-50 dark:bg-neutral-800"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="text-[13px] font-mono text-neutral-600 dark:text-neutral-400">&gt;_</span><span class="text-[13px] font-normal tracking-normal text-neutral-600 dark:text-neutral-400 font-sans">Terminal</span></div></div></div><div class="bg-white dark:bg-neutral-900 overflow-x-auto"><pre style="color:black;background:#f5f2f0;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:0.875rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;padding:20px;margin:0;overflow:auto;font-weight:400;background-color:transparent"><code class="language-bash" style="white-space:pre;color:black;background:none;text-shadow:0 1px white;font-family:Consolas, Monaco, &#x27;Andale Mono&#x27;, &#x27;Ubuntu Mono&#x27;, monospace;font-size:1em;text-align:left;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none"><span><span>$ </span><span class="token" style="color:#DD4A68">cat</span><span> ~/.ssh/xxxx.pub </span><span class="token" style="color:#9a6e3a;background:hsla(0, 0%, 100%, .5)">|</span><span> </span><span class="token" style="color:#DD4A68">ssh</span><span> root@192.168.42.1 </span><span class="token" style="color:#690">&#x27;mkdir -p ~/.ssh &amp;&amp; cat &gt;&gt; ~/.ssh/authorized_keys&#x27;</span><span>
+</span></span><span></span></code></pre></div></div>
+<ol start="3">
+<li>验证：<code>ssh root@192.168.42.1</code></li>
+</ol>
+<p>成功的情况下此时不需要再输入密码了。</p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="文件选项卡"><a class="pagination-nav__link bg-transparent border-0 shadow-none no-underline block transition-colors duration-200 hover:text-[var(--ifm-link-color)] pagination-nav__link--prev" href="/docs/category/ide-使用案例"><div class="pagination-nav__sublabel text-xs text-[var(--ifm-color-emphasis-600)] mb-1 font-normal">上一页</div><div class="pagination-nav__label inline-flex items-center font-semibold text-base text-[var(--ifm-font-color-base)]"><span class="mr-1 text-lg">‹</span><span>IDE 使用案例</span></div></a><a class="pagination-nav__link bg-transparent border-0 shadow-none no-underline block transition-colors duration-200 hover:text-[var(--ifm-link-color)] pagination-nav__link--next" href="/docs/IDE/cases/sipeed-lpi4a-ide-hello-world"><div class="pagination-nav__sublabel text-xs text-[var(--ifm-color-emphasis-600)] mb-1 font-normal">下一页</div><div class="pagination-nav__label inline-flex items-center font-semibold text-base text-[var(--ifm-font-color-base)]"><span>Sipeed Lichee Pi 4A: 在 RuyiSDK IDE 中构建 Hello World 项目</span><span class="ml-1 text-lg">›</span></div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_RHOI thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#编译环境搭建">编译环境搭建</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#在ide中开发">在IDE中开发</a><ul><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#源码准备">源码准备</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#导入并设置工程属性">导入并设置工程属性</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#执行构建">执行构建</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#将目标程序传输到目标设备">将目标程序传输到目标设备</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#运行目标程序并回显执行结果">运行目标程序并回显执行结果</a></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#调试">调试</a></li></ul></li><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#补充说明">补充说明</a><ul><li><a class="table-of-contents__link toc-highlight" href="/docs/IDE/cases/milkv-duo-ide#ssh秘钥配置">SSH秘钥配置</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer_xBL4"><div class="footer__links_rq3l"><div class="footer__col_I_Ea"><div class="footer__title_pF9u">生态</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="/docs/intro">RuyiSDK</a></li><li class="footer__item_N3As"><a href="https://docs.revyos.dev" target="_blank" rel="noopener noreferrer">RevyOS<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://matrix.ruyisdk.org/" target="_blank" rel="noopener noreferrer">Support Matrix<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">社区</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="https://ruyisdk.cn" target="_blank" rel="noopener noreferrer">RISC-V 开发者社区<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://github.com/ruyisdk/ruyisdk/discussions" target="_blank" rel="noopener noreferrer">讨论组<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="/dashboard">数据统计</a></li><li class="footer__item_N3As"><a href="https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" target="_blank" rel="noopener noreferrer">实习生招聘<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">关注我们</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a class="hover-wechat-link" href="/about">微信公众号</a></li><li class="footer__item_N3As"><a class="hover-qq-link" href="/about">QQ群</a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">更多开发工具</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="https://github.com/Glavo/JetBrains-IDE-Multiarch" target="_blank" rel="noopener noreferrer">JetBrains IDE Multiarch<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_WXge"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__copyright_xAbK">Copyright © 2024-2026 Institute of Software, CAS</div></footer></div>
+</body>
+</html>

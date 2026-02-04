@@ -1,0 +1,784 @@
+{
+  "articles": [
+    {
+      "title": "VSCode Extension for RuyiSDK",
+      "summary": "The RuyiSDK VSCode extension plugin version 0.1.0 has been officially released. Give it a try now!",
+      "date": 1767225600000,
+      "image": "/img/newsshowcase/2025-01-01-ruyisdk-vscode-extension.png",
+      "filename": "2026-01-01-ruyisdk-vscode-extension.en.md",
+      "link": "https://ruyisdk.cn/t/topic/2338"
+    },
+    {
+      "title": "Great News: Steam Can Now Run Stably on RISC-V! Box64 Delivers Again",
+      "summary": "Box64 version v0.3.8 has been released. This update brings a large number of compatibility fixes to the RISC-V backend, making Linux Steam (finally) able to run stably!",
+      "date": 1760572800000,
+      "image": "/img/newsshowcase/2025-10-16-steam-riscv-box64.png",
+      "filename": "2025-10-16-steam-riscv-box64.en.md",
+      "link": "https://mp.weixin.qq.com/s/zIuQ-2k4B98wEmNbHG5CUA"
+    },
+    {
+      "title": "openGauss RISC-V SIG at Chengdu Meetup: Advancing Open-Source Databases on RISC-V",
+      "summary": "On September 27, 2025, the openGauss Meetup in Chengdu was successfully held. The openGauss RISC‑V SIG presented key progress on the RISC‑V architecture: - Porting from openGauss 5.1.0 to 7.0.0 (full ...",
+      "date": 1758931200000,
+      "image": "/img/newsshowcase/2.png",
+      "filename": "2025-09-27-opengauss-meetup.en.md",
+      "link": "https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg"
+    },
+    {
+      "title": "The First \"Hefei RISC-V Open Day\" Held at Hefei University of Technology, Showcasing a Vibrant Ecosystem",
+      "summary": "On September 24, 2025, the first Hefei RISC-V Open Day was successfully held at Hefei University of Technology. The event brought together over a hundred experts and scholars to discuss the developmen...",
+      "date": 1758672000000,
+      "image": "/img/newsshowcase/3.png",
+      "filename": "2025-09-24-hefei-riscv-open-day.en.md",
+      "link": "https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g"
+    },
+    {
+      "title": "Put Learning into Practice — XuanTie RV Academy Courses Launched; Join Us to Build the Future of Chips",
+      "summary": "XuanTie has partnered with the PLCT Laboratory to launch a RISC‑V course series that includes three intermediate‑level courses and two advanced courses, taught by an experienced instructor team. The c...",
+      "date": 1755820800000,
+      "image": "/img/newsshowcase/1.png",
+      "filename": "2025-08-22-xuantie-rv-academy.en.md",
+      "link": "https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q"
+    }
+  ],
+  "ruyinews": [
+    {
+      "title": "Release notes for RuyiSDK 0.44",
+      "summary": "RuyiSDK 0.44 is now released. The corresponding package manager version is also 0.44.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
+      "date": 1767052800000,
+      "image": null,
+      "filename": "2025-12-30-ruyi-0.44.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-12-30-ruyi-0.44.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.43",
+      "summary": "RuyiSDK 0.43 is now released. The corresponding package manager version is also 0.43.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
+      "date": 1764115200000,
+      "image": null,
+      "filename": "2025-11-26-ruyi-0.43.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-11-26-ruyi-0.43.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.42",
+      "summary": "RuyiSDK 0.42 is now released. The corresponding package manager version is also 0.42.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
+      "date": 1761264000000,
+      "image": null,
+      "filename": "2025-10-24-ruyi-0.42.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-10-24-ruyi-0.42.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.41",
+      "summary": "RuyiSDK 0.41 is now released. The corresponding package manager version is also 0.41.0. You can download the RuyiSDK package manager from one of the following locations: This update mainly consists of...",
+      "date": 1759190400000,
+      "image": null,
+      "filename": "2025-09-30-ruyi-0.41.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-09-30-ruyi-0.41.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.40",
+      "summary": "RuyiSDK 0.40 is now released. The corresponding package manager version is also 0.40.0. You can download the RuyiSDK package manager from one of the following locations: We focused on QA process impro...",
+      "date": 1757548800000,
+      "image": null,
+      "filename": "2025-09-11-ruyi-0.40.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-09-11-ruyi-0.40.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.39",
+      "summary": "RuyiSDK 0.39 is now released. The corresponding package manager version is also 0.39.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1754956800000,
+      "image": null,
+      "filename": "2025-08-12-ruyi-0.39.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-08-12-ruyi-0.39.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.38",
+      "summary": "RuyiSDK 0.38 is now released. The corresponding package manager version is also 0.38.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1753142400000,
+      "image": null,
+      "filename": "2025-07-22-ruyi-0.38.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-07-22-ruyi-0.38.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.37",
+      "summary": "RuyiSDK 0.37 is now released. The corresponding package manager version is also 0.37.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1751932800000,
+      "image": null,
+      "filename": "2025-07-08-ruyi-0.37.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-07-08-ruyi-0.37.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.36",
+      "summary": "RuyiSDK 0.36 is now released. The corresponding package manager version is also 0.36.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1750723200000,
+      "image": null,
+      "filename": "2025-06-24-ruyi-0.36.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-06-24-ruyi-0.36.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.35",
+      "summary": "RuyiSDK 0.35 is now released. The corresponding package manager version is also 0.35.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1749513600000,
+      "image": null,
+      "filename": "2025-06-10-ruyi-0.35.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-06-10-ruyi-0.35.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.34",
+      "summary": "RuyiSDK 0.34 is now released. The corresponding package manager version is also 0.34.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1748304000000,
+      "image": null,
+      "filename": "2025-05-27-ruyi-0.34.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-05-27-ruyi-0.34.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.33",
+      "summary": "RuyiSDK 0.33 is now released. The corresponding package manager version is also 0.33.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1747094400000,
+      "image": null,
+      "filename": "2025-05-13-ruyi-0.33.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-05-13-ruyi-0.33.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.32",
+      "summary": "RuyiSDK 0.32 is now released. The corresponding package manager version is also 0.32.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1745280000000,
+      "image": null,
+      "filename": "2025-04-22-ruyi-0.32.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-04-22-ruyi-0.32.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.31",
+      "summary": "RuyiSDK 0.31 is now released. The corresponding package manager version is also 0.31.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1744070400000,
+      "image": null,
+      "filename": "2025-04-08-ruyi-0.31.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-04-08-ruyi-0.31.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.30",
+      "summary": "RuyiSDK 0.30 is now released. The corresponding package manager version is also 0.30.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1742860800000,
+      "image": null,
+      "filename": "2025-03-25-ruyi-0.30.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-03-25-ruyi-0.30.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.29",
+      "summary": "RuyiSDK 0.29 is now released. The corresponding package manager version is also 0.29.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1741651200000,
+      "image": null,
+      "filename": "2025-03-11-ruyi-0.29.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-03-11-ruyi-0.29.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.28",
+      "summary": "RuyiSDK 0.28 is now released. The corresponding package manager version is also 0.28.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1740441600000,
+      "image": null,
+      "filename": "2025-02-25-ruyi-0.28.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-02-25-ruyi-0.28.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.27",
+      "summary": "RuyiSDK 0.27 is now released. The corresponding package manager version is also 0.27.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1739232000000,
+      "image": null,
+      "filename": "2025-02-11-ruyi-0.27.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-02-11-ruyi-0.27.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.26",
+      "summary": "RuyiSDK 0.26 is now released. The corresponding package manager version is also 0.26.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1736812800000,
+      "image": null,
+      "filename": "2025-01-14-ruyi-0.26.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2025-01-14-ruyi-0.26.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.25",
+      "summary": "RuyiSDK 0.25 is now released. The corresponding package manager version is also 0.25.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1735603200000,
+      "image": null,
+      "filename": "2024-12-31-ruyi-0.25.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-12-31-ruyi-0.25.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.24",
+      "summary": "RuyiSDK 0.24 is now released. The corresponding package manager version is also 0.24.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1734393600000,
+      "image": null,
+      "filename": "2024-12-17-ruyi-0.24.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-12-17-ruyi-0.24.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.23",
+      "summary": "RuyiSDK 0.23 is now released. The corresponding package manager version is also 0.23.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1733184000000,
+      "image": null,
+      "filename": "2024-12-03-ruyi-0.23.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-12-03-ruyi-0.23.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.22",
+      "summary": "RuyiSDK 0.22 is now released. The corresponding package manager version is also 0.22.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1731974400000,
+      "image": null,
+      "filename": "2024-11-19-ruyi-0.22.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-11-19-ruyi-0.22.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.21",
+      "summary": "RuyiSDK 0.21 is now released. The corresponding package manager version is also 0.21.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1730764800000,
+      "image": null,
+      "filename": "2024-11-05-ruyi-0.21.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-11-05-ruyi-0.21.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.20",
+      "summary": "RuyiSDK 0.20 is now released. The corresponding package manager version is also 0.20.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1729555200000,
+      "image": null,
+      "filename": "2024-10-22-ruyi-0.20.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-10-22-ruyi-0.20.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.19",
+      "summary": "RuyiSDK 0.19 is now released. The corresponding package manager version is also 0.19.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1727654400000,
+      "image": null,
+      "filename": "2024-09-30-ruyi-0.19.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-09-30-ruyi-0.19.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.18",
+      "summary": "RuyiSDK 0.18 is now released. The corresponding package manager version is also 0.18.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1726272000000,
+      "image": null,
+      "filename": "2024-09-14-ruyi-0.18.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-09-14-ruyi-0.18.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.17",
+      "summary": "RuyiSDK 0.17 is now released. The corresponding package manager version is also 0.17.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1725321600000,
+      "image": null,
+      "filename": "2024-09-03-ruyi-0.17.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-09-03-ruyi-0.17.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.16",
+      "summary": "RuyiSDK 0.16 is now released. The corresponding package manager version is also 0.16.0. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruy...",
+      "date": 1723507200000,
+      "image": null,
+      "filename": "2024-08-13-ruyi-0.16.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-08-13-ruyi-0.16.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.15",
+      "summary": "RuyiSDK 0.15 is now released. The corresponding package manager version is also 0.15. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1721692800000,
+      "image": null,
+      "filename": "2024-07-23-ruyi-0.15.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-07-23-ruyi-0.15.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.14",
+      "summary": "RuyiSDK 0.14 is now released. The corresponding package manager version is also 0.14. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1720483200000,
+      "image": null,
+      "filename": "2024-07-09-ruyi-0.14.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-07-09-ruyi-0.14.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.13",
+      "summary": "RuyiSDK 0.13 is now released. The corresponding package manager version is also 0.13. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1719187200000,
+      "image": null,
+      "filename": "2024-06-24-ruyi-0.13.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-06-24-ruyi-0.13.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.12",
+      "summary": "RuyiSDK 0.12 is now released. The corresponding package manager version is also 0.12. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1718064000000,
+      "image": null,
+      "filename": "2024-06-11-ruyi-0.12.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-06-11-ruyi-0.12.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.11",
+      "summary": "RuyiSDK 0.11 is now released. The corresponding package manager version is also 0.11. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1716854400000,
+      "image": null,
+      "filename": "2024-05-28-ruyi-0.11.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-05-28-ruyi-0.11.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.10",
+      "summary": "RuyiSDK 0.10 is now released. The corresponding package manager version is also 0.10. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/...",
+      "date": 1715644800000,
+      "image": null,
+      "filename": "2024-05-14-ruyi-0.10.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-05-14-ruyi-0.10.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.9",
+      "summary": "RuyiSDK 0.9 is now released. The corresponding package manager version is also 0.9. You can download the RuyiSDK package manager from one of the following locations: https://github.com/ruyisdk/ruyi/re...",
+      "date": 1713830400000,
+      "image": null,
+      "filename": "2024-04-23-ruyi-0.9.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-04-23-ruyi-0.9.en_US.md"
+    },
+    {
+      "title": "RV64ILP32 bare-metal toolchain & profile now available",
+      "summary": "For your convenience following bleeding-edge development, the RuyiSDK team has packaged a bare-metal toolchain targetting the experimental RV64ILP32 ABI. Because this is a bare-metal toolchain, no sys...",
+      "date": 1708905600000,
+      "image": null,
+      "filename": "2024-02-26-gnu-plct-rv64ilp32-elf.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-02-26-gnu-plct-rv64ilp32-elf.en_US.md"
+    },
+    {
+      "title": "Release notes for RuyiSDK 0.4",
+      "summary": "RuyiSDK 0.4 is now released. The corresponding package manager version is also 0.4. You can download the RuyiSDK package manager from the GitHub Releases page: https://github.com/ruyisdk/ruyi/releases...",
+      "date": 1706486400000,
+      "image": null,
+      "filename": "2024-01-29-ruyi-0.4.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-01-29-ruyi-0.4.en_US.md"
+    },
+    {
+      "title": "New board images available (2024-01-29)",
+      "summary": "Image packages are now available for the following boards. You can have your device automatically provisioned with the RuyiSDK Device Provisioning Wizard . Or you can still manually install with : fil...",
+      "date": 1706486400000,
+      "image": null,
+      "filename": "2024-01-29-new-board-images.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-01-29-new-board-images.en_US.md"
+    },
+    {
+      "title": "New board images available (2024-01-15)",
+      "summary": "Image packages are now available for the following boards. You can install them with : files will be automatically unpacked or symlinked to . Thank you for supporting RuyiSDK! : official Buildroot SDK...",
+      "date": 1705276800000,
+      "image": null,
+      "filename": "2024-01-15-new-board-images.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-01-15-new-board-images.en_US.md"
+    },
+    {
+      "title": "RuyiSDK now supports displaying news",
+      "summary": "We have added support for news items to for you to follow RuyiSDK development more easily. If you are on ruyi 0.3 or greater, any incoming news item will appear after a successful . You can list all n...",
+      "date": 1705190400000,
+      "image": null,
+      "filename": "2024-01-14-ruyi-news.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2024-01-14-ruyi-news.en_US.md"
+    }
+  ],
+  "weeklies": [
+    {
+      "title": "Biweekly 059: 2025-12-30",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！辞旧迎新之际，先祝福大家元旦快乐，万事如意！ Ruyi 包管理器 0.44.0 版本已于今日发布，我们新增Milk-V Megrez设备支持并完善RV32的manual profile命名，修复了遥测功能的若干细节，旨在提供更多设备支持和更好的服务。 同时，RuyiSDK VS Code 插件和 Eclipse 插件也均发布了 0.1.0 版本。目前这两个...",
+      "date": 1767052800000,
+      "image": null,
+      "filename": "20251230-ruyisdk-biweekly-59.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251230-ruyisdk-biweekly-59.md"
+    },
+    {
+      "title": "Biweekly 058: 2025-12-16",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！ 本周我们迎来一场线下之约：RISC-V校园行活动将于2025年12月17日下午在 上海海事大学（临港校区） 举办，欢迎上海的小伙伴们前来交流学习 ！ 线上生态同样精彩：IDE插件即将发布，软件源持续为更多设备提供支持，V8项目也获得了RISE基金会的关注。这些成就都离不开社区的每一位贡献者。感谢大家的参与和反馈，我们诚挚邀请您常来 RuyiSDK 技术社...",
+      "date": 1765843200000,
+      "image": null,
+      "filename": "20251216-ruyisdk-biweekly-58.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251216-ruyisdk-biweekly-58.md"
+    },
+    {
+      "title": "Biweekly 057: 2025-12-02",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！欢迎阅读第 57 期《RuyiSDK 双周进展》！ 包管理器 0.43.0 版本正式发布，不仅解锁容器环境 root 运行权限，适配 CI 等受控场景需求，更在虚拟环境元数据记录、依赖精简与测试框架完善上完成迭代，让开发流程更顺畅、功能稳定性更有保障。软件源生态持续扩容，新增多款热门硬件设备支持，同时优化镜像适配方案，兼顾新增需求与老旧设备的生命周期管理，...",
+      "date": 1764633600000,
+      "image": null,
+      "filename": "20251202-ruyisdk-biweekly-57.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251202-ruyisdk-biweekly-57.md"
+    },
+    {
+      "title": "Biweekly 056: 2025-11-18",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！欢迎阅读第 56 期《RuyiSDK 双周进展》！ 本期，开发团队的主要工作集中在以下几个方面： - 为加强 ruyi 的质量保障，覆盖更多常见及特殊使用场景，我们正在为其构建一套集成测试套件。 - 持续扩展 packages-index，增加对更多 RISC-V 设备的支持。 - IDE 插件的功能开发与优化也在同步进行中，目前第一版 VSCode 插件...",
+      "date": 1763424000000,
+      "image": null,
+      "filename": "20251118-ruyisdk-biweekly-56.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251118-ruyisdk-biweekly-56.md"
+    },
+    {
+      "title": "Biweekly 055: 2025-11-04",
+      "summary": "小伙伴们是不是在期待新的版本？按照我们上期公布的月度发版策略，下一个版本计划于 11 月 25 日与大家见面，我们的双周进展汇报仍会保持原有节奏，持续为大家同步最新动态。 目前，开发团队正在全力推进各项开发工作： - 为加强 ruyi 的质量保障，覆盖更多常见及特殊使用场景，我们正在为其构建一套集成测试套件。 - 持续扩展 packages-index，增加对更多 RISC-V 设备的支持。 - ...",
+      "date": 1762214400000,
+      "image": null,
+      "filename": "20251104-ruyisdk-biweekly-55.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251104-ruyisdk-biweekly-55.md"
+    },
+    {
+      "title": "Biweekly 054: 2025-10-24",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！ 欢迎阅读第 54 期《RuyiSDK 双周进展》！ 经过多轮测试和打磨，RuyiSDK 0.42.0 终于和大家见面了！这个版本带来了多项重要改进，让您的使用体验更加顺畅和贴心。 我们特别关注了用户隐私和系统集成的需求，将遥测功能的默认模式调整为 local。现在，所有数据都会在本地记录，只有您主动选择时才会上传（请放心，所有数据均经过匿名化处理）。同时...",
+      "date": 1761264000000,
+      "image": null,
+      "filename": "20251024-ruyisdk-biweekly-54.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20251024-ruyisdk-biweekly-54.md"
+    },
+    {
+      "title": "Biweekly 053: 2025-09-30",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！欢迎阅读第 53 期《RuyiSDK 双周进展》！ 我们如期带来了 RuyiSDK 包管理器 0.41.0 版本，为大家的国庆假期准备了一份特别的“技术礼物”！每一个版本的迭代，都离不开社区朋友们的支持与反馈，我们由衷地感谢大家。 值此国庆佳节来临之际，祝大家节日快乐，阖家幸福！如果您在假期里有了闲暇时光，不妨来 RuyiSDK 的世界里转一转，体验一下新...",
+      "date": 1759190400000,
+      "image": null,
+      "filename": "20250930-ruyisdk-biweekly-53.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250930-ruyisdk-biweekly-53.md"
+    },
+    {
+      "title": "Biweekly 052: 2025-09-11",
+      "summary": "各位 RuyiSDK 的小伙伴们，大家好！ 欢迎阅读第 52 期《RuyiSDK 双周进展》！ 本期我们重点优化了发版测试流程，进一步加强了版本发布前的兼容性与文档测试。经过 2 天集中修复，RuyiSDK 0.40 现已正式发布。该版本存在一些已知问题（详见文档末尾），但不影响核心功能。请您在下载和使用前仔细阅读相关说明。 我们计划在 9 月 30 日发布 RuyiSDK 0.41，为您的假期折...",
+      "date": 1757548800000,
+      "image": null,
+      "filename": "20250911-ruyisdk-biweekly-52.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250911-ruyisdk-biweekly-52.md"
+    },
+    {
+      "title": "Biweekly 051: 2025-08-26",
+      "summary": "各位RuyiSDK的小伙伴们，大家好呀！ 来查收RuyiSDK第51期双周进展啦！首先要小小声跟大家说一声，这期咱们暂时没有新版本发布～主要是因为团队小伙伴最近全跑去深圳赶展啦（Elexcon 2025 深圳国际电子展暨嵌入式展，8.26-8.28）！展会现场我们团队小伙伴都积极与嵌入式小伙伴们面基聊技术、换想法💡，相信会带来一些新的感受和灵感～ 这期虽然没有新包可搓，但动态还是要追的嘛！近期除...",
+      "date": 1756166400000,
+      "image": null,
+      "filename": "20250826-ruyisdk-biweekly-51.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250826-ruyisdk-biweekly-51.md"
+    },
+    {
+      "title": "Biweekly 050: 2025-08-12",
+      "summary": "欢迎阅读第50期《RuyiSDK双周进展》！ 本期，值得欣喜的是： 现已在 PyPI 同步发布！您只需在 Python 环境中执行 命令，即可轻松安装 RuyiSDK 包管理器，开启您的 RISC-V 开发之旅。 如果您在使用过程中遇到任何问题，还可以通过以下方式获得支持： - 参与 8月14日（周四）15:00 举办的 第十一次 RuyiSDK Office Hours，我们将提供在线答疑服务。...",
+      "date": 1754956800000,
+      "image": null,
+      "filename": "20250812-ruyisdk-biweekly-50.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250812-ruyisdk-biweekly-50.md"
+    },
+    {
+      "title": "Biweekly 049: 2025-07-22",
+      "summary": "近期，RISC-V 生态发展迎来了一系列重要活动——\"RISC-V 中国峰会\"、\"RISC-V校园行·香港城市大学站\"等活动相继举办。团队小伙伴积极参与其中，不仅展示了我们的成果，也与行业同仁进行了深入交流，共同探讨技术发展趋势。由于这段时间的精力部分投入在这些行业活动中，本期更新内容相对精简，还请大家理解。后续我们将持续带来更多精彩内容，敬请关注！ 我们特别欣喜地发现，RuyiSDK 论坛 正变...",
+      "date": 1753142400000,
+      "image": null,
+      "filename": "20250722-ruyisdk-biweekly-49.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250722-ruyisdk-biweekly-49.md"
+    },
+    {
+      "title": "Biweekly 048: 2025-07-08",
+      "summary": "欢迎阅读第48期《RuyiSDK双周进展》！包管理器已更新新版本，欢迎下载试用。 为了让RISC-V开发者更方便的交流，https://ruyisdk.cn 新网站已经上线了！目前有PLCT实验室超过百名RISC-V开发人员和活跃爱好者帮助回答问题，欢迎注册并参与讨论分享。 如果您在 RuyiSDK 的使用中遇到问题，可以在 RuyiSDK讨论区 反馈，或者参加 7月17日（周四）下午 15:00...",
+      "date": 1751932800000,
+      "image": null,
+      "filename": "20250708-ruyisdk-biweekly-48.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250708-ruyisdk-biweekly-48.md"
+    },
+    {
+      "title": "Biweekly 047: 2025-06-24",
+      "summary": "欢迎阅读第47期《RuyiSDK双周进展》！包管理器已更新新版本，欢迎下载试用。如果您在 RuyiSDK 的使用中遇到问题，欢迎参加每双周四下午 15:00 开展的 “RuyiSDK Office Hours” 获得在线答疑支持服务（下一次在7月3日），也可以在 RuyiSDK讨论区 反馈。 下个开发版本计划7月8日发布，我们将持续带来更多改进。 RuyiSDK 0.36 对应的包管理器版本也为 ...",
+      "date": 1750723200000,
+      "image": null,
+      "filename": "20250624-ruyisdk-biweekly-47.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250624-ruyisdk-biweekly-47.md"
+    },
+    {
+      "title": "Biweekly 046: 2025-06-10",
+      "summary": "欢迎阅读第46期《RuyiSDK双周进展》！包管理器已更新新版本，欢迎下载试用。如果您在 RuyiSDK 的使用中遇到问题，欢迎参加每双周四下午 15:00 开展的 “RuyiSDK Office Hours” 获得在线答疑支持服务（下一次在6月19日），也可以在 RuyiSDK讨论区 反馈。 下个开发版本计划6月24日发布，我们将持续带来更多改进。 RuyiSDK 0.35 对应的包管理器版本也...",
+      "date": 1749513600000,
+      "image": null,
+      "filename": "20250610-ruyisdk-biweekly-46.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250610-ruyisdk-biweekly-46.md"
+    },
+    {
+      "title": "Biweekly 045: 2025-05-27",
+      "summary": "第45期《RuyiSDK双周进展》准时送达！包管理器已更新新版本，欢迎下载试用。如果您在 RuyiSDK 的使用中遇到问题，欢迎参加每双周四下午 15:00 开展的 “RuyiSDK Office Hours” 获得在线答疑支持服务（下一次在6月5日），也可以在 RuyiSDK讨论区 反馈。 下个开发版本计划6月10日发布，我们将持续带来更多改进。 RuyiSDK 0.34 对应的包管理器版本也为...",
+      "date": 1748304000000,
+      "image": null,
+      "filename": "20250527-ruyisdk-biweekly-45.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250527-ruyisdk-biweekly-45.md"
+    },
+    {
+      "title": "Biweekly 044: 2025-05-13",
+      "summary": "欢迎阅读《RuyiSDK 双周进展汇报》第 44 期，包管理器 和 ide 都有版本更新，欢迎下载试用。如果您在 RuyiSDK 的使用中遇到问题，欢迎参加每双周四下午 15:00 开展的 “RuyiSDK Office Hours” 获得在线答疑支持服务（下一次在5月22日），也可以在 RuyiSDK讨论区 反馈。 下个开发版本计划 5月27日发布，我们将持续带来更多改进。 RuyiSDK 0....",
+      "date": 1747094400000,
+      "image": null,
+      "filename": "20250513-ruyisdk-biweekly-44.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250513-ruyisdk-biweekly-44.md"
+    },
+    {
+      "title": "Biweekly 043: 2025-04-22",
+      "summary": "近两周进展已呈上，欢迎阅读《RuyiSDK 双周进展汇报》第 43 期。如果您在 RuyiSDK 的使用中遇到问题，欢迎参加每双周四下午 15:00 开展的 “RuyiSDK Office Hours” 获得在线答疑支持服务（下一次在4月24日），也可以在 RuyiSDK讨论区 反馈。 受五一假期影响，下个开发版本将顺延至5月13日发布，我们将持续带来更多创新改进。 RuyiSDK 0.32 对应...",
+      "date": 1745280000000,
+      "image": null,
+      "filename": "20250422-ruyisdk-biweekly-43.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250422-ruyisdk-biweekly-43.md"
+    },
+    {
+      "title": "Biweekly 042: 2025-04-08",
+      "summary": "大家好，RuyiSDK 近期在持续迭代的基础上，也在用户支持上做出更多努力。围绕 RuyiSDK 的使用、问题与缺陷、改进建议等在线会议 RuyiSDK Office Hours 本周四将迎来第二次会议，欢迎您的关注与加入。 第2次RuyiSDK Office Hours会议安排如下： - 会议频率：每两周一次，默认使用中文沟通 - 首次会议时间：2025年4月10日下午3:00（新加坡时间） -...",
+      "date": 1744070400000,
+      "image": null,
+      "filename": "20250408-ruyisdk-biweekly-42.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250408-ruyisdk-biweekly-42.md"
+    },
+    {
+      "title": "Biweekly 041: 2025-03-25",
+      "summary": "大家好，RuyiSDK 项目组为了更好地帮助开发者掌握 RuyiSDK 的使用，让开发团队能更加深入了解大家的需求从而改进产品，我们诚挚邀请您参加 RuyiSDK Office Hours 线上会议（类似于RISC-V技术答疑时间）。我们期待与您通过线上会议的方式相聚，共同探讨如何提升 RuyiSDK 的用户体验。会议内容将主要围绕 RuyiSDK 的使用、问题与缺陷、改进建议等话题进行交流，同时...",
+      "date": 1742860800000,
+      "image": null,
+      "filename": "20250325-ruyisdk-biweekly-41.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250325-ruyisdk-biweekly-41.md"
+    },
+    {
+      "title": "Biweekly 040: 2025-03-11",
+      "summary": "欢迎阅读《RuyiSDK 双周进展汇报》第 40 期。在过去的两周里，我们团队持续努力，推进各项功能的开发与优化，具体进展将在下文中详细呈现。 我们期待在 2025 年 3 月 25 日发布下一个开发版本，届时将带来更多创新与改进。感谢您一直以来的支持与关注，您的反馈是我们前进的动力！ RuyiSDK 0.29 对应的包管理器版本也为 0.29.0，已于今日发布。您可移步 [GitHub Rele...",
+      "date": 1741651200000,
+      "image": null,
+      "filename": "20250311-ruyisdk-biweekly-40.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250311-ruyisdk-biweekly-40.md"
+    },
+    {
+      "title": "Biweekly 039: 2025-02-25",
+      "summary": "欢迎阅读《RuyiSDK 双周进展汇报》第 39 期。在过去的两周里，我们团队持续努力，推进各项功能的开发与优化，具体进展将在下文中详细呈现。 我们期待在2025年3月11日发布下一个开发版本，届时将带来更多创新与改进。感谢您一直以来的支持与关注，您的反馈是我们前进的动力！ RuyiSDK 0.28 对应的包管理器版本也为 0.28.0，已于今日发布。您可移步 [GitHub Releases][...",
+      "date": 1740441600000,
+      "image": null,
+      "filename": "20250225-ruyisdk-biweekly-39.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250225-ruyisdk-biweekly-39.md"
+    },
+    {
+      "title": "Biweekly 038: 2025-02-11",
+      "summary": "新年开工啦！🎉 RuyiSDK 团队已经继续启航~🚀 在过年期间，大家短暂地停下脚步，休息整顿，蓄势待发。2025 年，新的一年，新的开始，我们将继续撸起袖子加油干，全力推进 RuyiSDK 的建设，为大家提供更实用、更高效的产品体验！ 期待与大家一起创造更多精彩！ ✨ 我们也非常欢迎大家参与贡献，一起让 RuyiSDK 变得更好！无论是提交代码、反馈问题，还是分享想法，您的参与都是我们前进的...",
+      "date": 1739232000000,
+      "image": null,
+      "filename": "20250211-ruyisdk-biweekly-38.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250211-ruyisdk-biweekly-38.md"
+    },
+    {
+      "title": "Biweekly 037: 2025-01-14",
+      "summary": "RuyiSDK包管理器 V0.26 、RuyiSDK IDE V0.0.3 版本已发布。 RuyiSDK包管理器近期在细节上进行完善和优化，主要有新增遥测允许上传设置命令、修复虚拟环境 映射问题、兼容性加强和工程优化等内容。RuyiSDK 软件源则发布了RevyOS新版本，同时配合 映射逻辑升级 profile API。 RuyiSDK IDE 目前针对 milkv duo 开发板进一步完善了开发...",
+      "date": 1736812800000,
+      "image": null,
+      "filename": "20250114-ruyisdk-biweekly-37.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20250114-ruyisdk-biweekly-37.md"
+    },
+    {
+      "title": "Biweekly 036: 2024-12-31",
+      "summary": "今天是2024年度的最后一天，在这个辞旧迎新的时刻，我谨代表RuyiSDK项目团队，向所有项目的贡献者、参与者表示最诚挚的感谢！衷心感谢大家的关注和支持，祝愿各位元旦快乐，万事如意！ 这一期，RuyiSDK包管理器 V0.25 、RuyiSDK IDE V0.0.2 版本已发布。 RuyiSDK包管理器重点完善遥测配置、软件源包版本规范化，并修复了一些已知的问题； RuyiSDK IDE 目前针对...",
+      "date": 1735603200000,
+      "image": null,
+      "filename": "20241231-ruyisdk-biweekly-36.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241231-ruyisdk-biweekly-36.md"
+    },
+    {
+      "title": "Biweekly 035: 2024-12-17",
+      "summary": "RuyiSDK包管理器 V0.24 版本已于今日发布。RuyiSDK IDE V0.0.1版本发布，本版本面向RuyiSDK测试人员，提供Linux系统 x8664、riscv64、aarch64 三架构的安装程序，欢迎下载试用和反馈建议。 RuyiSDK包管理器针对兼容性进一步优化更新了依赖版本。RuyiSDK 软件源近期针对开发板镜像进行了更新，用户可以通过系统安装器安装新版本镜像。此外为了让...",
+      "date": 1734393600000,
+      "image": null,
+      "filename": "20241217-ruyisdk-biweekly-35.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241217-ruyisdk-biweekly-35.md"
+    },
+    {
+      "title": "Biweekly 034: 2024-12-03",
+      "summary": "RuyiSDK包管理器 V0.23 版本已于今日发布。包管理器遥测功能正式上线了，我们秉持最小化收集信息的原则，当前采用匿名化的方式收集一些与个人身份无关的设备信息和使用数据用于统计和优化产品服务，收集的数据与方式等详细信息详见隐私政策)。请您放心，目前的数据是匿名化的，并不会有任何您的个人身份信息，因此也诚挚的希望您可以参与到数据上传反馈已助力我们改进服务，如果您拒绝上传，那么可以在使用前修改数...",
+      "date": 1733184000000,
+      "image": null,
+      "filename": "20241203-ruyisdk-biweekly-34.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241203-ruyisdk-biweekly-34.md"
+    },
+    {
+      "title": "Biweekly 033: 2024-11-19",
+      "summary": "RuyiSDK包管理器 V0.22 版本已于今日发布。包管理器近期主要针对 Linux发行版的兼容性支持进行了核心依赖的调研和调整，以满足 Debian、RevyOS、RuyiOS(开展中)、Ubuntu、Fedora、deepin、Arch Linux等发行版的兼容性需求。并新增了 [RuyiSDK 的平台支持文档][ruyisdk-platform-support] 告知用户RuyiSDK的兼...",
+      "date": 1731974400000,
+      "image": null,
+      "filename": "20241119-ruyisdk-biweekly-33.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241119-ruyisdk-biweekly-33.md"
+    },
+    {
+      "title": "Biweekly 032: 2024-11-05",
+      "summary": "RuyiSDK包管理器 V0.21 版本已于今日发布。包管理器近期主要修复了一些测试出的缺陷，并增加兼容性支持和一些小功能的实现，进一步完善了包管理器工具； Milkv Duo SDK建设计划已经完成第一阶段的验证和缺陷整理，后续可以有针对性的进行SDK的优化了。 《从零开始开发VSCode插件与Ruyi IDE插件》 第3课已经上线B站。Eclipse 插件开发当前成功的搭建并解决了依赖项的问题...",
+      "date": 1730764800000,
+      "image": null,
+      "filename": "20241105-ruyisdk-biweekly-32.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241105-ruyisdk-biweekly-32.md"
+    },
+    {
+      "title": "Biweekly 031: 2024-10-22",
+      "summary": "RuyiSDK V0.20 版本已于今日发布。为了简化打包和供应链安全的考虑，包管理器工具移除了插件机制的 Starlark 沙箱，同时完善了遥测功能，增加了禁用遥测选项、清除本地已收集的信息等功能；并修复了一些已知bug。 LLVM新增了rv64ilp32 ABI的支持，目前可以成功编译 rv64ilp32 Linux kernel（bf63582b08）并进入用户态了，这项成果已在玄铁团队的宣...",
+      "date": 1729555200000,
+      "image": null,
+      "filename": "20241022-ruyisdk-biweekly-31.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20241022-ruyisdk-biweekly-31.md"
+    },
+    {
+      "title": "Biweekly 030: 2024-09-30",
+      "summary": "RuyiSDK V0.19 版本已于今日发布。包管理器工具为 新增了多工具链支持，目前可以为一个虚拟环境配置多个 target tuple 互不相同的工具链包，满足sdk构建时多工具链的需求。同时，RuyiSDK 开始了基础的遥测功能采集用户数据，目前完成了基础数据的采集（当前存储在用户本地），后续上传功能会在用户隐私协议、后端服务器就绪后正式启用。收集的 ruyi 安装信息、ruyi insta...",
+      "date": 1727654400000,
+      "image": null,
+      "filename": "20240930-ruyisdk-biweekly-30.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240930-ruyisdk-biweekly-30.md"
+    },
+    {
+      "title": "Biweekly 029: 2024-09-14",
+      "summary": "RuyiSDK V0.18 版本已于今日发布。本期 RuyiSDK 重点针对 Milk-V Duo 开发板进行支持，调研并集成了演示示例 milkv-duo-examples，并集成了由 Milk-V 提供的、在 x86_64 平台上交叉编译 milkv-duo-examples 所需的自定义工具链，提供了一套 Milk-V Duo 的配套开发资源。同时软件源对 WPS Office、RV64IL...",
+      "date": 1726272000000,
+      "image": null,
+      "filename": "20240914-ruyisdk-biweekly-29.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240914-ruyisdk-biweekly-29.md"
+    },
+    {
+      "title": "Biweekly 028: 2024-09-03",
+      "summary": "RuyiSDK V0.17 版本已于今日发布。RuyiSDK 包管理器修复了一些已知的缺陷，RuyiSDK 软件源更新了 Box64 和 WPS Office；RuyiSDK 官网也新增 algolia search，现在可以搜索网站上的任何内容了。 此外，RuyiSDK 在第四届 RISC-V 中国峰会（RISC-V Summit China 2024）上，进行了包括 RuyiSDK 介绍、Ru...",
+      "date": 1725321600000,
+      "image": null,
+      "filename": "20240903-ruyisdk-biweekly-28.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240903-ruyisdk-biweekly-28.md"
+    },
+    {
+      "title": "Biweekly 027: 2024-08-13",
+      "summary": "RuyiSDK V0.16 版本已于今日发布。包管理器完成了设备安装器（）的插件化改造，后续升级程序将更加方便。此外，RuyiSDK 完善了Canaan Kendryte K230D 开发板的支持，对 K230D SDK 源码进行了更新和完善，同时建立了SDK自动构建CI，并联合玄铁团队和嘉楠科技进行了标题为“嘉楠勘智 K230D: 首款基于新 32 位 RuyiSDK 的 AIoT 量产芯片”的...",
+      "date": 1723507200000,
+      "image": null,
+      "filename": "20240813-ruyisdk-biweekly-27.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240813-ruyisdk-biweekly-27.md"
+    },
+    {
+      "title": "Biweekly 026: 2024-07-23",
+      "summary": "RuyiSDK V0.15 版本已于今日发布。 这个版本，包管理器为多语言支持进行了准备，完成了用户系统区域、语言配置与包管理器语言版本的匹配；同时包管理器支持了不依赖 Docker 的构建方式，为Linux发行版打包 ruyi 和将 ruyi 集成到Linux发行版提供了更多样的构建方式。RuyiSDK 软件源随着Box64 上游版本的更新，将Box64版本更新到 0.3.0 版本，并完善了对W...",
+      "date": 1721692800000,
+      "image": null,
+      "filename": "20240723-ruyisdk-biweekly-26.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240723-ruyisdk-biweekly-26.md"
+    },
+    {
+      "title": "Biweekly 025: 2024-07-09",
+      "summary": "RuyiSDK V0.14 版本已于今日发布。 在这个版本中，包管理器正式引入插件架构， 虚拟环境的 profile 相关处理现在完全由插件负责了。此外 PLCT 作为主要贡献者完成了Box64 的RISC-V架构适配（同时也是LoongArch jit主要贡献者），并将代码合入上游，RuyiSDK 软件源此次增加了 Box64 模拟器，并初步实现了在 RISC-V 上启动运行 wps-linux...",
+      "date": 1720483200000,
+      "image": null,
+      "filename": "20240709-ruyisdk-biweekly-25.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240709-ruyisdk-biweekly-25.md"
+    },
+    {
+      "title": "Biweekly 024: 2024-06-24",
+      "summary": "RuyiSDK V0.13 版本已于今日发布。 在这个版本中，操作系统支持矩阵增加了开发板的IP Core信息，同时完成了英文版本的支持。RuyiSDK包管理器修复并完善了一些缺陷，同时为引入插件架构做了准备，以达到后续更新不需要每次都必须下载最新版的ruyi工具。同时ruyi包管理器增加了新发布的 openEuler 24.03 LTS 系统的支持和测试； 此外，RuyiSDK 还参加了两期活动...",
+      "date": 1719187200000,
+      "image": null,
+      "filename": "20240624-ruyisdk-biweekly-24.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240624-ruyisdk-biweekly-24.md"
+    },
+    {
+      "title": "Biweekly 023: 2024-06-11",
+      "summary": "RuyiSDK V0.12 版本已于今日发布。 在这个版本中，操作系统支持矩阵为3款开发板新增了其支持的操作系统，RuyiSDK包管理器本期重点修复并完善了一些缺陷，并增加了Ubuntu 24.04 LTS 系统的支持和测试；官网建设方面申请了公用邮箱contact@ruyisdk.cn，优化了订阅体验。 RuyiSDK 目前采用先调研摸底、然后包管理器集成支持（含设备安装器集成支持）、再IDE集...",
+      "date": 1718064000000,
+      "image": null,
+      "filename": "20240611-ruyisdk-biweekly-23.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240611-ruyisdk-biweekly-23.md"
+    },
+    {
+      "title": "Biweekly 022: 2024-05-28",
+      "summary": "RuyiSDK V0.11 版本已于今日发布。 RuyiSDK社区首次线下 Meetup 成功举办。RuyiSDK 包管理器本期重点修复并完善了一些缺陷，同时RuyiSDK 软件源增加支持了 Pine64 Star64开发板，此外正在设计第三方系统镜像在如意软件源的二次分发管理（很多系统镜像存放在网盘、Google Drive、MEGA 等平台上，不便于下载）、以及根据源码自构建出的系统镜像的管理...",
+      "date": 1716854400000,
+      "image": null,
+      "filename": "20240528-ruyisdk-biweekly-22.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240528-ruyisdk-biweekly-22.md"
+    },
+    {
+      "title": "Biweekly 021: 2024-05-14",
+      "summary": "RuyiSDK V0.10 版本已于今日发布。 如意软件源仓库发布了PLCT实验室提交的支持T-Head Vector的LLVM 17.0.6 版本。RISC-V设备集成与支持方面，RuyiSDK 完成了对沁恒微电子现有 RISC-V 全产品系列的调研，并在设备系统安装器中添加支持。 此外，全志、芯来RISC-V处理器的开发板也已经加入集成设备清单，目前相关开发板大部分已经完成调研，接下来也会集成...",
+      "date": 1715644800000,
+      "image": null,
+      "filename": "20240514-ruyisdk-biweekly-21.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240514-ruyisdk-biweekly-21.md"
+    },
+    {
+      "title": "Biweekly 020: 2024-04-23",
+      "summary": "RuyiSDK V0.9 版本已于今日发布。 RuyiSDK 完成了对矽速现有 RISC-V 全产品线的调研，并在设备系统安装器中添加支持，除RISCV FPGA 系列中无RISC-V硬核的开发板，均已集成到RuyiSDK中。同时，完成了对 嘉楠勘智 K510 的支持。 近期提交了基于17.0.6版本添加xtheadvector支持的LLVM工具链，这一支持后续也将集成到RuyiSDK中。此外，包...",
+      "date": 1713830400000,
+      "image": null,
+      "filename": "20240423-ruyisdk-biweekly-20.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240423-ruyisdk-biweekly-20.md"
+    },
+    {
+      "title": "Biweekly 019: 2024-04-09",
+      "summary": "RuyiSDK V0.8 版本已于今日发布。RuyiSDK 官网已正式上线；RuyiSDK 软件源已集成PLCT发布的支持香山南湖微处理器的GNU； RuyiSDK 对milkv全产品线支持计划于上期基本完成，本期缺失待测设备还未就绪，因此仍需等待设备就绪后完成最后部分设备测试工作。对矽速全产品线支持计划本期完成了部分调研和集成准备工作，其Linux RISC-V SBC 系列所有开发板、以及Ma...",
+      "date": 1712620800000,
+      "image": null,
+      "filename": "20240409-ruyisdk-biweekly-19.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240409-ruyisdk-biweekly-19.md"
+    },
+    {
+      "title": "Biweekly 018: 2024-03-26",
+      "summary": "RuyiSDK V0.7 版本今日正式发布。GCC上游社区合并了PLCT提交的香山南湖微架构补丁，RuyiSDK包管理器正在对最新的gnu-upstream进行新版本的打包分发，预计近日将发布；RuyiSDK 官网已公开内测；操作系统安装器新增了Milk-V Duo S、Milk-V Mars、Milk-V Vega等产品的集成，截止本版本为止，Milk-V当前全产品线已经初步集成到RuyiSDK...",
+      "date": 1711411200000,
+      "image": null,
+      "filename": "20240326-ruyisdk-biweekly-18.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240326-ruyisdk-biweekly-18.md"
+    },
+    {
+      "title": "Biweekly 017: 2024-03-12",
+      "summary": "RuyiSDK V0.6 版本如期而至，RuyiSDK官网上线内测，网站各基础板块已具备，文档和内容已初步成型。RISC-V开发板操作系统支持矩阵一直在持续更新，本期在官网上发布第一版结果。操作系统安装器对已集成的开发板可用操作系统的类型进行了增加。 此外调研了milkv、矽速、沁恒微电子三家厂商的RISC-V产品，开始启动milkv、矽速全产品线支持计划。 更多更新详见下方详情，欢迎大家试用并提...",
+      "date": 1710201600000,
+      "image": null,
+      "filename": "20240312-ruyisdk-biweekly-17.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240312-ruyisdk-biweekly-17.md"
+    },
+    {
+      "title": "Biweekly 016: 2024-02-27",
+      "summary": "RuyiSDK V0.5 版本如期发布，此版本集成并发布了 PLCT GNU 小队新发布的 GNU RV64ILP32 工具链，并更新了适用 th1520 的 plctxthead-linux-gnu 工具链。继续扩展了系统安装器支持的 RISC-V 开发板，添加了对 SiFive HiFive Unmatched 、Canaan Kendryte K230 两款RISC-V 开发板的支持，包括镜...",
+      "date": 1708992000000,
+      "image": null,
+      "filename": "20240227-ruyisdk-biweekly-16.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240227-ruyisdk-biweekly-16.md"
+    },
+    {
+      "title": "Biweekly 015: 2024-01-30",
+      "summary": "RuyiSDK V0.4版本今日正式发布。此版本添加了对Allwinner Nezha D1、Sipeed Lichee RV、StarFive VisionFive、StarFive VisionFive2四款RISC-V开发板的支持，包括镜像信息的维护与下载、开发板系统的安装引导，为RISC-V开发者提供了更加便捷的OS获取及安装体验。此外RuyiSDK软件源新增提供了riscv64 平台的 ...",
+      "date": 1706572800000,
+      "image": null,
+      "filename": "20240130-ruyisdk-biweekly-15.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240130-ruyisdk-biweekly-15.md"
+    },
+    {
+      "title": "Biweekly 014: 2024-01-16",
+      "summary": "RuyiSDK V0.3 版本今日发布，这是RuyiSDK 项目切换为开发迭代模式后的第一次发版，为了更好的让用户了解版本功能的演进，包管理器提供了软件源新闻消息的功能。此外新增了主流的3款 RISC-V 开发板的 可用镜像信息维护与下载、开发板系统安装引导程序，方便 RISC-V 开发者获取指定开发板可用的OS并可方便的安装OS的安装。欢迎大家试用并提供反馈和建议。下一个开发版本 RuyiSDK...",
+      "date": 1705363200000,
+      "image": null,
+      "filename": "20240116-ruyisdk-biweekly-14.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240116-ruyisdk-biweekly-14.md"
+    },
+    {
+      "title": "Biweekly 013: 2024-01-02",
+      "summary": "2024 年 RuyiSDK 项目将切换为更加敏捷的开发迭代模式，预期每 2 周发布一个开发版本，提供一些新功能，如包管理器能力迭代、RuyiSDK软件源提供新的软件包或者软件包版本升级、或工具链、板卡的新增适配等等，这些更新将以 release note 的方式公开。下次更新的 RuyiSDK V0.3 版本将在 1 月 16 日发布。 在 Ruyi 包管理器方面，近 2 周的工作主要是制定本里...",
+      "date": 1704153600000,
+      "image": null,
+      "filename": "20240102-ruyisdk-biweekly-13.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20240102-ruyisdk-biweekly-13.md"
+    },
+    {
+      "title": "Biweekly 012: 2023-12-19",
+      "summary": "RuyiSDK V0.2版本发布，为大家提供了一个基础的以编译工具链和模拟器运行环境为主的包管理器，并在12月15日举办的 PLCT Lab OpenDay 2023 线上会议上分享了RuyiSDK V0.2的建设成果和未来计划，希望这个版本能够给大家带来不一样的编译环境搭建体验，从文档开始，欢迎大家关注和试用。 项目地址：https://github.com/ruyisdk/ruyi Ruyi ...",
+      "date": 1702944000000,
+      "image": null,
+      "filename": "20231219-ruyisdk-biweekly-12.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20231219-ruyisdk-biweekly-12.md"
+    },
+    {
+      "title": "Biweekly 011: 2023-12-05",
+      "summary": "2023年即将结束，小伙伴们都开始盘点和总结今年的工作，RuyiSDK团队则在紧锣密鼓地准备V0.2版本的发布。RuyiSDKV0.2版本很快就将与大家见面，希望能成为2023年底的一份小礼物，为大家在寒冬中带来一丝温暖。 项目地址：https://github.com/ruyisdk/ruyi Ruyi 0.2.x 分支的功能开发已完成，代码已冻结，进入测试阶段。 目前已经支持了以下功能： 源代...",
+      "date": 1701734400000,
+      "image": null,
+      "filename": "20231205-ruyisdk-biweekly-11.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20231205-ruyisdk-biweekly-11.md"
+    },
+    {
+      "title": "Biweekly 010: 2023-11-21",
+      "summary": "即将进入年底，各类技术会议密集召开，各种新产品和新动态不断发布，各类社区的技术氛围空前浓厚。RuyiSDK将在下个月按计划发布V0.2版本，欢迎大家关注和试用。 需求变更：ruyi v0.2 新增了 sysroot、QEMU 的支持需求，该版本的代码冻结因而未在上周完成。 目前仍然在做 QEMU、LLVM 的打包工作。 完成了从上游源码、平头哥源码构建的 GCC 工具链的打包，期间修复了上游 cr...",
+      "date": 1700524800000,
+      "image": null,
+      "filename": "20231121-ruyisdk-biweekly-10.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20231121-ruyisdk-biweekly-10.md"
+    },
+    {
+      "title": "Biweekly 009: 2023-11-07",
+      "summary": "天气渐冷，RuyiSDK双周进展已经来到了第9期。从本期开始，RuyiSDK双周进展将采用全新的内容组织形式，期望能给您带来更好的体验，成为您冬日里的一缕暖阳。 项目地址：https://github.com/ruyisdk/ruyi 相比两周前，调整了一部分软件源的元数据格式，联网包管理器的功能也实现了大部分。 目前实现了以下的功能点： 二进制分发：可以打包为单个二进制可执行文件了。 平台适配方...",
+      "date": 1699315200000,
+      "image": null,
+      "filename": "20231107-ruyisdk-biweekly-09.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20231107-ruyisdk-biweekly-09.md"
+    }
+  ]
+}

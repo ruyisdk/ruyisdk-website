@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkruyisdk=globalThis.webpackChunkruyisdk||[]).push([[7807],{20632(e){e.exports=JSON.parse('{"blogBasePath":"/de/biweekly","blogTitle":"\u53cc\u5468\u62a5"}')}}]);

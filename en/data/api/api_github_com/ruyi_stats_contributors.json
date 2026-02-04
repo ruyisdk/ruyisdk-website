@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "Glavo",
+        "id": 20694662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/20694662?v=4",
+        "html_url": "https://github.com/Glavo"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "bkmgit",
+        "id": 1679477,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1679477?v=4",
+        "html_url": "https://github.com/bkmgit"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "U2FsdGVkX1",
+        "id": 11484206,
+        "avatar_url": "https://avatars.githubusercontent.com/u/11484206?v=4",
+        "html_url": "https://github.com/U2FsdGVkX1"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "wychlw",
+        "id": 54484233,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54484233?v=4",
+        "html_url": "https://github.com/wychlw"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "RekiDunois",
+        "id": 23435534,
+        "avatar_url": "https://avatars.githubusercontent.com/u/23435534?v=4",
+        "html_url": "https://github.com/RekiDunois"
+      }
+    },
+    {
+      "total": 6,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
+      }
+    },
+    {
+      "total": 1209,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:48.483Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyi/stats/contributors"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "total": 1,
+      "author": {
+        "login": "RevySR",
+        "id": 13116853,
+        "avatar_url": "https://avatars.githubusercontent.com/u/13116853?v=4",
+        "html_url": "https://github.com/RevySR"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
+      }
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-01-29T14:43:51.683Z",
+    "source": "https://api.github.com/repos/ruyisdk/ruyi-package-ci/stats/contributors"
+  }
+}
