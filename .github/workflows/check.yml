@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - create-pull-request/submodules
+      - create-pull-request/data
 
 jobs:
   build:
