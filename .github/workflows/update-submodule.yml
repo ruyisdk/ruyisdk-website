@@ -26,9 +26,16 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            docs
+            news/ruyinews
+            news/weeklies
           commit-message: "cron: auto update submodules"
           signoff: true
           title: "Auto-update: Submodules to latest"
           body: "Auto generated PR to sync submodules."
           labels: automat
           branch: create-pull-request/submodules
+
+      - name: PNPM Build
+        uses: ./.github/workflows/composite_npm_build
