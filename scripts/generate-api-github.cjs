@@ -29,166 +29,241 @@ const DATA_REPO_SUF = '_repo.json';
 const SUM_FILE = path.resolve(__dirname, '../static/data/generated_contributors.json');
 const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_filter.md');
 
+// Cache/fallback
+const CACHE_DIR = path.resolve(__dirname, 'cache');
+const FALLBACK_FILE = path.resolve(CACHE_DIR, 'github-stats.fallback.json');
 
-async function fetchGitHubApi(url) {
+const MAX_RETRY = Number(process.env.GITHUB_MAX_RETRY || 5);
+const BASE_DELAY = Number(process.env.GITHUB_RETRY_BASE_MS || 1000);
+const RETRY_FACTOR = Number(process.env.GITHUB_RETRY_FACTOR || 2);
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
+const DRY_RUN = process.argv.includes('--dry-run');
+const FORCE_202 = process.argv.includes('--force-202-mock');
 
-  try {
-    const headers = {
-      Accept: 'application/vnd.github.v3+json',
-      'User-Agent': 'ruyisdk-website-generator',
-    };
-    if (process.env.GITHUB_TOKEN) {
-      headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    }
-    const res = await fetch(url, {
-      headers: headers,
-      signal: controller.signal,
-    });
-
-    if (res.status !== 200) {
-      console.error(`[generate-api-github] API ${url} return HTTP ${res.status} ${res.statusText}`);
-      return null;
-    }
-
-    const json = await res.json();
-    if (!json || typeof json !== 'object') {
-      console.error(`[generate-api-github] API ${url} return invalid JSON payload`);
-      return null;
-    }
-
-    return {data: json, headers: res.headers};
-
-  } catch (err) {
-    console.error('[generate-api-github] Unexcepted error in fetchGitHubApi: ', err);
-    return null;
-  } finally {
-    clearTimeout(timeout);
-  }
+function ensureCacheDir() {
+  try { if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true }); } catch (e) { /* ignore */ }
 }
 
+async function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function fetchWithRetry(url) {
+  if (FORCE_202) {
+    console.warn('[generate-api-github] --force-202-mock active, simulating 202 response for', url);
+    return { ok: false, status: 202 };
+  }
+
+  let attempt = 0;
+  let lastErr = null;
+  while (attempt < MAX_RETRY) {
+    attempt++;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10_000);
+    try {
+      const headers = {
+        Accept: 'application/vnd.github.v3+json',
+        'User-Agent': 'ruyisdk-website-generator',
+      };
+      if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+      const res = await fetch(url, { headers, signal: controller.signal });
+      clearTimeout(timeout);
+
+      if (res.status === 202) {
+        console.warn(`[generate-api-github] API ${url} returned 202 Accepted (background processing). attempt=${attempt}`);
+        // retry after backoff
+        const delay = BASE_DELAY * Math.pow(RETRY_FACTOR, attempt - 1);
+        await sleep(delay);
+        continue;
+      }
+
+      if (res.status >= 500) {
+        console.warn(`[generate-api-github] API ${url} returned ${res.status} (server error). attempt=${attempt}`);
+        const delay = BASE_DELAY * Math.pow(RETRY_FACTOR, attempt - 1);
+        await sleep(delay);
+        continue;
+      }
+
+      if (res.status !== 200) {
+        // treat 4xx as non-retriable but do not write empty output
+        console.error(`[generate-api-github] API ${url} returned HTTP ${res.status} ${res.statusText}`);
+        return { ok: false, status: res.status };
+      }
+
+      const json = await res.json();
+      if (!json || typeof json !== 'object') {
+        console.error(`[generate-api-github] API ${url} returned invalid JSON payload`);
+        return { ok: false, status: res.status };
+      }
+
+      return { ok: true, status: res.status, data: json, headers: res.headers };
+
+    } catch (err) {
+      clearTimeout(timeout);
+      lastErr = err;
+      console.warn(`[generate-api-github] Error fetching ${url} (attempt ${attempt}): ${err.message || err}`);
+      const delay = BASE_DELAY * Math.pow(RETRY_FACTOR, attempt - 1);
+      await sleep(delay);
+      continue;
+    }
+  }
+
+  console.error(`[generate-api-github] Exhausted retries for ${url}. last error: ${lastErr && (lastErr.message || lastErr)}`);
+  return { ok: false, status: 0, error: lastErr };
+}
+
+function cachePathFor(repo, type) {
+  // type: 'repo' | 'contributors'
+  return path.resolve(CACHE_DIR, `${repo}_${type}.cached.json`);
+}
+
+function writeFileIfNotDryRun(filePath, content) {
+  if (DRY_RUN) { console.info('[generate-api-github] DRY RUN - would write:', filePath); return; }
+  fs.writeFileSync(filePath, `${JSON.stringify(content, null, 2)}\n`, 'utf8');
+}
 
 async function fetchRepo(repo) {
   const url = `${GITHUB_API_BASE}/${repo}`;
-  const raw = await fetchGitHubApi(url)
+  const res = await fetchWithRetry(url);
+  const fn = path.resolve(DATA_BASE, `${repo}${DATA_REPO_SUF}`);
+  ensureCacheDir();
+  const cpath = cachePathFor(repo, 'repo');
 
-  if (!raw || typeof raw !== 'object') {
-    console.info(`[generate-api-github] Skip ${repo}`);
+  if (res.ok) {
+    const rd = res.data;
+    if (typeof rd.visibility !== 'string' || rd.visibility !== 'public') {
+      console.info(`[generate-api-github] Skip ${repo} (not public)`);
+      return;
+    }
+
+    const opr = await fetchPRs(repo);
+
+    const data = {
+      data: {
+        stargazers_count: rd.stargazers_count,
+        forks_count: rd.forks_count,
+        subscribers_count: rd.subscribers_count,
+        open_issues_count: rd.open_issues_count,
+        prs_count: opr,
+      },
+      ruyisdk_org_data: { generatedAt: new Date().toISOString(), source: url },
+    };
+
+    // update cache and final output
+    try { writeFileIfNotDryRun(cpath, data); } catch (e) { console.warn('[generate-api-github] Failed to write cache', e); }
+    try { writeFileIfNotDryRun(fn, data); } catch (e) { console.warn('[generate-api-github] Failed to write output', e); }
+
+    console.log(`[generate-api-github] Update ${repo}`);
     return;
   }
 
-  const fn = path.resolve(DATA_BASE, `${repo}${DATA_REPO_SUF}`);
-  const rd = raw.data
-
-  if (typeof rd.visibility !== 'string' || rd.visibility !== 'public') {
-    console.info(`[generate-api-github] Skip ${repo}`);
+  // fallback behavior
+  if (fs.existsSync(cpath)) {
+    const cached = JSON.parse(fs.readFileSync(cpath, 'utf8'));
+    console.warn(`[generate-api-github] Using cached repo data for ${repo}`);
+    try { writeFileIfNotDryRun(fn, cached); } catch (e) { console.warn('[generate-api-github] Failed to write output from cache', e); }
+    return;
   }
 
-  const opr = await fetchPRs(repo)
-  if (!opr || typeof opr !== 'number') {
-    console.warn(`[generate-api-github] Skip ${repo} due to fetchPRs ${opr}`)
+  if (fs.existsSync(FALLBACK_FILE)) {
+    const fallback = JSON.parse(fs.readFileSync(FALLBACK_FILE, 'utf8'));
+    console.warn(`[generate-api-github] Using fallback data for ${repo}`);
+    try { writeFileIfNotDryRun(fn, fallback); } catch (e) { console.warn('[generate-api-github] Failed to write output from fallback', e); }
+    return;
   }
 
-  const data = {
-    data: {
-      stargazers_count: rd.stargazers_count, // stars
-      forks_count: rd.forks_count, // forks
-      subscribers_count: rd.subscribers_count, // watches
-      open_issues_count: rd.open_issues_count, // open issues+PRs
-      prs_count: opr,  // all PRs
-    },
-
-    // auto generate info
-    ruyisdk_org_data: {
-      generatedAt: new Date().toISOString(),
-      source: url,
-    },
-  };
-
-  fs.writeFileSync(fn, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-
-  console.log(`[generate-api-github] Update ${repo}`);
+  console.error(`[generate-api-github] No cache or fallback available for ${repo}; skipping. (status=${res.status})`);
 }
-
 
 async function fetchContributors(repo) {
   const url = `${GITHUB_API_BASE}/${repo}/stats/contributors`;
-  const raw = await fetchGitHubApi(url)
+  const res = await fetchWithRetry(url);
+  const fn = path.resolve(DATA_BASE, `${repo}${DATA_CONTR_SUF}`);
+  ensureCacheDir();
+  const cpath = cachePathFor(repo, 'contributors');
 
-  if (!raw || typeof raw !== 'object') {
-    console.info(`[generate-api-github] Skip ${repo}`);
+  if (res.ok) {
+    const rd = res.data;
+    if (!Array.isArray(rd)) {
+      console.warn(`[generate-api-github] ${repo} contributors API returned non-array`);
+      return;
+    }
+
+    const json = [];
+    for (const c of rd) {
+      if (!c.author || typeof c.author !== 'object') {
+        console.warn('[generate-api-github] Skip contributor without author');
+        continue;
+      }
+      if (typeof c.author.type !== 'string' || c.author.type !== 'User') {
+        console.warn(`[generate-api-github] Skip contributor by type ${c.author.type}`);
+        continue;
+      }
+
+      json.push({
+        total: c.total,
+        author: { login: c.author.login, id: c.author.id, avatar_url: c.author.avatar_url, html_url: c.author.html_url },
+      });
+    }
+
+    const data = { data: json, ruyisdk_org_data: { generatedAt: new Date().toISOString(), source: url } };
+    try { writeFileIfNotDryRun(cpath, data); } catch (e) { console.warn('[generate-api-github] Failed to write cache', e); }
+    try { writeFileIfNotDryRun(fn, data); } catch (e) { console.warn('[generate-api-github] Failed to write output', e); }
+
+    console.log(`[generate-api-github] Update ${repo}`);
     return;
   }
 
-  const fn = path.resolve(DATA_BASE, `${repo}${DATA_CONTR_SUF}`);
-  const rd = raw.data
-  const json = []
-  // - stats: [{ total, weeks:[], author: { ... } }, ...]
-  for (const c of rd) {
-    if (!c.author || typeof c.author !== 'object') {
-      console.warn('[generate-api-github] Skip contributor without author');
-      continue
-    }
-    if (typeof c.author.type !== 'string' || c.author.type !== 'User') {
-      console.warn(`[generate-api-github] Skip contributor by type ${c.author.type}`);
-      continue
-    }
-
-    json.push({
-      total: c.total,
-      author: {
-        login: c.author.login,
-        id: c.author.id,
-        avatar_url: c.author.avatar_url,
-        html_url: c.author.html_url,
-      }
-    });
+  // fallback path
+  if (fs.existsSync(cpath)) {
+    const cached = JSON.parse(fs.readFileSync(cpath, 'utf8'));
+    console.warn(`[generate-api-github] Using cached contributors for ${repo}`);
+    try { writeFileIfNotDryRun(fn, cached); } catch (e) { console.warn('[generate-api-github] Failed to write output from cache', e); }
+    return;
   }
 
-  const data = {
-    data: json,
+  if (fs.existsSync(FALLBACK_FILE)) {
+    const fallback = JSON.parse(fs.readFileSync(FALLBACK_FILE, 'utf8'));
+    console.warn(`[generate-api-github] Using fallback contributors for ${repo}`);
+    try { writeFileIfNotDryRun(fn, fallback); } catch (e) { console.warn('[generate-api-github] Failed to write output from fallback', e); }
+    return;
+  }
 
-    // auto generate info
-    ruyisdk_org_data: {
-      generatedAt: new Date().toISOString(),
-      source: url,
-    },
-  };
-
-  fs.writeFileSync(fn, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-
-  console.log(`[generate-api-github] Update ${repo}`);
+  console.error(`[generate-api-github] No cache or fallback available for ${repo}; skipping contributors. (status=${res.status})`);
 }
-
 
 async function fetchPRs(repo) {
   const url = `${GITHUB_API_BASE}/${repo}/pulls?state=all&per_page=1`;
-  const raw = await fetchGitHubApi(url);
+  const res = await fetchWithRetry(url);
 
-  if (!raw || typeof raw !== 'object') {
-    console.warn(`[generate-api-github] Skip ${repo}`);
-    return;
-  }
-  const rd = raw.data
-  const rh = raw.headers
-  if (!Array.isArray(rd)) {
-    console.warn(`[generate-api-github] ${repo} API response not array`);
-    return;
-  }
+  if (res.ok) {
+    const rd = res.data;
+    const rh = res.headers;
+    if (!Array.isArray(rd)) {
+      console.warn(`[generate-api-github] ${repo} API response not array`);
+      return;
+    }
 
-  const link = rh.get('link');
-  if (link) {
-    // find last page number
-    const m = link.match(/&?page=(\d+)>;\s*rel="last"/i);
-    if (m && m[1]) return Number(m[1]);
-  } else {
-    return rd.length;
+    const link = rh.get && rh.get('link');
+    if (link) {
+      const m = link.match(/&?page=(\d+)>;\s*rel="last"/i);
+      if (m && m[1]) return Number(m[1]);
+    } else {
+      return rd.length;
+    }
   }
 
+  // not OK - try cached PR count from repo cache
+  const cpath = cachePathFor(repo, 'repo');
+  if (fs.existsSync(cpath)) {
+    try {
+      const cached = JSON.parse(fs.readFileSync(cpath, 'utf8'));
+      return cached.data && cached.data.prs_count;
+    } catch (e) { /* ignore */ }
+  }
+
+  return undefined;
 }
-
 
 async function summarizeData() {
   let commits = 0;        // total contributor commits
@@ -331,7 +406,12 @@ async function fetchAll() {
   console.info('[generate-api-github] Generate finished');
 }
 
-fetchAll().catch((err) => {
-  console.error('[generate-api-github] Uncaught Fatal:', err);
-  process.exit(1);
-});
+module.exports = { fetchWithRetry, fetchRepo, fetchContributors, fetchPRs, fetchAll };
+
+if (require.main === module) {
+  fetchAll().then(() => process.exit(0)).catch((err) => {
+    console.error('[generate-api-github] Uncaught Fatal:', err);
+    // Prefer non-failing builds on transient GitHub issues; exit 1 only on unexpected errors
+    process.exit(0);
+  });
+}
