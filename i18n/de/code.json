@@ -586,11 +586,18 @@
   "贡献者": {
     "message": "Mitwirkende"
   },
+  "新闻": {
+    "message": "Nachrichten"
+  },
   "合作伙伴": {
     "message": "Partner"
   },
   "贡献者公约": {
     "message": "Contributor Covenant"
+  },
+  "footer.社区守则": {
+    "message": "Community-Richtlinien",
+    "description": "Navbar item with label 社区守则"
   },
   "footer.ecosystem": { "message": "Ökosystem" },
   "footer.revyos": { "message": "RevyOS" },

@@ -79,24 +79,10 @@ const config = {
             type: "localeDropdown",
             position: "right",
           },
-          { to: "/blog", label: "博客", position: "left" },
-          { to: "/biweekly", label: "双周报", position: "left" },
           { to: "/download", label: "下载", position: "left" },
-          {
-            type: "dropdown",
-            label: "社区",
-            position: "left",
-            items: [
-              {
-                label: "贡献者",
-                to: "/contributors",
-              },
-              {
-                label: "社区守则",
-                to: "/code_of_conduct",
-              },
-            ],
-          },
+          { to: "/news", label: "新闻", position: "left" },
+          { to: "/contributors", label: "贡献者", position: "left" },
+          { href: "https://ruyisdk.cn", label: "社区", position: "left" },
           {
             label: "关于",
             to: "/about",
