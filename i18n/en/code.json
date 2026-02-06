@@ -599,11 +599,18 @@
   "贡献者": {
     "message": "Contributors"
   },
+  "新闻": {
+    "message": "News"
+  },
   "合作伙伴": {
     "message": "Partners"
   },
   "贡献者公约": {
     "message": "Contributor Covenant"
+  },
+  "footer.社区守则": {
+    "message": "Community Code",
+    "description": "Navbar item with label 社区守则"
   },
   "footer.ecosystem": { "message": "Ecosystem" },
   "footer.ruyisdk": { "message": "RuyiSDK" },

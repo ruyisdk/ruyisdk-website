@@ -26,7 +26,7 @@ export default function Footer() {
         { label: <Translate id="footer.riscv-community">RISC-V 开发者社区</Translate>, href: "https://ruyisdk.cn" },
         { label: <Translate id="footer.discussion">讨论组</Translate>, href: "https://github.com/ruyisdk/ruyisdk/discussions" },
         { label: <Translate id="footer.stats">数据统计</Translate>, to: "/dashboard" },
-        { label: <Translate id="footer.intern">实习生招聘</Translate>, href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" },
+        { label: <Translate id="footer.社区守则">社区守则</Translate>, to: "/code_of_conduct" },
       ],
     },
     {
@@ -35,6 +35,7 @@ export default function Footer() {
         { label: <Translate id="footer.wechat">微信公众号</Translate>, className: 'hover-wechat-link', to: '/about' },
         { label: <Translate id="footer.qqgroup">QQ群</Translate>, className: 'hover-qq-link', to: '/about' },
      // { label: <Translate id="footer.plct">PLCT 实验室</Translate>, href: "https://plctlab.org/" },
+        { label: <Translate id="footer.intern">实习生招聘</Translate>, href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" },
       ],
     },
     {
