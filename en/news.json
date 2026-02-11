@@ -43,6 +43,14 @@
   ],
   "ruyinews": [
     {
+      "title": "Release notes for RuyiSDK 0.46",
+      "summary": "RuyiSDK 0.46 is now released. The corresponding package manager version is also 0.46.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
+      "date": 1770681600000,
+      "image": null,
+      "filename": "2026-02-10-ruyi-0.46.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2026-02-10-ruyi-0.46.en_US.md"
+    },
+    {
       "title": "Release notes for RuyiSDK 0.45",
       "summary": "RuyiSDK 0.45 is now released. The corresponding package manager version is also 0.45.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: https://github.com/ruyis...",
       "date": 1769472000000,
@@ -382,7 +390,7 @@
   "weeklies": [
     {
       "title": "Biweekly 062: 2026-02-10",
-      "summary": "",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 金蛇辞旧，骏马迎新。在这辞旧迎新的美好时节，首先㊗️大家新春快乐，阖家幸福，万事如意！ 🎉 本期是农历乙巳年的最后一次更新。回首这一年，RuyiSDK 一步一个脚印，稳步前行：包管理器基础功能逐步成熟稳定，现已支持完整的插件架构和本地化（i18n）特性，让中文开发者使用更加亲切；VSCode 和 Eclipse 插件从零起步，如今双双上架官方市场，为...",
       "date": 1770681600000,
       "image": null,
       "filename": "20260210-ruyisdk-biweekly-62.md",
