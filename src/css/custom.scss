@@ -179,13 +179,37 @@ body {
 .navbar__items--left {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
 }
 
 .navbar__items--right {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
+}
+
+.navbar__item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.navbar__item .navbar__link,
+.navbar__item .dropdown__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.navbar__item .navbar__link svg,
+.navbar__item .dropdown__link svg,
+.navbar__item .navbar__link [class*="iconExternalLink"] {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .navbar-sidebar__brand .navbar__brand {
