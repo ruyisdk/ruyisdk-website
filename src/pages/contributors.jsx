@@ -65,11 +65,11 @@ const ContributorCard = ({ person }) => {
     <div className="flex flex-col items-center justify-center gap-3 p-2 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03]">
       <AvatarWithGithub avatarUrl={avatarUrl} name={name} githubUrl={github} sizeClass={sizeClass} />
       {github ? (
-        <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem] hover:underline">
+        <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base md:text-lg font-semibold !text-slate-900 visited:!text-slate-900 text-center truncate max-w-[12rem] hover:underline">
           {name}
         </a>
       ) : (
-        <p className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem]">{name}</p>
+        <p className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 text-center truncate max-w-[12rem]">{name}</p>
       )}
     </div>
   );
