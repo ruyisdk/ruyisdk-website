@@ -53,7 +53,6 @@ const RuyiInLive = () => {
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isWideScreen, setIsWideScreen] = useState(false);
-
   const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
   const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
 
@@ -387,17 +386,15 @@ const RuyiInLive = () => {
     return Math.max(...currentData.map((item) => item.total), 0);
   };
 
-  const discussButtonStyle = {
-    ...styles.button,
-    ...styles.discussButtonBase,
-    ...(isDiscussButtonHovered ? styles.buttonHover : {}),
-  };
-
-  const sourceButtonStyle = {
-    ...styles.button,
-    ...styles.sourceButtonBase,
-    ...(isSourceButtonHovered ? styles.buttonHover : {}),
-  };
+  const getActionButtonStyle = (hovered, background) => ({
+    background,
+    color: colors.textDark,
+    minWidth: '6.25rem',
+    transform: hovered ? 'translateY(-0.125rem)' : 'translateY(0)',
+    boxShadow: hovered ? '0 0.625rem 1.25rem rgba(0, 0, 0, 0.2)' : '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
+    transition: 'transform 300ms ease-out, box-shadow 300ms ease-out',
+    willChange: 'transform, box-shadow',
+  });
 
   const PlaceholderChart = () => (
     <div className="w-full h-full relative opacity-60">
@@ -459,8 +456,8 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isDiscussButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
-                style={{ background: colors.creamBeige_light, color: colors.textDark, minWidth: '6.25rem' }}
+                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                style={getActionButtonStyle(isDiscussButtonHovered, colors.creamBeige_light)}
                 onMouseEnter={() => setIsDiscussButtonHovered(true)}
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
@@ -472,8 +469,8 @@ const RuyiInLive = () => {
                 href="https://github.com/ruyisdk"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isSourceButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
-                style={{ background: colors.creamBeige, color: colors.textDark, minWidth: '6.25rem' }}
+                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                style={getActionButtonStyle(isSourceButtonHovered, colors.creamBeige)}
                 onMouseEnter={() => setIsSourceButtonHovered(true)}
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >

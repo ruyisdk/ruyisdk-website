@@ -81,14 +81,15 @@ export default function CardNews() {
     cardSmall: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-[calc(50%_-_0.5rem)] h-[240px] flex-none',
     mobileCard: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[240px]',
     clickableCard: 'cursor-pointer',
+    defaultCard: 'cursor-default',
     slideBackground: 'absolute inset-0 bg-cover bg-center z-0 bg-black/40 bg-blend-darken',
     blurredBackground: 'filter blur-[15px] scale-[1.05]',
     content: 'relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]',
-    title: 'text-base mb-3 tracking-tight text-white drop-shadow-md',
-    subtitle: 'text-sm mb-3 text-white drop-shadow-md',
+    title: 'text-[0.8rem] font-normal mb-3 tracking-tight !text-white drop-shadow-md',
+    subtitle: 'text-[0.56rem] !font-[420] mb-3 !text-white drop-shadow-md',
     buttonContainer: 'flex gap-3 mt-4 flex-wrap justify-center',
-    primaryButton: 'inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[rgb(242,222,154)] hover:-translate-y-0.5',
-    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] min-w-[100px] shadow-sm transition-all duration-200 hover:bg-[#E8E3D2] hover:-translate-y-0.5',
+    primaryButton: 'inline-flex items-center justify-center !bg-[rgb(252,232,164)] hover:!bg-[rgb(242,222,154)] !text-[#1a2f78] visited:!text-[#1a2f78] hover:!text-[#1a2f78] focus:!text-[#1a2f78] active:!text-[#1a2f78] !no-underline hover:!no-underline px-4 py-2 !rounded-full text-[0.9rem] !font-semibold min-w-[100px] !shadow-sm hover:!shadow-md !transform-gpu !transition-all !duration-500 !ease-[cubic-bezier(0.22,1,0.36,1)] hover:!-translate-y-0.5 hover:!scale-[1.02] active:!translate-y-0 active:!scale-100',
+    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] font-semibold min-w-[100px] shadow-sm transition-all duration-300 ease-out hover:bg-[#E8E3D2] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-100',
   };
 
   const organizeCards = () => {
@@ -196,8 +197,8 @@ export default function CardNews() {
       Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       Links: "/docs/IDE/",
       ButtonText: "了解更多",        // 了解更多/立即跳转
-      titleColor: "#ffffff",        // Custom title color (white)
-      subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+      titleColorClass: "text-white",        // Custom title color
+      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
       size: CardSizes.S,            // Small card (half width, 1x height)
       isBlur: false,                // Apply blur effect to background
       ispopup: false,               // Disable click-to-show-popup for this card
@@ -209,8 +210,8 @@ export default function CardNews() {
       Image: "img/RevyOS-logo.svg",
       Links: revyosLink,
       ButtonText: "立即跳转",
-      titleColor: "#ffffff",        // Custom title color (white)
-      subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+      titleColorClass: "text-white",        // Custom title color
+      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
       size: CardSizes.S,            // Small card (half width, 1x height)
       isBlur: true,                 // Enable blur on background
       ispopup: false,               // Disable click-to-show-popup for this card
@@ -222,8 +223,8 @@ export default function CardNews() {
       Image: "img/ruyi-logo-720.svg",
       Links: "https://matrix.ruyisdk.org/",
       ButtonText: "立即跳转",
-      titleColor: "#ffffff",        // Custom title color (white)
-      subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+      titleColorClass: "text-white",        // Custom title color
+      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
       size: CardSizes.S,            // Small card (half width, 1x height)
       isBlur: true,                 // Enable blur on background
       ispopup: false,               // Disable click-to-show-popup for this card
@@ -235,8 +236,8 @@ export default function CardNews() {
       Image: "img/licheepi-4a.png",
       Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/",
       ButtonText: "立即下载",
-      titleColor: "#ffffff",        // Custom title color (white)
-      subtitleColor: "#f0f0f0",      // Custom subtitle color (light)
+      titleColorClass: "text-white",        // Custom title color
+      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
       size: CardSizes.S,            // Small card (half width, 1x height)
       isBlur: false,                // Enable blur on background
       ispopup: true,                // Enable click-to-show-popup for this card
@@ -247,13 +248,11 @@ export default function CardNews() {
 
   // Handler for card click - only process popup if ispopup is true
   const handleCardClick = (index, event) => {
-    // Prevent expanding if clicked on a link that should navigate away
-    if (event.target.tagName === 'A' ||
-        event.target.parentElement.tagName === 'A') {
-      // Check if the link is inside a card that is NOT a popup trigger
-      if (!slideImages[index].ispopup) {
-          return;
-      }
+    const clickedLink = event.target.closest('a');
+
+    // Non-popup cards should keep normal link navigation behavior
+    if (clickedLink && !slideImages[index].ispopup) {
+      return;
     }
 
     // Only show popup if ispopup is true
@@ -284,16 +283,13 @@ export default function CardNews() {
     // Determine if card should have clickable styling
     const cardClassName = card.ispopup
       ? `${card.layoutClass} ${classes.clickableCard}`
-      : card.layoutClass;
+      : `${card.layoutClass} ${classes.defaultCard}`;
 
     return (
       <div
         key={card.index}
         className={cardClassName}
         onClick={(e) => handleCardClick(card.index, e)}
-        style={{
-          cursor: card.ispopup ? 'pointer' : 'default'
-        }}
       >
         <div
           className={backgroundClassName}
@@ -303,25 +299,15 @@ export default function CardNews() {
         />
 
         <div className={classes.content}>
-          <h1
-            className={classes.title}
-            style={{
-              color: card.titleColor || "#ffffff",
-            }}
-          >
+          <h1 className={classes.title}>
             {card.title}
           </h1>
-          <h2
-            className={classes.subtitle}
-            style={{
-              color: card.subtitleColor || "#f0f0f0",
-            }}
-          >
+          <h2 className={classes.subtitle}>
             {card.subtitle}
           </h2>
           <div className={classes.buttonContainer}>
             {card.ispopup ? (
-              <button className={classes.primaryButton}>
+              <button type="button" className={classes.primaryButton}>
                 <Translate>显示详情</Translate>
               </button>
             ) : (
@@ -416,7 +402,7 @@ export default function CardNews() {
               <div className="flex gap-3 mt-6 flex-col sm:flex-row">
                 <a
                   href={slideImages[expandedCardIndex].Links}
-                  className={`inline-flex items-center justify-center bg-[rgb(252,232,164)] text-[#002677] px-4 py-2 rounded-full min-w-[100px] shadow-sm`}
+                  className={classes.primaryButton}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -425,7 +411,7 @@ export default function CardNews() {
                 {slideImages[expandedCardIndex].subLinks && (
                   <a
                     href={slideImages[expandedCardIndex].subLinks}
-                    className="inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full min-w-[100px] shadow-sm"
+                    className={classes.secondaryButton}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
