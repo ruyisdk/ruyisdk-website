@@ -35,6 +35,14 @@
   bottom: 20px;
   right: 20px;
   border-radius: 1rem;
+  padding: 4px 15px;
+  border: 1px solid #d9d9d9;
+  background: #ffffff;
+  line-height: 1.5714285714;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
 
 .cardSmall:hover {

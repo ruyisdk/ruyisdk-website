@@ -1,12 +1,10 @@
-import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } from "antd"
-import { useCallback } from "react"
-import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
 import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "@site/src/utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
 import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
+import { Download, Smile, Monitor, Cloud } from 'lucide-react';
 
 // Constants (palette aligned with homepage)
 // Data visualization palette (value-based color intensity, blue gradient theme)
@@ -107,7 +105,7 @@ const useDebounce = (value, delay) => {
 // Components
 const CustomizeRenderEmpty = () => (
   <div className={styles.emptyState}>
-    <SmileOutlined className={styles.emptyIcon} />
+    <Smile className={styles.emptyIcon} size={48} strokeWidth={1.75} />
     <p className={styles.emptyText}>{translate(TRANSLATION_KEY.NO_DATA)}</p>
   </div>
 );
@@ -284,38 +282,38 @@ const StatsSection = ({ data, loading, isMobile }) => {
 
   return (
     <div className={styles.statsSection}>
-      <Row gutter={[24, 24]} className={styles.statsRow}>
+      <div className={styles.statsRow}>
         {!isMobile && (
-          <Col xs={24} sm={12} lg={8}>
+          <div className={styles.statsCol}>
             <AnimatedStatistic
               title={translate(TRANSLATION_KEY.PM_DOWNLOADS)}
               value={pmDownloads}
-              icon={<DownloadOutlined />}
+              icon={<Download size={32} strokeWidth={2} />}
               color="#07a0cc"
               loading={loading}
             />
-          </Col>
+          </div>
         )}
         
-        <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
+        <div className={styles.statsCol}>
           <AnimatedStatistic
             title={translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS)}
             value={componentDownloads}
-            icon={<CloudServerOutlined />}
+            icon={<Cloud size={32} strokeWidth={2} />}
             color="#07a0cc"
             loading={loading}
             />
-        </Col>
-        <Col xs={24} sm={12} lg={!isMobile ? 8 : 12}>
+        </div>
+        <div className={styles.statsCol}>
           <AnimatedStatistic
             title={translate(TRANSLATION_KEY.RUYI_INSTALLS)}
             value={totalInstalls}
-            icon={<DesktopOutlined />}
+            icon={<Monitor size={32} strokeWidth={2} />}
             color="#07a0cc"
             loading={loading}
           />
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };
@@ -375,12 +373,14 @@ const CategorySection = ({ data }) => {
                 <span className={styles.categoryName}>{dir}</span>
                 <span className={styles.categoryValue}>{val.total.toLocaleString()}</span>
               </div>
-              <Progress 
-                percent={percentage} 
-                showInfo={false}
-                strokeColor="#07a0cc"
-                className={styles.categoryProgress}
-              />
+              <div className={styles.categoryProgress}>
+                <div className={styles.categoryProgressTrack}>
+                  <div
+                    className={styles.categoryProgressBar}
+                    style={{ width: `${Math.max(0, Math.min(100, percentage))}%` }}
+                  />
+                </div>
+              </div>
             </div>
           );
         })}
@@ -390,32 +390,22 @@ const CategorySection = ({ data }) => {
 };
 
 const ChartsSection = ({ data }) => {
-  const CardOneitems = [{
-    key: '1',
-    label: translate(TRANSLATION_KEY.TOP_COMMANDS),
-    children: <TopList data={data?.top_commands || {}} title={translate(TRANSLATION_KEY.TOP_COMMANDS_TITLE)} />,
-  }];
-
-  const CardTwoitems = [{
-    key: '1',
-    label: translate(TRANSLATION_KEY.TOP_PACKAGES),
-    children: <TopList data={data?.top_packages || {}} title={translate(TRANSLATION_KEY.TOP_PACKAGES_TITLE)} />,
-  }];
-
   return (
     <div className={styles.chartsSection}>
-      <Row gutter={[24, 24]}>
-        <Col xs={24} lg={12}>
-          <Card className={styles.chartCard}>
-            <Tabs defaultActiveKey="1" items={CardOneitems} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card className={styles.chartCard}>
-            <Tabs defaultActiveKey="1" items={CardTwoitems} />
-          </Card>
-        </Col>
-      </Row>
+      <div className={styles.chartsGrid}>
+        <div className={styles.chartCard}>
+          <div className={styles.tabHeader}>
+            <span className={styles.tabLabel}>{translate(TRANSLATION_KEY.TOP_COMMANDS)}</span>
+          </div>
+          <TopList data={data?.top_commands || {}} title={translate(TRANSLATION_KEY.TOP_COMMANDS_TITLE)} />
+        </div>
+        <div className={styles.chartCard}>
+          <div className={styles.tabHeader}>
+            <span className={styles.tabLabel}>{translate(TRANSLATION_KEY.TOP_PACKAGES)}</span>
+          </div>
+          <TopList data={data?.top_packages || {}} title={translate(TRANSLATION_KEY.TOP_PACKAGES_TITLE)} />
+        </div>
+      </div>
     </div>
   );
 };
@@ -528,36 +518,19 @@ const ServiceData = () => {
         <div className={`${styles.blob} ${styles.blob3}`} />
       </div>
 
-      <ConfigProvider 
-        renderEmpty={CustomizeRenderEmpty} 
-        theme={{
-          components: { 
-            Tabs: { 
-                  itemSelectedColor: "#0A2C7E", 
-                  inkBarColor: "#F9C23C",
-            },
-            Card: {
-                  borderRadius: 12,
-                  boxShadow: '0 8px 24px rgba(16, 24, 40, 0.06)',
-                  borderColor: 'rgba(16, 24, 40, 0.04)'
-            }
-          }
-        }}
-      >
-        <div className={styles.mainContent}>
-          {isMobile && (
-            <MobileInstallSection pmDownloads={pmDownloads} loading={loading} />
-          )}
-          
-          <StatsSection data={data} loading={loading} isMobile={isMobile} />
-          
-          {data && <CategorySection data={data} />}
-          
-          <ChartsSection data={data} />
-          
-          {data && <UpdateTime data={data} />}
-        </div>
-      </ConfigProvider>
+      <div className={styles.mainContent}>
+        {isMobile && (
+          <MobileInstallSection pmDownloads={pmDownloads} loading={loading} />
+        )}
+
+        <StatsSection data={data} loading={loading} isMobile={isMobile} />
+
+        {data && <CategorySection data={data} />}
+
+        <ChartsSection data={data} />
+
+        {data && <UpdateTime data={data} />}
+      </div>
     </div>
   );
 };

@@ -19,7 +19,6 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@ant-design/icons": "^6.1.0",
     "@antv/g2": "^5.3.0",
     "@docusaurus/core": "3.4.0",
     "@docusaurus/plugin-google-gtag": "3.4.0",
@@ -28,7 +27,6 @@
     "@giscus/react": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@xterm/xterm": "^5.5.0",
-    "antd": "^5.23.1",
     "axios": "^1.7.9",
     "clsx": "^2.0.0",
     "cross-env": "^7.0.3",

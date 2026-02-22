@@ -1,5 +1,4 @@
 import React from "react";
-import { QRCode as AntdQRCode } from "antd";
 
 const QRCode = ({ 
   src, // 必填：图片路径

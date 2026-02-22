@@ -1,4 +1,3 @@
-import { Button, Card, ConfigProvider, Divider, Flex, Image } from "antd";
 import styles from "./styles.module.css";
 
 const demoBoardData = [
@@ -40,51 +39,39 @@ const exampleData = [
 const DemoList = ({ data }) => {
 
   return (
-    <ConfigProvider theme={{
-      components: {
-        Button: {
-          defaultActiveColor: "#0d4977",
-          defaultActiveBorderColor: "#0d4977",
-          defaultHoverBorderColor: "#0d4977",
-          defaultHoverColor: "#0d4977"
-        },
-      },
-    }}>
-      <div style={{ width: "100%", margin: "0 0 0.5rem 0", padding: "0 0.5rem", }}>
-        <Card style={{ borderRadius: "0", backgroundColor: "aliceblue", border: 'none' }}>
-          <div className={styles.container}>
-            <div className={styles.rowContainer}>
-              <Card className={styles.cardSmall} >
-                <span className={styles.cardFontSize}>
-                  {data[0].title}
-                </span>
-              </Card>
-              <Card className={styles.cardLarge} >
-                <span className={styles.cardFontSize}>
-                  {data[1].title}
-                </span>
-                <Button className={styles.buttonStyle} color="geekblue" href={data[1].links}>进入</Button>
-              </Card>
+    <div style={{ width: "100%", margin: "0 0 0.5rem 0", padding: "0 0.5rem", }}>
+      <div style={{ borderRadius: "0", backgroundColor: "aliceblue", border: 'none', padding: "24px" }}>
+        <div className={styles.container}>
+          <div className={styles.rowContainer}>
+            <div className={styles.cardSmall} style={{ position: "relative", backgroundColor: "white", border: "1px solid #f0f0f0", padding: "24px" }}>
+              <span className={styles.cardFontSize}>
+                {data[0].title}
+              </span>
             </div>
-            <div className={styles.rowContainer}>
-              <Card className={styles.cardLarge} >
-                <span className={styles.cardFontSize}>
-                  {data[2].title}
-                </span>
-                <Button className={styles.buttonStyle} color="geekblue" href={data[2].links}>进入</Button>
-              </Card>
-              <Card className={styles.cardSmall} style={{ backgroundColor: "#2d88c9", border: "none" }} >
-                <span className={styles.cardFontSize} style={{ color: "white" }}>
-                  {data[3].title}
-                </span>
-                <Button className={styles.buttonStyle} href={data[3].links} style={{ background: "rgb(255,255,255,0)", color: "white" }}> 进入</Button>
-              </Card>
+            <div className={styles.cardLarge} style={{ position: "relative", backgroundColor: "white", border: "1px solid #f0f0f0", padding: "24px" }}>
+              <span className={styles.cardFontSize}>
+                {data[1].title}
+              </span>
+              <a className={styles.buttonStyle} href={data[1].links} style={{ color: "#0d4977", textDecoration: "none" }}>进入</a>
             </div>
           </div>
-        </Card>
+          <div className={styles.rowContainer}>
+            <div className={styles.cardLarge} style={{ position: "relative", backgroundColor: "white", border: "1px solid #f0f0f0", padding: "24px" }}>
+              <span className={styles.cardFontSize}>
+                {data[2].title}
+              </span>
+              <a className={styles.buttonStyle} href={data[2].links} style={{ color: "#0d4977", textDecoration: "none" }}>进入</a>
+            </div>
+            <div className={styles.cardSmall} style={{ position: "relative", backgroundColor: "#2d88c9", border: "none", padding: "24px" }}>
+              <span className={styles.cardFontSize} style={{ color: "white" }}>
+                {data[3].title}
+              </span>
+              <a className={styles.buttonStyle} href={data[3].links} style={{ background: "rgb(255,255,255,0)", color: "white", textDecoration: "none" }}> 进入</a>
+            </div>
+          </div>
+        </div>
       </div>
-
-    </ConfigProvider>
+    </div>
   );
 };
 
