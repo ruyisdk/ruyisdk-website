@@ -49,7 +49,7 @@ jobs:
             
             **Action run:** ${{ env.RUN_URL }}
           labels: automat
-          branch: create-pull-request/submodules
+          branch: create-pull-request/apiupdate
 
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
