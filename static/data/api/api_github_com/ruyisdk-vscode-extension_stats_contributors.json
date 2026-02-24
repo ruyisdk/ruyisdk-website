@@ -12,28 +12,10 @@
     {
       "total": 2,
       "author": {
-        "login": "MalachiteN",
-        "id": 53076703,
-        "avatar_url": "https://avatars.githubusercontent.com/u/53076703?v=4",
-        "html_url": "https://github.com/MalachiteN"
-      }
-    },
-    {
-      "total": 2,
-      "author": {
         "login": "lazyparser",
         "id": 1802104,
         "avatar_url": "https://avatars.githubusercontent.com/u/1802104?v=4",
         "html_url": "https://github.com/lazyparser"
-      }
-    },
-    {
-      "total": 3,
-      "author": {
-        "login": "Master-Hash",
-        "id": 56669192,
-        "avatar_url": "https://avatars.githubusercontent.com/u/56669192?v=4",
-        "html_url": "https://github.com/Master-Hash"
       }
     },
     {
@@ -46,6 +28,24 @@
       }
     },
     {
+      "total": 4,
+      "author": {
+        "login": "MalachiteN",
+        "id": 53076703,
+        "avatar_url": "https://avatars.githubusercontent.com/u/53076703?v=4",
+        "html_url": "https://github.com/MalachiteN"
+      }
+    },
+    {
+      "total": 5,
+      "author": {
+        "login": "Master-Hash",
+        "id": 56669192,
+        "avatar_url": "https://avatars.githubusercontent.com/u/56669192?v=4",
+        "html_url": "https://github.com/Master-Hash"
+      }
+    },
+    {
       "total": 7,
       "author": {
         "login": "ddsfda99",
@@ -55,7 +55,7 @@
       }
     },
     {
-      "total": 8,
+      "total": 9,
       "author": {
         "login": "Platohykj",
         "id": 147904598,
@@ -82,7 +82,7 @@
       }
     },
     {
-      "total": 48,
+      "total": 52,
       "author": {
         "login": "U2FsdGVkX1",
         "id": 11484206,
@@ -92,7 +92,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-01-29T13:55:23.786Z",
+    "generatedAt": "2026-02-24T12:16:16.978Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
   }
 }
