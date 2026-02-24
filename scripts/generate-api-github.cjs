@@ -49,8 +49,8 @@ async function fetchGitHubApi(url) {
     });
 
     if (res.status !== 200) {
-      console.error(`[generate-api-github] API ${url} return HTTP ${res.status} ${res.statusText}`);
-      return null;
+      console.warn(`[generate-api-github] API ${url} return HTTP ${res.status} ${res.statusText}`);
+      return {data: null, headers: res.headers, code: res.status};
     }
 
     const json = await res.json();
@@ -59,7 +59,7 @@ async function fetchGitHubApi(url) {
       return null;
     }
 
-    return {data: json, headers: res.headers};
+    return {data: json, headers: res.headers, code: res.status};
 
   } catch (err) {
     console.error('[generate-api-github] Unexcepted error in fetchGitHubApi: ', err);
@@ -74,7 +74,7 @@ async function fetchRepo(repo) {
   const url = `${GITHUB_API_BASE}/${repo}`;
   const raw = await fetchGitHubApi(url)
 
-  if (!raw || typeof raw !== 'object') {
+  if (!raw || typeof raw !== 'object' || raw.code !== 200) {
     console.info(`[generate-api-github] Skip ${repo}`);
     return;
   }
@@ -113,15 +113,49 @@ async function fetchRepo(repo) {
 }
 
 
-async function fetchContributors(repo) {
-  const url = `${GITHUB_API_BASE}/${repo}/stats/contributors`;
-  const raw = await fetchGitHubApi(url)
+async function fetchContributorsWait(repos) {
+  const repos_wrote = new Set();
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+  let try_time = 0;
 
-  if (!raw || typeof raw !== 'object') {
-    console.info(`[generate-api-github] Skip ${repo}`);
-    return;
+  while (repos.length !== repos_wrote.length) {
+    for (const repo of repos) {
+      if (repos_wrote.has(repo)) {
+        continue
+      }
+
+      const url = `${GITHUB_API_BASE}/${repo}/stats/contributors`;
+      const raw = await fetchGitHubApi(url)
+
+      if (!raw || typeof raw !== 'object') {
+        console.info(`[generate-api-github] Skip ${repo}`);
+        repos_wrote.add(repo);
+        continue;
+      }
+
+      if (raw.code === 202) {
+        // wait and retry
+        console.info(`[generate-api-github] Will retry ${repo}`);
+        continue;
+      }
+
+      repos_wrote.add(repo);
+      await writeContributors(repo, url, raw);
+    }
+
+    try_time += 1;
+    if (try_time >= 10) {
+      console.warn(`[generate-api-github] Wait more than 10min`)
+      break;
+    }
+
+    console.info(`[generate-api-github] Sleep wait 1min`)
+    await sleep(1000 * 60); // 1 min
   }
+}
 
+
+async function writeContributors(repo, url, raw) {
   const fn = path.resolve(DATA_BASE, `${repo}${DATA_CONTR_SUF}`);
   const rd = raw.data
   const json = []
@@ -167,7 +201,7 @@ async function fetchPRs(repo) {
   const url = `${GITHUB_API_BASE}/${repo}/pulls?state=all&per_page=1`;
   const raw = await fetchGitHubApi(url);
 
-  if (!raw || typeof raw !== 'object') {
+  if (!raw || typeof raw !== 'object' || raw.code !== 200) {
     console.warn(`[generate-api-github] Skip ${repo}`);
     return;
   }
