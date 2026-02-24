@@ -346,7 +346,7 @@ async function fetchAll() {
 
   console.info('[generate-api-github] Generate contributors');
   for (const r of GEN_REPOS) {
-    await fetchContributors(r);
+    await fetchContributorsWait(r);
   }
 
   console.info('[generate-api-github] Check generated data');
