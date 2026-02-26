@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Layout from '@theme/Layout';
 import ServiceData from '@site/src/components/ServiceData';
 import { translate } from "@docusaurus/Translate";
-import { GithubOutlined, StarOutlined, ForkOutlined, IssuesCloseOutlined, CodeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const Dashboard = () => {
   return (

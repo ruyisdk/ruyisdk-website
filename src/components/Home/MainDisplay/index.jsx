@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Tag } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
 import Translate, { translate } from '@docusaurus/Translate';
 
 import CardNews from './CardNews';
@@ -308,14 +306,26 @@ const MainDisplay = () => {
             <div className="bg-white rounded-2xl w-[480px] max-w-[90vw] shadow-2xl overflow-hidden" ref={modalRef}>
               <div className="flex items-center justify-between p-4 border-b">
                 <h2 className="text-lg font-semibold">{selectedPackage.name}</h2>
-                <CloseOutlined className="text-xl cursor-pointer" onClick={handleModalClose} />
+                <button
+                  type="button"
+                  className="text-xl cursor-pointer bg-transparent border-none p-0 leading-none"
+                  onClick={handleModalClose}
+                  aria-label="Close"
+                >
+                  ×
+                </button>
               </div>
               <div className="p-4">
                 <p className="text-sm text-gray-600">{selectedPackage.version}</p>
                 <p className="mt-2 text-gray-700">{selectedPackage.description}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {selectedPackage.tags.map((tag, index) => (
-                    <Tag key={index} color="blue">{tag}</Tag>
+                    <span
+                      key={index}
+                      className="inline-flex items-center rounded-md border border-[#91caff] bg-[#e6f4ff] px-2 py-0.5 text-xs text-[#0958d9]"
+                    >
+                      {tag}
+                    </span>
                   ))}
                 </div>
                 <div className="mt-4">

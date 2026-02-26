@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CloudServerOutlined } from '@ant-design/icons';
+import { Cloud } from 'lucide-react';
 import styles from './FlipCounter.module.css';
 
 const FlipDigit = ({ digit }) => {
@@ -99,7 +99,7 @@ const FlipCounter = ({ value, title, icon, color, loading, standalone = false })
   return (
     <div className={styles.statCard} ref={elementRef} data-stat={title}>
       <div className={styles.statIcon} style={{ color }}>
-        {<CloudServerOutlined />}
+        <Cloud size={28} strokeWidth={2} />
       </div>
       <div className={styles.statContent}>
         <h3 className={styles.statTitle}>{title}</h3>

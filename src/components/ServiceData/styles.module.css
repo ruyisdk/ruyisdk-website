@@ -92,7 +92,14 @@
 }
 
 .statsRow {
-  margin: 0 !important;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.statsCol {
+  display: flex;
 }
 
 .statCard {
@@ -224,13 +231,30 @@
   margin: 0;
 }
 
-.categoryProgress :global(.ant-progress-bg) {
+.categoryProgressTrack {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.categoryProgressBar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
   background: linear-gradient(90deg, #06bcee 0%, #087ea4 100%);
 }
 
 /* 图表区域样式 */
 .chartsSection {
   margin-top: 2rem;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 .chartCard {
@@ -244,6 +268,20 @@
 .chartCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tabHeader {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+  margin-bottom: 8px;
+}
+
+.tabLabel {
+  color: #0A2C7E;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 2px solid #F9C23C;
+  padding-bottom: 8px;
 }
 
 .chartContainer {
@@ -371,17 +409,22 @@
 
 @media (min-width: 1025px) {
   .statsRow {
-    display: flex;
-    align-items: stretch;
-  }
-  
-  .statsRow .ant-col {
-    display: flex;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   
   .statCard {
     width: 100%;
     height: 100%;
+  }
+
+  .chartsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .statsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
