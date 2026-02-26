@@ -14,14 +14,14 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 416
+      "contributions": 417
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 291
+      "contributions": 293
     },
     {
       "id": 54484233,
@@ -38,6 +38,13 @@
       "contributions": 157
     },
     {
+      "id": 29089388,
+      "name": "pzhlkj6612",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
+      "github": "https://github.com/pzhlkj6612",
+      "contributions": 93
+    },
+    {
       "id": 22784008,
       "name": "aisuneko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/22784008?v=4",
@@ -50,13 +57,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
       "github": "https://github.com/ArchFeh",
       "contributions": 80
-    },
-    {
-      "id": 29089388,
-      "name": "pzhlkj6612",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
-      "github": "https://github.com/pzhlkj6612",
-      "contributions": 73
     },
     {
       "id": 11484206,
@@ -418,15 +418,15 @@
   ],
   "totals": {
     "contributors": 59,
-    "commits": 3863,
-    "pullRequests": 1693,
-    "issues": 99,
+    "commits": 3886,
+    "pullRequests": 1700,
+    "issues": 101,
     "stars": 107,
     "forks": 154,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-02-24T12:23:21.094Z",
+    "generatedAt": "2026-02-26T19:45:06.999Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
