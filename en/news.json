@@ -389,8 +389,24 @@
   ],
   "weeklies": [
     {
+      "title": "Biweekly 064: 2026-03-10",
+      "summary": "",
+      "date": 1773100800000,
+      "image": null,
+      "filename": "20260310-ruyisdk-biweekly-64.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260310-ruyisdk-biweekly-64.md"
+    },
+    {
+      "title": "Biweekly 063: 2026-02-24",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家马年吉祥，开工大吉！ 今天 RuyiSDK 团队结束新春假期，已经逐步恢复到正常的开发节奏中来。在这里先给大家拜个晚年：㊗️各位在新的一年里，身体健康、工作顺利、代码无 Bug、提交顺利合！🎉 新的一年，我们将继续以社区需求为导向，稳步完善包管理器与 IDE 工具链体验，拓展对更多 RISC-V 设备与系统场景的支持，也欢迎大家多在社区提出需求、分享使用体...",
+      "date": 1771891200000,
+      "image": null,
+      "filename": "20260224-ruyisdk-biweekly-63.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260224-ruyisdk-biweekly-63.md"
+    },
+    {
       "title": "Biweekly 062: 2026-02-10",
-      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 金蛇辞旧，骏马迎新。在这辞旧迎新的美好时节，首先㊗️大家新春快乐，阖家幸福，万事如意！ 🎉 本期是农历乙巳年的最后一次更新。回首这一年，RuyiSDK 一步一个脚印，稳步前行：包管理器基础功能逐步成熟稳定，现已支持完整的插件架构和本地化（i18n）特性，让中文开发者使用更加亲切；VSCode 和 Eclipse 插件从零起步，如今双双上架官方市场，为...",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 金蛇辞旧，骏马迎新。在这辞旧迎新的美好时节，首先㊗️大家新春快乐，阖家幸福，万事如意！ 🎉 本期是农历乙巳年的最后一次更新。回首这一年，RuyiSDK 一步一个脚印，稳步前行：包管理器基础功能逐步成熟稳定，现已支持完整的插件架构和本地化特性，让中文开发者使用更加亲切；VSCode 和 Eclipse 插件从零起步，如今双双上架官方市场，为不同偏好的开...",
       "date": 1770681600000,
       "image": null,
       "filename": "20260210-ruyisdk-biweekly-62.md",
