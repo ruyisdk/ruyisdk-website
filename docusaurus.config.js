@@ -124,7 +124,7 @@ const config = {
         additionalLanguages: ["bash"],
 
         theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
+        darkTheme: prismThemes.github,
       },
     }),
   plugins: [

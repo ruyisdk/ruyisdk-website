@@ -16,8 +16,8 @@ const LangSwitcher = ({ langs, currentLang, onLangChange }) => {
                         className={`
                             px-2 py-1 text-xs font-medium rounded transition-all duration-200
                             ${isActive 
-                                ? 'bg-neutral-200 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100' 
-                                : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:text-neutral-100 dark:hover:bg-neutral-800'
+                                ? 'bg-neutral-200 text-neutral-900' 
+                                : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100'
                             }
                         `}
                         aria-label={`Switch to ${langOption.lang}`}
