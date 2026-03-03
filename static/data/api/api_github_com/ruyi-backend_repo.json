@@ -3,11 +3,11 @@
     "stargazers_count": 0,
     "forks_count": 2,
     "subscribers_count": 3,
-    "open_issues_count": 4,
-    "prs_count": 64
+    "open_issues_count": 5,
+    "prs_count": 65
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-02-26T19:35:58.949Z",
+    "generatedAt": "2026-03-03T19:32:01.913Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyi-backend"
   }
 }
