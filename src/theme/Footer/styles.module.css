@@ -61,6 +61,12 @@
   transition: color 0.2s;
 }
 
+.footer__item a svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25em;
+}
+
 .footer__item a:hover {
   text-decoration: underline !important;
 }
