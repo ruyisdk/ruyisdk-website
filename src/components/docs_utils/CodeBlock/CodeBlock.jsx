@@ -208,7 +208,8 @@ const CodeBlock = ({
                 if (shouldHighlight) {
                     const prevHighlighted = highlightedLines.has(index - 1);
                     const nextHighlighted = highlightedLines.has(index + 1);
-                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                    // force light mode for code blocks, ignore system theme
+                    const isDark = false;
                     
                     line.style.backgroundColor = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgb(235, 244, 255)';
                     line.style.position = 'relative';
@@ -433,9 +434,7 @@ const CodeBlock = ({
     return (
         <div 
             ref={codeBlockRef}
-            className="rounded-xl font-mono my-6 overflow-hidden text-sm 
-                       bg-neutral-50 border border-neutral-200 shadow-sm 
-                       dark:bg-neutral-900 dark:border-neutral-800 dark:shadow-black/30"
+            className="rounded-xl font-mono my-6 overflow-hidden text-sm bg-neutral-50 border border-neutral-200 shadow-sm"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
@@ -449,7 +448,7 @@ const CodeBlock = ({
                 onLangChange={setCurrentLang}
             />
             
-            <div className="bg-white dark:bg-neutral-900 overflow-x-auto">
+            <div className="bg-white overflow-x-auto">
                 <SyntaxHighlighter 
                     language={displayLang} 
                     customStyle={{ 
