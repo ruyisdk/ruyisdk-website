@@ -4,4 +4,4 @@
 @source "../../blog";
 @source "../../docusaurus.config.js";
 
-
+@custom-variant dark (&:where(html[data-theme="dark"], html[data-theme="dark"] *));
