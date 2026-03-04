@@ -5,8 +5,8 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "@site/src/utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
 import styles from "./styles.module.css";
-import { Chart } from '@antv/g2';
 import FlipCounter from './FlipCounter';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip } from 'recharts';
 
 // Constants (palette aligned with homepage)
 // Data visualization palette (value-based color intensity, blue gradient theme)
@@ -157,93 +157,61 @@ const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
 };
 
 const TopList = ({ data, title }) => {
-  const containerRef = useRef();
-  const chartRef = useRef();
   const debouncedData = useDebounce(data, 300);
 
   const barData = useMemo(() => {
     if (!debouncedData) return [];
     return Object.entries(data)
-      .map(([action, { total }]) => ({ 
-        action, 
-        total, 
-        logTotal: Math.pow(total, 0.4) * (1 + total / 2000) * 0.6
+      .map(([action, { total }]) => ({
+        action,
+        total,
       }))
       .sort((a, b) => b.total - a.total)
       .slice(0, 10);
   }, [debouncedData]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !barData.length || !containerRef.current) return;
-    
-    if (chartRef.current) {
-      chartRef.current.destroy();
-    }
-
-    const chart = new Chart({
-      container: containerRef.current,
-      autoFit: true,
-      events: { enabled: false }
-    });
-
-    chartRef.current = chart;
-
-    chart.coordinate({ transform: [{ type: 'transpose' }] });
-    chart
-      .interval()
-      .style({ 
-        fill: (d, index) => {
-          const maxValue = Math.max(...barData.map(item => item.total));
-          const minValue = Math.min(...barData.map(item => item.total));
-          const normalizedValue = (d.total - minValue) / (maxValue - minValue);
-          const colorIndex = Math.floor((1 - normalizedValue) * (CHART_COLORS.length - 1));
-          return CHART_COLORS[colorIndex];
-        }
-      })
-      .data(barData)
-      .transform({ type: 'sortX', reverse: true, by: "y" })
-      .axis('x', { line: false, title: false, label: false, tick: false, grid: false })
-      .axis('y', { title: false, line: false, tick: false, grid: false })
-      .encode('x', 'action')
-      .encode('y', 'logTotal')
-      .scale('y', { 
-        nice: false,
-        padding: 0.6,
-        min: 0,
-        max: Math.max(...barData.map(d => d.logTotal)) * 3.5,
-        tickCount: 0
-      })
-      .scale('x', { padding: 0.6, tickCount: 0 })
-      .style('maxWidth', 200)
-      .label({ 
-        text: 'action', 
-        position: "top-left", 
-        fill: '#2E3A46', 
-        dy: -12, 
-        fontWeight: 600,
-        fontSize: 12
-      })
-      .label({ 
-        text: 'total', 
-        position: "inside", 
-        fill: '#ffffff', 
-        dy: 0, 
-        dx: -5,
-        fontWeight: 700,
-        fontSize: 12
-      })
-      .interaction({ tooltip: { body: false } });
-
-    chart.interaction('view-scroll', false);
-    chart.render();
-  }, [barData]);
 
   return (
     <div className={styles.chartContainer}>
       <h3 className={styles.chartTitle}>{title}</h3>
       <div className={styles.chartWrapper}>
         {barData.length ? (
-          <div ref={containerRef} className={styles.chart} />
+          <div className={styles.chart}>
+            <ResponsiveContainer width="100%" height={360}>
+              <BarChart
+                data={barData}
+                layout="vertical"
+                margin={{ top: 10, right: 24, left: 40, bottom: 10 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                <XAxis
+                  type="number"
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fontSize: 12 }}
+                />
+                <YAxis
+                  dataKey="action"
+                  type="category"
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fontSize: 12 }}
+                  width={120}
+                />
+                <RechartsTooltip
+                  formatter={(value) =>
+                    typeof value === 'number'
+                      ? value.toLocaleString()
+                      : value
+                  }
+                />
+                <Bar
+                  dataKey="total"
+                  radius={[0, 4, 4, 0]}
+                  fill="#0A2C7E"
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         ) : (
           <CustomizeRenderEmpty />
         )}
