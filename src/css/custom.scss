@@ -10,7 +10,9 @@
   --ifm-color-primary-light: #0B318C;
   --ifm-color-primary-lighter: #0C3494;
   --ifm-color-primary-lightest: #0F3FAE;
-  aa: #90b3ff;
+
+  --home-background: #f5f5f7;
+  --home-secondary-background: #f5f5f7;
 
   --home-button-primary: var(--ifm-color-primary);
   --home-button-primary-hover: var(--ifm-color-primary-lightest);
@@ -82,8 +84,6 @@
   --home-feature-background-2: #e1eefc;
   --home-feature-background-3: #d4f3e7;
   --home-border: #e5e7eb;
-  --home-background: #f5f5f7;
-  --home-secondary-background: #f5f5f7;
   --home-text: #1c1e21;
   --home-code-red: #d73a49;
   --home-code-purple: #6f42c1;

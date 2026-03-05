@@ -4,8 +4,9 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import WeChatLink from "../common/WeChatLink";
+import BackgroundAnimation from "./Background";
 import MainDisplay from "./MainDisplay";
+import WeChatLink from "../common/WeChatLink";
 import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
 import styles from "./styles.module.css";
@@ -22,6 +23,7 @@ function Hero() {
           width: "100%",
         }}
       >
+        <BackgroundAnimation />
         <MainDisplay />
         <RuyiInLive />
         <NewsShowcase />

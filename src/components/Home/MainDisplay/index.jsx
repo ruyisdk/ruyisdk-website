@@ -143,34 +143,6 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
   );
 };
 
-// A decorative background animation with moving blobs.
-const BackgroundAnimation = () => {
-  // Colors used in the original CSS :root
-  const ruyiLightBlue = '#D9E0F3';
-  const ruyiLightGold = '#FDEFC3';
-
-  const blobBase = {
-    position: 'absolute',
-    width: '150%',
-    height: '150%',
-    top: '-25%',
-    left: '-25%',
-    borderRadius: '50%',
-    filter: 'blur(50px)',
-    opacity: 0.5,
-    mixBlendMode: 'soft-light',
-    pointerEvents: 'none',
-  };
-
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-gradient-to-b from-transparent to-[#f5f5f7] pointer-events-none">
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, ${ruyiLightBlue}, transparent 60%)`, animation: 'blobMove1 15s infinite alternate ease-in-out' }} />
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, ${ruyiLightGold}, transparent 60%)`, animation: 'blobMove2 18s infinite alternate ease-in-out' }} />
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, #90b3ff, transparent 60%)`, animation: 'blobMove3 12s infinite alternate ease-in-out', opacity: 0.4 }} />
-    </div>
-  );
-};
-
 const MainDisplay = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -265,8 +237,7 @@ const MainDisplay = () => {
 
   return (
     <div>
-      <div className="py-16 bg-[#f5f5f7] font-sans w-full relative overflow-hidden flex flex-col">
-        <BackgroundAnimation />
+      <div className="py-16 font-sans w-full relative overflow-hidden flex flex-col">
 
         {/* Main page content */}
         <div className="relative z-10 mx-auto max-w-[1280px] w-[90%] px-8 box-border">
