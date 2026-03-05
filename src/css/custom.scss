@@ -1,5 +1,26 @@
 :root {
+  // Document Infima variables https://github.com/facebook/docusaurus/issues/3955
+
   /* Global site container width used for pages and site sections */
+
+  --ifm-color-primary: #0A2C7E;
+  --ifm-color-primary-dark: #092871;
+  --ifm-color-primary-darker: #08256A;
+  --ifm-color-primary-darkest: #061F57;
+  --ifm-color-primary-light: #0B318C;
+  --ifm-color-primary-lighter: #0C3494;
+  --ifm-color-primary-lightest: #0F3FAE;
+  aa: #90b3ff;
+
+  --home-button-primary: var(--ifm-color-primary);
+  --home-button-primary-hover: var(--ifm-color-primary-lightest);
+  --home-button-primary-text: white;
+  --home-button-secondary: #F4EEDB;
+  --home-button-secondary-hover: #F0E7CB;
+  --home-button-secondary-text: var(--ifm-color-primary);
+  --home-button-secondary-border: none;
+
+  // TODO: why we need --site-container-width
   --site-container-width: 1180px;
   --brand: #5d84b3;
   --dark: #282c34;
@@ -10,7 +31,7 @@
   --divider: #ececec;
   --tintColor: #f7f7f7;
   --rn-note-background: rgba(255, 229, 100, 0.25);
-  --ifm-color-primary: #06bcee;
+
   --ifm-font-size-base: 17px;
   --ifm-spacing-horizontal: 16px;
   --ifm-navbar-item-padding-horizontal: 18px;
@@ -44,13 +65,6 @@
   --logo: #087ea4;
   --home-hero-floor-background: rgb(236, 248, 250);
   --home-hero-floor-background-bottom: white;
-  --home-button-primary: #087ea4;
-  --home-button-primary-text: white;
-  --home-button-primary-hover: #4e98b6;
-  --home-button-secondary: white;
-  --home-button-secondary-text: #404756;
-  --home-button-secondary-border: #bcc1cd;
-  --home-button-secondary-hover: #f8f9fa;
   --home-hero-devices-border: #5e687e;
   --home-hero-devices-stop: #66728b;
   --home-hero-devices-skeleton-element: #cfe6ee;

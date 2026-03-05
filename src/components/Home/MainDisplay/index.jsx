@@ -221,7 +221,7 @@ const MainDisplay = () => {
 
   // Define button styles with hover effects and scalable units.
   const primaryButtonStyle = {
-    background: 'linear-gradient(180deg, #0A2C7E 0%, #071E58 100%)',
+    background: 'linear-gradient(180deg, var(--home-button-primary) 0%, #071E58 100%)',
     color: 'white',
     border: 'none',
     borderRadius: '9999px',
@@ -241,9 +241,9 @@ const MainDisplay = () => {
   };
 
   const secondaryButtonStyle = {
-    background: '#F4EEDB',
-    color: '#0A2C7E',
-    border: 'none',
+    background: 'var(--home-button-secondary)',
+    color: 'var(--home-button-secondary-text)',
+    border: 'var(--home-button-secondary-border)',
     borderRadius: '9999px',
     padding: '0.72rem 1.6rem',
     fontSize: '0.9rem',
@@ -255,8 +255,8 @@ const MainDisplay = () => {
       : '0 0.15rem 0.5rem rgba(173, 145, 87, 0.16)',
     transform: isSecondaryButtonHovered ? 'translateY(-0.125rem)' : 'translateY(0)',
     backgroundColor: isSecondaryButtonHovered
-      ? '#F0E7CB'
-      : '#F4EEDB',
+      ? 'var(--home-button-secondary-hover)'
+      : 'var(--home-button-secondary)',
     textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
