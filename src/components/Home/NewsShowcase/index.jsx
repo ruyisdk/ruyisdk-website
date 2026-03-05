@@ -209,7 +209,7 @@ const NewsShowcase = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     /* Card: added isolate for stacking context, inner paddings from finetune */
-                    className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate"
+                    className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate !text-[#1a1a1a]"
                   >
                     <img
                       src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
@@ -242,7 +242,7 @@ const NewsShowcase = () => {
               href={news.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline"
+              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline !text-[#1a1a1a]"
             >
               <img
                 src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
