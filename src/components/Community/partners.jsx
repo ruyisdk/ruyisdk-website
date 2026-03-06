@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "@theme/Layout";
-import Translate from "@docusaurus/Translate";
+import { translate } from "@docusaurus/Translate";
 import ReactDOM from "react-dom";
 
 const Partners = ({ partners }) => (
@@ -50,12 +50,19 @@ export default function PartnersPage() {
   ];
 
   return (
-    <Layout title="Community Partners" description="社区共建计划">
+    <Layout
+      title={translate({id: 'community.partners.meta.title', message: 'Community Partners'})}
+      description={translate({id: 'community.partners.meta.description', message: '社区共建计划'})}
+    >
       <PageBackground isClient={isClient} />
       <div className="relative overflow-hidden px-6 py-8 text-gray-800">
         <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mt-6 mb-4"><Translate id="community.partners.title">合作伙伴</Translate></h2>
-          <p className="text-gray-500 text-lg text-center mb-6"><Translate id="community.partners.subtitle">RuyiSDK合作伙伴</Translate></p>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mt-6 mb-4">
+            {translate({id: 'community.partners.title', message: '合作伙伴'})}
+          </h2>
+          <p className="text-gray-500 text-lg text-center mb-6">
+            {translate({id: 'community.partners.subtitle', message: 'RuyiSDK合作伙伴'})}
+          </p>
           <Partners partners={partnersData} />
         </div>
       </div>
