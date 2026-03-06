@@ -4,6 +4,7 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import { themes as prismThemes } from "prism-react-renderer";
+import {translate} from '@docusaurus/Translate';
 
 const config = {
   title: "RuyiSDK",
@@ -82,7 +83,14 @@ const config = {
           { to: "/download", label: "下载", position: "left" },
           { to: "/news", label: "新闻", position: "left" },
           { to: "/contributors", label: "贡献者", position: "left" },
-          { href: "https://ruyisdk.cn", label: "社区", position: "left" },
+          {
+            label: translate({id: 'navbar.community', message: '社区'}),
+            position: 'left',
+            items: [
+              { to: '/Community/partners', label: translate({id: 'navbar.community.partners', message: '合作伙伴'}) },
+              { href: 'https://ruyisdk.cn', label: translate({id: 'navbar.community.site', message: '社区网站'}) },
+            ],
+          },
           {
             label: "关于",
             to: "/about",
