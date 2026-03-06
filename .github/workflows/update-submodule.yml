@@ -10,10 +10,14 @@ jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Compute run url
+        run: echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -25,8 +29,19 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: |
+            docs
+            news/ruyinews
+            news/weeklies
           commit-message: "cron: auto update submodules"
           signoff: true
           title: "Auto-update: Submodules to latest"
-          body: "Auto generated PR to sync submodules."
+          body: |
+            Auto generated PR to sync submodules.
+            
+            **Action run:** ${{ env.RUN_URL }}
+          labels: automat
           branch: create-pull-request/submodules
+
+      - name: PNPM Build
+        uses: ./.github/workflows/composite_npm_build
