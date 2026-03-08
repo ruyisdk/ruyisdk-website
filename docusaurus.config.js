@@ -88,7 +88,6 @@ const config = {
             position: 'left',
             items: [
               { to: '/contributors', label: '贡献者' },
-              { to: '/Community/partners', label: '合作伙伴' },
               { href: 'https://ruyisdk.cn', label: '社区网站' },
             ],
           },
