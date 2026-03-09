@@ -9,7 +9,7 @@ import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 
-import Home from '@site/src/components/Home';
+import Hero from '@site/src/components/Home';
 
 const Index = () => {
   const { siteConfig } = useDocusaurusContext();
@@ -29,7 +29,7 @@ const Index = () => {
         </title>
       </Head>
 
-      <Home />
+      <Hero />
     </Layout>
   );
 };

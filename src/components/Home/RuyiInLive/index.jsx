@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import SectionContainer from '../common/SectionContainer';
-import styles from './styles.module.css';
 
 // Custom SVG icons
 const UsersIcon = () => (
