@@ -43,14 +43,14 @@ const NewsShowcase = () => {
         truncated = truncated.substring(0, lastSpaceIndex);
       }
     }
-    
+
     return truncated + '...';
   };
 
   const handleNewsClick = (idx) => {
     setSelectedIndex(idx);
     setIsAutoSwitchPaused(true);
-    
+
     // Resume auto-switching after 10 seconds of user inactivity
     setTimeout(() => {
       setIsAutoSwitchPaused(false);
@@ -74,7 +74,7 @@ const NewsShowcase = () => {
   // Auto-switch news every 3 seconds, but only when component is visible and not on mobile
   useEffect(() => {
     if (!isVisible || isMobile || newsData.length < 2) return; // Don't start auto-switching until component is visible and not on mobile
-    
+
     const interval = setInterval(() => {
       if (!isAutoSwitchPaused) {
         setSelectedIndex((prevIndex) => {
@@ -173,7 +173,6 @@ const NewsShowcase = () => {
   }
 
   return (
-    <SectionContainer>
     <div
           /* Unified container: restored negative top margin to reduce gap; removed inner horizontal padding to align width with other sections */
           className="newsshowcase-container -mt-6 flex w-full h-auto md:h-[44rem] gap-4 font-sans pt-2 pb-10 overflow-x-hidden md:overflow-visible"
@@ -189,7 +188,7 @@ const NewsShowcase = () => {
             {newsData.map((news, idx) => (
               <div
                 key={idx}
-                className={`newsshowcase-title-item px-4 py-4 rounded-[0.625rem] cursor-pointer transition-transform duration-300 text-base font-medium border border-[rgba(230,230,230,1)] select-none shadow-[0_8px_30px_rgba(0,0,0,0.1)] m-0 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] ${
+                className={`newsshowcase-title-item px-4 py-4 rounded-[0.625rem] cursor-pointer transition-transform duration-300 text-base font-medium border border-[rgba(230,230,230,1)] select-none shadow-[0_8px_30px_rgba(0,0,0,0.1)] m-0 hover:scale-[1.01] ${
                   selectedIndex === idx
                     ? 'newsshowcase-active bg-[#002677] text-white shadow-none scale-[1.01]'
                     : 'bg-white text-[#1d1d1f]'
@@ -209,7 +208,7 @@ const NewsShowcase = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     /* Card: added isolate for stacking context, inner paddings from finetune */
-                    className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate"
+                    className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 transform w-full h-full flex flex-col border border-[rgba(230,230,230,1)] flex-shrink-0 no-underline isolate !text-[#1a1a1a]"
                   >
                     <img
                       src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
@@ -242,7 +241,7 @@ const NewsShowcase = () => {
               href={news.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline"
+              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline !text-[#1a1a1a]"
             >
               <img
                 src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
@@ -262,7 +261,6 @@ const NewsShowcase = () => {
         </div>
       )}
     </div>
-    </SectionContainer>
   );
 };
 

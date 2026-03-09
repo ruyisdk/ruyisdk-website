@@ -1,5 +1,28 @@
 :root {
+  // Document Infima variables https://github.com/facebook/docusaurus/issues/3955
+
   /* Global site container width used for pages and site sections */
+
+  --ifm-color-primary: #0A2C7E;
+  --ifm-color-primary-dark: #092871;
+  --ifm-color-primary-darker: #08256A;
+  --ifm-color-primary-darkest: #061F57;
+  --ifm-color-primary-light: #0B318C;
+  --ifm-color-primary-lighter: #0C3494;
+  --ifm-color-primary-lightest: #0F3FAE;
+
+  --home-background: #f5f5f7;
+  --home-secondary-background: #f5f5f7;
+
+  --home-button-primary: var(--ifm-color-primary);
+  --home-button-primary-hover: var(--ifm-color-primary-lightest);
+  --home-button-primary-text: white;
+  --home-button-secondary: #F4EEDB;
+  --home-button-secondary-hover: #F0E7CB;
+  --home-button-secondary-text: var(--ifm-color-primary);
+  --home-button-secondary-border: none;
+
+  // TODO: why we need --site-container-width
   --site-container-width: 1180px;
   --brand: #5d84b3;
   --dark: #282c34;
@@ -10,7 +33,7 @@
   --divider: #ececec;
   --tintColor: #f7f7f7;
   --rn-note-background: rgba(255, 229, 100, 0.25);
-  --ifm-color-primary: #06bcee;
+
   --ifm-font-size-base: 17px;
   --ifm-spacing-horizontal: 16px;
   --ifm-navbar-item-padding-horizontal: 18px;
@@ -44,13 +67,6 @@
   --logo: #087ea4;
   --home-hero-floor-background: rgb(236, 248, 250);
   --home-hero-floor-background-bottom: white;
-  --home-button-primary: #087ea4;
-  --home-button-primary-text: white;
-  --home-button-primary-hover: #4e98b6;
-  --home-button-secondary: white;
-  --home-button-secondary-text: #404756;
-  --home-button-secondary-border: #bcc1cd;
-  --home-button-secondary-hover: #f8f9fa;
   --home-hero-devices-border: #5e687e;
   --home-hero-devices-stop: #66728b;
   --home-hero-devices-skeleton-element: #cfe6ee;
@@ -68,8 +84,6 @@
   --home-feature-background-2: #e1eefc;
   --home-feature-background-3: #d4f3e7;
   --home-border: #e5e7eb;
-  --home-background: #f5f5f7;
-  --home-secondary-background: #f5f5f7;
   --home-text: #1c1e21;
   --home-code-red: #d73a49;
   --home-code-purple: #6f42c1;
@@ -179,13 +193,37 @@ body {
 .navbar__items--left {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
 }
 
 .navbar__items--right {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
+}
+
+.navbar__item {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.navbar__item .navbar__link,
+.navbar__item .dropdown__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.navbar__item .navbar__link svg,
+.navbar__item .dropdown__link svg,
+.navbar__item .navbar__link [class*="iconExternalLink"] {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .navbar-sidebar__brand .navbar__brand {

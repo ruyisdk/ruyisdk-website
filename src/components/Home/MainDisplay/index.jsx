@@ -143,34 +143,6 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
   );
 };
 
-// A decorative background animation with moving blobs.
-const BackgroundAnimation = () => {
-  // Colors used in the original CSS :root
-  const ruyiLightBlue = '#D9E0F3';
-  const ruyiLightGold = '#FDEFC3';
-
-  const blobBase = {
-    position: 'absolute',
-    width: '150%',
-    height: '150%',
-    top: '-25%',
-    left: '-25%',
-    borderRadius: '50%',
-    filter: 'blur(50px)',
-    opacity: 0.5,
-    mixBlendMode: 'soft-light',
-    pointerEvents: 'none',
-  };
-
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-gradient-to-b from-transparent to-[#f5f5f7] pointer-events-none">
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, ${ruyiLightBlue}, transparent 60%)`, animation: 'blobMove1 15s infinite alternate ease-in-out' }} />
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, ${ruyiLightGold}, transparent 60%)`, animation: 'blobMove2 18s infinite alternate ease-in-out' }} />
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, #90b3ff, transparent 60%)`, animation: 'blobMove3 12s infinite alternate ease-in-out', opacity: 0.4 }} />
-    </div>
-  );
-};
-
 const MainDisplay = () => {
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -221,18 +193,18 @@ const MainDisplay = () => {
 
   // Define button styles with hover effects and scalable units.
   const primaryButtonStyle = {
-    background: 'linear-gradient(180deg, #0A2C7E 0%, #071E58 100%)',
+    background: 'linear-gradient(180deg, var(--home-button-primary) 0%, #071E58 100%)',
     color: 'white',
     border: 'none',
-    borderRadius: '1.5rem', // Using rem for scalability
-    padding: '0.75rem 1.5rem', // Using rem for scalability
-    fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', // Fluid font size
+    borderRadius: '9999px',
+    padding: '0.72rem 1.6rem',
+    fontSize: '0.9rem',
     fontWeight: '500',
     cursor: 'pointer',
     transition: 'all 0.2s ease-out',
     boxShadow: isPrimaryButtonHovered
-      ? '0 0.25rem 1rem rgba(10, 44, 126, 0.4)'
-      : '0 0.125rem 0.375rem rgba(10, 44, 126, 0.3)',
+      ? '0 0.4rem 1.1rem rgba(10, 44, 126, 0.35)'
+      : '0 0.2rem 0.7rem rgba(10, 44, 126, 0.26)',
     transform: isPrimaryButtonHovered ? 'translateY(-0.125rem)' : 'translateY(0)',
     textDecoration: 'none',
     display: 'inline-flex',
@@ -241,22 +213,22 @@ const MainDisplay = () => {
   };
 
   const secondaryButtonStyle = {
-    background: 'rgba(249, 194, 60, 0.15)',
-    color: '#0A2C7E',
-    border: 'none',
-    borderRadius: '1.5rem', // Using rem for scalability
-    padding: '0.75rem 1.5rem', // Using rem for scalability
-    fontSize: 'clamp(1rem, 1.2vw, 1.1rem)', // Fluid font size
+    background: 'var(--home-button-secondary)',
+    color: 'var(--home-button-secondary-text)',
+    border: 'var(--home-button-secondary-border)',
+    borderRadius: '9999px',
+    padding: '0.72rem 1.6rem',
+    fontSize: '0.9rem',
     fontWeight: '500',
     cursor: 'pointer',
     transition: 'all 0.2s ease-out',
     boxShadow: isSecondaryButtonHovered
-      ? '0 0.25rem 1rem rgba(249, 194, 60, 0.3)'
-      : '0 0.125rem 0.5rem rgba(249, 194, 60, 0.1)',
+      ? '0 0.3rem 1rem rgba(173, 145, 87, 0.22)'
+      : '0 0.15rem 0.5rem rgba(173, 145, 87, 0.16)',
     transform: isSecondaryButtonHovered ? 'translateY(-0.125rem)' : 'translateY(0)',
     backgroundColor: isSecondaryButtonHovered
-      ? 'rgba(249, 194, 60, 0.25)'
-      : 'rgba(249, 194, 60, 0.15)',
+      ? 'var(--home-button-secondary-hover)'
+      : 'var(--home-button-secondary)',
     textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
@@ -265,15 +237,19 @@ const MainDisplay = () => {
 
   return (
     <div>
-      <div className="py-16 bg-[#f5f5f7] font-sans w-full relative overflow-hidden flex flex-col">
-        <BackgroundAnimation />
+      <div className="py-16 font-sans w-full relative overflow-hidden flex flex-col">
 
         {/* Main page content */}
         <div className="relative z-10 mx-auto max-w-[1280px] w-[90%] px-8 box-border">
           <div className="flex flex-col lg:flex-row justify-between items-center lg:gap-12 gap-10 w-full">
-            <div className="flex-1 lg:min-w-[300px] min-w-0 lg:max-w-[500px] max-w-full flex flex-col lg:block items-center lg:items-start text-center lg:text-left">
-              <h1 className="text-[clamp(2.5rem,5vw,3.5rem)] font-extrabold mb-4 text-[#0A2C7E] tracking-tight">RuyiSDK</h1>
-              <p className="text-[clamp(1.125rem,2.5vw,1.5rem)] text-[#515154] mb-10 leading-7 lg:max-w-[40ch] max-w-none"><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
+            <div className="flex-1 lg:min-w-[300px] min-w-0 lg:max-w-[680px] max-w-full flex flex-col lg:block items-center lg:items-start text-center lg:text-left">
+              <h1
+                className="leading-[1.05] font-bold mb-6 tracking-[-0.02em]"
+                style={{ fontSize: 'clamp(2.94rem, 3.92vw, 3.5rem)', color: '#123D91' }}
+              >
+                RuyiSDK
+              </h1>
+              <p className="text-[clamp(0.98rem,1.47vw,1.4rem)] text-[#515154] mb-10 leading-[1.35] lg:max-w-[40ch] max-w-none"><Translate>面向 RISC-V 架构的一体化集成开发环境</Translate></p>
 
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <a

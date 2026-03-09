@@ -22,7 +22,7 @@ export default function Heading({as: As, id, ...props}) {
         // when navbar hides on scroll, use 0.5rem scroll margin; otherwise include navbar height
         hideOnScroll
           ? 'scroll-mt-2'
-          : '[scroll-margin-top:calc(var(--ifm-navbar-height)_+_0.5rem)]',
+          : 'scroll-mt-[calc(var(--ifm-navbar-height)+0.5rem)]',
         props.className,
       )}
       id={id}>
