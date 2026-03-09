@@ -3,7 +3,6 @@ import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Added for baseUrl resolution
 import axios from 'axios';
 
-import SectionContainer from '../common/SectionContainer';
 
 const NewsShowcase = () => {
   const { siteConfig, i18n } = useDocusaurusContext(); // Access global site config and i18n

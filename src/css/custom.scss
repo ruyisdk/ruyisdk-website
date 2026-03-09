@@ -11,17 +11,6 @@
   --ifm-color-primary-lighter: #0C3494;
   --ifm-color-primary-lightest: #0F3FAE;
 
-  --home-background: #f5f5f7;
-  --home-secondary-background: #f5f5f7;
-
-  --home-button-primary: var(--ifm-color-primary);
-  --home-button-primary-hover: var(--ifm-color-primary-lightest);
-  --home-button-primary-text: white;
-  --home-button-secondary: #F4EEDB;
-  --home-button-secondary-hover: #F0E7CB;
-  --home-button-secondary-text: var(--ifm-color-primary);
-  --home-button-secondary-border: none;
-
   // TODO: why we need --site-container-width
   --site-container-width: 1180px;
   --brand: #5d84b3;
@@ -338,30 +327,6 @@ giscus-widget {
   display: flex;
   margin: auto;
   max-width: 900px;
-}
-
-.secondaryButtonShow {
-  border: none;
-  padding: 10px 24px;
-  border-radius: 99rem;
-  font-weight: bold;
-  font-size: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  color: #000;
-  border: 1px solid var(--home-button-secondary-border);
-  background-color: #ffa630;
-}
-
-.secondaryButtonHide {
-  visibility: hidden;
-}
-
-.secondaryButtonShow:hover {
-  background-color: var(--home-button-secondary-hover);
-  color: var(--home-button-secondary-text);
 }
 
 .hover-wechat-link {
