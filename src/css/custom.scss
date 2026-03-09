@@ -201,7 +201,7 @@ body {
 
 .navbar__item .navbar__link,
 .navbar__item .dropdown__link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.25rem;
   white-space: nowrap;
