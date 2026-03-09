@@ -19,7 +19,7 @@ const BackgroundAnimation = () => {
   };
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-gradient-to-b from-transparent to-(--home-background) pointer-events-none">
+    <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-transparent to-(--home-background) pointer-events-none">
       <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, ${ruyiLightBlue}, transparent 60%)`, animation: 'blobMove1 15s infinite alternate ease-in-out' }} />
       <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, ${ruyiLightGold}, transparent 60%)`, animation: 'blobMove2 18s infinite alternate ease-in-out' }} />
       <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, ${ruyiBlue}, transparent 60%)`, animation: 'blobMove3 12s infinite alternate ease-in-out', opacity: 0.4 }} />

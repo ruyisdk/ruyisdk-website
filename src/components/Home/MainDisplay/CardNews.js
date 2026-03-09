@@ -336,7 +336,6 @@ export default function CardNews() {
   return (
     <>
       {/* Unified wrapper for the light grey background and width */}
-      <SectionContainer>
         <div className={`flex flex-col gap-4 w-full relative`}>
           {organizedCards.map((item, i) => {
             // For regular cards
@@ -356,7 +355,6 @@ export default function CardNews() {
             return null;
           })}
         </div>
-      </SectionContainer>
 
       {/* Expanded Card Modal */}
       {expandedCardIndex !== null && (

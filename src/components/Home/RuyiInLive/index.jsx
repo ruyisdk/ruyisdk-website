@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import SectionContainer from '../common/SectionContainer';
+import styles from './styles.module.css';
 
 // Custom SVG icons
 const UsersIcon = () => (
@@ -436,7 +437,6 @@ const RuyiInLive = () => {
 
   return (
     <>
-    <SectionContainer>
         <div className="w-full py-4 flex justify-center items-center">
           <div className={`w-full mx-auto ${isMobile ? 'flex flex-col' : 'flex flex-row'} ${isMobile ? 'h-auto' : 'h-[21.875rem]'} bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677] mx-auto mb-4`}>
 
@@ -553,7 +553,6 @@ const RuyiInLive = () => {
           </div>
         </div>
         </div>
-    </SectionContainer>
       <style>{`
         @keyframes pulse {
           0% { background-color: ${colors.placeholderGrey}; }

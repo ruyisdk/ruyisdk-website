@@ -13,17 +13,9 @@ import styles from "./styles.module.css";
 
 function Hero() {
   return (
-    <div className="homecontainer">
-      <div
-        className={styles.container}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
-        <BackgroundAnimation />
+    <div className="relative min-h-screen bg-(--home-background)">
+      <BackgroundAnimation />
+      <div className="max-w-7xl mx-auto px-4 text-black" >
         <MainDisplay />
         <RuyiInLive />
         <NewsShowcase />
