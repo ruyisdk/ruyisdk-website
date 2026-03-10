@@ -1,4 +1,4 @@
-.primaryButton {
+.primary-button {
     background: linear-gradient(180deg, var(--home-button-primary) 0%, var(--home-button-primary-end) 100%);
     color: var(--home-button-primary-text);
     border: none;
@@ -18,13 +18,13 @@
     box-shadow: 0 0.2rem 0.7rem rgba(10, 44, 126, 0.26);
 }
 
-.primaryButton:hover {
+.primary-button:hover {
     color: var(--home-button-primary-text);
     box-shadow: 0 0.4rem 1.1rem rgba(10, 44, 126, 0.35);
     transform: translateY(-0.125rem);
 }
 
-.secondaryButton {
+.secondary-button {
     background: var(--home-button-secondary);
     color: var(--home-button-secondary-text);
     border: var(--home-button-secondary-border);
@@ -46,7 +46,7 @@
     box-shadow: 0 0.15rem 0.5rem rgba(173, 145, 87, 0.16);
 }
 
-.secondaryButton:hover {
+.secondary-button:hover {
     color: var(--home-button-secondary-text);
     box-shadow: 0 0.3rem 1rem rgba(173, 145, 87, 0.22);
     transform: translateY(-0.125rem);

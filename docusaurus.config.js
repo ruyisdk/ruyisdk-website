@@ -12,6 +12,23 @@ const config = {
   customFields: {
     // Put your custom environment here
     apiURL: process.env.BASE_URL,
+    externalLinks: {
+      revyos: {
+        "zh-Hans": 'https://docs.revyos.dev/',
+        en: 'https://docs.revyos.dev/en/',
+      },
+      "support-matrix": {
+        "zh-Hans": "https://matrix.ruyisdk.org/zh-CN/",
+        en: "https://matrix.ruyisdk.org/",
+      },
+      plct: {
+        "zh-Hans": "https://plctlab.org/zh/",
+        en: "https://plctlab.org/en/",
+        ja: "https://plctlab.org/ja/",
+        ru: "https://plctlab.org/ru/",
+        ko: "https://plctlab.org/ko/"
+      }
+    },
   },
   // Set the production url of your site here
   url: "https://ruyisdk.org",

@@ -12,15 +12,15 @@ import MainDisplay from "./MainDisplay";
 import WeChatLink from "../common/WeChatLink";
 import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
-
-import styles from "./styles.module.css";
+import CardNews from './CardNews';
 
 export default function Hero() {
   return (
-    <div className={clsx(styles.homeColors, "relative min-h-screen")}>
+    <div className="relative min-h-screen">
       <BackgroundAnimation />
       <div className="max-w-7xl mx-auto px-4 text-black" >
         <MainDisplay />
+        <CardNews />
         <RuyiInLive />
         <NewsShowcase />
         <WeChatLink />
