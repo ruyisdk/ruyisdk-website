@@ -64,7 +64,7 @@
       }
     },
     {
-      "total": 329,
+      "total": 332,
       "author": {
         "login": "xen0n",
         "id": 1175567,
@@ -74,7 +74,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-05T19:52:30.615Z",
+    "generatedAt": "2026-03-10T19:34:10.334Z",
     "source": "https://api.github.com/repos/ruyisdk/packages-index/stats/contributors"
   }
 }
