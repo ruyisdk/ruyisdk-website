@@ -33,7 +33,7 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en", "de"],
+    locales: ["zh-Hans", "en", ],
   },
 
   presets: [
@@ -53,7 +53,7 @@ const config = {
           blogDescription: "Blog",
         },
         theme: {
-          customCss: ["./src/css/custom.scss", "./src/css/unocss.css"],
+          customCss: ["./src/css/tailwind.css", "./src/css/custom.scss"],
         },
       }),
     ],
@@ -123,9 +123,8 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
-    "./plugins/unocss",
     "./plugins/news-generator",
-        [
+    [
       "@docusaurus/plugin-content-blog",
       {
         blogTitle: "双周报",
@@ -148,6 +147,11 @@ const config = {
       defer: false,
     },
   ],
+  // for mermaid support
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;

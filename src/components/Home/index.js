@@ -4,24 +4,22 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import WeChatLink from "../common/WeChatLink";
+
+import clsx from "clsx";
+
+import BackgroundAnimation from "./Background";
 import MainDisplay from "./MainDisplay";
+import WeChatLink from "../common/WeChatLink";
 import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
+
 import styles from "./styles.module.css";
 
-function Hero() {
+export default function Hero() {
   return (
-    <div className="homecontainer">
-      <div
-        className={styles.container}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          width: "100%",
-        }}
-      >
+    <div className={clsx(styles.homeColors, "relative min-h-screen")}>
+      <BackgroundAnimation />
+      <div className="max-w-7xl mx-auto px-4 text-black" >
         <MainDisplay />
         <RuyiInLive />
         <NewsShowcase />
@@ -30,8 +28,4 @@ function Hero() {
       </div>
     </div>
   );
-}
-
-export default function Home() {
-  return <Hero />;
 }

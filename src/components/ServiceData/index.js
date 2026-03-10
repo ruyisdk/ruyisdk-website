@@ -1,6 +1,6 @@
 import { Card, Statistic, ConfigProvider, Tabs, Row, Col, Progress, Tooltip } from "antd"
 import { useCallback } from "react"
-import { SmileOutlined, EllipsisOutlined, RiseOutlined, DownloadOutlined, DesktopOutlined, CodeOutlined, CloudServerOutlined } from '@ant-design/icons';
+import { IconDownload, IconCloudUp, IconCloudDown, IconBarrierBlock } from '@tabler/icons-react';
 import { useEffect, useMemo, useRef, useState } from "react"
 import useDashboardClient from "@site/src/utils/hooks/useDashboardClient"
 import { translate } from "@docusaurus/Translate"
@@ -107,7 +107,7 @@ const useDebounce = (value, delay) => {
 // Components
 const CustomizeRenderEmpty = () => (
   <div className={styles.emptyState}>
-    <SmileOutlined className={styles.emptyIcon} />
+    <IconBarrierBlock size={64} stroke={1.5} color={'gray'} />
     <p className={styles.emptyText}>{translate(TRANSLATION_KEY.NO_DATA)}</p>
   </div>
 );
@@ -290,7 +290,7 @@ const StatsSection = ({ data, loading, isMobile }) => {
             <AnimatedStatistic
               title={translate(TRANSLATION_KEY.PM_DOWNLOADS)}
               value={pmDownloads}
-              icon={<DownloadOutlined />}
+              icon={<IconDownload size={48} stroke={1.5} />}
               color="#07a0cc"
               loading={loading}
             />
@@ -301,7 +301,7 @@ const StatsSection = ({ data, loading, isMobile }) => {
           <AnimatedStatistic
             title={translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS)}
             value={componentDownloads}
-            icon={<CloudServerOutlined />}
+            icon={<IconCloudDown size={48} stroke={1.5} />}
             color="#07a0cc"
             loading={loading}
             />
@@ -310,7 +310,7 @@ const StatsSection = ({ data, loading, isMobile }) => {
           <AnimatedStatistic
             title={translate(TRANSLATION_KEY.RUYI_INSTALLS)}
             value={totalInstalls}
-            icon={<DesktopOutlined />}
+            icon={<IconCloudUp size={48} stroke={1.5} />}
             color="#07a0cc"
             loading={loading}
           />

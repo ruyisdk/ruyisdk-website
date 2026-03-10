@@ -1,34 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { IconUser, IconGitCommit, IconGitPullRequest } from '@tabler/icons-react';
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
 import ReactDOM from "react-dom";
-
-const GithubIcon = ({ className, size = 24 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-  </svg>
-);
-
-const StatIconUser = ({ size = '1em' }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-    <circle cx="12" cy="7" r="4" />
-  </svg>
-);
-
-const StatIconCommit = ({ size = '1em' }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="3" />
-    <path d="M3 12h3" />
-    <path d="M18 12h3" />
-  </svg>
-);
-
-const StatIconPR = ({ size = '1em' }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18 15C16.3431 15 15 16.3431 15 18C15 19.6569 16.3431 21 18 21C19.6569 21 21 19.6569 21 18C21 16.3431 19.6569 15 18 15ZM18 15V8C18 7.46957 17.7893 6.96086 17.4142 6.58579C17.0391 6.21071 16.5304 6 16 6H13M6 9C7.65685 9 9 7.65685 9 6C9 4.34315 7.65685 3 6 3C4.34315 3 3 4.34315 3 6C3 7.65685 4.34315 9 6 9ZM6 9V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
 
 const AvatarWithGithub = ({ avatarUrl, name, githubUrl, sizeClass = "w-20 h-20" }) => {
   const img = (
@@ -65,11 +39,11 @@ const ContributorCard = ({ person }) => {
     <div className="flex flex-col items-center justify-center gap-3 p-2 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03]">
       <AvatarWithGithub avatarUrl={avatarUrl} name={name} githubUrl={github} sizeClass={sizeClass} />
       {github ? (
-        <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem] hover:underline">
+        <a href={github} target="_blank" rel="noopener noreferrer" className="text-sm sm:text-base md:text-lg font-semibold !text-slate-900 visited:!text-slate-900 text-center truncate max-w-[12rem] hover:underline">
           {name}
         </a>
       ) : (
-        <p className="text-sm sm:text-base md:text-lg font-semibold text-slate-700 text-center truncate max-w-[12rem]">{name}</p>
+        <p className="text-sm sm:text-base md:text-lg font-semibold text-slate-900 text-center truncate max-w-[12rem]">{name}</p>
       )}
     </div>
   );
@@ -138,17 +112,17 @@ export default function ContributorsPage() {
           {/* Totals / stats bar (populated at build time by generator) */}
           <div className="flex flex-wrap gap-4 justify-center items-stretch my-4 md:my-6">
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><StatIconUser /></div>
+              <div className="text-slate-900 mb-1 text-2xl"><IconUser size={28} stroke={1.5} color="black" /></div>
               <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.contributors">Contributors</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{totals.contributors ?? allPeople.length}</div>
             </div>
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><StatIconCommit /></div>
+              <div className="text-slate-900 mb-1 text-2xl"><IconGitCommit size={28} stroke={1.5} color="black" style={{transform: 'rotate(90deg)'}} /></div>
               <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.commits">Commits</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><StatIconPR /></div>
+              <div className="text-slate-900 mb-1 text-2xl"><IconGitPullRequest size={28} stroke={1.5} color="black" /></div>
               <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.prs">Pull Requests</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>

@@ -1,48 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { IconBrandGithub, IconUsersGroup } from '@tabler/icons-react';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import SectionContainer from '../common/SectionContainer';
-
-// Custom SVG icons
-const UsersIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={{ marginRight: '0.5rem' }}
-  >
-    <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" />
-    <path
-      d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" />
-    <path
-      d="M21 21v-2a4 4 0 0 0-3-3.85"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-  </svg>
-);
-
-const GithubIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={{ marginRight: '0.5rem' }}
-  >
-    <path
-      d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.252-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.934.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"
-      fill="currentColor"
-    />
-  </svg>
-);
 
 const RuyiInLive = () => {
   const {
@@ -53,7 +12,6 @@ const RuyiInLive = () => {
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isWideScreen, setIsWideScreen] = useState(false);
-
   const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
   const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
 
@@ -387,17 +345,15 @@ const RuyiInLive = () => {
     return Math.max(...currentData.map((item) => item.total), 0);
   };
 
-  const discussButtonStyle = {
-    ...styles.button,
-    ...styles.discussButtonBase,
-    ...(isDiscussButtonHovered ? styles.buttonHover : {}),
-  };
-
-  const sourceButtonStyle = {
-    ...styles.button,
-    ...styles.sourceButtonBase,
-    ...(isSourceButtonHovered ? styles.buttonHover : {}),
-  };
+  const getActionButtonStyle = (hovered, background) => ({
+    background,
+    color: colors.textDark,
+    minWidth: '6.25rem',
+    transform: hovered ? 'translateY(-0.125rem)' : 'translateY(0)',
+    boxShadow: hovered ? '0 0.625rem 1.25rem rgba(0, 0, 0, 0.2)' : '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
+    transition: 'transform 300ms ease-out, box-shadow 300ms ease-out',
+    willChange: 'transform, box-shadow',
+  });
 
   const PlaceholderChart = () => (
     <div className="w-full h-full relative opacity-60">
@@ -439,7 +395,6 @@ const RuyiInLive = () => {
 
   return (
     <>
-    <SectionContainer>
         <div className="w-full py-4 flex justify-center items-center">
           <div className={`w-full mx-auto ${isMobile ? 'flex flex-col' : 'flex flex-row'} ${isMobile ? 'h-auto' : 'h-[21.875rem]'} bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677] mx-auto mb-4`}>
 
@@ -459,12 +414,12 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isDiscussButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
-                style={{ background: colors.creamBeige_light, color: colors.textDark, minWidth: '6.25rem' }}
+                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                style={getActionButtonStyle(isDiscussButtonHovered, colors.creamBeige_light)}
                 onMouseEnter={() => setIsDiscussButtonHovered(true)}
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
-                <UsersIcon />
+                <IconUsersGroup size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="ruyisdk.cn" />
               </a>
 
@@ -472,12 +427,12 @@ const RuyiInLive = () => {
                 href="https://github.com/ruyisdk"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold transition ${isSourceButtonHovered ? 'shadow-lg -translate-y-0.5' : 'shadow-sm'}`}
-                style={{ background: colors.creamBeige, color: colors.textDark, minWidth: '6.25rem' }}
+                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                style={getActionButtonStyle(isSourceButtonHovered, colors.creamBeige)}
                 onMouseEnter={() => setIsSourceButtonHovered(true)}
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >
-                <GithubIcon />
+                <IconBrandGithub size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="source.repository" />
               </a>
             </div>
@@ -556,7 +511,6 @@ const RuyiInLive = () => {
           </div>
         </div>
         </div>
-    </SectionContainer>
       <style>{`
         @keyframes pulse {
           0% { background-color: ${colors.placeholderGrey}; }
