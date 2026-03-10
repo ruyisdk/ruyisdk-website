@@ -3,20 +3,30 @@ import Layout from "@theme/Layout";
 import { translate } from "@docusaurus/Translate";
 import ReactDOM from "react-dom";
 
-const Partners = ({ partners }) => (
-  <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-6">
+const Partners = ({ partners, noWrapper = false }) => {
+  const grid = (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
       {partners.map((partner) => (
-        <a key={partner.id} href={partner.url} target="_blank" rel="noopener noreferrer" className="block transform transition hover:scale-105">
+        <a key={partner.id} href={partner.url} target="_blank" rel="noopener noreferrer" className="block transform transition-transform duration-300 ease-in-out hover:scale-105">
           <div className="flex justify-center">
-            <img src={partner.logoUrl} alt={partner.name} className={`h-20 object-contain ${partner.logoClass || ''}`}
+            <img src={partner.logoUrl} alt={partner.name} className={`h-20 object-contain transition-shadow duration-300 ease-in-out hover:shadow-lg ${partner.logoClass || ''}`}
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/200x80/ffffff/000000?text=" + partner.name; }} />
           </div>
         </a>
       ))}
     </div>
-  </div>
-);
+  );
+
+  if (noWrapper) {
+    return grid;
+  }
+
+  return (
+    <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-6">
+      {grid}
+    </div>
+  );
+};
 
 const PageBackground = ({ isClient }) => {
   if (!isClient) return null;
@@ -58,13 +68,16 @@ export const partnersData = [
   ];
 
 export function PartnersSection() {
-  // convenience wrapper with title and padding
+  // convenience wrapper with title and padding; when used on the about page we only want the
+  // outer card, so ask <Partners> not to render its own inner box.
   return (
     <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-8">
       <h2 className="text-2xl font-bold mb-4">
         {translate({id: 'community.partners.title', message: '合作伙伴'})}
       </h2>
-      <Partners partners={partnersData} />
+      <div className="mt-6">
+        <Partners partners={partnersData} noWrapper />
+      </div>
     </div>
   );
 }
