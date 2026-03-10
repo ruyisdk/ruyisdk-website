@@ -71,6 +71,7 @@
   "community.stats.contributors": { "message": "贡献者" },
   "community.stats.commits": { "message": "提交数" },
   "community.stats.prs": { "message": "Pull Requests" },
+  "community.stats.issues": { "message": "Issues" },
   "community.stats.unknown": { "message": "暂无" }
   ,
   "about.intro.title": { "message": "关于我们" },
