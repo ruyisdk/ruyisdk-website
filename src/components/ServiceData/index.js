@@ -519,15 +519,6 @@ const ServiceData = () => {
       className={styles.container}
       style={{ pointerEvents: isFooterVisible && isMobile ? 'none' : 'auto' }}
     >
-
-      {/* Decorative header + animated background blobs (homepage-style) */}
-      <div className={styles.backgroundHeader} />
-      <div className={styles.animationContainer} aria-hidden="true">
-        <div className={`${styles.blob} ${styles.blob1}`} />
-        <div className={`${styles.blob} ${styles.blob2}`} />
-        <div className={`${styles.blob} ${styles.blob3}`} />
-      </div>
-
       <ConfigProvider 
         renderEmpty={CustomizeRenderEmpty} 
         theme={{

@@ -1,35 +1,24 @@
 .container {
-  background-color: #f5f5f7; /* match homepage light grey */
-  min-height: 100vh;
+  background-color: transparent;
+  min-height: auto;
   width: 100%;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
-  flex-wrap: wrap;
-  flex-direction: row;
   min-width: 0; /* allow responsive */
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   position: relative;
-}
-
-.container::-webkit-scrollbar {
-  display: none;
 }
 
 .mainContent {
   width: 100%;
-  max-width: 1400px;
-  padding: 2rem;
+  max-width: var(--site-container-width);
+  margin: 0 auto;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
 
-/* 安装台数区域样式 */
+/* Install section */
 .installSection {
   margin-bottom: 3rem;
   text-align: center;
@@ -51,7 +40,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* removed decorative gradient to match homepage styling */
+  /* Keep the card clean (no decorative overlay) */
   background: none;
   opacity: 0;
 }
@@ -86,7 +75,7 @@
   min-height: 120px;
 }
 
-/* 统计数据卡片样式 */
+/* Top stats cards */
 .statsSection {
   margin-bottom: 2rem;
 }
@@ -165,7 +154,7 @@
   border-radius: 4px;
 }
 
-/* 分类数据样式 */
+/* Category breakdown */
 .categorySection {
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.06);
@@ -228,7 +217,7 @@
   background: linear-gradient(90deg, #06bcee 0%, #087ea4 100%);
 }
 
-/* 图表区域样式 */
+/* Charts */
 .chartsSection {
   margin-top: 2rem;
 }
@@ -271,7 +260,7 @@
   min-height: 400px;
 }
 
-/* 隐藏坐标轴数字和刻度 */
+/* Hide axis labels/ticks */
 .chart :global(.g2-axis-label),
 .chart :global(.g2-axis-tick),
 .chart :global(.g2-axis-line),
@@ -284,7 +273,7 @@
   display: none !important;
 }
 
-/* 空状态样式 */
+/* Empty state */
 .emptyState {
   display: flex;
   flex-direction: column;
@@ -307,7 +296,7 @@
 }
 
 
-/* 更新时间样式 */
+/* Last updated */
 .updateTime {
   text-align: center;
   padding: 1rem;
@@ -322,27 +311,18 @@
   margin: 0;
 }
 
-/* 响应式设计 */
+/* Responsive */
 @media (max-width: 1024px) {
   .container {
     background-color: #f5f5f7; /* match homepage light grey */
     min-height: 100vh;
     margin: 0;
     width: 100%;
-    display: block;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     min-width: 0;
-    overflow-x: unset;
-  }
-
-  .container::-webkit-scrollbar {
-    display: none;
   }
 
   .mainContent {
-    padding: 1rem;
+    padding: 1rem 0;
     gap: 2rem;
   }
 
@@ -449,9 +429,8 @@
     height: 520px;
   }
 }
-/* 禁用移动端hover效果以改善滑动体验 */
+/* Disable hover effects on touch devices */
 @media (max-width: 768px) {
-  /* 禁用所有卡片的hover效果 */
   .statCard:hover {
     transform: none !important;
     box-shadow: 0 8px 16px rgba(0,0,0,0.04) !important;
@@ -474,7 +453,6 @@
 
 }
 
-/* 更严格的移动端hover禁用 */
 @media (max-width: 480px) {
   .statCard:hover,
   .categoryCard:hover,
@@ -490,31 +468,20 @@
   }
 }
 
-/* 移动端滚动性能优化 */
 @media (max-width: 1024px) {
   .container {
-    
-    /* 优化滚动性能 */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    
-    /* 移除可能导致卡顿的属性 */
-    overflow-y: auto;
-    scroll-behavior: auto;
+    overflow: visible;
   }
-  
-  
 }
 
-/* 更严格的移动端优化 */
+
 @media (max-width: 768px) {
   .container {
-    /* 进一步优化滚动 */
     scroll-padding-top: 0;
     scroll-padding-bottom: 0;
   }
   
-  /* 减少重绘 */
+
   .chartContainer,
   .chartWrapper,
   .statCard,
@@ -524,45 +491,29 @@
   }
 }
 
-/* 移动端滚动优化 - 确保可以滚动到footer */
+
 @media (max-width: 1024px) {
   .container {
-    /* 确保容器可以超出视口高度 */
     min-height: 100vh;
     height: auto;
-    
-    /* 确保滚动正常工作 */
-    overflow-y: visible;
-    overflow-x: hidden;
-    
-    /* 优化滚动性能 */
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+    overflow: visible;
   }
   
-  /* 确保主内容区域可以正常滚动 */
   .mainContent {
-    /* 移除可能限制高度的设置 */
     height: auto;
     min-height: auto;
-    
-    /* 确保内容可以正常显示 */
     overflow: visible;
   }
 }
 
-/* 更严格的移动端滚动优化 */
 @media (max-width: 768px) {
   .container {
-    /* 进一步优化滚动 */
     min-height: 100vh;
     height: auto;
-    overflow-y: visible;
-    overflow-x: hidden;
+    overflow: visible;
   }
   
   .mainContent {
-    /* 确保移动端内容正常显示 */
     height: auto;
     min-height: auto;
     overflow: visible;
