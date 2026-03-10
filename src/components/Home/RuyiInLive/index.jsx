@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { IconBrandGithub, IconUsersGroup } from '@tabler/icons-react';
+import { IconLink, IconLogin2 } from '@tabler/icons-react';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
@@ -403,10 +403,10 @@ const RuyiInLive = () => {
             style={{ background: `linear-gradient(135deg, ${colors.navyBlue}, ${colors.navyBlue} 70%, ${colors.navyBlue} 85%)` }}
           >
             <h1 className="text-2xl md:text-[1.8rem] font-bold mb-1">
-              <Translate id="ruyisdk.community" />
+              <Translate id="home.ruyiinlive.community">RuyiSDK 社区</Translate>
             </h1>
             <p className="text-sm md:text-[0.9rem] mb-3 font-medium opacity-90">
-              <Translate id="ruyisdk.community.open" />
+              <Translate id="home.ruyiinlive.community.subtitle">RuyiSDK 开发者社区现已开启</Translate>
             </p>
 
             <div className="flex gap-3 flex-wrap">
@@ -419,12 +419,12 @@ const RuyiInLive = () => {
                 onMouseEnter={() => setIsDiscussButtonHovered(true)}
                 onMouseLeave={() => setIsDiscussButtonHovered(false)}
               >
-                <IconUsersGroup size={18} stroke={2} color="#002677" />&nbsp;
-                <Translate id="ruyisdk.cn" />
+                <IconLink size={18} stroke={2} color="#002677" />&nbsp;
+                <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
               </a>
 
               <a
-                href="https://github.com/ruyisdk"
+                href="https://ruyisdk.cn/signup"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
@@ -432,8 +432,8 @@ const RuyiInLive = () => {
                 onMouseEnter={() => setIsSourceButtonHovered(true)}
                 onMouseLeave={() => setIsSourceButtonHovered(false)}
               >
-                <IconBrandGithub size={18} stroke={2} color="#002677" />&nbsp;
-                <Translate id="source.repository" />
+                <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
+                <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
               </a>
             </div>
 
@@ -454,7 +454,7 @@ const RuyiInLive = () => {
                 onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
                 onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}
               >
-                <Translate id="view.more" />&nbsp;&gt;
+                <Translate id="view.more">查看更多</Translate>&nbsp;&gt;
               </a>
             </div>
 

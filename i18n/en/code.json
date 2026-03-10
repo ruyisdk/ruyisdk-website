@@ -1,4 +1,83 @@
 {
+  "home.title": {
+    "message": "RuyiSDK: Preparing for 1 Million RISC-V Software Developers"
+  },
+  "home.description": {
+    "message": "All-in-one integrated development environment for RISC-V architecture"
+  },
+  "home.ruyisdk": {
+    "message": "RuyiSDK"
+  },
+  "home.maindisplay.getstarted": {
+    "message": "Get Started"
+  },
+  "home.maindisplay.source": {
+    "message": "GitHub"
+  },
+  "home.ruyiinlive.community": {
+    "message": "RuyiSDK Community"
+  },
+  "home.ruyiinlive.community.subtitle": {
+    "message": "RuyiSDK Developer Community is now open. (Currently available in Chinese)"
+  },
+  "home.ruyiinlive.seecommunity": {
+    "message": "Explore",
+    "description": "Button text linking to RuyiSDK community"
+  },
+  "home.ruyiinlive.joincommunity": {
+    "message": "Join Now",
+    "description": "Button text linking to community signup"
+  },
+
+  "footer.ecosystem": {
+    "message": "Ecosystem"
+  },
+  "footer.ruyisdk": {
+    "message": "RuyiSDK"
+  },
+  "footer.revyos": {
+    "message": "RevyOS"
+  },
+  "footer.matrix": {
+    "message": "Support Matrix"
+  },
+  "footer.community": {
+    "message": "Community"
+  },
+  "footer.riscv-community": {
+    "message": "RuyiSDK Community"
+  },
+  "footer.discussion": {
+    "message": "Discussion"
+  },
+  "footer.stats": {
+    "message": "Data Overview"
+  },
+  "footer.community-code": {
+    "message": "Community Code"
+  },
+  "footer.intern": {
+    "message": "Open Internship"
+  },
+  "footer.followus": {
+    "message": "Follow Us"
+  },
+  "footer.wechat": {
+    "message": "WeChat Official Account"
+  },
+  "footer.qqgroup": {
+    "message": "QQ Group"
+  },
+  "footer.plct": {
+    "message": "PLCT Lab"
+  },
+  "footer.tools": {
+    "message": "More Developer Tools"
+  },
+  "footer.jetbrains": {
+    "message": "JetBrains IDE Multiarch"
+  },
+
   "meetup": {
     "message": "Our recent events"
   },
@@ -256,19 +335,37 @@
   "about.goals.item2": {
     "message": "Allow developers to specify common RISC-V ISA extension combinations and generate the required OS, toolchains, language runtimes/VMs, libraries, and application frameworks via the RUYISDK system."
   },
-  "about.goals.item3": { "message": "Foster and operate an active, inclusive developer community." },
+  "about.goals.item3": {
+    "message": "Foster and operate an active, inclusive developer community."
+  },
   "about.products.title": { "message": "Our products" },
-  "about.products.revyos": { "message": "RISC-V OS (XuanTie-optimized): RevyOS" },
+  "about.products.revyos": {
+    "message": "RISC-V OS (XuanTie-optimized): RevyOS"
+  },
   "about.products.ruyi": { "message": "RISC-V package manager: ruyi" },
-  "about.products.provision": { "message": "RISC-V OS installer: ruyi device provision" },
+  "about.products.provision": {
+    "message": "RISC-V OS installer: ruyi device provision"
+  },
   "about.products.ide": { "message": "RISC-V IDE: RuyiSDK IDE" },
-  "about.products.toolchains": { "message": "RISC-V toolchains: PLCT-GCC, PLCT-LLVM" },
-  "about.products.software.title": { "message": "Notable upstream software integrated into RuyiSDK:" },
+  "about.products.toolchains": {
+    "message": "RISC-V toolchains: PLCT-GCC, PLCT-LLVM"
+  },
+  "about.products.software.title": {
+    "message": "Notable upstream software integrated into RuyiSDK:"
+  },
   "about.opensource.title": { "message": "Open source & community" },
-  "about.opensource.description1": { "message": "The RUYISDK project is managed openly and hosted on GitHub. We welcome contributors and collaborators to advance the RISC-V ecosystem together." },
-  "about.opensource.description2": { "message": "The RUYISDK community aims to be open, friendly, diverse, inclusive, and healthy." },
-  "about.opensource.description3": { "message": "We are recruiting passionate and talented contributors — send CVs to: wuwei2016@iscas.ac.cn." },
-  "about.opensource.description4": { "message": "Before participating in community discussions, please read the Code of Conduct to help maintain a constructive community." },
+  "about.opensource.description1": {
+    "message": "The RUYISDK project is managed openly and hosted on GitHub. We welcome contributors and collaborators to advance the RISC-V ecosystem together."
+  },
+  "about.opensource.description2": {
+    "message": "The RUYISDK community aims to be open, friendly, diverse, inclusive, and healthy."
+  },
+  "about.opensource.description3": {
+    "message": "We are recruiting passionate and talented contributors — send CVs to: wuwei2016@iscas.ac.cn."
+  },
+  "about.opensource.description4": {
+    "message": "Before participating in community discussions, please read the Code of Conduct to help maintain a constructive community."
+  },
   "about.opensource.codeOfConduct": { "message": "Code of Conduct" },
   "about.contact.title": { "message": "Contact" },
   "about.contact.emailLabel": { "message": "Email:" },
@@ -276,7 +373,9 @@
   "about.contact.wechatLabel": { "message": "WeChat Official Account:" },
   "about.contact.qqLabel": { "message": "QQ group:" },
   "about.qr.title": { "message": "Community QR codes" },
-  "about.qr.wechat": { "message": "Scan to follow the RuyiSDK official WeChat account:" },
+  "about.qr.wechat": {
+    "message": "Scan to follow the RuyiSDK official WeChat account:"
+  },
   "about.qr.qq": { "message": "Join the RUYISDK QQ group:" },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
@@ -608,35 +707,8 @@
   "贡献者公约": {
     "message": "Contributor Covenant"
   },
-  "footer.社区守则": {
-    "message": "Community Code",
-    "description": "Navbar item with label 社区守则"
-  },
-  "footer.ecosystem": { "message": "Ecosystem" },
-  "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.revyos": { "message": "RevyOS" },
-  "footer.matrix": { "message": "Support Matrix" },
-  "footer.community": { "message": "Community" },
-  "footer.discussion": { "message": "Discussion" },
-  "footer.stats": { "message": "Data Overview" },
-  "footer.intern": { "message": "Open Internship" },
-  "footer.followus": { "message": "Follow Us" },
-  "footer.wechat": { "message": "WeChat Official Account" },
-  "footer.qqgroup": { "message": "QQ Group" },
-  "footer.plct": { "message": "PLCT Lab" },
-  "footer.tools": { "message": "More Developer Tools" },
-  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
-  "footer.riscv-community": {
-    "message": "RuyiSDK Community (Chinese Website)"
-  },
-  "ruyisdk.community": {
-    "message": "RuyiSDK Community"
-  },
   "community.contributors.subtitle": {
     "message": "The RuyiSDK community is driven by its contributors."
-  },
-  "ruyisdk.community.open": {
-    "message": "RuyiSDK Developer Community is now open"
   },
   "ruyisdk.cn": {
     "message": "ruyisdk.cn"

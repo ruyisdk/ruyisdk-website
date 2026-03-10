@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Translate, { translate } from "@docusaurus/Translate";
+import Translate from "@docusaurus/Translate";
+
+import { externalLinks } from "../common/externalLinks";
+
 import "react-slideshow-image/dist/styles.css";
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import SectionContainer from '../common/SectionContainer';
 
 // Card sizes enum
 const CardSizes = {
@@ -12,9 +13,7 @@ const CardSizes = {
 };
 
 export default function CardNews() {
-  const { i18n } = useDocusaurusContext();
-  const locale = i18n?.currentLocale;
-  const revyosLink = (locale === 'en' || locale === 'de') ? 'https://docs.revyos.dev/en' : 'https://docs.revyos.dev';
+
   // Define state variables
   const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const [windowSize, setWindowSize] = useState({
@@ -210,7 +209,7 @@ export default function CardNews() {
       subtitle: <Translate>针对 XuanTie 生态芯片优化的 Debian 发行版</Translate>,
       content: "How you went there as there's no popup?",
       Image: "img/RevyOS-logo.svg",
-      Links: revyosLink,
+      Links: externalLinks("revyos"),
       ButtonText: "立即跳转",
       titleColorClass: "text-white",        // Custom title color
       subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color

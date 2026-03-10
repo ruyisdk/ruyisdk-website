@@ -113,12 +113,12 @@ export default function ContributorsPage() {
           <div className="flex flex-wrap gap-4 justify-center items-stretch my-4 md:my-6">
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
               <div className="text-slate-900 mb-1 text-2xl"><IconUser size={28} stroke={1.5} color="black" /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.contributors">Contributors</Translate></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.contributors">贡献者</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{totals.contributors ?? allPeople.length}</div>
             </div>
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
               <div className="text-slate-900 mb-1 text-2xl"><IconGitCommit size={28} stroke={1.5} color="black" style={{transform: 'rotate(90deg)'}} /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.commits">Commits</Translate></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.commits">提交数</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>
             <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
