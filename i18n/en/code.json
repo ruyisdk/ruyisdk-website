@@ -18,7 +18,7 @@
     "message": "RuyiSDK Community"
   },
   "home.ruyiinlive.community.subtitle": {
-    "message": "RuyiSDK Developer Community is now open. (Currently available in Chinese)"
+    "message": "RuyiSDK Developer Community is now open.\n(Currently available in Chinese)"
   },
   "home.ruyiinlive.seecommunity": {
     "message": "Explore",
@@ -27,6 +27,12 @@
   "home.ruyiinlive.joincommunity": {
     "message": "Join Now",
     "description": "Button text linking to community signup"
+  },
+  "home.ruyiinlive.viewmore": {
+    "message": "View More"
+  },
+  "home.ruyiinlive.statistics": {
+    "message": "Live Metrics"
   },
 
   "footer.ecosystem": {
@@ -715,12 +721,6 @@
   },
   "source.repository": {
     "message": "Source Repository"
-  },
-  "statistics": {
-    "message": "Statistics"
-  },
-  "view.more": {
-    "message": "View More"
   },
   "pm_downloads": {
     "message": "Ruyi Package Manager Tool Downloads"
