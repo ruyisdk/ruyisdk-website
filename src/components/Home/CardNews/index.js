@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Translate from "@docusaurus/Translate";
 
-import { externalLinks } from "../common/externalLinks";
-
 import "react-slideshow-image/dist/styles.css";
-
-// Card sizes enum
-const CardSizes = {
-  L: "large",   // full width, 2x height
-  M: "medium",  // full width, 1x height
-  S: "small",   // half width, 1x height
-};
 
 export default function CardNews() {
 
   // Define state variables
-  const [expandedCardIndex, setExpandedCardIndex] = useState(null);
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
   });
@@ -41,76 +31,29 @@ export default function CardNews() {
     }
   }, []);
 
-  // Handle ESC key to close expanded card
-  useEffect(() => {
-    const handleEscKey = (event) => {
-      if (event.key === 'Escape' && expandedCardIndex !== null) {
-        setExpandedCardIndex(null);
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', handleEscKey);
-      return () => window.removeEventListener('keydown', handleEscKey);
-    }
-  }, [expandedCardIndex]);
-
-  // Handle body scroll lock when card is expanded
-  useEffect(() => {
-    if (expandedCardIndex !== null && typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden';
-    } else if (typeof document !== 'undefined') {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      if (typeof document !== 'undefined') {
-        document.body.style.overflow = '';
-      }
-      return undefined; // Add this return statement
-    };
-  }, [expandedCardIndex]);
+  // Card sizes enum
+  const CardSizes = {
+    L: "large",   // full width, 2x height
+    M: "medium",  // full width, 1x height
+    S: "small",   // half width, 1x height
+  };
 
   // Layout logic for responsive design and grouping small cards
 
   // Tailwind class mappings for card layouts and elements (component scope)
   const classes = {
-    cardLarge: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[480px]',
-    cardMedium: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[240px]',
-    cardSmall: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-[calc(50%_-_0.5rem)] h-[240px] flex-none',
-    mobileCard: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-[240px]',
-    clickableCard: 'cursor-pointer',
-    defaultCard: 'cursor-default',
-    slideBackground: 'absolute inset-0 bg-cover bg-center z-0 bg-black/40 bg-blend-darken',
-    blurredBackground: 'filter blur-[15px] scale-[1.05]',
-    content: 'relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]',
-    title: '!text-2xl font-bold mb-4 tracking-tight !text-white drop-shadow-md',
-    subtitle: '!font-medium !text-[1.05rem] mb-4 !text-white drop-shadow-md',
-    buttonContainer: 'flex gap-3 mt-4 flex-wrap justify-center',
-    cardPrimaryButton: 'inline-flex items-center justify-center !bg-[rgb(252,232,164)] hover:!bg-[rgb(242,222,154)] !text-[var(--ifm-color-primary-darkest)] visited:!text-[var(--ifm-color-primary-darkest)] hover:!text-[var(--ifm-color-primary-darkest)] focus:!text-[var(--ifm-color-primary-darkest)] active:!text-[var(--ifm-color-primary-darkest)] !no-underline hover:!no-underline px-4 py-2 !rounded-full !text-[1rem] !font-semibold min-w-[100px] !shadow-sm hover:!shadow-md !transform-gpu !transition-all !duration-500 !ease-[cubic-bezier(0.22,1,0.36,1)] hover:!-translate-y-0.5 hover:!scale-[1.02] active:!translate-y-0 active:!scale-100',
-    cardSecondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full text-[0.63rem] font-semibold min-w-[100px] shadow-sm transition-all duration-300 ease-out hover:bg-[#E8E3D2] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-100',
-    primaryButton: 'inline-flex items-center justify-center !bg-[rgb(252,232,164)] hover:!bg-[rgb(242,222,154)] !text-[var(--ifm-color-primary-darkest)] visited:!text-[var(--ifm-color-primary-darkest)] hover:!text-[var(--ifm-color-primary-darkest)] focus:!text-[var(--ifm-color-primary-darkest)] active:!text-[var(--ifm-color-primary-darkest)] !no-underline hover:!no-underline px-4 py-2 !rounded-full text-[0.9rem] !font-semibold min-w-[100px] !shadow-sm hover:!shadow-md !transform-gpu !transition-all !duration-500 !ease-[cubic-bezier(0.22,1,0.36,1)] hover:!-translate-y-0.5 hover:!scale-[1.02] active:!translate-y-0 active:!scale-100',
-    secondaryButton: 'inline-flex items-center justify-center bg-[#F8F3E2] text-[#002677] px-4 py-2 rounded-full text-[0.9rem] font-semibold min-w-[100px] shadow-sm transition-all duration-300 ease-out hover:bg-[#E8E3D2] hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-md active:translate-y-0 active:scale-100',
+    cardLarge:  'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-auto lg:h-[240px] lg:h-[480px]',
+    cardMedium: 'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full h-auto lg:h-[240px]',
+    cardSmall:  'relative overflow-hidden flex items-center justify-center transition-transform duration-300 rounded-[10px] shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-full lg:w-[calc(50%_-_0.5rem)] h-auto lg:h-[240px] lg:flex-none',
   };
 
   const organizeCards = () => {
-    const isMobile = windowSize.width < 768;
     let result = [];
     let currentSmallCards = [];
 
     // Process all cards
     slideImages.forEach((card, index) => {
-      // On mobile, all cards are full width
-      if (isMobile) {
-        result.push({
-          ...card,
-          layoutClass: classes.mobileCard,
-          index
-        });
-        return;
-      }
 
-      // On desktop, handle according to size
       switch (card.size) {
         case CardSizes.L:
           // Before adding a large card, flush any pending small cards
@@ -192,138 +135,74 @@ export default function CardNews() {
 
   const slideImages = [
     {
-      title: <Translate>RuyiSDK IDE</Translate>,
-      subtitle: <Translate>将 Ruyi 包管理器带到桌面环境</Translate>,
-      content: "RuyiSDK IDE 是一款基于开源软件 Eclipse 开发的、图形化的、主要面向 RISC-V 开发者的集成开发环境。该工具在继承 Eclipse 对嵌入式开发支持的基础上，计划逐步集成多款主流RISC-V开发板的 SDK，使得 RISC-V 开发更加便捷。",
+      title: <Translate>RuyiSDK 包管理器</Translate>,
+      subtitle: <Translate>从包管理器获取 RuyiSDK 资源</Translate>,
       Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      Links: "/docs/IDE/",
-      ButtonText: "了解更多",        // 了解更多/立即跳转
-      titleColorClass: "text-white",        // Custom title color
-      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
+      Links: "/docs/intro",
       size: CardSizes.S,            // Small card (half width, 1x height)
-      isBlur: false,                // Apply blur effect to background
-      ispopup: false,               // Disable click-to-show-popup for this card
-    },
-    {
-      title: <Translate>RevyOS</Translate>,
-      subtitle: <Translate>针对 XuanTie 生态芯片优化的 Debian 发行版</Translate>,
-      content: "How you went there as there's no popup?",
-      Image: "img/RevyOS-logo.svg",
-      Links: externalLinks("revyos"),
-      ButtonText: "立即跳转",
-      titleColorClass: "text-white",        // Custom title color
-      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
-      size: CardSizes.S,            // Small card (half width, 1x height)
-      isBlur: true,                 // Enable blur on background
-      ispopup: false,               // Disable click-to-show-popup for this card
     },
     {
       title: <Translate>Support Matrix</Translate>,
       subtitle: <Translate>RISC-V 开发板与操作系统支持矩阵</Translate>,
-      content: "How you went there as there's no popup?",
       Image: "img/ruyi-logo-720.svg",
       Links: "https://matrix.ruyisdk.org/",
-      ButtonText: "立即跳转",
-      titleColorClass: "text-white",        // Custom title color
-      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
       size: CardSizes.S,            // Small card (half width, 1x height)
-      isBlur: true,                 // Enable blur on background
-      ispopup: false,               // Disable click-to-show-popup for this card
     },
     {
-      title: <Translate>荔枝派 4A</Translate>,
-      subtitle: <Translate>荔枝派 4A 软件生态已并入 RuyiSDK 项目</Translate>,
-      content: "RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。",
-      Image: "img/licheepi-4a.png",
-      Links: "https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/",
-      ButtonText: "立即下载",
-      titleColorClass: "text-white",        // Custom title color
-      subtitleColorClass: "text-[#f0f0f0]", // Custom subtitle color
+      title: <Translate>Eclipse 插件</Translate>,
+      subtitle: <Translate>RuyiSDK 包管理器的 Eclipse 集成</Translate>,
+      Image: "img/ruyi-logo-720.svg",
+      Links: "/docs/IDE/",
+      subLink: "https://marketplace.eclipse.org/content/ruyisdk",
+      subText: "Marketplace",
       size: CardSizes.S,            // Small card (half width, 1x height)
-      isBlur: false,                // Enable blur on background
-      ispopup: true,                // Enable click-to-show-popup for this card
+    },
+    {
+      title: <Translate>VS Code 插件</Translate>,
+      subtitle: <Translate>RuyiSDK 包管理器的 VS Code 集成</Translate>,
+      Image: "/img/home-cardnews-vscode.png",
+      Links: "/docs/VSCode-Plugins/",
+      subLink: "https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension",
+      subText: "Marketplace",
+      size: CardSizes.S,            // Small card (half width, 1x height)
     },
   ];
 
   const organizedCards = organizeCards();
 
-  // Handler for card click - only process popup if ispopup is true
-  const handleCardClick = (index, event) => {
-    const clickedLink = event.target.closest('a');
-
-    // Non-popup cards should keep normal link navigation behavior
-    if (clickedLink && !slideImages[index].ispopup) {
-      return;
-    }
-
-    // Only show popup if ispopup is true
-    if (slideImages[index].ispopup) {
-      setExpandedCardIndex(index);
-    }
-  };
-
-  // Handler for closing expanded card
-  const handleCloseExpandedCard = () => {
-    setExpandedCardIndex(null);
-  };
-
-  // Handler for overlay click - close only if clicking the overlay background
-  const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      setExpandedCardIndex(null);
-    }
-  };
-
   // Render a single card
   const renderCard = (card) => {
-    // Create the correct card background classes based on blur setting
-    const backgroundClassName = card.isBlur
-      ? `${classes.slideBackground} ${classes.blurredBackground}`
-      : classes.slideBackground;
 
     // Determine if card should have clickable styling
-    const cardClassName = card.ispopup
-      ? `${card.layoutClass} ${classes.clickableCard}`
-      : `${card.layoutClass} ${classes.defaultCard}`;
+    const cardClassName = `${card.layoutClass} "cursor-default"`;
 
     return (
       <div
         key={card.index}
         className={cardClassName}
-        onClick={(e) => handleCardClick(card.index, e)}
       >
         <div
-          className={backgroundClassName}
+          className="absolute inset-0 bg-cover bg-center z-0 bg-(--ifm-color-primary-lightest)/10 bg-blend-soft-light"
           style={{
             backgroundImage: `url(${card.Image})`,
+            opacity: 0.18,
           }}
         />
 
-        <div className={classes.content}>
-          <h1 className={classes.title}>
+        <div className="relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]">
+          <p className="text-2xl font-bold mb-4 tracking-tight text-(--home-little-title-color) drop-shadow-md">
             {card.title}
-          </h1>
-          <h2 className={classes.subtitle}>
+          </p>
+          <p className="font-medium text-[1.05rem] mb-4 text-(--home-subtitle-color) drop-shadow-md">
             {card.subtitle}
-          </h2>
-          <div className={classes.buttonContainer}>
-            {card.ispopup ? (
-              <button type="button" className={classes.cardPrimaryButton}>
-                <Translate>显示详情</Translate>
-              </button>
-            ) : (
-              <a target="_blank" href={card.Links} className={classes.cardPrimaryButton} rel="noopener noreferrer">
-                <Translate>{card.ButtonText}</Translate>
-              </a>
-            )}
-            {card.subLinks && (
-              <a
-                href={card.subLinks}
-                className={classes.cardSecondaryButton}
-              >
-                <Translate id="homepage.secondarybutton">
-                  现在开始
-                </Translate>
+          </p>
+          <div className="flex gap-3 mt-4 flex-wrap justify-center">
+            <a target="_blank" href={card.Links} className="secondary-button" rel="noopener noreferrer">
+              <Translate id="home.cardnews.learnmore">了解更多</Translate>
+            </a>
+            {card.subLink && (
+              <a target="_blank" href={card.subLink} className="tertiary-button" rel="noopener noreferrer">
+                <Translate>{card.subText}</Translate>
               </a>
             )}
           </div>
@@ -354,76 +233,6 @@ export default function CardNews() {
             return null;
           })}
         </div>
-
-      {/* Expanded Card Modal */}
-      {expandedCardIndex !== null && (
-        <div
-          className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-8 overflow-y-auto"
-          onClick={handleOverlayClick}
-        >
-          <div className="flex flex-col relative w-[90%] max-w-[900px] max-h-[90vh] bg-white rounded-[10px] overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.15)]" ref={null}>
-            <button
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/20 text-white text-2xl flex items-center justify-center z-10 backdrop-blur-sm"
-              onClick={handleCloseExpandedCard}
-              aria-label="Close"
-            >
-              ×
-            </button>
-
-            {/* New header element for the image */}
-            <div
-              className="relative h-[25vh] flex-shrink-0 bg-cover bg-center"
-              style={{
-                backgroundImage: `url(${slideImages[expandedCardIndex].Image})`,
-              }}
-            >
-              <div className="absolute inset-0 bg-black/20" />
-            </div>
-
-            {/* Content element is now a sibling to the header */}
-            <div className="relative z-20 p-8 overflow-y-auto bg-white">
-              <h1 className="text-[2.5rem] mb-4 leading-tight text-[#111]">
-                {slideImages[expandedCardIndex].title}
-              </h1>
-
-              <h2 className="text-lg mb-6 text-[#333]">
-                {slideImages[expandedCardIndex].subtitle}
-              </h2>
-
-              {slideImages[expandedCardIndex].content && (
-                <div className="mb-6 leading-7 text-[#333] whitespace-pre-line">
-                  {slideImages[expandedCardIndex].content.split('\n\n').map((paragraph, i) => (
-                    <p key={i}><Translate>{paragraph}</Translate></p>
-                  ))}
-                </div>
-              )}
-
-              <div className="flex gap-3 mt-6 flex-col sm:flex-row">
-                <a
-                  href={slideImages[expandedCardIndex].Links}
-                  className={classes.primaryButton}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Translate>{slideImages[expandedCardIndex].ButtonText}</Translate>
-                </a>
-                {slideImages[expandedCardIndex].subLinks && (
-                  <a
-                    href={slideImages[expandedCardIndex].subLinks}
-                    className={classes.secondaryButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Translate id="homepage.secondarybutton">
-                      现在开始
-                    </Translate>
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }

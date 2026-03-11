@@ -22,7 +22,7 @@ const MainDisplay = () => {
             >
               <Translate id="home.ruyisdk">RuyiSDK</Translate>
             </h1>
-            <p className="text-[clamp(0.98rem,1.47vw,1.4rem)] text-[#515154] mb-10 leading-[1.35] lg:max-w-[40ch] max-w-none">
+            <p className="text-[clamp(0.98rem,1.47vw,1.4rem)] text-(--home-subtitle-color) mb-10 leading-[1.35] lg:max-w-[40ch] max-w-none">
               <Translate id="home.description">面向 RISC-V 架构的一体化集成开发环境</Translate>
             </p>
 
@@ -31,7 +31,7 @@ const MainDisplay = () => {
                 <IconCode size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.getstarted">现在开始</Translate>
               </a>
-              <a href="https://github.com/ruyisdk" target="_blank" className="secondary-button">
+              <a href="https://github.com/ruyisdk" target="_blank" className="secondary-button" rel="noopener noreferrer">
                 <IconBrandGithub size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.source">源码库</Translate>
               </a>

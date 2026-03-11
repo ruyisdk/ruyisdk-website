@@ -163,7 +163,7 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="tertiary-button inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                className="tertiary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
                 <IconLink size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
@@ -173,7 +173,7 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/signup"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="secondary-button inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
+                className="secondary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
                 <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
