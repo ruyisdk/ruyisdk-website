@@ -14,6 +14,27 @@
   "home.maindisplay.source": {
     "message": "GitHub"
   },
+  "home.cardnews.learnmore": {
+    "message": "Learn More"
+  },
+  "从包管理器获取 RuyiSDK 资源": {
+    "message": "Access and manage RuyiSDK resources through the package manager"
+  },
+  "Eclipse 插件": {
+    "message": "Eclipse Plugin"
+  },
+  "RuyiSDK 包管理器的 Eclipse 集成": {
+    "message": "Eclipse integration for the RuyiSDK Package Manager"
+  },
+  "VS Code 插件": {
+    "message": "VSCode Extension"
+  },
+  "RuyiSDK 包管理器的 VS Code 集成": {
+    "message": "Visual Studio Code integration for the RuyiSDK Package Manager"
+  },
+  "RISC-V 开发板与操作系统支持矩阵": {
+    "message": "RISC-V Board and OS Support Matrix"
+  },
   "home.ruyiinlive.community": {
     "message": "RuyiSDK Community"
   },
@@ -526,9 +547,6 @@
   },
   "RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。": {
     "message": "Sipeed and the PLCT Lab jointly announced that RuyiSDK will serve as the upstream support platform for the LicheePi 4A development board, taking responsibility for future system maintenance, upgrades, and software support. This not only promotes the development and broader adoption of RISC-V development boards but also provides developers with a more convenient and efficient development environment."
-  },
-  "RISC-V 开发板与操作系统支持矩阵": {
-    "message": "RISC-V Board and OS Support Matrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
     "message": "A toolbox specifically designed for developing software and applications that can run on RISC-V architecture devices. It can help developers write and test their own programs without the need for users to spend time setting up the environment."

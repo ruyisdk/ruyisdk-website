@@ -1,6 +1,8 @@
 
 .homepage {
     --home-title-color: #123D91;
+    --home-subtitle-color: #515154;
+    --home-little-title-color: #000000;
 
     --home-background: #f5f5f7;
     --home-secondary-background: #f5f5f7;
