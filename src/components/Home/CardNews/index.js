@@ -137,21 +137,21 @@ export default function CardNews() {
     {
       title: <Translate>RuyiSDK 包管理器</Translate>,
       subtitle: <Translate>从包管理器获取 RuyiSDK 资源</Translate>,
-      Image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      Image: "img/home-cardnews-manager.png",
       Links: "/docs/intro",
       size: CardSizes.S,            // Small card (half width, 1x height)
     },
     {
       title: <Translate>Support Matrix</Translate>,
       subtitle: <Translate>RISC-V 开发板与操作系统支持矩阵</Translate>,
-      Image: "img/ruyi-logo-720.svg",
+      Image: "img/home-cardnews-matrix.png",
       Links: "https://matrix.ruyisdk.org/",
       size: CardSizes.S,            // Small card (half width, 1x height)
     },
     {
       title: <Translate>Eclipse 插件</Translate>,
       subtitle: <Translate>RuyiSDK 包管理器的 Eclipse 集成</Translate>,
-      Image: "img/ruyi-logo-720.svg",
+      Image: "img/home-cardnews-eclipse.jpg",
       Links: "/docs/IDE/",
       subLink: "https://marketplace.eclipse.org/content/ruyisdk",
       subText: "Marketplace",
@@ -160,7 +160,7 @@ export default function CardNews() {
     {
       title: <Translate>VS Code 插件</Translate>,
       subtitle: <Translate>RuyiSDK 包管理器的 VS Code 集成</Translate>,
-      Image: "/img/home-cardnews-vscode.png",
+      Image: "img/home-cardnews-vscode.png",
       Links: "/docs/VSCode-Plugins/",
       subLink: "https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension",
       subText: "Marketplace",
@@ -185,7 +185,7 @@ export default function CardNews() {
           className="absolute inset-0 bg-cover bg-center z-0 bg-(--ifm-color-primary-lightest)/10 bg-blend-soft-light"
           style={{
             backgroundImage: `url(${card.Image})`,
-            opacity: 0.18,
+            opacity: 0.12,
           }}
         />
 
