@@ -7,21 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1897
+      "contributions": 1903
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 421
+      "contributions": 431
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 293
+      "contributions": 294
     },
     {
       "id": 54484233,
@@ -42,7 +42,7 @@
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 93
+      "contributions": 94
     },
     {
       "id": 22784008,
@@ -63,7 +63,14 @@
       "name": "U2FsdGVkX1",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 72
+      "contributions": 73
+    },
+    {
+      "id": 43362020,
+      "name": "pz9115",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
+      "github": "https://github.com/pz9115",
+      "contributions": 61
     },
     {
       "id": 62790279,
@@ -73,18 +80,11 @@
       "contributions": 61
     },
     {
-      "id": 43362020,
-      "name": "pz9115",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
-      "github": "https://github.com/pz9115",
-      "contributions": 60
-    },
-    {
       "id": 198067605,
       "name": "a1gorhythm7",
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "github": "https://github.com/a1gorhythm7",
-      "contributions": 56
+      "contributions": 57
     },
     {
       "id": 207433538,
@@ -105,7 +105,7 @@
       "name": "imkiva",
       "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
       "github": "https://github.com/imkiva",
-      "contributions": 29
+      "contributions": 30
     },
     {
       "id": 132126433,
@@ -157,18 +157,18 @@
       "contributions": 17
     },
     {
+      "id": 24410810,
+      "name": "qjivy",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
+      "github": "https://github.com/qjivy",
+      "contributions": 14
+    },
+    {
       "id": 43716472,
       "name": "NanamiKite",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43716472?v=4",
       "github": "https://github.com/NanamiKite",
       "contributions": 13
-    },
-    {
-      "id": 24410810,
-      "name": "qjivy",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
-      "github": "https://github.com/qjivy",
-      "contributions": 12
     },
     {
       "id": 200599239,
@@ -418,15 +418,15 @@
   ],
   "totals": {
     "contributors": 59,
-    "commits": 3891,
-    "pullRequests": 1707,
-    "issues": 102,
+    "commits": 3915,
+    "pullRequests": 1728,
+    "issues": 108,
     "stars": 107,
-    "forks": 154,
+    "forks": 155,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-05T19:58:31.924Z",
+    "generatedAt": "2026-03-10T19:40:11.425Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
