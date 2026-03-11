@@ -31,7 +31,7 @@ const MainDisplay = () => {
                 <IconCode size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.getstarted">现在开始</Translate>
               </a>
-              <a href="https://github.com/ruyisdk" className="secondary-button">
+              <a href="https://github.com/ruyisdk" target="_blank" className="secondary-button">
                 <IconBrandGithub size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.source">源码库</Translate>
               </a>

@@ -52,3 +52,32 @@
     transform: translateY(-0.125rem);
     background: var(--home-button-secondary-hover);
 }
+
+.tertiary-button {
+    background: var(--home-button-tertiary);
+    color: var(--home-button-tertiary-text);
+    border: none;
+
+    border-radius: 9999px;
+    padding: 0.72rem 1.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease-out;
+
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.tertiary-button:hover {
+    color: var(--home-button-tertiary-text);
+    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.125rem);
+    background: var(--home-button-tertiary-hover);
+}

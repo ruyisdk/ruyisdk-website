@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { IconLink, IconLogin2 } from '@tabler/icons-react';
+
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
@@ -12,18 +13,13 @@ const RuyiInLive = () => {
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isWideScreen, setIsWideScreen] = useState(false);
-  const [isDiscussButtonHovered, setIsDiscussButtonHovered] = useState(false);
-  const [isSourceButtonHovered, setIsSourceButtonHovered] = useState(false);
 
   const colors = {
     navyBlue: '#002677',
-    creamBeige_light: 'rgb(252, 232, 164)',
-    creamBeige: '#F8F3E2',
     gold: '#FFBD30',
     lightGold: '#FFD580',
     white: '#FFFFFF',
     lightGray: '#F5F5F7',
-    textDark: '#002677',
     textGray: '#86868B',
     placeholderGrey: '#E0E0E0',
     placeholderTextShade: 'rgba(0,0,0,0.1)',
@@ -103,257 +99,10 @@ const RuyiInLive = () => {
       .slice(0, 3);
   }, [data]);
 
-  const styles = {
-    outerContainer: {
-      display: 'flex',
-      overflowX: 'auto',
-      width: '100%',
-      gap: '1rem',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
-      margin: '0 auto',
-      padding: '0rem 0rem 0rem',
-      backgroundColor: '#f5f5f7',
-      maxWidth: isWideScreen ? '90rem' : '100%',
-      borderRadius: isWideScreen ? '0.625rem' : '0',
-      boxShadow: 'none',
-    },
-    background: {
-      width: '100%',
-      height: '100%',
-      backgroundColor: colors.lightGray,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '1rem 0',
-    },
-    container: {
-      display: 'flex',
-      flexDirection: isMobile ? 'column' : 'row',
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-      width: isMobile ? 'calc(100% - 2rem)' : 'calc(100% - 4rem)',
-      height: isMobile ? 'auto' : '21.875rem',
-      backgroundColor: colors.lightGray,
-      borderRadius: '0.75rem',
-      overflow: 'hidden',
-      color: colors.textDark,
-      margin: '0 auto 1rem auto',
-      boxShadow: isWideScreen ? 'none' : '0 0.25rem 1.25rem rgba(0, 0, 0, 0.1)',
-    },
-    leftPanel: {
-      width: isMobile ? '100%' : '40%',
-      padding: isMobile ? '1.875rem' : '2.5rem',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      background: `linear-gradient(135deg, ${colors.navyBlue}, ${colors.navyBlue} 70%, ${colors.navyBlue} 85%)`,
-      color: colors.white,
-      position: 'relative',
-      overflow: 'hidden',
-    },
-    leftPanelAccent: {
-      position: 'absolute',
-      bottom: '-3.125rem',
-      right: '-3.125rem',
-      width: '12.5rem',
-      height: '12.5rem',
-      borderRadius: '50%',
-      background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)`,
-      opacity: 0.6,
-    },
-    rightPanel: {
-      width: isMobile ? '100%' : '60%',
-      padding: isMobile ? '1.5rem' : '1.5rem 2rem', // Adjusted padding
-      overflowY: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: colors.white,
-    },
-    title: {
-      fontSize: '1.8rem',
-      fontWeight: '700',
-      marginBottom: '0.375rem',
-      letterSpacing: '-0.03125rem',
-    },
-    subtitle: {
-      fontSize: '0.9rem',
-      lineHeight: '1.5',
-      marginBottom: '1.125rem',
-      fontWeight: '500',
-      opacity: '0.9',
-    },
-    buttonContainer: {
-      display: 'flex',
-      gap: '0.75rem',
-      flexWrap: 'wrap',
-    },
-    button: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: 'none',
-      padding: '0.625rem 1.125rem',
-      borderRadius: '62.4375rem',
-      fontWeight: '600',
-      fontSize: '0.9rem',
-      cursor: 'pointer',
-      transition: 'all 0.2s ease-out',
-      boxShadow: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
-      textDecoration: 'none',
-      minWidth: '6.25rem',
-    },
-    discussButtonBase: {
-      backgroundColor: colors.creamBeige_light,
-      color: colors.textDark,
-    },
-    sourceButtonBase: {
-      backgroundColor: colors.creamBeige,
-      color: colors.textDark,
-    },
-    buttonHover: {
-      transform: 'translateY(-2px)',
-      boxShadow: '0 0.25rem 1rem rgba(0, 0, 0, 0.2)',
-    },
-    rightPanelHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'baseline',
-      marginBottom: '1rem', // Space below title
-    },
-    rightPanelTitle: {
-      fontSize: '1.1rem',
-      fontWeight: '600',
-      color: colors.textDark,
-    },
-    viewMoreLink: {
-      fontSize: '0.8rem',
-      color: colors.textGray,
-      textDecoration: 'none',
-      transition: 'color 0.2s',
-    },
-    statsBox: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      padding: '1rem',
-      backgroundColor: colors.lightGray,
-      borderRadius: '0.5rem',
-      textAlign: 'center',
-      marginBottom: '1.5rem', // More space below stats
-    },
-    statItem: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-    },
-    statValue: {
-      fontSize: '1.75rem',
-      fontWeight: '700',
-      color: colors.navyBlue,
-      lineHeight: 1.2,
-      minHeight: '2.1rem',
-    },
-    statLabel: {
-      fontSize: '0.75rem',
-      color: colors.textGray,
-      marginTop: '0.25rem',
-    },
-    statPlaceholder: {
-      height: '1.75rem',
-      width: '4rem',
-      backgroundColor: colors.placeholderGrey,
-      borderRadius: '0.25rem',
-      animation: 'pulse 1.5s infinite ease-in-out',
-    },
-    chartContainer: {
-      flex: 1, // Allow chart to take remaining space
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    chartWrapper: {
-      width: '100%',
-      flex: 1,
-      position: 'relative',
-    },
-    placeholderWrapper: {
-      width: '100%',
-      position: 'relative',
-      opacity: 0.6,
-      flex: 1,
-    },
-    nativeChart: {
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around',
-      gap: '0.5rem',
-    },
-    nativeChartRow: {
-      display: 'flex',
-      alignItems: 'center',
-      minHeight: '2rem',
-    },
-    nativeChartBarOuter: {
-      width: '100%',
-      height: '1.75rem',
-      backgroundColor: colors.lightGray,
-      borderRadius: '0.25rem',
-      overflow: 'hidden',
-    },
-    nativeChartBarInner: {
-      height: '100%',
-      borderRadius: '0.25rem',
-      transition: 'width 0.4s ease-out',
-      display: 'flex',
-      alignItems: 'center',
-      position: 'relative',
-    },
-    nativeChartActionLabelInsideBar: {
-      fontSize: '0.75rem',
-      fontWeight: '600',
-      color: colors.white,
-      paddingLeft: '0.5rem',
-      paddingRight: '0.5rem',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      maxWidth: '100%',
-    },
-    placeholderLabelInsideBar: {
-      height: '0.75rem',
-      backgroundColor: colors.placeholderTextShade,
-      borderRadius: '0.1875rem',
-      marginLeft: '0.5rem',
-    },
-    emptyDataText: {
-      textAlign: 'center',
-      color: colors.textGray,
-      fontSize: '0.875rem',
-      padding: '1.25rem',
-      fontWeight: '500',
-      height: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  };
-
   const getMaxValue = (currentData) => {
     if (!currentData || currentData.length === 0) return 100;
     return Math.max(...currentData.map((item) => item.total), 0);
   };
-
-  const getActionButtonStyle = (hovered, background) => ({
-    background,
-    color: colors.textDark,
-    minWidth: '6.25rem',
-    transform: hovered ? 'translateY(-0.125rem)' : 'translateY(0)',
-    boxShadow: hovered ? '0 0.625rem 1.25rem rgba(0, 0, 0, 0.2)' : '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
-    transition: 'transform 300ms ease-out, box-shadow 300ms ease-out',
-    willChange: 'transform, box-shadow',
-  });
 
   const PlaceholderChart = () => (
     <div className="w-full h-full relative opacity-60">
@@ -405,7 +154,7 @@ const RuyiInLive = () => {
             <h1 className="text-2xl md:text-[1.8rem] font-bold mb-1">
               <Translate id="home.ruyiinlive.community">RuyiSDK 社区</Translate>
             </h1>
-            <p className="text-sm md:text-[0.9rem] mb-3 font-medium opacity-90">
+            <p className="whitespace-pre-line text-sm md:text-[0.9rem] mb-3 font-medium opacity-90">
               <Translate id="home.ruyiinlive.community.subtitle">RuyiSDK 开发者社区现已开启</Translate>
             </p>
 
@@ -414,10 +163,7 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
-                style={getActionButtonStyle(isDiscussButtonHovered, colors.creamBeige_light)}
-                onMouseEnter={() => setIsDiscussButtonHovered(true)}
-                onMouseLeave={() => setIsDiscussButtonHovered(false)}
+                className="tertiary-button inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
                 <IconLink size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
@@ -427,10 +173,7 @@ const RuyiInLive = () => {
                 href="https://ruyisdk.cn/signup"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
-                style={getActionButtonStyle(isSourceButtonHovered, colors.creamBeige)}
-                onMouseEnter={() => setIsSourceButtonHovered(true)}
-                onMouseLeave={() => setIsSourceButtonHovered(false)}
+                className="secondary-button inline-flex items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
                 <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
                 <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
@@ -438,23 +181,21 @@ const RuyiInLive = () => {
             </div>
 
             <div
-              className="absolute -bottom-12 -right-12 w-48 h-48 rounded-full opacity-60 pointer-events-none"
+              className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-60 pointer-events-none"
               style={{ background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)` }}
             />
           </div>
 
           <div className={`${isMobile ? 'w-full' : 'w-3/5'} p-4 md:p-6 overflow-hidden flex flex-col bg-white`}>
             <div className="flex justify-between items-baseline mb-4">
-              <h2 className="text-lg font-semibold text-[#002677]">
-                <Translate id="statistics" />
+              <h2 className="text-lg font-semibold text-(--home-title-color)">
+                <Translate id="home.ruyiinlive.statistics">实时数据</Translate>
               </h2>
               <a
                 href="/dashboard"
-                className="text-sm text-[#86868B] hover:text-[#002677]"
-                onMouseEnter={(e) => e.currentTarget.style.color = colors.navyBlue}
-                onMouseLeave={(e) => e.currentTarget.style.color = colors.textGray}
+                className="text-sm"
               >
-                <Translate id="view.more">查看更多</Translate>&nbsp;&gt;
+                <Translate id="home.ruyiinlive.viewmore">查看更多</Translate>&nbsp;&gt;
               </a>
             </div>
 
