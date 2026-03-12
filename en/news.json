@@ -390,7 +390,7 @@
   "weeklies": [
     {
       "title": "Biweekly 064: 2026-03-10",
-      "summary": "",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期包管理器集成了香山编译器（执行 后再使用 安装即可）；VSCode 插件上架 Open VSX ，您可以在主流 Linux 发行版（包括 openKylin、Deepin、Ubuntu（非官方版）、Fedora、Debian、openEuler 等）和 VSCodium 等兼容 VS Code 扩展 API 的编辑器、IDE 和开发平台中安装使用 ...",
       "date": 1773100800000,
       "image": null,
       "filename": "20260310-ruyisdk-biweekly-64.md",
