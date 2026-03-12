@@ -342,6 +342,10 @@
     "message": "Pull Requests",
     "description": "Label for pull requests stat"
   },
+  "community.stats.issues": {
+    "message": "Issues",
+    "description": "Label for issue count on contributors page"
+  },
   "community.stats.unknown": {
     "message": "N/A",
     "description": "Fallback label when a stat is unavailable"

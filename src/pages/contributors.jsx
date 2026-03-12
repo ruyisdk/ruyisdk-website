@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IconUser, IconGitCommit, IconGitPullRequest } from '@tabler/icons-react';
+import { IconUser, IconGitCommit, IconGitPullRequest, IconCircleDot } from '@tabler/icons-react';
 import Layout from "@theme/Layout";
 import Translate from "@docusaurus/Translate";
 import ReactDOM from "react-dom";
@@ -96,7 +96,8 @@ export default function ContributorsPage() {
     ...(peopleData.contributors || []),
   ];
 
-  const totals = (peopleData && peopleData.totals) || { contributors: allPeople.length, commits: null, pullRequests: null };
+  // `peopleData.totals` comes from the generated JSON; fall back gracefully when unavailable
+  const totals = (peopleData && peopleData.totals) || { contributors: allPeople.length, commits: null, pullRequests: null, issues: null };
 
   return (
     <Layout title="Contributors" description="RuyiSDK 贡献者">
@@ -125,6 +126,12 @@ export default function ContributorsPage() {
               <div className="text-slate-900 mb-1 text-2xl"><IconGitPullRequest size={28} stroke={1.5} color="black" /></div>
               <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.prs">Pull Requests</Translate></div>
               <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">N/A</Translate>}</div>
+            </div>
+            {/* issues count card */}
+            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
+              <div className="text-slate-900 mb-1 text-2xl"><IconCircleDot size={28} stroke={1.5} color="black" /></div>
+              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.issues">Issues</Translate></div>
+              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.issues === 'number' ? totals.issues : <Translate id="community.stats.unknown">N/A</Translate>}</div>
             </div>
           </div>
 
