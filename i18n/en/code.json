@@ -17,24 +17,6 @@
   "home.cardnews.learnmore": {
     "message": "Learn More"
   },
-  "从包管理器获取 RuyiSDK 资源": {
-    "message": "Access and manage RuyiSDK resources through the package manager"
-  },
-  "Eclipse 插件": {
-    "message": "Eclipse Plugin"
-  },
-  "RuyiSDK 包管理器的 Eclipse 集成": {
-    "message": "Eclipse integration for the RuyiSDK Package Manager"
-  },
-  "VS Code 插件": {
-    "message": "VSCode Extension"
-  },
-  "RuyiSDK 包管理器的 VS Code 集成": {
-    "message": "Visual Studio Code integration for the RuyiSDK Package Manager"
-  },
-  "RISC-V 开发板与操作系统支持矩阵": {
-    "message": "RISC-V Board and OS Support Matrix"
-  },
   "home.ruyiinlive.community": {
     "message": "RuyiSDK Community"
   },
