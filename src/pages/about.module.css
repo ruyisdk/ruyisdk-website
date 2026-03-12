@@ -1,0 +1,64 @@
+.aboutMarkdown {
+  color: #4b5563;
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+.aboutMarkdown h2 {
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.aboutMarkdown h3 {
+  color: #111827;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.aboutMarkdown p {
+  margin: 0 0 0.9rem;
+}
+
+.aboutMarkdown ul,
+.aboutMarkdown ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.aboutMarkdown li {
+  margin-bottom: 0.35rem;
+}
+
+.aboutMarkdown a {
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.aboutMarkdown a:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+.aboutMarkdown code {
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  padding: 0.1rem 0.3rem;
+}
+
+@media (min-width: 768px) {
+  .aboutMarkdown {
+    font-size: 1rem;
+  }
+
+  .aboutMarkdown h2 {
+    font-size: 1.875rem;
+  }
+
+  .aboutMarkdown h3 {
+    font-size: 1.25rem;
+  }
+}
