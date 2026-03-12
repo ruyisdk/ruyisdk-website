@@ -83,14 +83,7 @@ const config = {
           { to: "/download", label: "下载", position: "left" },
           { to: "/news", label: "新闻", position: "left" },
           { to: "/contributors", label: "贡献者", position: "left" },
-          {
-            label: '社区',
-            position: 'left',
-            items: [
-              { to: '/contributors', label: '贡献者' },
-              { href: 'https://ruyisdk.cn', label: '社区网站' },
-            ],
-          },
+          { href: "https://ruyisdk.cn", label: "社区", position: "left" },
           {
             label: "关于",
             to: "/about",
