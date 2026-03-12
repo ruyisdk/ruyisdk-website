@@ -48,20 +48,20 @@ const PageBackground = ({ isClient }) => {
 };
 
 export const partnersData = [
-    { id: 1, name: "Deepin", logoUrl: "https://storage.deepin.org/thread/202305231040315865_1.png", url: "https://www.deepin.org/", logoClass: "h-24" },
-    { id: 2, name: "openCloudOS", logoUrl: "https://opencloudos.org/assets/logo-C2hewUFH.png", url: "https://opencloudos.org/" },
-    { id: 3, name: "openKylin", logoUrl: "https://www.openkylin.top/upload/202209/1664440595.png", url: "https://www.openkylin.top/" },
-    { id: 4, name: "苦芽科技", logoUrl: "https://kubuds.io/assets/img/logos/kubuds_en.webp", url: "https://kubuds.io/ch/" },
-    { id: 5, name: "玄铁", logoUrl: "https://img.alicdn.com/imgextra/i2/O1CN01i43OVP1sjpL2Qkkge_!!6000000005803-2-tps-209-38.png", url: "https://www.xrvm.cn/", logoClass: "bg-[#8145e2]" },
-    { id: 6, name: "算能科技", logoUrl: "https://sophon-assets.sophon.cn/sophon-prod-s3/assets/images/sophgo-logo-new3.png", url: "https://www.sophgo.com/" },
-    { id: 7, name: "Milk-V", logoUrl: "https://www.fedoravforce.org/partner-logo/milkv.png", url: "https://milkv.io/" },
-    { id: 8, name: "Sipeed", logoUrl: "https://www.fedoravforce.org/partner-logo/sipeed.png", url: "https://sipeed.com/" },
-    { id: 9, name: "英麟智能", logoUrl: "http://pro557598cf.pic11.ysjianzhan.cn/upload/logo2-02.jpg", url: "http://www.inchitech.com/" },
-    { id: 10, name: "赛昉科技", logoUrl: "https://starfivetech.com/themes/basic/skin/images/logo1.png", url: "https://starfivetech.com/", logoClass: "h-24" },
-    { id: 11, name: "嘉楠科技", logoUrl: "https://static.canaan.io/prod/u_file/2401/29/logo-1bdb.png?x-oss-process=image/quality,q_80/resize,m_lfit,h_0,w_1920", url: "https://www.canaan.io/", logoClass: "h-24" },
-    { id: 12, name: "秦派软件", logoUrl: "https://www.qinware.com/images/common/qinware.png", url: "https://www.qinware.com/" },
-    { id: 13, name: "匠芯创", logoUrl: "https://www.artinchip.com/upload/images/site/20231226/17035607408910353.png", url: "https://www.artinchip.com/" },
-    { id: 14, name: "跃昉科技", logoUrl: "https://omo-oss-image.thefastimg.com/portal-saas/pg2024081421440948431/cms/image/bfeababb-b487-4483-8fad-fcf46229bbbf.png", url: "https://www.leapfive.com/" },
+    { id: 1, name: "Deepin", logoUrl: "img/about-partners-deepin.png", url: "https://www.deepin.org/", logoClass: "h-24" },
+    { id: 2, name: "openCloudOS", logoUrl: "img/about-partners-opencloudos.png", url: "https://opencloudos.org/" },
+    { id: 3, name: "openKylin", logoUrl: "img/about-partners-openkylin.png", url: "https://www.openkylin.top/" },
+    { id: 4, name: "苦芽科技", logoUrl: "img/about-partners-kubuds.webp", url: "https://kubuds.io/ch/" },
+    { id: 5, name: "玄铁", logoUrl: "img/about-partners-xuantie.png", url: "https://www.xrvm.cn/", logoClass: "bg-[#8145e2]" },
+    { id: 6, name: "算能科技", logoUrl: "img/about-partners-sophgo.png", url: "https://www.sophgo.com/" },
+    { id: 7, name: "Milk-V", logoUrl: "img/about-partners-milkv.png", url: "https://milkv.io/" },
+    { id: 8, name: "Sipeed", logoUrl: "img/about-partners-sipeed.png", url: "https://sipeed.com/" },
+    { id: 9, name: "英麟智能", logoUrl: "img/about-partners-inchi.jpg", url: "http://www.inchitech.com/" },
+    { id: 10, name: "赛昉科技", logoUrl: "img/about-partners-starfive.png", url: "https://starfivetech.com/", logoClass: "h-24" },
+    { id: 11, name: "嘉楠科技", logoUrl: "img/about-partners-canaan.png", url: "https://www.canaan.io/", logoClass: "h-24" },
+    { id: 12, name: "秦派软件", logoUrl: "img/about-partners-qinware.png", url: "https://www.qinware.com/" },
+    { id: 13, name: "匠芯创", logoUrl: "img/about-partners-artinchip.png", url: "https://www.artinchip.com/" },
+    { id: 14, name: "跃昉科技", logoUrl: "img/about-partners-leapfive.png", url: "https://www.leapfive.com/" },
   ];
 
 export function PartnersSection() {
