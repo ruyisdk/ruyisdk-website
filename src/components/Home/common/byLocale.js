@@ -9,3 +9,11 @@ export function externalLinks(key) {
   return customFields.externalLinks[key][i18n.currentLocale] ??
     customFields.externalLinks[key].en;
 }
+
+export function byLocale(messages) {
+  if (typeof messages === "string") return messages;
+
+  const { i18n } = useDocusaurusContext();
+
+  return messages[i18n.currentLocale] ?? messages.en;
+}
