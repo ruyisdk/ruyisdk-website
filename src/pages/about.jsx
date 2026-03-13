@@ -71,8 +71,6 @@ export default function AboutPage() {
   const [qrLoadError, setQrLoadError] = useState(false);
   const [qrLoading, setQrLoading] = useState(true);
   const { i18n } = useDocusaurusContext();
-  const contentRef = React.useRef(null);
-  const partnersRef = React.useRef(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -115,19 +113,6 @@ export default function AboutPage() {
     };
   }, [i18n?.currentLocale]);
 
-  // sync partners box height to main content grid
-  useEffect(() => {
-    function updateHeight() {
-      if (contentRef.current && partnersRef.current) {
-        const h = contentRef.current.offsetHeight;
-        partnersRef.current.style.minHeight = h + "px";
-      }
-    }
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, []);
-
   const pageTitle = i18n?.currentLocale === "zh-Hans" ? "关于我们" : i18n?.currentLocale === "de" ? "Über uns" : "About";
   const aboutHtml = React.useMemo(
     () => marked.parse(aboutMarkdown, { gfm: true, breaks: true }),
@@ -153,7 +138,7 @@ export default function AboutPage() {
           {/* 顶部居中的 名称（已移除 'RuyiSDK' 文本） */}
 
           {/* 内容主体卡片 */}
-          <div ref={contentRef} className="w-full grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-stretch">
+          <div className="w-full grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-stretch">
             <section className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/70 shadow-lg p-6 sm:p-8">
               {aboutLoading && (
                 <p className="text-gray-600 text-sm md:text-base">
@@ -214,7 +199,7 @@ export default function AboutPage() {
             </aside>
           </div>
           {/* partners list inserted below main grid */}
-          <div ref={partnersRef} className="w-full mt-12">
+          <div className="w-full mt-12">
             <PartnersSection />
           </div>
         </div>
