@@ -61,54 +61,37 @@ const NewsShowcase = () => {
   }
 
   return (
-    <div className="newsshowcase-container w-full font-sans pt-4 md:-mt-8 pb-12 md:pb-16">
-      <div className="hidden md:grid md:grid-cols-3 gap-4 w-full">
+    <div className="w-full font-sans pt-4 md:-mt-8 pb-12 md:pb-16">
+      <div className="w-full gap-4 grid grid-cols-1 md:grid-cols-3">
         {newsData.map((news, idx) => (
           <a
             key={idx}
             href={news.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="newsshowcase-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] border border-[rgba(230,230,230,1)] no-underline !text-[#1a1a1a] flex flex-col"
+            className="group flex h-full flex-col overflow-hidden rounded-[0.625rem] border border-[rgba(230,230,230,1)] bg-white no-underline !text-[#1a1a1a] shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all"
           >
             <img
               src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
               alt={news.title}
-              className="newsshowcase-image w-full h-[13rem] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
+              className="block aspect-[3/2] w-full rounded-t-[0.625rem] border-0 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
-            <div className="newsshowcase-content p-5 bg-white">
-              <h2 className="newsshowcase-card-title text-[2rem] font-bold text-[#1a1a1a] leading-tight">
+
+            <div className="flex flex-1 flex-col bg-white p-5">
+              <h2 className="text-xl font-bold leading-tight text-[#1a1a1a]">
                 <Translate>{news.title}</Translate>
               </h2>
+
+
+              <div className="mt-auto flex justify-end pt-5">
+                <div className="inline-flex items-center text-sm text-(--ifm-link-color) transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-(--ifm-link-hover-color)">
+                  <Translate id="home.ruyiinlive.viewmore">查看更多</Translate>
+                  <span className="ml-1">&gt;</span>
+                </div>
+              </div>
             </div>
           </a>
         ))}
-      </div>
-
-      <div className="mobile-cards-wrapper flex flex-col gap-4 w-full md:hidden">
-          {newsData.map((news, idx) => (
-            <a
-              key={idx}
-              href={news.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mobile-news-card group bg-white rounded-[0.625rem] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.1)] cursor-pointer transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] border border-[rgba(230,230,230,1)] no-underline !text-[#1a1a1a]"
-            >
-              <img
-                src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
-                alt={news.title}
-                className="mobile-news-image w-full h-[12.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02] block border-0 rounded-t-[0.625rem]"
-              />
-              <div className="mobile-news-content p-4 bg-white flex flex-col relative">
-                <h2 className="mobile-news-title text-2xl font-bold text-[#1a1a1a] mb-4 leading-tight"><Translate>{news.title}</Translate></h2>
-                <p className="mobile-news-description text-sm text-[#333] leading-7 mb-4"><Translate>{news.description}</Translate></p>
-                <div className="mobile-news-link-indicator inline-flex items-center text-[#0A2C7E] font-bold text-base bg-[#FDEFC3] px-4 py-2 rounded-full border border-[rgb(255,228,138)] gap-2 justify-center w-fit mx-auto">
-                  <Translate>前往阅读</Translate>
-                  <span className="newsshowcase-arrow">→</span>
-                </div>
-              </div>
-            </a>
-          ))}
       </div>
     </div>
   );
