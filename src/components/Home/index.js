@@ -14,18 +14,35 @@ import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
 import CardNews from './CardNews';
 
-export default function Hero() {
+
+function Hero() {
   return (
     <div className="relative min-h-screen">
       <BackgroundAnimation />
-      <div className="max-w-7xl mx-auto px-4 text-black" >
-        <MainDisplay />
-        <CardNews />
-        <RuyiInLive />
-        <NewsShowcase />
-        <WeChatLink />
-        {/*<DemoBoardsDisplay />*/}
-      </div>
+
+      <section className="py-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4" >
+          <MainDisplay />
+          <CardNews />
+          {/*<DemoBoardsDisplay />*/}
+        </div>
+      </section>
+
+      <section className="py-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 border-t-2 border-black/5" >
+          <RuyiInLive />
+          <NewsShowcase />
+        </div>
+      </section>
+
+      <section className="py-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <WeChatLink />
+        </div>
+      </section>
+
     </div>
   );
 }
+
+export default Hero;
