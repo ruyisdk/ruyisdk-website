@@ -7,10 +7,10 @@ export default function cardNews(card) {
   return (
     <>
       <div
-        className="absolute inset-0 bg-cover bg-center z-0 bg-(--ifm-color-primary-lightest)/10 bg-blend-soft-light"
+        className="absolute inset-0 bg-cover bg-center z-0 bg-(--ifm-color-primary-lightest)/2 bg-blend-soft-light"
         style={{
           backgroundImage: `url(${card.Image})`,
-          opacity: 0.12,
+          opacity: 0.15,
         }}
       />
 
