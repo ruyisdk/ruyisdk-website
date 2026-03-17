@@ -11,8 +11,6 @@ const RuyiInLive = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isWideScreen, setIsWideScreen] = useState(false);
 
   const colors = {
     navyBlue: '#002677',
@@ -24,16 +22,6 @@ const RuyiInLive = () => {
     placeholderGrey: '#E0E0E0',
     placeholderTextShade: 'rgba(0,0,0,0.1)',
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      setIsWideScreen(window.innerWidth >= 1440); // Breakpoint for wide screen
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const placeholderData = useMemo(
     () => [
@@ -144,11 +132,11 @@ const RuyiInLive = () => {
 
   return (
     <>
-        <div className="w-full py-4 flex justify-center items-center">
-          <div className={`w-full mx-auto ${isMobile ? 'flex flex-col' : 'flex flex-row'} ${isMobile ? 'h-auto' : 'h-[21.875rem]'} bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677] mx-auto mb-4`}>
+        <div className="w-full flex justify-center items-center">
+          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677]">
 
           <div
-            className={`${isMobile ? 'w-full' : 'w-2/5'} p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white`}
+            className="w-full lg:w-2/5 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white"
             style={{ background: `linear-gradient(135deg, ${colors.navyBlue}, ${colors.navyBlue} 70%, ${colors.navyBlue} 85%)` }}
           >
             <h1 className="text-2xl md:text-[1.8rem] font-bold mb-1">
@@ -186,7 +174,7 @@ const RuyiInLive = () => {
             />
           </div>
 
-          <div className={`${isMobile ? 'w-full' : 'w-3/5'} p-4 md:p-6 overflow-hidden flex flex-col bg-white`}>
+          <div className="w-full lg:w-3/5 p-4 md:p-6 overflow-hidden flex flex-col bg-white">
             <div className="flex justify-between items-baseline mb-4">
               <h2 className="text-lg font-semibold text-(--home-title-color)">
                 <Translate id="home.ruyiinlive.statistics">实时数据</Translate>
