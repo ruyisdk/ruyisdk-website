@@ -28,21 +28,21 @@
       }
     },
     {
-      "total": 4,
-      "author": {
-        "login": "MalachiteN",
-        "id": 53076703,
-        "avatar_url": "https://avatars.githubusercontent.com/u/53076703?v=4",
-        "html_url": "https://github.com/MalachiteN"
-      }
-    },
-    {
       "total": 5,
       "author": {
         "login": "Master-Hash",
         "id": 56669192,
         "avatar_url": "https://avatars.githubusercontent.com/u/56669192?v=4",
         "html_url": "https://github.com/Master-Hash"
+      }
+    },
+    {
+      "total": 6,
+      "author": {
+        "login": "MalachiteN",
+        "id": 53076703,
+        "avatar_url": "https://avatars.githubusercontent.com/u/53076703?v=4",
+        "html_url": "https://github.com/MalachiteN"
       }
     },
     {
@@ -92,7 +92,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-12T19:38:01.526Z",
+    "generatedAt": "2026-03-17T19:49:53.394Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
   }
 }
