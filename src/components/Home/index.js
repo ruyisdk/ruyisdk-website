@@ -13,6 +13,7 @@ import WeChatLink from "../common/WeChatLink";
 import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
 import CardNews from './CardNews';
+import Partners from "./Partners";
 
 
 function Hero() {
@@ -20,26 +21,20 @@ function Hero() {
     <div className="relative min-h-screen">
       <BackgroundAnimation />
 
-      <section className="py-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4" >
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mt-4" >
           <MainDisplay />
           <CardNews />
           {/*<DemoBoardsDisplay />*/}
         </div>
-      </section>
 
-      <section className="py-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 border-t-2 border-black/5" >
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
           <RuyiInLive />
           <NewsShowcase />
         </div>
-      </section>
 
-      <section className="py-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <WeChatLink />
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mb-18 border-t-2 border-black/5">
+          <Partners />
         </div>
-      </section>
 
     </div>
   );

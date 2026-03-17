@@ -7,8 +7,6 @@ import { marked } from "marked";
 import { QRCode, QRGroup } from "@site/src/components/common";
 import styles from "./about.module.css";
 
-import { PartnersSection } from "@site/src/components/Community/partners";
-
 const ABOUT_CONTENT_FILES = {
   "zh-Hans": "/content/about/about.zh-Hans.md",
   de: "/content/about/about.de.md",
@@ -197,10 +195,6 @@ export default function AboutPage() {
                 )}
               </section>
             </aside>
-          </div>
-          {/* partners list inserted below main grid */}
-          <div className="w-full mt-12">
-            <PartnersSection />
           </div>
         </div>
       </div>

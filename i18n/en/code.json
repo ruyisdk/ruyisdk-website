@@ -37,6 +37,13 @@
   "home.ruyiinlive.statistics": {
     "message": "Live Metrics"
   },
+  "home.partners.joindoc": {
+    "message": "Join us"
+  },
+  "home.partners.title": {
+    "message": "Partners",
+    "description": "Title for partners page"
+  },
 
   "footer.ecosystem": {
     "message": "Ecosystem"
@@ -307,10 +314,6 @@
   "community.contributors.title": {
     "message": "Contributors",
     "description": "Title for contributors page"
-  },
-  "community.partners.title": {
-    "message": "Partners",
-    "description": "Title for partners page"
   },
   "community.stats.contributors": {
     "message": "Contributors",

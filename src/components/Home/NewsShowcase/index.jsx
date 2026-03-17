@@ -61,7 +61,7 @@ const NewsShowcase = () => {
   }
 
   return (
-    <div className="w-full font-sans pt-4 md:-mt-8 pb-12 md:pb-16">
+    <div className="w-full font-sans">
       <div className="w-full gap-4 grid grid-cols-1 md:grid-cols-3">
         {newsData.map((news, idx) => (
           <a

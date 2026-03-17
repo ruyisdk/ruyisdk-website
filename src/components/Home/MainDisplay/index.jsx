@@ -8,7 +8,7 @@ import Terminal from './Terminal';
 const MainDisplay = () => {
 
   return (
-    <div className="py-16 font-sans w-full relative overflow-hidden flex flex-col">
+    <div className="py-10 font-sans w-full relative overflow-hidden flex flex-col">
 
       {/* Main page content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-8 box-border">
