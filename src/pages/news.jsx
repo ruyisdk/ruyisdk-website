@@ -96,16 +96,16 @@ const NewsPage = () => {
                     <Card
                       items={weeklies}
                       label={translate({ id: "news.biweekly", message: "Biweekly" })}
-                      color="bg-blue-500"
-                      borderColor="border-blue-500"
+                      color="bg-[var(--ruyi-logo-blue)]"
+                      borderColor="border-[var(--ruyi-logo-blue)]"
                       onClick={handleClick}
                       loading={loading}
                     />
                     <Card
                       items={ruyinews}
                       label={translate({ id: "news.news", message: "RuyiSDK 新闻" })}
-                      color="bg-green-500"
-                      borderColor="border-green-500"
+                      color="bg-[var(--ruyi-logo-yellow)]"
+                      borderColor="border-[var(--ruyi-logo-yellow)]"
                       onClick={handleClick}
                       loading={loading}
                     />

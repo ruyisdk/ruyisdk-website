@@ -57,14 +57,14 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             {/* Content section (left on md+) */}
             <div className="min-w-0 flex flex-1 flex-col p-6 md:h-full">
               <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug md:text-3xl font-bold text-gray-800">
+                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug font-bold text-gray-800">
                   {article.title}
                 </span>
-                <span className="flex-shrink-0 whitespace-nowrap text-sm md:text-base text-gray-600">
+                <span className="flex-shrink-0 whitespace-nowrap text-sm text-gray-600">
                   {new Date(article.date).toLocaleDateString()}
                 </span>
               </div>
-              <p className="mt-2 text-sm md:text-base text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
+              <p className="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
             </div>
 
             {/* Image section */}
