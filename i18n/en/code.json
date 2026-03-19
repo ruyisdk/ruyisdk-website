@@ -44,6 +44,29 @@
     "message": "Partners",
     "description": "Title for partners page"
   },
+  "community.contributors.title": {
+    "message": "Contributors",
+    "description": "Title for contributors page"
+  },
+  "community.contributors.subtitle": {
+    "message": "The RuyiSDK community is driven by its contributors"
+  },
+  "community.stats.contributors": {
+    "message": "Contributors",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "Commits",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.issues": {
+    "message": "Issues",
+    "description": "Label for issue count on contributors page"
+  },
 
   "footer.ecosystem": {
     "message": "Ecosystem"
@@ -310,26 +333,6 @@
   "community.hub.code.desc": {
     "message": "Read the contributor code of conduct to ensure friendly, high-quality collaboration.",
     "description": "Code of conduct card description"
-  },
-  "community.contributors.title": {
-    "message": "Contributors",
-    "description": "Title for contributors page"
-  },
-  "community.stats.contributors": {
-    "message": "Contributors",
-    "description": "Label for contributors stat"
-  },
-  "community.stats.commits": {
-    "message": "Commits",
-    "description": "Label for commits stat"
-  },
-  "community.stats.prs": {
-    "message": "Pull Requests",
-    "description": "Label for pull requests stat"
-  },
-  "community.stats.issues": {
-    "message": "Issues",
-    "description": "Label for issue count on contributors page"
   },
   "community.stats.unknown": {
     "message": "N/A",
@@ -719,9 +722,6 @@
   },
   "贡献者公约": {
     "message": "Contributor Covenant"
-  },
-  "community.contributors.subtitle": {
-    "message": "The RuyiSDK community is driven by its contributors."
   },
   "ruyisdk.cn": {
     "message": "ruyisdk.cn"
