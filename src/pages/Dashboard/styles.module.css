@@ -124,7 +124,7 @@
 }
 
 .inner {
-  max-width: var(--site-container-width);
+  max-width: var(--container-7xl);
   width: 90%;
   margin: 0 auto;
 }

@@ -276,7 +276,7 @@ export default function DownloadsPage() {
       <PageBackground isClient={isClient} />
 
       <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
+        <div className="mx-auto relative z-10 max-w-screen-xl">
           <div className="flex flex-col items-center justify-center mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm mb-4">
               <Translate id="downloads.title">下载 RuyiSDK</Translate>

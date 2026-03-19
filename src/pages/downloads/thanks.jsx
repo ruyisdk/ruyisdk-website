@@ -143,7 +143,7 @@ export default function DownloadThanksPage() {
       <PageBackground isClient={isClient} />
 
       <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site">
+        <div className="mx-auto relative z-10 max-w-screen-xl">
           <section className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
             <div className="px-8 py-6 text-white" style={headerGradientStyle('gold')}>
               <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0">

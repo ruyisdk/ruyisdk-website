@@ -56,7 +56,7 @@
 
 /* --- Content Styling --- */
 .contentContainer {
-  max-width: var(--site-container-width);
+  max-width: var(--container-7xl);
   margin-left: auto;
   margin-right: auto;
   position: relative;

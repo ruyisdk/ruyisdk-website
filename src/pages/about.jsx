@@ -132,7 +132,7 @@ export default function AboutPage() {
     >
       <PageBackground isClient={isClient} />
       <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl max-w-site flex flex-col items-center">
+        <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center">
           {/* 顶部居中的 名称（已移除 'RuyiSDK' 文本） */}
 
           {/* 内容主体卡片 */}
