@@ -1,6 +1,6 @@
 
 // A decorative background animation with moving blobs.
-const BackgroundAnimation = () => {
+const HomeBackground = () => {
 
   const blobBase = {
     position: 'absolute',
@@ -24,4 +24,22 @@ const BackgroundAnimation = () => {
   );
 };
 
-export default BackgroundAnimation;
+const PageBackground = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 rounded-full -z-10"
+        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-0 right-0 rounded-full -z-10"
+        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
+      />
+    </div>
+  );
+};
+
+export default HomeBackground;
+export { PageBackground };
