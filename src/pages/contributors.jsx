@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { IconUser, IconUserCircle, IconGitCommit, IconGitPullRequest, IconCircleDot } from '@tabler/icons-react';
 
 import Layout from "@theme/Layout";
@@ -8,6 +8,20 @@ import { PageBackground } from "@site/src/components/Home/Background";
 
 const ContributorAvatar = ({ avatarUrl, name, githubUrl}) => {
   const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) {
+      return;
+    }
+
+    if (img.complete && img.naturalWidth > 0) {
+      setLoaded(true);
+    } else {
+      setLoaded(false);
+    }
+  }, [avatarUrl]);
 
   return (
     <div className={`relative rounded-full overflow-hidden shadow-lg w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28`}>
@@ -23,6 +37,7 @@ const ContributorAvatar = ({ avatarUrl, name, githubUrl}) => {
         </div>
 
         <img
+          ref={imgRef}
           src={avatarUrl}
           alt={`${name}'s avatar`}
           className={`absolute inset-0 w-full h-full object-cover rounded-full transition-opacity duration-200 ${
