@@ -7,14 +7,14 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1903
+      "contributions": 1948
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 442
+      "contributions": 448
     },
     {
       "id": 84754181,
@@ -73,18 +73,18 @@
       "contributions": 61
     },
     {
+      "id": 198067605,
+      "name": "a1gorhythm7",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
+      "github": "https://github.com/a1gorhythm7",
+      "contributions": 61
+    },
+    {
       "id": 62790279,
       "name": "stydxm",
       "avatarUrl": "https://avatars.githubusercontent.com/u/62790279?v=4",
       "github": "https://github.com/stydxm",
       "contributions": 61
-    },
-    {
-      "id": 198067605,
-      "name": "a1gorhythm7",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
-      "github": "https://github.com/a1gorhythm7",
-      "contributions": 59
     },
     {
       "id": 207433538,
@@ -241,6 +241,13 @@
       "contributions": 6
     },
     {
+      "id": 53076703,
+      "name": "MalachiteN",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/53076703?v=4",
+      "github": "https://github.com/MalachiteN",
+      "contributions": 6
+    },
+    {
       "id": 19223209,
       "name": "255doesnotexist",
       "avatarUrl": "https://avatars.githubusercontent.com/u/19223209?v=4",
@@ -274,13 +281,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/63940407?v=4",
       "github": "https://github.com/Sharelter",
       "contributions": 5
-    },
-    {
-      "id": 53076703,
-      "name": "MalachiteN",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/53076703?v=4",
-      "github": "https://github.com/MalachiteN",
-      "contributions": 4
     },
     {
       "id": 126950588,
@@ -418,15 +418,15 @@
   ],
   "totals": {
     "contributors": 59,
-    "commits": 3928,
-    "pullRequests": 1736,
+    "commits": 3983,
+    "pullRequests": 1746,
     "issues": 103,
-    "stars": 107,
+    "stars": 108,
     "forks": 155,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-12T19:44:02.015Z",
+    "generatedAt": "2026-03-17T19:55:54.320Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
