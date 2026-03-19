@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import ServiceData from '@site/src/components/ServiceData';
 import { translate } from "@docusaurus/Translate";
-import { GithubOutlined, StarOutlined, ForkOutlined, IssuesCloseOutlined, CodeOutlined, EyeOutlined } from '@ant-design/icons';
 
 const Dashboard = () => {
   return (
@@ -15,7 +14,7 @@ const Dashboard = () => {
         </div>
 
         <div className="relative z-20 flex-1 flex justify-center items-start pt-10 pb-16 px-6">
-          <div className="w-full max-w-site mx-auto">
+          <div className="w-full max-w-screen-xl mx-auto">
             <ServiceData />
           </div>
         </div>

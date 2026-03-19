@@ -17,8 +17,6 @@
   --ruyi-logo-blue: #10247a;
   --ruyi-logo-yellow: #f5b926;
 
-  // TODO: why we need --site-container-width
-  --site-container-width: 1180px;
   --brand: #5d84b3;
   --dark: #282c34;
   --deepdark: #20232a;
@@ -998,13 +996,6 @@ main[class*="docMainContainer"] {
     border-radius: 0.75rem;
     opacity: 0.65;
   }
-}
-
-/* Utility class to unify page content width across layouts */
-.max-w-site {
-  max-width: var(--site-container-width);
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Loading skeleton shimmer helpers */
