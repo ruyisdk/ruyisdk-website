@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "total": 76,
+      "total": 77,
       "author": {
         "login": "xen0n",
         "id": 1175567,
@@ -11,7 +11,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-12T19:36:59.376Z",
+    "generatedAt": "2026-03-17T19:47:49.808Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-overlay/stats/contributors"
   }
 }
