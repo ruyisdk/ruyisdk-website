@@ -51,6 +51,19 @@ function triggerDownload(url) {
   const allowedHosts = new Set(['mirror.iscas.ac.cn', 'github.com']);
   if (!allowedHosts.has(parsed.hostname)) return;
 
+  const anchor = document.createElement('a');
+  anchor.href = parsed.toString();
+  anchor.target = '_blank';
+  anchor.rel = 'noopener noreferrer';
+  anchor.style.display = 'none';
+  document.body.appendChild(anchor);
+  anchor.click();
+  try {
+    document.body.removeChild(anchor);
+  } catch {
+    // no-op
+  }
+
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
   iframe.src = parsed.toString();
@@ -116,6 +129,7 @@ export default function DownloadThanksPage() {
   const parent = safeParseUrl(parentRaw)?.toString() || '';
   const downloadRaw = params.get('download') || '';
   const download = safeParseUrl(downloadRaw)?.toString() || '';
+  const started = params.get('started') || '0';
 
   const localePrefix = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -125,8 +139,9 @@ export default function DownloadThanksPage() {
   useEffect(() => {
     if (!isClient) return;
     if (!download) return;
+    if (started === '1') return;
     triggerDownload(download);
-  }, [isClient, download]);
+  }, [isClient, download, started]);
 
   const sourceLabel =
     source === 'mirror'
@@ -202,6 +217,19 @@ export default function DownloadThanksPage() {
                   </div>
 
                   <div className="mt-6 flex flex-col md:flex-row gap-3">
+                    {download && (
+                      <a
+                        href={download}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
+                        style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
+                      >
+                        <Translate id="downloads.thanks.retry">无响应？点此重试</Translate>
+                      </a>
+                    )}
+
                     <a
                       href={withLocalePrefix('/docs/Package-Manager/installation', localePrefix)}
                       className="w-full inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl transition-all focus:outline-none hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5"
