@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import ReactDOM from 'react-dom';
@@ -12,6 +12,7 @@ const COLOR_VARS = {
   goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
   blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
   blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
+  eclipse: '#5f3dc4',
   contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
 };
 
@@ -23,11 +24,20 @@ const IDE_MIRROR_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/';
 const IDE_VSCODE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-vscode-extension/releases';
 const IDE_ECLIPSE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases';
 
+const SECTION_IDS = {
+  packageManager: 'ruyisdk-package-manager',
+  vscodeExtension: 'ruyisdk-vscode-extension',
+  eclipseExtension: 'ruyisdk-eclipse-extension',
+};
+
 function headerGradientStyle(accent) {
   if (accent === 'gold') {
-    return { background: `linear-gradient(90deg, ${COLOR_VARS.goldDark} 0%, ${COLOR_VARS.gold} 100%)` };
+    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
   }
-  return { background: `linear-gradient(90deg, ${COLOR_VARS.blue} 0%, ${COLOR_VARS.blueDark} 100%)` };
+  if (accent === 'eclipse') {
+    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
+  }
+  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
 }
 
 function primaryButtonStyle(accent) {
@@ -68,22 +78,30 @@ function PackageManagerSection({ releaseData }) {
   const hasReleaseData = Boolean(releaseData?.channels?.stable);
 
   return (
-    <section className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl">
-      <div className="px-8 py-6 text-white" style={headerGradientStyle('gold')}>
-        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-            />
-          </svg>
-          <Translate id="downloads.pm.title">RuyiSDK Package Manager</Translate>
-        </h2>
-        <p className="mt-2 text-lg opacity-90 text-white/90">
-          <Translate id="downloads.pm.description">Ruyi 包管理器是 RuyiSDK 的核心组件，提供包管理、环境配置等功能。</Translate>
-        </p>
+    <section id={SECTION_IDS.packageManager} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl scroll-mt-24">
+      <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle('gold')}>
+        <div className="min-w-0 md:pr-44">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: COLOR_VARS.goldDark }}>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                />
+              </svg>
+              <Translate id="downloads.pm.title">RuyiSDK Package Manager</Translate>
+            </h2>
+            <p className="mt-2 text-lg text-gray-700">
+              <Translate id="downloads.pm.description">Ruyi 包管理器是 RuyiSDK 的核心组件，提供包管理、环境配置等功能。</Translate>
+            </p>
+        </div>
+        <img
+          src="/img/ruyi-logo-720.svg"
+          alt="RuyiSDK"
+          className="hidden md:block pointer-events-none select-none absolute right-6 top-2 h-36 w-auto object-contain"
+          style={{ transform: 'translateY(12px)' }}
+        />
       </div>
 
       <div className="p-6 sm:p-8">
@@ -160,47 +178,37 @@ function PackageManagerSection({ releaseData }) {
           <Translate id="downloads.label.pypi">PyPI</Translate>
         </a>
         <span className="text-gray-300">|</span>
-        <a href={PM_MIRROR_RELEASES_URL} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
-          <Translate id="downloads.label.mirror">镜像站</Translate>
+        <a href={IDE_MIRROR_URL} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
+          <Translate id="downloads.pm.other.ideMirror">RuyiSDK IDE</Translate>
         </a>
       </div>
     </section>
   );
 }
 
-function IDESection() {
-  const entries = useMemo(() => {
-    return [
-      {
-        title: translate({ id: 'downloads.ide.entry.mirror', message: 'IDE 镜像目录' }),
-        description: translate({ id: 'downloads.ide.entry.mirror.desc', message: '获取 IDE 的最新构建/版本。' }),
-        href: IDE_MIRROR_URL,
-      },
-      {
-        title: translate({ id: 'downloads.ide.entry.vscode', message: 'RuyiSDK VS Code Extension（Releases）' }),
-        description: translate({ id: 'downloads.ide.entry.vscode.desc', message: '基于 VS Code 的 RuyiSDK 扩展发布页。' }),
-        href: IDE_VSCODE_RELEASES_URL,
-      },
-      {
-        title: translate({ id: 'downloads.ide.entry.eclipse', message: 'RuyiSDK Eclipse（Releases）' }),
-        description: translate({ id: 'downloads.ide.entry.eclipse.desc', message: '基于 Eclipse 的 RuyiSDK 项目发布页。' }),
-        href: IDE_ECLIPSE_RELEASES_URL,
-      },
-    ];
-  }, []);
-
+function ExtensionSection({ sectionId, titleId, titleMessage, descriptionId, descriptionMessage, href, accent = 'blue', logoSrc, logoAlt }) {
   return (
-    <section className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl">
-      <div className="px-8 py-6 text-white" style={headerGradientStyle('blue')}>
-        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-          </svg>
-          <Translate id="downloads.ide.title">RuyiSDK IDE</Translate>
-        </h2>
-        <p className="mt-2 text-lg opacity-90 text-white/90">
-          <Translate id="downloads.ide.description">IDE 相关下载与发布入口。</Translate>
-        </p>
+    <section id={sectionId} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl scroll-mt-24">
+      <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle(accent)}>
+        <div className="min-w-0 md:pr-44">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: accent === 'eclipse' ? COLOR_VARS.eclipse : COLOR_VARS.blueDark }}>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <Translate id={titleId}>{titleMessage}</Translate>
+            </h2>
+            <p className="mt-2 text-lg text-gray-700">
+              <Translate id={descriptionId}>{descriptionMessage}</Translate>
+            </p>
+        </div>
+        {logoSrc && (
+          <img
+            src={logoSrc}
+            alt={logoAlt}
+            className="hidden md:block pointer-events-none select-none absolute right-6 top-2 h-40 w-auto object-contain"
+            style={{ transform: 'translateY(12px)' }}
+          />
+        )}
       </div>
 
       <div className="p-6 sm:p-8">
@@ -214,46 +222,19 @@ function IDESection() {
             </span>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            {entries.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-lg transition-all"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="min-w-0 flex-1">
-                    <div className="font-bold text-gray-900 mb-1 group-hover:underline" style={{ color: COLOR_VARS.contrast }}>
-                      {item.title}
-                    </div>
-                    <div className="text-sm text-gray-600 leading-relaxed">{item.description}</div>
-                  </div>
-
-                  <span
-                    aria-hidden
-                    className="shrink-0 inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white border border-gray-200 shadow-sm group-hover:shadow-md transition-all"
-                    style={{ color: COLOR_VARS.blue }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 3v10" />
-                      <path d="M7 11l5 5 5-5" />
-                      <path d="M4 21h16" />
-                    </svg>
-                  </span>
-                </div>
-              </a>
-            ))}
+          <div className="bg-white rounded-2xl border border-gray-200 p-5">
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl transition-all focus:outline-none hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5"
+              style={primaryButtonStyle('blue')}
+            >
+              <svg className="mr-2 -ml-1 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <Translate id="downloads.extension.releasesButton">GitHub Releases</Translate>
+            </a>
           </div>
         </div>
       </div>
@@ -284,11 +265,33 @@ export default function DownloadsPage() {
             <p className="text-lg text-gray-600 max-w-2xl">
               <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅。</Translate>
             </p>
+
           </div>
 
           <div className="w-full grid gap-8">
             <PackageManagerSection releaseData={latestPm} />
-            <IDESection />
+            <ExtensionSection
+              sectionId={SECTION_IDS.vscodeExtension}
+              titleId="downloads.vscode.title"
+              titleMessage="RuyiSDK VS Code Extension"
+              descriptionId="downloads.vscode.description"
+              descriptionMessage="VS Code 扩展下载与发布入口。"
+              href={IDE_VSCODE_RELEASES_URL}
+              accent="blue"
+              logoSrc="/img/vs-code.png"
+              logoAlt="VS Code"
+            />
+            <ExtensionSection
+              sectionId={SECTION_IDS.eclipseExtension}
+              titleId="downloads.eclipse.title"
+              titleMessage="RuyiSDK Eclipse Extension"
+              descriptionId="downloads.eclipse.description"
+              descriptionMessage="Eclipse 扩展下载与发布入口。"
+              href={IDE_ECLIPSE_RELEASES_URL}
+              accent="eclipse"
+              logoSrc="/img/Eclipse2014-logo_RGB.svg"
+              logoAlt="Eclipse"
+            />
           </div>
 
           <div className="mt-12 text-center text-gray-500 text-sm">
