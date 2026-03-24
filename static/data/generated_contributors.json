@@ -7,21 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 1948
+      "contributions": 1949
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 453
+      "contributions": 454
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 294
+      "contributions": 298
     },
     {
       "id": 54484233,
@@ -42,7 +42,7 @@
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 94
+      "contributions": 97
     },
     {
       "id": 22784008,
@@ -63,14 +63,14 @@
       "name": "U2FsdGVkX1",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 73
+      "contributions": 74
     },
     {
       "id": 43362020,
       "name": "pz9115",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
       "github": "https://github.com/pz9115",
-      "contributions": 61
+      "contributions": 62
     },
     {
       "id": 198067605,
@@ -105,7 +105,7 @@
       "name": "imkiva",
       "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
       "github": "https://github.com/imkiva",
-      "contributions": 30
+      "contributions": 31
     },
     {
       "id": 132126433,
@@ -161,7 +161,7 @@
       "name": "qjivy",
       "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
       "github": "https://github.com/qjivy",
-      "contributions": 14
+      "contributions": 15
     },
     {
       "id": 43716472,
@@ -418,15 +418,15 @@
   ],
   "totals": {
     "contributors": 59,
-    "commits": 3988,
-    "pullRequests": 1751,
-    "issues": 104,
+    "commits": 4001,
+    "pullRequests": 1760,
+    "issues": 114,
     "stars": 108,
-    "forks": 156,
+    "forks": 157,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-19T19:51:13.773Z",
+    "generatedAt": "2026-03-24T19:55:03.218Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
