@@ -389,6 +389,14 @@
   ],
   "weeklies": [
     {
+      "title": "Biweekly 065: 2026-03-24",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期包管理器 0.47.0 发布，主要新增了多软件源（多仓库）支持，并修复了一些已知的问题。欢迎大家下载试用！ 此外，香山编译器正式接入RuyiSDK生态，深化协同构建全栈开发能力，也欢迎香山用户下载使用。 ⏬ 每个组件都提供了多种下载或安装方式，您可以任意选择一种： RuyiSDK 包管理器 0.47.0🚀 从 PyPI 安装： 手动下载安装： G...",
+      "date": 1774310400000,
+      "image": null,
+      "filename": "20260324-ruyisdk-biweekly-65.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260324-ruyisdk-biweekly-65.md"
+    },
+    {
       "title": "Biweekly 064: 2026-03-10",
       "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期包管理器集成了香山编译器（执行 后再使用 安装即可）；VSCode 插件上架 Open VSX ，您可以在主流 Linux 发行版（包括 openKylin、Deepin、Ubuntu（非官方版）、Fedora、Debian、openEuler 等）和 VSCodium 等兼容 VS Code 扩展 API 的编辑器、IDE 和开发平台中安装使用 ...",
       "date": 1773100800000,
