@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 454
+      "contributions": 455
     },
     {
       "id": 84754181,
@@ -42,7 +42,7 @@
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 97
+      "contributions": 102
     },
     {
       "id": 22784008,
@@ -418,15 +418,15 @@
   ],
   "totals": {
     "contributors": 59,
-    "commits": 4001,
-    "pullRequests": 1760,
-    "issues": 114,
+    "commits": 4007,
+    "pullRequests": 1765,
+    "issues": 118,
     "stars": 108,
     "forks": 157,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-24T19:55:03.218Z",
+    "generatedAt": "2026-03-26T19:58:27.080Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
