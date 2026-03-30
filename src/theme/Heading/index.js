@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import { Link } from 'lucide-react';
+
 export default function Heading({as: As, id, ...props}) {
   const brokenLinks = useBrokenLinks();
   const {

@@ -1,0 +1,416 @@
+
+aside.theme-doc-sidebar-container {
+    border-right: none !important;
+}
+
+.theme-doc-sidebar-container {
+    border-right: none !important;
+}
+
+div[class*="sidebar"] {
+    border-right: none !important;
+}
+
+.menu__link--active {
+    background-color: transparent !important;
+    color: #666666 !important;
+    font-weight: 500 !important;
+}
+
+.menu__list-item--collapsed .menu__link--active {
+    background-color: transparent !important;
+    color: #666666 !important;
+}
+
+.menu__link:hover {
+    background-color: transparent !important;
+    color: #666666 !important;
+}
+
+/* Menu items with sublists should not be bold
+/ Level 1 categories use 14px, level 2+ categories use 14px */
+.theme-doc-sidebar-item-category-level-1 .menu__link--sublist {
+    font-weight: normal !important;
+    font-size: 14px !important;
+}
+
+.theme-doc-sidebar-item-category-level-2 .menu__link--sublist,
+.theme-doc-sidebar-item-category-level-3 .menu__link--sublist {
+    font-weight: normal !important;
+    font-size: 14px !important;
+}
+
+.theme-doc-sidebar-item-link-level-1 > :is(a, button) {
+    background-color: transparent !important;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-link-level-2 > :is(a, button) {
+    background-color: transparent !important;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-link-level-3 > :is(a, button) {
+    background-color: transparent !important;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+}
+
+/* Category items (both level 1 and level 2) */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > :is(a, button) {
+    background-color: transparent !important;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+}
+
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > :is(a, button) {
+    background-color: transparent !important;
+    font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+}
+
+/* Remove all background highlights from sidebar items */
+.menu__list-item {
+    background-color: transparent !important;
+}
+
+.menu__list-item:hover {
+    background-color: transparent !important;
+}
+
+.menu__list-item--collapsed {
+    background-color: transparent !important;
+}
+
+
+/* Sidebar menu hierarchical styling */
+.menu__link--sublist {
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+/* Hide all Docusaurus native arrows visually but keep them functional */
+.menu__caret {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Hide arrow pseudo-elements */
+.menu__link--sublist-caret:after {
+    display: none !important;
+}
+
+.menu__link--sublist::after {
+    display: none !important;
+}
+
+/* Make entire title area clickable for expand/collapse */
+.menu__link--sublist {
+    cursor: pointer !important;
+    user-select: none !important;
+    position: relative !important;
+}
+
+/* Make collapsible container clickable */
+.menu__list-item-collapsible {
+    cursor: pointer !important;
+
+    .menu__link--sublist {
+        pointer-events: auto !important;
+    }
+}
+
+/* Level 1 - Top level categories (e.g., "Ruyi 包管理器") */
+.theme-doc-sidebar-item-category-level-1 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+
+    .menu__list-item-collapsible {
+        .menu__link--sublist {
+            font-weight: normal !important;
+            font-size: 14px !important;
+            color: #333333 !important;
+            padding-left: 0.75rem !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            border-left: 3px solid transparent !important;
+            transition: all 0.2s ease !important;
+
+            &:hover {
+                color: #000000 !important;
+                background-color: rgba(0, 0, 0, 0.03) !important;
+            }
+        }
+
+        /* Shrink arrow for level 1  */
+        .menu__caret {
+            width: 12px !important;
+            height: 12px !important;
+            min-width: 12px !important;
+            min-height: 12px !important;
+
+            svg {
+                width: 12px !important;
+                height: 12px !important;
+            }
+        }
+    }
+
+    > .menu__list {
+        margin-left: 0.5rem;
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
+        padding-left: 0.75rem;
+    }
+}
+
+/* Level 2 - Second level categories (e.g., "使用案例") */
+.theme-doc-sidebar-item-category-level-2 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.125rem;
+
+    .menu__list-item-collapsible {
+        .menu__link--sublist {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            color: #555555 !important;
+            padding-left: 0.5rem !important;
+            padding-top: 0.375rem !important;
+            padding-bottom: 0.375rem !important;
+            border-left: 2px solid transparent !important;
+            transition: all 0.2s ease !important;
+
+            &:hover {
+                color: #333333 !important;
+                background-color: rgba(0, 0, 0, 0.02) !important;
+            }
+        }
+    }
+
+    > .menu__list {
+        margin-left: 0.5rem;
+        border-left: 1px solid rgba(0, 0, 0, 0.06);
+        padding-left: 0.5rem;
+    }
+}
+
+/* Level 1 links */
+.theme-doc-sidebar-item-link-level-1 {
+    .menu__link {
+        font-weight: 500 !important;
+        font-size: 15px !important;
+        color: #444444 !important;
+        padding-left: 0.75rem !important;
+        padding-top: 0.375rem !important;
+        padding-bottom: 0.375rem !important;
+
+        &:hover {
+            color: #000000 !important;
+            background-color: rgba(0, 0, 0, 0.02) !important;
+        }
+    }
+}
+
+/* Level 2 links */
+.theme-doc-sidebar-item-link-level-2 {
+    .menu__link {
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        color: #666666 !important;
+        padding-left: 1.5rem !important;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+
+        &:hover {
+            color: #333333 !important;
+            background-color: rgba(0, 0, 0, 0.02) !important;
+        }
+    }
+}
+
+/* Level 3 links */
+.theme-doc-sidebar-item-link-level-3 {
+    .menu__link {
+        font-weight: 400 !important;
+        font-size: 13px !important;
+        color: #777777 !important;
+        padding-left: 2.25rem !important;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+
+        &:hover {
+            color: #444444 !important;
+            background-color: rgba(0, 0, 0, 0.02) !important;
+        }
+    }
+}
+
+/* Font styles - Only apply to docs pages */
+.docs-wrapper,
+.theme-doc-wrapper,
+[class*="docMainContainer"],
+main[class*="docMainContainer"] {
+    /* H1 heading styles */
+    h1 {
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        font-size: 36px !important;
+        color: #171717 !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    article h1,
+    .markdown h1,
+    .theme-doc-markdown h1 {
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        font-size: 36px !important;
+        color: #171717 !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    /* Anchor link styles - heading links */
+    h1 a,
+    h2 a,
+    h3 a,
+    h4 a,
+    h5 a,
+    h6 a,
+    .anchor a,
+    .hash-link {
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        color: #171717 !important;
+        text-decoration: none !important;
+        font-weight: inherit !important;
+
+        &:hover {
+            color: #171717 !important;
+            text-decoration: none !important;
+        }
+    }
+
+    /* Heading sizes for anchor links */
+    h2,
+    h2 a {
+        font-size: 24px !important;
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        color: #171717 !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+    }
+
+    h3,
+    h3 a {
+        font-size: 20px !important;
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        color: #171717 !important;
+        font-weight: 600 !important;
+    }
+
+    h4,
+    h4 a {
+        font-size: 18px !important;
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        color: #171717 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Paragraph and body text styles */
+    p,
+    article p,
+    .markdown p,
+    .theme-doc-markdown p {
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        font-size: 16px !important;
+        color: #171717 !important;
+        line-height: 1.7 !important;
+        margin: 16px 0 0 !important;
+        font-weight: 400 !important;
+    }
+
+    /* First paragraph no top margin */
+    article p:first-of-type,
+    .markdown p:first-of-type,
+    .theme-doc-markdown p:first-of-type {
+        margin-top: 0 !important;
+    }
+
+    /* Body text */
+    article,
+    .markdown,
+    .theme-doc-markdown {
+        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
+        font-size: 16px !important;
+        color: #171717 !important;
+        line-height: 1.7 !important;
+    }
+}
+
+/* doc css here */
+.docs-wrapper div[class*="docRoot"] {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: calc(var(--ifm-navbar-height) + 24px) 32px 80px;
+    display: flex;
+    gap: 32px;
+}
+
+.docs-wrapper aside.theme-doc-sidebar-container { flex: 0 0 220px; }
+.docs-wrapper [class*="docItemCol"] { max-width: 760px; }
+.docs-wrapper .col.col--3 { flex: 0 0 200px; }
+
+.docs-wrapper div[class*="sidebarViewport"] {
+    overflow-y: auto;             /* 保持可滚 */
+}
+
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Firefox */
+.docs-wrapper div[class*="sidebarViewport"] {
+    scrollbar-width: none;
+}
+
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar-track,
+.docs-wrapper div[class*="sidebarViewport"]::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+/* Docs right sidebar watermark (separate block below the TOC) */
+.theme-doc-toc-desktop {
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        margin: 1.75rem 0.75rem 0;
+        height: 18rem;
+        background-image: url("/img/ruyi-logo-720.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 60%;
+        background-color: color-mix(in srgb, var(--ifm-background-color) 90%, white);
+        background-blend-mode: overlay;
+        border-radius: 0.75rem;
+        opacity: 0.65;
+    }
+}
