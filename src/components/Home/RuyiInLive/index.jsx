@@ -2,129 +2,181 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { IconLink, IconLogin2 } from '@tabler/icons-react';
 
 import Translate from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const RuyiInLive = () => {
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
   const [data, setData] = useState(null);
+  const [hotTags, setHotTags] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const colors = {
     navyBlue: '#002677',
     gold: '#FFBD30',
-    lightGold: '#FFD580',
-    white: '#FFFFFF',
-    textGray: '#86868B',
-    placeholderGrey: '#E0E0E0',
-    placeholderTextShade: 'rgba(0,0,0,0.1)',
+    categoryPillColors: [
+      '#4D7FA1',
+      '#5E8E9A',
+      '#8A7FB2',
+      '#C07A92',
+      '#A87A60',
+      '#7FA04B',
+      '#7E7098',
+      '#527AA0',
+    ],
   };
 
-  const placeholderData = useMemo(
+  const fallbackHotTags = useMemo(
     () => [
-      { action: 'Loading Action 1', total: 80 },
-      { action: 'Loading Action 2', total: 65 },
-      { action: 'Loading Action 3', total: 50 },
+      {
+        id: 'qemu',
+        href: 'https://ruyisdk.cn/tag/qemu/4',
+        label: 'qemu',
+      },
+      {
+        id: 'debian',
+        href: 'https://ruyisdk.cn/tag/debian/13',
+        label: 'debian',
+      },
+      {
+        id: 'internship',
+        href: 'https://ruyisdk.cn/tag/internship/20',
+        label: 'internship',
+      },
+      {
+        id: 'linux-upstream',
+        href: 'https://ruyisdk.cn/tag/linux-upstream/12',
+        label: 'linux-upstream',
+      },
+      {
+        id: 'linux',
+        href: 'https://ruyisdk.cn/tag/linux/9',
+        label: 'linux',
+      },
+      {
+        id: 'llvm',
+        href: 'https://ruyisdk.cn/tag/llvm/1',
+        label: 'llvm',
+      },
+      {
+        id: 'ruyisdk',
+        href: 'https://ruyisdk.cn/tag/ruyisdk/2',
+        label: 'ruyisdk',
+      },
+      {
+        id: 'gcc',
+        href: 'https://ruyisdk.cn/tag/gcc/3',
+        label: 'gcc',
+      },
     ],
     [],
   );
 
   useEffect(() => {
-    if (!customFields.apiURL) {
-      console.warn('apiURL not found in Docusaurus customFields.');
-      setLoading(false);
-      setError(new Error('API configuration is missing.'));
-      return;
-    }
+    const controller = new AbortController();
 
-    // In development, avoid spinning a Worker that calls remote APIs to speed up preview and avoid rate limits.
     if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-      // Use lightweight placeholder data to render immediately.
       setTimeout(() => {
         setData({
-          pm_downloads: { total: 1200 },
-          downloads: { total: 5400 },
-          installs: { total: 3200 },
-          top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
+          topics_30_days: 66,
+          posts_30_days: 121,
+          active_users_30_days: 60,
         });
         setLoading(false);
-        setError(null);
       }, 0);
 
-      return;
+      return () => {
+        controller.abort();
+      };
     }
 
-    const worker = new Worker('/js/dashboardFetcher.js');
-    worker.onmessage = (event) => {
-      const { type, payload } = event.data;
-      if (type === 'success') {
+    fetch('https://ruyisdk.cn/site/statistics.json', {
+      signal: controller.signal,
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((payload) => {
         setData(payload);
-        setError(null);
-      } else if (type === 'error') {
-        setError(new Error(payload.message));
-      }
-      setLoading(false);
-    };
-    worker.onerror = (err) => {
-      console.error('An error occurred in the dashboard fetcher worker:', err);
-      setError(new Error('Failed to load data due to a worker error.'));
-      setLoading(false);
-    };
-    worker.postMessage({ apiURL: customFields.apiURL });
+      })
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Failed to fetch community statistics:', err);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    fetch('/data/api/api_ruyisdk_cn/tags_hot.json', {
+      signal: controller.signal,
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        const tags = Array.isArray(payload?.data) ? payload.data : [];
+        setHotTags(tags);
+      })
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('Failed to fetch hot tags:', err);
+        }
+      });
+
     return () => {
-      worker.terminate();
+      controller.abort();
     };
-  }, [customFields.apiURL]);
+  }, []);
 
-  const barData = useMemo(() => {
-    if (!data || !data.top_commands) return [];
-    return Object.entries(data.top_commands)
-      .map(([action, { total }]) => ({ action, total }))
-      .sort((a, b) => b.total - a.total)
-      .slice(0, 3);
-  }, [data]);
+  const visibleTags = hotTags.length > 0 ? hotTags : fallbackHotTags;
 
-  const getMaxValue = (currentData) => {
-    if (!currentData || currentData.length === 0) return 100;
-    return Math.max(...currentData.map((item) => item.total), 0);
-  };
-
-  const PlaceholderChart = () => (
-    <div className="w-full h-full relative opacity-60">
-      <div className="w-full h-full flex flex-col justify-around gap-2">
-        {placeholderData.map((item, index) => {
-          const maxValue = getMaxValue(placeholderData);
-          const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
-          const innerLabelWidth = Math.min(80, Math.max(20, barWidth * 0.6));
-          return (
-            <div key={`placeholder-${index}`} className="flex items-center min-h-[2rem]">
-              <div className="w-full h-7 rounded-[0.25rem] overflow-hidden">
-                <div
-                  style={{ width: `${barWidth}%`, backgroundColor: colors.placeholderGrey }}
-                  className="h-full rounded-[0.25rem] transition-all duration-300"
-                >
-                  <div
-                    style={{ width: `${innerLabelWidth}%` }}
-                    className="h-3 bg-[rgba(0,0,0,0.06)] rounded-[0.1875rem] ml-2 mt-2"
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+  const activityStats = useMemo(
+    () => [
+      {
+        key: 'active_users_30_days',
+        value: data?.active_users_30_days,
+        labelId: 'home.ruyiinlive.metric.active_users_30_days',
+        defaultLabel: '30天活跃用户',
+      },
+      {
+        key: 'posts_30_days',
+        value: data?.posts_30_days,
+        labelId: 'home.ruyiinlive.metric.posts_30_days',
+        defaultLabel: '30天发帖数',
+      },
+      {
+        key: 'topics_30_days',
+        value: data?.topics_30_days,
+        labelId: 'home.ruyiinlive.metric.topics_30_days',
+        defaultLabel: '30天新话题',
+      },
+    ],
+    [data],
   );
 
-  const StatItem = ({ value, label, loading }) => (
-    <div className="flex flex-col items-center justify-center flex-1">
-      <div className="text-[1.75rem] font-bold text-[#002677] min-h-[2.1rem]">
-        {loading ? <div className="h-6 w-16 bg-[#E0E0E0] rounded animate-pulse" /> : (value !== null && value !== undefined ? value.toLocaleString() : '---')}
+  const StatItem = ({ value, labelId, defaultLabel, loading }) => (
+    <div className="flex min-w-0 flex-col items-center justify-center px-1">
+      <div className="w-full min-h-[2.1rem] text-center text-[clamp(1rem,3.1vw,1.75rem)] font-bold leading-tight text-[#002677]">
+        {loading ? (
+          <div className="mx-auto h-6 w-16 rounded bg-[#E0E0E0] animate-pulse" />
+        ) : (
+          <span className="block w-full overflow-hidden text-ellipsis whitespace-nowrap" title={value !== null && value !== undefined ? value.toLocaleString() : '---'}>
+            {value !== null && value !== undefined ? value.toLocaleString() : '---'}
+          </span>
+        )}
       </div>
-      <div className="text-[0.75rem] text-[#86868B] mt-1">
-        <Translate>{label}</Translate>
+      <div className="mt-1 w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-[0.75rem] text-[#86868B] md:text-[0.8rem]">
+        <Translate id={labelId}>{defaultLabel}</Translate>
       </div>
     </div>
   );
@@ -173,79 +225,52 @@ const RuyiInLive = () => {
             />
           </div>
 
-          <div className="w-full lg:w-3/5 p-4 md:p-6 overflow-hidden flex flex-col bg-white">
-            <div className="flex justify-between items-baseline mb-4">
-              <h2 className="text-lg font-semibold text-(--home-title-color)">
-                <Translate id="home.ruyiinlive.statistics">实时数据</Translate>
-              </h2>
-              <a
-                href="/dashboard"
-                className="text-sm"
-              >
-                <Translate id="home.ruyiinlive.viewmore">查看更多</Translate>&nbsp;&gt;
-              </a>
+          <div className="w-full lg:w-3/5 px-4 py-5 md:px-7 md:py-6 overflow-hidden flex flex-col bg-white lg:justify-between">
+            <div className="shrink-0 mb-4 md:mb-5 grid grid-cols-3 gap-y-3 gap-x-2 rounded-[0.5rem] p-2 text-center md:gap-x-4 md:p-3">
+              {activityStats.map((stat) => (
+                <StatItem
+                  key={stat.key}
+                  value={stat.value}
+                  labelId={stat.labelId}
+                  defaultLabel={stat.defaultLabel}
+                  loading={loading}
+                />
+              ))}
             </div>
 
-            <div className="flex justify-around p-4 rounded-[0.5rem] text-center mb-6">
-              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
-              <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
-              <StatItem value={data?.installs?.total} label="installs" loading={loading} />
-            </div>
-
-            <div className="flex-1">
-              {loading || error ? (
-                <PlaceholderChart />
-              ) : barData.length > 0 ? (
-                <div className="w-full h-full">
-                  <div className="w-full h-full">
-                    {barData.map((item) => {
-                      const maxValue = getMaxValue(barData);
-                      const barWidth =
-                        maxValue > 0 ? (item.total / maxValue) * 100 : 0;
-                      return (
-                        <div key={item.action} className="flex items-center min-h-[2rem]">
-                          <div className="w-full h-7 rounded-[0.25rem] overflow-hidden">
-                            <div
-                              style={{
-                                height: '100%',
-                                borderRadius: '0.25rem',
-                                transition: 'width 0.4s ease-out',
-                                display: 'flex',
-                                alignItems: 'center',
-                                position: 'relative',
-                                width: `${barWidth}%`,
-                                backgroundColor: colors.navyBlue,
-                              }}
-                            >
-                              <span
-                                className="text-[0.75rem] font-semibold text-white px-2 overflow-hidden text-ellipsis whitespace-nowrap"
-                                title={item.action}
-                              >
-                                {item.action}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+            <div className="flex-1 min-h-0 pt-1 md:pt-2">
+              <div className="h-full">
+                <div className="flex h-full flex-wrap content-start gap-x-2.5 gap-y-3 overflow-hidden pr-1 md:gap-x-3 md:gap-y-3.5 max-h-[10.25rem] md:max-h-[11.625rem]">
+                  {visibleTags.map((tag, index) => (
+                    <a
+                      key={tag.id || tag.slug || tag.name || `tag-${index}`}
+                      href={tag.href || tag.url || `https://ruyisdk.cn/tag/${tag.slug}/${tag.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-8 md:h-9 max-w-full items-center rounded-full border px-3.5 text-xs md:text-sm font-semibold whitespace-nowrap transition-transform duration-200 hover:-translate-y-[1px]"
+                      style={{
+                        color:
+                          colors.categoryPillColors[
+                            index % colors.categoryPillColors.length
+                          ],
+                        borderColor:
+                          colors.categoryPillColors[
+                            index % colors.categoryPillColors.length
+                          ],
+                        backgroundColor: '#FFFFFF',
+                      }}
+                    >
+                      <span className="max-w-[16rem] overflow-hidden text-ellipsis whitespace-nowrap">
+                        {tag.name || tag.label || tag.slug}
+                      </span>
+                    </a>
+                  ))}
                 </div>
-              ) : (
-                <div className="text-center text-[#86868B] text-sm p-4">
-                  <Translate id="no.data" />
-                </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
         </div>
-      <style>{`
-        @keyframes pulse {
-          0% { background-color: ${colors.placeholderGrey}; }
-          50% { background-color: #d0d0d0; }
-          100% { background-color: ${colors.placeholderGrey}; }
-        }
-      `}</style>
     </>
   );
 };

@@ -33,8 +33,10 @@ jobs:
 
       - name: Update github api
         run: pnpm run generate-github
-      - name: Update github api
+      - name: Update latest pm api
         run: pnpm run generate-latest-pm
+      - name: Update hot tags api
+        run: pnpm run generate-hot-tags
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
