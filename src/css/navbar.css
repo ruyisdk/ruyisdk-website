@@ -57,6 +57,7 @@
     margin-right: 0;
     order: 2;
     opacity: 1;
+    color: var(--home-sidebar-color);
 
     svg {
         opacity: 0;
@@ -164,7 +165,7 @@
 }
 
 .navbar-sidebar {
-    --ifm-menu-color: #282c34;
+    --ifm-menu-color: var(--home-sidebar-color);
     --ifm-menu-color-active: var(--home-menu-focus-color);
 
     left: auto;
