@@ -16,7 +16,7 @@ const HomeBackground = () => {
   };
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-transparent to-(--home-background) pointer-events-none">
+    <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-transparent to-(--ifm-background-color) pointer-events-none">
       <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, var(--home-ruyi-light-blue), transparent 60%)`}} />
       <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, var(--home-ruyi-light-gold), transparent 60%)`}} />
       <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, var(--home-ruyi-blue), transparent 60%)`, opacity: 0.4 }} />

@@ -17,7 +17,6 @@ const RuyiInLive = () => {
     gold: '#FFBD30',
     lightGold: '#FFD580',
     white: '#FFFFFF',
-    lightGray: '#F5F5F7',
     textGray: '#86868B',
     placeholderGrey: '#E0E0E0',
     placeholderTextShade: 'rgba(0,0,0,0.1)',
@@ -101,7 +100,7 @@ const RuyiInLive = () => {
           const innerLabelWidth = Math.min(80, Math.max(20, barWidth * 0.6));
           return (
             <div key={`placeholder-${index}`} className="flex items-center min-h-[2rem]">
-              <div className="w-full h-7 bg-[#F5F5F7] rounded-[0.25rem] overflow-hidden">
+              <div className="w-full h-7 rounded-[0.25rem] overflow-hidden">
                 <div
                   style={{ width: `${barWidth}%`, backgroundColor: colors.placeholderGrey }}
                   className="h-full rounded-[0.25rem] transition-all duration-300"
@@ -133,7 +132,7 @@ const RuyiInLive = () => {
   return (
     <>
         <div className="w-full flex justify-center items-center">
-          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] bg-[#f5f5f7] rounded-[0.75rem] overflow-hidden text-[#002677]">
+          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] rounded-[0.75rem] overflow-hidden text-[#002677]">
 
           <div
             className="w-full lg:w-2/5 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white"
@@ -187,7 +186,7 @@ const RuyiInLive = () => {
               </a>
             </div>
 
-            <div className="flex justify-around p-4 bg-[#F5F5F7] rounded-[0.5rem] text-center mb-6">
+            <div className="flex justify-around p-4 rounded-[0.5rem] text-center mb-6">
               <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
               <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
               <StatItem value={data?.installs?.total} label="installs" loading={loading} />
@@ -205,7 +204,7 @@ const RuyiInLive = () => {
                         maxValue > 0 ? (item.total / maxValue) * 100 : 0;
                       return (
                         <div key={item.action} className="flex items-center min-h-[2rem]">
-                          <div className="w-full h-7 bg-[#F5F5F7] rounded-[0.25rem] overflow-hidden">
+                          <div className="w-full h-7 rounded-[0.25rem] overflow-hidden">
                             <div
                               style={{
                                 height: '100%',
