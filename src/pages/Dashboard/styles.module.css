@@ -3,14 +3,13 @@
 :root {
   --ruyi-blue: #0A2C7E;
   --ruyi-gold: #F9C23C;
-  --page-bg: #f5f5f7; /* light grey used on homepage */
   --muted-text: #515154;
 }
 
  .container {
   color: #000;
   min-height: 100vh;
-  background-color: var(--page-bg);
+  background-color: var(--ifm-background-color);
   position: relative;
   overflow: hidden;
   display: flex;
