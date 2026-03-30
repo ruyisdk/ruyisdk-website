@@ -16,6 +16,8 @@
 
   --ifm-background-color: #f5f5f7;
 
+  --ifm-navbar-sidebar-width: 75vw;
+
   --ruyi-logo-blue: #10247a;
   --ruyi-logo-yellow: #f5b926;
 
@@ -30,6 +32,7 @@
   --home-button-tertiary: #FCE8A4FF;
   --home-button-tertiary-hover: var(--home-button-secondary-hover);
   --home-button-tertiary-text: #002677;
+  --home-menu-focus-color: #5d84b3;
 
   --brand: #5d84b3;
   --dark: #282c34;
@@ -64,12 +67,7 @@
   --ifm-alert-color: var(--ifm-font-color-base);
   --ifm-pagination-nav-color-hover: var(--ifm-color-emphasis-300);
   --ifm-table-border-width: 0.005rem;
-  --ifm-navbar-sidebar-width: 100%;
   --ifm-hr-border-color: var(--docusaurus-collapse-button-bg-hover);
-
-  @media (min-width: 340px) {
-    --ifm-navbar-sidebar-width: 340px;
-  }
 
   --logo: #087ea4;
   --home-hero-floor-background: rgb(236, 248, 250);
