@@ -240,7 +240,7 @@ const RuyiInLive = () => {
 
             <div className="flex-1 min-h-0 pt-1 md:pt-2">
               <div className="h-full">
-                <div className="flex h-full flex-wrap content-start gap-x-2.5 gap-y-3 overflow-hidden pr-1 md:gap-x-3 md:gap-y-3.5 max-h-[10.25rem] md:max-h-[11.625rem]">
+                <div className="flex h-full flex-wrap content-start gap-x-2.5 gap-y-3 overflow-hidden pr-1 pt-[2px] pb-[2px] md:gap-x-3 md:gap-y-3.5 max-h-[10.5rem] md:max-h-[11.875rem]">
                   {visibleTags.map((tag, index) => (
                     <a
                       key={tag.id || tag.slug || tag.name || `tag-${index}`}
