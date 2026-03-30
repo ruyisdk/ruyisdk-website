@@ -8,18 +8,6 @@
     --home-ruyi-light-gold: #FDEFC3;
     --home-ruyi-blue: #90b3ff;
 
-    --home-button-primary: var(--ifm-color-primary);
-    --home-button-primary-end: #071E58;
-    --home-button-primary-hover: var(--ifm-color-primary-lightest);
-    --home-button-primary-text: white;
-    --home-button-secondary: #F4EEDB;
-    --home-button-secondary-hover: #F0E7CB;
-    --home-button-secondary-text: var(--ifm-color-primary);
-    --home-button-secondary-border: none;
-    --home-button-tertiary: #FCE8A4FF;
-    --home-button-tertiary-hover: var(--home-button-secondary-hover);
-    --home-button-tertiary-text: #002677;
-
     --ifm-link-color: #86868B;
     --ifm-link-hover-color: #002677;
     --ifm-link-decoration: none;
