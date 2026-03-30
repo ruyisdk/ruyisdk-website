@@ -1,4 +1,6 @@
 .navbar {
+    --ifm-link-color: var(--home-menu-focus-color);
+
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(3px);
     color: #000;
@@ -130,13 +132,13 @@
 
 .navbar-sidebar {
     --ifm-menu-color: #282c34;
-    --ifm-menu-color-active: #5d84b3;
+    --ifm-menu-color-active: var(--home-menu-focus-color);
 
     left: auto;
     right: 0;
     height: 100vh;
     max-height: 100vh;
-    background-color: #fff;
+    background-color: var(--ifm-background-color);
 
     transform: translate3d(-100%, 0, 0);
     transition: opacity 200ms ease, transform 0s linear 200ms, visibility 0s linear 200ms;
