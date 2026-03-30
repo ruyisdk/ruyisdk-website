@@ -7,26 +7,6 @@ aside.theme-doc-sidebar-container {
     border-right: none !important;
 }
 
-div[class*="sidebar"] {
-    border-right: none !important;
-}
-
-.menu__link--active {
-    background-color: transparent !important;
-    color: #666666 !important;
-    font-weight: 500 !important;
-}
-
-.menu__list-item--collapsed .menu__link--active {
-    background-color: transparent !important;
-    color: #666666 !important;
-}
-
-.menu__link:hover {
-    background-color: transparent !important;
-    color: #666666 !important;
-}
-
 /* Menu items with sublists should not be bold
 / Level 1 categories use 14px, level 2+ categories use 14px */
 .theme-doc-sidebar-item-category-level-1 .menu__link--sublist {
