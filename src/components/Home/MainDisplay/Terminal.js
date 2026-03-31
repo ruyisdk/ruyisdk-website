@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import style from "./styles.module.css"
 
 // A terminal simulation that cycles through a set of commands.
 const Terminal = () => {
@@ -67,7 +68,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
     }
 
     const cmd = commands[currentCommand];
-    const prefix = "me@Ruyi ~ $ ";
+    const prefix = "we@RuyiSDK ~ $ ";
 
     if (typing) {
       // Animate typing the command
@@ -148,8 +149,8 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
         </div>
       </div>
       <div
-        className="min-h-0 flex-1 overflow-y-auto bg-[#1e1f29] p-4 text-sm
-          leading-6 text-[#f8f8f2]"
+        className={`min-h-0 flex-1 overflow-y-auto bg-[#1e1f29] p-4 text-sm
+          leading-6 text-[#f8f8f2] ${style.hideScrollbar}`}
         ref={terminalRef}
       >
         <pre className="m-0 font-mono break-words whitespace-pre-wrap">
