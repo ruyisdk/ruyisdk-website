@@ -1,0 +1,7 @@
+.hideScrollbar {
+    scrollbar-width: none; /* Firefox */
+}
+
+.hideScrollbar::-webkit-scrollbar {
+    display: none; /* Chrome / Safari */
+}
