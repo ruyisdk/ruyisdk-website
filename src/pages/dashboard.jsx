@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import ServiceData from '@site/src/components/ServiceData';
 import { translate } from "@docusaurus/Translate";
+import { Suspense } from "react";
+
+const PageHeader = ({ title }) => (
+  <header className="text-center pt-14 px-8 pb-6 border-b border-black/5">
+    <h1 className="text-3xl font-extrabold text-blue-900">
+      {title}
+    </h1>
+  </header>
+);
 
 const Dashboard = () => {
   return (
     <Layout title="Data Panel" description="RuyiSDK Data Panel">
-      <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] relative overflow-hidden flex flex-col font-sans">
-        <div className="relative z-20 text-center pt-14 px-8 pb-6 bg-transparent border-b border-[rgba(0,0,0,0.06)]">
-          <h1 className="m-0 mb-4 text-[clamp(1.8rem,4vw,3rem)] font-extrabold text-[#0A2C7E]">
-            {translate({ id: "RuyiSDK 数据统计", message: "RuyiSDK 数据统计" })}
-          </h1>
-        </div>
+      <main className="min-h-screen flex flex-col font-sans bg-gray-100 text-gray-900">
+        
+        <PageHeader
+          title={translate({
+            id: "dashboard.title",
+            message: "RuyiSDK 数据统计"
+          })}
+        />
 
-        <div className="relative z-20 flex-1 flex justify-center items-start pt-10 pb-16 px-6">
+        <section className="flex-1 flex justify-center pt-10 pb-16 px-6">
           <div className="w-full max-w-screen-xl mx-auto">
-            <ServiceData />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ServiceData />
+            </Suspense>
           </div>
-        </div>
-      </div>
+        </section>
+
+      </main>
     </Layout>
   );
-}
+};
 
 export default Dashboard;
