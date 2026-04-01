@@ -15,7 +15,6 @@ const Dashboard = () => {
   return (
     <Layout title="Data Panel" description="RuyiSDK Data Panel">
       <main className="min-h-screen flex flex-col font-sans bg-gray-100 text-gray-900">
-        
         <PageHeader
           title={translate({
             id: "dashboard.title",
