@@ -1,7 +1,6 @@
 import Layout from '@theme/Layout';
 import ServiceData from '@site/src/components/ServiceData';
 import { translate } from "@docusaurus/Translate";
-import { Suspense } from "react";
 
 const PageHeader = ({ title }) => (
   <header className="text-center pt-14 px-8 pb-6 border-b border-black/5">
@@ -24,9 +23,7 @@ const Dashboard = () => {
 
         <section className="flex-1 flex justify-center pt-10 pb-16 px-6">
           <div className="w-full max-w-screen-xl mx-auto">
-            <Suspense fallback={<div>Loading...</div>}>
-              <ServiceData />
-            </Suspense>
+            <ServiceData />
           </div>
         </section>
 
