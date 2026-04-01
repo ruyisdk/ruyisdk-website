@@ -46,12 +46,12 @@ You can read them with ruyi news read.`,
     },
     {
       command: "ruyi install emulator/qemu-user-riscv-upstream",
-      output: `info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst to /home/me/.cache/ruyi/distfiles/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst
+      output: `info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst to /home/we/.cache/ruyi/distfiles/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 14.5M  100 14.5M    0     0  1116k       0  0:00:13  0:00:13 --:--:-- 1143k
 info: extracting qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst for package qemu-user-riscv-upstream-8.2.0-ruyi.20240128
-info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me/.local/share/ruyi/binaries/x86_64/qemu-user-riscv-upstream-8.2.0-ruyi.20240128`,
+info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/we/.local/share/ruyi/binaries/x86_64/qemu-user-riscv-upstream-8.2.0-ruyi.20240128`,
     },
   ];
 
@@ -133,7 +133,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
   return (
     <div
       className="flex h-full w-full flex-col overflow-hidden rounded-lg
-        bg-[#1e1f29] shadow-xl"
+        bg-[#1e1f29] text-[#f8f8f2] shadow-xl"
     >
       <div
         className="flex flex-shrink-0 items-center border-b border-[#44475a]
@@ -144,18 +144,22 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/me
           <span className="block h-3 w-3 rounded-full bg-[#f1fa8c]"></span>
           <span className="block h-3 w-3 rounded-full bg-[#50fa7b]"></span>
         </div>
-        <div className="flex-1 text-center text-sm font-medium text-[#f8f8f2]">
+        <div className="flex-1 text-center text-sm font-medium">
           Terminal
         </div>
       </div>
       <div
-        className={`min-h-0 flex-1 overflow-y-auto bg-[#1e1f29] p-4 text-sm
-          leading-6 text-[#f8f8f2] ${style.hideScrollbar}`}
-        ref={terminalRef}
+        className={`flex-1 overflow-y-hidden px-4 pt-4
+          ${style.hideScrollbar}`}
       >
-        <pre className="m-0 font-mono break-words whitespace-pre-wrap">
+        <div
+          className="w-full h-full overflow-hidden text-sm leading-6"
+             ref={terminalRef}
+        >
+        <pre className="font-mono break-all whitespace-pre-wrap">
           {text}
         </pre>
+        </div>
       </div>
     </div>
   );
