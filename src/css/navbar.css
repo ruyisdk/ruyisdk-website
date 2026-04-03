@@ -159,6 +159,33 @@
     vertical-align: middle;
 }
 
+.navbar__item.dropdown {
+    position: relative;
+}
+
+.navbar__item.dropdown .dropdown__menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    clip-path: inset(0 0 100% 0);
+
+    transform: none;
+    transition: opacity 300ms ease, clip-path 300ms ease, visibility 0s linear 300ms;
+}
+
+.navbar__item.dropdown:hover .dropdown__menu,
+.navbar__item.dropdown:focus-within .dropdown__menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    clip-path: inset(0 0 0 0);
+
+    transition: opacity 300ms ease, clip-path 300ms ease, visibility 0s linear 0s;
+}
+
 .navbar-sidebar__brand,
 .navbar-sidebar__close {
     display: none;
