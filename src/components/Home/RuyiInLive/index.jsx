@@ -1,73 +1,145 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { IconLink, IconLogin2 } from '@tabler/icons-react';
 
 import Translate from '@docusaurus/Translate';
+
+const TAG_STEP_MS = 2000;
+
+const TAG_SLOT_STYLE = {
+  '-1': { left: '-12%', scale: 0.52, opacity: 0, zIndex: 0, y: 20, blur: 6 },
+  '0': { left: '20%', scale: 0.8, opacity: 0.75, zIndex: 2, y: 16, blur: 2.8 },
+  '1': { left: '34%', scale: 1, opacity: 1, zIndex: 6, y: 8, blur: 0 },
+  '2': { left: '48%', scale: 0.8, opacity: 0.9, zIndex: 5, y: 6, blur: 0.6 },
+  '3': { left: '62%', scale: 0.7, opacity: 0.84, zIndex: 4, y: 8, blur: 1.2 },
+  '4': { left: '76%', scale: 0.6, opacity: 0.72, zIndex: 3, y: 12, blur: 1.8 },
+  '5': { left: '90%', scale: 0.52, opacity: 0.55, zIndex: 2, y: 16, blur: 2.4 },
+  '6': { left: '108%', scale: 0.4, opacity: 0, zIndex: 1, y: 22, blur: 5 },
+};
+
+function resolveTagSlot(relativeIndex, total) {
+  if (relativeIndex === total - 1) {
+    return -1;
+  }
+  if (relativeIndex >= 0 && relativeIndex <= 6) {
+    return relativeIndex;
+  }
+  return null;
+}
+
+function normalizeTag(rawTag, index) {
+  const fallbackId = `tag-${index}`;
+  const id = String(rawTag?.id ?? rawTag?.slug ?? rawTag?.name ?? fallbackId);
+  const label = String(rawTag?.name ?? rawTag?.label ?? rawTag?.slug ?? id);
+  const url = rawTag?.href ?? rawTag?.url ?? `https://ruyisdk.cn/tag/${rawTag?.slug ?? label}/${rawTag?.id ?? index}`;
+  const numericCount = Number(rawTag?.count ?? rawTag?.posts ?? 0);
+
+  return {
+    id,
+    label,
+    url,
+    count: Number.isFinite(numericCount) ? numericCount : 0,
+  };
+}
 
 const RuyiInLive = () => {
   const [data, setData] = useState(null);
   const [hotTags, setHotTags] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTagIndex, setActiveTagIndex] = useState(0);
+  const [hoveredTop, setHoveredTop] = useState(null);
+  const [highlightStyle, setHighlightStyle] = useState({ left: '0px', width: '0px', height: '100%' });
+  const selectorButtonRefs = useRef([]);
 
-  const colors = {
-    navyBlue: '#002677',
-    gold: '#FFBD30',
-    categoryPillColors: [
-      '#4D7FA1',
-      '#5E8E9A',
-      '#8A7FB2',
-      '#C07A92',
-      '#A87A60',
-      '#7FA04B',
-      '#7E7098',
-      '#527AA0',
-    ],
-  };
 
   const fallbackHotTags = useMemo(
     () => [
       {
         id: 'qemu',
-        href: 'https://ruyisdk.cn/tag/qemu/4',
-        label: 'qemu',
+        name: 'qemu',
+        count: 25,
+        url: 'https://ruyisdk.cn/tag/qemu/4',
       },
       {
         id: 'debian',
-        href: 'https://ruyisdk.cn/tag/debian/13',
-        label: 'debian',
+        name: 'debian',
+        count: 19,
+        url: 'https://ruyisdk.cn/tag/debian/13',
       },
       {
         id: 'internship',
-        href: 'https://ruyisdk.cn/tag/internship/20',
-        label: 'internship',
+        name: 'internship',
+        count: 19,
+        url: 'https://ruyisdk.cn/tag/internship/20',
       },
       {
         id: 'linux-upstream',
-        href: 'https://ruyisdk.cn/tag/linux-upstream/12',
-        label: 'linux-upstream',
+        name: 'linux-upstream',
+        count: 17,
+        url: 'https://ruyisdk.cn/tag/linux-upstream/12',
       },
       {
         id: 'linux',
-        href: 'https://ruyisdk.cn/tag/linux/9',
-        label: 'linux',
+        name: 'linux',
+        count: 10,
+        url: 'https://ruyisdk.cn/tag/linux/9',
       },
       {
         id: 'llvm',
-        href: 'https://ruyisdk.cn/tag/llvm/1',
-        label: 'llvm',
+        name: 'llvm',
+        count: 7,
+        url: 'https://ruyisdk.cn/tag/llvm/1',
       },
       {
         id: 'ruyisdk',
-        href: 'https://ruyisdk.cn/tag/ruyisdk/2',
-        label: 'ruyisdk',
+        name: 'ruyisdk',
+        count: 7,
+        url: 'https://ruyisdk.cn/tag/ruyisdk/2',
       },
       {
         id: 'gcc',
-        href: 'https://ruyisdk.cn/tag/gcc/3',
-        label: 'gcc',
+        name: 'gcc',
+        count: 6,
+        url: 'https://ruyisdk.cn/tag/gcc/3',
       },
     ],
     [],
   );
+
+  const topCategories = useMemo(
+    () => [
+      { id: 'study', label: '学习', url: 'https://ruyisdk.cn/c/learn/15', gradient: 'from-cyan-400 to-emerald-400' },
+      { id: 'news', label: '新闻', url: 'https://ruyisdk.cn/c/news/12', gradient: 'from-fuchsia-500 to-pink-500' },
+      { id: 'jobs', label: '招聘', url: 'https://ruyisdk.cn/c/jobs/18', gradient: 'from-orange-400 to-rose-500' },
+    ],
+    [],
+  );
+
+  const activeTop = hoveredTop ?? topCategories[0]?.id;
+
+  const updateHighlight = () => {
+    const activeIndex = topCategories.findIndex((category) => category.id === activeTop);
+    const button = selectorButtonRefs.current[activeIndex];
+    if (button && button.parentElement) {
+      const wrapperRect = button.parentElement.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      setHighlightStyle({
+        left: `${buttonRect.left - wrapperRect.left}px`,
+        width: `${buttonRect.width}px`,
+        height: `${buttonRect.height}px`,
+      });
+    }
+  };
+
+  useLayoutEffect(() => {
+    updateHighlight();
+  }, [activeTop, topCategories]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateHighlight);
+    return () => {
+      window.removeEventListener('resize', updateHighlight);
+    };
+  }, [activeTop, topCategories]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -140,6 +212,74 @@ const RuyiInLive = () => {
 
   const visibleTags = hotTags.length > 0 ? hotTags : fallbackHotTags;
 
+  const normalizedTags = useMemo(() => {
+    return visibleTags.map((tag, index) => normalizeTag(tag, index));
+  }, [visibleTags]);
+
+  const carouselSource = useMemo(() => {
+    if (normalizedTags.length === 0) {
+      return [];
+    }
+    if (normalizedTags.length >= 8) {
+      return normalizedTags.map((tag, index) => ({
+        ...tag,
+        uid: `${tag.id}-${index}`,
+      }));
+    }
+
+    const expanded = [];
+    for (let index = 0; index < 8; index += 1) {
+      const tag = normalizedTags[index % normalizedTags.length];
+      expanded.push({
+        ...tag,
+        uid: `${tag.id}-loop-${index}`,
+      });
+    }
+    return expanded;
+  }, [normalizedTags]);
+
+  useEffect(() => {
+    setActiveTagIndex(0);
+  }, [carouselSource.length]);
+
+  useEffect(() => {
+    if (carouselSource.length <= 1) {
+      return undefined;
+    }
+
+    const timer = setInterval(() => {
+      setActiveTagIndex((previous) => (previous + 1) % carouselSource.length);
+    }, TAG_STEP_MS);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [carouselSource.length]);
+
+  const carouselTags = useMemo(() => {
+    const total = carouselSource.length;
+    if (total === 0) {
+      return [];
+    }
+
+    return carouselSource
+      .map((tag, index) => {
+        const relativeIndex = (index - activeTagIndex + total) % total;
+        const slot = resolveTagSlot(relativeIndex, total);
+        if (slot === null) {
+          return null;
+        }
+
+        const slotStyle = TAG_SLOT_STYLE[String(slot)];
+        return {
+          ...tag,
+          slot,
+          slotStyle,
+        };
+      })
+      .filter(Boolean);
+  }, [activeTagIndex, carouselSource]);
+
   const activityStats = useMemo(
     () => [
       {
@@ -164,115 +304,362 @@ const RuyiInLive = () => {
     [data],
   );
 
-  const StatItem = ({ value, labelId, defaultLabel, loading }) => (
-    <div className="flex min-w-0 flex-col items-center justify-center px-1">
-      <div className="w-full min-h-[2.1rem] text-center text-[clamp(1rem,3.1vw,1.75rem)] font-bold leading-tight text-[#002677]">
-        {loading ? (
-          <div className="mx-auto h-6 w-16 rounded bg-[#E0E0E0] animate-pulse" />
-        ) : (
-          <span className="block w-full overflow-hidden text-ellipsis whitespace-nowrap" title={value !== null && value !== undefined ? value.toLocaleString() : '---'}>
-            {value !== null && value !== undefined ? value.toLocaleString() : '---'}
-          </span>
-        )}
-      </div>
-      <div className="mt-1 w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-[0.75rem] text-[#86868B] md:text-[0.8rem]">
-        <Translate id={labelId}>{defaultLabel}</Translate>
-      </div>
-    </div>
-  );
-
   return (
     <>
-        <div className="w-full flex justify-center items-center">
-          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] rounded-[0.75rem] overflow-hidden text-[#002677]">
+      <div className="w-full flex justify-center items-center">
+        <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[17.5rem] rounded-[0.75rem] overflow-hidden text-white shadow-[0_24px_80px_rgba(0,0,0,0.18)] ruyi-liquid-surface">
+          <div className="w-full lg:w-2/7 p-5 md:p-8 flex flex-col justify-center relative z-10">
+            <div className="relative z-10 w-full lg:max-w-[22.5rem]">
+              <h1 className="text-xl md:text-[1.45rem] font-bold mb-1 leading-tight">
+                <Translate id="home.ruyiinlive.community">RuyiSDK 社区</Translate>
+              </h1>
+              <p className="whitespace-pre-line text-xs md:text-[0.78rem] mb-4 font-medium opacity-90 max-w-[24rem]">
+                <Translate id="home.ruyiinlive.community.subtitle">RuyiSDK 开发者社区现已开启</Translate>
+              </p>
 
-          <div
-            className="w-full lg:w-2/5 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white"
-            style={{ background: `linear-gradient(135deg, ${colors.navyBlue}, ${colors.navyBlue} 70%, ${colors.navyBlue} 85%)` }}
-          >
-            <h1 className="text-2xl md:text-[1.8rem] font-bold mb-1">
-              <Translate id="home.ruyiinlive.community">RuyiSDK 社区</Translate>
-            </h1>
-            <p className="whitespace-pre-line text-sm md:text-[0.9rem] mb-3 font-medium opacity-90">
-              <Translate id="home.ruyiinlive.community.subtitle">RuyiSDK 开发者社区现已开启</Translate>
-            </p>
+              <div className="flex flex-nowrap gap-2.5">
+                <a
+                  href="https://ruyisdk.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="tertiary-button items-center justify-center rounded-full px-3.5 py-2 text-sm font-semibold whitespace-nowrap"
+                >
+                  <IconLink size={18} stroke={2} color="#002677" />&nbsp;
+                  <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
+                </a>
 
-            <div className="flex gap-3 flex-wrap">
-              <a
-                href="https://ruyisdk.cn/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tertiary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
-              >
-                <IconLink size={18} stroke={2} color="#002677" />&nbsp;
-                <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
-              </a>
-
-              <a
-                href="https://ruyisdk.cn/signup"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="secondary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
-              >
-                <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
-                <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
-              </a>
+                <a
+                  href="https://ruyisdk.cn/signup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="secondary-button items-center justify-center rounded-full px-3.5 py-2 text-sm font-semibold whitespace-nowrap"
+                >
+                  <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
+                  <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
+                </a>
+              </div>
             </div>
-
-            <div
-              className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-60 pointer-events-none"
-              style={{ background: `radial-gradient(circle, ${colors.gold} 0%, transparent 70%)` }}
-            />
           </div>
 
-          <div className="w-full lg:w-3/5 px-4 py-5 md:px-7 md:py-6 overflow-hidden flex flex-col bg-white lg:justify-between">
-            <div className="shrink-0 mb-4 md:mb-5 grid grid-cols-3 gap-y-3 gap-x-2 rounded-[0.5rem] p-2 text-center md:gap-x-4 md:p-3">
-              {activityStats.map((stat) => (
-                <StatItem
-                  key={stat.key}
-                  value={stat.value}
-                  labelId={stat.labelId}
-                  defaultLabel={stat.defaultLabel}
-                  loading={loading}
-                />
-              ))}
-            </div>
+          <div className="w-full lg:w-5/7 px-3 py-4 md:px-5 md:py-5 overflow-x-hidden overflow-y-visible relative z-10 lg:h-full">
+            <div className="flex h-full min-h-0 flex-col gap-3 md:gap-4 lg:grid lg:grid-rows-[minmax(0,2fr)_minmax(0,5fr)] lg:gap-3">
+              <div className="relative z-20 flex flex-col gap-2.5 pb-1 md:gap-3 lg:h-full lg:min-h-0 lg:flex-row lg:items-center lg:overflow-visible">
+                <div className="ruyi-stat-container lg:h-full lg:w-[11.2rem] lg:min-w-[11.2rem]">
+                  {activityStats.map((stat, index) => (
+                    <div
+                      key={stat.key}
+                      className={`ruyi-stat-row ${index < activityStats.length - 1 ? 'border-b border-white/18' : ''}`}
+                    >
+                      <div className="truncate text-[0.68rem] text-white/82">
+                        <Translate id={stat.labelId}>{stat.defaultLabel}</Translate>
+                      </div>
+                      <div className="ml-2.5 max-w-[6rem] shrink-0 truncate text-right text-[1.15rem] font-bold leading-none text-white">
+                        {loading ? <span className="inline-block h-4 w-11 rounded bg-white/35 animate-pulse" /> : valueToString(stat.value)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-            <div className="flex-1 min-h-0 pt-1 md:pt-2">
-              <div className="h-full">
-                <div className="flex h-full flex-wrap content-start gap-x-2.5 gap-y-3 overflow-hidden pr-1 pt-[2px] pb-[2px] md:gap-x-3 md:gap-y-3.5 max-h-[10.5rem] md:max-h-[11.875rem]">
-                  {visibleTags.map((tag, index) => (
+                <div
+                  className="ruyi-selector-wrapper flex flex-1 items-center lg:h-full lg:min-h-0"
+                  onMouseLeave={() => setHoveredTop(null)}
+                >
+                  <div
+                    className="ruyi-selector-highlight absolute rounded-[0.75rem]"
+                    style={highlightStyle}
+                  />
+                  {topCategories.map((category, index) => (
                     <a
-                      key={tag.id || tag.slug || tag.name || `tag-${index}`}
-                      href={tag.href || tag.url || `https://ruyisdk.cn/tag/${tag.slug}/${tag.id}`}
+                      key={category.id}
+                      ref={(el) => {
+                        selectorButtonRefs.current[index] = el;
+                      }}
+                      href={category.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-8 md:h-9 max-w-full items-center rounded-full border px-3.5 text-xs md:text-sm font-semibold whitespace-nowrap transition-transform duration-200 hover:-translate-y-[1px]"
-                      style={{
-                        color:
-                          colors.categoryPillColors[
-                            index % colors.categoryPillColors.length
-                          ],
-                        borderColor:
-                          colors.categoryPillColors[
-                            index % colors.categoryPillColors.length
-                          ],
-                        backgroundColor: '#FFFFFF',
-                      }}
+                      onMouseEnter={() => setHoveredTop(category.id)}
+                      onFocus={() => setHoveredTop(category.id)}
+                      className={`ruyi-selector-item relative inline-flex h-[2.52rem] items-center justify-center px-3.5 text-[clamp(1.08rem,1.44vw,1.52rem)] font-bold transition duration-300 lg:h-full ${activeTop === category.id ? 'ruyi-selector-item-active' : ''}`}
                     >
-                      <span className="max-w-[16rem] overflow-hidden text-ellipsis whitespace-nowrap">
-                        {tag.name || tag.label || tag.slug}
-                      </span>
+                      <span className="relative z-10">{category.label}</span>
                     </a>
                   ))}
                 </div>
               </div>
+
+              <div className="ruyi-tag-stage relative z-10 min-h-[6.72rem] lg:h-full lg:min-h-0" aria-live="polite">
+                {carouselTags.map((tag) => (
+                  <a
+                    key={tag.uid}
+                    href={tag.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ruyi-glass-tag"
+                    data-slot={tag.slot}
+                    style={{
+                      left: tag.slotStyle.left,
+                      opacity: tag.slotStyle.opacity,
+                      zIndex: tag.slotStyle.zIndex,
+                      transform: `translate(-50%, calc(-50% + ${tag.slotStyle.y}px)) scale(${tag.slotStyle.scale})`,
+                      filter: `blur(${tag.slotStyle.blur}px)`,
+                      pointerEvents: tag.slot >= 0 && tag.slot <= 5 ? 'auto' : 'none',
+                    }}
+                  >
+                    <span className="block truncate text-[1.2rem] font-semibold text-white/92">{tag.label}</span>
+                    <span className="mt-1 block text-[0.9rem] font-bold tracking-tight text-[#FFE27B]">
+                      {tag.count.toLocaleString()} 帖子
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        </div>
+      </div>
+
+      <style>{`
+        .ruyi-liquid-surface {
+          position: relative;
+          isolation: isolate;
+          background: radial-gradient(circle at 14% 16%, rgba(255, 176, 32, 0.32), transparent 24%),
+            radial-gradient(circle at 88% 22%, rgba(255, 255, 255, 0.18), transparent 20%),
+            linear-gradient(132deg, rgba(0, 38, 119, 0.96) 0%, rgba(21, 76, 182, 0.9) 52%, rgba(0, 38, 119, 0.97) 100%);
+          background-size: 140% 140%;
+          animation: ruyi-surface-breathe 30s ease-in-out infinite;
+        }
+
+        .ruyi-liquid-surface::before,
+        .ruyi-liquid-surface::after {
+          content: '';
+          position: absolute;
+          inset: -18%;
+          border-radius: 36%;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .ruyi-liquid-surface::before {
+          background: radial-gradient(circle at 24% 42%, rgba(255, 176, 32, 0.26), transparent 33%),
+            radial-gradient(circle at 72% 64%, rgba(255, 255, 255, 0.14), transparent 30%);
+          background-size: 140% 140%;
+          mix-blend-mode: screen;
+          animation: ruyi-fluid-drift 24s ease-in-out infinite;
+        }
+
+        .ruyi-liquid-surface::after {
+          background: radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.18), transparent 24%),
+            radial-gradient(circle at 34% 78%, rgba(76, 175, 255, 0.22), transparent 27%);
+          background-size: 145% 145%;
+          animation: ruyi-fluid-wave 30s ease-in-out infinite;
+        }
+
+        .ruyi-stat-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgba(255, 255, 255, 0.23);
+          border-radius: 0.75rem;
+          background: linear-gradient(154deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 18px 36px rgba(5, 22, 62, 0.14);
+          backdrop-filter: blur(20px) saturate(155%);
+          -webkit-backdrop-filter: blur(20px) saturate(155%);
+        }
+
+        .ruyi-selector-wrapper {
+          display: flex;
+          position: relative;
+          width: 100%;
+          min-height: 2.52rem;
+          gap: 0.18rem;
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgba(255, 255, 255, 0.23);
+          border-radius: 0.75rem;
+          padding: 0.22rem;
+          background: linear-gradient(154deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+          backdrop-filter: blur(20px) saturate(155%);
+          -webkit-backdrop-filter: blur(20px) saturate(155%);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 18px 36px rgba(5, 22, 62, 0.14);
+          align-items: center;
+          overflow: hidden;
+        }
+
+        .ruyi-selector-highlight {
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          border-radius: 0.75rem;
+          background: linear-gradient(160deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.22));
+          border: 1px solid rgba(255, 255, 255, 0.48);
+          box-shadow: 0 16px 24px rgba(4, 25, 65, 0.18);
+          backdrop-filter: blur(18px) saturate(170%);
+          -webkit-backdrop-filter: blur(18px) saturate(170%);
+          transition: left 220ms cubic-bezier(0.22, 0.8, 0.32, 1), width 220ms cubic-bezier(0.22, 0.8, 0.32, 1), height 220ms cubic-bezier(0.22, 0.8, 0.32, 1);
+          pointer-events: none;
+        }
+
+        .ruyi-selector-item {
+          position: relative;
+          z-index: 1;
+          flex: 1 1 0%;
+          min-width: 0;
+          height: 2.52rem;
+          border-radius: 0.75rem;
+          border: 1px solid transparent;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.86);
+          font-weight: 700;
+          cursor: pointer;
+          transition: color 240ms ease, transform 240ms ease, border-color 240ms ease, background 240ms ease, box-shadow 240ms ease;
+        }
+
+        .ruyi-selector-item-active {
+          color: #ffffff;
+        }
+
+        .ruyi-selector-item:hover {
+          color: #ffffff;
+        }
+
+        .ruyi-selector-item:focus-visible {
+          outline: 2px solid rgba(255, 255, 255, 0.5);
+          outline-offset: 2px;
+        }
+
+        .ruyi-stat-row {
+          display: flex;
+          flex: 1;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 0;
+          padding: 0.5rem 0.72rem;
+        }
+
+        .ruyi-tag-stage {
+          position: relative;
+          height: 100%;
+          min-height: 0;
+          padding: 0.44rem 0 1rem;
+          overflow: visible;
+        }
+
+        .ruyi-glass-tag {
+          position: absolute;
+          top: 50%;
+          width: clamp(9.36rem, 15.84vw, 13.44rem);
+          aspect-ratio: 16 / 10;
+          min-height: 6.24rem;
+          border-radius: 0.75rem;
+          padding: 0.72rem 0.76rem;
+          border: 1px solid rgba(255, 255, 255, 0.32);
+          background: linear-gradient(138deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+          box-shadow: 0 20px 44px rgba(3, 14, 54, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -20px 26px rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(22px) saturate(145%);
+          -webkit-backdrop-filter: blur(22px) saturate(145%);
+          transform-origin: center;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          overflow: hidden;
+          transition: left 1180ms cubic-bezier(0.19, 0.82, 0.25, 1), transform 1180ms cubic-bezier(0.19, 0.82, 0.25, 1), opacity 300ms ease, filter 1180ms ease;
+            background-position: 0% 50%;
+          }
+        }
+
+        @keyframes ruyi-fluid-drift {
+          0% {
+            transform: translate3d(0, 0, 0);
+            background-position: 12% 42%;
+            opacity: 0.74;
+          }
+          50% {
+            transform: translate3d(-3%, 4%, 0);
+            background-position: 84% 58%;
+            opacity: 0.92;
+          }
+          100% {
+            transform: translate3d(0, 0, 0);
+            background-position: 12% 42%;
+            opacity: 0.74;
+          }
+        }
+
+        @keyframes ruyi-fluid-wave {
+          0% {
+            transform: translate3d(0, 0, 0);
+            background-position: 85% 22%;
+            opacity: 0.62;
+          }
+          33% {
+            transform: translate3d(-3%, 6%, 0);
+            background-position: 22% 78%;
+            opacity: 0.76;
+          }
+          66% {
+            transform: translate3d(4%, -5%, 0);
+            background-position: 70% 35%;
+            opacity: 0.66;
+          }
+          100% {
+            transform: translate3d(0, 0, 0);
+            background-position: 85% 22%;
+            opacity: 0.62;
+          }
+        }
+
+        @media (max-width: 1023px) {
+          .ruyi-stat-container {
+            min-height: 6.4rem;
+          }
+
+          .ruyi-stat-row {
+            padding: 0.52rem 0.7rem;
+          }
+
+          .ruyi-glass-tag {
+            width: clamp(9.6rem, 37.2vw, 12.24rem);
+            aspect-ratio: 16 / 10;
+            min-height: 5.92rem;
+            padding: 0.56rem 0.66rem;
+          }
+
+          .ruyi-tag-stage {
+            min-height: 8.8rem;
+            padding-bottom: 0.8rem;
+            overflow: visible;
+          }
+
+          .ruyi-liquid-surface {
+            border-radius: 0.75rem;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .ruyi-liquid-surface {
+            animation-duration: 0s;
+          }
+
+          .ruyi-liquid-surface::before,
+          .ruyi-liquid-surface::after {
+            animation-duration: 0s;
+          }
+
+          .ruyi-glass-tag {
+            transition-duration: 0s;
+          }
+        }
+      `}</style>
     </>
   );
 };
+
+function valueToString(value) {
+  return value !== null && value !== undefined ? value.toLocaleString() : '---';
+}
 
 export default RuyiInLive;
