@@ -389,6 +389,14 @@
   ],
   "weeklies": [
     {
+      "title": "Biweekly 066: 2026-04-07",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！春意渐浓，RuyiSDK 双周进展已更新到第 66 期。 本期看点集中在以下几个方面： - 包管理器：为 4 月底的版本更新做收尾，同时为后续 0.48.0 的功能演进打基础。兼容性基线将提升到 Ubuntu 24.04 LTS，虚拟环境与遥测上报等能力也在持续演进，以更好地服务企业级与 CI 场景。 - IDE：VSCode 与 Eclipse 插件持...",
+      "date": 1775520000000,
+      "image": null,
+      "filename": "20260407-ruyisdk-biweekly-66.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260407-ruyisdk-biweekly-66.md"
+    },
+    {
       "title": "Biweekly 065: 2026-03-24",
       "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期包管理器 0.47.0 发布，主要新增了多软件源（多仓库）支持，并修复了一些已知的问题。欢迎大家下载试用！ 此外，香山编译器正式接入RuyiSDK生态，深化协同构建全栈开发能力，也欢迎香山用户下载使用。 ⏬ 每个组件都提供了多种下载或安装方式，您可以任意选择一种： RuyiSDK 包管理器 0.47.0🚀 从 PyPI 安装： 手动下载安装： G...",
       "date": 1774310400000,
