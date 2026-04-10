@@ -789,12 +789,64 @@
   "downloads.label.pypi": {
     "message": "PyPI"
   },
+  "downloads.button.latest": {
+    "message": "Latest"
+  },
+  "downloads.button.version": {
+    "message": "Version"
+  },
+  "downloads.button.otherVersions": {
+    "message": "Other versions"
+  },
+  "downloads.button.loading": {
+    "message": "Loading"
+  },
+  "downloads.arch.x86_64": {
+    "message": "x86_64"
+  },
+  "downloads.arch.aarch64": {
+    "message": "aarch64"
+  },
+  "downloads.arch.riscv64": {
+    "message": "riscv64"
+  },
+  "downloads.arch.universal": {
+    "message": "Universal (no architecture split)"
+  },
+  "downloads.modal.title": {
+    "message": "Choose architecture and download"
+  },
+  "downloads.modal.latestVersion": {
+    "message": "Latest"
+  },
+  "downloads.modal.noOptions": {
+    "message": "Unable to fetch the latest download link now. Please use \"Other versions\"."
+  },
+  "downloads.modal.cancel": {
+    "message": "Cancel"
+  },
 
   "downloads.otherMethods": {
     "message": "Other links:"
   },
   "downloads.viewDocs": {
     "message": "View full installation docs"
+  },
+  "downloads.pm.other.ideMirror": {
+    "message": "RuyiSDK IDE"
+  },
+
+  "downloads.vscode.title": {
+    "message": "RuyiSDK VS Code Extension"
+  },
+  "downloads.vscode.description": {
+    "message": "Download and release entry for the VS Code extension."
+  },
+  "downloads.eclipse.title": {
+    "message": "RuyiSDK Eclipse Extension"
+  },
+  "downloads.eclipse.description": {
+    "message": "Download and release entry for the Eclipse extension."
   },
 
   "downloads.ide.title": {
@@ -831,6 +883,9 @@
   },
   "downloads.privacy": {
     "message": "privacy statement"
+  },
+  "downloads.thanks.retry": {
+    "message": "No response? Click here to retry"
   },
   "subscription.emailPlaceholder": {
     "message": "Enter your email"

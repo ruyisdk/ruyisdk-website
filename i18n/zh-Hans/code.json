@@ -54,6 +54,105 @@
   "news.news": {
     "message": "RuyiSDK 新闻"
   },
+  "downloads.meta.title": {
+    "message": "下载"
+  },
+  "downloads.meta.description": {
+    "message": "下载 RuyiSDK 包管理器与 IDE"
+  },
+  "downloads.title": {
+    "message": "下载 RuyiSDK"
+  },
+  "downloads.subtitle": {
+    "message": "获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅。"
+  },
+  "downloads.pm.title": {
+    "message": "RuyiSDK Package Manager"
+  },
+  "downloads.pm.description": {
+    "message": "Ruyi 包管理器是 RuyiSDK 的核心组件，提供包管理、环境配置等功能。"
+  },
+  "downloads.pm.noData": {
+    "message": "当前构建未能获取最新版本信息，请使用下方入口获取最新版。"
+  },
+  "downloads.badge.stable": {
+    "message": "稳定版"
+  },
+  "downloads.label.mirror": {
+    "message": "镜像站"
+  },
+  "downloads.label.githubReleases": {
+    "message": "GitHub Releases"
+  },
+  "downloads.label.pypi": {
+    "message": "PyPI"
+  },
+  "downloads.button.latest": {
+    "message": "最新版本"
+  },
+  "downloads.button.version": {
+    "message": "版本"
+  },
+  "downloads.button.otherVersions": {
+    "message": "其它版本"
+  },
+  "downloads.button.loading": {
+    "message": "加载中"
+  },
+  "downloads.arch.x86_64": {
+    "message": "x86_64"
+  },
+  "downloads.arch.aarch64": {
+    "message": "aarch64"
+  },
+  "downloads.arch.riscv64": {
+    "message": "riscv64"
+  },
+  "downloads.arch.universal": {
+    "message": "通用（无架构区分）"
+  },
+  "downloads.modal.title": {
+    "message": "选择架构并下载"
+  },
+  "downloads.modal.latestVersion": {
+    "message": "最新版本"
+  },
+  "downloads.modal.noOptions": {
+    "message": "当前无法获取该项目的最新版下载链接，请使用“其它版本”。"
+  },
+  "downloads.modal.cancel": {
+    "message": "取消"
+  },
+  "downloads.otherMethods": {
+    "message": "其他入口："
+  },
+  "downloads.viewDocs": {
+    "message": "查看完整安装文档"
+  },
+  "downloads.pm.other.ideMirror": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.vscode.title": {
+    "message": "RuyiSDK VS Code Extension"
+  },
+  "downloads.vscode.description": {
+    "message": "VS Code 扩展下载与发布入口。"
+  },
+  "downloads.eclipse.title": {
+    "message": "RuyiSDK Eclipse Extension"
+  },
+  "downloads.eclipse.description": {
+    "message": "Eclipse 扩展下载与发布入口。"
+  },
+  "downloads.agreement": {
+    "message": "下载并使用 RuyiSDK，即表示您同意许可条款和 {privacyLink}。"
+  },
+  "downloads.privacy": {
+    "message": "隐私声明"
+  },
+  "downloads.thanks.retry": {
+    "message": "无响应？点此重试"
+  },
 
   "ruyi包管理器工具下载数量": { "message": "Ruyi GitHub 下载量" },
   "ruyi安装台数": { "message": "RuyiSDK遥测上传台数" },
