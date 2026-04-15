@@ -351,15 +351,6 @@ h6.anchor .hash-link,
   color: var(--ifm-color-primary);
 }
 
-/* Dark theme adjustments for anchor links */
-html[data-theme="dark"] .hash-link {
-  color: var(--ifm-color-emphasis-400);
-  
-  &:hover {
-    background-color: var(--ifm-color-emphasis-200);
-    color: var(--ifm-color-primary);
-  }
-}
 
 @import "./docs-sidebar.css";
 @import "./news-skeleton.css";
