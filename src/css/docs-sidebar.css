@@ -1,18 +1,23 @@
 :root {
     --docs-sidebar-font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --docs-sidebar-text-color: #444;
-    --docs-sidebar-text-color-hover: #000000;
-    --docs-sidebar-text-color-active: #0a2c7e;
-    --docs-sidebar-bg-hover: rgba(0, 0, 0, 0.02);
-    --docs-sidebar-font-size-l1: 18px;
-    --docs-sidebar-font-size-l2: 16px;
+    --docs-sidebar-text-color: #4b5563;
+    --docs-sidebar-text-color-hover: #111827;
+    --docs-sidebar-text-color-active: #0f172a;
+    --docs-sidebar-bg-hover: rgba(15, 23, 42, 0.05);
+    --docs-sidebar-bg-active: rgba(15, 23, 42, 0.08);
+    --docs-sidebar-bg: transparent;
+    --docs-sidebar-border: transparent;
+    --docs-sidebar-shadow: none;
+    --docs-sidebar-radius: 6px;
+    --docs-sidebar-font-size-l1: 14px;
+    --docs-sidebar-font-size-l2: 14px;
     --docs-sidebar-font-size-l3: 14px;
-    --docs-sidebar-padding-y-l1: 0.375rem;
+    --docs-sidebar-padding-y-l1: 0.25rem;
     --docs-sidebar-padding-y-l2: 0.25rem;
     --docs-sidebar-padding-y-l3: 0.25rem;
-    --docs-sidebar-padding-x-l1: 0.75rem;
-    --docs-sidebar-padding-x-l2: 1.5rem;
-    --docs-sidebar-padding-x-l3: 2.25rem;
+    --docs-sidebar-padding-x-l1: 0.5rem;
+    --docs-sidebar-padding-x-l2: 0.5rem;
+    --docs-sidebar-padding-x-l3: 0.5rem;
 }
 
 aside.theme-doc-sidebar-container,
@@ -20,14 +25,24 @@ aside.theme-doc-sidebar-container,
     border-right: none !important;
 }
 
+.theme-doc-sidebar-container {
+    border: 1px solid var(--docs-sidebar-border) !important;
+    border-radius: var(--docs-sidebar-radius) !important;
+    background: var(--docs-sidebar-bg) !important;
+    box-shadow: var(--docs-sidebar-shadow);
+    padding: 0 !important;
+}
+
 .theme-doc-sidebar-container .menu__list-item {
     background-color: transparent !important;
+    margin: 0.35rem 0;
 }
 
 .theme-doc-sidebar-container .menu__link {
     font-family: var(--docs-sidebar-font-family) !important;
     background-color: transparent !important;
     color: var(--docs-sidebar-text-color) !important;
+    border-radius: var(--docs-sidebar-radius);
     transition: color 0.2s ease, background-color 0.2s ease !important;
 }
 
@@ -39,7 +54,9 @@ aside.theme-doc-sidebar-container,
 .theme-doc-sidebar-container .menu__link--active,
 .theme-doc-sidebar-container .menu__link--active:hover {
     color: var(--docs-sidebar-text-color-active) !important;
-    background-color: color-mix(in srgb, var(--docs-sidebar-text-color-active) 8%, transparent) !important;
+    background-color: var(--docs-sidebar-bg-active) !important;
+    box-shadow: none;
+    font-weight: 600 !important;
 }
 
 /* Category rows and leaf links share the same clickable row style */
@@ -51,6 +68,11 @@ aside.theme-doc-sidebar-container,
     font-family: var(--docs-sidebar-font-family) !important;
     background-color: transparent !important;
     color: var(--docs-sidebar-text-color) !important;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible,
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible {
+    position: relative;
 }
 
 /* Level-specific typography and spacing */
@@ -82,15 +104,15 @@ aside.theme-doc-sidebar-container,
 
 /* Category nesting guides */
 .theme-doc-sidebar-item-category-level-1 > .menu__list {
-    margin-left: 0.5rem;
-    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    margin-left: 1rem;
+    border-left: 1px solid #e5e7eb;
     padding-left: 0.75rem;
 }
 
 .theme-doc-sidebar-item-category-level-2 > .menu__list {
-    margin-left: 0.5rem;
-    border-left: 1px solid rgba(0, 0, 0, 0.06);
-    padding-left: 0.5rem;
+    margin-left: 1rem;
+    border-left: 1px solid #e5e7eb;
+    padding-left: 0.75rem;
 }
 
 /* Hide native carets but keep button for accessibility/click handling */
@@ -106,6 +128,41 @@ aside.theme-doc-sidebar-container,
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist::after,
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link--sublist::after {
+    content: "";
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 1.2px solid currentColor;
+    border-bottom: 1.2px solid currentColor;
+    transform: translateY(-58%) rotate(-45deg);
+    opacity: 0.75;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after,
+.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after {
+    transform: translateY(-62%) rotate(45deg);
+    opacity: 1;
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link--sublist {
+    padding-right: 1.6rem !important;
+}
+
+@media (max-width: 996px) {
+    .theme-doc-sidebar-container {
+        border-radius: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none;
+    }
 }
 
 /* Font styles - Only apply to docs pages */
