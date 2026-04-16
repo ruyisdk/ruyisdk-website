@@ -20,8 +20,11 @@ export default function Footer() {
       title: <Translate id="footer.ecosystem">生态</Translate>,
       items: [
         { label: <Translate id="footer.ruyisdk">RuyiSDK</Translate>, to: "/docs/intro" },
-        { label: <Translate id="footer.revyos">RevyOS</Translate>, href: externalLinks("revyos") },
         { label: <Translate id="footer.matrix">Support Matrix</Translate>, href: externalLinks("support-matrix") },
+        { label: <Translate id="footer.ruyiai">RuyiAI</Translate>, href: "https://github.com/RuyiAI-Stack" },
+        { label: <Translate id="footer.openruyi">openRuyi</Translate>, href: "https://github.com/openRuyi-Project" },
+        { label: <Translate id="footer.rvck">RVCK</Translate>, href: "https://github.com/RVCK-Project/rvck" },
+        { label: <Translate id="footer.revyos">RevyOS</Translate>, href: externalLinks("revyos") },
       ],
     },
     {
