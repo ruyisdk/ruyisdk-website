@@ -31,6 +31,45 @@
     "message": "Join Now",
     "description": "Button text linking to community signup"
   },
+  "home.ruyiinlive.categories": {
+    "message": "Popular Categories"
+  },
+  "home.ruyiinlive.viewallcategories": {
+    "message": "All Categories"
+  },
+  "home.ruyiinlive.category.toolchains": {
+    "message": "Toolchains"
+  },
+  "home.ruyiinlive.category.matrix": {
+    "message": "Sunflower Test Matrix"
+  },
+  "home.ruyiinlive.category.boards": {
+    "message": "Development Boards"
+  },
+  "home.ruyiinlive.category.news": {
+    "message": "News & Gossip"
+  },
+  "home.ruyiinlive.category.learn": {
+    "message": "Learning & Discussion"
+  },
+  "home.ruyiinlive.category.spec": {
+    "message": "ISA Standards"
+  },
+  "home.ruyiinlive.category.ruyisdk": {
+    "message": "RuyiSDK"
+  },
+  "home.ruyiinlive.category.jobs": {
+    "message": "Jobs"
+  },
+  "home.ruyiinlive.metric.active_users_30_days": {
+    "message": "Active Users (30 Days)"
+  },
+  "home.ruyiinlive.metric.posts_30_days": {
+    "message": "Posts (30 Days)"
+  },
+  "home.ruyiinlive.metric.topics_30_days": {
+    "message": "New Topics (30 Days)"
+  },
   "home.ruyiinlive.viewmore": {
     "message": "View More"
   },
