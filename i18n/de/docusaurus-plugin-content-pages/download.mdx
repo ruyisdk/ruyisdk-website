@@ -11,7 +11,25 @@ Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingun
 
 ## Ruyi herunterladen
 
-Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an. Führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
+Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an.
+
+### Installation mit dem Skript (empfohlen)
+
+Das Installationsskript erkennt Ihre Architektur automatisch, lädt zuerst die neueste stabile Version vom ISCAS-Mirror herunter und installiert sie nach ``~/.local/bin/ruyi``:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+Für eine Installation in einem Systemverzeichnis führen Sie das Skript mit ``sudo`` aus und geben Sie den Installationspfad explizit an:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+### Manueller Download
+
+Beim manuellen Download führen Sie ``uname -m`` aus, um die Systemarchitektur zu überprüfen, und laden Sie dann die entsprechende Binärdatei herunter.
 
 <ArchSelector language="de"/>
 
@@ -41,4 +59,3 @@ Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen könne
 
   </>
 </ReleaseProvider>
-
