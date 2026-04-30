@@ -13,12 +13,26 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 The RuyiSDK package manager is currently available as precompiled binaries for **Linux** systems, supporting three architectures: **amd64** (i.e., x86_64), **arm64**, and **riscv64**. It does not rely on the system’s Python environment, making it broadly compatible across setups.
 
+We recommend using the installer script. It detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to `~/.local/bin/ruyi`:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+To install into a system directory, run the script with `sudo` and pass an explicit install path:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+You can also download the precompiled binary manually.
+
 They are simultaneously published on both GitHub Releases and the ISCAS mirror site:
 
 - [ruyi GitHub Releases](https://github.com/ruyisdk/ruyi/releases/)
 - [ISCAS Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
 
-This guide uses the ISCAS mirror as an example. First, run `uname -m` to check your system architecture, then download the corresponding binary.
+This guide uses the ISCAS mirror as an example for manual downloads. For manual downloads, first run `uname -m` to check your system architecture, then download the corresponding binary.
 
 <ArchSelector language="en"/>
 
@@ -41,8 +55,8 @@ If the command executes and prints the copyright information, the installation w
 - se `echo $PATH` to confirm that the directory containing `ruyi` is included in your `PATH` environment variable.
 :::
 :::tip Custom Installation Path
-- If you prefer a custom installation directory, modify the `/usr/local/bin` path in the command accordingly, and ensure your `PATH` includes that directory.
-- Installing `ruyi` to `~/.local/bin/ruyi` is often recommended, as it allows installation and removal without superuser privileges. In this case, make sure `~/.local/bin/` is part of your `PATH`.
+- If you prefer a custom installation directory, modify the install path in the command accordingly, and ensure your `PATH` includes that directory.
+- The default installation directory is `~/.local/bin`. If `ruyi` is not found after installation, make sure `~/.local/bin` is in your `PATH`, then log in again or restart your shell if needed.
 :::
 
   </>

@@ -11,7 +11,25 @@ By downloading and using RuyiSDK, you agree to the license terms and the [privac
 
 ## Download RuyiSDK Package Manager
 
-RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures. Run ``uname -m`` to check your system architecture, then download the appropriate binary.
+RuyiSDK Package Manager provides pre-built binaries for x86_64, riscv64, and aarch64 architectures.
+
+### Install with the script (recommended)
+
+The installer detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to ``~/.local/bin/ruyi``:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+To install into a system directory, run the script with ``sudo`` and pass an explicit install path:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+### Manual download
+
+For manual downloads, run ``uname -m`` to check your system architecture, then download the appropriate binary.
 
 <ArchSelector language="en"/>
 
@@ -83,4 +101,3 @@ Refer to the [documentation](https://ruyisdk.org/en/docs/intro/) to learn how to
 
   </>
 </ReleaseProvider>
-

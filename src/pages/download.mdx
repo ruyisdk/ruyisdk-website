@@ -11,7 +11,25 @@ import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
 ## 下载 RuyiSDK 包管理器
 
-Ruyi 包管理器当前发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
+Ruyi 包管理器当前发布了 x86_64、riscv64 和 aarch64 三种架构的二进制。
+
+### 使用安装脚本（推荐）
+
+安装脚本会自动识别系统架构，优先从 ISCAS 镜像下载最新稳定版，并安装到 ``~/.local/bin/ruyi``：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+如需安装到系统目录，请使用 ``sudo`` 执行脚本并显式指定安装路径：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+### 手动下载
+
+手动下载时，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
 
 <ArchSelector />
 
@@ -107,4 +125,3 @@ $ /opt/ruyisdk/ruyisdk/ruyisdk
 
   </>
 </ReleaseProvider>
-

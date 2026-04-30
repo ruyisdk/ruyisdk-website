@@ -18,12 +18,26 @@ Dieses Dokument verwendet ``~`` als Kurznotation für das Home-Verzeichnis des a
 
 Derzeit wurden für das RuyiSDK-Paketmanagement-Tool vorgefertigte Binärdateien für die **Linux**-Betriebssysteme mit den Architekturen **amd64**, **arm64** und **riscv64** bereitgestellt. Dieses Tool ist unabhängig vom System-Python und hat ein breiteres Anwendungsgebiet.
 
+Wir empfehlen die Installation mit dem Skript. Es erkennt Ihre Architektur automatisch, lädt zuerst die neueste stabile Version vom ISCAS-Mirror herunter und installiert sie nach `~/.local/bin/ruyi`:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+Für eine Installation in einem Systemverzeichnis führen Sie das Skript mit `sudo` aus und geben Sie den Installationspfad explizit an:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+Sie können die vorgefertigte Binärdatei auch manuell herunterladen.
+
 Diese werden sowohl auf GitHub Release als auch auf dem ISCAS-Repository veröffentlicht:
 
 - [ruyi GitHub Releases](https://github.com/RuyiSDK/ruyi/releases/)
 - [ISCAS-Mirror-Source](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
 
-Um den Installationsprozess zu beschreiben, verwenden wir das ISCAS-Mirror-Source-Beispiel. Führen Sie zunächst ``uname -m`` aus, um die Systemarchitektur zu überprüfen und die entsprechende Binärdatei herunterzuladen.
+Um den manuellen Download zu beschreiben, verwenden wir das ISCAS-Mirror-Source-Beispiel. Führen Sie beim manuellen Download zunächst ``uname -m`` aus, um die Systemarchitektur zu überprüfen und die entsprechende Binärdatei herunterzuladen.
 
 Wenn die Ausgabe ``x86_64`` ist:
 
@@ -47,7 +61,7 @@ Installieren Sie die Binärdatei in das Verzeichnis, das im ``PATH`` enthalten i
 
 <CpCommand arch="x86_64" />
 
-Wenn Ihr ``PATH`` das Verzeichnis ``~/.local/bin/`` enthält, könnte es die empfehlenswertere Wahl sein, ``ruyi`` in ``~/.local/bin/ruyi`` zu installieren. Installationen und Deinstallationen in diesem Verzeichnis benötigen keine Superuser-Rechte.
+Das Standardinstallationsverzeichnis ist ``~/.local/bin``. Wenn ``ruyi`` nach der Installation nicht gefunden wird, stellen Sie sicher, dass ``~/.local/bin`` in Ihrem ``PATH`` enthalten ist, und melden Sie sich bei Bedarf erneut an oder starten Sie Ihre Shell neu.
 
 Bitte beachten Sie, dass der Name der Binärdatei ``ruyi`` sein muss.
 
