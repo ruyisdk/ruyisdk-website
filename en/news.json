@@ -389,6 +389,22 @@
   ],
   "weeklies": [
     {
+      "title": "Biweekly 068: 2026-05-06",
+      "summary": "",
+      "date": 1778025600000,
+      "image": null,
+      "filename": "20260506-ruyisdk-biweekly-68.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260506-ruyisdk-biweekly-68.md"
+    },
+    {
+      "title": "Biweekly 067: 2026-04-21",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！ 本期 RuyiSDK 各组件的进展主要如下： - 包管理器新增“为虚拟环境指定自备 sysroot”能力，适配更灵活的交叉开发场景； - 软件源元数据增加名称字段、并完善 Milk‑V Duo 相关配置； - VSCode 插件补齐项目一键编译等功能，Eclipse 插件兼容 Ruyi 0.47 并改进虚拟环境向导； - GCC 将 P 扩展工具链升级...",
+      "date": 1776729600000,
+      "image": null,
+      "filename": "20260421-ruyisdk-biweekly-67.md",
+      "link": "https://github.com/ruyisdk/wechat-articles/blob/main/20260421-ruyisdk-biweekly-67.md"
+    },
+    {
       "title": "Biweekly 066: 2026-04-07",
       "summary": "各位 RuyiSDK 的开发者伙伴，大家好！春意渐浓，RuyiSDK 双周进展已更新到第 66 期。 本期看点集中在以下几个方面： - 包管理器：为 4 月底的版本更新做收尾，同时为后续 0.48.0 的功能演进打基础。兼容性基线将提升到 Ubuntu 24.04 LTS，虚拟环境与遥测上报等能力也在持续演进，以更好地服务企业级与 CI 场景。 - IDE：VSCode 与 Eclipse 插件持...",
       "date": 1775520000000,
