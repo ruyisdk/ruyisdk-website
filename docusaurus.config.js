@@ -69,6 +69,12 @@ const config = {
           showReadingTime: true,
           blogDescription: "Blog",
         },
+        sitemap: {
+          ignorePatterns: [
+            '/blog/**',
+            '/biweekly/**'
+          ]
+        },
         theme: {
           customCss: ["./src/css/tailwind.css", "./src/css/custom.scss"],
         },
