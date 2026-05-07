@@ -43,6 +43,14 @@
   ],
   "ruyinews": [
     {
+      "title": "Release notes for RuyiSDK 0.48",
+      "summary": "RuyiSDK 0.48 is now released. The corresponding package manager version is also 0.48.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
+      "date": 1777507200000,
+      "image": null,
+      "filename": "2026-04-30-ruyi-0.48.en_US.md",
+      "link": "https://github.com/ruyisdk/packages-index/blob/main/news/2026-04-30-ruyi-0.48.en_US.md"
+    },
+    {
       "title": "Release notes for RuyiSDK 0.46",
       "summary": "RuyiSDK 0.46 is now released. The corresponding package manager version is also 0.46.0. You can download the RuyiSDK package manager from one of the following locations: PyPI: > [!NOTE] > RISC-V users...",
       "date": 1770681600000,
@@ -390,7 +398,7 @@
   "weeklies": [
     {
       "title": "Biweekly 068: 2026-05-06",
-      "summary": "",
+      "summary": "各位 RuyiSDK 的开发者伙伴，大家好！夏日将至，RuyiSDK 双周进展已更新到第 068 期。 本期看点集中在以下几个方面： - 包管理器：RuyiSDK 0.48.0 正式发布，首次引入 build recipe 工作流与 子命令，同时停止对 Ubuntu 22.04 与 Python 3.10 的支持，将兼容性基线提升至 Ubuntu 24.04 LTS，为后续企业级与 CI 场景打下...",
       "date": 1778025600000,
       "image": null,
       "filename": "20260506-ruyisdk-biweekly-68.md",
