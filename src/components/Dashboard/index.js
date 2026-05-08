@@ -19,6 +19,8 @@ const TRANSLATION_KEY = {
   VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
   THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
   DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
+
+  UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
 };
 
 const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
@@ -148,6 +150,14 @@ const CategorySection = ({ data }) => {
   );
 };
 
+const UpdateTime = ({ data }) => (
+  <div className={styles.updateTime}>
+    <p>
+      {translate(TRANSLATION_KEY.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+    </p>
+  </div>
+);
+
 const Dashboard = () => {
   const [data, setData] = useState(dashboardData);
 
@@ -191,6 +201,7 @@ const Dashboard = () => {
     <div className={styles.container}>
       <div className={styles.mainContent}>
         <CategorySection data={data} />
+        <UpdateTime data={data} />
       </div>
     </div>
   );
