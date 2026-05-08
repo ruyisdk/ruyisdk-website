@@ -1,0 +1,513 @@
+{
+  "last_updated": "2026-04-28T07:00:33.201404Z",
+  "downloads": {
+    "total": 42294
+  },
+  "pm_downloads": {
+    "total": 53942
+  },
+  "other_categories_downloads": {
+    "3rdparty": {
+      "total": 15794
+    },
+    "humans": {
+      "total": 766
+    },
+    "ide": {
+      "total": 2323
+    }
+  },
+  "downloads_by_categories_v1": {
+    "pkg": {
+      "total": 42294
+    },
+    "pm:github": {
+      "total": 5686
+    },
+    "pm:mirror": {
+      "total": 42705
+    },
+    "pm:pypi": {
+      "total": 5551
+    },
+    "3rdparty": {
+      "total": 15794
+    },
+    "humans": {
+      "total": 766
+    },
+    "ide:eclipse:mirror": {
+      "total": 1792
+    },
+    "ide:plugin:eclipse:mirror": {
+      "total": 174
+    },
+    "ide:plugin:eclipse:github": {
+      "total": 73
+    },
+    "ide:plugin:vscode:mirror": {
+      "total": 214
+    },
+    "ide:plugin:vscode:github": {
+      "total": 70
+    }
+  },
+  "installs": {
+    "total": 2405
+  },
+  "top_packages": {},
+  "top_commands": {
+    "ruyi admin format-manifest": {
+      "total": 17819
+    },
+    "ruyi list": {
+      "total": 10420
+    },
+    "ruyi": {
+      "total": 6394
+    },
+    "ruyi update": {
+      "total": 5314
+    },
+    "ruyi news read": {
+      "total": 4247
+    },
+    "ruyi news list": {
+      "total": 3252
+    },
+    "ruyi list profiles": {
+      "total": 2220
+    },
+    "ruyi install": {
+      "total": 2078
+    },
+    "ruyi telemetry consent": {
+      "total": 1567
+    },
+    "ruyi telemetry upload": {
+      "total": 1555
+    }
+  },
+  "github_org_stats": [
+    {
+      "name": "ruyisdk",
+      "watchers_count": 66,
+      "forks_count": 263,
+      "stars_count": 225,
+      "prs_count": 2344,
+      "issues_count": 564,
+      "contributors_count": 93,
+      "detail_by_repo": [
+        {
+          "name": "wechat-articles",
+          "watchers_count": 2,
+          "forks_count": 12,
+          "stars_count": 1,
+          "prs_count": 258,
+          "issues_count": 0,
+          "contributors_count": 15
+        },
+        {
+          "name": "revyos",
+          "watchers_count": 5,
+          "forks_count": 4,
+          "stars_count": 13,
+          "prs_count": 1,
+          "issues_count": 2,
+          "contributors_count": 13
+        },
+        {
+          "name": "ruyici",
+          "watchers_count": 2,
+          "forks_count": 7,
+          "stars_count": 2,
+          "prs_count": 11,
+          "issues_count": 1,
+          "contributors_count": 1
+        },
+        {
+          "name": "llvm-project",
+          "watchers_count": 3,
+          "forks_count": 7,
+          "stars_count": 12,
+          "prs_count": 153,
+          "issues_count": 14,
+          "contributors_count": 0
+        },
+        {
+          "name": "riscv-gcc",
+          "watchers_count": 1,
+          "forks_count": 8,
+          "stars_count": 4,
+          "prs_count": 10,
+          "issues_count": 2,
+          "contributors_count": 0
+        },
+        {
+          "name": "riscv-binutils",
+          "watchers_count": 1,
+          "forks_count": 8,
+          "stars_count": 4,
+          "prs_count": 14,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "docs",
+          "watchers_count": 1,
+          "forks_count": 26,
+          "stars_count": 6,
+          "prs_count": 121,
+          "issues_count": 13,
+          "contributors_count": 24
+        },
+        {
+          "name": "ruyibuild",
+          "watchers_count": 1,
+          "forks_count": 3,
+          "stars_count": 0,
+          "prs_count": 2,
+          "issues_count": 0,
+          "contributors_count": 4
+        },
+        {
+          "name": "riscv-glibc",
+          "watchers_count": 1,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "riscv-gnu-toolchain",
+          "watchers_count": 1,
+          "forks_count": 2,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 5,
+          "contributors_count": 0
+        },
+        {
+          "name": "openwrt-th1520",
+          "watchers_count": 0,
+          "forks_count": 3,
+          "stars_count": 6,
+          "prs_count": 4,
+          "issues_count": 2,
+          "contributors_count": 0
+        },
+        {
+          "name": "dynamorio",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 4,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "LuaJIT",
+          "watchers_count": 2,
+          "forks_count": 0,
+          "stars_count": 3,
+          "prs_count": 0,
+          "issues_count": 3,
+          "contributors_count": 0
+        },
+        {
+          "name": "ruyisdk-base",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "ruyi",
+          "watchers_count": 1,
+          "forks_count": 18,
+          "stars_count": 39,
+          "prs_count": 259,
+          "issues_count": 192,
+          "contributors_count": 7
+        },
+        {
+          "name": "ruyisdk",
+          "watchers_count": 2,
+          "forks_count": 2,
+          "stars_count": 5,
+          "prs_count": 4,
+          "issues_count": 66,
+          "contributors_count": 2
+        },
+        {
+          "name": "demo",
+          "watchers_count": 1,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 1,
+          "contributors_count": 2
+        },
+        {
+          "name": "ruyisdk-website",
+          "watchers_count": 2,
+          "forks_count": 20,
+          "stars_count": 6,
+          "prs_count": 368,
+          "issues_count": 66,
+          "contributors_count": 17
+        },
+        {
+          "name": "packages-index",
+          "watchers_count": 2,
+          "forks_count": 16,
+          "stars_count": 3,
+          "prs_count": 152,
+          "issues_count": 36,
+          "contributors_count": 14
+        },
+        {
+          "name": "riscv-gnu-toolchain-rv64ilp32",
+          "watchers_count": 0,
+          "forks_count": 3,
+          "stars_count": 8,
+          "prs_count": 21,
+          "issues_count": 15,
+          "contributors_count": 0
+        },
+        {
+          "name": "qemu",
+          "watchers_count": 1,
+          "forks_count": 3,
+          "stars_count": 0,
+          "prs_count": 6,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "k230-rv64ilp32-linux-kernel",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "k230-rv64ilp32-opensbi",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "k230-rv64ilp32-u-boot",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "mkimg-k230-rv64ilp32",
+          "watchers_count": 0,
+          "forks_count": 1,
+          "stars_count": 2,
+          "prs_count": 1,
+          "issues_count": 3,
+          "contributors_count": 0
+        },
+        {
+          "name": "support-matrix",
+          "watchers_count": 4,
+          "forks_count": 34,
+          "stars_count": 54,
+          "prs_count": 332,
+          "issues_count": 50,
+          "contributors_count": 23
+        },
+        {
+          "name": "ruyisdk-vscode-extension-archived",
+          "watchers_count": 2,
+          "forks_count": 1,
+          "stars_count": 1,
+          "prs_count": 3,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "linux-xuantie-kernel",
+          "watchers_count": 6,
+          "forks_count": 39,
+          "stars_count": 40,
+          "prs_count": 246,
+          "issues_count": 6,
+          "contributors_count": 0
+        },
+        {
+          "name": "linux-xuantie-kernel-test",
+          "watchers_count": 2,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "ruyi-backend",
+          "watchers_count": 3,
+          "forks_count": 2,
+          "stars_count": 0,
+          "prs_count": 71,
+          "issues_count": 17,
+          "contributors_count": 3
+        },
+        {
+          "name": "openwrt-eic770x",
+          "watchers_count": 1,
+          "forks_count": 1,
+          "stars_count": 2,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "k230_linux_sdk",
+          "watchers_count": 0,
+          "forks_count": 6,
+          "stars_count": 2,
+          "prs_count": 3,
+          "issues_count": 1,
+          "contributors_count": 0
+        },
+        {
+          "name": "jdk",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "jdk11u",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "ruyisdk-xda",
+          "watchers_count": 3,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 1
+        },
+        {
+          "name": ".github",
+          "watchers_count": 2,
+          "forks_count": 1,
+          "stars_count": 0,
+          "prs_count": 1,
+          "issues_count": 1,
+          "contributors_count": 2
+        },
+        {
+          "name": "ruyisdk-overlay",
+          "watchers_count": 2,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 1,
+          "issues_count": 0,
+          "contributors_count": 1
+        },
+        {
+          "name": "ruyi-packaging",
+          "watchers_count": 4,
+          "forks_count": 9,
+          "stars_count": 0,
+          "prs_count": 59,
+          "issues_count": 2,
+          "contributors_count": 2
+        },
+        {
+          "name": "ruyisdk-eclipse-packages",
+          "watchers_count": 2,
+          "forks_count": 2,
+          "stars_count": 1,
+          "prs_count": 4,
+          "issues_count": 1,
+          "contributors_count": 0
+        },
+        {
+          "name": "ruyisdk-eclipse-plugins",
+          "watchers_count": 5,
+          "forks_count": 7,
+          "stars_count": 2,
+          "prs_count": 111,
+          "issues_count": 43,
+          "contributors_count": 8
+        },
+        {
+          "name": "ruyisdk-vscode-extension",
+          "watchers_count": 1,
+          "forks_count": 12,
+          "stars_count": 3,
+          "prs_count": 121,
+          "issues_count": 22,
+          "contributors_count": 11
+        },
+        {
+          "name": "ruyi-package-ci",
+          "watchers_count": 0,
+          "forks_count": 3,
+          "stars_count": 1,
+          "prs_count": 3,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "dejagnu",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "setup-ruyi-action",
+          "watchers_count": 0,
+          "forks_count": 0,
+          "stars_count": 0,
+          "prs_count": 0,
+          "issues_count": 0,
+          "contributors_count": 0
+        },
+        {
+          "name": "board-docs",
+          "watchers_count": 0,
+          "forks_count": 3,
+          "stars_count": 1,
+          "prs_count": 4,
+          "issues_count": 0,
+          "contributors_count": 0
+        }
+      ]
+    }
+  ],
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-05-08T12:08:12.595Z",
+    "source": "https://api.ruyisdk.cn/fe/dashboard"
+  }
+}
