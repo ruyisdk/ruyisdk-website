@@ -133,6 +133,12 @@ async function fetchContributorsWait(repos) {
         continue;
       }
 
+      if (raw.code === 403) {
+        // skip
+        console.info(`[generate-api-github] Skip ${repo} due to 403 ${JSON.stringify(raw)}`);
+        continue;
+      }
+
       if (raw.code === 202) {
         // wait and retry
         console.info(`[generate-api-github] Will retry ${repo}`);
