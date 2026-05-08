@@ -33,8 +33,8 @@ jobs:
 
       - name: Update github api
         run: pnpm run generate-github
-      - name: Update github api
-        run: pnpm run generate-latest-pm
+      - name: Update ruyisdk.cn api
+        run: pnpm run generate-ruyisdk-api
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
