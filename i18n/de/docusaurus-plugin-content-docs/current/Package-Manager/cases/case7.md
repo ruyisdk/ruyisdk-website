@@ -2,28 +2,26 @@
 sidebar_position: 7
 ---
 
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
-
 
 # Kompilieren der `milkv-duo-examples` Beispielprogramme
 
 Zuerst die notwendigen Abhängigkeiten installieren:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi install gnu-milkv-milkv-duo-musl-bin
-`} />
+```
 
 Entpacken und Kompilieren der `milkv-duo-examples`:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ mkdir test-duo-examples
 $ cd test-duo-examples
 $ ruyi extract milkv-duo-examples
-`} />
+```
 
 Ändern Sie den Inhalt der `envsetup.sh`:
 
-<CodeBlock lang="bash" code={`
+```bash
 #!/bin/bash
 
 script_dir=$(cd -- "$(dirname -- "\${BASH_SOURCE[0]}")" &> /dev/null && pwd)
@@ -132,17 +130,17 @@ export CHIP="\${milkv_chip}"
 source \${host_tools}/bin/ruyi-activate
 
 print_info "Die Umgebung ist bereit."
-`} />
+```
 
 Starten der virtuellen Umgebung:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ source envsetup.sh
-`} />
+```
 
 Der Build-Vorgang sollte nun erfolgreich sein:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ cd i2c/ssd1306_i2c
 $ make
-`} />
+```

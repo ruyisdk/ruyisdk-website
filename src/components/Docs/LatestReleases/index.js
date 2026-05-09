@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import CodeBlock from '@site/src/components/Docs/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
 const ReleaseContext = createContext(null);

@@ -2,8 +2,6 @@
 sidebar_position: 4
 ---
 
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
-
 # Verwendung von integrierten Funktionen
 
 Der Ruyi-Paketmanager bietet neben den grundlegenden Funktionen zur Verwaltung von Softwarepaketen auch Integrationen für Toolchains, Emulatoren, Images und andere Pakete.
@@ -24,14 +22,14 @@ Der Ruyi-Paketmanager bietet mit dem Befehl ``venv`` die Möglichkeit, Toolchain
 
 Im Ruyi-Software-Repository sind bereits einige vorkonfigurierte Einstellungen verfügbar, die ohne Installation verwendet werden können. Diese Konfigurationen können mit dem Befehl ``ruyi list profiles`` aufgelistet werden:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi list profiles
 generic
 baremetal-rv64ilp32 (needs flavor(s): {'rv64ilp32'})
 xiangshan-nanhu
 sipeed-lpi4a (needs flavor(s): {'xthead'})
 milkv-duo
-`} />
+```
 
 Einige Konfigurationen benötigen eine Ruyi-Toolchain-Version, die bestimmte flavor(s) unterstützt. Diese Informationen können Sie in der Ausgabe von ``ruyi list --verbose`` abrufen, um zu überprüfen, ob eine bestimmte Toolchain diese Merkmale unterstützt. Alternativ können Sie auch auf die Tabelle im Abschnitt „Toolchain- und vorkonfigurierte Konfigurationen“ zurückgreifen.
 
@@ -64,13 +62,13 @@ Für weitere Informationen zu Compiler-Toolchains siehe [RuyiSDK Compiler-Tools]
 
 Details zur Verwendung des ``venv``-Befehls können Sie mit dem Parameter ``-h`` einsehen:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi venv -h
-`} />
+```
 
 Hier sind einige Beispiele:
 
-<CodeBlock lang="bash" code={`
+```bash
 # Erstellen einer RISC-V-virtuellen Umgebung mit der GNU-Upstream-Toolchain:
 $ ruyi venv -t gnu-upstream generic ./generic-venv
 
@@ -94,7 +92,7 @@ $ ruyi venv -t gnu-plct-xthead sipeed-lpi4a -e qemu-user-riscv-xthead ./xthead-q
 
 # Mehrere Toolchains, wobei gnu-upstream die sysroot bereitstellt
 $ ruyi venv -t llvm-upstream -t gnu-upstream generic ./upstream-venv
-`} />
+```
 
 Virtuelle Umgebungen dienen zur Integration von Toolchains, Emulatoren und weiteren Tools. Bevor Sie die Build-Umgebung erstellen, stellen Sie sicher, dass die entsprechenden Ruyi-Pakete installiert sind.
 
@@ -104,28 +102,28 @@ Hier wird die Integration anhand von gnu-upstream im Detail beschrieben. Pfade, 
 
 Zuerst installieren Sie die benötigten Pakete folgendes Beispiel:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi install gnu-upstream qemu-user-riscv-upstream
-`} />
+```
 
 Erstellen Sie ein sauberes Verzeichnis für die Ausführung des Beispiels:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ mkdir hello-ruyi
 $ cd hello-ruyi
-`} />
+```
 
 Ziehen Sie den Quellcode des ruyisdk-Demos:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi extract ruyisdk-demo
 $ ls
 README.md  rvv-autovec
-`} />
+```
 
 Erstellen Sie die virtuelle Umgebung:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi venv -t gnu-upstream -e qemu-user-riscv-upstream generic ./myhone-venv
 info: Erstellen einer Ruyi-virtuellen Umgebung unter myhone-venv...
 info: Die virtuelle Umgebung wurde jetzt erstellt.
@@ -141,26 +139,26 @@ Es ist unter dem folgenden Pfad verfügbar:
 Die virtuelle Umgebung enthält auch eine fertige CMake-Toolchain-Datei
 und eine Meson-Cross-Datei. Überprüfen Sie das Wurzelverzeichnis der virtuellen Umgebung auf diese;
 Kommentare in den Dateien enthalten Benutzungsanweisungen.
-`} />
+```
 
 Diese virtuelle Umgebung integriert die gnu-upstream-Toolchain und den qemu-user-riscv-upstream-Emulator unter der generischen Konfiguration für das Ziel-Betriebssystem riscv64 Linux und erstellt die Build-Umgebung im Verzeichnis ``./myhome-venv`` (es kann auch ein absoluter Pfad verwendet werden). Die Ausgabe des Befehls gibt Informationen zur Aktivierung der Build-Umgebung, um die Build-Umgebung zu verlassen, den absoluten Pfad des sysroot-Verzeichnisses sowie einige andere Informationen zurück.
 
 Im Verzeichnis der virtuellen Umgebung können Sie die mit der Build-Umgebung verbundenen Dateien sehen:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ls ./myhone-venv/
 bin                                        ruyi-venv.toml
 binfmt.conf                                sysroot
 meson-cross.ini                            sysroot.riscv64-unknown-linux-gnu
 meson-cross.riscv64-unknown-linux-gnu.ini  toolchain.cmake
 ruyi-cache.v1.toml                         toolchain.riscv64-unknown-linux-gnu.cmake
-`} />
+```
 
 Die Datei ``binfmt.conf`` ist ein Beispielkonfigurationsdatei für systemd-binfmt, und ``toolchain.cmake`` sowie ``meson-cross.ini`` können für die Cross-Kompilierung von Projekten verwendet werden. ``sysroot`` ist das für diese virtuelle Umgebung verwendete sysroot und das ``bin``-Verzeichnis enthält die verfügbaren Befehle und Skripte dieser Build-Umgebung.
 
 Im ``bin``-Verzeichnis können Sie die verfügbaren Toolchain-Binärdateien sehen:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ls ./myhone-venv/bin/
 riscv64-unknown-linux-gnu-addr2line  riscv64-unknown-linux-gnu-gcc-ranlib     riscv64-unknown-linux-gnu-nm
 riscv64-unknown-linux-gnu-ar         riscv64-unknown-linux-gnu-gcov           riscv64-unknown-linux-gnu-objcopy
@@ -174,20 +172,20 @@ riscv64-unknown-linux-gnu-g++        riscv64-unknown-linux-gnu-ld             ru
 riscv64-unknown-linux-gnu-gcc        riscv64-unknown-linux-gnu-ld.bfd         ruyi-qemu
 riscv64-unknown-linux-gnu-gcc-ar     riscv64-unknown-linux-gnu-ldd
 riscv64-unknown-linux-gnu-gcc-nm     riscv64-unknown-linux-gnu-lto-dump
-`} />
+```
 
 Es sind die gesamten Toolchain-Befehle enthalten, sowie der QEMU-Benutzermodus-Emulator, der als ``ruyi-qemu`` umbenannt wurde, und das Skript ``ruyi-activate``, das zum Aktivieren der virtuellen Umgebung verwendet wird. Das Script verlinkt tatsächlich auf die Ruyi-Toolchain-Funktionen.
 
 Durch das Ausführen von ``source`` ruyi-activate wird die Build-Umgebung aktiviert und ``PS1`` wird geändert:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ source ./myhone-venv/bin/ruyi-activate
 «Ruyi myhone-venv» $
-`} />
+```
 
 Gleichzeitig wird auch ``PATH`` geändert, sodass nun direkt auf die Toolchain zugegriffen werden kann:
 
-<CodeBlock lang="bash" code={`
+```bash
 «Ruyi myhone-venv» $ whereis riscv64-unknown-linux-gnu-gcc
 riscv64-unknown-linux-gnu-gcc: /home/myhone/hello-ruyi/myhone-venv/bin/riscv64-unknown-linux-gnu-gcc
 «Ruyi myhone-venv» $ riscv64-unknown-linux-gnu-gcc --version
@@ -195,23 +193,23 @@ riscv64-unknown-linux-gnu-gcc (RuyiSDK 20231212 Upstream-Sources) 13.2.0
 Copyright (C) 2023 Free Software Foundation, Inc.
 Dies ist freie Software; siehe die Quelle für Kopierbedingungen. Es gibt KEINE
 Garantie; nicht einmal für MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.
-`} />
+```
 
 In der Ruyi virtuellen Umgebung wird, zusätzlich zu den automatisch an die Toolchain übergebenen Konfigurationsarchitektur-Optionen, die Verwendung von Toolchain und Emulator nicht wesentlich verändert. Weitere Inhalte finden Sie im Abschnitt „Anwendungsbeispiele“. 
 
 Bauen Sie das ruyisdk-Demo:
 
-<CodeBlock lang="bash" code={`
+```bash
 $ cd rvv-autovec
 $ make
-`} />
+```
 
 Nach der Verwendung der virtuellen Umgebung können Sie die Build-Umgebung verlassen, und alles wird auf den vorherigen Zustand zurückgesetzt:
 
-<CodeBlock lang="bash" code={`
+```bash
 «Ruyi myhone-venv» $ ruyi-deactivate
 $
-`} />
+```
 
 ## Ruyi-Image-Integration
 
@@ -219,8 +217,8 @@ Die Image-Integration von Ruyi bietet die Möglichkeit, Images für Entwicklungs
 
 Diese Funktion bietet einen Assistenten, der das Flashen von System-Images auf RISC-V-Geräte mithilfe von ``dd`` und ``fastboot`` unterstützt und bietet auch Leitfäden für RISC-V-Mikrocontroller, die nicht regulär geflasht werden können.
 
-<CodeBlock lang="bash" code={`
+```bash
 $ ruyi device provision
-`} />
+```
 
 Weitere detaillierte Beispiele können im Abschnitt „Anwendungsbeispiele“ nachgeschlagen werden.

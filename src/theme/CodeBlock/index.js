@@ -1,5 +1,5 @@
 import React from 'react';
-import RuyiCodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import RuyiCodeBlock from '@site/src/components/Docs/CodeBlock';
 
 function parseMetaString(metastring) {
   if (typeof metastring !== 'string' || !metastring.trim()) {

@@ -1,5 +1,3 @@
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
-
 # Canaan K230D User Manual
 
 ## Installing System Image
@@ -17,11 +15,11 @@ RuyiSDK currently provides two types of image files: LP64 and ILP32. You can dow
    Currently, RuyiSDK provides RV64ILP32 (Xuantie new 32-bit kernel + 32-bit rootfs) and RV64LP64 (conventional 64-bit system) for K230D. It is recommended to install the RV64ILP32 system to experience the advantages of the new 32-bit system in dynamic memory space consumption.
 
    ```bash
-   The following system configurations are supported by the device variant you have chosen. 
-   Please pick the one you want to put on the device:
+The following system configurations are supported by the device variant you have chosen. 
+Please pick the one you want to put on the device:
    
-     1. Canaan Kendryte K230D CanMV Linux SDK demo, RV64ILP32 ABI
-     2. Canaan Kendryte K230D CanMV Linux SDK demo, RV64LP64 ABI
+  1. Canaan Kendryte K230D CanMV Linux SDK demo, RV64ILP32 ABI
+  2. Canaan Kendryte K230D CanMV Linux SDK demo, RV64LP64 ABI
    
    ```
 
@@ -43,11 +41,11 @@ output/k230d_canmv_lp64_defconfig/images/sysimage-sdcard.img
 
 After the build is completed, please extract the files and burn them to a TF card. Insert the TF card into the device, and power on the device to start using it.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 # Assuming /dev/sdb is the TF card device node, execute the following command to burn the TF card:
 
 $ sudo dd if=sysimage-sdcard.img of=/dev/sdb bs=1M oflag=sync
-`} />
+```
 
 ## Booting
 

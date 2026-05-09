@@ -7,24 +7,24 @@
 2. Installing the toolchain: this guide uses the gnu-milkv-milkv-duo-musl compiler as an example (you may adjust the toolchain and version as needed).
 
    ```bash
-   # View resources in the software repository
-   $ ruyi list --name-contains milkv --category-is toolchain
+# View resources in the software repository
+$ ruyi list --name-contains milkv --category-is toolchain
    
-   # Install the specified toolchain
-   $ ruyi install gnu-milkv-milkv-duo-musl-bin
+# Install the specified toolchain
+$ ruyi install gnu-milkv-milkv-duo-musl-bin
    
-   # From the returned information, you can view the installation path, e.g., ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7
+# From the returned information, you can view the installation path, e.g., ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7
    
    ```
 
 3. Create and use the Duo compilation environment
 
    ```bash
-   # View ruyi pre-configured environments
-   $ ruyi list profiles
+# View ruyi pre-configured environments
+$ ruyi list profiles
    
-   # Create a virtual environment: toolchain is gnu-milkv-milkv-duo-musl-bin
-   $ ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo
+# Create a virtual environment: toolchain is gnu-milkv-milkv-duo-musl-bin
+$ ruyi venv -t gnu-milkv-milkv-duo-musl-bin milkv-duo ./venv-milkvduo
    ```
 
 ## Developing in the IDE
@@ -34,11 +34,11 @@
 This article uses the application example duo-examples for the milkv-duo development board. Use either of the following methods to obtain the source code:
 
 ```bash
-   # Method 1: git clone
-   $ git clone https://github.com/milkv-duo/duo-examples.git
+# Method 1: git clone
+$ git clone https://github.com/milkv-duo/duo-examples.git
 
-   # Method 2: ruyi extract command
-   $ ruyi extract milkv-duo-examples
+# Method 2: ruyi extract command
+$ ruyi extract milkv-duo-examples
 ```
 
 ### Importing and Setting Project Properties
@@ -270,9 +270,9 @@ The original buildroot image does not come with gdbserver. You can copy the orig
 
    ```bash
 
-   $ scp gdbserver root@192.168.42.1:/usr/bin/
+$ scp gdbserver root@192.168.42.1:/usr/bin/
 
-   $ ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"
+$ ssh root@192.168.42.1 "chmod +x /usr/bin/gdbserver"
 
    ```
 
@@ -287,29 +287,29 @@ Steps for remote debugging using GDBServer + GDB commands:
 1. On the milkvduo device (operate in the helloworld directory):
 
    ```bash
-   [root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
-   Process ./sumdemo created; pid = 1802
-   Listening on port 2345
+[root@milkv-duo]~/target# gdbserver :2345 ./sumdemo
+Process ./sumdemo created; pid = 1802
+Listening on port 2345
    ```
 2. On the PC (operate in the helloworld.c directory):
 
    ```bash
-   $ cd ~/ews-milkvduo-t01/sumdemo
+$ cd ~/ews-milkvduo-t01/sumdemo
 
-   # Check gdb version, start debugging
-   # Use the ruyi virtual environment for debugging, activate the virtual environment, and compile in the virtual environment
-   $ source ~/venv-milkvduo/bin/ruyi-activate
-   $ riscv64-unknown-linux-musl-gdb --version
-   $ riscv64-unknown-linux-musl-gdb ./sumdemo
+# Check gdb version, start debugging
+# Use the ruyi virtual environment for debugging, activate the virtual environment, and compile in the virtual environment
+$ source ~/venv-milkvduo/bin/ruyi-activate
+$ riscv64-unknown-linux-musl-gdb --version
+$ riscv64-unknown-linux-musl-gdb ./sumdemo
 
-   $ target remote 192.168.42.1:2345   #Port number must match the gdbserver side
+$ target remote 192.168.42.1:2345   #Port number must match the gdbserver side
 
-   $ break sumdemo.c:8                 #Set a breakpoint at line 8
+$ break sumdemo.c:8                 #Set a breakpoint at line 8
 
-   # The following are commonly used; use as needed
-   $ c                                 #Continue, resume program execution until the next breakpoint
-   $ disp result                       #Track a variable, display its value each time it stops
-   $ print result                      #Print the internal variable result
+# The following are commonly used; use as needed
+$ c                                 #Continue, resume program execution until the next breakpoint
+$ disp result                       #Track a variable, display its value each time it stops
+$ print result                      #Print the internal variable result
 
    ```
 
