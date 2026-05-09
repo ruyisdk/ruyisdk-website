@@ -7,7 +7,7 @@ import ReleaseProvider, {
   extractFileName,
   generateChmodCommand,
   testFileNameExtraction,
-} from '@site/src/components/docs_utils/LatestReleases';
+} from '@site/src/components/Docs/LatestReleases';
 
 // Re-export default and named exports so imports targeting
 // '@site/src/pages/LatestReleases' will resolve correctly.

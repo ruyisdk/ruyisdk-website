@@ -67,10 +67,10 @@ Currently, the program can only be executed manually. Users may modify the comma
 In "Project Explorer", right‑click the project, expand "Show in Local Terminal", click "Terminal" to open a terminal, and run the following commands:
 
     ```bash input="1,2,4"
-    $ source ./.venv/bin/ruyi-activate
-    «Ruyi .venv» $ ruyi-qemu ./Debug/hello-risc5.elf
-    Hello RISC-V World!
-    «Ruyi .venv» $
+$ source ./.venv/bin/ruyi-activate
+«Ruyi .venv» $ ruyi-qemu ./Debug/hello-risc5.elf
+Hello RISC-V World!
+«Ruyi .venv» $
     ```
 
 ![terminal-execution](image/sipeed-lpi4a-ide-hello-world/terminal-execution.jpg)

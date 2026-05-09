@@ -2,17 +2,15 @@
 sidebar_position: 3
 ---
 
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
-
 # Managing Ruyi Packages
 
 ## Refreshing Local Package Cache
 
 Fetch the contents of remote package repositories and refresh the local package cache. By default, the mirror hosted on GitHub is used:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi update
-`} />
+```
 
 The package cache will be stored in the user's home directory, typically at ``~/.cache/ruyi/packages-index/``. If the ``XDG_CACHE_HOME`` environment variable is set, the directory will be ``$XDG_CACHE_HOME/ruyi/packages-index/``.
 
@@ -20,7 +18,7 @@ The package cache will be stored in the user's home directory, typically at ``~/
 
 Since the package index is currently hosted in a GitHub repository, if the repository access becomes unstable, you can use the `ruyi config` subcommand to configure the use of the [alternative repository](https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git).
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 # Check the current repository configuration
 $ ruyi config get repo.remote
 
@@ -35,7 +33,7 @@ $ ruyi config set repo.local /your/custom/cache/path
 
 # After completing the configuration changes, refresh the local package cache again
 $ ruyi update
-`} />
+```
 
 ## Reading News
 
@@ -45,7 +43,7 @@ Running ``ruyi news list`` will also bring up this page, but it will display all
 
 You can use the following commands to browse, read news, and mark them as read:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi news list -h
 $ ruyi news list
 $ ruyi news list --new        # List only unread news
@@ -54,7 +52,7 @@ $ ruyi news read -h
 $ ruyi news read 1            # Read news with ID 1
 $ ruyi news read              # Read all unread news
 $ ruyi news read --quiet      # Output nothing, only mark unread news as read
-`} />
+```
 
 Ruyi marks news as read by storing the news titles in ``~/.local/state/ruyi/news.read.txt``, or at ``$XDG_STATE_HOME/ruyi/news.read.txt`` if ``XDG_STATE_HOME`` is configured.
 
@@ -79,7 +77,7 @@ Use the ``ruyi list`` command to list all available packages. Note that even if 
 
 Here is an example on an ``x86_64`` machine; the actual list will be longer:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi list --name-contains ''
 List of available packages:
 
@@ -119,7 +117,8 @@ List of available packages:
 * extra/wps-office
   - 12.1.0-r.17900 (latest)
   - 12.1.0-r.17885 ()
-    `} />
+    
+```
 
 The ``list`` command also provides the ``--verbose`` or ``-v`` option to output more detailed information, which will print almost all information from the package repository. Since the full output will be very long, it is recommended to pass a non-empty search field to ``--name-contains``, add other limiting parameters, or redirect the full output to a file or a tool such as ``less``.
 
@@ -156,9 +155,9 @@ In some scenarios, it is appropriate to install packages for non-native architec
 
 In such cases, you can specify the installation of a binary package for a particular architecture:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi install --host x86_64 wps-office
-`} />
+```
 
 ## Installing Binary Packages
 
@@ -172,31 +171,31 @@ Typically, the following sections contain binary packages:
 
 These packages can be installed using the ``install`` command, such as installing the GNU upstream GCC toolchain:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi install gnu-upstream
 $ ruyi install toolchain/gnu-upstream
-`} />
+```
 
 The above method of specifying the package name will by default install the version marked as ``latest``. If you want to install a specific historical version of gnu-upstream, you can specify the version:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi install 'gnu-upstream(0.20231118.0)'
 $ ruyi install 'gnu-upstream(>=0.20231118.0)'
-`} />
+```
 
 The expression supports ``<``, ``>``, ``==``, ``<=``, ``>=``, and ``!=`` operators.
 
 If you want to install multiple packages:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi install gnu-plct gnu-upsteam llvm-plct llvm-upstream
-`} />
+```
 
 In some special cases, such as accidentally deleting files of an installed package, you can reinstall the package to restore it:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi install --reinstall gnu-upstream
-`} />
+```
 
 Packages downloaded by the package manager are stored in ``~/.cache/ruyi/distfiles/``, or at ``$XDG_CACHE_HOME/ruyi/distfiles/`` if ``XDG_CACHE_HOME`` is specified. These packages are typically stored in a compressed format and require system tools to unpack. If the corresponding tools are missing on the system, a warning will be printed.
 
@@ -212,32 +211,32 @@ The following section clearly contains source packages:
 
 A source package can be downloaded and extracted using the `extract` command. By default, `extract` will unpack the requested package into a separate directory named after the package and its version.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi extract ruyisdk-demo
 $ cd ruyisdk-demo-0.20231114.0
 $ ls
 README.md  rvv-autovec
-`} />
+```
 
 If you need to extract directly into the current working directory (the default behavior in earlier versions), you can use the `--extract-without-subdir` option.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi extract --extract-without-subdir ruyisdk-demo
 $ ls
 README.md  rvv-autovec
-`} />
+```
 
 If you need to extract the contents to another directory, you can specify the target directory using the `--dest-dir` or `-d` option.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi extract -d /path/to/destination ruyisdk-demo
-`} />
+```
 
 If you only need to download the source package without extracting it, you can use the `--fetch-only` or `-f` option.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi extract -f ruyisdk-demo
-`} />
+```
 
 The ``extract`` command supports the same version expression syntax as ``install``.
 
@@ -245,22 +244,22 @@ The ``extract`` command supports the same version expression syntax as ``install
 
 You can use the `ruyi uninstall` command to remove an installed package.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi uninstall gnu-upstream
-`} />
+```
 
 This command also has shorter aliases available: `ruyi remove` or `ruyi rm`.
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi remove gnu-upstream
 $ ruyi rm gnu-upstream
-`} />
+```
 
 If you need to delete all downloaded and installed packages, you can use the following command:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi self clean --distfiles --installed-pkgs
-`} />
+```
 
 Note that if a toolchain package is deleted, any virtual environments that depend on it will become invalid, and there will be no warning when activating such a compilation environment.
 

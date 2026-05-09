@@ -1,7 +1,6 @@
 
-import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/components/docs_utils/LatestReleases';
-import ArchSelector from '@site/src/components/docs_utils/LatestReleases/ArchSelector';
-import CodeBlock from '@site/src/components/docs_utils/CodeBlock';
+import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/components/Docs/LatestReleases';
+import ArchSelector from '@site/src/components/Docs/LatestReleases/ArchSelector';
 
 <ReleaseProvider>
   <>
@@ -15,15 +14,15 @@ The RuyiSDK package manager is currently available as precompiled binaries for *
 
 We recommend using the installer script. It detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to `~/.local/bin/ruyi`:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
-`} />
+```
 
 To install into a system directory, run the script with `sudo` and pass an explicit install path:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
-`} />
+```
 
 You can also download the precompiled binary manually.
 
@@ -43,9 +42,9 @@ The command above has been auto-generated based on your system architecture. Mak
 
 To verify the installation, run:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+```bash
 $ ruyi version
-`} />
+```
 
 If the command executes and prints the copyright information, the installation was successful. If unexpected output appears, please check your installation steps and system environment.
 
