@@ -1,62 +1,53 @@
 :root {
-    --docs-sidebar-font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    --docs-sidebar-text-color: #4b5563;
-    --docs-sidebar-text-color-hover: #111827;
-    --docs-sidebar-text-color-active: #0f172a;
-    --docs-sidebar-bg-hover: rgba(15, 23, 42, 0.05);
-    --docs-sidebar-bg-active: rgba(15, 23, 42, 0.08);
-    --docs-sidebar-bg: transparent;
-    --docs-sidebar-border: transparent;
-    --docs-sidebar-shadow: none;
+    --ifm-font-family-base: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ifm-heading-font-family: var(--ifm-font-family-base);
+    --ifm-heading-color: #171717;
+    --ifm-font-color-base: #171717;
+    --ifm-menu-color: #4b5563;
+    --ifm-menu-color-active: #0f172a;
+    --ifm-menu-color-background-hover: rgba(15, 23, 42, 0.05);
+    --ifm-menu-color-background-active: rgba(15, 23, 42, 0.08);
+    --ifm-menu-link-padding-vertical: 0.25rem;
+    --ifm-menu-link-padding-horizontal: 0.5rem;
+    --ifm-menu-link-sublist-icon-filter: none;
+    --ifm-menu-link-sublist-icon-size: 0.65rem;
+    --ifm-line-height-base: 1.7;
+    --ifm-paragraph-margin-bottom: 1rem;
     --docs-sidebar-radius: 6px;
-    --docs-sidebar-font-size-l1: 14px;
-    --docs-sidebar-font-size-l2: 14px;
-    --docs-sidebar-font-size-l3: 14px;
-    --docs-sidebar-padding-y-l1: 0.25rem;
-    --docs-sidebar-padding-y-l2: 0.25rem;
-    --docs-sidebar-padding-y-l3: 0.25rem;
-    --docs-sidebar-padding-x-l1: 0.5rem;
-    --docs-sidebar-padding-x-l2: 0.5rem;
-    --docs-sidebar-padding-x-l3: 0.5rem;
 }
 
 aside.theme-doc-sidebar-container,
 .theme-doc-sidebar-container {
-    border-right: none !important;
+    border-right: none;
 }
 
 .theme-doc-sidebar-container {
-    border: 1px solid var(--docs-sidebar-border) !important;
-    border-radius: var(--docs-sidebar-radius) !important;
-    background: var(--docs-sidebar-bg) !important;
-    box-shadow: var(--docs-sidebar-shadow);
-    padding: 0 !important;
+    border-radius: var(--docs-sidebar-radius);
+    padding: 0;
 }
 
 .theme-doc-sidebar-container .menu__list-item {
-    background-color: transparent !important;
+    background-color: transparent;
     margin: 0.35rem 0;
 }
 
 .theme-doc-sidebar-container .menu__link {
-    font-family: var(--docs-sidebar-font-family) !important;
-    background-color: transparent !important;
-    color: var(--docs-sidebar-text-color) !important;
+    background-color: transparent;
     border-radius: var(--docs-sidebar-radius);
-    transition: color 0.2s ease, background-color 0.2s ease !important;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .theme-doc-sidebar-container .menu__link:hover {
-    color: var(--docs-sidebar-text-color-hover) !important;
-    background-color: var(--docs-sidebar-bg-hover) !important;
+    color: var(--ifm-heading-color);
+    background-color: var(--ifm-menu-color-background-hover);
 }
 
 .theme-doc-sidebar-container .menu__link--active,
 .theme-doc-sidebar-container .menu__link--active:hover {
-    color: var(--docs-sidebar-text-color-active) !important;
-    background-color: var(--docs-sidebar-bg-active) !important;
+    color: var(--ifm-menu-color-active);
+    background-color: var(--ifm-menu-color-background-active);
     box-shadow: none;
-    font-weight: 600 !important;
+    font-weight: 600;
 }
 
 /* Category rows and leaf links share the same clickable row style */
@@ -65,9 +56,7 @@ aside.theme-doc-sidebar-container,
 .theme-doc-sidebar-item-link-level-1 > :is(a, button),
 .theme-doc-sidebar-item-link-level-2 > :is(a, button),
 .theme-doc-sidebar-item-link-level-3 > :is(a, button) {
-    font-family: var(--docs-sidebar-font-family) !important;
-    background-color: transparent !important;
-    color: var(--docs-sidebar-text-color) !important;
+    background-color: transparent;
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible,
@@ -78,28 +67,19 @@ aside.theme-doc-sidebar-container,
 /* Level-specific typography and spacing */
 .theme-doc-sidebar-item-link-level-1 > .menu__link,
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist {
-    font-weight: 500 !important;
-    font-size: var(--docs-sidebar-font-size-l1) !important;
-    padding-left: var(--docs-sidebar-padding-x-l1) !important;
-    padding-top: var(--docs-sidebar-padding-y-l1) !important;
-    padding-bottom: var(--docs-sidebar-padding-y-l1) !important;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .theme-doc-sidebar-item-link-level-2 > .menu__link,
 .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link--sublist {
-    font-weight: 400 !important;
-    font-size: var(--docs-sidebar-font-size-l2) !important;
-    padding-left: var(--docs-sidebar-padding-x-l2) !important;
-    padding-top: var(--docs-sidebar-padding-y-l2) !important;
-    padding-bottom: var(--docs-sidebar-padding-y-l2) !important;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .theme-doc-sidebar-item-link-level-3 > .menu__link {
-    font-weight: 400 !important;
-    font-size: var(--docs-sidebar-font-size-l3) !important;
-    padding-left: var(--docs-sidebar-padding-x-l3) !important;
-    padding-top: var(--docs-sidebar-padding-y-l3) !important;
-    padding-bottom: var(--docs-sidebar-padding-y-l3) !important;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 /* Category nesting guides */
@@ -117,17 +97,17 @@ aside.theme-doc-sidebar-container,
 
 /* Hide native carets but keep button for accessibility/click handling */
 .menu__caret {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: auto !important;
-    position: absolute !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    background: transparent !important;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: auto;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist::after,
@@ -152,120 +132,53 @@ aside.theme-doc-sidebar-container,
 }
 
 .theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link--sublist {
-    padding-right: 1.6rem !important;
+    padding-right: 1.6rem;
 }
 
 @media (max-width: 996px) {
     .theme-doc-sidebar-container {
-        border-radius: 0 !important;
-        border-left: 0 !important;
-        border-right: 0 !important;
-        box-shadow: none !important;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        box-shadow: none;
         backdrop-filter: none;
     }
 }
 
-/* Font styles - Only apply to docs pages */
+/* Use Infima typography variables for docs body */
 .docs-wrapper,
 .theme-doc-wrapper,
 [class*="docMainContainer"],
 main[class*="docMainContainer"] {
-    /* H1 heading styles */
-    h1 {
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        font-size: 36px !important;
-        color: #171717 !important;
-        font-weight: 600 !important;
-        line-height: 1.2 !important;
-        letter-spacing: -0.02em !important;
-    }
+    --ifm-font-size-base: 16px;
+    --ifm-heading-font-weight: 600;
+}
 
-    article h1,
-    .markdown h1,
-    .theme-doc-markdown h1 {
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        font-size: 36px !important;
-        color: #171717 !important;
-        font-weight: 600 !important;
-        line-height: 1.2 !important;
-        letter-spacing: -0.02em !important;
-    }
+.theme-doc-wrapper .theme-doc-markdown h1 {
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
 
-    /* Anchor link styles - heading links */
-    h1 a,
-    h2 a,
-    h3 a,
-    h4 a,
-    h5 a,
-    h6 a,
-    .anchor a,
-    .hash-link {
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        color: #171717 !important;
-        text-decoration: none !important;
-        font-weight: inherit !important;
+.theme-doc-wrapper .theme-doc-markdown h2 {
+    font-size: 24px;
+    line-height: 1.3;
+}
 
-        &:hover {
-            color: #171717 !important;
-            text-decoration: none !important;
-        }
-    }
+.theme-doc-wrapper .theme-doc-markdown h3 {
+    font-size: 20px;
+}
 
-    /* Heading sizes for anchor links */
-    h2,
-    h2 a {
-        font-size: 24px !important;
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        color: #171717 !important;
-        font-weight: 600 !important;
-        line-height: 1.3 !important;
-    }
+.theme-doc-wrapper .theme-doc-markdown h4 {
+    font-size: 18px;
+}
 
-    h3,
-    h3 a {
-        font-size: 20px !important;
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        color: #171717 !important;
-        font-weight: 600 !important;
-    }
+.theme-doc-wrapper .theme-doc-markdown p {
+    margin-top: 1rem;
+}
 
-    h4,
-    h4 a {
-        font-size: 18px !important;
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        color: #171717 !important;
-        font-weight: 600 !important;
-    }
-
-    /* Paragraph and body text styles */
-    p,
-    article p,
-    .markdown p,
-    .theme-doc-markdown p {
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        font-size: 16px !important;
-        color: #171717 !important;
-        line-height: 1.7 !important;
-        margin: 16px 0 0 !important;
-        font-weight: 400 !important;
-    }
-
-    /* First paragraph no top margin */
-    article p:first-of-type,
-    .markdown p:first-of-type,
-    .theme-doc-markdown p:first-of-type {
-        margin-top: 0 !important;
-    }
-
-    /* Body text */
-    article,
-    .markdown,
-    .theme-doc-markdown {
-        font-family: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif !important;
-        font-size: 16px !important;
-        color: #171717 !important;
-        line-height: 1.7 !important;
-    }
+.theme-doc-wrapper .theme-doc-markdown p:first-of-type {
+    margin-top: 0;
 }
 
 /* doc css here */
