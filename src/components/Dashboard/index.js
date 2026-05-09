@@ -1,34 +1,29 @@
 import { Col, Row } from "antd";
-import { IconCloudDown, IconDownload } from '@tabler/icons-react';
-import { useEffect, useRef, useState } from "react"
-import { translate } from "@docusaurus/Translate"
-import styles from "../ServiceData/styles.module.css";
+import { useEffect, useRef, useState } from "react";
+import { translate } from "@docusaurus/Translate";
 import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json";
+import useDataWithApiFallback from "@site/src/utils/hooks/useDataWithApiFallback";
+import { PageBackground } from "@site/src/components/Home/Background";
+
+import styles from "./styles.module.css";
 
 const DASHBOARD_API_URL = "https://api.ruyisdk.cn/fe/dashboard";
-const ANIMATION_DURATION = 2000;
-const ANIMATION_STEPS = 60;
-const MAX_RETRY_COUNT = 5;
-const RETRY_DELAY_BASE = 1000;
 
-const TRANSLATION_KEY = {
-  DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
-  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "组件下载数量" },
-  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" },
-  IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
-  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
-  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
-  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
-
-  UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
-};
+const PageHeader = ({ title }) => (
+  <header className="text-center pt-14 px-8">
+    <h1 className="text-3xl font-extrabold text-blue-900">
+      {title}
+    </h1>
+    <div className="mx-auto mt-6 max-w-screen-xl border-b border-black/5" />
+  </header>
+);
 
 const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
   const elementRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -50,158 +45,137 @@ const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
   return { elementRef, isVisible };
 };
 
-const AnimatedStatistic = ({ title, value, icon, color, loading }) => {
-  const [displayValue, setDisplayValue] = useState(0);
+const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
+  const ANIMATION_DURATION = 500;
+
+  const [displayValue, setDisplayValue] = useState(value);
+  const previousValueRef = useRef(value);
   const { elementRef, isVisible } = useIntersectionObserver();
 
   useEffect(() => {
-    if (isVisible && !loading && typeof value === 'number') {
-      const increment = value / ANIMATION_STEPS;
-      let current = 0;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= value) {
-          setDisplayValue(value);
-          clearInterval(timer);
-        } else {
-          setDisplayValue(Math.floor(current));
-        }
-      }, ANIMATION_DURATION / ANIMATION_STEPS);
+    if (typeof value !== "number") return;
 
-      return () => clearInterval(timer);
+    if (!animate || !isVisible) {
+      setDisplayValue(value);
+      previousValueRef.current = value;
+      return;
     }
-  }, [isVisible, value, loading]);
+
+    const startValue = previousValueRef.current;
+    const diff = value - startValue;
+    previousValueRef.current = value;
+
+    if (diff === 0) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const step = diff > 0 ? 1 : -1;
+    const stepCount = Math.abs(diff);
+    const stepDuration = ANIMATION_DURATION / stepCount;
+    let current = startValue;
+
+    const timer = setInterval(() => {
+      current += step;
+      if ((step > 0 && current >= value) || (step < 0 && current <= value)) {
+        setDisplayValue(value);
+        clearInterval(timer);
+      } else {
+        setDisplayValue(current);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(timer);
+  }, [animate, isVisible, value]);
 
   return (
-    <div className={styles.statCard} ref={elementRef} data-stat={title}>
-      <div className={styles.statIcon} style={{ color }}>
-        {icon}
+    <div
+      className={`${styles.statCard} min-h-35 p-[1.15rem] md:min-h-35 md:p-5 lg:px-[1.45rem] lg:pt-[1.35rem] lg:pb-[1.15rem]`}
+      ref={elementRef}
+      data-stat={title}
+    >
+      <h3 className={styles.statTitle}>{title}</h3>
+      <div className={styles.statValue}>
+        <span className={`${styles.valueNumber} text-[1.8rem] md:text-[1.9rem] lg:text-[2rem]`}>
+          {displayValue.toLocaleString()}
+        </span>
+        <span className={styles.statUnit}>{unit}</span>
       </div>
-      <div className={styles.statContent}>
-        <h3 className={styles.statTitle}>{title}</h3>
-        <div className={styles.statValue}>
-          {loading ? (
-            <div className={styles.loadingSkeleton}></div>
-          ) : (
-            <span className={styles.valueNumber}>
-              {typeof value === 'number' ? displayValue.toLocaleString() : value}
-            </span>
-          )}
-        </div>
-      </div>
+      <div className={styles.statDivider} />
+      <p className={`${styles.statNote} text-[0.74rem]`}>{note}</p>
     </div>
   );
 };
 
-const getCategoryTotal = (data, key) => data?.downloads_by_categories_v1?.[key]?.total || 0;
+const getCategoryV1Total = (data, key) => data?.downloads_by_categories_v1?.[key]?.total || 0;
 
-const CategorySection = ({ data }) => {
-  const combinedDownloads = [
+const CategorySection = ({ data, animate }) => {
+  const stats = [
     {
-      title: translate(TRANSLATION_KEY.COMPONENT_DOWNLOADS),
-      value: getCategoryTotal(data, "pkg"),
-      icon: <IconCloudDown size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK 组件包下载量", message: "RuyiSDK 组件包下载量" }),
+      value: getCategoryV1Total(data, "pkg"),
+      unit: translate({ id: "次", message: "次" }),
+      note: translate({ id: "包含 GNU/LLVM 工具链、QEMU 等组件", message: "包含 GNU/LLVM 工具链、QEMU 等组件" }),
     },
     {
-      title: translate(TRANSLATION_KEY.PM_DOWNLOADS),
-      value: getCategoryTotal(data, "pm:github") + getCategoryTotal(data, "pm:mirror") + getCategoryTotal(data, "pm:pypi"),
-      icon: <IconDownload size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK 遥测设备数", message: "RuyiSDK 遥测设备数" }),
+      value: data?.installs?.total || 0,
+      unit: translate({ id: "台", message: "台" }),
+      note: translate({ id: "上报设备数", message: "上报设备数" }),
     },
     {
-      title: translate(TRANSLATION_KEY.IDE_DOWNLOADS),
-      value: getCategoryTotal(data, "ide:eclipse:mirror") + getCategoryTotal(data, "ide:plugin:eclipse:mirror") + getCategoryTotal(data, "ide:plugin:eclipse:github"),
-      icon: <IconDownload size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK 文档下载量", message: "RuyiSDK 文档下载量" }),
+      value: getCategoryV1Total(data, "humans"),
+      unit: translate({ id: "次", message: "次" }),
+      note: translate({ id: "含用户手册、峰会演示稿、规格书", message: "含用户手册、峰会演示稿、规格书" }),
     },
     {
-      title: translate(TRANSLATION_KEY.VSCODE_DOWNLOADS),
-      value: getCategoryTotal(data, "ide:plugin:vscode:mirror") + getCategoryTotal(data, "ide:plugin:vscode:github"),
-      icon: <IconDownload size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK 包管理器下载量", message: "RuyiSDK 包管理器下载量" }),
+      value: getCategoryV1Total(data, "pm:github") + getCategoryV1Total(data, "pm:mirror") + getCategoryV1Total(data, "pm:pypi"),
+      unit: translate({ id: "次", message: "次" }),
+      note: translate({ id: "RuyiSDK CLI 工具，三渠道下载量汇总", message: "RuyiSDK CLI 工具，三渠道下载量汇总" }),
     },
     {
-      title: translate(TRANSLATION_KEY.THIRD_PARTY),
-      value: getCategoryTotal(data, "3rdparty"),
-      icon: <IconCloudDown size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK VS Code 插件下载量", message: "RuyiSDK VS Code 插件下载量" }),
+      value: getCategoryV1Total(data, "ide:plugin:vscode:mirror") + getCategoryV1Total(data, "ide:plugin:vscode:github"),
+      unit: translate({ id: "次", message: "次" }),
+      note: translate({ id: "不含两个市场 Open VSX、Visual Studio Marketplace", message: "不含两个市场 Open VSX、Visual Studio Marketplace" }),
     },
     {
-      title: translate(TRANSLATION_KEY.DOCS_DOWNLOADS),
-      value: getCategoryTotal(data, "humans"),
-      icon: <IconCloudDown size={48} stroke={1.5} />,
+      title: translate({ id: "RuyiSDK Eclipse 组件下载量", message: "RuyiSDK Eclipse 组件下载量" }),
+      value: getCategoryV1Total(data, "ide:eclipse:mirror") + getCategoryV1Total(data, "ide:plugin:eclipse:mirror") + getCategoryV1Total(data, "ide:plugin:eclipse:github"),
+      unit: translate({ id: "次", message: "次" }),
+      note: translate({ id: "IDE定制包 + 插件，不含 Eclipse Marketplace 市场", message: "IDE定制包 + 插件，不含 Eclipse Marketplace 市场" }),
     },
   ];
 
   return (
-    <div className={styles.categorySection}>
-      <h3 className={styles.sectionTitle}>{translate(TRANSLATION_KEY.DETAILED_STATS)}</h3>
+    <section className={styles.statsSection}>
       <Row gutter={[24, 24]} className={styles.statsRow}>
-        {combinedDownloads.map((item) => (
-          <Col key={item.title} xs={24} sm={12} lg={8}>
-            <AnimatedStatistic
-              title={item.title}
-              value={item.value}
-              icon={item.icon}
-              color="#07a0cc"
-              loading={false}
-            />
+        {stats.map((item) => (
+          <Col key={item.title} xs={24} md={12} lg={8}>
+            <div className="mx-auto h-full max-w-md lg:max-w-none">
+              <AnimatedStatistic {...item} animate={animate} />
+            </div>
           </Col>
         ))}
       </Row>
-    </div>
+      <div className={`${styles.updateTime} mx-auto max-w-md text-[0.74rem] md:max-w-[calc(56rem+24px)] lg:max-w-none`}>
+        {translate({ id: "数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+      </div>
+    </section>
   );
 };
 
-const UpdateTime = ({ data }) => (
-  <div className={styles.updateTime}>
-    <p>
-      {translate(TRANSLATION_KEY.UPDATE_TIME)}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
-    </p>
-  </div>
-);
-
 const Dashboard = () => {
-  const [data, setData] = useState(dashboardData);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    let retryTimer = null;
-    let retryCount = 0;
-
-    const fetchData = async () => {
-      if (retryCount > MAX_RETRY_COUNT) return;
-
-      try {
-        const response = await fetch(DASHBOARD_API_URL, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Dashboard API responded with ${response.status}`);
-        }
-
-        const nextData = await response.json();
-        setData(nextData);
-      } catch (error) {
-        retryTimer = setTimeout(fetchData, Math.pow(2, retryCount) * RETRY_DELAY_BASE);
-        retryCount++;
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      clearTimeout(retryTimer);
-    };
-  }, []);
+  const { data, hasRemoteData } = useDataWithApiFallback(dashboardData, DASHBOARD_API_URL);
 
   return (
     <div className={styles.container}>
-      <div className={styles.mainContent}>
-        <CategorySection data={data} />
-        <UpdateTime data={data} />
+      <PageBackground />
+      <PageHeader title={translate({ id: "dashboard.title", message: "RuyiSDK 下载统计" })} />
+      <div className={`${styles.mainContent} max-w-screen-xl px-3 py-6 md:px-4 md:py-8 lg:px-8 lg:py-14`}>
+        <CategorySection data={data} animate={hasRemoteData} />
       </div>
     </div>
   );
