@@ -1,6 +1,7 @@
 import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { PageBackground } from "@site/src/components/Home/Background";
+import MarkdownCard from "@site/src/components/About/MarkdownCard";
 
 import AboutDe from "./mdx/about.de.mdx";
 import AboutEn from "./mdx/about.en.mdx";
@@ -11,8 +12,6 @@ import ContactZhHans from "./mdx/contact.zh-Hans.mdx";
 import QrDe from "./mdx/qr.de.mdx";
 import QrEn from "./mdx/qr.en.mdx";
 import QrZhHans from "./mdx/qr.zh-Hans.mdx";
-
-import styles from "./about.module.css";
 
 const ABOUT_CONTENT = {
   "zh-Hans": AboutZhHans,
@@ -47,24 +46,18 @@ export default function About() {
       <PageBackground />
       <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center">
         <div className="w-full grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-stretch">
-          <section className="bg-white/70 backdrop-blur-md rounded-2xl border border-white/70 shadow-lg p-6 sm:p-8">
-            <div className={styles.aboutMarkdown}>
-              <AboutContent />
-            </div>
-          </section>
+          <MarkdownCard>
+            <AboutContent />
+          </MarkdownCard>
 
           <aside className="flex h-full flex-col gap-6">
-            <section className="bg-white/75 backdrop-blur-md rounded-2xl border border-white/70 shadow-lg p-6">
-              <div className={styles.aboutMarkdown}>
-                <ContactContent />
-              </div>
-            </section>
+            <MarkdownCard variant="strong">
+              <ContactContent />
+            </MarkdownCard>
 
-            <section className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 flex-1">
-              <div className={styles.aboutMarkdown}>
-                <QrContent />
-              </div>
-            </section>
+            <MarkdownCard variant="soft" className="flex-1">
+              <QrContent />
+            </MarkdownCard>
           </aside>
         </div>
       </div>
