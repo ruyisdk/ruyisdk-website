@@ -1,0 +1,132 @@
+.card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 1rem;
+  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.default {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.strong {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.soft {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.solid {
+  border-color: rgba(15, 35, 70, 0.06);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.markdown {
+  color: #4b5563;
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: #111827;
+  line-height: 1.3;
+}
+
+.markdown h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.markdown h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.markdown p {
+  margin: 0 0 0.9rem;
+}
+
+.markdown ul,
+.markdown ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.markdown ul {
+  list-style-type: disc;
+}
+
+.markdown ol {
+  list-style-type: decimal;
+}
+
+.markdown li {
+  margin-bottom: 0.35rem;
+}
+
+.markdown a {
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.markdown a:hover {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+.markdown code {
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  padding: 0.1rem 0.3rem;
+}
+
+.markdown blockquote {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #8fc5de;
+  border-radius: 0 8px 8px 0;
+  background: rgba(53, 125, 161, 0.08);
+  color: #334b6d;
+}
+
+.markdown hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid rgba(15, 35, 70, 0.1);
+}
+
+.markdown table {
+  display: block;
+  width: 100%;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid rgba(15, 35, 70, 0.12);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown th {
+  background: rgba(53, 125, 161, 0.1);
+  color: #111827;
+  font-weight: 700;
+}

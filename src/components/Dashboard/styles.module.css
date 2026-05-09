@@ -78,3 +78,8 @@
   line-height: 1.5;
   text-align: right;
 }
+
+.markdownSection {
+  margin: 3rem auto 0;
+  width: 100%;
+}

@@ -1,13 +1,29 @@
 import { Col, Row } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
-import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useDataWithApiFallback from "@site/src/utils/hooks/useDataWithApiFallback";
 import { PageBackground } from "@site/src/components/Home/Background";
+import MarkdownCard from "@site/src/components/About/MarkdownCard";
+
+import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json";
+import StatsDetailDe from "./mdx/stats_detail.de.md";
+import StatsDetailEn from "./mdx/stats_detail.en.md";
+import StatsDetailZhHans from "./mdx/stats_detail.zh-Hans.md";
 
 import styles from "./styles.module.css";
 
 const DASHBOARD_API_URL = "https://api.ruyisdk.cn/fe/dashboard";
+
+const STATS_DETAIL_CONTENT = {
+  "zh-Hans": StatsDetailZhHans,
+  de: StatsDetailDe,
+  en: StatsDetailEn,
+};
+
+function resolveLocalizedContent(contentMap, locale) {
+  return contentMap[locale] || contentMap.en;
+}
 
 const PageHeader = ({ title }) => (
   <header className="text-center pt-14 px-8">
@@ -168,7 +184,9 @@ const CategorySection = ({ data, animate }) => {
 };
 
 const Dashboard = () => {
+  const { i18n } = useDocusaurusContext();
   const { data, hasRemoteData } = useDataWithApiFallback(dashboardData, DASHBOARD_API_URL);
+  const StatsDetail = resolveLocalizedContent(STATS_DETAIL_CONTENT, i18n?.currentLocale);
 
   return (
     <div className={styles.container}>
@@ -176,6 +194,9 @@ const Dashboard = () => {
       <PageHeader title={translate({ id: "dashboard.title", message: "RuyiSDK 下载统计" })} />
       <div className={`${styles.mainContent} max-w-screen-xl px-3 py-6 md:px-4 md:py-8 lg:px-8 lg:py-14`}>
         <CategorySection data={data} animate={hasRemoteData} />
+        <MarkdownCard variant="solid" className={styles.markdownSection}>
+          <StatsDetail />
+        </MarkdownCard>
       </div>
     </div>
   );
