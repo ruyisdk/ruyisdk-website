@@ -1,6 +1,23 @@
 import React from 'react';
 import RuyiCodeBlock from '@site/src/components/docs_utils/CodeBlock';
 
+function parseMetaString(metastring) {
+  if (typeof metastring !== 'string' || !metastring.trim()) {
+    return {};
+  }
+
+  const meta = {};
+  const matcher = /(?:^|\s)([^\s="'{}]+)(?:=(?:"([^"]*)"|'([^']*)'|([^\s]+)))?/g;
+  let match;
+
+  while ((match = matcher.exec(metastring)) !== null) {
+    const [, key, doubleQuoted, singleQuoted, bare] = match;
+    meta[key] = doubleQuoted ?? singleQuoted ?? bare ?? true;
+  }
+
+  return meta;
+}
+
 // Adapter to route all fenced code blocks to our custom CodeBlock
 export default function CodeBlockAdapter(props) {
   const { children, className = '', metastring, title, language } = props;
@@ -13,25 +30,11 @@ export default function CodeBlockAdapter(props) {
   // If language is explicitly empty/absent, fall back to plain text; otherwise use provided
   const lang = String(derivedLang).trim() === '' ? 'text' : derivedLang;
 
-  // Parse metastring for title/copiable/input
-  let customTitle = title;
-  let copiable = false;
-  let input = '';
-  if (typeof metastring === 'string' && metastring.trim()) {
-    const titleMatchQuoted = metastring.match(/(?:^|\s)title=("|')(.*?)\1/);
-    const titleMatchBare = metastring.match(/(?:^|\s)title=([^\s"']+)/);
-    const copiableMatch = /(?:^|\s)copiable(?:\s|$)/.test(metastring);
-    const inputMatchQuoted = metastring.match(/(?:^|\s)input=("|')(.*?)\1/);
-    const inputMatchBare = metastring.match(/(?:^|\s)input=([^\s"']+)/);
-
-    if (!customTitle) {
-      if (titleMatchQuoted && titleMatchQuoted[2]) customTitle = titleMatchQuoted[2];
-      else if (titleMatchBare && titleMatchBare[1]) customTitle = titleMatchBare[1];
-    }
-    if (copiableMatch) copiable = true;
-    if (inputMatchQuoted && inputMatchQuoted[2]) input = inputMatchQuoted[2];
-    else if (inputMatchBare && inputMatchBare[1]) input = inputMatchBare[1];
-  }
+  const meta = parseMetaString(metastring);
+  const hasInput = Object.prototype.hasOwnProperty.call(meta, 'input');
+  const customTitle = title || meta.title || '';
+  const input = hasInput && typeof meta.input === 'string' ? meta.input : '';
+  const copiable = meta.nocopy || meta.noCopy ? false : (meta.copiable ? true : undefined);
 
   return (
     <RuyiCodeBlock
@@ -40,8 +43,7 @@ export default function CodeBlockAdapter(props) {
       title={customTitle}
       copiable={copiable}
       input={input}
+      hasInput={hasInput}
     />
   );
 }
-
-

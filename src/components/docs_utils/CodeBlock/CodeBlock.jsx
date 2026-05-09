@@ -1,24 +1,27 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Header from './Header';
-import { normalizeCode, cleanShellPrompt } from './utils';
+import { normalizeCode, cleanShellPrompt, stripShellPrompt } from './utils';
 
 const CodeBlock = ({ 
     code = '', 
     lang = 'bash', 
     langs = [],
     title = '',
-    copiable = false,
-    input = ''
+    copiable,
+    input = '',
+    hasInput = false,
+    showTitleCopyButton
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentLang, setCurrentLang] = useState(lang);
 
     const inputLines = useMemo(() => {
-        if (!input) return new Set();
-        
         const lines = new Set();
-        const parts = input.split(',');
+        if (!hasInput || !input) return lines;
+
+        const normalizedInput = String(input).replace(/^['"]|['"]$/g, '');
+        const parts = normalizedInput.split(',');
         
         parts.forEach(part => {
             part = part.trim();
@@ -36,7 +39,7 @@ const CodeBlock = ({
         });
         
         return lines;
-    }, [input]);
+    }, [input, hasInput]);
 
     const currentCode = useMemo(() => {
         if (langs && langs.length > 0) {
@@ -66,7 +69,7 @@ const CodeBlock = ({
             }
             
             if (trimmedLine.includes('highlight-next-line')) {
-                toHighlight.add(filteredLines.length + 1);
+                toHighlight.add(filteredLines.length);
                 return;
             }
             
@@ -83,18 +86,27 @@ const CodeBlock = ({
         };
     }, [currentCode]);
 
-    const copyableCode = useMemo(() => 
-        cleanShellPrompt(displayCode, currentLang),
-    [displayCode, currentLang]);
-
     const displayLang = currentLang === 'no' ? 'text' : currentLang;
+    const isInputOutputBlock = hasInput;
+
+    const copyableCode = useMemo(() => 
+        isInputOutputBlock ? cleanShellPrompt(displayCode) : displayCode,
+    [displayCode, isInputOutputBlock]);
+
+    const shouldShowHeaderCopy = useMemo(() => {
+        if (typeof showTitleCopyButton === 'boolean') return showTitleCopyButton;
+        if (typeof showTitleCopyButton === 'string') return showTitleCopyButton === 'true';
+        if (typeof copiable === 'boolean') return copiable;
+        if (typeof copiable === 'string') return copiable === 'true';
+        return !isInputOutputBlock;
+    }, [showTitleCopyButton, copiable, isInputOutputBlock]);
 
     const headerTitle = useMemo(() => {
         if (title && title.trim() !== '') return title;
-        if (currentLang === 'bash') return 'Terminal';
+        if (isInputOutputBlock) return displayLang;
         if (currentLang === 'text' || currentLang === '') return 'text';
         return displayLang;
-    }, [title, currentLang, displayLang]);
+    }, [title, currentLang, displayLang, isInputOutputBlock]);
 
     const codeBlockRef = useRef(null);
     
@@ -132,6 +144,36 @@ const CodeBlock = ({
         
         const preElement = codeBlockRef.current.querySelector('pre');
         if (!preElement) return;
+        const scrollElement = preElement.parentElement || preElement;
+
+        const cleanupFns = [];
+        const positionUpdaters = new Set();
+        let animationFrame = null;
+
+        const updateAllCopyButtonPositions = () => {
+            positionUpdaters.forEach((update) => update());
+        };
+
+        const schedulePositionUpdate = () => {
+            if (animationFrame !== null) return;
+
+            animationFrame = requestAnimationFrame(() => {
+                animationFrame = null;
+                updateAllCopyButtonPositions();
+            });
+        };
+
+        scrollElement.addEventListener('scroll', schedulePositionUpdate, { passive: true });
+        window.addEventListener('scroll', schedulePositionUpdate, { passive: true });
+        window.addEventListener('resize', schedulePositionUpdate);
+        cleanupFns.push(() => scrollElement.removeEventListener('scroll', schedulePositionUpdate));
+        cleanupFns.push(() => window.removeEventListener('scroll', schedulePositionUpdate));
+        cleanupFns.push(() => window.removeEventListener('resize', schedulePositionUpdate));
+        cleanupFns.push(() => {
+            if (animationFrame !== null) {
+                cancelAnimationFrame(animationFrame);
+            }
+        });
         
         const timeoutId = setTimeout(() => {
             const codeElement = preElement.querySelector('code');
@@ -156,7 +198,7 @@ const CodeBlock = ({
             
             const highlightedLines = new Set();
             allLines.forEach((line, index) => {
-                const shouldHighlight = input ? inputLines.has(index) : highlightLines.has(index);
+                const shouldHighlight = isInputOutputBlock ? inputLines.has(index) : highlightLines.has(index);
                 
                 if (shouldHighlight) {
                     highlightedLines.add(index);
@@ -195,12 +237,38 @@ const CodeBlock = ({
             
             allLines.forEach((line, index) => {
                 const shouldHighlight = highlightedLines.has(index);
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                const rightPaddingPx = isMobile ? '56px' : '48px';
+                const leftPaddingPx = isMobile ? '12px' : '20px';
+                const horizontalMargin = isMobile ? '0' : '-20px';
                 
                 // Ensure all lines display as block to preserve line breaks
                 line.style.display = 'block';
+                line.style.textShadow = 'none';
+                line.querySelectorAll('*').forEach((child) => {
+                    child.style.textShadow = 'none';
+                });
                 
-                if (shouldHighlight) {
-                    // For highlighted lines, preserve syntax highlighting
+                if (isInputOutputBlock && !shouldHighlight) {
+                    line.style.backgroundColor = isDark ? 'rgb(23, 23, 23)' : 'rgb(255, 255, 255)';
+                    line.style.position = '';
+                    line.style.margin = `0 ${horizontalMargin}`;
+                    line.style.padding = `0 ${rightPaddingPx} 0 ${leftPaddingPx}`;
+                    line.style.boxSizing = 'border-box';
+                    line.style.width = maxLineWidth > 0 ? `${maxLineWidth}px` : 'fit-content';
+                    line.style.minWidth = isMobile ? '100%' : 'calc(100% + 40px)';
+                    line.style.borderRadius = '';
+                    line.style.minHeight = '';
+                    line.style.lineHeight = 'var(--ifm-pre-line-height)';
+                    line.style.color = '';
+                    line.style.fontFamily = '';
+                    line.querySelectorAll('*').forEach((child) => {
+                        child.style.color = 'inherit';
+                        child.style.fontWeight = 'inherit';
+                        child.style.fontStyle = 'inherit';
+                        child.style.textShadow = 'none';
+                    });
+                } else if (shouldHighlight) {
                     line.style.color = '';
                     line.style.fontFamily = '';
                 }
@@ -208,9 +276,8 @@ const CodeBlock = ({
                 if (shouldHighlight) {
                     const prevHighlighted = highlightedLines.has(index - 1);
                     const nextHighlighted = highlightedLines.has(index + 1);
-                    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
                     
-                    line.style.backgroundColor = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgb(235, 244, 255)';
+                    line.style.backgroundColor = isDark ? 'rgba(180, 83, 9, 0.14)' : 'rgb(255, 251, 235)';
                     line.style.position = 'relative';
                     
                     // Only add spacing before first and after last highlighted line
@@ -225,12 +292,8 @@ const CodeBlock = ({
                     }
                     
                     // All highlighted lines use the same width (max width)
-                    const rightPaddingPx = isMobile ? '56px' : '48px';
-                    const leftPaddingPx = isMobile ? '12px' : '20px';
-                    const horizontalMargin = isMobile ? '0' : '-20px';
-                    
                     line.style.margin = `${marginTop} ${horizontalMargin} ${marginBottom} ${horizontalMargin}`;
-                    line.style.padding = `4px ${rightPaddingPx} 4px ${leftPaddingPx}`;
+                    line.style.padding = `0 ${rightPaddingPx} 0 ${leftPaddingPx}`;
                     line.style.boxSizing = 'border-box';
                     
                     // All highlighted lines use max width from entire code block
@@ -243,8 +306,8 @@ const CodeBlock = ({
                     line.style.minWidth = isMobile ? '100%' : 'calc(100% + 40px)';
                     
                     line.style.borderRadius = '0';
-                    line.style.minHeight = isMobile ? '40px' : '32px';
-                    line.style.lineHeight = '1.7';
+                    line.style.minHeight = '';
+                    line.style.lineHeight = 'var(--ifm-pre-line-height)';
                     
                     // Remove existing copy button if any
                     const existingBtn = line.querySelector('.line-copy-button');
@@ -256,7 +319,7 @@ const CodeBlock = ({
                     copyBtn.className = 'line-copy-button';
                     
                     // Larger icon for mobile
-                    const iconSize = isMobile ? '18' : '16';
+                    const iconSize = isMobile ? '12' : '14';
                     copyBtn.innerHTML = `
                         <svg width="${iconSize}" height="${iconSize}" viewBox="0 0 16 16" fill="currentColor" style="display: block;">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 0.5C1.7835 0.5 1 1.2835 1 2.25V9.75C1 10.7165 1.7835 11.5 2.75 11.5H3.75H4.5V10H3.75H2.75C2.61193 10 2.5 9.88807 2.5 9.75V2.25C2.5 2.11193 2.61193 2 2.75 2H8.25C8.38807 2 8.5 2.11193 8.5 2.25V3H10V2.25C10 1.2835 9.2165 0.5 8.25 0.5H2.75ZM7.75 4.5C6.7835 4.5 6 5.2835 6 6.25V13.75C6 14.7165 6.7835 15.5 7.75 15.5H13.25C14.2165 15.5 15 14.7165 15 13.75V6.25C15 5.2835 14.2165 4.5 13.25 4.5H7.75ZM7.5 6.25C7.5 6.11193 7.61193 6 7.75 6H13.25C13.3881 6 13.5 6.11193 13.5 6.25V13.75C13.5 13.8881 13.3881 14 13.25 14H7.75C7.61193 14 7.5 13.8881 7.5 13.75V6.25Z"/>
@@ -264,14 +327,12 @@ const CodeBlock = ({
                     `;
                     
                     // Mobile-optimized styling
-                    const btnSize = isMobile ? '36px' : '28px';
-                    const btnRight = isMobile ? '8px' : '8px';
-                    const btnPadding = isMobile ? '6px' : '4px';
+                    const btnSize = isMobile ? 20 : 22;
+                    const btnRight = isMobile ? 8 : 8;
+                    const btnPadding = isMobile ? '2px' : '3px';
                     
                     copyBtn.style.cssText = `
-                        position: absolute;
-                        right: ${btnRight};
-                        top: 50%;
+                        position: fixed;
                         transform: translateY(-50%);
                         background: ${isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
                         border: 1px solid ${isDark ? 'rgba(82, 82, 82, 0.8)' : 'rgba(203, 213, 225, 0.8)'};
@@ -281,23 +342,60 @@ const CodeBlock = ({
                         border-radius: ${isMobile ? '8px' : '6px'};
                         color: rgb(107, 114, 128);
                         opacity: ${isMobile ? '0.85' : '0'};
-                        transition: all 0.2s ease;
+                        transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        line-height: 0;
                         z-index: 10;
                         pointer-events: auto;
                         user-select: none;
                         -webkit-user-select: none;
                         -webkit-tap-highlight-color: transparent;
                         touch-action: manipulation;
-                        width: ${btnSize};
-                        height: ${btnSize};
-                        min-width: ${btnSize};
-                        min-height: ${btnSize};
+                        width: ${btnSize}px;
+                        height: ${btnSize}px;
+                        min-width: ${btnSize}px;
+                        min-height: ${btnSize}px;
                         flex-shrink: 0;
                         box-shadow: ${isDark ? '0 2px 6px rgba(0, 0, 0, 0.5)' : '0 2px 6px rgba(0, 0, 0, 0.2)'};
                     `;
+
+                    const updateCopyButtonPosition = () => {
+                        const scrollRect = scrollElement.getBoundingClientRect();
+                        const lineRect = line.getBoundingClientRect();
+
+                        copyBtn.style.left = `${scrollRect.right - btnSize - btnRight}px`;
+                        copyBtn.style.top = `${lineRect.top + lineRect.height / 2}px`;
+                    };
+
+                    updateCopyButtonPosition();
+                    requestAnimationFrame(() => {
+                        updateCopyButtonPosition();
+                        requestAnimationFrame(updateCopyButtonPosition);
+                    });
+                    positionUpdaters.add(updateCopyButtonPosition);
+
+                    const existingUnderline = line.querySelector('.line-command-underline');
+                    if (existingUnderline) {
+                        existingUnderline.remove();
+                    }
+
+                    const rawLineText = line.textContent || '';
+                    const commandText = stripShellPrompt(rawLineText);
+                    const commandStart = commandText ? rawLineText.indexOf(commandText) : -1;
+                    const commandUnderline = document.createElement('span');
+                    commandUnderline.className = 'line-command-underline';
+                    commandUnderline.style.cssText = `
+                        position: absolute;
+                        left: calc(${leftPaddingPx} + ${Math.max(commandStart, 0)}ch);
+                        bottom: 1px;
+                        width: ${commandText.length}ch;
+                        border-bottom: 1px solid ${isDark ? 'rgb(115, 115, 115)' : 'rgb(156, 163, 175)'};
+                        opacity: ${isMobile ? '1' : '0'};
+                        pointer-events: none;
+                    `;
+                    line.appendChild(commandUnderline);
                     
                     let isProcessing = false;
                     
@@ -315,16 +413,9 @@ const CodeBlock = ({
                             btnInClone.remove();
                         }
                         
-                        let textToCopy = lineClone.textContent || '';
-                        
-                        // Remove PS1 prompt ($ and everything before it)
-                        const dollarIndex = textToCopy.indexOf('$');
-                        if (dollarIndex !== -1) {
-                            textToCopy = textToCopy.substring(dollarIndex + 1);
-                        }
-                        
-                        // Trim leading and trailing whitespace
-                        textToCopy = textToCopy.trim();
+                        const textToCopy = isInputOutputBlock
+                            ? stripShellPrompt(lineClone.textContent || '')
+                            : (lineClone.textContent || '').trim();
                         
                         // Use Docusaurus copyToClipboard
                         copyToClipboard(textToCopy).then(() => {
@@ -354,13 +445,16 @@ const CodeBlock = ({
                     
                     const handleMouseEnter = () => {
                         if (!isMobile) {
+                            updateCopyButtonPosition();
                             copyBtn.style.opacity = '1';
+                            commandUnderline.style.opacity = '1';
                         }
                     };
                     
                     const handleMouseLeave = () => {
                         if (!isMobile) {
                             copyBtn.style.opacity = '0';
+                            commandUnderline.style.opacity = '0';
                         }
                     };
                     
@@ -382,6 +476,7 @@ const CodeBlock = ({
                     
                     const handleTouchStart = (e) => {
                         if (isMobile) {
+                            updateCopyButtonPosition();
                             copyBtn.style.backgroundColor = isDark ? 'rgba(82, 82, 82, 1)' : 'rgba(200, 200, 200, 1)';
                             copyBtn.style.transform = 'translateY(-50%) scale(0.92)';
                             copyBtn.style.opacity = '1';
@@ -425,10 +520,9 @@ const CodeBlock = ({
         
         return () => {
             clearTimeout(timeoutId);
-            // This won't clean up if timeout already fired, but that's okay
-            // because the next render will clean up old buttons
+            cleanupFns.forEach((cleanup) => cleanup());
         };
-    }, [highlightLines, displayCode, input, inputLines]);
+    }, [highlightLines, displayCode, inputLines, isInputOutputBlock]);
 
     return (
         <div 
@@ -443,20 +537,23 @@ const CodeBlock = ({
                 title={headerTitle}
                 code={copyableCode}
                 isHovered={isHovered}
-                copiable={copiable}
+                copiable={shouldShowHeaderCopy}
                 langs={langs}
                 currentLang={currentLang}
                 onLangChange={setCurrentLang}
+                isTerminal={isInputOutputBlock}
             />
             
-            <div className="bg-white dark:bg-neutral-900 overflow-x-auto">
+            <div
+                className={`${isInputOutputBlock ? 'bg-[#fffbeb] dark:bg-[rgba(180,83,9,0.14)]' : 'bg-white dark:bg-neutral-900'} overflow-x-auto`}
+            >
                 <SyntaxHighlighter 
                     language={displayLang} 
                     customStyle={{ 
                         margin: 0, 
                         padding: '20px', 
                         fontSize: '0.875rem', 
-                        lineHeight: '1.7', 
+                        lineHeight: 'var(--ifm-pre-line-height)', 
                         fontWeight: 400,
                         backgroundColor: 'transparent'
                     }} 
@@ -471,4 +568,3 @@ const CodeBlock = ({
 };
 
 export default CodeBlock;
-
