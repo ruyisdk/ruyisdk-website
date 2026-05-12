@@ -904,5 +904,98 @@
   },
   "subscription.responseReceived": {
     "message": "Subscription response received."
+  },
+  "riscvSpecs.page.title": {
+    "message": "RISC-V Ratified Specs"
+  },
+  "riscvSpecs.page.description": {
+    "message": "Guide and download entry for RISC-V Ratified Specs"
+  },
+  "riscvSpecs.category.core.description": {
+    "message": "Foundational material for processors, instructions, privilege levels, and interrupts."
+  },
+  "riscvSpecs.category.profiles.description": {
+    "message": "Capability sets that help software reason about platform compatibility."
+  },
+  "riscvSpecs.category.hardware.description": {
+    "message": "Hardware implementation topics for SoCs, devices, IOMMU, server platforms, and resource management."
+  },
+  "riscvSpecs.category.debugTraceRas.description": {
+    "message": "Debugging, execution trace, error records, and reliability-related capabilities."
+  },
+  "riscvSpecs.category.platformSoftware.description": {
+    "message": "System software interfaces for firmware, boot, SBI, UEFI, and platform management."
+  },
+  "riscvSpecs.category.applicationEnablement.description": {
+    "message": "Toolchain and application support for ABI, porting, semihosting, and vector intrinsics."
+  },
+  "riscvSpecs.guide.isa.audience": {
+    "message": "ISA fundamentals"
+  },
+  "riscvSpecs.guide.isa.description": {
+    "message": "Start with the execution model visible to regular programs, privilege levels, exceptions, and interrupts."
+  },
+  "riscvSpecs.guide.platformSoftware.audience": {
+    "message": "System software / firmware"
+  },
+  "riscvSpecs.guide.platformSoftware.description": {
+    "message": "Look first at boot, SBI, UEFI, and platform management interfaces used in system enablement work."
+  },
+  "riscvSpecs.guide.profiles.audience": {
+    "message": "Software ecosystem compatibility"
+  },
+  "riscvSpecs.guide.profiles.description": {
+    "message": "Use Profiles to understand the baseline capability sets expected by software."
+  },
+  "riscvSpecs.guide.hardware.audience": {
+    "message": "Hardware / SoC / validation"
+  },
+  "riscvSpecs.guide.hardware.description": {
+    "message": "Focus on platform integration and hardware interfaces such as IOMMU, PLIC, Server SoC, and QoS."
+  },
+  "riscvSpecs.guide.debugTraceRas.audience": {
+    "message": "Debug / trace / bring-up"
+  },
+  "riscvSpecs.guide.debugTraceRas.description": {
+    "message": "Start from the debug model, trace data, and error record interfaces for low-level diagnosis."
+  },
+  "riscvSpecs.guide.applicationEnablement.audience": {
+    "message": "Compilers / runtimes / vector libraries"
+  },
+  "riscvSpecs.guide.applicationEnablement.description": {
+    "message": "Focus on ABI, semihosting, and vector intrinsics for porting and optimization work."
+  },
+  "riscvSpecs.categoryNav.ariaLabel": {
+    "message": "RISC-V Specs category navigation"
+  },
+  "riscvSpecs.guide.title": {
+    "message": "Read by Interest"
+  },
+  "riscvSpecs.guide.categoryLabel": {
+    "message": "Category: "
+  },
+  "riscvSpecs.card.summaryLabel": {
+    "message": "Summary: "
+  },
+  "riscvSpecs.card.audienceLabel": {
+    "message": "Audience: "
+  },
+  "riscvSpecs.card.mirrorDate": {
+    "message": "Mirror date: {date}"
+  },
+  "riscvSpecs.card.downloadPdf": {
+    "message": "Download PDF"
+  },
+  "riscvSpecs.category.count": {
+    "message": "{count} specs"
+  },
+  "riscvSpecs.specs.ariaLabel": {
+    "message": "RISC-V Ratified Specs category list"
+  },
+  "riscvSpecs.officialSite": {
+    "message": "RISC-V International technical website"
+  },
+  "riscvSpecs.pageNote": {
+    "message": "Note: This page is a guide and mirror download entry. For the corresponding technical standards, please refer to the {link}."
   }
 }
