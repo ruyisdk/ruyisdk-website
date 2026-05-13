@@ -131,40 +131,40 @@ const getCategoryV1Total = (data, key) => data?.downloads_by_categories_v1?.[key
 const CategorySection = ({ data, animate }) => {
   const stats = [
     {
-      title: translate({ id: "RuyiSDK 组件包下载量", message: "RuyiSDK 组件包下载量" }),
+      title: translate({ id: "dashboard.RuyiSDK 组件包下载量", message: "RuyiSDK 组件包下载量" }),
       value: getCategoryV1Total(data, "pkg"),
-      unit: translate({ id: "次", message: "次" }),
-      note: translate({ id: "包含 GNU/LLVM 工具链、QEMU 等组件", message: "包含 GNU/LLVM 工具链、QEMU 等组件" }),
+      unit: translate({ id: "dashboard.次", message: "次" }),
+      note: translate({ id: "dashboard.包含 GNU/LLVM 工具链、QEMU 等组件", message: "包含 GNU/LLVM 工具链、QEMU 等组件" }),
     },
     {
-      title: translate({ id: "RuyiSDK 遥测设备数", message: "RuyiSDK 遥测设备数" }),
+      title: translate({ id: "dashboard.RuyiSDK 遥测设备数", message: "RuyiSDK 遥测设备数" }),
       value: data?.installs?.total || 0,
-      unit: translate({ id: "台", message: "台" }),
-      note: translate({ id: "上报设备数", message: "上报设备数" }),
+      unit: translate({ id: "dashboard.台", message: "台" }),
+      note: translate({ id: "dashboard.上报设备数", message: "上报设备数" }),
     },
     {
-      title: translate({ id: "RuyiSDK 文档下载量", message: "RuyiSDK 文档下载量" }),
+      title: translate({ id: "dashboard.RuyiSDK 文档下载量", message: "RuyiSDK 文档下载量" }),
       value: getCategoryV1Total(data, "humans"),
-      unit: translate({ id: "次", message: "次" }),
-      note: translate({ id: "含用户手册、峰会演示稿、规格书", message: "含用户手册、峰会演示稿、规格书" }),
+      unit: translate({ id: "dashboard.次", message: "次" }),
+      note: translate({ id: "dashboard.含用户手册、峰会演示稿、规格书", message: "含用户手册、峰会演示稿、规格书" }),
     },
     {
-      title: translate({ id: "RuyiSDK 包管理器下载量", message: "RuyiSDK 包管理器下载量" }),
+      title: translate({ id: "dashboard.RuyiSDK 包管理器下载量", message: "RuyiSDK 包管理器下载量" }),
       value: getCategoryV1Total(data, "pm:github") + getCategoryV1Total(data, "pm:mirror") + getCategoryV1Total(data, "pm:pypi"),
-      unit: translate({ id: "次", message: "次" }),
-      note: translate({ id: "RuyiSDK CLI 工具，三渠道下载量汇总", message: "RuyiSDK CLI 工具，三渠道下载量汇总" }),
+      unit: translate({ id: "dashboard.次", message: "次" }),
+      note: translate({ id: "dashboard.RuyiSDK CLI 工具，三渠道下载量汇总", message: "RuyiSDK CLI 工具，三渠道下载量汇总" }),
     },
     {
-      title: translate({ id: "RuyiSDK VS Code 插件下载量", message: "RuyiSDK VS Code 插件下载量" }),
+      title: translate({ id: "dashboard.RuyiSDK VS Code 插件下载量", message: "RuyiSDK VS Code 插件下载量" }),
       value: getCategoryV1Total(data, "ide:plugin:vscode:mirror") + getCategoryV1Total(data, "ide:plugin:vscode:github"),
-      unit: translate({ id: "次", message: "次" }),
-      note: translate({ id: "不含两个市场 Open VSX、Visual Studio Marketplace", message: "不含两个市场 Open VSX、Visual Studio Marketplace" }),
+      unit: translate({ id: "dashboard.次", message: "次" }),
+      note: translate({ id: "dashboard.不含两个市场 Open VSX、Visual Studio Marketplace", message: "不含两个市场 Open VSX、Visual Studio Marketplace" }),
     },
     {
-      title: translate({ id: "RuyiSDK Eclipse 组件下载量", message: "RuyiSDK Eclipse 组件下载量" }),
+      title: translate({ id: "dashboard.RuyiSDK Eclipse 组件下载量", message: "RuyiSDK Eclipse 组件下载量" }),
       value: getCategoryV1Total(data, "ide:eclipse:mirror") + getCategoryV1Total(data, "ide:plugin:eclipse:mirror") + getCategoryV1Total(data, "ide:plugin:eclipse:github"),
-      unit: translate({ id: "次", message: "次" }),
-      note: translate({ id: "IDE定制包 + 插件，不含 Eclipse Marketplace 市场", message: "IDE定制包 + 插件，不含 Eclipse Marketplace 市场" }),
+      unit: translate({ id: "dashboard.次", message: "次" }),
+      note: translate({ id: "dashboard.IDE定制包 + 插件，不含 Eclipse Marketplace 市场", message: "IDE定制包 + 插件，不含 Eclipse Marketplace 市场" }),
     },
   ];
 
@@ -173,14 +173,14 @@ const CategorySection = ({ data, animate }) => {
       <Row gutter={[24, 24]} className={styles.statsRow}>
         {stats.map((item) => (
           <Col key={item.title} xs={24} md={12} lg={8}>
-            <div className="mx-auto h-full max-w-md lg:max-w-none">
+            <div className="mx-auto h-full max-w-md md:max-w-none">
               <AnimatedStatistic {...item} animate={animate} />
             </div>
           </Col>
         ))}
       </Row>
-      <div className={`${styles.updateTime} mx-auto max-w-md text-[0.74rem] md:max-w-[calc(56rem+24px)] lg:max-w-none`}>
-        {translate({ id: "数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
+      <div className={`${styles.updateTime} text-[0.74rem]`}>
+        {translate({ id: "dashboard.数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
       </div>
     </section>
   );
