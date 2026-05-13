@@ -14,6 +14,7 @@ import NewsShowcase from "./NewsShowcase";
 import RuyiInLive from "./RuyiInLive";
 import CardNews from './CardNews';
 import Partners from "./Partners";
+import VideoIntro from "./VideoIntro";
 
 
 function Hero() {
@@ -23,6 +24,7 @@ function Hero() {
 
         <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mt-4" >
           <MainDisplay />
+          <VideoIntro />
           <CardNews />
           {/*<DemoBoardsDisplay />*/}
         </div>
