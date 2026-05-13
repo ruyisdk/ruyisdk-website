@@ -1,4 +1,6 @@
 {
+  "========== homepage ==========": { "message": "" },
+
   "home.title": {
     "message": "RuyiSDK: Preparing for 1 Million RISC-V Software Developers"
   },
@@ -44,6 +46,9 @@
     "message": "Partners",
     "description": "Title for partners page"
   },
+
+  "========== Contributors ==========": { "message": "" },
+
   "community.contributors.title": {
     "message": "Contributors",
     "description": "Title for contributors page"
@@ -67,6 +72,8 @@
     "message": "Issues",
     "description": "Label for issue count on contributors page"
   },
+
+  "========== footer ==========": { "message": "" },
 
   "footer.ecosystem": {
     "message": "Ecosystem"
@@ -115,6 +122,57 @@
   },
   "footer.jetbrains": {
     "message": "JetBrains IDE Multiarch"
+  },
+
+  "========== dashboard ==========": { "message": "" },
+
+  "dashboard.title": {
+    "message": "RuyiSDK Dashboard"
+  },
+  "dashboard.RuyiSDK 组件包下载量": {
+    "message": "RuyiSDK Component Downloads"
+  },
+  "dashboard.RuyiSDK 遥测设备数": {
+    "message": "Ruyi Telemetry Upload Installations"
+  },
+  "dashboard.RuyiSDK 文档下载量": {
+    "message": "RuyiSDK Documentation Downloads"
+  },
+  "dashboard.RuyiSDK 包管理器下载量": {
+    "message": "RuyiSDK Package Manager Downloads"
+  },
+  "dashboard.RuyiSDK VS Code 插件下载量": {
+    "message": "VSCode Extension Downloads"
+  },
+  "dashboard.RuyiSDK Eclipse 组件下载量": {
+    "message": "Eclipse Plugin Downloads"
+  },
+  "dashboard.包含 GNU/LLVM 工具链、QEMU 等组件": {
+    "message": "Includes GNU/LLVM toolchains, QEMU, and other components"
+  },
+  "dashboard.上报设备数": {
+    "message": "Ruyi telemetry upload device count"
+  },
+  "dashboard.含用户手册、峰会演示稿、规格书": {
+    "message": "Includes user manuals, summit slides, and specifications"
+  },
+  "dashboard.RuyiSDK CLI 工具，三渠道下载量汇总": {
+    "message": "RuyiSDK CLI tool, total downloads across three channels"
+  },
+  "dashboard.不含两个市场 Open VSX、Visual Studio Marketplace": {
+    "message": "Excludes Open VSX and Visual Studio Marketplace"
+  },
+  "dashboard.IDE定制包 + 插件，不含 Eclipse Marketplace 市场": {
+    "message": "IDE custom package plus plugins, excluding Eclipse Marketplace"
+  },
+  "dashboard.次": {
+    "message": "times"
+  },
+  "dashboard.台": {
+    "message": "devices"
+  },
+  "dashboard.数据更新时间": {
+    "message": "Data updated at"
   },
 
   "meetup": {
