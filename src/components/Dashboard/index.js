@@ -63,7 +63,7 @@ const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
 
 const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
   const ANIMATION_DURATION = 500;
-  const MAX_ANIMATION_STEPS = 5;
+  const MAX_ANIMATION_STEPS = 30;
 
   const [displayValue, setDisplayValue] = useState(value);
   const previousValueRef = useRef(value);
