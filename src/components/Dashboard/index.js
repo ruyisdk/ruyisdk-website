@@ -63,6 +63,7 @@ const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
 
 const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
   const ANIMATION_DURATION = 500;
+  const MAX_ANIMATION_STEPS = 5;
 
   const [displayValue, setDisplayValue] = useState(value);
   const previousValueRef = useRef(value);
@@ -86,18 +87,20 @@ const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
       return;
     }
 
-    const step = diff > 0 ? 1 : -1;
-    const stepCount = Math.abs(diff);
+    const stepCount = Math.min(Math.abs(diff), MAX_ANIMATION_STEPS);
+    if (stepCount <= 0) return;
+
     const stepDuration = ANIMATION_DURATION / stepCount;
-    let current = startValue;
+    let currentStep = 0;
 
     const timer = setInterval(() => {
-      current += step;
-      if ((step > 0 && current >= value) || (step < 0 && current <= value)) {
+      currentStep += 1;
+      if (currentStep >= stepCount) {
         setDisplayValue(value);
         clearInterval(timer);
       } else {
-        setDisplayValue(current);
+        const progress = currentStep / stepCount;
+        setDisplayValue(Math.round(startValue + diff * progress));
       }
     }, stepDuration);
 
