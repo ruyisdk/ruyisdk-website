@@ -7,7 +7,7 @@
 }
 
 .container {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 48px));
   margin: 0 auto;
   padding: 44px 0 72px;
 }
@@ -416,7 +416,7 @@
 
 @media (max-width: 760px) {
   .container {
-    width: min(100% - 24px, 1180px);
+    width: calc(100% - 48px);
     padding: 28px 0 48px;
   }
 
