@@ -7,17 +7,11 @@ export default function VideoIntro() {
     <section className="mb-4 w-full overflow-hidden rounded-[0.75rem] bg-[linear-gradient(135deg,rgba(232,237,249,0.9),rgba(250,251,254,0.82))] shadow-[0_1rem_2.75rem_rgba(18,61,145,0.09)] backdrop-blur">
       <div className="grid items-center gap-0 lg:grid-cols-2">
         <div className="overflow-hidden bg-black">
-          <video
+          <img
             className="block aspect-video w-full bg-black object-cover"
-            src="https://mirrors.iscas.ac.cn/ruyisdk/humans/events/cas-public-science-day-2026/hello-ruyisdk.mp4"
-            controls
-            preload="metadata"
-            playsInline
-          >
-            <Translate id="home.videointro.unsupported">
-              您的浏览器不支持 HTML5 视频播放。
-            </Translate>
-          </video>
+            src="/img/news/events/202605_cas_public_science_day_2026/title.jpg"
+            alt="RuyiSDK 公众科学日活动"
+          />
         </div>
 
         <div className="flex flex-col items-start px-4 py-5 md:px-7 md:py-7 lg:px-10">
