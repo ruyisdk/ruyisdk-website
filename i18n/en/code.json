@@ -46,6 +46,15 @@
     "message": "Partners",
     "description": "Title for partners page"
   },
+  "home.videointro.title": {
+    "message": "RuyiSDK at the 2026 ISCAS “Software Defines the Future” Public Science Day"
+  },
+  "home.videointro.description": {
+    "message": "On May 16, the Institute of Software, Chinese Academy of Sciences will host its 2026 “Software Defines the Future” Public Science Day at the Zhongguancun Software Park campus in Beijing."
+  },
+  "home.videointro.button": {
+    "message": "Explore"
+  },
 
   "========== Contributors ==========": { "message": "" },
 
