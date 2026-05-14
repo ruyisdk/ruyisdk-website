@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 
 export default function PdfPreview({ href, linkText }) {
-  const [canPreview, setCanPreview] = useState(true);
+  const [canPreview, setCanPreview] = useState(false);
 
   useEffect(() => {
-    if (typeof navigator !== "undefined" && navigator.pdfViewerEnabled === false) {
+    if (typeof window === "undefined" || typeof navigator === "undefined") {
       setCanPreview(false);
+      return;
     }
+
+    const userAgent = navigator.userAgent || "";
+    const isMobileUserAgent = /Android|iPhone|iPad|iPod|Mobile|IEMobile|Opera Mini/i.test(userAgent);
+    const isNarrowTouchScreen =
+      window.matchMedia?.("(max-width: 767px)").matches &&
+      window.matchMedia?.("(pointer: coarse)").matches;
+    const supportsPdfPreview = navigator.pdfViewerEnabled !== false;
+
+    setCanPreview(supportsPdfPreview && !isMobileUserAgent && !isNarrowTouchScreen);
   }, []);
 
   if (!canPreview) {
