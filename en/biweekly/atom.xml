@@ -74,13 +74,13 @@ RuyiSDK 软件的打包与分发工作：目前您可以直接在 GitHub 上查�
 <li>RuyiSDK VSCode Extension：<!-- -->
 <ul>
 <li><a href="https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/tag/0.1.0/" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/tag/0.1.0/</a></li>
-<li><a href="https://mirror.isrc.ac.cn/ruyisdk/ide/plugins/vscode/" target="_blank" rel="noopener noreferrer">https://mirror.isrc.ac.cn/ruyisdk/ide/plugins/vscode/</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/</a></li>
 </ul>
 </li>
 <li>RuyiSDK Eclipse Plugins：<!-- -->
 <ul>
 <li><a href="https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/tag/v0.1.0/" target="_blank" rel="noopener noreferrer">https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/tag/v0.1.0/</a></li>
-<li><a href="https://mirror.isrc.ac.cn/ruyisdk/ide/plugins/eclipse/" target="_blank" rel="noopener noreferrer">https://mirror.isrc.ac.cn/ruyisdk/ide/plugins/eclipse/</a></li>
+<li><a href="https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/" target="_blank" rel="noopener noreferrer">https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/</a></li>
 </ul>
 </li>
 </ul>
