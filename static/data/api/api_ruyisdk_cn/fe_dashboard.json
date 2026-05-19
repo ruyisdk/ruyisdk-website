@@ -1,91 +1,91 @@
 {
-  "last_updated": "2026-05-14T20:00:01.793212Z",
+  "last_updated": "2026-05-19T01:00:11.938951Z",
   "downloads": {
-    "total": 46714
+    "total": 47523
   },
   "pm_downloads": {
-    "total": 57726
+    "total": 57920
   },
   "other_categories_downloads": {
     "3rdparty": {
-      "total": 17499
+      "total": 17992
     },
     "humans": {
-      "total": 816
+      "total": 853
     },
     "ide": {
-      "total": 2466
+      "total": 2505
     }
   },
   "downloads_by_categories_v1": {
     "pkg": {
-      "total": 46714
+      "total": 47523
     },
     "pm:github": {
       "total": 5786
     },
     "pm:mirror": {
-      "total": 46068
+      "total": 46262
     },
     "pm:pypi": {
       "total": 5872
     },
     "3rdparty": {
-      "total": 17499
+      "total": 17992
     },
     "humans": {
-      "total": 816
+      "total": 853
     },
     "ide:eclipse:mirror": {
-      "total": 1844
+      "total": 1861
     },
     "ide:plugin:eclipse:mirror": {
-      "total": 205
+      "total": 215
     },
     "ide:plugin:eclipse:github": {
       "total": 75
     },
     "ide:plugin:vscode:mirror": {
-      "total": 265
+      "total": 277
     },
     "ide:plugin:vscode:github": {
       "total": 77
     }
   },
   "installs": {
-    "total": 7771
+    "total": 8295
   },
   "top_packages": {},
   "top_commands": {
     "ruyi admin format-manifest": {
-      "total": 17819
+      "total": 19790
     },
     "ruyi update": {
-      "total": 10799
+      "total": 11716
     },
     "ruyi list": {
-      "total": 10626
+      "total": 11216
     },
     "ruyi": {
-      "total": 7776
+      "total": 8909
     },
     "ruyi news read": {
-      "total": 4364
+      "total": 4433
     },
     "ruyi news list": {
-      "total": 3441
+      "total": 3865
     },
     "ruyi list profiles": {
-      "total": 2236
+      "total": 2266
     },
     "ruyi install": {
-      "total": 2091
+      "total": 2136
     },
     "ruyi telemetry status": {
-      "total": 1770
+      "total": 2085
     },
     "ruyi telemetry consent": {
-      "total": 1700
+      "total": 2027
     }
   },
   "github_org_stats": [
@@ -507,7 +507,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-05-14T20:27:40.044Z",
+    "generatedAt": "2026-05-19T20:28:23.929Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }
