@@ -63,11 +63,6 @@ const config = {
           // Remove this to remove the "edit this page" links.
         },
         blog: false,
-        sitemap: {
-          ignorePatterns: [
-            '/biweekly/**'
-          ]
-        },
         theme: {
           customCss: ["./src/css/tailwind.css", "./src/css/custom.scss"],
         },
@@ -132,17 +127,6 @@ const config = {
   plugins: [
     "docusaurus-plugin-sass",
     "./scripts/plugins/news-generator",
-    [
-      "@docusaurus/plugin-content-blog",
-      {
-        blogTitle: "双周报",
-        blogSidebarTitle: "所有报告",
-        id: "biweekly",
-        routeBasePath: "biweekly",
-        path: "biweekly",
-        blogSidebarCount: "ALL",
-      },
-    ],
   ],
   // add custom script
   scripts: [
