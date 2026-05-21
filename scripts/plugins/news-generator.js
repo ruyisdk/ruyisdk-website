@@ -281,7 +281,7 @@ function scanFiles(pattern, preferredLocale = null) {
 export default function newsGeneratorPlugin(context, options) {
   return {
     name: "docusaurus-news-generator",
-    async postBuild({siteConfig = {}, routesPaths = [], outDir}) {
+    async loadContent() {
       const { currentLocale } = context.i18n;
       // Helpers to produce localized titles for the news sidebar
       const toArabicDigits = (str = "") =>
@@ -393,11 +393,15 @@ export default function newsGeneratorPlugin(context, options) {
           data[itemname] = scannedItems;
         }
 
-      writeFileSync(join(outDir, "news.json"), JSON.stringify(data, null, 2));
-      console.log(`[${currentLocale}] Generated news.json with:`);
+      console.log(`[${currentLocale}] Prepared news data with:`);
       console.log(`- ${data.articles.length} articles`);
       console.log(`- ${data.ruyinews.length} ruyi news`);
       console.log(`- ${data.weeklies.length} weeklies`);
+
+      return data;
+    },
+    async contentLoaded({ content, actions }) {
+      actions.setGlobalData(content);
     },
   };
 }
