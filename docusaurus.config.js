@@ -81,8 +81,7 @@ const config = {
         defaultMode: "light",
         disableSwitch: true,
       },
-      // Replace with your project's social card
-      image: "img/docusaurus-social-card.jpg",
+      image: "img/ruyi-logo-720.svg",
       navbar: {
         title: "RuyiSDK",
         hideOnScroll: true,
