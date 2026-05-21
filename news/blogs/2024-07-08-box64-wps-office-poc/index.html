@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr" class="plugin-pages plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.4.0">
+<title data-rh="true">尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office | RuyiSDK</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://ruyisdk.org/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://ruyisdk.org/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://ruyisdk.org/news/blogs/2024-07-08-box64-wps-office-poc"><meta data-rh="true" property="og:locale" content="zh_Hans"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office | RuyiSDK"><meta data-rh="true" name="description" content="使用 RuyiSDK 与 Box64 在 RISC-V Linux 桌面发行版上体验运行 WPS Office。"><meta data-rh="true" property="og:description" content="使用 RuyiSDK 与 Box64 在 RISC-V Linux 桌面发行版上体验运行 WPS Office。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://ruyisdk.org/news/blogs/2024-07-08-box64-wps-office-poc"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/news/blogs/2024-07-08-box64-wps-office-poc" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/en/news/blogs/2024-07-08-box64-wps-office-poc" hreflang="en"><link data-rh="true" rel="alternate" href="https://ruyisdk.org/news/blogs/2024-07-08-box64-wps-office-poc" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/biweekly/rss.xml" title="RuyiSDK RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/biweekly/atom.xml" title="RuyiSDK Atom Feed">
+
+<script src="/js/toc-smooth-scroll.js" async></script>
+<script src="/js/menu-title-click.js"></script><link rel="stylesheet" href="/assets/css/styles.5f748315.css">
+<script src="/assets/js/runtime~main.afa78b4a.js" defer="defer"></script>
+<script src="/assets/js/main.982f3dc8.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_NAvT" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="navbar navbar--fixed-top navbarHideable_bCy9 navbar--primary"><div class="navbar__inner"><div class="navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/ruyi-logo-720.svg" alt="RuyiSDK Logo" class="themedComponent_yc2b themedComponent--light_oZU5"><img src="/img/ruyi-logo-720.svg" alt="RuyiSDK Logo" class="themedComponent_yc2b themedComponent--dark_Kz2s"></div><b class="navbar__title text--truncate">RuyiSDK</b></a><a class="navbar__item navbar__link" href="/download">下载</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/news">新闻</a><a class="navbar__item navbar__link" href="/contributors">贡献者</a><a href="https://ruyisdk.cn" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">社区<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><a class="navbar__item navbar__link" href="/about">关于</a></div><div class="navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link" href="/news/blogs/2024-07-08-box64-wps-office-poc"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_YaZf"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>简体中文</a><ul class="dropdown__menu"><li><a href="/news/blogs/2024-07-08-box64-wps-office-poc" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="zh-Hans">简体中文</a></li><li><a href="/en/news/blogs/2024-07-08-box64-wps-office-poc" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="en">English</a></li></ul></div><a class="navbar__item navbar__link" href="/docs/intro">文档</a><a href="https://github.com/ruyisdk" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="navbarSearchContainer_gQ5o"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_eExm"><main class="relative overflow-hidden px-6 py-10 text-gray-800 font-inter"><div class="absolute inset-0 overflow-hidden pointer-events-none"><div aria-hidden="true" class="absolute top-0 left-0 rounded-full -z-10" style="width:600px;height:600px;background:rgba(221, 190, 221, 0.2);filter:blur(120px)"></div><div aria-hidden="true" class="absolute bottom-0 right-0 rounded-full -z-10" style="width:700px;height:700px;background:rgba(168, 218, 220, 0.2);filter:blur(120px)"></div></div><div class="mx-auto relative z-10 max-w-screen-xl"><div class="header_SB2j"><h1 class="title_CvtQ">尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office</h1><div class="authorList_TgHW"><div class="authorCard_Okxx"><img src="https://avatars.githubusercontent.com/u/1175567?v=4" alt="xen0n" class="authorAvatar_BXu7"><div class="authorText_GXs5"><a href="https://github.com/xen0n" class="authorName_IOyo">xen0n</a><span class="authorTitle_gvCA">RuyiSDK 技术主管</span></div></div></div></div><div class="min-w-0"><section class="card_UszP default_zh28 overflow-hidden articleCard_uTZ4"><div class="markdown_YmOW"><h1 id="尝鲜使用-box64-在-risc-v-系统上运行-wps-office">尝鲜：使用 Box64 在 RISC-V 系统上运行 WPS Office</h1>
+<p>得益于 Box64 RISC-V 移植工作的进展，在 RISC-V Linux 桌面发行版上运行 WPS
+Office 等常见 x86 二进制软件已成为可能。RuyiSDK 正在开展此方面的集成工作；
+按以下的步骤操作，您将能先行一步感受 RISC-V 办公体验。</p>
+<p>我们假定您在进行以下操作之前，已经升级到了 <code>ruyi</code> 0.14.0 或更高的版本，
+并执行了 <code>ruyi update</code> 以将软件源信息同步到最新。</p>
+<h2 id="操作步骤">操作步骤</h2>
+<p>为叙述方便，设您的 <code>$HOME</code> 为 <code>/home/foo</code>，架构（<code>uname -m</code> 输出）为
+<code>riscv64</code>，使用 <code>sudo</code> 提权。</p>
+<h3 id="允许安装预发布版本的软件包">允许安装预发布版本的软件包</h3>
+<p>由于 Box64 RISC-V 支持进展迅速，目前（2024 年 7 月初）很多功能改进没有在
+其最新稳定版本得到体现。我们打包了 Box64 的开发快照版本；为了能够安装此版本，
+您需要配置 <code>ruyi</code> 以使其在安装软件包时考虑预发布版本。</p>
+<ul>
+<li>如果 <code>~/.config/ruyi</code> 目录不存在，则创建之。</li>
+<li>编辑 <code>~/.config/ruyi/config.toml</code>。</li>
+</ul>
+<pre><code class="language-toml">[packages]
+prereleases = true
+</code></pre>
+<h3 id="安装-box64">安装 Box64</h3>
+<p>按照 RuyiSDK 软件包的命名习惯，从 Box64 的上游（而非 PLCT 或某些厂商的 fork）
+构建的 Box64 二进制包，名字叫 <code>box64-upstream</code>。</p>
+<pre><code class="language-sh">ruyi install box64-upstream
+# ...
+# info: package box64-upstream-0.2.8-ruyi.20240702 installed to /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702
+</code></pre>
+<p>记下安装路径。</p>
+<h3 id="配置-linux-binfmt_misc-机制">配置 Linux <code>binfmt_misc</code> 机制</h3>
+<p>由于 WPS Office 的打包方式特殊，它只能从开发商提供的启动器脚本被间接拉起，
+而不能直接交由 Box64 启动。因此您需要确保您的系统支持 <code>binfmt_misc</code>：
+如果不支持，接下来的操作会失败。</p>
+<p>不同 Linux 发行版的 <code>binfmt_misc</code> 配置方式不尽相同，以下针对采用 systemd
+的系统叙述。您可以根据自身情况自行调整。</p>
+<pre><code class="language-sh"># 确认 Box64 可执行文件的位置
+ls /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/bin/box64
+
+# 调整 Box64 `binfmt.d` 配置文件的路径
+# 假设您使用 nano 编辑器
+nano /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/etc/binfmt.d/box64.conf
+# 将行尾的 //bin/box64 改为先前验证过的绝对路径
+
+# 将其部署到系统
+sudo cp /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/etc/binfmt.d/box64.conf /etc/binfmt.d/box64.conf
+sudo systemctl restart systemd-binfmt
+
+# 检查部署结果
+cat /proc/sys/fs/binfmt_misc/box64
+</code></pre>
+<h3 id="安装-x86-sysroot">安装 x86 sysroot</h3>
+<p>由于 Box64 主要面向游戏等软件的模拟，而这些软件基本都自带所有依赖，所以 Box64
+本身基本没有自带什么 x86 运行时库。WPS Office 作为一个预期被系统包管理器管理的
+桌面应用，Box64 自带的少量 x86 运行时库无法满足它的需求，因此我们需要自行准备
+x86 环境。</p>
+<pre><code class="language-sh"># 下载预制的 x86 sysroot
+# 此为临时性的链接。后续待本功能迭代稳定之后，操作方式将改变，此链接也将失效
+# 假设此文件放在了 ~/Downloads 目录下
+wget https://mirror.iscas.ac.cn/ruyisdk/dist/temp/debian-bookworm.gui.20240705.amd64.tar.zst
+
+# 假设安装到 /opt/debian-bookworm.amd64
+sudo mkdir /opt/debian-bookworm.amd64
+pushd /opt/debian-bookworm.amd64
+tar -xf ~/Downloads/debian-bookworm.gui.20240705.amd64.tar.zst
+popd
+</code></pre>
+<h3 id="安装-wps-office">安装 WPS Office</h3>
+<p>强制安装 <code>x86_64</code> 架构的 WPS Office 软件包：</p>
+<pre><code class="language-sh">ruyi install --host x86_64 wps-office
+# ...
+# info: package wps-office-11.1.0-r.11719 installed to /home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719
+</code></pre>
+<p>由于 WPS Office 官方下载页面的限制，<code>ruyi</code> 无法自动下载安装包。
+请按照提示信息操作，之后重新执行该命令以安装。</p>
+<h3 id="调整-wps-office-启动器脚本">调整 WPS Office 启动器脚本</h3>
+<p>由于 WPS Office 预期自身被系统包管理器管理，它的启动器脚本假定了自身的安装路径
+为 <code>/opt/kingsoft/wps-office</code>，需要为它们打补丁。</p>
+<pre><code class="language-sh">pushd /home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719
+
+# 当前工作目录路径中应当不含特殊字符。
+# 如果含有，请自行适当调整 sed 命令的参数
+sed -i &quot;s@gInstallPath=/@gInstallPath=$(pwd)/@&quot; ./usr/bin/*
+
+popd
+</code></pre>
+<h3 id="运行-wps-office">运行 WPS Office</h3>
+<p>准备工作终于完成，现在将所有部分串起来：</p>
+<pre><code class="language-sh"># 此动态链接库的原生转发仍有些问题，因此强制以模拟方式执行
+export BOX64_EMULATED_LIBS=libsqlite3.so.0
+# 配置 Box64 库搜索路径
+export BOX64_LD_LIBRARY_PATH=/opt/debian-bookworm.amd64/usr/lib/x86_64-linux-gnu
+
+# 现在可以执行了！
+/home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719/usr/bin/wps
+</code></pre>
+<h2 id="结语">结语</h2>
+<p>以上是 RuyiSDK 对 RISC-V 二进制翻译 x86 软件的初步集成成果。
+今后我们仍将迭代这一过程的用户体验，以期用户在 RISC-V 系统上运行需要的应用
+更加方便。</p></div></section></div></div></main></div><footer class="footer_xBL4"><div class="footer__links_rq3l"><div class="footer__col_I_Ea"><div class="footer__title_pF9u">生态</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="/docs/intro">RuyiSDK</a></li><li class="footer__item_N3As"><a href="https://matrix.ruyisdk.org/zh-CN/" target="_blank" rel="noopener noreferrer">Support Matrix<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://github.com/RuyiAI-Stack" target="_blank" rel="noopener noreferrer">RuyiAI<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://github.com/openRuyi-Project" target="_blank" rel="noopener noreferrer">openRuyi<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://github.com/RVCK-Project/rvck" target="_blank" rel="noopener noreferrer">RVCK<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://docs.revyos.dev/" target="_blank" rel="noopener noreferrer">RevyOS<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">社区</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="https://ruyisdk.cn" target="_blank" rel="noopener noreferrer">RISC-V 开发者社区<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="https://github.com/ruyisdk/ruyisdk/discussions" target="_blank" rel="noopener noreferrer">讨论组<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item_N3As"><a href="/dashboard">数据统计</a></li><li class="footer__item_N3As"><a href="/code_of_conduct">社区守则</a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">关注我们</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a class="hover-wechat-link" href="/about">微信公众号</a></li><li class="footer__item_N3As"><a class="hover-qq-link" href="/about">QQ群</a></li><li class="footer__item_N3As"><a href="https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" target="_blank" rel="noopener noreferrer">实习生招聘<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="footer__col_I_Ea"><div class="footer__title_pF9u">更多开发工具</div><ul class="footer__items_OetA"><li class="footer__item_N3As"><a href="/riscv-specs">RVI Specs</a></li><li class="footer__item_N3As"><a href="https://github.com/Glavo/JetBrains-IDE-Multiarch" target="_blank" rel="noopener noreferrer">JetBrains IDE Multiarch<!-- --> <svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_DYDQ"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__copyright_xAbK">Copyright © 2024-2026 Institute of Software, CAS</div></footer></div>
+</body>
+</html>
