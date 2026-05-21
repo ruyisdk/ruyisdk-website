@@ -1,6 +1,6 @@
 ---
 date: 2024-09-30
-link: /news/blogs/2024-09-30-eclipse-riscv64
+link: /en/news/blogs/2024-09-30-eclipse-riscv64
 image: /img/news/blogs/2024-09-30-eclipse-pic-1.png
 ---
 

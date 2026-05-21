@@ -1,6 +1,6 @@
 ---
 date: 2024-07-08
-link: /news/blogs/2024-07-08-box64-wps-office-poc
+link: /en/news/blogs/2024-07-08-box64-wps-office-poc
 ---
 
 # Early Access: Using Box64 to Run WPS Office on RISC-V Systems
