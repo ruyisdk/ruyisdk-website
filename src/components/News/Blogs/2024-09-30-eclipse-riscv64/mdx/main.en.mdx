@@ -1,0 +1,58 @@
+---
+title: "Initial RISC-V Support Landed Upstream in Eclipse, and Daily Builds Are Available"
+---
+# Initial RISC-V Support Landed Upstream in Eclipse, and Daily Builds Are Available
+
+> - Original article: https://riscv.org/blog-chinese/2024/09/eclipse-riscv64-support-upstreamed/
+> - Date: September 30, 2024
+> - Author: Chen Xuan
+
+Eclipse is an open-source and powerful integrated development environment
+(IDE). It supports many programming languages and provides developers with a
+unified platform for writing, debugging, and managing code. Eclipse also has a
+strong plugin system that can be flexibly extended for different needs.
+
+Recently, engineers from the RevyOS team at the Institute of Software, Chinese
+Academy of Sciences (ISCAS), together with developers from other open-source
+communities, successfully brought initial riscv64 support into the upstream
+Eclipse repositories. More than
+[twenty issues and pull requests](https://github.com/eclipse-platform/eclipse.platform.releng.aggregator/issues/2310)
+were created during the process, covering key components including SWT and
+Equinox. Eclipse can now support Java development based on OpenJDK on riscv64.
+
+![eclipse-pic-1.png](/img/eclipse-pic-1.png)
+
+*Figure 1. Upstreaming Eclipse support involved dozens of different components,
+with contributions from many developers.*
+
+The related changes have already been merged upstream. If you are interested,
+visit the link below and choose the latest build date in the Integration Builds
+section. For builds dated 2024-09-29 or later, riscv support is included in
+the daily builds. Enter the daily build page and select
+"Eclipse SDK -> Linux (64 bit version for RISC-V)" to download and try it.
+
+https://download.eclipse.org/eclipse/downloads/index.html
+
+![eclipse-pic-2.png](/img/eclipse-pic-2.png)
+
+*Figure 2. Eclipse SDK IDE tested on a SiFive Unmatched running Debian.*
+
+Going forward, the RevyOS team will continue improving Eclipse support on
+riscv64. More optimizations and refinements are on the way.
+
+ISCAS warmly welcomes open-source contributors who are passionate about
+open-source technology to join and help advance Eclipse on the riscv64
+platform.
+
+**About ISCAS and the RevyOS Team**
+
+The RevyOS team is part of PLCT Lab, ISCAS. ISCAS is both a Development
+Partner and a Training Partner of RISC-V International, and in August 2024 it
+also received certification as a RISC-V Ecosystem Lab.
+
+**Special Thanks to the Following Contributors**
+
+Yu Bo, Chen Xuan, Hannes Wellmann, Alexander Kurtakov, Ed Merks,
+Pawel Stankiewicz, and Frederic Gurr
+
+*If anyone has been omitted, please contact the author.*

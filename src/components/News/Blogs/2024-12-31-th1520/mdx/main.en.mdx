@@ -1,0 +1,62 @@
+---
+title: "Kernel Upgraded from 5.10 to 6.6: New RuyiSDK Images for TH1520 Development Boards"
+---
+> - Original article: https://mp.weixin.qq.com/s/iVKqprdmaHCylPZAOyKigg
+> - Date: December 31, 2024
+> - Author: Nie Yuting
+
+On December 29, the **RevyOS** operating system for the **TH1520** completed
+its kernel upgrade from **5.10** to **6.6**, and introduced updated support
+for both Milk-V Meles and LicheePi 4A. The newly added support includes:
+
+- CPU frequency scaling and fan-speed control
+- Support for 8GB memory variants of Milk-V Meles and LicheePi 4A
+- Proper operation on eMMC storage, with OS booting from eMMC supported
+- Wired networking, allowing stable Internet access through Ethernet
+- HDMI video and audio output
+- Support for the AP6256 WiFi module after updating the kernel
+
+At this point, RevyOS fully covers multiple variants of Milk-V Meles
+4GB/8GB/16GB and LicheePi 4A 8GB/16GB.
+
+![6401](/img/6401.png)
+
+Download link for the latest RevyOS image for Milk-V Meles
+(the image supports SD card flashing):
+
+https://mirror.iscas.ac.cn/revyos/extra/images/meles/20241229/
+
+
+
+![6402](/img/6402.png)
+
+
+
+Download link for the latest RevyOS image for LicheePi 4A
+(the image supports SD card flashing):
+
+https://mirror.iscas.ac.cn/revyos/extra/images/lpi4a/20241229/
+
+
+
+To help developers better understand and use RevyOS, the team also provides a
+rich set of tutorials covering Debian package building, GCC toolchains,
+XuanTie QEMU build workflows, kernel replacement, and kernel compilation. For
+more resources, visit the official documentation site:
+
+![6403](/img/6403.png)
+
+https://docs.revyos.dev/
+
+
+
+###### **About TH1520**
+
+Based on the XuanTie C910 core, TH1520 runs at up to 2.5GHz, supports
+end-to-end security protection, offers 4K video processing capability, and
+includes rich heterogeneous computing and high-speed I/O resources. It is well
+suited to a broad range of mid- to high-performance application scenarios.
+Developers are welcome to scan the QR code and note "TH1520" when joining the
+WeChat group.
+
+![6404](/img/6404.png)
