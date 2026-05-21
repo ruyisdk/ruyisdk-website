@@ -198,6 +198,15 @@
   "news.news": {
     "message": "Ruyi News"
   },
+  "news.pagination.prev": {
+    "message": "Previous"
+  },
+  "news.pagination.next": {
+    "message": "Next"
+  },
+  "news.articles.empty": {
+    "message": "No articles yet"
+  },
 
   "meetup": {
     "message": "Our recent events"

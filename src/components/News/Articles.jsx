@@ -1,5 +1,6 @@
 import Button from "../common/Button";
 import React, { useState, useMemo } from "react";
+import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import LoadingSkeleton from "./LoadingSkeleton";
 
@@ -73,7 +74,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
 
         {!loading && currentPageItems.length === 0 && (
           <div className="rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-4 shadow-sm text-gray-600">
-            暂无文章
+            {translate({ id: "news.articles.empty", message: "暂无文章" })}
           </div>
         )}
 
@@ -118,7 +119,8 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             disabled={!canGoPrev || isTransitioning}
             onClick={() => changePage("prev")}
           >
-            ← 上一页
+            {"← "}
+            {translate({ id: "news.pagination.prev", message: "上一页" })}
           </Button>
 
           <div className="flex items-center gap-2 rounded-lg bg-white/70 backdrop-blur px-4 py-2 shadow-sm">
@@ -131,7 +133,8 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             disabled={!canGoNext || isTransitioning}
             onClick={() => changePage("next")}
           >
-            下一页 →
+            {translate({ id: "news.pagination.next", message: "下一页" })}
+            {" →"}
           </Button>
         </div>
       )}
