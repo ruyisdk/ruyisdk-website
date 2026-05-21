@@ -9,7 +9,7 @@ export default function VideoIntro() {
         <div className="overflow-hidden bg-black">
           <img
             className="block aspect-video w-full bg-black object-cover"
-            src="/img/news/events/202605_cas_public_science_day_2026/title.jpg"
+            src="/img/news/events/202605_cas_public_science_day_2026/title.webp"
             alt="RuyiSDK 公众科学日活动"
           />
         </div>

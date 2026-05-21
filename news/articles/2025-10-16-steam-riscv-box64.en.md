@@ -1,7 +1,7 @@
 ---
 date: 2025-10-16
 link: https://mp.weixin.qq.com/s/zIuQ-2k4B98wEmNbHG5CUA
-image: /img/news/articles/2025-10-16-steam-riscv-box64.png
+image: /img/news/articles/2025-10-16-steam-riscv-box64.webp
 ---
 
 # Great News: Steam Can Now Run Stably on RISC-V! Box64 Delivers Again

@@ -645,7 +645,7 @@ export default function DownloadsPage() {
               descriptionMessage="VS Code 扩展下载与发布入口。"
               href={IDE_VSCODE_RELEASES_URL}
               accent="blue"
-              logoSrc="/img/vs-code.png"
+              logoSrc="/img/vs-code.webp"
               logoAlt="VS Code"
               showIdeLink={false}
               latestVersion={vscodeLatest.version}

@@ -1,7 +1,7 @@
 ---
 date: 2025-08-08
 link: https://mp.weixin.qq.com/s/OW8OAXUPN-kWurjVjk2VsQ
-image: /img/news/articles/2025-08-08-bosc-world-riscv-day.jpg
+image: /img/news/articles/2025-08-08-bosc-world-riscv-day.webp
 ---
 
 # PLCT实验室携香山南湖笔记本倾情参与BOSC世界RISC-V日

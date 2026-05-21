@@ -1,7 +1,7 @@
 ---
 date: 2026-05-13
 link: /en/news/events/202605-cas-public-science-day-2026
-image: /img/news/events/202605_cas_public_science_day_2026/title.jpg
+image: /img/news/events/202605_cas_public_science_day_2026/title.webp
 ---
 
 # RuyiSDK at the 2026 ISCAS “Software Defines the Future” Public Science Day

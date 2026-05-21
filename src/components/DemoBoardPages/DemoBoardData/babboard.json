@@ -1,5 +1,5 @@
 {
-  "image": "../../../../staitc/img/616c6103a9a4656a2b24226e55425d62.png",
+  "image": "/img/news/blogs/2024-07-30-616c6103a9a4656a2b24226e55425d62.webp",
   "abstract": "# RuyiSDK 镜像文件安装指南\n\nRuyiSDK 目前提供了 LP64 和 ILP32 两种镜像文件，可以通过 RuyiSDK 下载安装，具体步骤如下：\n\n1. 请确保您已经下载并安装了 ruyi，请参考 [RuyiSDK 包管理器安装说明](#)安装（建议您下载最新版本），安装完成后可以执行 `ruyi --version` 查看版本信息\n\n2. 执行 `ruyi update` 更新 RuyiSDK 软件源：该操作将会把软件源的最新软件包等资源索引更新到本地，方便后续查询、安装能够得到最新的信息。\n\n当前，RiviSDK 为 K230D 提供了以下系统：\n- **RV641LP32**（玄铁新82位内核+32位rootfs）\n- **RV64LP64**（常规64位系统）\n\n推荐您安装 RV641LP32 系统体验新32位在动态内存空间消耗上的优势。\n\n## 支持的系统配置\n\n以下是您所选择的设备变体支持的系统配置：\n\n- Canaan Kendryte K230D CanMV Linux SDK demo. RV641LP32 ABI\n- Canaan Kendryte K230D CanMV Linux SDK demo. RV64LP64 ABI",
   "canshu": {
     "CPU": "CPU1,1.6GHZ,支持RVV1.0；CPU2,800MHZ;",

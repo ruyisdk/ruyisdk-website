@@ -1,7 +1,7 @@
 ---
 date: 2025-07-23
 link: https://mp.weixin.qq.com/s/-PGCCl1k919KtcU8Para1w
-image: /img/news/articles/2025-07-23-hong-kong-cityu-riscv.jpeg
+image: /img/news/articles/2025-07-23-hong-kong-cityu-riscv.webp
 ---
 
 # RISC-V校园行｜PLCT实验室走进香港城市大学，开启RISC-V开源人才培养新篇章

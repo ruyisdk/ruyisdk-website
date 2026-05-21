@@ -1,7 +1,7 @@
 ---
 date: 2024-09-30
 link: /news/blogs/2024-09-30-eclipse-riscv64
-image: /img/news/blogs/2024-09-30-eclipse-pic-1.png
+image: /img/news/blogs/2024-09-30-eclipse-pic-1.webp
 ---
 
 # Eclipse 上游初步支持 RISC-V，每日构建镜像已经可以下载试用

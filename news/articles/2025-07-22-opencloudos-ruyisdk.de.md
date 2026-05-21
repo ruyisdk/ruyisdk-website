@@ -1,7 +1,7 @@
 ---
 date: 2025-07-22
 link: https://mp.weixin.qq.com/s/R1y8tVzddT7_im2FUhfJVw
-image: /img/news/articles/2025-07-22-opencloudos-ruyisdk.png
+image: /img/news/articles/2025-07-22-opencloudos-ruyisdk.webp
 ---
 
 # OpenCloudOS tritt der RuyiSDK-Entwickler-Community bei, beide Parteien erreichen tiefgreifende Zusammenarbeit

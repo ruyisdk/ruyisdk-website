@@ -1,7 +1,7 @@
 ---
 date: 2025-08-22
 link: https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q
-image: /img/news/articles/2025-08-22-xuantie-rv-academy.png
+image: /img/news/articles/2025-08-22-xuantie-rv-academy.webp
 ---
 
 # 学以致用 虚位以待｜玄铁RV学院课程正式上线，玄铁与PLCT实验室邀您创"芯"未来

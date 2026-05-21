@@ -1,7 +1,7 @@
 ---
 date: 2025-08-12
 link: https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ
-image: /img/news/articles/2025-08-12-cheng-longcan.png
+image: /img/news/articles/2025-08-12-cheng-longcan.webp
 ---
 
 # 人物｜程龙灿：做RISC-V世界的 “连接者”

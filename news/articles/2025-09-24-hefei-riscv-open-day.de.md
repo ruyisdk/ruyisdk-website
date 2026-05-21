@@ -1,7 +1,7 @@
 ---
 date: 2025-09-24
 link: https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g
-image: /img/news/articles/2025-09-24-hefei-riscv-open-day.png
+image: /img/news/articles/2025-09-24-hefei-riscv-open-day.webp
 ---
 
 # Erster „Hefei RISC-V Open Day“ an der Hefei University of Technology – beeindruckende Ökosystem-Erfolge
