@@ -184,6 +184,21 @@
     "message": "Data updated at"
   },
 
+  "========== news ==========": { "message": "" },
+
+  "news.title": {
+    "message": "News"
+  },
+  "news.subtitle": {
+    "message": "See important news from the RuyiSDK team at any time"
+  },
+  "news.biweekly": {
+    "message": "Biweekly"
+  },
+  "news.news": {
+    "message": "Ruyi News"
+  },
+
   "meetup": {
     "message": "Our recent events"
   },
@@ -694,9 +709,6 @@
   "博客": {
     "message": "Blog"
   },
-  "随时看到来自 RuyiSDK 团队的重大消息": {
-    "message": "See important news from the RuyiSDK team at any time"
-  },
   "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备": {
     "message": "RuyiSDK: Preparing for 1 Million RISC-V Software Developers"
   },
@@ -807,12 +819,6 @@
   },
   "no.data": {
     "message": "No statistical data available currently."
-  },
-  "news.biweekly": {
-    "message": "Biweekly"
-  },
-  "news.news": {
-    "message": "RuyiSDK News"
   },
 
   "downloads.meta.title": {

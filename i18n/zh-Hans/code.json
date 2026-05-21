@@ -48,12 +48,6 @@
   "downloads": { "message": "组件下载数量" },
   "installs": { "message": "安装台数" },
   "no.data": { "message": "当前暂无统计数据。" },
-  "news.biweekly": {
-    "message": "双周报"
-  },
-  "news.news": {
-    "message": "RuyiSDK 新闻"
-  },
   "downloads.meta.title": {
     "message": "下载"
   },
