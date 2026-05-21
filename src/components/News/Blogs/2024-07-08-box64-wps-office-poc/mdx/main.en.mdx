@@ -1,0 +1,150 @@
+---
+title: "Early Access: Using Box64 to Run WPS Office on RISC-V Systems"
+authors: [white]
+---
+
+# Early Access: Using Box64 to Run WPS Office on RISC-V Systems
+
+Thanks to the recent progress in the Box64 RISC-V porting effort, it is now
+possible to run common x86 binaries such as WPS Office on RISC-V Linux desktop
+distributions. RuyiSDK is working on integrating this workflow; by following
+the steps below, you can get an early taste of office software on RISC-V.
+
+We assume that before proceeding, you have already upgraded to `ruyi` 0.14.0
+or later and run `ruyi update` to synchronize your package repository metadata.
+
+## Steps
+
+For simplicity, we assume that your `$HOME` is `/home/foo`, your machine
+architecture (`uname -m`) is `riscv64`, and you use `sudo` for privilege
+escalation.
+
+### Allow pre-release packages to be installed
+
+Because Box64 support on RISC-V is moving quickly, many improvements had not
+yet made it into the latest stable release as of early July 2024. We packaged
+a development snapshot of Box64; to install it, you need to configure `ruyi`
+to consider pre-release packages.
+
+- If `~/.config/ruyi` does not exist, create it.
+- Edit `~/.config/ruyi/config.toml`.
+
+```toml
+[packages]
+prereleases = true
+```
+
+### Install Box64
+
+Following the naming convention used by RuyiSDK packages, the Box64 binary
+package built from upstream Box64, rather than from a PLCT or vendor-specific
+fork, is named `box64-upstream`.
+
+```sh
+ruyi install box64-upstream
+# ...
+# info: package box64-upstream-0.2.8-ruyi.20240702 installed to /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702
+```
+
+Take note of the installation path.
+
+### Configure Linux `binfmt_misc`
+
+Because of the way WPS Office is packaged, it can only be launched indirectly
+through the vendor-provided startup scripts rather than handed directly to
+Box64. Therefore, you must ensure that your system supports `binfmt_misc`;
+otherwise, the following steps will fail.
+
+The exact setup of `binfmt_misc` differs across Linux distributions. The
+example below assumes a system that uses systemd; adjust as needed for your
+own environment.
+
+```sh
+# Confirm where the Box64 executable is located
+ls /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/bin/box64
+
+# Adjust the path in the Box64 `binfmt.d` configuration file
+# Assuming you use nano
+nano /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/etc/binfmt.d/box64.conf
+# Replace the trailing //bin/box64 with the verified absolute path
+
+# Deploy it to the system
+sudo cp /home/foo/.local/share/ruyi/binaries/riscv64/box64-upstream-0.2.8-ruyi.20240702/etc/binfmt.d/box64.conf /etc/binfmt.d/box64.conf
+sudo systemctl restart systemd-binfmt
+
+# Verify the result
+cat /proc/sys/fs/binfmt_misc/box64
+```
+
+### Install an x86 sysroot
+
+Box64 is primarily aimed at software such as games, which usually bundle most
+of their own dependencies, so Box64 itself does not ship many x86 runtime
+libraries. WPS Office, however, is a desktop application that expects to be
+managed by a system package manager. The small set of x86 runtime libraries
+that come with Box64 is not enough for it, so we need to prepare an x86
+environment ourselves.
+
+```sh
+# Download a prebuilt x86 sysroot
+# This is a temporary link. Once this workflow stabilizes, the process will change and this link will eventually expire.
+# Assume the file is saved under ~/Downloads
+wget https://mirror.iscas.ac.cn/ruyisdk/dist/temp/debian-bookworm.gui.20240705.amd64.tar.zst
+
+# Assume you install it under /opt/debian-bookworm.amd64
+sudo mkdir /opt/debian-bookworm.amd64
+pushd /opt/debian-bookworm.amd64
+tar -xf ~/Downloads/debian-bookworm.gui.20240705.amd64.tar.zst
+popd
+```
+
+### Install WPS Office
+
+Force-install the WPS Office package for the `x86_64` architecture:
+
+```sh
+ruyi install --host x86_64 wps-office
+# ...
+# info: package wps-office-11.1.0-r.11719 installed to /home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719
+```
+
+Due to limitations on the official WPS Office download page, `ruyi` cannot
+automatically download the installer package. Follow the prompt, then rerun
+the command to complete the installation.
+
+### Patch the WPS Office launcher scripts
+
+Because WPS Office expects to be managed by a system package manager, its
+launcher scripts assume that it is installed under `/opt/kingsoft/wps-office`.
+You need to patch them accordingly.
+
+```sh
+pushd /home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719
+
+# The current working directory should not contain special characters.
+# If it does, adjust the sed command accordingly.
+sed -i "s@gInstallPath=/@gInstallPath=$(pwd)/@" ./usr/bin/*
+
+popd
+```
+
+### Run WPS Office
+
+The preparation is finally complete. Now put everything together:
+
+```sh
+# Native forwarding for this shared library still has some issues, so force it to run in emulation mode.
+export BOX64_EMULATED_LIBS=libsqlite3.so.0
+# Set the Box64 library search path
+export BOX64_LD_LIBRARY_PATH=/opt/debian-bookworm.amd64/usr/lib/x86_64-linux-gnu
+
+# Now you can launch it!
+/home/foo/.local/share/ruyi/binaries/x86_64/wps-office-11.1.0-r.11719/usr/bin/wps
+```
+
+## Closing Remarks
+
+This is the first round of RuyiSDK integration work for running x86 software
+through binary translation on RISC-V. We will continue improving the user
+experience of this workflow so that running the applications you need on
+RISC-V systems becomes easier over time.

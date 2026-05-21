@@ -1,0 +1,150 @@
+---
+title: "Canaan Kendryte K230D: The First Mass-Produced AIoT Chip Based on the New 32-bit RuyiSDK"
+authors: [ruyi]
+tags: [k230d]
+---
+
+import ReactPlayer from 'react-player'
+
+
+In the previous article, we introduced
+["The XuanTie Team and PLCT Lab Jointly Release a New 32-bit Product-Grade Open-Source Toolchain and Linux Kernel"](https://mp.weixin.qq.com/s/argIGP4_rUKDm9IRIB-YTg).
+This article brings the latest productization progress of the new 32-bit
+(RV64ILP32) effort: the Canaan Kendryte K230D.
+
+Last year, Canaan launched the [K230](https://gitee.com/kendryte/k230_docs),
+based on the XuanTie C908, the world's first 64-bit RISC-V AIoT chip with
+VECTOR 1.0 support. This year, Canaan Kendryte introduced the more highly
+integrated K230D AIoT chip, reducing memory from external 256MB/512MB to
+128MB in-package. Software built on the LP64 ABI had too much memory overhead
+for the K230D, while the new 32-bit technology improves both memory and cache
+efficiency. PLCT Lab and the XuanTie team worked together to build a new
+32-bit RuyiSDK for the K230D, achieving the first real product deployment of
+the new 32-bit stack for AIoT devices. Compared with the previous LP64-based
+SDK, the new 32-bit SDK reduces **memory overhead by 30%** and improves
+linked-list traversal **performance by 20%**, balancing both cost and
+performance.
+
+![616c6103a9a4656a2b24226e55425d62.png](/img/616c6103a9a4656a2b24226e55425d62.png)
+
+# K230D RUYISDK Overview
+
+The DAMO Academy XuanTie team, together with Canaan and PLCT Lab of the
+Institute of Software, Chinese Academy of Sciences, brought the new 32-bit
+technology to the Banana Pi open-source community's BPI-CANMV-K230D-Zero
+development board and integrated it with PLCT Lab's RuyiSDK to provide a more
+convenient user experience:
+
+- Linux kernel upgraded to 6.6, along with toolchain upgrades
+- A new 32-bit root filesystem and LVGL support
+- VECTOR-based graphics acceleration
+- Dual-system support for Linux + NuttX, with flexible big/small core switching
+- Support for both the traditional 64-bit and the new 32-bit system configurations
+
+### Kernel configuration
+
+|   |  Traditional 64-bit (RV64 LP64)  |  New 32-bit (RV64 ILP32)  |
+| --- | --- | --- |
+|  Kernel build command  |  make ARCH=riscv k230_defconfig all  |  make ARCH=riscv k230_defconfig 64ilp32.config all  |
+
+The default configuration differs by only two lines:
+
+CONFIG\_ARCH\_RV64ILP32=y
+
+CONFIG\_32BIT=y
+
+## Memory Comparison
+
+The video and image below compare LVGL running on the traditional 64-bit build
+(left) and the new 32-bit build (right):
+<ReactPlayer playing controls muted={true} url='/video/video_20240730_182451.mp4' />
+
+
+
+![k230d_final.jpeg](/img/k230d_final.jpeg)
+
+|  **Dynamic Memory Comparison**  |  **Traditional 64-bit (RV64 LP64)**  |  **New 32-bit (RV64 ILP32)**  |
+| --- | --- | --- |
+|  **used**  |  **37MB**  |  **24MB**  |
+
+|  Static Memory Comparison  |  Traditional 64-bit (RV64 LP64)  |  New 32-bit (RV64 ILP32)  |
+| --- | --- | --- |
+|  kernel code  |  10282KB  |  10456KB  |
+|  rwdata  |  1126KB  |  832KB  |
+|  rodata  |  5105KB  |  4464KB  |
+|  bss  |  500KB  |  376KB  |
+
+Compared with the traditional 64-bit build, the new 32-bit RuyiSDK greatly
+improves memory efficiency and avoids memory waste in K230D productization.
+
+## Performance Comparison
+
+Because pointer data types in LP64 are twice as large as in ILP32, LP64 makes
+less efficient use of cache. The table below compares doubly linked-list
+traversal performance on the K230D:
+
+### Doubly linked-list traversal (4000 nodes, traversed 50,000 times)
+
+|   |  First run  |  Second run  |  Third run  |  Fourth run  |  Fifth run  |  **Average execution time**  |
+| --- | --- | --- | --- | --- | --- | --- |
+|  |  Unit: nanoseconds  |  |  |  |  |  Unit: seconds  |
+|  LP64  |  3872221628  |  3420261850  |  3774494961  |  3539484998  |  4034940590  |  **3.728280805**  |
+|  ILP32  |  2614749257  |  2261891517  |  2680216665  |  2894499368  |  2847282036  |  **2.659727769**  |
+
+The results show that ILP32 significantly outperforms LP64 in linked-list
+traversal.
+
+## Related Resources
+
+K230D RuyiSDK: [https://github.com/ruyisdk/k230\_linux\_sdk](https://github.com/ruyisdk/k230_linux_sdk)
+
+For image building details, see:
+[https://github.com/ruyisdk/k230_linux_sdk/blob/dev/README_zh.md](https://github.com/ruyisdk/k230_linux_sdk/blob/dev/README_zh.md)
+
+K230D usage guide:
+[https://ruyisdk.org/docs/k230d/intro](https://ruyisdk.org/docs/k230d/intro)
+
+# Closing Remarks
+
+Unlike earlier architecture efforts focused on user space, such as ARM, x86,
+MIPS, and SPARC, the current new 32-bit approach provides an **ILP32 ABI for
+the privileged mode of the RV64 architecture**, based on the RVA20/22/23
+Profiles. This is a path that has not been explored before. Since the release
+of the new 32-bit toolchain and Linux kernel in March 2024, this work has now
+reached product deployment on the K230D, cutting memory overhead by 30% and
+substantially improving cache efficiency. These results further demonstrate the
+industrial value of the new 32-bit approach.
+
+We warmly welcome developers to participate in the development and improvement
+of the new 32-bit stack, contribute suggestions and feedback, and help drive
+it forward. We are committed to building a healthy and active open-source
+community, continuously investing resources and effort to ensure the stability
+and reliability of the software while steadily improving its functionality and
+performance. We also call on more hardware vendors to join this effort and
+advance the development and innovation of new 32-bit embedded systems together.
+
+## About Us
+
+● [RuyiSDK](https://ruyisdk.org/) is an open-source project initiated by
+[PLCT Lab](https://plctlab.org/zh/). It aims to provide RISC-V developers with
+a full-featured, all-in-one development environment, covering the complete
+toolchain from compilation and debugging to simulation, with planned support
+for mainstream RISC-V hardware platforms.
+
+● The DAMO Academy XuanTie team has continued to invest deeply in RISC-V
+technology research and ecosystem building, launching a series of XuanTie
+processors that cover the full performance range from low to high end. XuanTie
+actively embraces open source and open innovation, and has gradually built a
+RISC-V-centered ecosystem, working with partners to advance integrated
+hardware-software development across chips, development tools, operating
+systems, and application solutions. Its goal is to accelerate the adoption of
+full-stack RISC-V technology in multiple domains and help realize the
+interconnected world of the intelligent era.
+
+● Canaan Inc. (NASDAQ: CAN) is a leading high-performance ASIC chip design
+company with a diversified "blockchain + AI" strategy. Its business spans
+high-performance ASIC computing chips and equipment, as well as AI chip and
+product development. As a Nasdaq-listed company, Canaan was the world's first
+"blockchain stock" and also the first Chinese AI chip company with independent
+intellectual property to list in the United States. Its vision is to improve
+the efficiency of society and enhance the way people live.

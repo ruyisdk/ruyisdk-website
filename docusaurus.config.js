@@ -62,16 +62,9 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
         },
-        blog: {
-          blogTitle: "RuyiSDK 博客",
-          blogSidebarTitle: "所有博文",
-          blogSidebarCount: "ALL",
-          showReadingTime: true,
-          blogDescription: "Blog",
-        },
+        blog: false,
         sitemap: {
           ignorePatterns: [
-            '/blog/**',
             '/biweekly/**'
           ]
         },
