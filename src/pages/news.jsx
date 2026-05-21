@@ -1,4 +1,4 @@
-import { translate } from "@docusaurus/Translate";
+import Translate, { translate } from "@docusaurus/Translate";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
 import React, { useState, useEffect } from "react";
@@ -61,6 +61,14 @@ const NewsPage = () => {
             <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row md:gap-x-8 md:gap-y-6">
               {/* left */}
                 <div className="min-w-0 flex-1 md:flex-[3] md:pr-0 lg:pr-0">
+                <div className="mb-6 flex min-h-[57px] items-end gap-4">
+                  <h1 className="m-0 text-3xl font-bold leading-none text-gray-900 md:text-[2rem]">
+                    <Translate id="news.title">新闻</Translate>
+                  </h1>
+                  <p className="m-0 text-[1.05rem] font-medium leading-6 text-gray-600">
+                    <Translate id="news.subtitle">随时看到来自 RuyiSDK 团队的重大消息</Translate>
+                  </p>
+                </div>
                 <Articles items={articles} loading={loading} onClick={handleClick} />
               </div>
 
@@ -73,7 +81,7 @@ const NewsPage = () => {
                   <div className="space-y-4">
                     <Card
                       items={weeklies}
-                      label={translate({ id: "news.biweekly", message: "Biweekly" })}
+                      label={translate({ id: "news.biweekly", message: "双周报" })}
                       color="bg-[var(--ruyi-logo-blue)]"
                       borderColor="border-[var(--ruyi-logo-blue)]"
                       onClick={handleClick}
@@ -81,7 +89,7 @@ const NewsPage = () => {
                     />
                     <Card
                       items={ruyinews}
-                      label={translate({ id: "news.news", message: "RuyiSDK 新闻" })}
+                      label={translate({ id: "news.news", message: "Ruyi 新闻" })}
                       color="bg-[var(--ruyi-logo-yellow)]"
                       borderColor="border-[var(--ruyi-logo-yellow)]"
                       onClick={handleClick}
