@@ -1,10 +1,23 @@
 import Button from "../common/Button";
 import React, { useState, useMemo } from "react";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const { siteConfig } = useDocusaurusContext();
+  const baseUrl = siteConfig?.baseUrl || "/";
+
+  const resolveImg = (src) => {
+    if (!src) return null;
+    try {
+      new URL(src);
+      return src;
+    } catch {}
+    if (src.startsWith("/")) return baseUrl + src.slice(1);
+    return baseUrl + src;
+  };
 
   const totalPages = useMemo(
     () => Math.ceil(items.length / pageSize),
@@ -68,18 +81,16 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             </div>
 
             {/* Image section */}
-            {article.image && (
-              <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-              </div>
-            )}
+            <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
+              <img
+                src={resolveImg(article.image) || resolveImg("img/ruyi-logo-720.svg")}
+                alt={article.title}
+                className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={(e) => {
+                  e.target.src = resolveImg("img/ruyi-logo-720.svg");
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>
