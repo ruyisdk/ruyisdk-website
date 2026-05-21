@@ -7,8 +7,6 @@ image: /img/news/articles/2025-09-27-opengauss-meetup.png
 
 # openGauss RISC-V SIG 深度参与 openGauss Meetup 成都站，探索开源数据库与 RISC-V 的融合与实践
 
-![openGauss RISC-V SIG](/img/news/articles/2025-09-27-opengauss-meetup.png)
-
 2025 年 9 月 27 日，openGauss Meetup 成都站成功举办。openGauss RISC‑V SIG 核心团队精彩亮相，分享了在 RISC‑V 架构下的重要进展：
 
 - 完成 openGauss 从 5.1.0 到 7.0.0 的全量移植，显著提升性能；

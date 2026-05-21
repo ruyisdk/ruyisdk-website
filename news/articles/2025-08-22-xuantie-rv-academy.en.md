@@ -6,7 +6,5 @@ image: /img/news/articles/2025-08-22-xuantie-rv-academy.png
 
 # Put Learning into Practice — XuanTie RV Academy Courses Launched; Join Us to Build the Future of Chips
 
-![XuanTie RV Academy](/img/news/articles/2025-08-22-xuantie-rv-academy.png)
-
 XuanTie has partnered with the PLCT Laboratory to launch a RISC‑V course series that includes three intermediate‑level courses and two advanced courses, taught by an experienced instructor team. The curriculum covers the RISC‑V software ecosystem, compiler development, and hands‑on practice with mainstream development boards. Graduates will be able to join technical salons, participate in Hackathons, and connect with industry experts — excellent opportunities for career development.
 

@@ -6,8 +6,6 @@ image: /img/news/articles/2025-09-27-opengauss-meetup.png
 
 # openGauss RISC-V SIG at Chengdu Meetup: Advancing Open-Source Databases on RISC-V
 
-![openGauss RISC-V SIG](/img/news/articles/2025-09-27-opengauss-meetup.png)
-
 On September 27, 2025, the openGauss Meetup in Chengdu was successfully held. The openGauss RISC‑V SIG presented key progress on the RISC‑V architecture:
 
 - Porting from openGauss 5.1.0 to 7.0.0 (full versions) with notable performance improvements;

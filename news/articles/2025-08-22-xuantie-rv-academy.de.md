@@ -6,6 +6,4 @@ image: /img/news/articles/2025-08-22-xuantie-rv-academy.png
 
 # Lernen durch Anwenden – XuanTie RV Academy startet Kurse; gestalten Sie mit uns die Zukunft der Chips
 
-![XuanTie RV Academy](/img/news/articles/2025-08-22-xuantie-rv-academy.png)
-
 XuanTie hat gemeinsam mit dem PLCT‑Labor eine RISC‑V‑Kursreihe gestartet, bestehend aus drei Mittelstufen‑ und zwei Fortgeschrittenenkursen, geleitet von einem erfahrenen Dozententeam. Die Inhalte umfassen das RISC‑V‑Software‑Ökosystem, Compiler‑Entwicklung sowie praktische Übungen mit gängigen Entwicklungsboards. Absolvent:innen haben die Möglichkeit, an technischen Salons teilzunehmen, an Hackathons mitzuwirken und sich mit Branchenexpert:innen zu vernetzen — ideale Chancen für die berufliche Weiterentwicklung.
