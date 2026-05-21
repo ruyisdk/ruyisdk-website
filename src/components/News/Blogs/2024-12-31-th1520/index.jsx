@@ -2,8 +2,8 @@ import React from "react";
 
 import ArticlePage from "../ArticlePage";
 
-import MainEn from "./mdx/main.en.mdx";
-import MainZhHans from "./mdx/main.zh-Hans.mdx";
+import * as MainEn from "./mdx/main.en.mdx";
+import * as MainZhHans from "./mdx/main.zh-Hans.mdx";
 
 const CONTENT = {
   "zh-Hans": MainZhHans,
