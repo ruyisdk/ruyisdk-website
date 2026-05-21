@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkruyisdk=globalThis.webpackChunkruyisdk||[]).push([[9354],{77887(e){e.exports=JSON.parse('{"metadata":{"permalink":"/biweekly/page/4","page":4,"postsPerPage":10,"totalPages":6,"totalCount":51,"previousPage":"/biweekly/page/3","nextPage":"/biweekly/page/5","blogDescription":"Blog","blogTitle":"\u53cc\u5468\u62a5"}}')}}]);
