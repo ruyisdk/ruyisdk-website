@@ -1,7 +1,6 @@
 import { translate } from "@docusaurus/Translate";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
@@ -11,12 +10,8 @@ import Card from "@site/src/components/News/Card";
 import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
-  const { i18n } = useDocusaurusContext();
-  const [loading, setLoading] = useState(true);
-  const [articles, setArticles] = useState([]);
-  const [ruyinews, setRuyinews] = useState([]);
-  const [weeklies, setWeeklies] = useState([]);
   const [isClient, setIsClient] = useState(false);
+  const pluginData = usePluginData("docusaurus-news-generator");
 
   const handleClick = (link) => {
     window.open(link, "_blank");
@@ -30,27 +25,10 @@ const NewsPage = () => {
     });
   };
 
-  const loadNewsData = async () => {
-    try {
-      let newsUrl = "/news.json";
-      if (i18n.currentLocale !== i18n.defaultLocale) {
-        newsUrl = `/${i18n.currentLocale}${newsUrl}`;
-      }
-      let response = await axios.get(newsUrl);
-      const { articles, ruyinews, weeklies } = response.data;
-      setArticles(filterFutureItems(articles));
-      setRuyinews(filterFutureItems(ruyinews).slice(0, 10));
-      setWeeklies(filterFutureItems(weeklies).slice(0, 10));
-    } catch (error) {
-      console.error("Failed to load data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadNewsData();
-  }, [i18n.currentLocale]);
+  const articles = filterFutureItems(pluginData?.articles);
+  const ruyinews = filterFutureItems(pluginData?.ruyinews).slice(0, 10);
+  const weeklies = filterFutureItems(pluginData?.weeklies).slice(0, 10);
+  const loading = !pluginData;
 
   useEffect(() => {
     setIsClient(true);
