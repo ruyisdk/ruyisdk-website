@@ -18,7 +18,7 @@ function ruyiCard() {
         "zh-Hans": "从包管理器获取 RuyiSDK 资源",
         en: "Access and manage RuyiSDK resources through the package manager"
       },
-      Image: "img/home-cardnews-manager.png",
+      Image: "img/home/cardnews/home-cardnews-manager.png",
       Links: "/docs/intro",
     },
     {
@@ -28,7 +28,7 @@ function ruyiCard() {
         "zh-Hans": "RISC-V 开发板与操作系统支持矩阵",
         en: "RISC-V Board and OS Support Matrix"
       },
-      Image: "img/home-cardnews-matrix.png",
+      Image: "img/home/cardnews/home-cardnews-matrix.png",
       Links: externalLinks("support-matrix"),
     },
     {
@@ -41,7 +41,7 @@ function ruyiCard() {
         "zh-Hans": "RuyiSDK 包管理器的 Eclipse 集成",
         en: "Eclipse integration for the RuyiSDK Package Manager"
       },
-      Image: "img/home-cardnews-eclipse.jpg",
+      Image: "img/home/cardnews/home-cardnews-eclipse.jpg",
       Links: "/docs/IDE/",
       subLink: "https://marketplace.eclipse.org/content/ruyisdk",
       subText: {
@@ -59,7 +59,7 @@ function ruyiCard() {
         "zh-Hans": "RuyiSDK 包管理器的 VS Code 集成",
         en: "Visual Studio Code integration for the RuyiSDK Package Manager"
       },
-      Image: "img/home-cardnews-vscode.png",
+      Image: "img/home/cardnews/home-cardnews-vscode.png",
       Links: "/docs/VSCode-Plugins/",
       subLink: "https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension",
       subText: {
