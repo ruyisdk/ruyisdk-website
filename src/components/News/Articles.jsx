@@ -6,8 +6,9 @@ import LoadingSkeleton from "./LoadingSkeleton";
 const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const { siteConfig } = useDocusaurusContext();
+  const { siteConfig, i18n } = useDocusaurusContext();
   const baseUrl = siteConfig?.baseUrl || "/";
+  const currentLocale = i18n?.currentLocale;
 
   const resolveImg = (src) => {
     if (!src) return null;
@@ -17,6 +18,21 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
     } catch {}
     if (src.startsWith("/")) return baseUrl + src.slice(1);
     return baseUrl + src;
+  };
+
+  const formatDate = (date) => {
+    const parsed = new Date(date);
+    if (Number.isNaN(parsed.getTime())) return "";
+
+    if (currentLocale === "zh-Hans") {
+      return new Intl.DateTimeFormat("zh-CN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }).format(parsed);
+    }
+
+    return parsed.toLocaleDateString();
   };
 
   const totalPages = useMemo(
@@ -74,7 +90,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
                   {article.title}
                 </span>
                 <span className="flex-shrink-0 whitespace-nowrap text-sm text-gray-600">
-                  {new Date(article.date).toLocaleDateString()}
+                  {formatDate(article.date)}
                 </span>
               </div>
               <p className="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
