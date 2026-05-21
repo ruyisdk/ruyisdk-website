@@ -1,13 +1,13 @@
 ---
 date: 2025-09-27
 link: https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg
-image: /img/newsshowcase/2.png
+image: /img/news/articles/2025-09-27-opengauss-meetup.png
 ---
 
 
 # openGauss RISC-V SIG 深度参与 openGauss Meetup 成都站，探索开源数据库与 RISC-V 的融合与实践
 
-![openGauss RISC-V SIG](/img/newsshowcase/2.png)
+![openGauss RISC-V SIG](/img/news/articles/2025-09-27-opengauss-meetup.png)
 
 2025 年 9 月 27 日，openGauss Meetup 成都站成功举办。openGauss RISC‑V SIG 核心团队精彩亮相，分享了在 RISC‑V 架构下的重要进展：
 

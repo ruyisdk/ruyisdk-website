@@ -49,7 +49,7 @@ const NewsShowcase = () => {
             className="group flex h-full flex-col overflow-hidden rounded-[0.625rem] border border-[rgba(230,230,230,1)] bg-white no-underline !text-[#1a1a1a] shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all"
           >
             <img
-              src={resolveImg(news.img) || resolveImg('img/newsshowcase/1.png')}
+              src={resolveImg(news.img) || resolveImg('img/ruyi-logo-720.svg')}
               alt={news.title}
               className="block aspect-[3/2] w-full rounded-t-[0.625rem] border-0 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
