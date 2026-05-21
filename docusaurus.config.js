@@ -139,7 +139,7 @@ const config = {
     }),
   plugins: [
     "docusaurus-plugin-sass",
-    "./plugins/news-generator",
+    "./scripts/plugins/news-generator",
     [
       "@docusaurus/plugin-content-blog",
       {

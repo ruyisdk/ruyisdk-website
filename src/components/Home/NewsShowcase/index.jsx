@@ -1,14 +1,13 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React from 'react';
 import Translate from '@docusaurus/Translate';
+import { usePluginData } from '@docusaurus/useGlobalData';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import axios from 'axios';
 
 
 const NewsShowcase = () => {
-  const { siteConfig, i18n } = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   const baseUrl = siteConfig?.baseUrl || '/';
-
-  const [newsData, setNewsData] = useState([]);
+  const pluginData = usePluginData('docusaurus-news-generator');
 
   const resolveImg = (src) => {
     if (!src) return null;
@@ -20,41 +19,19 @@ const NewsShowcase = () => {
     return baseUrl + src;
   };
 
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadNews() {
-      try {
-        let newsUrl = '/news.json';
-        if (i18n?.currentLocale && i18n.currentLocale !== i18n.defaultLocale) {
-          newsUrl = `/${i18n.currentLocale}${newsUrl}`;
-        }
-        const res = await axios.get(newsUrl);
-        const items = (res?.data?.articles || []).filter((item) => {
-          const timestamp = Number(item?.date);
-          const now = Date.now();
-          return !Number.isFinite(timestamp) || timestamp <= now;
-        });
-        const selected = items.slice(0, 3).map((it) => ({
-          title: it.title,
-          description: it.summary,
-          img: it.image,
-          link: it.link,
-        }));
-
-        if (isMounted) {
-          setNewsData(selected);
-        }
-      } catch {
-        if (isMounted) {
-          setNewsData([]);
-        }
-      }
-    }
-
-    loadNews();
-    return () => { isMounted = false; };
-  }, [i18n?.currentLocale, i18n?.defaultLocale]);
+  const now = Date.now();
+  const newsData = (pluginData?.articles || [])
+    .filter((item) => {
+      const timestamp = Number(item?.date);
+      return !Number.isFinite(timestamp) || timestamp <= now;
+    })
+    .slice(0, 3)
+    .map((it) => ({
+      title: it.title,
+      description: it.summary,
+      img: it.image,
+      link: it.link,
+    }));
 
   if (newsData.length === 0) {
     return null;
