@@ -33,7 +33,7 @@ const exampleData = [
   },
   {
     title: "更多案例",
-    links: "/blog"
+    links: "/news/blogs"
   },
 ];
 
