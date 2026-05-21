@@ -9,7 +9,7 @@ import ReactPlayer from 'react-player'
 
 在上期文章中，向大家介绍了《[玄铁团队与PLCT实验室联合发布：新32位产品级开源工具链及Linux内核](https://mp.weixin.qq.com/s/argIGP4_rUKDm9IRIB-YTg)》，本期为大家带来新32位（RV64ILP32）产品化的最新进展：嘉楠勘智K230D。去年，嘉楠推出 [K230](https://gitee.com/kendryte/k230_docs)，它基于玄铁c908 打造，是世界上第一款带有 VECTOR 1.0 的 RISC-V 64位 AIOT 芯片。今年，嘉楠勘智推出更高集成度的 K230D AIoT 芯片，内存由原来外挂 256MB/512MB 改为内封 128MB。原先基于 LP64 ABI 的软件内存开销过大，不再适合 K230D，而新32位技术可同时提升内存与缓存的效率。PLCT实验室联合玄铁团队，一起为 K230D 打造基于新32位的 RuyiSDK，第一次实现新32位 AIoT 产品的落地。相比原先基于 LP64 ABI 的 SDK，新32位 SDK **内存开销下降 30%**，同时链表遍历**性能提升 20%**，兼顾成本和性能。
 
-![616c6103a9a4656a2b24226e55425d62.png](/img/616c6103a9a4656a2b24226e55425d62.png)
+![616c6103a9a4656a2b24226e55425d62.png](/img/news/blogs/2024-07-30-616c6103a9a4656a2b24226e55425d62.png)
 
 # K230D RUYISDK 介绍
 
@@ -45,7 +45,7 @@ CONFIG\_32BIT=y
 
 
 
-![k230d_final.jpeg](/img/k230d_final.jpeg)
+![k230d_final.jpeg](/img/news/blogs/2024-07-30-k230d-final.jpeg)
 
 |  **动态内存对比**  |  **传统64位 (RV64 LP64)**  |  **新32位 (RV64 ILP32)**  |
 | --- | --- | --- |
