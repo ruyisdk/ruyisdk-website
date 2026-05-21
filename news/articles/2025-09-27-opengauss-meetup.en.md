@@ -1,7 +1,7 @@
 ---
 date: 2025-09-27
 link: https://mp.weixin.qq.com/s/6BBBUjR-8d0pYgO2W9vLPg
-image: /img/news/articles/2025-09-27-opengauss-meetup.png
+image: /img/news/articles/2025-09-27-opengauss-meetup.webp
 ---
 
 # openGauss RISC-V SIG at Chengdu Meetup: Advancing Open-Source Databases on RISC-V

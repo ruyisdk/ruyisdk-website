@@ -1,7 +1,7 @@
 ---
 date: 2025-07-28
 link: https://mp.weixin.qq.com/s/2r4cKs5D7JJDqgH4lhdH_A
-image: /img/news/articles/2025-07-28-moonbit-challenge.jpg
+image: /img/news/articles/2025-07-28-moonbit-challenge.webp
 ---
 
 # 报名启动 | 2025 MoonBit全球编程创新挑战赛官宣

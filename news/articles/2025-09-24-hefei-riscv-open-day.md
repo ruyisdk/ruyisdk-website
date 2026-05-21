@@ -1,7 +1,7 @@
 ---
 date: 2025-09-24
 link: https://mp.weixin.qq.com/s/BNRZfGiAbu8FPx8sjQeC5g
-image: /img/news/articles/2025-09-24-hefei-riscv-open-day.png
+image: /img/news/articles/2025-09-24-hefei-riscv-open-day.webp
 ---
 
 # 首届“合肥RISC-V开放日”在合肥工业大学顺利举行，生态成果喜人

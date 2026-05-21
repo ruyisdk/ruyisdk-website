@@ -1,7 +1,7 @@
 ---
 date: 2025-08-22
 link: https://mp.weixin.qq.com/s/1K17gWu_TZFfzkxgZGxL-Q
-image: /img/news/articles/2025-08-22-xuantie-rv-academy.png
+image: /img/news/articles/2025-08-22-xuantie-rv-academy.webp
 ---
 
 # Lernen durch Anwenden – XuanTie RV Academy startet Kurse; gestalten Sie mit uns die Zukunft der Chips

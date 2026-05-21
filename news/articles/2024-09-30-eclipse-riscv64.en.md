@@ -1,7 +1,7 @@
 ---
 date: 2024-09-30
 link: /en/news/blogs/2024-09-30-eclipse-riscv64
-image: /img/news/blogs/2024-09-30-eclipse-pic-1.png
+image: /img/news/blogs/2024-09-30-eclipse-pic-1.webp
 ---
 
 # Initial RISC-V Support Landed Upstream in Eclipse, and Daily Builds Are Available

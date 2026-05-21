@@ -1,7 +1,7 @@
 ---
 date: 2025-08-12
 link: https://mp.weixin.qq.com/s/ufRXLP7Dl3mrkSU7IWaIrQ
-image: /img/news/articles/2025-08-12-cheng-longcan.png
+image: /img/news/articles/2025-08-12-cheng-longcan.webp
 ---
 
 # Profil | Chenglong Can: Ein 'Vermittler' in der RISC-V-Welt sein
