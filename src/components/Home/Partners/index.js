@@ -27,21 +27,21 @@ const Partners = ({ partners, noWrapper = false }) => {
 };
 
 const partnersData = [
-    { id: 1, name: "Deepin", logoUrl: "/img/about-partners-deepin.png", url: "https://www.deepin.org/", logoClass: "lg:scale-110" },
-    { id: 2, name: "openCloudOS", logoUrl: "/img/about-partners-opencloudos.png", url: "https://opencloudos.org/" },
-    { id: 3, name: "openKylin", logoUrl: "/img/about-partners-openkylin.png", url: "https://www.openkylin.top/" },
-    { id: 4, name: "苦芽科技", logoUrl: "/img/about-partners-kubuds.webp", url: "https://kubuds.io/ch/", logoClass: "lg:scale-90" },
-    { id: 5, name: "玄铁", logoUrl: "/img/about-partners-xuantie.png", url: "https://www.xrvm.cn/", logoClass: "lg:scale-90" },
-    { id: 6, name: "Sipeed", logoUrl: "/img/about-partners-sipeed.png", url: "https://sipeed.com/", logoClass: "lg:scale-90" },
-    { id: 7, name: "嘉楠科技", logoUrl: "/img/about-partners-canaan.png", url: "https://www.canaan.io/", logoClass: "lg:scale-90" },
-    { id: 8, name: "赛昉科技", logoUrl: "/img/about-partners-starfive.png", url: "https://starfivetech.com/", logoClass: "scale-70 lg:scale-150" },
-    { id: 9, name: "英麟智能", logoUrl: "/img/about-partners-inchi.png", url: "http://www.inchitech.com/", logoClass: "scale-120 lg:scale-100" },
-    { id: 10, name: "Jeandle", logoUrl: "/img/about-partners-jeandle.png", url: "https://github.com/jeandle", logoClass: "lg:scale-90" },
-    { id: 11, name: "Milk-V", logoUrl: "/img/about-partners-milkv.png", url: "https://milkv.io/", logoClass: "scale-70" },
-    { id: 12, name: "算能科技", logoUrl: "/img/about-partners-sophgo.png", url: "https://www.sophgo.com/", logoClass: "scale-70 lg:scale-130" },
-    { id: 13, name: "秦派软件", logoUrl: "/img/about-partners-qinware.png", url: "https://www.qinware.com/" },
-    { id: 14, name: "匠芯创", logoUrl: "/img/about-partners-artinchip.png", url: "https://www.artinchip.com/", logoClass: "lg:scale-120" },
-    { id: 15, name: "跃昉科技", logoUrl: "/img/about-partners-leapfive.png", url: "https://www.leapfive.com/", logoClass: "lg:scale-150" },
+    { id: 1, name: "Deepin", logoUrl: "/img/home/partners/about-partners-deepin.png", url: "https://www.deepin.org/", logoClass: "lg:scale-110" },
+    { id: 2, name: "openCloudOS", logoUrl: "/img/home/partners/about-partners-opencloudos.png", url: "https://opencloudos.org/" },
+    { id: 3, name: "openKylin", logoUrl: "/img/home/partners/about-partners-openkylin.png", url: "https://www.openkylin.top/" },
+    { id: 4, name: "苦芽科技", logoUrl: "/img/home/partners/about-partners-kubuds.webp", url: "https://kubuds.io/ch/", logoClass: "lg:scale-90" },
+    { id: 5, name: "玄铁", logoUrl: "/img/home/partners/about-partners-xuantie.png", url: "https://www.xrvm.cn/", logoClass: "lg:scale-90" },
+    { id: 6, name: "Sipeed", logoUrl: "/img/home/partners/about-partners-sipeed.png", url: "https://sipeed.com/", logoClass: "lg:scale-90" },
+    { id: 7, name: "嘉楠科技", logoUrl: "/img/home/partners/about-partners-canaan.png", url: "https://www.canaan.io/", logoClass: "lg:scale-90" },
+    { id: 8, name: "赛昉科技", logoUrl: "/img/home/partners/about-partners-starfive.png", url: "https://starfivetech.com/", logoClass: "scale-70 lg:scale-150" },
+    { id: 9, name: "英麟智能", logoUrl: "/img/home/partners/about-partners-inchi.png", url: "http://www.inchitech.com/", logoClass: "scale-120 lg:scale-100" },
+    { id: 10, name: "Jeandle", logoUrl: "/img/home/partners/about-partners-jeandle.png", url: "https://github.com/jeandle", logoClass: "lg:scale-90" },
+    { id: 11, name: "Milk-V", logoUrl: "/img/home/partners/about-partners-milkv.png", url: "https://milkv.io/", logoClass: "scale-70" },
+    { id: 12, name: "算能科技", logoUrl: "/img/home/partners/about-partners-sophgo.png", url: "https://www.sophgo.com/", logoClass: "scale-70 lg:scale-130" },
+    { id: 13, name: "秦派软件", logoUrl: "/img/home/partners/about-partners-qinware.png", url: "https://www.qinware.com/" },
+    { id: 14, name: "匠芯创", logoUrl: "/img/home/partners/about-partners-artinchip.png", url: "https://www.artinchip.com/", logoClass: "lg:scale-120" },
+    { id: 15, name: "跃昉科技", logoUrl: "/img/home/partners/about-partners-leapfive.png", url: "https://www.leapfive.com/", logoClass: "lg:scale-150" },
   ];
 
 export default function PartnersSection() {
