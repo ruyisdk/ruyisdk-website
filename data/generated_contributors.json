@@ -419,14 +419,14 @@
   "totals": {
     "contributors": 59,
     "commits": 4007,
-    "pullRequests": 1935,
-    "issues": 108,
+    "pullRequests": 1947,
+    "issues": 100,
     "stars": 116,
     "forks": 167,
     "watches": 26
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-05-19T20:28:22.040Z",
+    "generatedAt": "2026-05-21T20:34:13.629Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
