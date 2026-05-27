@@ -61,6 +61,57 @@
   "home.videointro.unsupportedSuffix": {
     "message": " to watch it."
   },
+  "home.devboards.eyebrow": {
+    "message": "Start with RuyiSDK"
+  },
+  "home.devboards.titlePrefix": {
+    "message": "Get Started with"
+  },
+  "home.devboards.titleSuffix": {
+    "message": "Dev Boards"
+  },
+  "home.devboards.description": {
+    "message": "Explore popular RISC-V development boards with starter examples, environment setup, firmware flashing, and debugging workflows. RuyiSDK helps you start development faster."
+  },
+  "home.devboards.cta": {
+    "message": "View All Dev Board Examples"
+  },
+  "home.devboards.examplesTitle": {
+    "message": "Latest Popular Dev Board Guides"
+  },
+  "home.devboards.cardLink": {
+    "message": "View Example"
+  },
+  "home.devboards.visionfive2.description": {
+    "message": "An accessible and feature-rich RISC-V single-board computer"
+  },
+  "home.devboards.bpif3.description": {
+    "message": "An industrial-grade 8-core RISC-V open hardware development board"
+  },
+  "home.devboards.milkvDuo256m.description": {
+    "message": "An upgraded Duo variant for applications that need more memory"
+  },
+  "home.devboards.licheepi4a.description": {
+    "message": "A high-performance RISC-V single-board computer based on the TH1520 processor"
+  },
+  "home.devboards.hero.config.title": {
+    "message": "Environment Setup"
+  },
+  "home.devboards.hero.config.description": {
+    "message": "Install RuyiSDK in one step"
+  },
+  "home.devboards.hero.flash.title": {
+    "message": "System Flashing"
+  },
+  "home.devboards.hero.flash.description": {
+    "message": "Flash images to dev boards quickly"
+  },
+  "home.devboards.hero.demo.title": {
+    "message": "Run Examples"
+  },
+  "home.devboards.hero.demo.description": {
+    "message": "Ready-to-use example code"
+  },
 
   "========== Contributors ==========": { "message": "" },
 

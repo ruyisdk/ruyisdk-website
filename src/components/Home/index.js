@@ -15,6 +15,7 @@ import RuyiInLive from "./RuyiInLive";
 import CardNews from './CardNews';
 import Partners from "./Partners";
 import VideoIntro from "./VideoIntro";
+import DevBoards from "./DevBoards";
 
 
 function Hero() {
@@ -28,6 +29,12 @@ function Hero() {
           <CardNews />
           {/*<DemoBoardsDisplay />*/}
         </div>
+
+        {/*
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
+          <DevBoards />
+        </div>
+        */}
 
         <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
           <RuyiInLive />
