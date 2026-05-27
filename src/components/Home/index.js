@@ -24,6 +24,7 @@ function Hero() {
 
         <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mt-4" >
           <MainDisplay />
+          <VideoIntro />
           <CardNews />
           {/*<DemoBoardsDisplay />*/}
         </div>

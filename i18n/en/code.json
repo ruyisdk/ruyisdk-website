@@ -47,13 +47,19 @@
     "description": "Title for partners page"
   },
   "home.videointro.title": {
-    "message": "RuyiSDK at the 2026 ISCAS “Software Defines the Future” Public Science Day"
+    "message": "Get to Know RuyiSDK Quickly"
   },
   "home.videointro.description": {
-    "message": "On May 16, the Institute of Software, Chinese Academy of Sciences will host its 2026 “Software Defines the Future” Public Science Day at the Zhongguancun Software Park campus in Beijing."
+    "message": "An all-in-one integrated development environment for local and cross RISC-V development. This video walks you through the toolchains, simulators, runtime environments, and debugging tools, and shows why RuyiSDK is worth choosing."
   },
-  "home.videointro.button": {
-    "message": "Explore"
+  "home.videointro.unsupportedPrefix": {
+    "message": "Your browser does not support HTML5 video playback. Please "
+  },
+  "home.videointro.downloadVideo": {
+    "message": "download the video"
+  },
+  "home.videointro.unsupportedSuffix": {
+    "message": " to watch it."
   },
 
   "========== Contributors ==========": { "message": "" },
