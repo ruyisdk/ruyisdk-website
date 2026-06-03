@@ -192,6 +192,25 @@
     --devboards-padding: 1rem;
   }
 
+  .copy {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .copy h2 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .examplesHeader h3 {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .copy :global(.primary-button) {
+    margin-bottom: 2rem;
+  }
+
   .boardGrid {
     grid-template-columns: 1fr;
   }
@@ -199,6 +218,14 @@
   .boardCard h3,
   .boardCard p {
     padding-inline: 1rem;
+  }
+
+  .boardCard h3 {
+    font-size: 1.5rem;
+  }
+
+  .boardCard p {
+    font-size: 1.05rem;
   }
 
   .cardLink {
