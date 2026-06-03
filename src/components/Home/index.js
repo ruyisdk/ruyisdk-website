@@ -30,11 +30,9 @@ function Hero() {
           {/*<DemoBoardsDisplay />*/}
         </div>
 
-        {/*
         <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
           <DevBoards />
         </div>
-        */}
 
         <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
           <RuyiInLive />
