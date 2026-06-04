@@ -193,7 +193,9 @@
   }
 
   .visual {
+    box-sizing: border-box;
     width: calc(100% + var(--devboards-padding) * 2);
+    max-width: 100vw;
     margin-left: calc(var(--devboards-padding) * -1);
     margin-right: calc(var(--devboards-padding) * -1);
   }
