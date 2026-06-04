@@ -13,21 +13,7 @@ const RuyiInLive = () => {
   const colors = {
     navyBlue: '#002677',
     gold: '#FFBD30',
-    lightGold: '#FFD580',
-    white: '#FFFFFF',
-    textGray: '#86868B',
-    placeholderGrey: '#E0E0E0',
-    placeholderTextShade: 'rgba(0,0,0,0.1)',
   };
-
-  const placeholderData = useMemo(
-    () => [
-      { action: 'Loading Action 1', total: 80 },
-      { action: 'Loading Action 2', total: 65 },
-      { action: 'Loading Action 3', total: 50 },
-    ],
-    [],
-  );
 
   const barData = useMemo(() => {
     if (!data || !data.top_commands) return [];
@@ -42,37 +28,10 @@ const RuyiInLive = () => {
     return Math.max(...currentData.map((item) => item.total), 0);
   };
 
-  const PlaceholderChart = () => (
-    <div className="w-full h-full relative opacity-60">
-      <div className="w-full h-full flex flex-col justify-around gap-2">
-        {placeholderData.map((item, index) => {
-          const maxValue = getMaxValue(placeholderData);
-          const barWidth = maxValue > 0 ? (item.total / maxValue) * 100 : 0;
-          const innerLabelWidth = Math.min(80, Math.max(20, barWidth * 0.6));
-          return (
-            <div key={`placeholder-${index}`} className="flex items-center min-h-[2rem]">
-              <div className="w-full h-7 rounded-[0.25rem] overflow-hidden">
-                <div
-                  style={{ width: `${barWidth}%`, backgroundColor: colors.placeholderGrey }}
-                  className="h-full rounded-[0.25rem] transition-all duration-300"
-                >
-                  <div
-                    style={{ width: `${innerLabelWidth}%` }}
-                    className="h-3 bg-[rgba(0,0,0,0.06)] rounded-[0.1875rem] ml-2 mt-2"
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  const StatItem = ({ value, label, loading }) => (
+  const StatItem = ({ value, label }) => (
     <div className="flex flex-col items-center justify-center flex-1">
       <div className="text-[1.75rem] font-bold text-[#002677] min-h-[2.1rem]">
-        {loading ? <div className="h-6 w-16 bg-[#E0E0E0] rounded animate-pulse" /> : (value !== null && value !== undefined ? value.toLocaleString() : '---')}
+        {value !== null && value !== undefined ? value.toLocaleString() : '---'}
       </div>
       <div className="text-[0.75rem] text-[#86868B] mt-1">
         <Translate>{label}</Translate>
@@ -138,15 +97,13 @@ const RuyiInLive = () => {
             </div>
 
             <div className="flex justify-around p-4 rounded-[0.5rem] text-center mb-6">
-              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={!data} />
-              <StatItem value={data?.downloads?.total} label="downloads" loading={!data} />
-              <StatItem value={data?.installs?.total} label="installs" loading={!data} />
+              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" />
+              <StatItem value={data?.downloads?.total} label="downloads" />
+              <StatItem value={data?.installs?.total} label="installs" />
             </div>
 
             <div className="flex-1">
-              {!data ? (
-                <PlaceholderChart />
-              ) : barData.length > 0 ? (
+              {barData.length > 0 ? (
                 <div className="w-full h-full">
                   <div className="w-full h-full">
                     {barData.map((item) => {
@@ -182,21 +139,12 @@ const RuyiInLive = () => {
                   </div>
                 </div>
               ) : (
-                <div className="text-center text-[#86868B] text-sm p-4">
-                  <Translate id="no.data" />
-                </div>
+                null
               )}
             </div>
           </div>
         </div>
         </div>
-      <style>{`
-        @keyframes pulse {
-          0% { background-color: ${colors.placeholderGrey}; }
-          50% { background-color: #d0d0d0; }
-          100% { background-color: ${colors.placeholderGrey}; }
-        }
-      `}</style>
     </>
   );
 };
