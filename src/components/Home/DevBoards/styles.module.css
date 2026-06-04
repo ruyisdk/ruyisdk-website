@@ -192,6 +192,12 @@
     --devboards-padding: 1rem;
   }
 
+  .visual {
+    width: calc(100% + var(--devboards-padding) * 2);
+    margin-left: calc(var(--devboards-padding) * -1);
+    margin-right: calc(var(--devboards-padding) * -1);
+  }
+
   .copy {
     align-items: flex-start;
     text-align: left;

@@ -42,7 +42,7 @@ const boards = [
 
 function BoardCard({ board }) {
   return (
-    <a className={styles.boardCard} href={board.href}>
+    <a className={styles.boardCard} href={board.href} target="_blank" rel="noopener noreferrer">
       <div className={styles.boardImageWrap}>
         <img className={styles.boardImage} src={board.image} alt={board.title} loading="lazy" />
       </div>
