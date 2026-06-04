@@ -134,7 +134,7 @@
 ### RuyiSDK VS Code Extension 分发渠道
 
 - [Open VSX](https://open-vsx.org/extension/RuyiSDK/ruyisdk-vscode-extension)：适用于 VSCodium。  
-- [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/RuyiSDK)：适用于 VS Code。  
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension)：适用于 VS Code。
 - [GitHub Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/)：手动下载 VSIX 安装。  
 - [ISCAS 镜像源](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/)：手动下载 VSIX 安装。
 

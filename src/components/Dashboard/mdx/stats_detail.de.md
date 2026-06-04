@@ -132,7 +132,7 @@ Die folgenden Erläuterungen entsprechen den sechs Kernkennzahlen der offizielle
 ### Distributionskanäle der RuyiSDK-VS-Code-Erweiterung
 
 - [Open VSX](https://open-vsx.org/extension/RuyiSDK/ruyisdk-vscode-extension): für VSCodium.
-- [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/RuyiSDK): für VS Code.
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension): für VS Code.
 - [GitHub Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/): manueller Download und Installation der VSIX-Datei.
 - [ISCAS-Spiegelserver](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/): manueller Download und Installation der VSIX-Datei.
 

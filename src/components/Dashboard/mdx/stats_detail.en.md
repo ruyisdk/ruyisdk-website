@@ -132,7 +132,7 @@ The following explanations correspond to the six core metrics on the official st
 ### RuyiSDK VS Code Extension Distribution Channels
 
 - [Open VSX](https://open-vsx.org/extension/RuyiSDK/ruyisdk-vscode-extension): for VSCodium.
-- [Visual Studio Marketplace](https://marketplace.visualstudio.com/manage/publishers/RuyiSDK): for VS Code.
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension): for VS Code.
 - [GitHub Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/): manual VSIX download and installation.
 - [ISCAS mirrors](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/): manual VSIX download and installation.
 
