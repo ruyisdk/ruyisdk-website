@@ -6,7 +6,6 @@ import ReleaseProvider, {
   FileName,
   extractFileName,
   generateChmodCommand,
-  testFileNameExtraction,
 } from '@site/src/components/Docs/LatestReleases';
 
 // Re-export default and named exports so imports targeting
@@ -20,5 +19,4 @@ export {
   FileName,
   extractFileName,
   generateChmodCommand,
-  testFileNameExtraction,
 };
