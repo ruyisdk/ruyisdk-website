@@ -12,14 +12,14 @@
     {
       "total": 1,
       "author": {
-        "login": "pzhlkj6612",
-        "id": 29089388,
-        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
-        "html_url": "https://github.com/pzhlkj6612"
+        "login": "lanthora",
+        "id": 20885085,
+        "avatar_url": "https://avatars.githubusercontent.com/u/20885085?v=4",
+        "html_url": "https://github.com/lanthora"
       }
     },
     {
-      "total": 1,
+      "total": 2,
       "author": {
         "login": "U2FsdGVkX1",
         "id": 11484206,
@@ -28,12 +28,12 @@
       }
     },
     {
-      "total": 1,
+      "total": 2,
       "author": {
-        "login": "lanthora",
-        "id": 20885085,
-        "avatar_url": "https://avatars.githubusercontent.com/u/20885085?v=4",
-        "html_url": "https://github.com/lanthora"
+        "login": "pzhlkj6612",
+        "id": 29089388,
+        "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
+        "html_url": "https://github.com/pzhlkj6612"
       }
     },
     {
@@ -55,7 +55,7 @@
       }
     },
     {
-      "total": 74,
+      "total": 76,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "total": 332,
+      "total": 341,
       "author": {
         "login": "xen0n",
         "id": 1175567,
@@ -74,7 +74,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-26T19:51:20.813Z",
+    "generatedAt": "2026-06-04T20:58:12.313Z",
     "source": "https://api.github.com/repos/ruyisdk/packages-index/stats/contributors"
   }
 }
