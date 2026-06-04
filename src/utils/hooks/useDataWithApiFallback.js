@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const DEFAULT_MAX_RETRY_COUNT = 5;
+const DEFAULT_MAX_RETRY_COUNT = 3;
 const DEFAULT_RETRY_DELAY_BASE = 1000;
 
 const useDataWithApiFallback = (
