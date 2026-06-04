@@ -150,13 +150,13 @@ async function fetchContributorsWait(repos) {
     }
 
     try_time += 1;
-    if (try_time >= 2) {
-      console.warn(`[generate-api-github] Wait more than 10min`)
+    if (try_time > 5) {
+      console.warn(`[generate-api-github] Wait more than 20min`)
       break;
     }
 
-    console.info(`[generate-api-github] Sleep wait 5min`)
-    await sleep(5000 * 60); // 5 min
+    console.info(`[generate-api-github] Sleep wait 4.2min`)
+    await sleep(4200 * 60); // 5 min
   }
 }
 
