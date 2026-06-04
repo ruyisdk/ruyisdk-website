@@ -164,12 +164,15 @@ function AudienceGuide() {
 }
 
 function SpecCard({ spec }) {
+  const title = spec.title || spec.titleZh;
+  const subtitle = spec.subtitle || spec.titleEn;
+
   return (
     <article className={styles.card}>
       <div className={styles.cardHeader}>
         <div>
-          <h3 className={styles.cardTitle}>{spec.titleZh}</h3>
-          <p className={styles.cardSubtitle}>{spec.titleEn}</p>
+          <h3 className={styles.cardTitle}>{title}</h3>
+          <p className={styles.cardSubtitle}>{subtitle}</p>
         </div>
         <span className={styles.version}>{spec.version}</span>
       </div>
