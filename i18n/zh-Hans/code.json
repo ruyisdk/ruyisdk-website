@@ -14,28 +14,6 @@
   "footer.tools": { "message": "更多开发工具" },
   "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
 
-  "home.devboards.eyebrow": { "message": "从 RuyiSDK 开始" },
-  "home.devboards.titlePrefix": { "message": "上手" },
-  "home.devboards.titleSuffix": { "message": "开发板" },
-  "home.devboards.description": {
-    "message": "精选热门 RISC-V 开发板，上手示例、开发环境配置、固件烧录、调试运行，RuyiSDK 帮你快速开始开发。"
-  },
-  "home.devboards.cta": { "message": "查看所有开发板示例" },
-  "home.devboards.examplesTitle": { "message": "最新最热开发板上手示例" },
-  "home.devboards.cardLink": { "message": "查看示例" },
-  "home.devboards.visionfive2.description": {
-    "message": "基于 StarFive JH7110 的高性能 RISC-V 开发板"
-  },
-  "home.devboards.bpif3.description": {
-    "message": "面向桌面与边缘计算场景的八核 RISC-V 开发板"
-  },
-  "home.devboards.beaglev.description": {
-    "message": "强大的 RISC-V 开发板，提供丰富扩展接口与社区支持"
-  },
-  "home.devboards.licheepi4a.description": {
-    "message": "面向 Linux 与图形应用开发的 RISC-V 开发板"
-  },
-
   "ruyisdk.community": { "message": "RuyiSDK 社区" },
   "community.contributors.subtitle": {
     "message": "RuyiSDK社区由贡献者们共同驱动"
