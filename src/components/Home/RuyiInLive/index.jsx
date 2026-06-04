@@ -1,16 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { IconLink, IconLogin2 } from '@tabler/icons-react';
 
 import Translate from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback';
+import dashboardData from '@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json';
+
+const DASHBOARD_API_URL = 'https://api.ruyisdk.cn/fe/dashboard';
 
 const RuyiInLive = () => {
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data } = useDataWithApiFallback(dashboardData, DASHBOARD_API_URL);
 
   const colors = {
     navyBlue: '#002677',
@@ -30,53 +28,6 @@ const RuyiInLive = () => {
     ],
     [],
   );
-
-  useEffect(() => {
-    if (!customFields.apiURL) {
-      console.warn('apiURL not found in Docusaurus customFields.');
-      setLoading(false);
-      setError(new Error('API configuration is missing.'));
-      return;
-    }
-
-    // In development, avoid spinning a Worker that calls remote APIs to speed up preview and avoid rate limits.
-    if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
-      // Use lightweight placeholder data to render immediately.
-      setTimeout(() => {
-        setData({
-          pm_downloads: { total: 1200 },
-          downloads: { total: 5400 },
-          installs: { total: 3200 },
-          top_commands: { ruyi: { total: 120 }, build: { total: 95 }, run: { total: 60 } },
-        });
-        setLoading(false);
-        setError(null);
-      }, 0);
-
-      return;
-    }
-
-    const worker = new Worker('/js/dashboardFetcher.js');
-    worker.onmessage = (event) => {
-      const { type, payload } = event.data;
-      if (type === 'success') {
-        setData(payload);
-        setError(null);
-      } else if (type === 'error') {
-        setError(new Error(payload.message));
-      }
-      setLoading(false);
-    };
-    worker.onerror = (err) => {
-      console.error('An error occurred in the dashboard fetcher worker:', err);
-      setError(new Error('Failed to load data due to a worker error.'));
-      setLoading(false);
-    };
-    worker.postMessage({ apiURL: customFields.apiURL });
-    return () => {
-      worker.terminate();
-    };
-  }, [customFields.apiURL]);
 
   const barData = useMemo(() => {
     if (!data || !data.top_commands) return [];
@@ -187,13 +138,13 @@ const RuyiInLive = () => {
             </div>
 
             <div className="flex justify-around p-4 rounded-[0.5rem] text-center mb-6">
-              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={loading} />
-              <StatItem value={data?.downloads?.total} label="downloads" loading={loading} />
-              <StatItem value={data?.installs?.total} label="installs" loading={loading} />
+              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" loading={!data} />
+              <StatItem value={data?.downloads?.total} label="downloads" loading={!data} />
+              <StatItem value={data?.installs?.total} label="installs" loading={!data} />
             </div>
 
             <div className="flex-1">
-              {loading || error ? (
+              {!data ? (
                 <PlaceholderChart />
               ) : barData.length > 0 ? (
                 <div className="w-full h-full">
