@@ -1,19 +1,19 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import CodeBlock from '@site/src/components/Docs/CodeBlock';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback';
+import latestPm from '@site/static/data/api/api_ruyisdk_cn/releases_latest_pm.json';
 
 const ReleaseContext = createContext(null);
+const PM_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-pm';
 
-// 提取文件名的函数
+
 export function extractFileName(downloadUrl) {
   if (!downloadUrl) return null;
   
   try {
-    // 从URL中提取文件名
     const urlParts = downloadUrl.split('/');
-    const fileName = urlParts[urlParts.length - 1];
-    
-    // 移除查询参数（如果有）
+    const fileName = urlParts[urlParts.length - 1];q
     const cleanFileName = fileName.split('?')[0];
     
     return cleanFileName;
@@ -23,7 +23,6 @@ export function extractFileName(downloadUrl) {
   }
 }
 
-// 生成chmod命令的函数
 export function generateChmodCommand(downloadUrl) {
   const fileName = extractFileName(downloadUrl);
   if (!fileName) return 'chmod +x ./ruyi';
@@ -31,32 +30,8 @@ export function generateChmodCommand(downloadUrl) {
   return `chmod +x ./${fileName}`;
 }
 
-// 测试函数（开发环境使用）
-export function testFileNameExtraction() {
-  const testUrls = [
-    'https://github.com/ruyisdk/ruyi/releases/download/v2.0.0/ruyi-v2.0.0-linux-amd64',
-    'https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/v2.0.0/ruyi-v2.0.0-linux-aarch64',
-    'https://example.com/download/ruyi-v1.5.0-linux-riscv64?token=abc123',
-    null,
-    ''
-  ];
-  
-  testUrls.forEach((url, index) => {
-    const fileName = extractFileName(url);
-    const chmodCommand = generateChmodCommand(url);
-    console.log(`Test ${index + 1}:`, { url, fileName, chmodCommand });
-  });
-}
-
 export default function ReleaseProvider({ children }) {
-  const [releaseData, setReleaseData] = useState(null);
-
-  useEffect(() => {
-    fetch('https://api.ruyisdk.cn/releases/latest-pm')
-      .then(res => res.json())
-      .then(data => setReleaseData(data))
-      .catch(err => console.error('API releases/latest-pm 获取版本信息失败', err));
-  }, []);
+  const { data: releaseData } = useDataWithApiFallback(latestPm, PM_RELEASE_LATEST_API);
 
   return (
     <ReleaseContext.Provider value={releaseData}>
@@ -89,7 +64,6 @@ export function DownloadRuyi({ arch }) {
   );
 }
 
-// 修改：返回文件名的组件
 export function FileName({ arch }) {
   const data = useReleaseData();
 
@@ -103,7 +77,6 @@ export function FileName({ arch }) {
   return <code>{fileName || 'ruyi'}</code>;
 }
 
-// 新增：返回完整chmod命令的组件
 export function ChmodCommand({ arch }) {
   const data = useReleaseData();
 
@@ -117,7 +90,6 @@ export function ChmodCommand({ arch }) {
   return <CodeBlock lang="bash" code={`$ chmod +x ./${fileName || 'ruyi'}`} />;
 }
 
-// 新增：返回完整cp命令的组件
 export function CpCommand({ arch }) {
   const data = useReleaseData();
 
@@ -130,4 +102,3 @@ export function CpCommand({ arch }) {
 
   return <CodeBlock lang="bash" code={`$ sudo cp -v ./${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
 }
-
