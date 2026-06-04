@@ -13,7 +13,7 @@ export function extractFileName(downloadUrl) {
   
   try {
     const urlParts = downloadUrl.split('/');
-    const fileName = urlParts[urlParts.length - 1];q
+    const fileName = urlParts[urlParts.length - 1];
     const cleanFileName = fileName.split('?')[0];
     
     return cleanFileName;
