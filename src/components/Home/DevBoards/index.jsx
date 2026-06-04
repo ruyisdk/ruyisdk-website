@@ -18,10 +18,10 @@ const boards = [
     href: 'https://board-docs-frontend.pages.dev/boards/LicheePi4A/',
   },
   {
-    title: 'StarFive VisionFive 2',
+    title: 'StarFive VisionFive 2 Lite',
     descriptionId: 'home.devboards.visionfive2.description',
     description: '一款入手门槛极低且功能丰富的 RISC-V 单板计算机',
-    image: '/img/home/devboards/VisionFive2.webp',
+    image: '/img/home/devboards/VisionFive2-lite.webp',
     href: 'https://board-docs-frontend.pages.dev/boards/VisionFive2Lite/',
   },
   {
