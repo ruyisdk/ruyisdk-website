@@ -1,6 +1,33 @@
 {
   "data": [
     {
+      "total": 1,
+      "author": {
+        "login": "mengzhuo",
+        "id": 885662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
+        "html_url": "https://github.com/mengzhuo"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "RealFYang",
+        "id": 70937056,
+        "avatar_url": "https://avatars.githubusercontent.com/u/70937056?v=4",
+        "html_url": "https://github.com/RealFYang"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "joy2myself",
+        "id": 43837589,
+        "avatar_url": "https://avatars.githubusercontent.com/u/43837589?v=4",
+        "html_url": "https://github.com/joy2myself"
+      }
+    },
+    {
       "total": 2,
       "author": {
         "login": "YunxiangLuo",
@@ -19,30 +46,30 @@
       }
     },
     {
-      "total": 8,
-      "author": {
-        "login": "weilinfox",
-        "id": 54651938,
-        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
-        "html_url": "https://github.com/weilinfox"
-      }
-    },
-    {
-      "total": 9,
-      "author": {
-        "login": "U2FsdGVkX1",
-        "id": 11484206,
-        "avatar_url": "https://avatars.githubusercontent.com/u/11484206?v=4",
-        "html_url": "https://github.com/U2FsdGVkX1"
-      }
-    },
-    {
       "total": 9,
       "author": {
         "login": "shining1984",
         "id": 3916635,
         "avatar_url": "https://avatars.githubusercontent.com/u/3916635?v=4",
         "html_url": "https://github.com/shining1984"
+      }
+    },
+    {
+      "total": 9,
+      "author": {
+        "login": "zifeihan",
+        "id": 16839929,
+        "avatar_url": "https://avatars.githubusercontent.com/u/16839929?v=4",
+        "html_url": "https://github.com/zifeihan"
+      }
+    },
+    {
+      "total": 10,
+      "author": {
+        "login": "weilinfox",
+        "id": 54651938,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54651938?v=4",
+        "html_url": "https://github.com/weilinfox"
       }
     },
     {
@@ -57,6 +84,15 @@
     {
       "total": 13,
       "author": {
+        "login": "U2FsdGVkX1",
+        "id": 11484206,
+        "avatar_url": "https://avatars.githubusercontent.com/u/11484206?v=4",
+        "html_url": "https://github.com/U2FsdGVkX1"
+      }
+    },
+    {
+      "total": 17,
+      "author": {
         "login": "pzhlkj6612",
         "id": 29089388,
         "avatar_url": "https://avatars.githubusercontent.com/u/29089388?v=4",
@@ -64,21 +100,12 @@
       }
     },
     {
-      "total": 15,
+      "total": 20,
       "author": {
         "login": "qjivy",
         "id": 24410810,
         "avatar_url": "https://avatars.githubusercontent.com/u/24410810?v=4",
         "html_url": "https://github.com/qjivy"
-      }
-    },
-    {
-      "total": 31,
-      "author": {
-        "login": "imkiva",
-        "id": 9902643,
-        "avatar_url": "https://avatars.githubusercontent.com/u/9902643?v=4",
-        "html_url": "https://github.com/imkiva"
       }
     },
     {
@@ -91,7 +118,16 @@
       }
     },
     {
-      "total": 57,
+      "total": 35,
+      "author": {
+        "login": "imkiva",
+        "id": 9902643,
+        "avatar_url": "https://avatars.githubusercontent.com/u/9902643?v=4",
+        "html_url": "https://github.com/imkiva"
+      }
+    },
+    {
+      "total": 61,
       "author": {
         "login": "pz9115",
         "id": 43362020,
@@ -100,7 +136,7 @@
       }
     },
     {
-      "total": 65,
+      "total": 69,
       "author": {
         "login": "xen0n",
         "id": 1175567,
@@ -109,7 +145,7 @@
       }
     },
     {
-      "total": 229,
+      "total": 246,
       "author": {
         "login": "xijing21",
         "id": 84754181,
@@ -119,7 +155,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-26T19:54:25.952Z",
+    "generatedAt": "2026-06-04T20:58:13.375Z",
     "source": "https://api.github.com/repos/ruyisdk/wechat-articles/stats/contributors"
   }
 }

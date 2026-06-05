@@ -37,7 +37,7 @@
       }
     },
     {
-      "total": 6,
+      "total": 7,
       "author": {
         "login": "MalachiteN",
         "id": 53076703,
@@ -55,21 +55,21 @@
       }
     },
     {
-      "total": 9,
-      "author": {
-        "login": "Platohykj",
-        "id": 147904598,
-        "avatar_url": "https://avatars.githubusercontent.com/u/147904598?v=4",
-        "html_url": "https://github.com/Platohykj"
-      }
-    },
-    {
       "total": 12,
       "author": {
         "login": "Rhapsodier",
         "id": 200599239,
         "avatar_url": "https://avatars.githubusercontent.com/u/200599239?v=4",
         "html_url": "https://github.com/Rhapsodier"
+      }
+    },
+    {
+      "total": 15,
+      "author": {
+        "login": "sisungo",
+        "id": 95552651,
+        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
+        "html_url": "https://github.com/sisungo"
       }
     },
     {
@@ -82,7 +82,16 @@
       }
     },
     {
-      "total": 53,
+      "total": 16,
+      "author": {
+        "login": "Platohykj",
+        "id": 147904598,
+        "avatar_url": "https://avatars.githubusercontent.com/u/147904598?v=4",
+        "html_url": "https://github.com/Platohykj"
+      }
+    },
+    {
+      "total": 62,
       "author": {
         "login": "U2FsdGVkX1",
         "id": 11484206,
@@ -92,7 +101,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-03-26T19:55:26.498Z",
+    "generatedAt": "2026-06-04T20:58:14.666Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
   }
 }
