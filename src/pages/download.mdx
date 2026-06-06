@@ -7,73 +7,37 @@ import CodeBlock from '@site/src/components/Docs/CodeBlock';
 
 <h2 align="center">下载 RuyiSDK 开发工具</h2>
 
-RuyiSDK 包管理器、VSCode 插件、Eclipse 插件：如果您不清楚怎么选择，可以参考[不同渠道和下载方式的说明](https://ruyisdk.cn/t/topic/2479)。
+新手可根据日常开发习惯挑选适配方案：命令行开发选用包管理器，使用IDE开发则按需安装VSCode或Eclipse配套插件。各类工具详细介绍与安装步骤均可查阅下方官方文档。
 
-
-> 各组件最新版本及详细下载说明，请参阅[RuyiSDK 双周报第 69 期](https://github.com/ruyisdk/wechat-articles/blob/main/20260526-ruyisdk-biweekly-69.md)。
+> 各工具版本迭代详情，可查看[第69期项目双周报](https://github.com/ruyisdk/wechat-articles/blob/main/20260526-ruyisdk-biweekly-69.md)。
 
 <div style={{ display: 'flex', gap: '16px', flexWrap: 'nowrap', marginTop: '2rem', overflowX: 'auto' }}>
 
 <div style={{ flex: '1 1 0', minWidth: '260px', background: '#ffffff', border: '1px solid rgba(15, 35, 70, 0.04)', borderRadius: '16px', boxShadow: '0 8px 18px rgba(12, 30, 60, 0.08)', padding: '24px' }}>
 <h3 style={{ margin: '0 0 0.85rem', color: '#00163f', fontSize: '0.95rem', fontWeight: 700 }}>📦 RuyiSDK 包管理器</h3>
-<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>轻量级命令行工具，用于管理软件包、工具链和虚拟环境</p>
+<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>纯终端管控工具，一站式完成工具链安装、依赖管理与环境配置，附带全套命令参考与目录自定义配置指南</p>
 <p style={{ margin: '0 0 0.5rem', color: '#2f4e86', fontSize: '0.85rem', fontWeight: 500 }}>最新版本：<strong style={{ color: '#00163f', fontWeight: 800 }}>v0.49.0</strong></p>
-<a href="/docs/intro" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
+<a href="/docs/package-manager/" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
 </div>
 
 <div style={{ flex: '1 1 0', minWidth: '260px', background: '#ffffff', border: '1px solid rgba(15, 35, 70, 0.04)', borderRadius: '16px', boxShadow: '0 8px 18px rgba(12, 30, 60, 0.08)', padding: '24px' }}>
 <h3 style={{ margin: '0 0 0.85rem', color: '#00163f', fontSize: '0.95rem', fontWeight: 700 }}>📝 VSCode 插件</h3>
-<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>在 VS Code 中图形化管理 RuyiSDK 软件包和虚拟环境（安装时自动附带 ruyi）</p>
+<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>嵌入VSCode可视化操作，支持应用商店一键安装与离线安装包部署，全平台桌面系统通用</p>
 <p style={{ margin: '0 0 0.5rem', color: '#2f4e86', fontSize: '0.85rem', fontWeight: 500 }}>最新版本：<strong style={{ color: '#00163f', fontWeight: 800 }}>v0.1.4</strong></p>
-<a href="https://ruyisdk.cn/t/topic/2713" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
+<a href="/docs/vscode-plugins/installation" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
 </div>
 
 <div style={{ flex: '1 1 0', minWidth: '260px', background: '#ffffff', border: '1px solid rgba(15, 35, 70, 0.04)', borderRadius: '16px', boxShadow: '0 8px 18px rgba(12, 30, 60, 0.08)', padding: '24px' }}>
 <h3 style={{ margin: '0 0 0.85rem', color: '#00163f', fontSize: '0.95rem', fontWeight: 700 }}>🔧 Eclipse 插件</h3>
-<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>在 Eclipse IDE 中集成 RuyiSDK 开发环境（安装时自动附带 ruyi）</p>
+<p style={{ margin: '0 0 1rem', color: '#6c7fa6', lineHeight: 1.5, fontSize: '0.9rem' }}>替代旧版独立RuyiSDK IDE，提供在线更新站点、离线压缩包两种安装方式，适配传统Eclipse开发人群</p>
 <p style={{ margin: '0 0 0.5rem', color: '#2f4e86', fontSize: '0.85rem', fontWeight: 500 }}>最新版本：<strong style={{ color: '#00163f', fontWeight: 800 }}>v0.1.3</strong></p>
-<a href="https://ruyisdk.cn/t/topic/2696" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
+<a href="/docs/ide/" style={{ color: '#0066cc', textDecoration: 'none', fontWeight: 500 }}>📖 下载与使用 →</a>
 </div>
 
 </div>
-
-## 下载 RuyiSDK IDE（v0.0.3）
-
-> **说明**：RuyiSDK IDE 打包工作目前未持续跟进，可下载版本停留在较早基线。如果您需要最新功能体验，建议优先使用 **Eclipse + RuyiSDK 插件** 的方式。
-
-可以下载适合架构的 tarball：
-
-<CodeBlock lang="bash" code={`
-$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
-`} />
-
-::::tip
-文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
-::::
-
-### 安装 RuyiSDK IDE
-
-1、建立目录：
-
-<CodeBlock lang="bash" code={`
-$ sudo mkdir /opt/ruyisdk
-`} />
-
-2、解压 tarball 文件：
-
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
-$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz -C /opt/ruyisdk
-`} />
-
-3、运行 RuyiSDK IDE：
-
-<CodeBlock lang="bash" code={`
-$ /opt/ruyisdk/ruyisdk/ruyisdk
-`} />
 
 ## 开始使用
-
-阅读[文档](/docs/intro)以了解 Ruyi 的强大功能！
+跳转对应文档页面，跟着指引完成安装与环境配置。
 
   </>
 </ReleaseProvider>
