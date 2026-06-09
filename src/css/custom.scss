@@ -363,3 +363,26 @@ html[data-theme="dark"] .hash-link {
 
 @import "./docs-sidebar.css";
 @import "./news-skeleton.css";
+
+.download-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .download-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.download-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 35, 70, 0.04);
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
