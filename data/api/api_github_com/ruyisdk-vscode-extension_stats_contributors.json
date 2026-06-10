@@ -66,15 +66,6 @@
     {
       "total": 15,
       "author": {
-        "login": "sisungo",
-        "id": 95552651,
-        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
-        "html_url": "https://github.com/sisungo"
-      }
-    },
-    {
-      "total": 15,
-      "author": {
         "login": "iexplore123",
         "id": 51986002,
         "avatar_url": "https://avatars.githubusercontent.com/u/51986002?v=4",
@@ -91,6 +82,15 @@
       }
     },
     {
+      "total": 17,
+      "author": {
+        "login": "sisungo",
+        "id": 95552651,
+        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
+        "html_url": "https://github.com/sisungo"
+      }
+    },
+    {
       "total": 62,
       "author": {
         "login": "U2FsdGVkX1",
@@ -101,7 +101,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-04T20:58:14.666Z",
+    "generatedAt": "2026-06-09T20:56:15.932Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
   }
 }
