@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 563
+      "contributions": 570
     },
     {
       "id": 84754181,
@@ -318,6 +318,13 @@
       "contributions": 4
     },
     {
+      "id": 256837162,
+      "name": "shenghailing00-stack",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/256837162?v=4",
+      "github": "https://github.com/shenghailing00-stack",
+      "contributions": 4
+    },
+    {
       "id": 126950588,
       "name": "SongYuSheng1216",
       "avatarUrl": "https://avatars.githubusercontent.com/u/126950588?v=4",
@@ -364,13 +371,6 @@
       "name": "jason-hue",
       "avatarUrl": "https://avatars.githubusercontent.com/u/64242055?v=4",
       "github": "https://github.com/jason-hue",
-      "contributions": 2
-    },
-    {
-      "id": 256837162,
-      "name": "shenghailing00-stack",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/256837162?v=4",
-      "github": "https://github.com/shenghailing00-stack",
       "contributions": 2
     },
     {
@@ -453,15 +453,15 @@
   ],
   "totals": {
     "contributors": 64,
-    "commits": 4427,
-    "pullRequests": 2011,
-    "issues": 108,
+    "commits": 4436,
+    "pullRequests": 2014,
+    "issues": 106,
     "stars": 120,
     "forks": 177,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-09T21:13:04.500Z",
+    "generatedAt": "2026-06-11T21:31:40.231Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
