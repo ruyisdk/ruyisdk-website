@@ -3,6 +3,8 @@
 
     background-color: var(--home-navbar-bg-glass);
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    transition: background-color 0.6s ease, backdrop-filter 0.6s ease, -webkit-backdrop-filter 0.6s ease;
     color: #000;
 
     &.navbar--dark {
@@ -112,6 +114,13 @@
 
 .navbar-sidebar__backdrop {
     background-color: transparent;
+    box-shadow: none;
+}
+
+.navbar-sidebar__brand,
+.navbar-sidebar__close {
+    display: none;
+    box-shadow: none;
 }
 
 /* Remove centering on mobile devices */
@@ -205,6 +214,7 @@
     background-color: var(--home-navbar-bg-glass);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
+    box-shadow: none;
 
     transform: translate3d(-100%, 0, 0);
     clip-path: inset(0 0 100% 0);
@@ -216,6 +226,8 @@
     background-color: var(--home-navbar-bg-solid);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    box-shadow: none;
+    transition: background-color 0.6s ease, backdrop-filter 0.6s ease, -webkit-backdrop-filter 0.6s ease;
 }
 
 .navbar.navbar-sidebar--show.navbar--dark,
