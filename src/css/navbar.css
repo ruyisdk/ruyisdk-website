@@ -202,14 +202,29 @@
     height: calc(100vh - var(--ifm-navbar-height));
     max-height: calc(100vh - var(--ifm-navbar-height));
 
-    background-color: var(--ifm-background-color);
+    background-color: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
 
     transform: translate3d(-100%, 0, 0);
     clip-path: inset(0 0 100% 0);
     transition: opacity 300ms ease, clip-path 240ms ease, transform 0s linear 300ms, visibility 0s linear 300ms;
 }
 
+.navbar.navbar-sidebar--show {
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.navbar.navbar-sidebar--show.navbar--dark {
+    background-color: rgba(32, 35, 42, 0.96);
+}
+
 .navbar-sidebar--show .navbar-sidebar {
+    background-color: rgba(255, 255, 255, 0.96);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     transform: translateX(0);
     clip-path: inset(0 0 0 0);
     transition: transform 0s linear 0s, clip-path 240ms ease, opacity 300ms ease 0s, visibility 0s linear 0s;
