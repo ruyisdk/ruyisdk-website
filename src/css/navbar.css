@@ -1,15 +1,15 @@
 .navbar {
     --ifm-link-color: var(--home-menu-focus-color);
 
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--home-navbar-bg-glass);
     backdrop-filter: blur(3px);
     color: #000;
 
     &.navbar--dark {
-        background-color: rgba(32, 35, 42, 0.3);
+        background-color: var(--home-navbar-bg-glass-dark);
     }
     &.navbar--light {
-        background-color: rgba(255, 255, 255, 0.3);
+        background-color: var(--home-navbar-bg-glass);
         color: #000;
     }
 
@@ -202,7 +202,7 @@
     height: calc(100vh - var(--ifm-navbar-height));
     max-height: calc(100vh - var(--ifm-navbar-height));
 
-    background-color: rgba(255, 255, 255, 0.28);
+    background-color: var(--home-navbar-bg-glass);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
 
@@ -211,20 +211,19 @@
     transition: opacity 300ms ease, clip-path 240ms ease, transform 0s linear 300ms, visibility 0s linear 300ms;
 }
 
-.navbar.navbar-sidebar--show {
-    background-color: rgba(255, 255, 255, 0.96);
+.navbar.navbar-sidebar--show,
+.navbar.navbar-sidebar--show .navbar-sidebar {
+    background-color: var(--home-navbar-bg-solid);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 
-.navbar.navbar-sidebar--show.navbar--dark {
-    background-color: rgba(32, 35, 42, 0.96);
+.navbar.navbar-sidebar--show.navbar--dark,
+.navbar.navbar-sidebar--show.navbar--dark .navbar-sidebar {
+    background-color: var(--home-navbar-bg-solid-dark);
 }
 
 .navbar-sidebar--show .navbar-sidebar {
-    background-color: rgba(255, 255, 255, 0.96);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     transform: translateX(0);
     clip-path: inset(0 0 0 0);
     transition: transform 0s linear 0s, clip-path 240ms ease, opacity 300ms ease 0s, visibility 0s linear 0s;
