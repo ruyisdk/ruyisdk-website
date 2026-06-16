@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import ErrorBoundary from '@docusaurus/ErrorBoundary';
+import {useLocation} from '@docusaurus/router';
 import {
   PageMetadata,
   SkipToContentFallbackId,
@@ -13,6 +14,7 @@ import Navbar from '@theme/Navbar';
 import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
+import BackToTopButton from '@theme/BackToTopButton';
 import styles from './styles.module.css';
 
 export default function Layout(props) {
@@ -25,6 +27,9 @@ export default function Layout(props) {
     description,
   } = props;
   useKeyboardNavigation();
+  const {pathname} = useLocation();
+  const isDocsPage = /(^|\/)docs(\/|$)/.test(pathname);
+
   return (
     <LayoutProvider>
       <PageMetadata title={title} description={description} />
@@ -46,6 +51,8 @@ export default function Layout(props) {
           {children}
         </ErrorBoundary>
       </div>
+
+      {!isDocsPage && <BackToTopButton />}
 
       {!noFooter && <Footer />}
     </LayoutProvider>

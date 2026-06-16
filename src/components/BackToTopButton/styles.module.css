@@ -1,0 +1,81 @@
+.button {
+  --back-to-top-size: 3rem;
+  --back-to-top-bottom: 2rem;
+  --back-to-top-footer-offset: 0px;
+  --back-to-top-inset-inline: max(
+    1rem,
+    calc((100vw - 90rem) / 2 + 2rem)
+  );
+
+  position: fixed;
+  right: var(--back-to-top-inset-inline);
+  bottom: calc(
+    var(--back-to-top-bottom) + var(--back-to-top-footer-offset)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--back-to-top-size);
+  height: var(--back-to-top-size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ifm-color-emphasis-200);
+  box-shadow: var(--ifm-global-shadow-lw);
+  color: var(--ifm-color-emphasis-1000);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(calc(100% + 2rem));
+  visibility: hidden;
+  z-index: var(--ifm-z-index-fixed);
+  transition:
+    opacity 180ms var(--ifm-transition-timing-default),
+    transform 180ms var(--ifm-transition-timing-default),
+    visibility 0s linear 180ms,
+    background-color 180ms var(--ifm-transition-timing-default);
+}
+
+.buttonVisible {
+  opacity: 1;
+  transform: translateX(0);
+  visibility: visible;
+  transition:
+    opacity 180ms var(--ifm-transition-timing-default),
+    transform 180ms var(--ifm-transition-timing-default),
+    visibility 0s,
+    background-color 180ms var(--ifm-transition-timing-default);
+}
+
+.arrow {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-top: 0.18rem solid currentColor;
+  border-left: 0.18rem solid currentColor;
+  transform: translateY(0.25rem) rotate(45deg);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background: var(--ifm-color-emphasis-300);
+  }
+}
+
+@media (max-width: 768px) {
+  .button {
+    --back-to-top-size: 2.75rem;
+    --back-to-top-bottom: max(1rem, env(safe-area-inset-bottom));
+    --back-to-top-inset-inline: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .buttonVisible {
+    transition: none;
+  }
+}
