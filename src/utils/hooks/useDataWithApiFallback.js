@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 const DEFAULT_MAX_RETRY_COUNT = 3;
 const DEFAULT_RETRY_DELAY_BASE = 1000;
 
+const isGithubApiUrl = (apiUrl) => {
+  try {
+    return new URL(apiUrl).hostname === "api.github.com";
+  } catch {
+    return false;
+  }
+};
+
 const useDataWithApiFallback = (
   fallbackData,
   apiUrl,
@@ -25,10 +33,12 @@ const useDataWithApiFallback = (
       if (retryCount > maxRetryCount || isCancelled) return;
 
       try {
+        const isGithubApi = isGithubApiUrl(apiUrl);
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
-            Accept: "application/json",
+            Accept: isGithubApi ? "application/vnd.github+json" : "application/json",
+            ...(isGithubApi ? { "X-GitHub-Api-Version": "2022-11-28" } : {}),
           },
         });
 
