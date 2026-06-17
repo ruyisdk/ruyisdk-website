@@ -51,9 +51,14 @@ function buttonStyle(variant, accent) {
   };
 }
 
-function getDownloadAccent(download) {
-  if (download.includes('eclipse')) return 'eclipse';
-  if (download.includes('vscode') || download.includes('vsix')) return 'blue';
+function getDownloadAccent(product, download) {
+  if (product === 'eclipse') return 'eclipse';
+  if (product === 'vscode') return 'blue';
+  if (product === 'pm') return 'gold';
+
+  const normalized = (download || '').toLowerCase();
+  if (normalized.includes('eclipse')) return 'eclipse';
+  if (normalized.includes('vscode') || normalized.includes('vsix')) return 'blue';
   return 'gold';
 }
 
@@ -166,9 +171,10 @@ export default function DownloadThanksPage() {
   const arch = params.get('arch') || '';
   const version = params.get('version') || '';
   const file = params.get('file') || '';
+  const product = params.get('product') || '';
   const downloadRaw = params.get('download') || '';
   const download = safeParseUrl(downloadRaw)?.toString() || '';
-  const accent = getDownloadAccent(download);
+  const accent = getDownloadAccent(product, download);
   const installDocsPath = getInstallDocsPath(accent);
 
   const localePrefix = useMemo(() => {
