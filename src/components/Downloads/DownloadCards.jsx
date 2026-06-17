@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
 import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback';
 import latestPmBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_pm.json';
-import latestVscodeBuilt from '@site/static/data/api/api_github_com/ruyisdk-vscode-extension_latest.json';
-import latestEclipseBuilt from '@site/static/data/api/api_github_com/ruyisdk-eclipse-plugins_latest.json';
+import latestVscodeBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_vscode.json';
+import latestEclipseBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_eclipse.json';
 
 export const COLOR_VARS = {
   gold: 'var(--ruyi-gold, var(--ifm-color-warning))',
@@ -18,8 +18,8 @@ const ARCH_ORDER = ['x86_64', 'aarch64', 'riscv64', 'universal'];
 const KNOWN_LOCALES = new Set(['zh-Hans', 'en', 'de']);
 
 const PM_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-pm';
-const VSCODE_RELEASE_LATEST_API = 'https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/releases/latest';
-const ECLIPSE_RELEASE_LATEST_API = 'https://api.github.com/repos/ruyisdk/ruyisdk-eclipse-plugins/releases/latest';
+const VSCODE_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-ide/vscode';
+const ECLIPSE_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-ide/eclipse';
 
 const PM_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/';
 const PM_GITHUB_RELEASES_URL = 'https://github.com/ruyisdk/ruyi/releases';
@@ -146,6 +146,17 @@ function archLabel(arch) {
 }
 
 function normalizeLatestRelease(data) {
+  const stable = data?.channels?.stable;
+  if (stable?.download_urls) {
+    const urls = Object.values(stable.download_urls).find((item) => Array.isArray(item) && item.length > 0);
+    const downloadUrl = pickPreferredUrl(urls);
+    return {
+      version: stable.version || '-',
+      downloadUrl,
+      fileName: extractFileName(downloadUrl),
+    };
+  }
+
   const firstAsset = Array.isArray(data?.assets) ? data.assets.find((item) => item?.browser_download_url) : null;
   return {
     version: data?.tag_name || data?.name || '-',
