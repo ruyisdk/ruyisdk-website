@@ -3,9 +3,13 @@ const fs = require('fs');
 const path = require('path');
 
 const API_URL = 'https://api.ruyisdk.cn';
-const API_LATEST_PM = "/releases/latest-pm";
-const API_DASHBOARD = "/fe/dashboard";
+const API_LATEST_PM = '/releases/latest-pm';
+const API_LATEST_VSCODE = '/releases/latest-ide/vscode';
+const API_LATEST_ECLIPSE = '/releases/latest-ide/eclipse';
+const API_DASHBOARD = '/fe/dashboard';
 const OUT_FILE = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'releases_latest_pm.json');
+const OUT_FILE_VSCODE = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'releases_latest_vscode.json');
+const OUT_FILE_ECLIPSE = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'releases_latest_eclipse.json');
 const OUT_FILE_DASHBOARD = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'fe_dashboard.json');
 
 async function apiFetch(url) {
@@ -35,52 +39,44 @@ async function apiFetch(url) {
   }
 }
 
+function withGeneratedInfo(json, source) {
+  return {
+    ...json,
+
+    // auto generate info
+    ruyisdk_org_data: {
+      generatedAt: new Date().toISOString(),
+      source,
+    },
+  };
+}
+
+async function generateApiSnapshot({ name, endpoint, outputFile }) {
+  const api = `${API_URL}${endpoint}`;
+  const json = await apiFetch(api);
+  if (!json || typeof json !== 'object') {
+    console.error(`[generate-api-ruyisdk-cn] ${name} API return invalid JSON payload`);
+    return false;
+  }
+
+  const data = withGeneratedInfo(json, api);
+  fs.writeFileSync(outputFile, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+  console.log(`[generate-api-ruyisdk-cn] Updated ${outputFile}`);
+  return true;
+}
+
 async function main() {
-
   try {
-    // release/latest_pm
-    let api = API_URL+API_LATEST_PM
-    let json = await apiFetch(api);
-    if (!json || typeof json !== 'object') {
-      console.error('[generate-api-latest-pm] API return invalid JSON payload');
-      return;
+    const snapshots = [
+      { name: 'releases/latest-pm', endpoint: API_LATEST_PM, outputFile: OUT_FILE },
+      { name: 'releases/latest-ide/vscode', endpoint: API_LATEST_VSCODE, outputFile: OUT_FILE_VSCODE },
+      { name: 'releases/latest-ide/eclipse', endpoint: API_LATEST_ECLIPSE, outputFile: OUT_FILE_ECLIPSE },
+      { name: 'fe/dashboard', endpoint: API_DASHBOARD, outputFile: OUT_FILE_DASHBOARD },
+    ];
+
+    for (const snapshot of snapshots) {
+      await generateApiSnapshot(snapshot);
     }
-
-    let data = {
-      ...json,
-
-      // auto generate info
-      ruyisdk_org_data: {
-        generatedAt: new Date().toISOString(),
-        source: api,
-      },
-    };
-
-    fs.writeFileSync(OUT_FILE, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-
-    console.log(`[generate-api-latest-pm] Updated ${OUT_FILE}`);
-
-    // fe/dashboard
-    api = API_URL+API_DASHBOARD
-    json = await apiFetch(api);
-    if (!json || typeof json !== 'object') {
-      console.error('[generate-api-latest-pm] API return invalid JSON payload');
-      return;
-    }
-
-    data = {
-      ...json,
-
-      // auto generate info
-      ruyisdk_org_data: {
-        generatedAt: new Date().toISOString(),
-        source: api,
-      },
-    };
-
-    fs.writeFileSync(OUT_FILE_DASHBOARD, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-
-    console.log(`[generate-api-latest-pm] Updated ${OUT_FILE_DASHBOARD}`);
   } catch (err) {
     // why error?
     throw err;
