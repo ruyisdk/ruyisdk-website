@@ -265,6 +265,303 @@
     "message": "No articles yet"
   },
 
+  "========== news subscription ==========": { "message": "" },
+
+  "subscription.emailPlaceholder": {
+    "message": "Enter your email"
+  },
+  "subscription.emailAriaLabel": {
+    "message": "Email address"
+  },
+  "subscription.subscribe": {
+    "message": "Subscribe"
+  },
+  "subscription.submitting": {
+    "message": "Submitting..."
+  },
+  "subscription.failed": {
+    "message": "Subscription failed. Please try again."
+  },
+  "subscription.responseReceived": {
+    "message": "Subscription response received."
+  },
+
+  "========== downloads ==========": { "message": "" },
+
+  "downloads.meta.title": {
+    "message": "Downloads"
+  },
+  "downloads.meta.description": {
+    "message": "Download RuyiSDK Package Manager and IDE"
+  },
+  "downloads.title": {
+    "message": "Download RuyiSDK"
+  },
+  "downloads.subtitle": {
+    "message": "Get the RuyiSDK Package Manager and IDE to start your RISC-V development journey."
+  },
+  "downloads.installScript.title": {
+    "message": "Install with the Script"
+  },
+  "downloads.manualDownload.title": {
+    "message": "Manual Download and Installation"
+  },
+
+  "downloads.pm.title": {
+    "message": "RuyiSDK Package Manager"
+  },
+  "downloads.pm.description": {
+    "message": "Ruyi Package Manager is the core component of RuyiSDK"
+  },
+  "downloads.pm.latestOnly": {
+    "message": "Go to download page"
+  },
+
+  "downloads.badge.stable": {
+    "message": "Stable"
+  },
+  "downloads.badge.testing": {
+    "message": "Testing"
+  },
+  "downloads.label.version": {
+    "message": "Version"
+  },
+  "downloads.label.mirror": {
+    "message": "Mirror"
+  },
+  "downloads.label.githubReleases": {
+    "message": "GitHub Releases"
+  },
+  "downloads.label.pypi": {
+    "message": "PyPI"
+  },
+  "downloads.button.latest": {
+    "message": "Latest"
+  },
+  "downloads.button.version": {
+    "message": "Version"
+  },
+  "downloads.button.otherVersions": {
+    "message": "Other versions"
+  },
+  "downloads.button.allVersions": {
+    "message": "All versions"
+  },
+  "downloads.button.loading": {
+    "message": "Loading"
+  },
+  "downloads.arch.x86_64": {
+    "message": "x86_64"
+  },
+  "downloads.arch.aarch64": {
+    "message": "aarch64"
+  },
+  "downloads.arch.riscv64": {
+    "message": "riscv64"
+  },
+  "downloads.arch.universal": {
+    "message": "Universal (no architecture split)"
+  },
+  "downloads.modal.title": {
+    "message": "Choose architecture and download"
+  },
+  "downloads.modal.latestVersion": {
+    "message": "Latest"
+  },
+  "downloads.modal.cancel": {
+    "message": "Cancel"
+  },
+
+  "downloads.otherMethods": {
+    "message": "Other links:"
+  },
+  "downloads.viewDocs": {
+    "message": "Installation docs"
+  },
+  "downloads.source.mirror": {
+    "message": "ISCAS mirror downloads:"
+  },
+  "downloads.source.github": {
+    "message": "GitHub Release downloads:"
+  },
+  "downloads.pm.other.ideMirror": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.label.debianTesting": {
+    "message": "Debian testing"
+  },
+  "downloads.label.ruyisdkOverlay": {
+    "message": "ruyisdk-overlay"
+  },
+  "downloads.label.aur": {
+    "message": "AUR"
+  },
+
+  "downloads.vscode.title": {
+    "message": "RuyiSDK VS Code Extension"
+  },
+  "downloads.vscode.description": {
+    "message": "Use RuyiSDK in Visual Studio Code"
+  },
+  "downloads.vscode.marketplace.title": {
+    "message": "VS Code marketplaces"
+  },
+  "downloads.vscode.openVsx": {
+    "message": "Download from Open VSX"
+  },
+  "downloads.vscode.marketplace": {
+    "message": "Download from Marketplace"
+  },
+  "downloads.eclipse.title": {
+    "message": "RuyiSDK Eclipse Plugin"
+  },
+  "downloads.eclipse.description": {
+    "message": "Use RuyiSDK in Eclipse Embedded CDT"
+  },
+  "downloads.eclipse.marketplace.title": {
+    "message": "Eclipse Marketplace"
+  },
+  "downloads.eclipse.marketplace": {
+    "message": "Download from Marketplace"
+  },
+
+  "downloads.ide.title": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.ide.description": {
+    "message": "IDE-related downloads and release links."
+  },
+  "downloads.ide.latestOnly": {
+    "message": "Go to download page"
+  },
+
+  "downloads.ide.entry.mirror": {
+    "message": "IDE mirror directory"
+  },
+  "downloads.ide.entry.mirror.desc": {
+    "message": "Get the latest IDE builds/releases."
+  },
+  "downloads.ide.entry.vscode": {
+    "message": "RuyiSDK VS Code Extension (Releases)"
+  },
+  "downloads.ide.entry.vscode.desc": {
+    "message": "Release page for the VS Code-based RuyiSDK extension."
+  },
+  "downloads.ide.entry.eclipse": {
+    "message": "RuyiSDK Eclipse (Releases)"
+  },
+  "downloads.ide.entry.eclipse.desc": {
+    "message": "Release page for the Eclipse-based RuyiSDK project."
+  },
+
+  "downloads.agreement": {
+    "message": "By downloading and using RuyiSDK, you agree to the license terms and the {privacyLink}."
+  },
+  "downloads.privacy": {
+    "message": "privacy statement"
+  },
+  "downloads.thanks.retry": {
+    "message": "No response? Click here to retry"
+  },
+
+  "========== riscv specs ==========": { "message": "" },
+
+  "riscvSpecs.page.title": {
+    "message": "RISC-V Ratified Specs"
+  },
+  "riscvSpecs.page.description": {
+    "message": "Guide and download entry for RISC-V Ratified Specs"
+  },
+  "riscvSpecs.category.core.description": {
+    "message": "Foundational material for processors, instructions, privilege levels, and interrupts."
+  },
+  "riscvSpecs.category.profiles.description": {
+    "message": "Capability sets that help software reason about platform compatibility."
+  },
+  "riscvSpecs.category.hardware.description": {
+    "message": "Hardware implementation topics for SoCs, devices, IOMMU, server platforms, and resource management."
+  },
+  "riscvSpecs.category.debugTraceRas.description": {
+    "message": "Debugging, execution trace, error records, and reliability-related capabilities."
+  },
+  "riscvSpecs.category.platformSoftware.description": {
+    "message": "System software interfaces for firmware, boot, SBI, UEFI, and platform management."
+  },
+  "riscvSpecs.category.applicationEnablement.description": {
+    "message": "Toolchain and application support for ABI, porting, semihosting, and vector intrinsics."
+  },
+  "riscvSpecs.guide.isa.audience": {
+    "message": "ISA fundamentals"
+  },
+  "riscvSpecs.guide.isa.description": {
+    "message": "Start with the execution model visible to regular programs, privilege levels, exceptions, and interrupts."
+  },
+  "riscvSpecs.guide.platformSoftware.audience": {
+    "message": "System software / firmware"
+  },
+  "riscvSpecs.guide.platformSoftware.description": {
+    "message": "Look first at boot, SBI, UEFI, and platform management interfaces used in system enablement work."
+  },
+  "riscvSpecs.guide.profiles.audience": {
+    "message": "Software ecosystem compatibility"
+  },
+  "riscvSpecs.guide.profiles.description": {
+    "message": "Use Profiles to understand the baseline capability sets expected by software."
+  },
+  "riscvSpecs.guide.hardware.audience": {
+    "message": "Hardware / SoC / validation"
+  },
+  "riscvSpecs.guide.hardware.description": {
+    "message": "Focus on platform integration and hardware interfaces such as IOMMU, PLIC, Server SoC, and QoS."
+  },
+  "riscvSpecs.guide.debugTraceRas.audience": {
+    "message": "Debug / trace / bring-up"
+  },
+  "riscvSpecs.guide.debugTraceRas.description": {
+    "message": "Start from the debug model, trace data, and error record interfaces for low-level diagnosis."
+  },
+  "riscvSpecs.guide.applicationEnablement.audience": {
+    "message": "Compilers / runtimes / vector libraries"
+  },
+  "riscvSpecs.guide.applicationEnablement.description": {
+    "message": "Focus on ABI, semihosting, and vector intrinsics for porting and optimization work."
+  },
+  "riscvSpecs.categoryNav.ariaLabel": {
+    "message": "RISC-V Specs category navigation"
+  },
+  "riscvSpecs.guide.title": {
+    "message": "Read by Interest"
+  },
+  "riscvSpecs.guide.categoryLabel": {
+    "message": "Category: "
+  },
+  "riscvSpecs.card.summaryLabel": {
+    "message": "Summary: "
+  },
+  "riscvSpecs.card.audienceLabel": {
+    "message": "Audience: "
+  },
+  "riscvSpecs.card.mirrorDate": {
+    "message": "Mirror date: {date}"
+  },
+  "riscvSpecs.card.downloadPdf": {
+    "message": "Download PDF"
+  },
+  "riscvSpecs.category.count": {
+    "message": "{count} specs"
+  },
+  "riscvSpecs.specs.ariaLabel": {
+    "message": "RISC-V Ratified Specs category list"
+  },
+  "riscvSpecs.officialSite": {
+    "message": "RISC-V International technical website"
+  },
+  "riscvSpecs.pageNote": {
+    "message": "Note: This page is a guide and mirror download entry. For the corresponding technical standards, please refer to the {link}."
+  },
+
+  "========== some old code ==========": { "message": "" },
+
   "meetup": {
     "message": "Our recent events"
   },
@@ -885,256 +1182,5 @@
   },
   "no.data": {
     "message": "No statistical data available currently."
-  },
-
-  "downloads.meta.title": {
-    "message": "Downloads"
-  },
-  "downloads.meta.description": {
-    "message": "Download RuyiSDK Package Manager and IDE"
-  },
-  "downloads.title": {
-    "message": "Download RuyiSDK"
-  },
-  "downloads.subtitle": {
-    "message": "Get the RuyiSDK Package Manager and IDE to start your RISC-V development journey."
-  },
-
-  "downloads.pm.title": {
-    "message": "RuyiSDK Package Manager"
-  },
-  "downloads.pm.description": {
-    "message": "Ruyi Package Manager is the core component of RuyiSDK, providing package management and environment setup."
-  },
-  "downloads.pm.noData": {
-    "message": "This build couldn't fetch the latest version info. Use the links below to get the latest release."
-  },
-  "downloads.pm.latestOnly": {
-    "message": "Go to download page"
-  },
-
-  "downloads.badge.stable": {
-    "message": "Stable"
-  },
-  "downloads.label.version": {
-    "message": "Version"
-  },
-  "downloads.label.mirror": {
-    "message": "Mirror"
-  },
-  "downloads.label.githubReleases": {
-    "message": "GitHub Releases"
-  },
-  "downloads.label.pypi": {
-    "message": "PyPI"
-  },
-  "downloads.button.latest": {
-    "message": "Latest"
-  },
-  "downloads.button.version": {
-    "message": "Version"
-  },
-  "downloads.button.otherVersions": {
-    "message": "Other versions"
-  },
-  "downloads.button.loading": {
-    "message": "Loading"
-  },
-  "downloads.arch.x86_64": {
-    "message": "x86_64"
-  },
-  "downloads.arch.aarch64": {
-    "message": "aarch64"
-  },
-  "downloads.arch.riscv64": {
-    "message": "riscv64"
-  },
-  "downloads.arch.universal": {
-    "message": "Universal (no architecture split)"
-  },
-  "downloads.modal.title": {
-    "message": "Choose architecture and download"
-  },
-  "downloads.modal.latestVersion": {
-    "message": "Latest"
-  },
-  "downloads.modal.noOptions": {
-    "message": "Unable to fetch the latest download link now. Please use \"Other versions\"."
-  },
-  "downloads.modal.cancel": {
-    "message": "Cancel"
-  },
-
-  "downloads.otherMethods": {
-    "message": "Other links:"
-  },
-  "downloads.viewDocs": {
-    "message": "View full installation docs"
-  },
-  "downloads.pm.other.ideMirror": {
-    "message": "RuyiSDK IDE"
-  },
-
-  "downloads.vscode.title": {
-    "message": "RuyiSDK VS Code Extension"
-  },
-  "downloads.vscode.description": {
-    "message": "Download and release entry for the VS Code extension."
-  },
-  "downloads.eclipse.title": {
-    "message": "RuyiSDK Eclipse Extension"
-  },
-  "downloads.eclipse.description": {
-    "message": "Download and release entry for the Eclipse extension."
-  },
-
-  "downloads.ide.title": {
-    "message": "RuyiSDK IDE"
-  },
-  "downloads.ide.description": {
-    "message": "IDE-related downloads and release links."
-  },
-  "downloads.ide.latestOnly": {
-    "message": "Go to download page"
-  },
-
-  "downloads.ide.entry.mirror": {
-    "message": "IDE mirror directory"
-  },
-  "downloads.ide.entry.mirror.desc": {
-    "message": "Get the latest IDE builds/releases."
-  },
-  "downloads.ide.entry.vscode": {
-    "message": "RuyiSDK VS Code Extension (Releases)"
-  },
-  "downloads.ide.entry.vscode.desc": {
-    "message": "Release page for the VS Code-based RuyiSDK extension."
-  },
-  "downloads.ide.entry.eclipse": {
-    "message": "RuyiSDK Eclipse (Releases)"
-  },
-  "downloads.ide.entry.eclipse.desc": {
-    "message": "Release page for the Eclipse-based RuyiSDK project."
-  },
-
-  "downloads.agreement": {
-    "message": "By downloading and using RuyiSDK, you agree to the license terms and the {privacyLink}."
-  },
-  "downloads.privacy": {
-    "message": "privacy statement"
-  },
-  "downloads.thanks.retry": {
-    "message": "No response? Click here to retry"
-  },
-  "subscription.emailPlaceholder": {
-    "message": "Enter your email"
-  },
-  "subscription.emailAriaLabel": {
-    "message": "Email address"
-  },
-  "subscription.subscribe": {
-    "message": "Subscribe"
-  },
-  "subscription.submitting": {
-    "message": "Submitting..."
-  },
-  "subscription.failed": {
-    "message": "Subscription failed. Please try again."
-  },
-  "subscription.responseReceived": {
-    "message": "Subscription response received."
-  },
-  "riscvSpecs.page.title": {
-    "message": "RISC-V Ratified Specs"
-  },
-  "riscvSpecs.page.description": {
-    "message": "Guide and download entry for RISC-V Ratified Specs"
-  },
-  "riscvSpecs.category.core.description": {
-    "message": "Foundational material for processors, instructions, privilege levels, and interrupts."
-  },
-  "riscvSpecs.category.profiles.description": {
-    "message": "Capability sets that help software reason about platform compatibility."
-  },
-  "riscvSpecs.category.hardware.description": {
-    "message": "Hardware implementation topics for SoCs, devices, IOMMU, server platforms, and resource management."
-  },
-  "riscvSpecs.category.debugTraceRas.description": {
-    "message": "Debugging, execution trace, error records, and reliability-related capabilities."
-  },
-  "riscvSpecs.category.platformSoftware.description": {
-    "message": "System software interfaces for firmware, boot, SBI, UEFI, and platform management."
-  },
-  "riscvSpecs.category.applicationEnablement.description": {
-    "message": "Toolchain and application support for ABI, porting, semihosting, and vector intrinsics."
-  },
-  "riscvSpecs.guide.isa.audience": {
-    "message": "ISA fundamentals"
-  },
-  "riscvSpecs.guide.isa.description": {
-    "message": "Start with the execution model visible to regular programs, privilege levels, exceptions, and interrupts."
-  },
-  "riscvSpecs.guide.platformSoftware.audience": {
-    "message": "System software / firmware"
-  },
-  "riscvSpecs.guide.platformSoftware.description": {
-    "message": "Look first at boot, SBI, UEFI, and platform management interfaces used in system enablement work."
-  },
-  "riscvSpecs.guide.profiles.audience": {
-    "message": "Software ecosystem compatibility"
-  },
-  "riscvSpecs.guide.profiles.description": {
-    "message": "Use Profiles to understand the baseline capability sets expected by software."
-  },
-  "riscvSpecs.guide.hardware.audience": {
-    "message": "Hardware / SoC / validation"
-  },
-  "riscvSpecs.guide.hardware.description": {
-    "message": "Focus on platform integration and hardware interfaces such as IOMMU, PLIC, Server SoC, and QoS."
-  },
-  "riscvSpecs.guide.debugTraceRas.audience": {
-    "message": "Debug / trace / bring-up"
-  },
-  "riscvSpecs.guide.debugTraceRas.description": {
-    "message": "Start from the debug model, trace data, and error record interfaces for low-level diagnosis."
-  },
-  "riscvSpecs.guide.applicationEnablement.audience": {
-    "message": "Compilers / runtimes / vector libraries"
-  },
-  "riscvSpecs.guide.applicationEnablement.description": {
-    "message": "Focus on ABI, semihosting, and vector intrinsics for porting and optimization work."
-  },
-  "riscvSpecs.categoryNav.ariaLabel": {
-    "message": "RISC-V Specs category navigation"
-  },
-  "riscvSpecs.guide.title": {
-    "message": "Read by Interest"
-  },
-  "riscvSpecs.guide.categoryLabel": {
-    "message": "Category: "
-  },
-  "riscvSpecs.card.summaryLabel": {
-    "message": "Summary: "
-  },
-  "riscvSpecs.card.audienceLabel": {
-    "message": "Audience: "
-  },
-  "riscvSpecs.card.mirrorDate": {
-    "message": "Mirror date: {date}"
-  },
-  "riscvSpecs.card.downloadPdf": {
-    "message": "Download PDF"
-  },
-  "riscvSpecs.category.count": {
-    "message": "{count} specs"
-  },
-  "riscvSpecs.specs.ariaLabel": {
-    "message": "RISC-V Ratified Specs category list"
-  },
-  "riscvSpecs.officialSite": {
-    "message": "RISC-V International technical website"
-  },
-  "riscvSpecs.pageNote": {
-    "message": "Note: This page is a guide and mirror download entry. For the corresponding technical standards, please refer to the {link}."
   }
 }

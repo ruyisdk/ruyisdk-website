@@ -675,9 +675,6 @@
   "downloads.pm.description": {
     "message": "Der Ruyi-Paketmanager ist die Kernkomponente von RuyiSDK und bietet Paketverwaltung sowie Umgebungs-Konfiguration."
   },
-  "downloads.pm.noData": {
-    "message": "In diesem Build konnten keine aktuellen Versionsinformationen abgerufen werden. Nutzen Sie die Links unten, um die neueste Version zu erhalten."
-  },
   "downloads.pm.latestOnly": {
     "message": "Zur Download-Seite"
   },
@@ -726,9 +723,6 @@
   },
   "downloads.modal.latestVersion": {
     "message": "Neueste Version"
-  },
-  "downloads.modal.noOptions": {
-    "message": "Der neueste Download-Link ist derzeit nicht verfügbar. Bitte \"Weitere Versionen\" verwenden."
   },
   "downloads.modal.cancel": {
     "message": "Abbrechen"
