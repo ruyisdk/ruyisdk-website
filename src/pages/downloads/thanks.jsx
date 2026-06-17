@@ -9,29 +9,64 @@ const COLOR_VARS = {
   goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
   blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
   blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
+  eclipse: '#5f3dc4',
   contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
 };
 
 function headerGradientStyle(accent) {
   if (accent === 'gold') {
-    return { background: `linear-gradient(90deg, ${COLOR_VARS.goldDark} 0%, ${COLOR_VARS.gold} 100%)` };
+    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
   }
-  return { background: `linear-gradient(90deg, ${COLOR_VARS.blue} 0%, ${COLOR_VARS.blueDark} 100%)` };
+  if (accent === 'eclipse') {
+    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
+  }
+  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
 }
 
-function primaryButtonStyle(accent) {
+function buttonStyle(variant, accent) {
+  if (variant === 'secondary') {
+    return { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
+  }
   if (accent === 'gold') {
     return {
-      backgroundColor: COLOR_VARS.gold,
-      color: COLOR_VARS.contrast,
-      boxShadow: '0 6px 18px rgba(0,0,0,0.08)',
+      backgroundColor: 'rgba(232, 183, 22, 0.18)',
+      background: 'rgba(232, 183, 22, 0.18)',
+      color: '#8c6b00',
+      boxShadow: 'none',
+    };
+  }
+  if (accent === 'eclipse') {
+    return {
+      backgroundColor: 'rgba(95, 61, 196, 0.14)',
+      background: 'rgba(95, 61, 196, 0.14)',
+      color: COLOR_VARS.eclipse,
+      boxShadow: 'none',
     };
   }
   return {
-    backgroundColor: COLOR_VARS.blue,
-    color: 'white',
-    boxShadow: '0 6px 18px rgba(0,0,0,0.08)',
+    backgroundColor: 'rgba(45, 120, 255, 0.14)',
+    background: 'rgba(45, 120, 255, 0.14)',
+    color: COLOR_VARS.blue,
+    boxShadow: 'none',
   };
+}
+
+function getDownloadAccent(download) {
+  if (download.includes('eclipse')) return 'eclipse';
+  if (download.includes('vscode') || download.includes('vsix')) return 'blue';
+  return 'gold';
+}
+
+function getInstallDocsPath(accent) {
+  if (accent === 'blue') return '/docs/VSCode-Plugins/';
+  if (accent === 'eclipse') return '/docs/IDE/';
+  return '/docs/Package-Manager/installation';
+}
+
+function iconColor(accent) {
+  if (accent === 'eclipse') return COLOR_VARS.eclipse;
+  if (accent === 'gold') return COLOR_VARS.goldDark;
+  return COLOR_VARS.blueDark;
 }
 
 function safeParseUrl(url) {
@@ -50,19 +85,6 @@ function triggerDownload(url) {
 
   const allowedHosts = new Set(['mirror.iscas.ac.cn', 'github.com']);
   if (!allowedHosts.has(parsed.hostname)) return;
-
-  const anchor = document.createElement('a');
-  anchor.href = parsed.toString();
-  anchor.target = '_blank';
-  anchor.rel = 'noopener noreferrer';
-  anchor.style.display = 'none';
-  document.body.appendChild(anchor);
-  anchor.click();
-  try {
-    document.body.removeChild(anchor);
-  } catch {
-    // no-op
-  }
 
   const iframe = document.createElement('iframe');
   iframe.style.display = 'none';
@@ -125,11 +147,10 @@ export default function DownloadThanksPage() {
   const arch = params.get('arch') || '';
   const version = params.get('version') || '';
   const file = params.get('file') || '';
-  const parentRaw = params.get('parent') || '';
-  const parent = safeParseUrl(parentRaw)?.toString() || '';
   const downloadRaw = params.get('download') || '';
   const download = safeParseUrl(downloadRaw)?.toString() || '';
-  const started = params.get('started') || '0';
+  const accent = getDownloadAccent(download);
+  const installDocsPath = getInstallDocsPath(accent);
 
   const localePrefix = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -139,13 +160,12 @@ export default function DownloadThanksPage() {
   useEffect(() => {
     if (!isClient) return;
     if (!download) return;
-    if (started === '1') return;
     triggerDownload(download);
-  }, [isClient, download, started]);
+  }, [isClient, download]);
 
   const sourceLabel =
     source === 'mirror'
-      ? translate({ id: 'downloads.thanks.source.mirror', message: '镜像站' })
+      ? translate({ id: 'downloads.thanks.source.mirror', message: '软件所镜像站' })
       : source === 'github'
         ? translate({ id: 'downloads.thanks.source.github', message: 'GitHub Releases' })
         : translate({ id: 'downloads.thanks.source.unknown', message: '下载源' });
@@ -157,12 +177,13 @@ export default function DownloadThanksPage() {
     >
       <PageBackground isClient={isClient} />
 
-      <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl">
-          <section className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="px-8 py-6 text-white" style={headerGradientStyle('gold')}>
-              <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="relative text-gray-800 font-inter">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">
+        <div className="relative mx-auto w-full z-10">
+          <section className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="px-8 py-6" style={headerGradientStyle(accent)}>
+              <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: iconColor(accent) }}>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -170,10 +191,10 @@ export default function DownloadThanksPage() {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <Translate id="downloads.thanks.title">感谢下载</Translate>
+                <Translate id="downloads.thanks.title">感谢下载 RuyiSDK</Translate>
               </h1>
-              <p className="mt-2 text-lg opacity-90 text-white/90">
-                <Translate id="downloads.thanks.subtitle">您的下载已开始（若浏览器拦截下载，请检查下载设置）。</Translate>
+              <p className="mt-2 text-lg text-gray-700">
+                <Translate id="downloads.thanks.subtitle">下载已经开始（若遇浏览器拦截，请检查下载设置）</Translate>
               </p>
             </div>
 
@@ -208,7 +229,7 @@ export default function DownloadThanksPage() {
 
                     <div className="bg-white rounded-xl border border-gray-200 p-4">
                       <div className="text-gray-500">
-                        <Translate id="downloads.thanks.field.file">文件</Translate>
+                        <Translate id="downloads.thanks.field.file">文件名</Translate>
                       </div>
                       <div className="font-semibold mt-1" style={{ wordBreak: 'break-all' }}>
                         {file || '-'}
@@ -216,65 +237,33 @@ export default function DownloadThanksPage() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex flex-col md:flex-row gap-3">
+                  <div className="mt-6 flex flex-wrap justify-end gap-3">
                     {download && (
                       <a
                         href={download}
                         download
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
-                        style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
+                        className="secondary-button text-sm font-semibold whitespace-nowrap"
+                        style={buttonStyle('secondary', accent)}
                       >
                         <Translate id="downloads.thanks.retry">无响应？点此重试</Translate>
                       </a>
                     )}
 
                     <a
-                      href={withLocalePrefix('/docs/Package-Manager/installation', localePrefix)}
-                      className="w-full inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-xl transition-all focus:outline-none hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5"
-                      style={primaryButtonStyle('gold')}
+                      href={withLocalePrefix(installDocsPath, localePrefix)}
+                      className="primary-button text-sm font-semibold whitespace-nowrap"
+                      style={buttonStyle('primary', accent)}
                     >
-                      <Translate id="downloads.thanks.gotoInstallDocs">查看安装文档</Translate>
-                    </a>
-
-                    {parent && (
-                      <a
-                        href={parent}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
-                        style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
-                      >
-                        <Translate id="downloads.thanks.gotoParent">前往上级目录</Translate>
-                      </a>
-                    )}
-
-                    <a
-                      href={withLocalePrefix('/downloads', localePrefix)}
-                      className="w-full inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
-                      style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
-                    >
-                      <Translate id="downloads.thanks.back">返回下载页</Translate>
+                      <Translate id="downloads.thanks.gotoInstallDocs">下一步：阅读安装文档</Translate>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 text-sm text-gray-500 flex flex-wrap gap-4 justify-center md:justify-start">
-              <span className="font-medium">
-                <Translate id="downloads.thanks.more">下一步：</Translate>
-              </span>
-              <a
-                href={withLocalePrefix('/docs/Package-Manager/installation', localePrefix)}
-                className="hover:underline font-medium transition-colors"
-                style={{ color: COLOR_VARS.contrast }}
-              >
-                <Translate id="downloads.thanks.more.install">阅读安装文档并完成安装</Translate>
-              </a>
-            </div>
           </section>
+        </div>
         </div>
       </div>
     </Layout>

@@ -90,41 +90,6 @@ function getLocalePrefixFromPathname(pathname) {
   return KNOWN_LOCALES.has(first) ? `/${first}` : '';
 }
 
-function startDownloadWithUserGesture(url) {
-  const parsed = safeParseUrl(url);
-  if (!parsed) return false;
-
-  const allowedHosts = new Set(['mirror.iscas.ac.cn', 'github.com']);
-  if (!allowedHosts.has(parsed.hostname)) return false;
-
-  try {
-    const popup = window.open('about:blank', '_blank');
-    if (popup) {
-      popup.opener = null;
-      popup.location.href = parsed.toString();
-      return true;
-    }
-  } catch {
-    // no-op
-  }
-
-  try {
-    const anchor = document.createElement('a');
-    anchor.href = parsed.toString();
-    anchor.target = '_blank';
-    anchor.rel = 'noopener noreferrer';
-    anchor.style.display = 'none';
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
-    return true;
-  } catch {
-    // no-op
-  }
-
-  return false;
-}
-
 export function detectSource(url) {
   const parsed = safeParseUrl(url);
   if (!parsed) return 'unknown';
@@ -238,7 +203,7 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
           <div className="px-6 py-4 border-t border-gray-100 flex justify-end">
             <button
               type="button"
-              className="inline-flex items-center justify-center px-5 py-2.5 border rounded-lg bg-white hover:bg-gray-50 font-medium"
+              className="secondary-button text-sm font-semibold whitespace-nowrap"
               style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
               onClick={onClose}
             >
@@ -633,7 +598,6 @@ export default function DownloadCards({
   const goToThanksPage = ({ item, version, parentUrl, arch }) => {
     if (!item?.url) return;
 
-    const started = startDownloadWithUserGesture(item.url);
     const source = item.source || detectSource(item.url);
     const downloadPath = withLocalePrefix('/downloads/thanks', localePrefix);
     const query = new URLSearchParams({
@@ -643,7 +607,6 @@ export default function DownloadCards({
       file: item.fileName || extractFileName(item.url),
       parent: parentUrl || '',
       download: item.url,
-      started: started ? '1' : '0',
     }).toString();
 
     window.location.href = `${downloadPath}?${query}`;
@@ -687,7 +650,7 @@ export default function DownloadCards({
           releaseData={vscodeLatestData}
           mirrorAllUrl={VSCODE_MIRROR_RELEASES_URL}
           githubAllUrl={IDE_VSCODE_RELEASES_URL}
-          docsUrl="/docs/IDE/"
+          docsUrl="/docs/VSCode-Plugins/"
           marketplace={{
             titleId: 'downloads.vscode.marketplace.title',
             titleMessage: '扩展市场',
@@ -716,7 +679,7 @@ export default function DownloadCards({
           releaseData={eclipseLatestData}
           mirrorAllUrl={ECLIPSE_MIRROR_RELEASES_URL}
           githubAllUrl={IDE_ECLIPSE_RELEASES_URL}
-          docsUrl="/docs/VSCode-Plugins/"
+          docsUrl="/docs/IDE/"
           marketplace={{
             titleId: 'downloads.eclipse.marketplace.title',
             titleMessage: 'Eclipse Marketplace',
