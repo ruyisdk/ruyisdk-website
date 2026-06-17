@@ -100,11 +100,11 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             {/* Image section */}
             <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
               <img
-                src={resolveImg(article.image) || resolveImg("img/ruyi-logo-720.svg")}
+                src={resolveImg(article.image) || resolveImg("img/downloads/ruyi-logo-720.svg")}
                 alt={article.title}
                 className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
-                  e.target.src = resolveImg("img/ruyi-logo-720.svg");
+                  e.target.src = resolveImg("img/downloads/ruyi-logo-720.svg");
                 }}
               />
             </div>

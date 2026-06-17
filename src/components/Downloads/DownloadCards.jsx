@@ -423,7 +423,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
         descriptionId="downloads.pm.description"
         descriptionMessage="Ruyi 包管理器是 RuyiSDK 的核心组件"
         accent="gold"
-        logoSrc="/img/ruyi-logo-720.svg"
+        logoSrc="/img/downloads/ruyi-logo-720.svg"
         logoAlt="RuyiSDK"
         iconPath="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
       />
@@ -682,7 +682,7 @@ export default function DownloadCards({
           descriptionId="downloads.vscode.description"
           descriptionMessage="在 Visual Studio Code 上使用 RuyiSDK"
           accent="blue"
-          logoSrc="/img/vs-code.webp"
+          logoSrc="/img/downloads/vs-code.webp"
           logoAlt="VS Code"
           releaseData={vscodeLatestData}
           mirrorAllUrl={VSCODE_MIRROR_RELEASES_URL}
@@ -711,7 +711,7 @@ export default function DownloadCards({
           descriptionId="downloads.eclipse.description"
           descriptionMessage="在 Eclipse Embedded CDT 上使用 RuyiSDK"
           accent="eclipse"
-          logoSrc="/img/Eclipse2014-logo_RGB.svg"
+          logoSrc="/img/downloads/Eclipse2014-logo_RGB.svg"
           logoAlt="Eclipse"
           releaseData={eclipseLatestData}
           mirrorAllUrl={ECLIPSE_MIRROR_RELEASES_URL}
