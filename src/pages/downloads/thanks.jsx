@@ -112,6 +112,24 @@ function withLocalePrefix(path, localePrefix) {
   return `${localePrefix}${path}`;
 }
 
+function LoadingDots() {
+  return (
+    <>
+      <style>{`
+        @keyframes downloadRetryDot {
+          0%, 20% { opacity: 0; }
+          40%, 100% { opacity: 1; }
+        }
+      `}</style>
+      <span className="ml-1 inline-flex w-5 justify-start" aria-hidden="true">
+        <span style={{ animation: 'downloadRetryDot 1.2s infinite' }}>.</span>
+        <span style={{ animation: 'downloadRetryDot 1.2s infinite', animationDelay: '200ms' }}>.</span>
+        <span style={{ animation: 'downloadRetryDot 1.2s infinite', animationDelay: '400ms' }}>.</span>
+      </span>
+    </>
+  );
+}
+
 function PageBackground({ isClient }) {
   if (!isClient) return null;
   return ReactDOM.createPortal(
@@ -133,6 +151,7 @@ function PageBackground({ isClient }) {
 
 export default function DownloadThanksPage() {
   const [isClient, setIsClient] = useState(false);
+  const [retryEnabled, setRetryEnabled] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -162,6 +181,14 @@ export default function DownloadThanksPage() {
     if (!download) return;
     triggerDownload(download);
   }, [isClient, download]);
+
+  useEffect(() => {
+    if (!download) return undefined;
+    const id = window.setTimeout(() => {
+      setRetryEnabled(true);
+    }, 5_000);
+    return () => window.clearTimeout(id);
+  }, [download]);
 
   const sourceLabel =
     source === 'mirror'
@@ -238,7 +265,7 @@ export default function DownloadThanksPage() {
                   </div>
 
                   <div className="mt-6 flex flex-wrap justify-end gap-3">
-                    {download && (
+                    {download && retryEnabled && (
                       <a
                         href={download}
                         download
@@ -249,6 +276,17 @@ export default function DownloadThanksPage() {
                       >
                         <Translate id="downloads.thanks.retry">无响应？点此重试</Translate>
                       </a>
+                    )}
+                    {download && !retryEnabled && (
+                      <button
+                        type="button"
+                        disabled
+                        className="secondary-button text-sm font-semibold whitespace-nowrap"
+                        style={{ ...buttonStyle('secondary', accent), opacity: 0.55, cursor: 'not-allowed', transform: 'none' }}
+                      >
+                        <Translate id="downloads.thanks.retryWaiting">正在开始下载</Translate>
+                        <LoadingDots />
+                      </button>
                     )}
 
                     <a
