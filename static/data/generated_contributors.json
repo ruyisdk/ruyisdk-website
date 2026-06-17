@@ -7,14 +7,14 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2066
+      "contributions": 2136
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 570
+      "contributions": 574
     },
     {
       "id": 84754181,
@@ -42,7 +42,7 @@
       "name": "KevinMX",
       "avatarUrl": "https://avatars.githubusercontent.com/u/17025286?v=4",
       "github": "https://github.com/KevinMX",
-      "contributions": 157
+      "contributions": 158
     },
     {
       "id": 11484206,
@@ -77,7 +77,7 @@
       "name": "a1gorhythm7",
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "github": "https://github.com/a1gorhythm7",
-      "contributions": 62
+      "contributions": 63
     },
     {
       "id": 62790279,
@@ -129,6 +129,13 @@
       "contributions": 21
     },
     {
+      "id": 95552651,
+      "name": "sisungo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
+      "github": "https://github.com/sisungo",
+      "contributions": 20
+    },
+    {
       "id": 45998863,
       "name": "saicogn",
       "avatarUrl": "https://avatars.githubusercontent.com/u/45998863?v=4",
@@ -136,18 +143,11 @@
       "contributions": 20
     },
     {
-      "id": 95552651,
-      "name": "sisungo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
-      "github": "https://github.com/sisungo",
-      "contributions": 19
-    },
-    {
       "id": 147904598,
       "name": "Platohykj",
       "avatarUrl": "https://avatars.githubusercontent.com/u/147904598?v=4",
       "github": "https://github.com/Platohykj",
-      "contributions": 17
+      "contributions": 18
     },
     {
       "id": 51986002,
@@ -262,17 +262,17 @@
       "contributions": 6
     },
     {
-      "id": 19223209,
-      "name": "255doesnotexist",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/19223209?v=4",
-      "github": "https://github.com/255doesnotexist",
-      "contributions": 6
-    },
-    {
       "id": 36284558,
       "name": "stc15f104w",
       "avatarUrl": "https://avatars.githubusercontent.com/u/36284558?v=4",
       "github": "https://github.com/stc15f104w",
+      "contributions": 6
+    },
+    {
+      "id": 19223209,
+      "name": "255doesnotexist",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/19223209?v=4",
+      "github": "https://github.com/255doesnotexist",
       "contributions": 6
     },
     {
@@ -374,6 +374,13 @@
       "contributions": 2
     },
     {
+      "id": 58899952,
+      "name": "calsys456",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/58899952?v=4",
+      "github": "https://github.com/calsys456",
+      "contributions": 2
+    },
+    {
       "id": 114720311,
       "name": "ChestNutICE",
       "avatarUrl": "https://avatars.githubusercontent.com/u/114720311?v=4",
@@ -381,10 +388,10 @@
       "contributions": 2
     },
     {
-      "id": 58899952,
-      "name": "calsys456",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/58899952?v=4",
-      "github": "https://github.com/calsys456",
+      "id": 101803232,
+      "name": "DuoQilai",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/101803232?v=4",
+      "github": "https://github.com/DuoQilai",
       "contributions": 2
     },
     {
@@ -437,6 +444,13 @@
       "contributions": 1
     },
     {
+      "id": 79030590,
+      "name": "dongdigua",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/79030590?v=4",
+      "github": "https://github.com/dongdigua",
+      "contributions": 1
+    },
+    {
       "id": 147403260,
       "name": "Gekyume777",
       "avatarUrl": "https://avatars.githubusercontent.com/u/147403260?v=4",
@@ -452,16 +466,16 @@
     }
   ],
   "totals": {
-    "contributors": 64,
-    "commits": 4436,
-    "pullRequests": 2014,
-    "issues": 106,
+    "contributors": 66,
+    "commits": 4517,
+    "pullRequests": 2024,
+    "issues": 105,
     "stars": 120,
-    "forks": 177,
+    "forks": 176,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-11T21:31:40.231Z",
+    "generatedAt": "2026-06-16T21:59:00.000Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
