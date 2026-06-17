@@ -48,7 +48,7 @@ export default function DownloadGuide({ sectionIds }) {
   ];
 
   return (
-    <section className="mb-8 w-full rounded-3xl border border-gray-100 bg-white shadow-xl overflow-hidden">
+    <section className="mt-8 mb-8 w-full rounded-3xl border border-gray-100 bg-white shadow-lg overflow-hidden">
       <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
         <div className="px-6 py-7 sm:px-8 sm:py-8">
           <div className="text-sm font-bold uppercase text-amber-600">

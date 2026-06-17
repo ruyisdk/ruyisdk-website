@@ -17,17 +17,16 @@ export default function DownloadsPage() {
       title={translate({ id: 'downloads.meta.title', message: '下载' })}
       description={translate({ id: 'downloads.meta.description', message: '下载 RuyiSDK 包管理器与 IDE' })}
     >
-      <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
+      <div className="relative min-h-screen text-gray-800 font-inter">
         <PageBackground />
-        <div className="mx-auto relative z-10 w-full max-w-screen-xl">
-          <div className="flex flex-col items-center justify-center mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 drop-shadow-sm mb-4">
-              <Translate id="downloads.title">下载 RuyiSDK</Translate>
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl">
-              <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅。</Translate>
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16">
+        <div className="relative mx-auto w-full z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 drop-shadow-sm">
+            <Translate id="downloads.title">下载 RuyiSDK</Translate>
+          </h2>
+          <p className="text-gray-500 text-lg md:text-xl leading-relaxed text-center mt-8">
+            <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅</Translate>
+          </p>
 
           <DownloadGuide sectionIds={SECTION_IDS} />
           <DownloadCards sectionIds={SECTION_IDS} />
@@ -48,6 +47,7 @@ export default function DownloadsPage() {
               </Translate>
             </p>
           </div>
+        </div>
         </div>
       </div>
     </Layout>
