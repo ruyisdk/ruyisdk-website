@@ -82,7 +82,7 @@ const config = {
         hideOnScroll: false,
         logo: {
           alt: "RuyiSDK Logo",
-          src: "img/ruyi-logo-720.svg",
+          src: "img/downloads/ruyi-logo-720.svg",
         },
         style: "primary",
         items: [
