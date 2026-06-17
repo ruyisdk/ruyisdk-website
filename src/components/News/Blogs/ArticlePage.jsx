@@ -40,9 +40,9 @@ export default function ArticlePage({ contentMap }) {
   const tagKeys = Array.isArray(frontMatter.tags) ? frontMatter.tags : [];
 
   return (
-    <main className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
+    <main className="relative overflow-hidden py-10 text-gray-800 font-inter">
       <PageBackground />
-      <div className="mx-auto relative z-10 max-w-screen-xl">
+      <div className="mx-auto relative z-10 max-w-screen-xl px-4">
         {title && (
           <div className={styles.header}>
             <h1 className={styles.title}>{title}</h1>

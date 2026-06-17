@@ -37,8 +37,8 @@ const NewsPage = () => {
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
       <PageBackground isClient={isClient} />
-      <div className="relative overflow-visible px-6 py-8 text-gray-800 font-inter">
-        <div className="mx-auto relative z-10 max-w-screen-xl">
+      <div className="relative overflow-visible py-8 text-gray-800 font-inter">
+        <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (
             <div className="flex w-full justify-center items-center py-12">
               <div className="skeleton-card w-full max-w-4xl">

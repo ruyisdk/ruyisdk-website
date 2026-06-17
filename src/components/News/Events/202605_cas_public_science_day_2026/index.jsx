@@ -45,9 +45,9 @@ export default function Events() {
   const QqContent = resolveLocalizedContent(CONTENT.qq, locale);
 
   return (
-    <main className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
+    <main className="relative overflow-hidden py-10 text-gray-800 font-inter">
       <PageBackground />
-      <div className="mx-auto relative z-10 max-w-screen-xl">
+      <div className="mx-auto relative z-10 max-w-screen-xl px-4">
         <div className="grid w-full gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(16rem,1fr)] lg:items-start">
           <div className="min-w-0">
             <MarkdownCard className="overflow-hidden">

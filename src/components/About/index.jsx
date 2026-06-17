@@ -42,9 +42,9 @@ export default function About() {
   const QrContent = resolveLocalizedContent(QR_CONTENT, i18n?.currentLocale);
 
   return (
-    <div className="relative overflow-hidden px-6 py-10 text-gray-800 font-inter">
+    <div className="relative overflow-hidden py-10 text-gray-800 font-inter">
       <PageBackground />
-      <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center">
+      <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center px-4">
         <div className="w-full grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-stretch">
           <MarkdownCard>
             <AboutContent />
