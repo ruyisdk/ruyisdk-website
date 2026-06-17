@@ -410,6 +410,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
                 version: stable?.version || '-',
                 options: stableMirrorOptions,
                 parentUrl: PM_MIRROR_STABLE_URL,
+                product: 'pm',
               })
             }
             onGithubLatest={() =>
@@ -418,6 +419,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
                 version: stable?.version || '-',
                 options: stableGithubOptions,
                 parentUrl: PM_GITHUB_RELEASES_URL,
+                product: 'pm',
               })
             }
           />
@@ -436,6 +438,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
                 version: testing?.version || '-',
                 options: testingMirrorOptions,
                 parentUrl: PM_MIRROR_TESTING_URL,
+                product: 'pm',
               })
             }
             onGithubLatest={() =>
@@ -444,6 +447,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
                 version: testing?.version || '-',
                 options: testingGithubOptions,
                 parentUrl: PM_GITHUB_RELEASES_URL,
+                product: 'pm',
               })
             }
           />
@@ -490,6 +494,7 @@ function ExtensionSection({
   githubAllUrl,
   marketplace,
   docsUrl,
+  product,
   onDirectLatest,
 }) {
   const stable = releaseData?.channels?.stable;
@@ -511,14 +516,6 @@ function ExtensionSection({
 
       <div className="p-6 sm:p-8">
         <div className="grid gap-6 md:grid-cols-2">
-          <MarketplaceCard titleId={marketplace.titleId} titleMessage={marketplace.titleMessage}>
-            {marketplace.links.map((link) => (
-              <DownloadButton key={link.href} variant="secondary" href={link.href}>
-                {link.label}
-              </DownloadButton>
-            ))}
-          </MarketplaceCard>
-
           <ReleaseCard
             badgeId="downloads.badge.stable"
             badgeMessage="稳定版"
@@ -534,6 +531,7 @@ function ExtensionSection({
                 version: stable?.version || '-',
                 item: mirrorItem,
                 parentUrl: mirrorAllUrl,
+                product,
               });
             }}
             onGithubLatest={() => {
@@ -542,9 +540,18 @@ function ExtensionSection({
                 version: stable?.version || '-',
                 item: githubItem,
                 parentUrl: githubAllUrl,
+                product,
               });
             }}
           />
+
+          <MarketplaceCard titleId={marketplace.titleId} titleMessage={marketplace.titleMessage}>
+            {marketplace.links.map((link) => (
+              <DownloadButton key={link.href} variant="secondary" href={link.href}>
+                {link.label}
+              </DownloadButton>
+            ))}
+          </MarketplaceCard>
         </div>
       </div>
       <ExternalLinks
@@ -574,6 +581,7 @@ export default function DownloadCards({
     version: '-',
     options: [],
     parentUrl: '',
+    product: '',
   });
 
   const localePrefix = useMemo(() => {
@@ -588,14 +596,15 @@ export default function DownloadCards({
       version: payload.version,
       options: payload.options,
       parentUrl: payload.parentUrl,
+      product: payload.product,
     });
   };
 
   const handleCloseModal = () => {
-    setModalState({ open: false, projectLabel: '', version: '-', options: [], parentUrl: '' });
+    setModalState({ open: false, projectLabel: '', version: '-', options: [], parentUrl: '', product: '' });
   };
 
-  const goToThanksPage = ({ item, version, parentUrl, arch }) => {
+  const goToThanksPage = ({ item, version, parentUrl, arch, product }) => {
     if (!item?.url) return;
 
     const source = item.source || detectSource(item.url);
@@ -607,6 +616,7 @@ export default function DownloadCards({
       file: item.fileName || extractFileName(item.url),
       parent: parentUrl || '',
       download: item.url,
+      product: product || '',
     }).toString();
 
     window.location.href = `${downloadPath}?${query}`;
@@ -618,15 +628,17 @@ export default function DownloadCards({
       version: modalState.version,
       parentUrl: modalState.parentUrl,
       arch: item.arch,
+      product: modalState.product,
     });
   };
 
-  const handleDirectLatest = ({ version, item, parentUrl }) => {
+  const handleDirectLatest = ({ version, item, parentUrl, product }) => {
     goToThanksPage({
       item,
       version,
       parentUrl,
       arch: item.arch || 'universal',
+      product,
     });
   };
 
@@ -651,9 +663,10 @@ export default function DownloadCards({
           mirrorAllUrl={VSCODE_MIRROR_RELEASES_URL}
           githubAllUrl={IDE_VSCODE_RELEASES_URL}
           docsUrl="/docs/VSCode-Plugins/"
+          product="vscode"
           marketplace={{
             titleId: 'downloads.vscode.marketplace.title',
-            titleMessage: '扩展市场',
+            titleMessage: '从扩展市场下载',
             links: [
               {
                 href: VSCODE_OPEN_VSX_URL,
@@ -680,9 +693,10 @@ export default function DownloadCards({
           mirrorAllUrl={ECLIPSE_MIRROR_RELEASES_URL}
           githubAllUrl={IDE_ECLIPSE_RELEASES_URL}
           docsUrl="/docs/IDE/"
+          product="eclipse"
           marketplace={{
             titleId: 'downloads.eclipse.marketplace.title',
-            titleMessage: 'Eclipse Marketplace',
+            titleMessage: '从扩展市场下载',
             links: [
               {
                 href: ECLIPSE_MARKETPLACE_URL,
