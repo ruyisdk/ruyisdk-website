@@ -460,8 +460,47 @@
   "downloads.privacy": {
     "message": "privacy statement"
   },
+  "downloads.thanks.source.mirror": {
+    "message": "ISCAS mirror"
+  },
+  "downloads.thanks.source.github": {
+    "message": "GitHub Releases"
+  },
+  "downloads.thanks.source.unknown": {
+    "message": "Download source"
+  },
+  "downloads.thanks.meta.title": {
+    "message": "Thanks for downloading"
+  },
+  "downloads.thanks.meta.description": {
+    "message": "Thanks for downloading RuyiSDK"
+  },
+  "downloads.thanks.title": {
+    "message": "Thanks for downloading RuyiSDK"
+  },
+  "downloads.thanks.subtitle": {
+    "message": "Your download has started. If your browser blocks it, check your download settings."
+  },
+  "downloads.thanks.details": {
+    "message": "Download details"
+  },
+  "downloads.thanks.field.source": {
+    "message": "Source"
+  },
+  "downloads.thanks.field.arch": {
+    "message": "Architecture"
+  },
+  "downloads.thanks.field.version": {
+    "message": "Version"
+  },
+  "downloads.thanks.field.file": {
+    "message": "File Name"
+  },
   "downloads.thanks.retry": {
     "message": "No response? Click here to retry"
+  },
+  "downloads.thanks.gotoInstallDocs": {
+    "message": "Next: read the installation docs"
   },
 
   "========== riscv specs ==========": { "message": "" },
