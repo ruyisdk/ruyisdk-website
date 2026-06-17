@@ -12,6 +12,15 @@
     {
       "total": 1,
       "author": {
+        "login": "dongdigua",
+        "id": 79030590,
+        "avatar_url": "https://avatars.githubusercontent.com/u/79030590?v=4",
+        "html_url": "https://github.com/dongdigua"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
         "login": "Gekyume777",
         "id": 147403260,
         "avatar_url": "https://avatars.githubusercontent.com/u/147403260?v=4",
@@ -48,10 +57,19 @@
     {
       "total": 2,
       "author": {
-        "login": "ChestNutICE",
-        "id": 114720311,
-        "avatar_url": "https://avatars.githubusercontent.com/u/114720311?v=4",
-        "html_url": "https://github.com/ChestNutICE"
+        "login": "Z572",
+        "id": 37945516,
+        "avatar_url": "https://avatars.githubusercontent.com/u/37945516?v=4",
+        "html_url": "https://github.com/Z572"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "xen0n",
+        "id": 1175567,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
+        "html_url": "https://github.com/xen0n"
       }
     },
     {
@@ -66,19 +84,19 @@
     {
       "total": 2,
       "author": {
-        "login": "Z572",
-        "id": 37945516,
-        "avatar_url": "https://avatars.githubusercontent.com/u/37945516?v=4",
-        "html_url": "https://github.com/Z572"
+        "login": "ChestNutICE",
+        "id": 114720311,
+        "avatar_url": "https://avatars.githubusercontent.com/u/114720311?v=4",
+        "html_url": "https://github.com/ChestNutICE"
       }
     },
     {
       "total": 2,
       "author": {
-        "login": "xen0n",
-        "id": 1175567,
-        "avatar_url": "https://avatars.githubusercontent.com/u/1175567?v=4",
-        "html_url": "https://github.com/xen0n"
+        "login": "DuoQilai",
+        "id": 101803232,
+        "avatar_url": "https://avatars.githubusercontent.com/u/101803232?v=4",
+        "html_url": "https://github.com/DuoQilai"
       }
     },
     {
@@ -102,19 +120,19 @@
     {
       "total": 6,
       "author": {
-        "login": "255doesnotexist",
-        "id": 19223209,
-        "avatar_url": "https://avatars.githubusercontent.com/u/19223209?v=4",
-        "html_url": "https://github.com/255doesnotexist"
+        "login": "stc15f104w",
+        "id": 36284558,
+        "avatar_url": "https://avatars.githubusercontent.com/u/36284558?v=4",
+        "html_url": "https://github.com/stc15f104w"
       }
     },
     {
       "total": 6,
       "author": {
-        "login": "stc15f104w",
-        "id": 36284558,
-        "avatar_url": "https://avatars.githubusercontent.com/u/36284558?v=4",
-        "html_url": "https://github.com/stc15f104w"
+        "login": "255doesnotexist",
+        "id": 19223209,
+        "avatar_url": "https://avatars.githubusercontent.com/u/19223209?v=4",
+        "html_url": "https://github.com/255doesnotexist"
       }
     },
     {
@@ -181,7 +199,7 @@
       }
     },
     {
-      "total": 122,
+      "total": 123,
       "author": {
         "login": "KevinMX",
         "id": 17025286,
@@ -200,7 +218,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-11T21:10:37.301Z",
+    "generatedAt": "2026-06-16T21:42:11.680Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix/stats/contributors"
   }
 }

@@ -73,7 +73,7 @@
       }
     },
     {
-      "total": 16,
+      "total": 17,
       "author": {
         "login": "Platohykj",
         "id": 147904598,
@@ -82,7 +82,7 @@
       }
     },
     {
-      "total": 17,
+      "total": 18,
       "author": {
         "login": "sisungo",
         "id": 95552651,
@@ -101,7 +101,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-11T21:10:36.856Z",
+    "generatedAt": "2026-06-16T21:37:57.652Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension/stats/contributors"
   }
 }
