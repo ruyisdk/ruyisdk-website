@@ -21,12 +21,20 @@ const PM_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-pm';
 const VSCODE_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-ide/vscode';
 const ECLIPSE_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-ide/eclipse';
 
-const PM_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/';
+const PM_MIRROR_STABLE_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ruyi/stable/';
+const PM_MIRROR_TESTING_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ruyi/testing/';
 const PM_GITHUB_RELEASES_URL = 'https://github.com/ruyisdk/ruyi/releases';
 const PM_PYPI_URL = 'https://pypi.org/project/ruyi/';
+const PM_DEBIAN_TESTING_URL = 'https://packages.debian.org/testing/main/ruyi';
+const PM_GENTOO_OVERLAY_URL = 'https://github.com/ruyisdk/ruyisdk-overlay';
+const PM_AUR_URL = 'https://aur.archlinux.org/packages/ruyi';
 
-const IDE_MIRROR_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/';
+const VSCODE_OPEN_VSX_URL = 'https://open-vsx.org/extension/RuyiSDK/ruyisdk-vscode-extension';
+const VSCODE_MARKETPLACE_URL = 'https://marketplace.visualstudio.com/items?itemName=RuyiSDK.ruyisdk-vscode-extension';
+const VSCODE_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/';
 const IDE_VSCODE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-vscode-extension/releases';
+const ECLIPSE_MARKETPLACE_URL = 'https://marketplace.eclipse.org/content/ruyisdk';
+const ECLIPSE_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/';
 const IDE_ECLIPSE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases';
 
 function headerGradientStyle(accent) {
@@ -138,31 +146,49 @@ function pickPreferredUrl(urls) {
   return mirror || urls[0] || '';
 }
 
+function pickUrlBySource(urls, source) {
+  if (!Array.isArray(urls) || urls.length === 0) return '';
+  if (source === 'mirror') return urls.find((url) => url.includes('mirror.iscas.ac.cn')) || '';
+  if (source === 'github') return urls.find((url) => url.includes('github.com')) || '';
+  return pickPreferredUrl(urls);
+}
+
+function getChannelOptions(channel, source) {
+  if (!channel?.download_urls) return [];
+  return Object.entries(channel.download_urls)
+    .map(([platformArch, urls]) => {
+      const rawArch = platformArch.split('/').pop() || 'universal';
+      const arch = rawArch === 'any' ? 'universal' : rawArch;
+      const url = pickUrlBySource(urls, source);
+      return {
+        arch,
+        url,
+        fileName: extractFileName(url),
+        source: detectSource(url),
+      };
+    })
+    .filter((item) => item.url)
+    .sort((a, b) => ARCH_ORDER.indexOf(a.arch) - ARCH_ORDER.indexOf(b.arch));
+}
+
+function getSingleChannelItem(channel, source) {
+  if (!channel?.download_urls) return null;
+  const urls = Object.values(channel.download_urls).find((item) => Array.isArray(item) && item.length > 0);
+  const url = pickUrlBySource(urls, source);
+  if (!url) return null;
+  return {
+    arch: 'universal',
+    url,
+    fileName: extractFileName(url),
+    source: detectSource(url),
+  };
+}
+
 function archLabel(arch) {
   if (arch === 'x86_64') return translate({ id: 'downloads.arch.x86_64', message: 'x86_64' });
   if (arch === 'aarch64') return translate({ id: 'downloads.arch.aarch64', message: 'aarch64' });
   if (arch === 'riscv64') return translate({ id: 'downloads.arch.riscv64', message: 'riscv64' });
   return translate({ id: 'downloads.arch.universal', message: '通用（无架构区分）' });
-}
-
-function normalizeLatestRelease(data) {
-  const stable = data?.channels?.stable;
-  if (stable?.download_urls) {
-    const urls = Object.values(stable.download_urls).find((item) => Array.isArray(item) && item.length > 0);
-    const downloadUrl = pickPreferredUrl(urls);
-    return {
-      version: stable.version || '-',
-      downloadUrl,
-      fileName: extractFileName(downloadUrl),
-    };
-  }
-
-  const firstAsset = Array.isArray(data?.assets) ? data.assets.find((item) => item?.browser_download_url) : null;
-  return {
-    version: data?.tag_name || data?.name || '-',
-    downloadUrl: firstAsset?.browser_download_url || '',
-    fileName: firstAsset?.name || '',
-  };
 }
 
 export function ArchSelectModal({ modalState, onClose, onSelect }) {
@@ -196,23 +222,17 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
           </div>
 
           <div className="p-4 grid gap-3">
-            {modalState.options.length > 0 ? (
-              modalState.options.map((item) => (
-                <button
-                  key={`${item.arch}-${item.url}`}
-                  type="button"
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:bg-white hover:shadow-md transition-all px-4 py-3 text-left"
-                  onClick={() => onSelect(item)}
-                >
-                  <div className="font-semibold text-gray-900">{archLabel(item.arch)}</div>
-                  <div className="mt-1 text-xs text-gray-500" style={{ wordBreak: 'break-all' }}>{item.fileName || item.url}</div>
-                </button>
-              ))
-            ) : (
-              <div className="rounded-xl border border-amber-200 bg-amber-50 text-amber-700 px-4 py-3 text-sm">
-                <Translate id="downloads.modal.noOptions">当前无法获取该项目的最新版下载链接，请使用“其它版本”。</Translate>
-              </div>
-            )}
+            {modalState.options.map((item) => (
+              <button
+                key={`${item.arch}-${item.url}`}
+                type="button"
+                className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:bg-white hover:shadow-md transition-all px-4 py-3 text-left"
+                onClick={() => onSelect(item)}
+              >
+                <div className="font-semibold text-gray-900">{archLabel(item.arch)}</div>
+                <div className="mt-1 text-xs text-gray-500" style={{ wordBreak: 'break-all' }}>{item.fileName || item.url}</div>
+              </button>
+            ))}
           </div>
 
           <div className="px-6 py-4 border-t border-gray-100 flex justify-end">
@@ -231,129 +251,263 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
   );
 }
 
-function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
-  const hasReleaseData = Boolean(releaseData?.channels?.stable);
-  const stable = releaseData?.channels?.stable;
-  const latestVersion = stable?.version || '-';
+function VersionBadge({ labelId, labelMessage }) {
+  return (
+    <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-green-700">
+      <Translate id={labelId}>{labelMessage}</Translate>
+    </span>
+  );
+}
 
-  const options = useMemo(() => {
-    if (!stable?.download_urls) return [];
-    return Object.entries(stable.download_urls)
-      .map(([platformArch, urls]) => {
-        const arch = platformArch.split('/').pop() || 'universal';
-        const url = pickPreferredUrl(urls);
-        return {
-          arch,
-          url,
-          fileName: extractFileName(url),
-          source: detectSource(url),
-        };
-      })
-      .filter((item) => item.url)
-      .sort((a, b) => ARCH_ORDER.indexOf(a.arch) - ARCH_ORDER.indexOf(b.arch));
-  }, [stable]);
+function DownloadButton({
+  children,
+  href,
+  onClick,
+  variant = 'primary',
+  accent = 'blue',
+  disabled = false,
+}) {
+  const className = variant === 'primary'
+    ? 'primary-button text-sm font-semibold whitespace-nowrap'
+    : 'secondary-button text-sm font-semibold whitespace-nowrap';
+  const primaryStyle = latestButtonStyle(accent);
+  const style = variant === 'primary'
+    ? { ...primaryStyle, background: primaryStyle.backgroundColor }
+    : { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
+  const disabledStyle = disabled ? { opacity: 0.55, cursor: 'not-allowed', transform: 'none' } : {};
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={{ ...style, ...disabledStyle }}>
+        {children}
+      </a>
+    );
+  }
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
-      <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle('gold')}>
-        <div className="min-w-0 md:pr-44">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: COLOR_VARS.goldDark }}>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-              />
-            </svg>
-            <Translate id="downloads.pm.title">RuyiSDK Package Manager</Translate>
-          </h2>
-          <p className="mt-2 text-lg text-gray-700">
-            <Translate id="downloads.pm.description">Ruyi 包管理器是 RuyiSDK 的核心组件，提供包管理、环境配置等功能。</Translate>
-          </p>
-        </div>
+    <button type="button" className={className} style={{ ...style, ...disabledStyle }} onClick={onClick} disabled={disabled}>
+      {children}
+    </button>
+  );
+}
+
+function DownloadSourceRow({
+  labelId,
+  labelMessage,
+  latestDisabled,
+  onLatest,
+  allVersionsUrl,
+  accent,
+}) {
+  return (
+    <div>
+      <div className="mb-2 text-sm font-semibold text-gray-600">
+        <Translate id={labelId}>{labelMessage}</Translate>
+      </div>
+      <div className="flex flex-wrap justify-end gap-3">
+        <DownloadButton accent={accent} onClick={onLatest} disabled={latestDisabled}>
+          <Translate id="downloads.button.latest">最新版本</Translate>
+        </DownloadButton>
+        <DownloadButton variant="secondary" href={allVersionsUrl}>
+          <Translate id="downloads.button.allVersions">所有版本</Translate>
+        </DownloadButton>
+      </div>
+    </div>
+  );
+}
+
+function ReleaseCard({
+  badgeId,
+  badgeMessage,
+  channel,
+  accent,
+  mirrorAllUrl,
+  githubAllUrl,
+  onMirrorLatest,
+  onGithubLatest,
+  mirrorLatestDisabled = false,
+  githubLatestDisabled = false,
+}) {
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+      <div className="mb-5 flex flex-wrap items-center gap-3">
+        <VersionBadge labelId={badgeId} labelMessage={badgeMessage} />
+        <span className="text-sm font-semibold text-gray-700">{channel?.version || '-'}</span>
+      </div>
+
+      <div className="grid gap-5">
+        <DownloadSourceRow
+          labelId="downloads.source.mirror"
+          labelMessage="软件所镜像站下载："
+          latestDisabled={mirrorLatestDisabled}
+          onLatest={onMirrorLatest}
+          allVersionsUrl={mirrorAllUrl}
+          accent={accent}
+        />
+        <DownloadSourceRow
+          labelId="downloads.source.github"
+          labelMessage="GitHub Release 下载："
+          latestDisabled={githubLatestDisabled}
+          onLatest={onGithubLatest}
+          allVersionsUrl={githubAllUrl}
+          accent={accent}
+        />
+      </div>
+    </div>
+  );
+}
+
+function ProductHeader({
+  titleId,
+  titleMessage,
+  descriptionId,
+  descriptionMessage,
+  accent,
+  logoSrc,
+  logoAlt,
+  iconPath,
+}) {
+  return (
+    <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle(accent)}>
+      <div className="min-w-0 md:pr-44">
+        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: accent === 'eclipse' ? COLOR_VARS.eclipse : accent === 'gold' ? COLOR_VARS.goldDark : COLOR_VARS.blueDark }}>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPath} />
+          </svg>
+          <Translate id={titleId}>{titleMessage}</Translate>
+        </h2>
+        <p className="mt-2 text-lg text-gray-700">
+          <Translate id={descriptionId}>{descriptionMessage}</Translate>
+        </p>
+      </div>
+      {logoSrc && (
         <img
-          src="/img/ruyi-logo-720.svg"
-          alt="RuyiSDK"
+          src={logoSrc}
+          alt={logoAlt}
           className="hidden md:block pointer-events-none select-none absolute right-6 top-2 h-36 w-auto object-contain"
           style={{ transform: 'translateY(12px)' }}
         />
-      </div>
+      )}
+    </div>
+  );
+}
+
+function ExternalLinks({ links }) {
+  return (
+    <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 text-sm text-gray-500 flex flex-wrap gap-4 justify-center md:justify-start">
+      {links.map((link, index) => (
+        <React.Fragment key={link.href}>
+          {index > 0 && <span className="text-gray-300">|</span>}
+          <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined} className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
+            {link.label}
+          </a>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
+  const stable = releaseData?.channels?.stable;
+  const testing = releaseData?.channels?.testing;
+  const stableMirrorOptions = useMemo(() => getChannelOptions(stable, 'mirror'), [stable]);
+  const stableGithubOptions = useMemo(() => getChannelOptions(stable, 'github'), [stable]);
+  const testingMirrorOptions = useMemo(() => getChannelOptions(testing, 'mirror'), [testing]);
+  const testingGithubOptions = useMemo(() => getChannelOptions(testing, 'github'), [testing]);
+
+  return (
+    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
+      <ProductHeader
+        titleId="downloads.pm.title"
+        titleMessage="Ruyi 包管理器"
+        descriptionId="downloads.pm.description"
+        descriptionMessage="Ruyi 包管理器是 RuyiSDK 的核心组件"
+        accent="gold"
+        logoSrc="/img/ruyi-logo-720.svg"
+        logoAlt="RuyiSDK"
+        iconPath="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+      />
 
       <div className="p-6 sm:p-8">
-        {!hasReleaseData && (
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-5 py-4 rounded-xl mb-6">
-            <p className="m-0">
-              <Translate id="downloads.pm.noData">当前构建未能获取最新版本信息，请使用下方入口获取最新版。</Translate>
-            </p>
-          </div>
-        )}
-
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wide rounded-full">
-                <Translate id="downloads.badge.stable">稳定版</Translate>
-              </span>
-            </div>
-          </div>
-
-          <div className="w-full md:w-auto flex flex-col sm:flex-row gap-3">
-            <button
-              type="button"
-              className="w-full sm:w-52 inline-flex flex-col items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all focus:outline-none hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5"
-              style={latestButtonStyle('gold')}
-              onClick={() =>
-                onOpenLatest({
-                  projectLabel: translate({ id: 'downloads.pm.title', message: 'RuyiSDK Package Manager' }),
-                  version: latestVersion,
-                  options,
-                  parentUrl: PM_MIRROR_RELEASES_URL,
-                })
-              }
-              disabled={options.length === 0}
-            >
-              <span className="inline-flex items-center">
-                <svg className="mr-2 -ml-1 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                <Translate id="downloads.button.latest">最新版本</Translate>
-              </span>
-              <span className="text-xs font-medium mt-1 opacity-80">
-                <Translate id="downloads.button.version">版本</Translate> {latestVersion}
-              </span>
-            </button>
-
-            <a
-              href={PM_MIRROR_RELEASES_URL}
-              className="w-full sm:w-40 inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
-              style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Translate id="downloads.button.otherVersions">其它版本</Translate>
-            </a>
-          </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          <ReleaseCard
+            badgeId="downloads.badge.stable"
+            badgeMessage="稳定版"
+            channel={stable}
+            accent="gold"
+            mirrorAllUrl={PM_MIRROR_STABLE_URL}
+            githubAllUrl={PM_GITHUB_RELEASES_URL}
+            mirrorLatestDisabled={stableMirrorOptions.length === 0}
+            githubLatestDisabled={stableGithubOptions.length === 0}
+            onMirrorLatest={() =>
+              onOpenLatest({
+                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                version: stable?.version || '-',
+                options: stableMirrorOptions,
+                parentUrl: PM_MIRROR_STABLE_URL,
+              })
+            }
+            onGithubLatest={() =>
+              onOpenLatest({
+                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                version: stable?.version || '-',
+                options: stableGithubOptions,
+                parentUrl: PM_GITHUB_RELEASES_URL,
+              })
+            }
+          />
+          <ReleaseCard
+            badgeId="downloads.badge.testing"
+            badgeMessage="测试版"
+            channel={testing}
+            accent="gold"
+            mirrorAllUrl={PM_MIRROR_TESTING_URL}
+            githubAllUrl={PM_GITHUB_RELEASES_URL}
+            mirrorLatestDisabled={testingMirrorOptions.length === 0}
+            githubLatestDisabled={testingGithubOptions.length === 0}
+            onMirrorLatest={() =>
+              onOpenLatest({
+                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                version: testing?.version || '-',
+                options: testingMirrorOptions,
+                parentUrl: PM_MIRROR_TESTING_URL,
+              })
+            }
+            onGithubLatest={() =>
+              onOpenLatest({
+                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                version: testing?.version || '-',
+                options: testingGithubOptions,
+                parentUrl: PM_GITHUB_RELEASES_URL,
+              })
+            }
+          />
         </div>
       </div>
 
-      <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 text-sm text-gray-500 flex flex-wrap gap-4 justify-center md:justify-start">
-        <span className="font-medium">
-          <Translate id="downloads.otherMethods">其他入口：</Translate>
-        </span>
-        <a href="/docs/Package-Manager/installation" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
-          <Translate id="downloads.viewDocs">查看完整安装文档</Translate>
-        </a>
-        <span className="text-gray-300">|</span>
-        <a href={PM_GITHUB_RELEASES_URL} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
-          <Translate id="downloads.label.githubReleases">GitHub Releases</Translate>
-        </a>
-        <span className="text-gray-300">|</span>
-        <a href={PM_PYPI_URL} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
-          <Translate id="downloads.label.pypi">PyPI</Translate>
-        </a>
-      </div>
+      <ExternalLinks
+        links={[
+          { href: '/docs/Package-Manager/installation', label: <Translate id="downloads.viewDocs">安装文档</Translate> },
+          { href: PM_PYPI_URL, external: true, label: <Translate id="downloads.label.pypi">PyPI</Translate> },
+          { href: PM_DEBIAN_TESTING_URL, external: true, label: <Translate id="downloads.label.debianTesting">Debian testing</Translate> },
+          { href: PM_GENTOO_OVERLAY_URL, external: true, label: <Translate id="downloads.label.ruyisdkOverlay">ruyisdk-overlay</Translate> },
+          { href: PM_AUR_URL, external: true, label: <Translate id="downloads.label.aur">AUR</Translate> },
+        ]}
+      />
     </section>
+  );
+}
+
+function MarketplaceCard({ titleId, titleMessage, children }) {
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+      <h3 className="m-0 mb-5 text-lg font-bold text-gray-900">
+        <Translate id={titleId}>{titleMessage}</Translate>
+      </h3>
+      <div className="flex flex-wrap justify-end gap-3">
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -363,123 +517,76 @@ function ExtensionSection({
   titleMessage,
   descriptionId,
   descriptionMessage,
-  href,
   accent = 'blue',
   logoSrc,
   logoAlt,
-  showIdeLink = false,
-  latestVersion,
-  latestDownloadUrl,
-  latestFileName,
+  releaseData,
+  mirrorAllUrl,
+  githubAllUrl,
+  marketplace,
+  docsUrl,
   onDirectLatest,
-  isLoadingLatest,
 }) {
-  const options = useMemo(() => {
-    if (!latestDownloadUrl) return [];
-    return [
-      {
-        arch: 'universal',
-        url: latestDownloadUrl,
-        fileName: latestFileName || extractFileName(latestDownloadUrl),
-        source: detectSource(latestDownloadUrl),
-      },
-    ];
-  }, [latestDownloadUrl, latestFileName]);
+  const stable = releaseData?.channels?.stable;
+  const mirrorItem = useMemo(() => getSingleChannelItem(stable, 'mirror'), [stable]);
+  const githubItem = useMemo(() => getSingleChannelItem(stable, 'github'), [stable]);
 
   return (
     <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
-      <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle(accent)}>
-        <div className="min-w-0 md:pr-44">
-          <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: accent === 'eclipse' ? COLOR_VARS.eclipse : COLOR_VARS.blueDark }}>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <Translate id={titleId}>{titleMessage}</Translate>
-          </h2>
-          <p className="mt-2 text-lg text-gray-700">
-            <Translate id={descriptionId}>{descriptionMessage}</Translate>
-          </p>
-        </div>
-        {logoSrc && (
-          <img
-            src={logoSrc}
-            alt={logoAlt}
-            className="hidden md:block pointer-events-none select-none absolute right-6 top-2 h-40 w-auto object-contain"
-            style={{ transform: 'translateY(12px)' }}
-          />
-        )}
-      </div>
+      <ProductHeader
+        titleId={titleId}
+        titleMessage={titleMessage}
+        descriptionId={descriptionId}
+        descriptionMessage={descriptionMessage}
+        accent={accent}
+        logoSrc={logoSrc}
+        logoAlt={logoAlt}
+        iconPath="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+      />
 
       <div className="p-6 sm:p-8">
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wide rounded-full">
-                <Translate id="downloads.badge.stable">稳定版</Translate>
-              </span>
-            </div>
-          </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          <MarketplaceCard titleId={marketplace.titleId} titleMessage={marketplace.titleMessage}>
+            {marketplace.links.map((link) => (
+              <DownloadButton key={link.href} variant="secondary" href={link.href}>
+                {link.label}
+              </DownloadButton>
+            ))}
+          </MarketplaceCard>
 
-          <div className="w-full md:w-auto flex flex-col sm:flex-row gap-3">
-            <button
-              type="button"
-              className="w-full sm:w-52 inline-flex flex-col items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-xl transition-all focus:outline-none hover:opacity-95 hover:shadow-lg transform hover:-translate-y-0.5"
-              style={latestButtonStyle(accent)}
-              onClick={() => {
-                const first = options[0];
-                if (!first?.url) return;
-                onDirectLatest({
-                  projectLabel: translate({ id: titleId, message: titleMessage }),
-                  version: latestVersion || '-',
-                  item: first,
-                  parentUrl: href,
-                });
-              }}
-              disabled={isLoadingLatest || options.length === 0}
-            >
-              {isLoadingLatest ? (
-                <span className="inline-flex items-center">
-                  <svg className="mr-2 h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="3" opacity="0.25" />
-                    <path d="M12 3a9 9 0 019 9" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
-                  <Translate id="downloads.button.loading">加载中</Translate>
-                </span>
-              ) : (
-                <span className="inline-flex items-center">
-                  <svg className="mr-2 -ml-1 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
-                  <Translate id="downloads.button.latest">最新版本</Translate>
-                </span>
-              )}
-              <span className="text-xs font-medium mt-1 opacity-80">
-                <Translate id="downloads.button.version">版本</Translate> {latestVersion || '-'}
-              </span>
-            </button>
-
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-40 inline-flex items-center justify-center px-6 py-4 border text-base font-bold rounded-xl bg-white hover:bg-gray-50 transition-all focus:outline-none"
-              style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
-            >
-              <Translate id="downloads.button.otherVersions">其它版本</Translate>
-            </a>
-          </div>
+          <ReleaseCard
+            badgeId="downloads.badge.stable"
+            badgeMessage="稳定版"
+            channel={stable}
+            accent={accent}
+            mirrorAllUrl={mirrorAllUrl}
+            githubAllUrl={githubAllUrl}
+            mirrorLatestDisabled={!mirrorItem?.url}
+            githubLatestDisabled={!githubItem?.url}
+            onMirrorLatest={() => {
+              if (!mirrorItem?.url) return;
+              onDirectLatest({
+                version: stable?.version || '-',
+                item: mirrorItem,
+                parentUrl: mirrorAllUrl,
+              });
+            }}
+            onGithubLatest={() => {
+              if (!githubItem?.url) return;
+              onDirectLatest({
+                version: stable?.version || '-',
+                item: githubItem,
+                parentUrl: githubAllUrl,
+              });
+            }}
+          />
         </div>
       </div>
-      {showIdeLink && (
-        <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 text-sm text-gray-500 flex flex-wrap gap-4 justify-center md:justify-start">
-          <span className="font-medium">
-            <Translate id="downloads.otherMethods">其他入口：</Translate>
-          </span>
-          <a href={IDE_MIRROR_URL} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
-            <Translate id="downloads.pm.other.ideMirror">RuyiSDK IDE</Translate>
-          </a>
-        </div>
-      )}
+      <ExternalLinks
+        links={[
+          { href: docsUrl, label: <Translate id="downloads.viewDocs">安装文档</Translate> },
+        ]}
+      />
     </section>
   );
 }
@@ -508,8 +615,6 @@ export default function DownloadCards({
     if (typeof window === 'undefined') return '';
     return getLocalePrefixFromPathname(window.location.pathname);
   }, []);
-  const vscodeLatest = useMemo(() => normalizeLatestRelease(vscodeLatestData), [vscodeLatestData]);
-  const eclipseLatest = useMemo(() => normalizeLatestRelease(eclipseLatestData), [eclipseLatestData]);
 
   const handleOpenLatest = (payload) => {
     setModalState({
@@ -573,36 +678,56 @@ export default function DownloadCards({
         <ExtensionSection
           sectionId={sectionIds.vscodeExtension}
           titleId="downloads.vscode.title"
-          titleMessage="RuyiSDK VS Code Extension"
+          titleMessage="RuyiSDK VS Code 扩展"
           descriptionId="downloads.vscode.description"
-          descriptionMessage="VS Code 扩展下载与发布入口。"
-          href={IDE_VSCODE_RELEASES_URL}
+          descriptionMessage="在 Visual Studio Code 上使用 RuyiSDK"
           accent="blue"
           logoSrc="/img/vs-code.webp"
           logoAlt="VS Code"
-          showIdeLink={false}
-          latestVersion={vscodeLatest.version}
-          latestDownloadUrl={vscodeLatest.downloadUrl}
-          latestFileName={vscodeLatest.fileName}
+          releaseData={vscodeLatestData}
+          mirrorAllUrl={VSCODE_MIRROR_RELEASES_URL}
+          githubAllUrl={IDE_VSCODE_RELEASES_URL}
+          docsUrl="/docs/IDE/"
+          marketplace={{
+            titleId: 'downloads.vscode.marketplace.title',
+            titleMessage: '扩展市场',
+            links: [
+              {
+                href: VSCODE_OPEN_VSX_URL,
+                label: <Translate id="downloads.vscode.openVsx">从 Open VSX 下载</Translate>,
+              },
+              {
+                href: VSCODE_MARKETPLACE_URL,
+                label: <Translate id="downloads.vscode.marketplace">从 Marketplace 下载</Translate>,
+              },
+            ],
+          }}
           onDirectLatest={handleDirectLatest}
-          isLoadingLatest={false}
         />
         <ExtensionSection
           sectionId={sectionIds.eclipseExtension}
           titleId="downloads.eclipse.title"
-          titleMessage="RuyiSDK Eclipse Extension"
+          titleMessage="RuyiSDK Eclipse 插件"
           descriptionId="downloads.eclipse.description"
-          descriptionMessage="Eclipse 扩展下载与发布入口。"
-          href={IDE_ECLIPSE_RELEASES_URL}
+          descriptionMessage="在 Eclipse Embedded CDT 上使用 RuyiSDK"
           accent="eclipse"
           logoSrc="/img/Eclipse2014-logo_RGB.svg"
           logoAlt="Eclipse"
-          showIdeLink={true}
-          latestVersion={eclipseLatest.version}
-          latestDownloadUrl={eclipseLatest.downloadUrl}
-          latestFileName={eclipseLatest.fileName}
+          releaseData={eclipseLatestData}
+          mirrorAllUrl={ECLIPSE_MIRROR_RELEASES_URL}
+          githubAllUrl={IDE_ECLIPSE_RELEASES_URL}
+          docsUrl="/docs/VSCode-Plugins/"
+          marketplace={{
+            titleId: 'downloads.eclipse.marketplace.title',
+            titleMessage: 'Eclipse Marketplace',
+            links: [
+              {
+                href: ECLIPSE_MARKETPLACE_URL,
+                label: <Translate id="downloads.eclipse.marketplace">从 Marketplace 下载</Translate>,
+              },
+            ],
+          }}
           onDirectLatest={handleDirectLatest}
-          isLoadingLatest={false}
         />
       </div>
 

@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import DownloadCards, { COLOR_VARS } from '@site/src/components/Downloads/DownloadCards';
 import DownloadGuide from '@site/src/components/Downloads/DownloadGuide';
+import DownloadInstallScript from '@site/src/components/Downloads/DownloadInstallScript';
 import { PageBackground } from '@site/src/components/Home/Background';
 
 const SECTION_IDS = {
@@ -28,10 +29,9 @@ export default function DownloadsPage() {
             <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅</Translate>
           </p>
 
-          <DownloadGuide sectionIds={SECTION_IDS} />
-          <DownloadCards sectionIds={SECTION_IDS} />
+          <DownloadGuide />
 
-          <div className="mt-12 text-center text-gray-500 text-sm">
+          <div className="mb-8 text-center text-gray-500 text-sm">
             <p>
               <Translate
                 id="downloads.agreement"
@@ -46,6 +46,19 @@ export default function DownloadsPage() {
                 {'下载并使用 RuyiSDK，即表示您同意许可条款和 {privacyLink}。'}
               </Translate>
             </p>
+          </div>
+
+          <h2 className="mb-4 pl-2 text-left text-2xl md:text-3xl font-bold text-gray-900">
+            <Translate id="downloads.installScript.title">使用安装脚本</Translate>
+          </h2>
+          <DownloadInstallScript />
+          <div className="pt-8">
+            <h2 className="mb-4 pl-2 text-left text-2xl md:text-3xl font-bold text-gray-900">
+              <Translate id="downloads.manualDownload.title">手动下载安装</Translate>
+            </h2>
+          </div>
+          <div className="mb-24">
+            <DownloadCards sectionIds={SECTION_IDS} />
           </div>
         </div>
         </div>
