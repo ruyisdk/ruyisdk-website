@@ -228,7 +228,7 @@ main[class*="docMainContainer"] {
 }
 
 /* Docs right sidebar watermark (separate block below the TOC) */
-/* .theme-doc-toc-desktop {
+.theme-doc-toc-desktop {
     position: relative;
 
     &::after {
@@ -245,4 +245,4 @@ main[class*="docMainContainer"] {
         border-radius: 0.75rem;
         opacity: 0.65;
     }
-} */
+}

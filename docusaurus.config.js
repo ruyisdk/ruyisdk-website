@@ -79,7 +79,7 @@ const config = {
       image: "img/ruyi-logo-720.jpg",
       navbar: {
         title: "RuyiSDK",
-        hideOnScroll: false,
+        hideOnScroll: true,
         logo: {
           alt: "RuyiSDK Logo",
           src: "img/ruyi-logo-720.svg",
