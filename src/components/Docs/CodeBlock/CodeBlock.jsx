@@ -277,7 +277,7 @@ const CodeBlock = ({
                     const prevHighlighted = highlightedLines.has(index - 1);
                     const nextHighlighted = highlightedLines.has(index + 1);
                     
-                    line.style.backgroundColor = isDark ? 'rgba(180, 83, 9, 0.14)' : 'rgb(255, 251, 235)';
+                    line.style.backgroundColor = isDark ? 'rgba(180, 83, 9, 0.14)' : 'rgb(255, 255, 255)';
                     line.style.position = 'relative';
                     
                     // Only add spacing before first and after last highlighted line
@@ -545,7 +545,7 @@ const CodeBlock = ({
             />
             
             <div
-                className={`${isInputOutputBlock ? 'bg-[#fffbeb] dark:bg-[rgba(180,83,9,0.14)]' : 'bg-white dark:bg-neutral-900'} overflow-x-auto`}
+                className={`${isInputOutputBlock ? 'bg-white dark:bg-[rgba(180,83,9,0.14)]' : 'bg-white dark:bg-neutral-900'} overflow-x-auto`}
             >
                 <SyntaxHighlighter 
                     language={displayLang} 
