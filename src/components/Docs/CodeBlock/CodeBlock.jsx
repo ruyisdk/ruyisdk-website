@@ -332,7 +332,7 @@ const CodeBlock = ({
                     const btnPadding = isMobile ? '2px' : '3px';
                     
                     copyBtn.style.cssText = `
-                        position: fixed;
+                        position: absolute;
                         transform: translateY(-50%);
                         background: ${isDark ? 'rgba(38, 38, 38, 0.95)' : 'rgba(255, 255, 255, 0.95)'};
                         border: 1px solid ${isDark ? 'rgba(82, 82, 82, 0.8)' : 'rgba(203, 213, 225, 0.8)'};
@@ -362,11 +362,8 @@ const CodeBlock = ({
                     `;
 
                     const updateCopyButtonPosition = () => {
-                        const scrollRect = scrollElement.getBoundingClientRect();
-                        const lineRect = line.getBoundingClientRect();
-
-                        copyBtn.style.left = `${scrollRect.right - btnSize - btnRight}px`;
-                        copyBtn.style.top = `${lineRect.top + lineRect.height / 2}px`;
+                        copyBtn.style.left = `${scrollElement.scrollLeft + scrollElement.clientWidth - btnSize - btnRight}px`;
+                        copyBtn.style.top = '50%';
                     };
 
                     updateCopyButtonPosition();
