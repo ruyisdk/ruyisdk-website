@@ -4,12 +4,18 @@ import CodeBlock from '@site/src/components/Docs/CodeBlock';
 
 The installer detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to ``~/.local/bin/ruyi``:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
-`} />
+<CodeBlock
+  lang="bash"
+  hasInput
+  input="1"
+  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh`}
+/>
 
 To install into a system directory, run the script with ``sudo`` and pass an explicit install path:
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
-`} />
+<CodeBlock
+  lang="bash"
+  hasInput
+  input="1"
+  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin`}
+/>

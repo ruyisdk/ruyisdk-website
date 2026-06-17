@@ -4,12 +4,18 @@ import CodeBlock from '@site/src/components/Docs/CodeBlock';
 
 安装脚本会自动识别系统架构，优先从 ISCAS 镜像下载最新稳定版，并安装到 ``~/.local/bin/ruyi``：
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
-`} />
+<CodeBlock
+  lang="bash"
+  hasInput
+  input="1"
+  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh`}
+/>
 
 如需安装到系统目录，请使用 ``sudo`` 执行脚本并显式指定安装路径：
 
-<CodeBlock lang="bash" showTitleCopyButton="true" code={`
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
-`} />
+<CodeBlock
+  lang="bash"
+  hasInput
+  input="1"
+  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin`}
+/>
