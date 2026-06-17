@@ -91,13 +91,13 @@ export default function ArchSelector({ language = 'zh' }) {
           {() => (
             filename ? (
               <>
-                <CodeBlock lang="bash" code={`${currentTranslations.chmodCommand}${filename}`} />
-                <CodeBlock lang="bash" code={`${currentTranslations.sudoCpCommand}${filename} ${currentTranslations.ruyiPath}`} />
+                <CodeBlock lang="bash" hasInput input="1" code={`${currentTranslations.chmodCommand}${filename}`} />
+                <CodeBlock lang="bash" hasInput input="1" code={`${currentTranslations.sudoCpCommand}${filename} ${currentTranslations.ruyiPath}`} />
               </>
             ) : (
               <>
-                <CodeBlock lang="bash" code={`$ chmod +x ./ruyi`} />
-                <CodeBlock lang="bash" code={`$ sudo cp -v ruyi /usr/local/bin/ruyi`} />
+                <CodeBlock lang="bash" hasInput input="1" code={`$ chmod +x ./ruyi`} />
+                <CodeBlock lang="bash" hasInput input="1" code={`$ sudo cp -v ruyi /usr/local/bin/ruyi`} />
               </>
             )
           )}

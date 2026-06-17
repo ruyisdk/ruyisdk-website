@@ -50,7 +50,7 @@ export function DownloadRuyi({ arch }) {
   if (!data) {
     return (
       <BrowserOnly fallback={<pre><code>$ wget </code></pre>}>
-        {() => <CodeBlock lang="bash" code={`$ wget`} />}
+        {() => <CodeBlock lang="bash" hasInput input="1" code={`$ wget`} />}
       </BrowserOnly>
     );
   }
@@ -59,7 +59,7 @@ export function DownloadRuyi({ arch }) {
 
   return (
     <BrowserOnly fallback={<pre><code>{`$ wget ${link || ''}`}</code></pre>}>
-      {() => <CodeBlock lang="bash" code={`$ wget ${link}`} />}
+      {() => <CodeBlock lang="bash" hasInput input="1" code={`$ wget ${link}`} />}
     </BrowserOnly>
   );
 }
@@ -81,24 +81,24 @@ export function ChmodCommand({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock lang="bash" code={`$ chmod +x ./ruyi`} />;
+    return <CodeBlock lang="bash" hasInput input="1" code={`$ chmod +x ./ruyi`} />;
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
   const fileName = extractFileName(link);
 
-  return <CodeBlock lang="bash" code={`$ chmod +x ./${fileName || 'ruyi'}`} />;
+  return <CodeBlock lang="bash" hasInput input="1" code={`$ chmod +x ./${fileName || 'ruyi'}`} />;
 }
 
 export function CpCommand({ arch }) {
   const data = useReleaseData();
 
   if (!data) {
-    return <CodeBlock lang="bash" code={`$ sudo cp -v ./ruyi /usr/local/bin/ruyi`} />;
+    return <CodeBlock lang="bash" hasInput input="1" code={`$ sudo cp -v ./ruyi /usr/local/bin/ruyi`} />;
   }
 
   const link = data.channels.stable.download_urls[`linux/${arch}`]?.[1];
   const fileName = extractFileName(link);
 
-  return <CodeBlock lang="bash" code={`$ sudo cp -v ./${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
+  return <CodeBlock lang="bash" hasInput input="1" code={`$ sudo cp -v ./${fileName || 'ruyi'} /usr/local/bin/ruyi`} />;
 }
