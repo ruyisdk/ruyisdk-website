@@ -184,6 +184,29 @@ main[class*="docMainContainer"] {
     margin-top: 0;
 }
 
+.docs-wrapper .theme-doc-markdown ul,
+.docs-wrapper .theme-doc-markdown ol,
+.theme-doc-wrapper .theme-doc-markdown ul,
+.theme-doc-wrapper .theme-doc-markdown ol {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+}
+
+.docs-wrapper .theme-doc-markdown ul,
+.theme-doc-wrapper .theme-doc-markdown ul {
+    list-style-type: disc;
+}
+
+.docs-wrapper .theme-doc-markdown ol,
+.theme-doc-wrapper .theme-doc-markdown ol {
+    list-style-type: decimal;
+}
+
+.docs-wrapper .theme-doc-markdown li,
+.theme-doc-wrapper .theme-doc-markdown li {
+    margin-bottom: 0.35rem;
+}
+
 /* doc css here */
 .docs-wrapper div[class*="docRoot"] {
     max-width: 1400px;
