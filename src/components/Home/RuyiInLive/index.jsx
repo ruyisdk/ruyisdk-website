@@ -28,13 +28,13 @@ const RuyiInLive = () => {
     return Math.max(...currentData.map((item) => item.total), 0);
   };
 
-  const StatItem = ({ value, label }) => (
+  const StatItem = ({ value, labelId, label }) => (
     <div className="flex flex-col items-center justify-center flex-1">
       <div className="text-[1.75rem] font-bold text-[#002677] min-h-[2.1rem]">
         {value !== null && value !== undefined ? value.toLocaleString() : '---'}
       </div>
       <div className="text-[0.75rem] text-[#86868B] mt-1">
-        <Translate>{label}</Translate>
+        <Translate id={labelId}>{label}</Translate>
       </div>
     </div>
   );
@@ -97,9 +97,9 @@ const RuyiInLive = () => {
             </div>
 
             <div className="flex justify-around p-4 rounded-[0.5rem] text-center mb-6">
-              <StatItem value={data?.pm_downloads?.total} label="pm_downloads" />
-              <StatItem value={data?.downloads?.total} label="downloads" />
-              <StatItem value={data?.installs?.total} label="installs" />
+              <StatItem value={data?.pm_downloads?.total} labelId="pm_downloads" label="包管理器下载量" />
+              <StatItem value={data?.downloads?.total} labelId="downloads" label="组件下载数量" />
+              <StatItem value={data?.installs?.total} labelId="installs" label="安装台数" />
             </div>
 
             <div className="flex-1">
