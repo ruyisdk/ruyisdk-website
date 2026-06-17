@@ -1,55 +1,55 @@
 {
   "last_updated": "2026-06-16T13:00:22.576148Z",
   "downloads": {
-    "total": 56143
+    "total": 56151
   },
   "pm_downloads": {
-    "total": 74739
+    "total": 74787
   },
   "other_categories_downloads": {
     "3rdparty": {
-      "total": 21216
+      "total": 21254
     },
     "humans": {
-      "total": 12171
+      "total": 12248
     },
     "ide": {
-      "total": 2857
+      "total": 2867
     }
   },
   "downloads_by_categories_v1": {
     "pkg": {
-      "total": 56143
+      "total": 56151
     },
     "pm:github": {
-      "total": 5898
+      "total": 5899
     },
     "pm:mirror": {
-      "total": 60882
+      "total": 60929
     },
     "pm:pypi": {
       "total": 7959
     },
     "3rdparty": {
-      "total": 21216
+      "total": 21254
     },
     "humans": {
-      "total": 12171
+      "total": 12248
     },
     "ide:eclipse:mirror": {
-      "total": 1944
+      "total": 1945
     },
     "ide:plugin:eclipse:mirror": {
-      "total": 381
+      "total": 385
     },
     "ide:plugin:eclipse:github": {
       "total": 86
     },
     "ide:plugin:vscode:mirror": {
-      "total": 348
+      "total": 352
     },
     "ide:plugin:vscode:github": {
-      "total": 98
+      "total": 99
     }
   },
   "installs": {
@@ -92,10 +92,10 @@
     {
       "name": "ruyisdk",
       "watchers_count": 66,
-      "forks_count": 283,
+      "forks_count": 282,
       "stars_count": 231,
-      "prs_count": 2540,
-      "issues_count": 598,
+      "prs_count": 2543,
+      "issues_count": 599,
       "contributors_count": 98,
       "detail_by_repo": [
         {
@@ -155,7 +155,7 @@
         {
           "name": "docs",
           "watchers_count": 1,
-          "forks_count": 32,
+          "forks_count": 31,
           "stars_count": 6,
           "prs_count": 128,
           "issues_count": 13,
@@ -256,7 +256,7 @@
           "watchers_count": 2,
           "forks_count": 23,
           "stars_count": 8,
-          "prs_count": 436,
+          "prs_count": 439,
           "issues_count": 69,
           "contributors_count": 19
         },
@@ -365,7 +365,7 @@
           "forks_count": 2,
           "stars_count": 0,
           "prs_count": 80,
-          "issues_count": 17,
+          "issues_count": 18,
           "contributors_count": 3
         },
         {
@@ -507,7 +507,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-16T21:59:02.143Z",
+    "generatedAt": "2026-06-17T06:16:43.189Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }
