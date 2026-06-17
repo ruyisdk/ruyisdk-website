@@ -243,7 +243,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
   }, [stable]);
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl scroll-mt-24">
+    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
       <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle('gold')}>
         <div className="min-w-0 md:pr-44">
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
@@ -376,7 +376,7 @@ function ExtensionSection({
   }, [latestDownloadUrl, latestFileName]);
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transition-all hover:shadow-2xl scroll-mt-24">
+    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
       <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle(accent)}>
         <div className="min-w-0 md:pr-44">
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
