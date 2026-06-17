@@ -46,7 +46,7 @@ export default function Footer() {
       ],
     },
     {
-      title: <Translate id="footer.tools">更多开发资源</Translate>,
+      title: <Translate id="footer.tools">更多开发工具</Translate>,
       items: [
         { label: <Translate id="footer.rvi-specs">RVI Specs</Translate>, to: "/riscv-specs" },
         { label: <Translate id="footer.jetbrains">JetBrains IDE Multiarch</Translate>, href: "https://github.com/Glavo/JetBrains-IDE-Multiarch" },

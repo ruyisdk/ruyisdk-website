@@ -15,21 +15,21 @@ const MAX_RETRY_COUNT = 5;
 const RETRY_DELAY_BASE = 1000;
 
 const TRANSLATION_KEY = {
-  NO_DATA: { id: "暂无数据", message: "暂无数据" },
+  NO_DATA: { id: "暂无数据", message: "生态建设中" },
   TOP_COMMANDS: { id: "最常用指令 Top Commands", message: "最常用指令" },
   TOP_PACKAGES: { id: "最常用包 Top Packages", message: "最常用包" },
   TOP_COMMANDS_TITLE: { id: "最常用指令", message: "最常用指令" },
   TOP_PACKAGES_TITLE: { id: "最常用包", message: "最常用包" },
 
-  RUYI_INSTALLS: { id: "ruyi安装台数", message: "ruyi安装台数" },
+  RUYI_INSTALLS: { id: "ruyi安装台数", message: "RuyiSDK遥测上传台数" },
 
   DETAILED_STATS: { id: "详细下载统计", message: "详细下载统计" },
-  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "组件下载数量" },
-  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "ruyi包管理器下载次数" },
-  IDE_DOWNLOADS: { id: "IDE下载次数", message: "IDE下载次数" },
-  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode下载次数" },
-  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载次数" },
-  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档下载数量" },
+  COMPONENT_DOWNLOADS: { id: "组件下载数量", message: "RuyiSDK组件下载量" },
+  PM_DOWNLOADS: { id: "ruyi包管理器下载次数", message: "Ruyi包管理器下载量" },
+  IDE_DOWNLOADS: { id: "IDE下载次数", message: "RuyiSDK IDE下载量" },
+  VSCODE_DOWNLOADS: { id: "vscode下载次数", message: "VSCode插件下载量" },
+  THIRD_PARTY: { id: "第三方软件下载次数", message: "第三方软件下载量" },
+  DOCS_DOWNLOADS: { id: "文档下载数量", message: "文档资源下载量" },
 
   UPDATE_TIME: { id: "数据更新时间", message: "数据更新时间" }
 };

@@ -12,7 +12,7 @@ export default function CommunityHub() {
           </h1>
 
           <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto text-center mb-6">
-            <Translate id="community.hub.lead">RuyiSDK 是一个开放、包容的社区，我们欢迎每一位对 RISC-V 与开源软件感兴趣的贡献者参与其中。</Translate>
+            <Translate id="community.hub.lead">RuyiSDK 是一个开放且包容的社区，欢迎对 RISC-V 与开源软件感兴趣的每一位贡献者加入。</Translate>
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
@@ -28,7 +28,7 @@ export default function CommunityHub() {
             </div>
             <div className="bg-white/80 rounded-lg p-6 shadow-md text-center">
               <div className="text-lg font-bold mb-2"><Translate>贡献者公约</Translate></div>
-              <div className="text-sm text-gray-600 mb-4"><Translate id="community.hub.code.desc">阅读社区行为准则，确保友好与高质量的协作。</Translate></div>
+              <div className="text-sm text-gray-600 mb-4"><Translate id="community.hub.code.desc">阅读贡献者公约，确保社区内的友好和高质量协作。</Translate></div>
               <a href="/code_of_conduct" className="text-blue-600 font-semibold"><Translate>前往查看 →</Translate></a>
             </div>
           </div>

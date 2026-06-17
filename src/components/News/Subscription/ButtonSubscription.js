@@ -35,7 +35,7 @@ function ButtonSubscription() {
           alert(
             translate({
               id: "subscription.failed",
-              message: "Subscription failed. Please try again.",
+              message: "订阅失败，请重试。",
             }),
           );
         } else if (data && data.msg) {
@@ -44,7 +44,7 @@ function ButtonSubscription() {
           alert(
             translate({
               id: "subscription.responseReceived",
-              message: "Subscription response received.",
+              message: "已收到订阅响应。",
             }),
           );
         }
@@ -59,8 +59,8 @@ function ButtonSubscription() {
       <input
         type="email"
         value={email}
-        placeholder={translate({ id: "subscription.emailPlaceholder", message: "Enter your email" })}
-        aria-label={translate({ id: "subscription.emailAriaLabel", message: "Email address" })}
+        placeholder={translate({ id: "subscription.emailPlaceholder", message: "请输入邮箱" })}
+        aria-label={translate({ id: "subscription.emailAriaLabel", message: "邮箱地址" })}
         onChange={(e) => setEmail(e.target.value)}
         className={styles.input}
         style={{
@@ -94,8 +94,8 @@ function ButtonSubscription() {
             className={styles.button}
           >
             {loading
-              ? translate({ id: "subscription.submitting", message: "Submitting..." })
-              : translate({ id: "subscription.subscribe", message: "Subscribe" })}
+              ? translate({ id: "subscription.submitting", message: "提交中..." })
+              : translate({ id: "subscription.subscribe", message: "订阅" })}
           </button>
         );
       })()}
