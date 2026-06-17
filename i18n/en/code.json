@@ -499,6 +499,9 @@
   "downloads.thanks.retry": {
     "message": "No response? Click here to retry"
   },
+  "downloads.thanks.retryWaiting": {
+    "message": "Starting download"
+  },
   "downloads.thanks.gotoInstallDocs": {
     "message": "Next: read the installation docs"
   },
