@@ -1,0 +1,30 @@
+{
+  "channels": {
+    "stable": {
+      "version": "0.1.4",
+      "channel": "stable",
+      "release_date": "2026-06-04T04:00:50Z",
+      "download_urls": {
+        "none/any": [
+          "https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/download/0.1.4/ruyisdk-vscode-extension-0.1.4.vsix",
+          "https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/0.1.4/ruyisdk-vscode-extension-0.1.4.vsix"
+        ]
+      }
+    },
+    "testing": {
+      "version": "0.1.4-beta.3",
+      "channel": "testing",
+      "release_date": "2026-05-26T04:43:50Z",
+      "download_urls": {
+        "none/any": [
+          "https://github.com/ruyisdk/ruyisdk-vscode-extension/releases/download/0.1.4-beta.3/ruyisdk-vscode-extension-0.1.4-beta.3.vsix",
+          "https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/0.1.4-beta.3/ruyisdk-vscode-extension-0.1.4-beta.3.vsix"
+        ]
+      }
+    }
+  },
+  "ruyisdk_org_data": {
+    "generatedAt": "2026-06-17T06:16:43.062Z",
+    "source": "https://api.ruyisdk.cn/releases/latest-ide/vscode"
+  }
+}
