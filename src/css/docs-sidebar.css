@@ -2,16 +2,14 @@
 .theme-doc-wrapper {
     --ifm-font-family-base: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     --ifm-heading-font-family: var(--ifm-font-family-base);
-    --ifm-heading-color: #171717;
-    --ifm-font-color-base: #171717;
-    --ifm-menu-color: #4b5563;
-    --ifm-menu-color-active: #0f172a;
-    --ifm-menu-color-background-hover: rgba(15, 23, 42, 0.05);
-    --ifm-menu-color-background-active: rgba(15, 23, 42, 0.08);
+    --ifm-menu-color: var(--home-subtitle-color);
+    --ifm-menu-color-active: #ffffff;
+    --ifm-menu-color-background-hover: var(--home-ruyi-light-blue);
+    --ifm-menu-color-background-active: var(--ifm-color-primary);
     --ifm-menu-link-padding-vertical: 0.25rem;
     --ifm-menu-link-padding-horizontal: 0.5rem;
     --ifm-menu-link-sublist-icon-filter: none;
-    --ifm-menu-link-sublist-icon-size: 0.65rem;
+    --ifm-menu-link-sublist-icon-size: 0.45rem; /* Reduced to ~70% of previous 0.65rem */
     --ifm-line-height-base: 1.7;
     --ifm-paragraph-margin-bottom: 1rem;
     --docs-sidebar-radius: 6px;
@@ -19,47 +17,147 @@
     --docs-sidebar-logo-row-height: 0;
 }
 
+html[data-theme="dark"] .docs-wrapper,
+html[data-theme="dark"] .theme-doc-wrapper {
+    --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.1);
+    --ifm-menu-color-background-active: var(--ifm-color-primary);
+}
+
+/* Vertical 3px blue divider between sidebar and content */
+@media (min-width: 997px) {
+    aside.theme-doc-sidebar-container {
+        border-right: 3px solid var(--ifm-color-primary) !important;
+        /* Ensure the sidebar sits strictly below the header */
+        position: sticky !important;
+        top: var(--ifm-navbar-height) !important;
+        height: calc(100vh - var(--ifm-navbar-height)) !important;
+        z-index: 10;
+        overflow-y: auto;
+    }
+
+    /* Prevent content from overlapping header or sidebar line */
+    .docs-wrapper {
+        margin-top: 0 !important;
+    }
+}
+
+/* Apply consistent sidebar styles to both desktop and mobile navbar sidebars */
 aside.theme-doc-sidebar-container,
-.theme-doc-sidebar-container {
+.theme-doc-sidebar-container,
+.navbar-sidebar {
     border-right: none;
 }
 
-.theme-doc-sidebar-container {
+.theme-doc-sidebar-container,
+.navbar-sidebar .menu {
     border-radius: var(--docs-sidebar-radius);
-    padding: 0;
+    padding: 0.5rem 1rem 0.5rem 0.5rem; /* Increased padding-right to 1rem to separate from divider line */
+    overflow: hidden;
 }
 
-.theme-doc-sidebar-container .menu__list-item {
-    background-color: transparent;
-    margin: 0.35rem 0;
-}
-
-.theme-doc-sidebar-container .menu__link {
-    background-color: transparent;
-    border-radius: var(--docs-sidebar-radius);
-    transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.theme-doc-sidebar-container .menu__link:hover {
-    color: var(--ifm-heading-color);
-    background-color: var(--ifm-menu-color-background-hover);
+.theme-doc-sidebar-container .menu__list-item,
+.theme-doc-sidebar-container .menu__link,
+.theme-doc-sidebar-container .menu__link--sublist {
+    overflow: hidden;
 }
 
 .theme-doc-sidebar-container .menu__link--active,
-.theme-doc-sidebar-container .menu__link--active:hover {
-    color: var(--ifm-menu-color-active);
-    background-color: var(--ifm-menu-color-background-active);
-    box-shadow: none;
+.theme-doc-sidebar-container .menu__link--active:hover,
+.navbar-sidebar .menu__link--active,
+.navbar-sidebar .menu__link--active:hover {
+    box-shadow: none; /* prevent hover shadow from causing overflow */
+}
+
+.theme-doc-sidebar-container .menu__list-item,
+.navbar-sidebar .menu__list-item,
+.navbar-sidebar .menu__list-item {
+    background-color: transparent;
+    margin: 0.25rem 0;
+}
+
+.theme-doc-sidebar-container .menu__link,
+.navbar-sidebar .menu__link {
+    background-color: transparent;
+    border-radius: var(--docs-sidebar-radius);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.35rem 0.75rem; /* Increased base padding */
+    display: block;
+    width: 80%;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.theme-doc-sidebar-container .menu__link--sublist,
+.navbar-sidebar .menu__link--sublist {
+    padding-right: 3rem; /* reserve more space for the caret */
+}
+
+.theme-doc-sidebar-container .menu__link .menu__caret,
+.navbar-sidebar .menu__link .menu__caret {
+    right: 0.75rem;
+}
+
+@media (max-width: 996px) {
+    .navbar-sidebar .menu__link {
+        padding: 12px 16px !important; /* Larger touch targets for mobile menu */
+        font-size: 15px !important;
+    }
+
+    .navbar-sidebar .menu__list-item {
+        margin: 0.5rem 0 !important;
+    }
+}
+
+.theme-doc-sidebar-container .menu__link:hover,
+.navbar-sidebar .menu__link:hover {
+    color: var(--ifm-color-primary);
+    background-color: var(--ifm-menu-color-background-hover);
+    /* Removed transform: translateX to prevent overflow/shifting issues */
+}
+
+.theme-doc-sidebar-container .menu__link--active,
+.theme-doc-sidebar-container .menu__link--active:hover,
+.navbar-sidebar .menu__link--active,
+.navbar-sidebar .menu__link--active:hover {
+    color: var(--ifm-menu-color-active) !important;
+    background-color: var(--ifm-menu-color-background-active) !important;
+    box-shadow: 0 4px 12px rgba(10, 44, 126, 0.25);
     font-weight: 600;
+    border: none !important; /* Ensure no borders interfere with rounded corners */
+    border-radius: var(--docs-sidebar-radius) !important;
+    transform: none;
+}
+
+/* Desktop-specific: Only Level 2+ remains solid block. Level 1 uses left-accent only. */
+@media (min-width: 997px) {
+    .theme-doc-sidebar-item-link-level-1 > .menu__link--active,
+    .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active {
+        background-color: transparent !important;
+        color: var(--ifm-color-primary) !important;
+        border-left: 4px solid var(--ifm-color-primary) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding-left: 0.5rem !important; /* Align with border */
+    }
+
+    .theme-doc-sidebar-item-link-level-1 > .menu__link--active:hover,
+    .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active:hover {
+        background-color: var(--ifm-menu-color-background-hover) !important;
+    }
+}
+
+.theme-doc-sidebar-container .menu__link--active .menu__caret,
+.navbar-sidebar .menu__link--active .menu__caret {
+    color: #ffffff !important;
+    opacity: 1;
 }
 
 /* Category rows and leaf links share the same clickable row style */
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > :is(a, button),
-.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > :is(a, button),
-.theme-doc-sidebar-item-link-level-1 > :is(a, button),
-.theme-doc-sidebar-item-link-level-2 > :is(a, button),
-.theme-doc-sidebar-item-link-level-3 > :is(a, button) {
-    background-color: transparent;
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > :is(a, button) {
+    border-radius: var(--docs-sidebar-radius);
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible,
@@ -98,44 +196,28 @@ aside.theme-doc-sidebar-container,
     padding-left: 0.75rem;
 }
 
-/* Hide native carets but keep button for accessibility/click handling */
-.theme-doc-sidebar-container .menu__caret {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: auto;
+/* Modern caret styling (Arrows kept visible and lively) */
+.theme-doc-sidebar-container .menu__caret,
+.navbar-sidebar .menu__caret {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.4;
     position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: transparent;
+    right: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist::after,
-.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link--sublist::after {
-    content: "";
-    position: absolute;
-    right: 0.7rem;
-    top: 50%;
-    width: 0.4rem;
-    height: 0.4rem;
-    border-right: 1.2px solid currentColor;
-    border-bottom: 1.2px solid currentColor;
-    transform: translateY(-58%) rotate(-45deg);
-    opacity: 0.75;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after,
-.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after {
-    transform: translateY(-62%) rotate(45deg);
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover .menu__caret,
+.navbar-sidebar .menu__list-item-collapsible:hover .menu__caret {
     opacity: 1;
+    color: var(--ifm-color-primary);
+    transform: scale(1.1);
 }
 
-.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link--sublist {
-    padding-right: 1.6rem;
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link--sublist,
+.navbar-sidebar .menu__list-item-collapsible > .menu__link--sublist {
+    padding-right: 2.5rem;
 }
 
 @media (max-width: 996px) {
