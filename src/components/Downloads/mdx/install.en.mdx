@@ -1,21 +1,13 @@
-import CodeBlock from '@site/src/components/Docs/CodeBlock';
-
 ## Install Ruyi Package Manager
 
 The installer detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to ``~/.local/bin/ruyi``:
 
-<CodeBlock
-  lang="bash"
-  hasInput
-  input="1"
-  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh`}
-/>
+```bash input="1"
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+```
 
 To install into a system directory, run the script with ``sudo`` and pass an explicit install path:
 
-<CodeBlock
-  lang="bash"
-  hasInput
-  input="1"
-  code={`$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin`}
-/>
+```bash input="1"
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+```
