@@ -218,8 +218,11 @@ const CodeBlock = ({
             // First pass: reset styles to measure pure content width (no padding)
             allLines.forEach((line) => {
                 line.style.width = 'auto';
+                line.style.minWidth = '';
                 line.style.display = 'inline-block';
+                line.style.margin = '0';
                 line.style.padding = '0';
+                line.style.boxSizing = '';
             });
             
             // Calculate max content width of ALL lines (pure code content)
