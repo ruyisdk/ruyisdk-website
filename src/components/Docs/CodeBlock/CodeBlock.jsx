@@ -15,11 +15,7 @@ const CodeBlock = ({
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [currentLang, setCurrentLang] = useState(lang);
-    const codeBlockIdRef = useRef(null);
-
-    if (!codeBlockIdRef.current) {
-        codeBlockIdRef.current = `codeblock-${Math.random().toString(36).slice(2)}`;
-    }
+    const copyButtonsRef = useRef(new Map());
 
     const inputLines = useMemo(() => {
         const lines = new Set();
@@ -249,13 +245,14 @@ const CodeBlock = ({
                 const rightPaddingPx = isMobile ? '56px' : '48px';
                 const leftPaddingPx = isMobile ? '12px' : '20px';
                 const horizontalMargin = isMobile ? '0' : '-20px';
-                const copyButtonSelector = `.line-copy-button[data-code-block-id="${codeBlockIdRef.current}"][data-line-index="${index}"]`;
                 const removeExistingCopyButton = () => {
-                    const existingBtn = line.querySelector('.line-copy-button') || document.body.querySelector(copyButtonSelector);
+                    const existingBtn = line.querySelector('.line-copy-button') || copyButtonsRef.current.get(index);
 
                     if (existingBtn) {
                         existingBtn.remove();
                     }
+
+                    copyButtonsRef.current.delete(index);
                 };
                 
                 // Ensure all lines display as block to preserve line breaks
@@ -329,8 +326,7 @@ const CodeBlock = ({
                     
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'line-copy-button';
-                    copyBtn.dataset.codeBlockId = codeBlockIdRef.current;
-                    copyBtn.dataset.lineIndex = String(index);
+                    copyButtonsRef.current.set(index, copyBtn);
                     
                     // Larger icon for mobile
                     const iconSize = isMobile ? '12' : '14';
@@ -525,6 +521,9 @@ const CodeBlock = ({
                     cleanupFns.push(() => {
                         try {
                             copyBtn.remove();
+                            if (copyButtonsRef.current.get(index) === copyBtn) {
+                                copyButtonsRef.current.delete(index);
+                            }
                         } catch {
                             // no-op
                         }
