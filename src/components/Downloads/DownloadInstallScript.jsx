@@ -1,6 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import MarkdownCard from '@site/src/components/About/MarkdownCard';
+import CodeBlock from '@theme/CodeBlock';
 
 import InstallEn from './mdx/install.en.mdx';
 import InstallZhHans from './mdx/install.zh-Hans.mdx';
@@ -14,13 +15,27 @@ function resolveLocalizedContent(contentMap, locale) {
   return contentMap[locale] || contentMap.en;
 }
 
+function PreCodeBlock(props) {
+  const code = React.Children.only(props.children);
+
+  if (!React.isValidElement(code) || code.type !== 'code') {
+    return <pre {...props} />;
+  }
+
+  return <CodeBlock {...code.props} />;
+}
+
+const MDX_COMPONENTS = {
+  pre: PreCodeBlock,
+};
+
 export default function DownloadInstallScript() {
   const { i18n } = useDocusaurusContext();
   const InstallContent = resolveLocalizedContent(INSTALL_CONTENT, i18n?.currentLocale);
 
   return (
     <MarkdownCard className="w-full">
-      <InstallContent />
+      <InstallContent components={MDX_COMPONENTS} />
     </MarkdownCard>
   );
 }
