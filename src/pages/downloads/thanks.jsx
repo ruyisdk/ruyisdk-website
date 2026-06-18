@@ -163,16 +163,16 @@ export default function DownloadThanksPage() {
   }, []);
 
   const params = useMemo(() => {
-    if (typeof window === 'undefined') return new URLSearchParams();
+    if (!isClient || typeof window === 'undefined') return null;
     return new URLSearchParams(window.location.search || '');
-  }, []);
+  }, [isClient]);
 
-  const source = params.get('source') || '';
-  const arch = params.get('arch') || '';
-  const version = params.get('version') || '';
-  const file = params.get('file') || '';
-  const product = params.get('product') || '';
-  const downloadRaw = params.get('download') || '';
+  const source = params?.get('source') || '';
+  const arch = params?.get('arch') || '';
+  const version = params?.get('version') || '';
+  const file = params?.get('file') || '';
+  const product = params?.get('product') || '';
+  const downloadRaw = params?.get('download') || '';
   const download = safeParseUrl(downloadRaw)?.toString() || '';
   const accent = getDownloadAccent(product, download);
   const installDocsPath = getInstallDocsPath(accent);
@@ -212,6 +212,7 @@ export default function DownloadThanksPage() {
 
       <div className="relative text-gray-800 font-inter">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">
+        {params && (
         <div className="relative mx-auto w-full z-10">
           <section className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
             <div className="px-8 py-6" style={headerGradientStyle(accent)}>
@@ -308,6 +309,7 @@ export default function DownloadThanksPage() {
             </div>
           </section>
         </div>
+        )}
         </div>
       </div>
     </Layout>
