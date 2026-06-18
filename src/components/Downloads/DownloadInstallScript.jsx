@@ -16,9 +16,13 @@ function resolveLocalizedContent(contentMap, locale) {
 }
 
 function PreCodeBlock(props) {
-  const code = React.Children.only(props.children);
+  const children = React.Children.toArray(props.children);
+  const code = children.find(
+    (child) => React.isValidElement(child)
+      && (child.type === 'code' || child.props?.mdxType === 'code')
+  );
 
-  if (!React.isValidElement(code) || code.type !== 'code') {
+  if (!code) {
     return <pre {...props} />;
   }
 
