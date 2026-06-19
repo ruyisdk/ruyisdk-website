@@ -100,7 +100,7 @@
       }
     },
     {
-      "total": 50,
+      "total": 51,
       "author": {
         "login": "LoneBlade-zhang",
         "id": 207433538,
@@ -127,7 +127,7 @@
       }
     },
     {
-      "total": 327,
+      "total": 357,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -137,7 +137,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-16T21:42:11.331Z",
+    "generatedAt": "2026-06-18T21:19:34.050Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-website/stats/contributors"
   }
 }
