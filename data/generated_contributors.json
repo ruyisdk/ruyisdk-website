@@ -7,14 +7,14 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2136
+      "contributions": 2147
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 574
+      "contributions": 604
     },
     {
       "id": 84754181,
@@ -91,7 +91,7 @@
       "name": "LoneBlade-zhang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/207433538?v=4",
       "github": "https://github.com/LoneBlade-zhang",
-      "contributions": 51
+      "contributions": 52
     },
     {
       "id": 102520124,
@@ -122,18 +122,18 @@
       "contributions": 22
     },
     {
+      "id": 95552651,
+      "name": "sisungo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
+      "github": "https://github.com/sisungo",
+      "contributions": 21
+    },
+    {
       "id": 24410810,
       "name": "qjivy",
       "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
       "github": "https://github.com/qjivy",
       "contributions": 21
-    },
-    {
-      "id": 95552651,
-      "name": "sisungo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
-      "github": "https://github.com/sisungo",
-      "contributions": 20
     },
     {
       "id": 45998863,
@@ -467,15 +467,15 @@
   ],
   "totals": {
     "contributors": 66,
-    "commits": 4517,
-    "pullRequests": 2024,
-    "issues": 105,
+    "commits": 4560,
+    "pullRequests": 2041,
+    "issues": 100,
     "stars": 120,
     "forks": 176,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-16T21:59:00.000Z",
+    "generatedAt": "2026-06-18T21:36:22.712Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
