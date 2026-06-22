@@ -1,12 +1,28 @@
 import Button from "../common/Button";
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import LoadingSkeleton from "./LoadingSkeleton";
 
+const getPageFromUrl = () => {
+  if (typeof window === "undefined") return 0;
+
+  const page = Number.parseInt(new URLSearchParams(window.location.search).get("page") || "1", 10);
+  return Number.isFinite(page) && page > 0 ? page - 1 : 0;
+};
+
+const updatePageInUrl = (pageIndex, { replace = false } = {}) => {
+  if (typeof window === "undefined") return;
+
+  const url = new URL(window.location.href);
+  url.searchParams.set("page", String(pageIndex + 1));
+  window.history[replace ? "replaceState" : "pushState"](null, "", url);
+};
+
 const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const hasReadPageFromUrl = useRef(false);
   const { siteConfig, i18n } = useDocusaurusContext();
   const baseUrl = siteConfig?.baseUrl || "/";
   const currentLocale = i18n?.currentLocale;
@@ -40,6 +56,37 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
     () => Math.ceil(items.length / pageSize),
     [items.length, pageSize],
   );
+
+  useEffect(() => {
+    if (totalPages <= 0) return;
+
+    setCurrentPage((page) => {
+      const pageFromUrl = hasReadPageFromUrl.current ? page : getPageFromUrl();
+      const clampedPage = Math.min(Math.max(pageFromUrl, 0), totalPages - 1);
+
+      if (!hasReadPageFromUrl.current) {
+        hasReadPageFromUrl.current = true;
+      }
+
+      if (clampedPage !== pageFromUrl) {
+        updatePageInUrl(clampedPage, { replace: true });
+      }
+
+      return clampedPage;
+    });
+  }, [totalPages]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const pageFromUrl = getPageFromUrl();
+      const maxPage = Math.max(totalPages - 1, 0);
+      setCurrentPage(Math.min(pageFromUrl, maxPage));
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [totalPages]);
+
   const currentPageItems = useMemo(() => {
     const start = currentPage * pageSize;
     const end = start + pageSize;
@@ -60,6 +107,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentPage(newPage);
+      updatePageInUrl(newPage);
       setTimeout(() => {
         setIsTransitioning(false);
       }, 100);
