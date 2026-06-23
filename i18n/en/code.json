@@ -506,6 +506,15 @@
     "message": "Next: read the installation docs"
   },
 
+  "========== issue ==========": { "message": "" },
+
+  "issue.meta.title": {
+    "message": "Report an Issue"
+  },
+  "issue.meta.description": {
+    "message": "How to report problems, bugs, feature requests, and package requests for RuyiSDK"
+  },
+
   "========== riscv specs ==========": { "message": "" },
 
   "riscvSpecs.page.title": {
