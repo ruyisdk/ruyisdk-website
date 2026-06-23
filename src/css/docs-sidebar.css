@@ -4,7 +4,7 @@
     --ifm-heading-font-family: var(--ifm-font-family-base);
     --ifm-menu-color: var(--home-subtitle-color);
     --ifm-menu-color-active: #ffffff;
-    --ifm-menu-color-background-hover: var(--home-ruyi-light-blue);
+    --ifm-menu-color-background-hover: #EDEAF0;
     --ifm-menu-color-background-active: var(--ifm-color-primary);
     --ifm-menu-link-padding-vertical: 0.25rem;
     --ifm-menu-link-padding-horizontal: 0.5rem;
@@ -19,14 +19,14 @@
 
 html[data-theme="dark"] .docs-wrapper,
 html[data-theme="dark"] .theme-doc-wrapper {
-    --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.1);
+    --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.06);
     --ifm-menu-color-background-active: var(--ifm-color-primary);
 }
 
 /* Vertical 3px blue divider between sidebar and content */
 @media (min-width: 997px) {
     aside.theme-doc-sidebar-container {
-        border-right: 3px solid var(--ifm-color-primary) !important;
+        border-right: 3px solid #6B5E84 !important;
         /* Ensure the sidebar sits strictly below the header */
         position: sticky !important;
         top: var(--ifm-navbar-height) !important;
@@ -122,22 +122,22 @@ aside.theme-doc-sidebar-container,
 .theme-doc-sidebar-container .menu__link--active:hover,
 .navbar-sidebar .menu__link--active,
 .navbar-sidebar .menu__link--active:hover {
-    color: var(--ifm-menu-color-active) !important;
-    background-color: var(--ifm-menu-color-background-active) !important;
-    box-shadow: 0 4px 12px rgba(10, 44, 126, 0.25);
+    color: #000000 !important;
+    background-color: #E5E0EC !important;
+    box-shadow: none;
     font-weight: 600;
     border: none !important; /* Ensure no borders interfere with rounded corners */
     border-radius: var(--docs-sidebar-radius) !important;
     transform: none;
 }
 
-/* Desktop-specific: Only Level 2+ remains solid block. Level 1 uses left-accent only. */
+/* Desktop-specific: Level 1 uses left-accent only. */
 @media (min-width: 997px) {
     .theme-doc-sidebar-item-link-level-1 > .menu__link--active,
     .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active {
-        background-color: transparent !important;
-        color: var(--ifm-color-primary) !important;
-        border-left: 4px solid var(--ifm-color-primary) !important;
+        background-color: #E5E0EC !important;
+        color: #000000 !important;
+        border-left: 4px solid #7B6E94 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
         padding-left: 0.5rem !important; /* Align with border */
@@ -145,13 +145,13 @@ aside.theme-doc-sidebar-container,
 
     .theme-doc-sidebar-item-link-level-1 > .menu__link--active:hover,
     .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--active:hover {
-        background-color: var(--ifm-menu-color-background-hover) !important;
+        background-color: #DDD8E5 !important;
     }
 }
 
 .theme-doc-sidebar-container .menu__link--active .menu__caret,
 .navbar-sidebar .menu__link--active .menu__caret {
-    color: #ffffff !important;
+    color: #000000 !important;
     opacity: 1;
 }
 
@@ -186,13 +186,13 @@ aside.theme-doc-sidebar-container,
 /* Category nesting guides */
 .theme-doc-sidebar-item-category-level-1 > .menu__list {
     margin-left: 1rem;
-    border-left: 1px solid #e5e7eb;
+    border-left: 1px solid #9B90AD;
     padding-left: 0.75rem;
 }
 
 .theme-doc-sidebar-item-category-level-2 > .menu__list {
     margin-left: 1rem;
-    border-left: 1px solid #e5e7eb;
+    border-left: 1px solid #9B90AD;
     padding-left: 0.75rem;
 }
 
