@@ -76,7 +76,7 @@ const config = {
         defaultMode: "light",
         disableSwitch: true,
       },
-      image: "img/ruyi-logo-720.jpg",
+      image: "img/downloads/ruyi-logo-720.svg",
       navbar: {
         title: "RuyiSDK",
         hideOnScroll: false,
