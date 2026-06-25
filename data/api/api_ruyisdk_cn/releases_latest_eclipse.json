@@ -1,19 +1,19 @@
 {
   "channels": {
     "stable": {
-      "version": "0.1.4",
+      "version": "0.1.5",
       "channel": "stable",
-      "release_date": "2026-05-29T10:20:17Z",
+      "release_date": "2026-06-23T12:44:25Z",
       "download_urls": {
         "none/any": [
-          "https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/download/v0.1.4/ruyisdk-eclipse-plugins-0.1.4.zip",
-          "https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/v0.1.4/ruyisdk-eclipse-plugins-0.1.4.zip"
+          "https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/download/v0.1.5/ruyisdk-eclipse-plugins-0.1.5.zip",
+          "https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/ruyisdk-eclipse-plugins-0.1.5.zip"
         ]
       }
     }
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-18T21:36:26.156Z",
+    "generatedAt": "2026-06-23T21:18:56.591Z",
     "source": "https://api.ruyisdk.cn/releases/latest-ide/eclipse"
   }
 }
