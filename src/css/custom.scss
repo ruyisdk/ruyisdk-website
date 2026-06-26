@@ -367,3 +367,72 @@ html[data-theme="dark"] .hash-link {
 
 @import "./docs-sidebar.css";
 @import "./news-skeleton.css";
+
+.download-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .download-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.download-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 35, 70, 0.04);
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.download-card-title {
+  margin: 0 0 0.85rem;
+  color: #00163f;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.download-card-desc {
+  margin: 0 0 1rem;
+  color: #6c7fa6;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.download-card-meta {
+  margin: 0 0 0.5rem;
+  color: #2f4e86;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.download-card-meta strong {
+  color: #00163f;
+  font-weight: 800;
+}
+
+.download-card-platform {
+  margin: 0 0 0.5rem;
+  color: #6c7fa6;
+  font-size: 0.85rem;
+}
+
+.download-card-link {
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.download-card-link:hover {
+  text-decoration: underline;
+}
