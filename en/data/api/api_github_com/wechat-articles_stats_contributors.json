@@ -145,7 +145,7 @@
       }
     },
     {
-      "total": 253,
+      "total": 254,
       "author": {
         "login": "xijing21",
         "id": 84754181,
@@ -155,7 +155,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-06-23T21:02:04.939Z",
+    "generatedAt": "2026-06-25T20:55:31.985Z",
     "source": "https://api.github.com/repos/ruyisdk/wechat-articles/stats/contributors"
   }
 }
