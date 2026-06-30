@@ -106,6 +106,11 @@ const config = {
             label: "文档",
           },
           {
+            label: "报告问题",
+            to: "/issue",
+            position: "right",
+          },
+          {
             href: "https://github.com/ruyisdk",
             label: "GitHub",
             position: "right",

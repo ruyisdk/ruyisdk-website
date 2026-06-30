@@ -43,6 +43,10 @@
     "message": "About",
     "description": "Navbar item with label 关于"
   },
+  "item.label.报告问题": {
+    "message": "Issues",
+    "description": "Navbar item with label 报告问题"
+  },
   "item.label.Discussion": {
     "message": "Discussion",
     "description": "Navbar item with label Discussion"
