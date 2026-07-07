@@ -129,10 +129,10 @@
     {
       "total": 6,
       "author": {
-        "login": "255doesnotexist",
+        "login": "cyjin-yl",
         "id": 19223209,
         "avatar_url": "https://avatars.githubusercontent.com/u/19223209?v=4",
-        "html_url": "https://github.com/255doesnotexist"
+        "html_url": "https://github.com/cyjin-yl"
       }
     },
     {
@@ -218,7 +218,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-02T20:13:22.963Z",
+    "generatedAt": "2026-07-07T20:47:43.672Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix/stats/contributors"
   }
 }
