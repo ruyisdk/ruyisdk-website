@@ -2,12 +2,12 @@
   "data": {
     "stargazers_count": 3,
     "forks_count": 12,
-    "subscribers_count": 1,
-    "open_issues_count": 3,
-    "prs_count": 152
+    "subscribers_count": 0,
+    "open_issues_count": 4,
+    "prs_count": 154
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-02T20:13:17.892Z",
+    "generatedAt": "2026-07-07T20:43:24.595Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-vscode-extension"
   }
 }
