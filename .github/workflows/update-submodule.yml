@@ -25,6 +25,17 @@ jobs:
         run: |
           git submodule update --remote --recursive
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install tomli
+
+      - name: Generate Packages API
+        run: python3 scripts/generate_packages_api.py
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
@@ -33,6 +44,7 @@ jobs:
             docs
             news/ruyinews
             news/weeklies
+            static/api
           commit-message: "cron: auto update submodules"
           signoff: true
           title: "Auto-update: Submodules to latest"
