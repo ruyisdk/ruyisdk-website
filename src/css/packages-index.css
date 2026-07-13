@@ -1,0 +1,111 @@
+/* packages-index custom classes */
+
+.pi-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(10, 44, 126, 0.08), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, var(--ifm-background-color) 100%);
+  color: var(--text);
+}
+
+.pi-navbar {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(3px);
+  border-bottom: 1px solid var(--divider);
+  box-shadow: 0 10px 30px rgba(12, 30, 60, 0.05);
+}
+
+.pi-surface {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(236, 236, 236, 0.95);
+  box-shadow: 0 12px 32px rgba(12, 30, 60, 0.08);
+}
+
+.pi-card {
+  background: #fff;
+  border: 1px solid var(--divider);
+  border-radius: 1rem;
+  box-shadow: 0 10px 24px rgba(12, 30, 60, 0.08);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.pi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(12, 30, 60, 0.14);
+  border-color: rgba(10, 44, 126, 0.22);
+}
+
+.pi-button-primary,
+.pi-button-secondary,
+.pi-button-tertiary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.72rem 1.6rem;
+  font-weight: 600;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.pi-button-primary:hover,
+.pi-button-secondary:hover,
+.pi-button-tertiary:hover {
+  transform: translateY(-0.125rem);
+}
+
+.pi-button-primary {
+  color: #fff;
+  background: linear-gradient(180deg, var(--ifm-color-primary) 0%, #071e58 100%);
+  box-shadow: 0 10px 24px rgba(10, 44, 126, 0.26);
+}
+
+.pi-button-primary:hover {
+  box-shadow: 0 14px 28px rgba(10, 44, 126, 0.34);
+}
+
+.pi-button-secondary {
+  color: var(--ifm-color-primary);
+  background: #f4eedb;
+  box-shadow: 0 10px 24px rgba(173, 145, 87, 0.16);
+}
+
+.pi-button-secondary:hover {
+  box-shadow: 0 14px 28px rgba(173, 145, 87, 0.24);
+}
+
+.pi-button-tertiary {
+  color: #002677;
+  background: #fce8a4;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.pi-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--divider);
+  background: #fff;
+  color: var(--subtle);
+}
+
+.pi-section-title {
+  color: var(--home-title-color);
+  letter-spacing: -0.02em;
+}
+
+@keyframes pi-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pi-animate-fade-in-up {
+  animation: pi-fade-in-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

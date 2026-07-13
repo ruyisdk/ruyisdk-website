@@ -27,6 +27,10 @@
     "message": "Download",
     "description": "Navbar item with label 下载"
   },
+  "item.label.包索引": {
+    "message": "Packages Index",
+    "description": "Navbar item with label 包索引"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"

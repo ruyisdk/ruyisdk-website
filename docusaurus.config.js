@@ -91,6 +91,7 @@ const config = {
             position: "right",
           },
           { to: "/downloads", label: "下载", position: "left" },
+          { to: "/packages", label: "包索引", position: "left" },
           { to: "/news", label: "新闻", position: "left" },
           { to: "/contributors", label: "贡献者", position: "left" },
           { href: "https://ruyisdk.cn", label: "社区", position: "left" },
