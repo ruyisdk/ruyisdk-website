@@ -7,7 +7,7 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2185
+      "contributions": 2211
     },
     {
       "id": 54651938,
@@ -21,14 +21,14 @@
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 325
+      "contributions": 326
     },
     {
       "id": 29089388,
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 214
+      "contributions": 218
     },
     {
       "id": 54484233,
@@ -49,7 +49,7 @@
       "name": "U2FsdGVkX1",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 92
+      "contributions": 96
     },
     {
       "id": 22784008,
@@ -108,18 +108,18 @@
       "contributions": 38
     },
     {
+      "id": 95552651,
+      "name": "sisungo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
+      "github": "https://github.com/sisungo",
+      "contributions": 30
+    },
+    {
       "id": 132126433,
       "name": "zeyi2",
       "avatarUrl": "https://avatars.githubusercontent.com/u/132126433?v=4",
       "github": "https://github.com/zeyi2",
       "contributions": 28
-    },
-    {
-      "id": 95552651,
-      "name": "sisungo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
-      "github": "https://github.com/sisungo",
-      "contributions": 26
     },
     {
       "id": 24410810,
@@ -474,15 +474,15 @@
   ],
   "totals": {
     "contributors": 67,
-    "commits": 4668,
-    "pullRequests": 2114,
-    "issues": 118,
+    "commits": 4707,
+    "pullRequests": 2142,
+    "issues": 116,
     "stars": 122,
     "forks": 178,
     "watches": 26
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-07T21:04:31.834Z",
+    "generatedAt": "2026-07-16T20:15:26.169Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
