@@ -399,7 +399,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
           <DownloadInstallScript variant="plain" />
         </div>
 
-        <div className="mb-6 border-t border-gray-100 pt-6 mt-6">
+        <div className="border-t border-gray-100 pt-6 mt-6">
           <h3 className="text-xl font-bold text-gray-900 mb-4">
             <Translate id="downloads.manualDownload.title">手动下载安装</Translate>
           </h3>
