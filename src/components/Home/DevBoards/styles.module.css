@@ -1,5 +1,5 @@
 .devboards {
-  --devboards-padding: clamp(1.5rem, 3vw, 3.5rem);
+  --devboards-padding: clamp(1.2rem, 2.5vw, 2.5rem);
 
   position: relative;
   width: 100%;
@@ -26,7 +26,7 @@
 }
 
 .eyebrow {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.75rem;
   color: var(--home-title-color);
   font-size: 1rem;
   font-weight: 700;
@@ -34,7 +34,7 @@
 }
 
 .copy h2 {
-  margin: 0 0 1.3rem;
+  margin: 0 0 0.8rem;
   color: var(--home-little-title-color);
   font-size: 1.5rem;
   font-weight: 700;
@@ -47,7 +47,7 @@
 }
 
 .description {
-  margin: 0 0 2rem;
+  margin: 0 0 1.25rem;
   max-width: 42rem;
   color: var(--home-subtitle-color);
   font-size: 1rem;
@@ -65,11 +65,11 @@
 }
 
 .examplesHeader {
-  margin-top: clamp(0.75rem, 1.5vw, 1.5rem);
+  margin-top: clamp(0.5rem, 1vw, 1rem);
 }
 
 .examplesHeader h3 {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.75rem;
   color: var(--home-little-title-color);
   font-size: 1rem;
   font-weight: 500;
@@ -85,7 +85,7 @@
 .boardCard {
   display: flex;
   min-width: 0;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 16 / 18;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(18, 61, 145, 0.06);
@@ -107,21 +107,24 @@
 
 .boardImageWrap {
   display: flex;
-  flex: 0 0 50%;
+  flex: 0 0 42%;
   align-items: center;
   justify-content: center;
   min-height: 0;
+  padding: 1.1rem 1.1rem 0;
 }
 
 .boardImage {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  transform: scale(1.3);
+  transform-origin: top center;
 }
 
 .boardCard h3 {
-  margin: 1rem 0 0;
+  margin: 2.2rem 0 0;
   padding: 0 1.1rem;
   color: var(--home-little-title-color);
   font-size: clamp(1.02rem, 1.25vw, 1.22rem);
@@ -130,7 +133,7 @@
 }
 
 .boardCard p {
-  margin: 0.65rem 0 1rem;
+  margin: 0.4rem 0 0.75rem;
   padding: 0 1.1rem;
   color: var(--home-subtitle-color);
   font-size: 0.95rem;
@@ -142,7 +145,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  margin: auto 1.1rem 1.15rem;
+  margin: auto 1.1rem 0.85rem;
   color: var(--home-title-color);
   font-size: 0.875rem;
   font-weight: 700;
@@ -244,7 +247,7 @@
 .visualStage {
   position: relative;
   width: 100%;
-  aspect-ratio: 1448 / 1086;
+  aspect-ratio: 1448 / 900;
   overflow: hidden;
   background:
     radial-gradient(ellipse at 72% 32%, rgba(144, 179, 255, 0.18) 0%, rgba(144, 179, 255, 0.08) 34%, transparent 68%),
@@ -322,13 +325,13 @@
 
 .featureFlash {
   top: 19%;
-  left: 43%;
+  left: 48%;
   transform: rotate(-3deg);
 }
 
 .featureDemo {
-  top: 41%;
-  left: 6%;
+  top: 63%;
+  left: 3%;
   transform: rotate(-3deg);
 }
 
