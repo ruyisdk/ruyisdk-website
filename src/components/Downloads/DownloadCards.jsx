@@ -4,6 +4,7 @@ import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback
 import latestPmBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_pm.json';
 import latestVscodeBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_vscode.json';
 import latestEclipseBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_eclipse.json';
+import DownloadInstallScript from './DownloadInstallScript';
 
 export const COLOR_VARS = {
   gold: 'var(--ruyi-gold, var(--ifm-color-warning))',
@@ -393,64 +394,73 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
         iconPath="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
       />
 
-      <div className="p-6 sm:p-8">
-        <div className="grid gap-6 md:grid-cols-2">
-          <ReleaseCard
-            badgeId="downloads.badge.stable"
-            badgeMessage="稳定版"
-            channel={stable}
-            accent="gold"
-            mirrorAllUrl={PM_MIRROR_STABLE_URL}
-            githubAllUrl={PM_GITHUB_RELEASES_URL}
-            mirrorLatestDisabled={stableMirrorOptions.length === 0}
-            githubLatestDisabled={stableGithubOptions.length === 0}
-            onMirrorLatest={() =>
-              onOpenLatest({
-                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
-                version: stable?.version || '-',
-                options: stableMirrorOptions,
-                parentUrl: PM_MIRROR_STABLE_URL,
-                product: 'pm',
-              })
-            }
-            onGithubLatest={() =>
-              onOpenLatest({
-                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
-                version: stable?.version || '-',
-                options: stableGithubOptions,
-                parentUrl: PM_GITHUB_RELEASES_URL,
-                product: 'pm',
-              })
-            }
-          />
-          <ReleaseCard
-            badgeId="downloads.badge.testing"
-            badgeMessage="测试版"
-            channel={testing}
-            accent="gold"
-            mirrorAllUrl={PM_MIRROR_TESTING_URL}
-            githubAllUrl={PM_GITHUB_RELEASES_URL}
-            mirrorLatestDisabled={testingMirrorOptions.length === 0}
-            githubLatestDisabled={testingGithubOptions.length === 0}
-            onMirrorLatest={() =>
-              onOpenLatest({
-                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
-                version: testing?.version || '-',
-                options: testingMirrorOptions,
-                parentUrl: PM_MIRROR_TESTING_URL,
-                product: 'pm',
-              })
-            }
-            onGithubLatest={() =>
-              onOpenLatest({
-                projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
-                version: testing?.version || '-',
-                options: testingGithubOptions,
-                parentUrl: PM_GITHUB_RELEASES_URL,
-                product: 'pm',
-              })
-            }
-          />
+      <div className="p-6 sm:p-8 pt-4 sm:pt-5">
+        <div className="mb-6">
+          <DownloadInstallScript variant="plain" />
+        </div>
+
+        <div className="border-t border-gray-100 pt-6 mt-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-4">
+            <Translate id="downloads.manualDownload.title">手动下载安装</Translate>
+          </h3>
+          <div className="grid gap-6 md:grid-cols-2">
+            <ReleaseCard
+              badgeId="downloads.badge.stable"
+              badgeMessage="稳定版"
+              channel={stable}
+              accent="gold"
+              mirrorAllUrl={PM_MIRROR_STABLE_URL}
+              githubAllUrl={PM_GITHUB_RELEASES_URL}
+              mirrorLatestDisabled={stableMirrorOptions.length === 0}
+              githubLatestDisabled={stableGithubOptions.length === 0}
+              onMirrorLatest={() =>
+                onOpenLatest({
+                  projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                  version: stable?.version || '-',
+                  options: stableMirrorOptions,
+                  parentUrl: PM_MIRROR_STABLE_URL,
+                  product: 'pm',
+                })
+              }
+              onGithubLatest={() =>
+                onOpenLatest({
+                  projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                  version: stable?.version || '-',
+                  options: stableGithubOptions,
+                  parentUrl: PM_GITHUB_RELEASES_URL,
+                  product: 'pm',
+                })
+              }
+            />
+            <ReleaseCard
+              badgeId="downloads.badge.testing"
+              badgeMessage="测试版"
+              channel={testing}
+              accent="gold"
+              mirrorAllUrl={PM_MIRROR_TESTING_URL}
+              githubAllUrl={PM_GITHUB_RELEASES_URL}
+              mirrorLatestDisabled={testingMirrorOptions.length === 0}
+              githubLatestDisabled={testingGithubOptions.length === 0}
+              onMirrorLatest={() =>
+                onOpenLatest({
+                  projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                  version: testing?.version || '-',
+                  options: testingMirrorOptions,
+                  parentUrl: PM_MIRROR_TESTING_URL,
+                  product: 'pm',
+                })
+              }
+              onGithubLatest={() =>
+                onOpenLatest({
+                  projectLabel: translate({ id: 'downloads.pm.title', message: 'Ruyi 包管理器' }),
+                  version: testing?.version || '-',
+                  options: testingGithubOptions,
+                  parentUrl: PM_GITHUB_RELEASES_URL,
+                  product: 'pm',
+                })
+              }
+            />
+          </div>
         </div>
       </div>
 

@@ -24,6 +24,14 @@
   background: rgba(255, 255, 255, 0.82);
 }
 
+.plain {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  backdrop-filter: none;
+}
+
 .markdown {
   color: #4b5563;
   line-height: 1.75;
