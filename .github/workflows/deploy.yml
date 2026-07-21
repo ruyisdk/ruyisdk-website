@@ -36,17 +36,6 @@ jobs:
           fetch-depth: 0
           submodules: true
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Python dependencies
-        run: pip install tomli
-
-      - name: Generate Packages API
-        run: python3 scripts/generate_packages_api.py
-
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
 
