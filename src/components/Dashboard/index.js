@@ -10,6 +10,7 @@ import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.jso
 import StatsDetailDe from "./mdx/stats_detail.de.md";
 import StatsDetailEn from "./mdx/stats_detail.en.md";
 import StatsDetailZhHans from "./mdx/stats_detail.zh-Hans.md";
+import { getMetricDetails } from "./metricsDetails";
 
 import styles from "./styles.module.css";
 
@@ -61,7 +62,36 @@ const useIntersectionObserver = (callback, options = { threshold: 0.1 }) => {
   return { elementRef, isVisible };
 };
 
-const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
+const WorldMapBackground = () => {
+  const [svgContent, setSvgContent] = useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    fetch("/img/world-map.svg")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to load map");
+        return res.text();
+      })
+      .then((text) => {
+        const cleanSvg = text.replace(/<\?xml.*\?>/gi, "").replace(/<!DOCTYPE.*?>/gi, "");
+        setSvgContent(cleanSvg);
+      })
+      .catch((err) => console.error("Error loading world map SVG:", err));
+  }, []);
+
+  if (!svgContent) return null;
+
+  return (
+    <div
+      className={styles.worldMapWrapper}
+      dangerouslySetInnerHTML={{ __html: svgContent }}
+      aria-hidden="true"
+    />
+  );
+};
+
+const AnimatedStatistic = ({ title, value, unit, note, animate, index, locale }) => {
   const ANIMATION_DURATION = 500;
   const MAX_ANIMATION_STEPS = 30;
 
@@ -107,28 +137,39 @@ const AnimatedStatistic = ({ title, value, unit, note, animate }) => {
     return () => clearInterval(timer);
   }, [animate, isVisible, value]);
 
+  const details = getMetricDetails(index, locale);
+
   return (
     <div
-      className={`${styles.statCard} min-h-35 p-[1.15rem] md:min-h-35 md:p-5 lg:px-[1.45rem] lg:pt-[1.35rem] lg:pb-[1.15rem]`}
+      className={styles.statCard}
       ref={elementRef}
       data-stat={title}
+      tabIndex={0}
+      role="region"
+      aria-label={`${title}: ${displayValue.toLocaleString()} ${unit}. ${note}`}
+      aria-describedby={`metric-desc-${index}`}
     >
       <h3 className={styles.statTitle}>{title}</h3>
       <div className={styles.statValue}>
-        <span className={`${styles.valueNumber} text-[1.8rem] md:text-[1.9rem] lg:text-[2rem]`}>
+        <span className={styles.valueNumber}>
           {displayValue.toLocaleString()}
         </span>
         <span className={styles.statUnit}>{unit}</span>
       </div>
       <div className={styles.statDivider} />
-      <p className={`${styles.statNote} text-[0.74rem]`}>{note}</p>
+      <p className={styles.statNote}>{note}</p>
+
+      {/* Detailed explanation block that expands smoothly on hover/focus */}
+      <div id={`metric-desc-${index}`} className={styles.cardDescription}>
+        {details.content}
+      </div>
     </div>
   );
 };
 
 const getCategoryV1Total = (data, key) => data?.downloads_by_categories_v1?.[key]?.total || 0;
 
-const CategorySection = ({ data, animate }) => {
+const CategorySection = ({ data, animate, locale }) => {
   const stats = [
     {
       title: translate({ id: "dashboard.RuyiSDK 组件包下载量", message: "RuyiSDK 组件包下载量" }),
@@ -170,11 +211,12 @@ const CategorySection = ({ data, animate }) => {
 
   return (
     <section className={styles.statsSection}>
+      <WorldMapBackground />
       <Row gutter={[24, 24]} className={styles.statsRow}>
-        {stats.map((item) => (
-          <Col key={item.title} xs={24} md={12} lg={8}>
+        {stats.map((item, index) => (
+          <Col key={item.title} xs={24} md={12} lg={8} className={styles[`statCol${index}`]}>
             <div className="mx-auto h-full max-w-md md:max-w-none">
-              <AnimatedStatistic {...item} animate={animate} />
+              <AnimatedStatistic {...item} animate={animate} index={index} locale={locale} />
             </div>
           </Col>
         ))}
@@ -190,16 +232,49 @@ const Dashboard = () => {
   const { i18n } = useDocusaurusContext();
   const { data, hasRemoteData } = useDataWithApiFallback(dashboardData, DASHBOARD_API_URL);
   const StatsDetail = resolveLocalizedContent(STATS_DETAIL_CONTENT, i18n?.currentLocale);
+  const [isDetailExpanded, setIsDetailExpanded] = useState(false);
 
   return (
     <div className={styles.container}>
       <PageBackground />
       <PageHeader title={translate({ id: "dashboard.title", message: "RuyiSDK 下载统计" })} />
       <div className={`${styles.mainContent} max-w-screen-xl px-3 py-6 md:px-4 md:py-8 lg:px-8 lg:py-14`}>
-        <CategorySection data={data} animate={hasRemoteData} />
-        <MarkdownCard variant="solid" className={styles.markdownSection}>
-          <StatsDetail />
-        </MarkdownCard>
+        <CategorySection data={data} animate={hasRemoteData} locale={i18n?.currentLocale} />
+        
+        {!isDetailExpanded ? (
+          <div 
+            className={styles.detailToggle}
+            onClick={() => setIsDetailExpanded(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsDetailExpanded(true);
+              }
+            }}
+          >
+            📊 {translate({ id: "dashboard.stats_detail_title", message: "RuyiSDK 统计数据详细说明" })} ▾
+          </div>
+        ) : (
+          <MarkdownCard variant="solid" className={`${styles.markdownSection} relative`}>
+            <div 
+              className={styles.collapseBtn}
+              onClick={() => setIsDetailExpanded(false)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setIsDetailExpanded(false);
+                }
+              }}
+            >
+              {translate({ id: "dashboard.collapse", message: "收起" })} ▴
+            </div>
+            <StatsDetail />
+          </MarkdownCard>
+        )}
       </div>
     </div>
   );
