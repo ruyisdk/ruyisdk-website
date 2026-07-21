@@ -46,7 +46,7 @@
       }
     },
     {
-      "total": 184,
+      "total": 190,
       "author": {
         "login": "pzhlkj6612",
         "id": 29089388,
@@ -56,7 +56,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-16T19:54:22.642Z",
+    "generatedAt": "2026-07-21T20:16:12.310Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-eclipse-plugins/stats/contributors"
   }
 }
