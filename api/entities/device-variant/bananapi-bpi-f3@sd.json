@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "bananapi-bpi-f3@sd", "file_path": "entities/device-variant/bananapi-bpi-f3@sd.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:spacemit-k1"], "unique_among_type_during_traversal": true, "device-variant": {"id": "sd", "variant_name": "SD/SSD storage"}}}

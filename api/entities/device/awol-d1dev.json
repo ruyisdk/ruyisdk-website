@@ -1,0 +1,1 @@
+{"type": "device", "id": "awol-d1dev", "file_path": "entities/device/awol-d1dev.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:awol-d1dev@generic"], "unique_among_type_during_traversal": true, "device": {"id": "awol-d1dev", "display_name": "Allwinner Nezha D1"}}}

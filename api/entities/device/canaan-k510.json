@@ -1,0 +1,1 @@
+{"type": "device", "id": "canaan-k510", "file_path": "entities/device/canaan-k510.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:canaan-k510@generic"], "unique_among_type_during_traversal": true, "device": {"id": "canaan-k510", "display_name": "Canaan Kendryte K510"}}}

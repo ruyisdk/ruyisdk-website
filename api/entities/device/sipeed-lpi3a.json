@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-lpi3a", "file_path": "entities/device/sipeed-lpi3a.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:bananapi-bpi-f3@sd", "device-variant:bananapi-bpi-f3@emmc"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-lpi3a", "display_name": "Sipeed LicheePi 3A"}}}

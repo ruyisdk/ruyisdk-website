@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "generic-rv64gc", "file_path": "entities/uarch/generic-rv64gc.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv64"], "unique_among_type_during_traversal": true, "uarch": {"id": "generic-rv64gc", "display_name": "Generic RV64GC-compatible core", "arch": "riscv64", "riscv": {"isa": "rv64imafdc"}}}}
