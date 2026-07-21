@@ -1,0 +1,1 @@
+{"type": "image-combo", "id": "rockos-milkv-megrez", "file_path": "entities/image-combo/rockos-milkv-megrez.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-megrez@generic"], "unique_among_type_during_traversal": true, "image-combo": {"display_name": "RockOS for Milk-V Megrez", "package_atoms": ["board-image/rockos-milkv-megrez"]}}}

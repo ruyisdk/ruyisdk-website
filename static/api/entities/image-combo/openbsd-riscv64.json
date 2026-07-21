@@ -1,0 +1,1 @@
+{"type": "image-combo", "id": "openbsd-riscv64", "file_path": "entities/image-combo/openbsd-riscv64.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sifive-unmatched@generic"], "unique_among_type_during_traversal": true, "image-combo": {"display_name": "OpenBSD riscv64", "package_atoms": ["board-image/openbsd-riscv64-live"]}}}

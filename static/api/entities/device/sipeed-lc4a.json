@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-lc4a", "file_path": "entities/device/sipeed-lc4a.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-lc4a@8g", "device-variant:sipeed-lc4a@16g"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-lc4a", "display_name": "Sipeed Lichee Cluster 4A"}}}
