@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-licheervnano", "file_path": "entities/device/sipeed-licheervnano.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-licheervnano@generic"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-licheervnano", "display_name": "Sipeed LicheeRV Nano"}}}

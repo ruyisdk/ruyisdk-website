@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "milkv-pioneer@v1.3", "file_path": "entities/device-variant/milkv-pioneer@v1.3.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:generic-rv64gc"], "unique_among_type_during_traversal": true, "device-variant": {"id": "v1.3", "variant_name": "v1.3"}}}

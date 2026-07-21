@@ -35,6 +35,7 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
 
