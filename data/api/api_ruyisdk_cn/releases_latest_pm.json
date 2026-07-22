@@ -1,5 +1,24 @@
 {
   "channels": {
+    "stable": {
+      "version": "0.51.0",
+      "channel": "stable",
+      "release_date": "2026-07-20T23:01:27Z",
+      "download_urls": {
+        "linux/aarch64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.arm64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.arm64"
+        ],
+        "linux/riscv64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.riscv64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.riscv64"
+        ],
+        "linux/x86_64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.amd64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.amd64"
+        ]
+      }
+    },
     "testing": {
       "version": "0.52.0-alpha.20260714",
       "channel": "testing",
@@ -22,29 +41,10 @@
           "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.52.0-alpha.20260714/ruyi-0.52.0-alpha.20260714.amd64"
         ]
       }
-    },
-    "stable": {
-      "version": "0.50.0",
-      "channel": "stable",
-      "release_date": "2026-06-23T13:06:10Z",
-      "download_urls": {
-        "linux/aarch64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.50.0/ruyi-0.50.0.arm64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.50.0/ruyi-0.50.0.arm64"
-        ],
-        "linux/riscv64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.50.0/ruyi-0.50.0.riscv64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.50.0/ruyi-0.50.0.riscv64"
-        ],
-        "linux/x86_64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.50.0/ruyi-0.50.0.amd64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.50.0/ruyi-0.50.0.amd64"
-        ]
-      }
     }
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-16T20:15:27.883Z",
+    "generatedAt": "2026-07-21T20:33:02.107Z",
     "source": "https://api.ruyisdk.cn/releases/latest-pm"
   }
 }
