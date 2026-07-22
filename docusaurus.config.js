@@ -144,6 +144,13 @@ const config = {
       src: '/js/menu-title-click.js',
       defer: false,
     },
+    {
+      src: 'https://static.cloudflareinsights.com/beacon.min.js',
+      defer: true,
+      'data-cf-beacon': JSON.stringify({
+        token: '627f2bb5a9274412bbaf0e85a238c90c',
+      })
+    },
   ],
   // for mermaid support
   markdown: {
