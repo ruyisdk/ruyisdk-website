@@ -12,15 +12,6 @@
     {
       "total": 1,
       "author": {
-        "login": "sisungo",
-        "id": 95552651,
-        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
-        "html_url": "https://github.com/sisungo"
-      }
-    },
-    {
-      "total": 1,
-      "author": {
         "login": "felixonmars",
         "id": 1006477,
         "avatar_url": "https://avatars.githubusercontent.com/u/1006477?v=4",
@@ -30,10 +21,10 @@
     {
       "total": 1,
       "author": {
-        "login": "Platohykj",
-        "id": 147904598,
-        "avatar_url": "https://avatars.githubusercontent.com/u/147904598?v=4",
-        "html_url": "https://github.com/Platohykj"
+        "login": "sisungo",
+        "id": 95552651,
+        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
+        "html_url": "https://github.com/sisungo"
       }
     },
     {
@@ -43,6 +34,15 @@
         "id": 885662,
         "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
         "html_url": "https://github.com/mengzhuo"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "Platohykj",
+        "id": 147904598,
+        "avatar_url": "https://avatars.githubusercontent.com/u/147904598?v=4",
+        "html_url": "https://github.com/Platohykj"
       }
     },
     {
@@ -163,7 +163,7 @@
       }
     },
     {
-      "total": 37,
+      "total": 38,
       "author": {
         "login": "xijing21",
         "id": 84754181,
@@ -182,7 +182,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-21T20:11:55.913Z",
+    "generatedAt": "2026-07-23T20:10:14.714Z",
     "source": "https://api.github.com/repos/ruyisdk/docs/stats/contributors"
   }
 }
