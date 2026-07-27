@@ -11,10 +11,16 @@ runs:
       with:
         node-version: 22.4.1
         cache: pnpm
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
 
     - name: Install dependencies
       shell: bash
       run: pnpm install
+    - name: Generate package index API data
+      shell: bash
+      run: python scripts/generate_packages_api.py
     - name: Build website
       shell: bash
       run: pnpm run build

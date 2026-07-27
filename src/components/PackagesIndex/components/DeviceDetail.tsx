@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getEntityDetail, getHierarchy, getPackages } from '../api';
+import { getEntities, getEntityDetail, getHierarchy, getPackages } from '../api';
 import { useI18n } from '../i18n';
 import { ArrowLeft, Server, Package as PackageIcon, Cpu, Layers } from 'lucide-react';
 
@@ -20,6 +20,7 @@ export default function DeviceDetail() {
   const [device, setDevice] = useState<any>(null);
   const [hierarchy, setHierarchy] = useState<Record<string, string[]>>({});
   const [allPackages, setAllPackages] = useState<any[]>([]);
+  const [variantNames, setVariantNames] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,14 +31,20 @@ export default function DeviceDetail() {
     const fetchAll = async () => {
       setLoading(true);
       try {
-        const [deviceData, hier, pkgs] = await Promise.all([
+        const [deviceData, hier, pkgs, entities] = await Promise.all([
           getEntityDetail('device', id!),
           getHierarchy(),
-          getPackages()
+          getPackages(),
+          getEntities(),
         ]);
         setDevice(deviceData);
         setHierarchy(hier);
         setAllPackages(pkgs);
+        setVariantNames(new Map(
+          entities
+            .filter((entity: any) => entity.type === 'device-variant')
+            .map((entity: any) => [entity.id, entity.display_name]),
+        ));
       } catch (error) {
         console.error(error);
       } finally {
@@ -168,11 +175,11 @@ export default function DeviceDetail() {
                 )}
                 {variants.length > 0 && (
                   <div>
-                    <dt className="text-[var(--subtle)]">{t('variants')} ({variants.length})</dt>
+                    <dt className="text-[var(--subtle)]">Variants ({variants.length})</dt>
                     <dd className="mt-1 flex flex-wrap gap-2">
                       {variants.map(v => (
                         <span key={v} className="rounded-md bg-[var(--tintColor)] px-2 py-1 text-xs font-mono text-[var(--subtle)]">
-                          {v.replace('device-variant:', '')}
+                          {variantNames.get(v.replace('device-variant:', '')) || v.replace('device-variant:', '')}
                         </span>
                       ))}
                     </dd>
