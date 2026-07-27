@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-vega", "file_path": "entities/device/milkv-vega.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-vega@generic"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-vega", "display_name": "Milk-V Vega"}}}

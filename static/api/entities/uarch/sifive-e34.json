@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "sifive-e34", "file_path": "entities/uarch/sifive-e34.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv32"], "unique_among_type_during_traversal": true, "uarch": {"id": "sifive-e34", "display_name": "SiFive E34", "arch": "riscv32", "riscv": {"isa": "rv32imafc"}}}}

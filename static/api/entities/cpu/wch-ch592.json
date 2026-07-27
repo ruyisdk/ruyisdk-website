@@ -1,0 +1,1 @@
+{"type": "cpu", "id": "wch-ch592", "file_path": "entities/cpu/wch-ch592.toml", "data": {"ruyi-entity": "v0", "related": ["uarch:wch-qingke-v4c"], "unique_among_type_during_traversal": true, "cpu": {"id": "wch-ch592", "display_name": "WCH CH592"}}}

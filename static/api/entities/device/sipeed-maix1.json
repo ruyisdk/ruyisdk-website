@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-maix1", "file_path": "entities/device/sipeed-maix1.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-maix1@generic"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-maix1", "display_name": "Sipeed Maix-I"}}}

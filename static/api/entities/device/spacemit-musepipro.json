@@ -1,0 +1,1 @@
+{"type": "device", "id": "spacemit-musepipro", "file_path": "entities/device/spacemit-musepipro.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:spacemit-musepipro@sd", "device-variant:spacemit-musepipro@emmc"], "unique_among_type_during_traversal": true, "device": {"id": "spacemit-musepipro", "display_name": "SpacemiT MUSE Pi Pro"}}}

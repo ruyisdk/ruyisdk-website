@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-megrez", "file_path": "entities/device/milkv-megrez.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-megrez@generic"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-megrez", "display_name": "Milk-V Megrez"}}}

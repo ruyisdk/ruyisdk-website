@@ -1,0 +1,1 @@
+{"type": "cpu", "id": "spacemit-m1", "file_path": "entities/cpu/spacemit-m1.toml", "data": {"ruyi-entity": "v0", "related": ["uarch:spacemit-x60"], "unique_among_type_during_traversal": true, "cpu": {"id": "spacemit-m1", "display_name": "SpacemiT Key Stone M1"}}}

@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-tangmega138kpro", "file_path": "entities/device/sipeed-tangmega138kpro.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-tangmega138kpro@generic"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-tangmega138kpro", "display_name": "Sipeed Tang Mega 138K Pro"}}}

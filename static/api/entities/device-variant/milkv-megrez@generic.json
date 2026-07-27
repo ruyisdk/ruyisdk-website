@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "milkv-megrez@generic", "file_path": "entities/device-variant/milkv-megrez@generic.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:eswin-eic7700x"], "unique_among_type_during_traversal": true, "device-variant": {"id": "generic", "variant_name": "generic variant"}}}

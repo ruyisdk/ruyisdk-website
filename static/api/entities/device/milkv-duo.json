@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-duo", "file_path": "entities/device/milkv-duo.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-duo@64m", "device-variant:milkv-duo@256m"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-duo", "display_name": "Milk-V Duo"}}}

@@ -1,0 +1,1 @@
+{"type": "image-combo", "id": "redleafos-xiangshan-nanhu", "file_path": "entities/image-combo/redleafos-xiangshan-nanhu.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:xiangshan-nanhu@generic"], "unique_among_type_during_traversal": true, "image-combo": {"display_name": "RedleafOS for Xiangshan Nanhu", "package_atoms": ["board-image/redleafos-xiangshan-nanhu"]}}}

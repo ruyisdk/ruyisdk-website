@@ -5,7 +5,6 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import { themes as prismThemes } from "prism-react-renderer";
 
-
 const config = {
   title: "RuyiSDK",
   tagline: "RuyiSDK是面向RISC-V架构的一体化集成开发环境",
@@ -15,8 +14,8 @@ const config = {
     apiURL: process.env.BASE_URL,
     externalLinks: {
       revyos: {
-        "zh-Hans": 'https://docs.revyos.dev/',
-        en: 'https://docs.revyos.dev/en/',
+        "zh-Hans": "https://docs.revyos.dev/",
+        en: "https://docs.revyos.dev/en/",
       },
       "support-matrix": {
         "zh-Hans": "https://matrix.ruyisdk.org/zh-CN/",
@@ -27,8 +26,8 @@ const config = {
         en: "https://plctlab.org/en/",
         ja: "https://plctlab.org/ja/",
         ru: "https://plctlab.org/ru/",
-        ko: "https://plctlab.org/ko/"
-      }
+        ko: "https://plctlab.org/ko/",
+      },
     },
   },
   // Set the production url of your site here
@@ -50,13 +49,13 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en", ],
+    locales: ["zh-Hans", "en"],
   },
 
   presets: [
     [
       "classic",
-      ({
+      {
         docs: {
           sidebarPath: "./src/components/core/sidebars.js",
           // Please change this to your repo.
@@ -66,90 +65,93 @@ const config = {
         theme: {
           customCss: ["./src/css/tailwind.css", "./src/css/custom.scss"],
         },
-      }),
+      },
     ],
   ],
 
-  themeConfig:
-    ({
-      colorMode: {
-        defaultMode: "light",
-        disableSwitch: true,
+  themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+      disableSwitch: true,
+    },
+    image: "img/downloads/ruyi-logo-720.svg",
+    navbar: {
+      title: "RuyiSDK",
+      hideOnScroll: false,
+      logo: {
+        alt: "RuyiSDK Logo",
+        src: "img/downloads/ruyi-logo-720.svg",
       },
-      image: "img/downloads/ruyi-logo-720.svg",
-      navbar: {
-        title: "RuyiSDK",
-        hideOnScroll: false,
-        logo: {
-          alt: "RuyiSDK Logo",
-          src: "img/downloads/ruyi-logo-720.svg",
+      style: "primary",
+      items: [
+        {
+          type: "localeDropdown",
+          position: "right",
         },
-        style: "primary",
-        items: [
-          {
-            type: "localeDropdown",
-            position: "right",
-          },
-          { to: "/downloads", label: "下载", position: "left" },
-          { to: "/packages", label: "包索引", position: "left" },
-          { to: "/news", label: "新闻", position: "left" },
-          { to: "/contributors", label: "贡献者", position: "left" },
-          { href: "https://ruyisdk.cn", label: "社区", position: "left" },
-          {
-            label: "关于",
-            to: "/about",
-            position: "left",
-          },
-          {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "right",
-            label: "文档",
-          },
-          {
-            label: "报告问题",
-            to: "/issue",
-            position: "right",
-          },
-          {
-            href: "https://github.com/ruyisdk",
-            label: "GitHub",
-            position: "right",
-          },
-        ],
-      },
-      footer: {
-        style: "light",
-        links: [],
-        copyright: `Copyright © 2024-2026 Institute of Software, CAS`,
-      },
-      prism: {
-        additionalLanguages: ["bash"],
+        { to: "/downloads", label: "下载", position: "left" },
+        { to: "/packages", label: "包索引", position: "left" },
+        { to: "/news", label: "新闻", position: "left" },
+        { to: "/contributors", label: "贡献者", position: "left" },
+        { href: "https://ruyisdk.cn", label: "社区", position: "left" },
+        {
+          label: "关于",
+          to: "/about",
+          position: "left",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "right",
+          label: "文档",
+        },
+        {
+          label: "报告问题",
+          to: "/issue",
+          position: "right",
+        },
+        {
+          href: "https://github.com/ruyisdk",
+          label: "GitHub",
+          position: "right",
+        },
+      ],
+    },
+    footer: {
+      style: "light",
+      links: [],
+      copyright: `Copyright © 2024-2026 Institute of Software, CAS`,
+    },
+    prism: {
+      additionalLanguages: ["bash"],
 
-        theme: prismThemes.github,
-        darkTheme: prismThemes.dracula,
-      },
-    }),
-  plugins: [
-    "docusaurus-plugin-sass",
-    "./scripts/plugins/news-generator",
-  ],
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  },
+  plugins: ["docusaurus-plugin-sass", "./scripts/plugins/news-generator"],
   // add custom script
   scripts: [
     {
-      src: '/js/toc-smooth-scroll.js',
+      src: "/js/toc-smooth-scroll.js",
       async: true,
     },
     {
-      src: '/js/menu-title-click.js',
+      src: "/js/menu-title-click.js",
       defer: false,
+    },
+    {
+      src: "https://static.cloudflareinsights.com/beacon.min.js",
+      defer: true,
+      "data-cf-beacon": JSON.stringify({
+        token: "627f2bb5a9274412bbaf0e85a238c90c",
+      }),
     },
   ],
   // for mermaid support
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
 };
 
 export default config;

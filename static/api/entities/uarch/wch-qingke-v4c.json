@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "wch-qingke-v4c", "file_path": "entities/uarch/wch-qingke-v4c.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv32"], "unique_among_type_during_traversal": true, "uarch": {"id": "wch-qingke-v4c", "display_name": "WCH Qingke V4C", "arch": "riscv32", "riscv": {"isa": "rv32imac"}}}}

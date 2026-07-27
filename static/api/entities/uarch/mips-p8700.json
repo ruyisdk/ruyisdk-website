@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "mips-p8700", "file_path": "entities/uarch/mips-p8700.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv64"], "unique_among_type_during_traversal": true, "uarch": {"id": "mips-p8700", "display_name": "MIPS P8700", "arch": "riscv64", "riscv": {"isa": "rv64imafd_zicsr_zmmul_zaamo_zalrsc_zba_zbb"}}}}

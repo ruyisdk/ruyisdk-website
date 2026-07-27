@@ -1,0 +1,1 @@
+{"type": "device", "id": "wch-ch32v307-evb", "file_path": "entities/device/wch-ch32v307-evb.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:wch-ch32v307-evb@rct6", "device-variant:wch-ch32v307-evb@vct6", "device-variant:wch-ch32v307-evb@wcu6"], "unique_among_type_during_traversal": true, "device": {"id": "wch-ch32v307-evb", "display_name": "WCH CH32V307 EVB"}}}

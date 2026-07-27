@@ -1,0 +1,1 @@
+{"type": "device", "id": "spacemit-musebook", "file_path": "entities/device/spacemit-musebook.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:bananapi-bpi-f3@sd", "device-variant:bananapi-bpi-f3@emmc"], "unique_among_type_during_traversal": true, "device": {"id": "spacemit-musebook", "display_name": "SpacemiT MUSE Book"}}}

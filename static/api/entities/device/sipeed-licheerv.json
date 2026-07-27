@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-licheerv", "file_path": "entities/device/sipeed-licheerv.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-licheerv@generic"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-licheerv", "display_name": "Sipeed Lichee RV"}}}

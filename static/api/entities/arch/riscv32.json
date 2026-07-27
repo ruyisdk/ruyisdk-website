@@ -1,0 +1,1 @@
+{"type": "arch", "id": "riscv32", "file_path": "entities/arch/riscv32.toml", "data": {"ruyi-entity": "v0", "unique_among_type_during_traversal": true, "arch": {"id": "riscv32", "display_name": "32-bit RISC-V"}}}

@@ -1,0 +1,1 @@
+{"type": "device", "id": "sifive-unmatched", "file_path": "entities/device/sifive-unmatched.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sifive-unmatched@generic"], "unique_among_type_during_traversal": true, "device": {"id": "sifive-unmatched", "display_name": "SiFive HiFive Unmatched"}}}
