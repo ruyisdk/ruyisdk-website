@@ -115,12 +115,12 @@ export default function DeviceDetail() {
       <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="md:col-span-1 space-y-6">
-            <div className="flex items-center gap-3 mb-2 flex-wrap">
-              <button type="button" onClick={handleBack} className="pi-button-secondary px-3 py-1.5 text-xs inline-flex items-center gap-1.5" aria-label={t('back')}>
+            <div className="mb-2 flex flex-wrap items-center gap-3">
+              <button type="button" onClick={handleBack} className="pi-button-secondary inline-flex h-10 items-center gap-1.5 px-3 text-xs" aria-label={t('back')}>
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>{t('back')}</span>
               </button>
-              <h1 className="text-xl font-bold text-[var(--ifm-color-primary)] m-0 leading-tight">
+              <h1 className="m-0 flex min-h-10 items-center text-xl font-bold leading-none text-[var(--ifm-color-primary)]">
                 {displayName}
               </h1>
             </div>

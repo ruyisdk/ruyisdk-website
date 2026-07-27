@@ -460,7 +460,7 @@ export default function Explorer() {
               lastMainScrollTop = e.currentTarget.scrollTop;
             }
           }}
-          className="flex-1 overflow-y-auto px-4 py-2 md:pl-2 md:pr-4"
+          className="flex-1 overflow-y-auto p-8"
         >
           <div className="block md:hidden mb-4">
             <div className="flex items-center gap-2 mb-3">
