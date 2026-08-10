@@ -4,7 +4,7 @@
     "total": 59308
   },
   "pm_downloads": {
-    "total": 87766
+    "total": 87769
   },
   "other_categories_downloads": {
     "3rdparty": {
@@ -14,7 +14,7 @@
       "total": 29290
     },
     "ide": {
-      "total": 3221
+      "total": 3222
     }
   },
   "downloads_by_categories_v1": {
@@ -22,7 +22,7 @@
       "total": 59308
     },
     "pm:github": {
-      "total": 6229
+      "total": 6232
     },
     "pm:mirror": {
       "total": 72127
@@ -49,7 +49,7 @@
       "total": 446
     },
     "ide:plugin:vscode:github": {
-      "total": 119
+      "total": 120
     }
   },
   "installs": {
@@ -94,7 +94,7 @@
       "watchers_count": 65,
       "forks_count": 288,
       "stars_count": 235,
-      "prs_count": 2700,
+      "prs_count": 2701,
       "issues_count": 634,
       "contributors_count": 100,
       "detail_by_repo": [
@@ -256,7 +256,7 @@
           "watchers_count": 2,
           "forks_count": 23,
           "stars_count": 8,
-          "prs_count": 475,
+          "prs_count": 476,
           "issues_count": 71,
           "contributors_count": 19
         },
@@ -507,7 +507,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-07-23T20:27:06.870Z",
+    "generatedAt": "2026-08-07T00:56:14.384Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }
