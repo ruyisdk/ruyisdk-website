@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Explorer from './components/Explorer';
@@ -9,10 +9,7 @@ import { setBaseUrl } from './api';
 
 function App() {
   const { siteConfig } = useDocusaurusContext();
-  
-  useEffect(() => {
-    setBaseUrl(siteConfig.baseUrl);
-  }, [siteConfig.baseUrl]);
+  setBaseUrl(siteConfig.baseUrl);
 
   return (
     <I18nProvider>
