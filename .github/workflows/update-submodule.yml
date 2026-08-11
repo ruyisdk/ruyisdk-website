@@ -44,7 +44,7 @@ jobs:
             docs
             news/ruyinews
             news/weeklies
-            static/api
+            static/data/api/api_packages_index
           commit-message: "cron: auto update submodules"
           signoff: true
           title: "Auto-update: Submodules to latest"

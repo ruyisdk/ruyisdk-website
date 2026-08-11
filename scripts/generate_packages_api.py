@@ -196,4 +196,4 @@ def generate_static_api(repo_path: str, output_dir: str):
     print("Done!")
 
 if __name__ == "__main__":
-    generate_static_api("news/ruyinews", "static/api")
+    generate_static_api("news/ruyinews", "static/data/api/api_packages_index")

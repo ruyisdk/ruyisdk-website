@@ -1,13 +1,21 @@
 import axios from 'axios';
 
-let baseUrl = '/';
+const API_PATH = 'data/api/api_packages_index';
+let apiBaseUrl: string | undefined;
 
-export const setBaseUrl = (url: string) => {
-  baseUrl = url;
+export const setBaseUrl = (baseUrl: string) => {
+  apiBaseUrl = `${baseUrl}${API_PATH}`;
+};
+
+const getApiUrl = (path: string) => {
+  if (!apiBaseUrl) {
+    throw new Error('Packages API base URL has not been configured');
+  }
+  return `${apiBaseUrl}${path}`;
 };
 
 export const getEntities = async (type?: string, query?: string) => {
-  const res = await axios.get(`${baseUrl}api/entities.json`);
+  const res = await axios.get(getApiUrl('/entities.json'));
   let data = res.data;
   if (type) {
     data = data.filter((e: any) => e.type === type);
@@ -22,7 +30,7 @@ export const getEntities = async (type?: string, query?: string) => {
 };
 
 export const getPackages = async (category?: string, pkg?: string, query?: string) => {
-  const res = await axios.get(`${baseUrl}api/packages.json`);
+  const res = await axios.get(getApiUrl('/packages.json'));
   let data = res.data;
   if (category) {
     data = data.filter((p: any) => p.category === category);
@@ -40,16 +48,16 @@ export const getPackages = async (category?: string, pkg?: string, query?: strin
 };
 
 export const getHierarchy = async () => {
-  const res = await axios.get(`${baseUrl}api/hierarchy.json`);
+  const res = await axios.get(getApiUrl('/hierarchy.json'));
   return res.data;
 };
 
 export const getEntityDetail = async (type: string, id: string) => {
-  const res = await axios.get(`${baseUrl}api/entities/${type}/${id}.json`);
+  const res = await axios.get(getApiUrl(`/entities/${type}/${id}.json`));
   return res.data;
 };
 
 export const getPackageDetail = async (category: string, pkg: string, version: string) => {
-  const res = await axios.get(`${baseUrl}api/packages/${category}/${pkg}/${version}.json`);
+  const res = await axios.get(getApiUrl(`/packages/${category}/${pkg}/${version}.json`));
   return res.data;
 };
