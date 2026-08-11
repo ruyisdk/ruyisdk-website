@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getEntityDetail, getHierarchy, getPackages } from '../api';
+import { getEntities, getEntityDetail, getHierarchy, getPackages } from '../api';
 import { useI18n } from '../i18n';
 import { ArrowLeft, Server, Package as PackageIcon, Cpu, Layers } from 'lucide-react';
 
@@ -20,6 +20,7 @@ export default function DeviceDetail() {
   const [device, setDevice] = useState<any>(null);
   const [hierarchy, setHierarchy] = useState<Record<string, string[]>>({});
   const [allPackages, setAllPackages] = useState<any[]>([]);
+  const [variantNames, setVariantNames] = useState<Map<string, string>>(new Map());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,14 +31,20 @@ export default function DeviceDetail() {
     const fetchAll = async () => {
       setLoading(true);
       try {
-        const [deviceData, hier, pkgs] = await Promise.all([
+        const [deviceData, hier, pkgs, entities] = await Promise.all([
           getEntityDetail('device', id!),
           getHierarchy(),
-          getPackages()
+          getPackages(),
+          getEntities(),
         ]);
         setDevice(deviceData);
         setHierarchy(hier);
         setAllPackages(pkgs);
+        setVariantNames(new Map(
+          entities
+            .filter((entity: any) => entity.type === 'device-variant')
+            .map((entity: any) => [entity.id, entity.display_name]),
+        ));
       } catch (error) {
         console.error(error);
       } finally {
@@ -109,11 +116,11 @@ export default function DeviceDetail() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="md:col-span-1 space-y-6">
             <div className="flex items-center gap-3 mb-2 flex-wrap">
-              <button type="button" onClick={handleBack} className="pi-button-secondary px-3 py-1.5 text-xs inline-flex items-center gap-1.5" aria-label={t('back')}>
+              <button type="button" onClick={handleBack} className="pi-button-secondary px-3 h-10 text-xs inline-flex items-center gap-1.5" aria-label={t('back')}>
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>{t('back')}</span>
               </button>
-              <h1 className="text-xl font-bold text-[var(--ifm-color-primary)] m-0 leading-tight">
+              <h1 className="text-xl font-bold text-[var(--ifm-color-primary)] m-0 leading-none flex min-h-10 items-center">
                 {displayName}
               </h1>
             </div>
@@ -172,7 +179,7 @@ export default function DeviceDetail() {
                     <dd className="mt-1 flex flex-wrap gap-2">
                       {variants.map(v => (
                         <span key={v} className="rounded-md bg-[var(--tintColor)] px-2 py-1 text-xs font-mono text-[var(--subtle)]">
-                          {v.replace('device-variant:', '')}
+                          {variantNames.get(v.replace('device-variant:', '')) || v.replace('device-variant:', '')}
                         </span>
                       ))}
                     </dd>

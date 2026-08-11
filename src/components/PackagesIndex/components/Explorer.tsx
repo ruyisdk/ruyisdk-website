@@ -18,6 +18,13 @@ type PackageItem = {
   desc?: string;
 };
 
+const sortByDisplayName = (items: Entity[]) =>
+  [...items].sort((left, right) =>
+    left.display_name.localeCompare(right.display_name, undefined, {
+      sensitivity: 'base',
+    }),
+  );
+
 let lastScrollTop = 0;
 let lastMainScrollTop = 0;
 let lastActiveTab: 'devices' | 'packages' = 'devices';
@@ -153,10 +160,29 @@ export default function Explorer() {
     fetchAll();
   }, []);
 
-  const archs = useMemo(() => entities.filter((entity) => entity.type === 'arch'), [entities]);
-  const cpus = useMemo(() => entities.filter((entity) => entity.type === 'cpu'), [entities]);
+  const archs = useMemo(
+    () => sortByDisplayName(entities.filter((entity) => entity.type === 'arch')),
+    [entities],
+  );
+  const cpus = useMemo(
+    () => sortByDisplayName(entities.filter((entity) => entity.type === 'cpu')),
+    [entities],
+  );
   const devices = useMemo(() => entities.filter((entity) => entity.type === 'device'), [entities]);
-  const categories = useMemo(() => Array.from(new Set(packages.map((pkg) => pkg.category))).sort(), [packages]);
+  const categories = useMemo(
+    () => Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
+      left.localeCompare(right, undefined, { sensitivity: 'base' }),
+    ),
+    [packages],
+  );
+  const variantNames = useMemo(
+    () => new Map(
+      entities
+        .filter((entity) => entity.type === 'device-variant')
+        .map((entity) => [entity.id, entity.display_name]),
+    ),
+    [entities],
+  );
 
   const renderIosSelector = () => (
     <div className="relative flex bg-[#e3e3e6] dark:bg-zinc-800 p-0.5 rounded-lg w-full mb-4">
@@ -434,7 +460,7 @@ export default function Explorer() {
               lastMainScrollTop = e.currentTarget.scrollTop;
             }
           }}
-          className="flex-1 overflow-y-auto px-4 py-2 md:pl-2 md:pr-4"
+          className="flex-1 overflow-y-auto p-8"
         >
           <div className="block md:hidden mb-4">
             <div className="flex items-center gap-2 mb-3">
@@ -489,7 +515,10 @@ export default function Explorer() {
               {filteredDevices.map((device) => {
                 const relatedVariants = (device.related || [])
                   .filter((ref) => ref.startsWith('device-variant:'))
-                  .map((ref) => ref.split(':')[1]);
+                  .map((ref) => {
+                    const variantId = ref.slice('device-variant:'.length);
+                    return variantNames.get(variantId) || variantId;
+                  });
 
                 return (
                   <Link to={`/device/${device.id}`} key={device.id} className="block">
