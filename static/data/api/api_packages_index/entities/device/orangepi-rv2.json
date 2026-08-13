@@ -1,0 +1,1 @@
+{"type": "device", "id": "orangepi-rv2", "file_path": "entities/device/orangepi-rv2.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:orangepi-rv2@2g", "device-variant:orangepi-rv2@4g", "device-variant:orangepi-rv2@8g"], "unique_among_type_during_traversal": true, "device": {"id": "orangepi-rv2", "display_name": "Orange Pi RV2"}}}
