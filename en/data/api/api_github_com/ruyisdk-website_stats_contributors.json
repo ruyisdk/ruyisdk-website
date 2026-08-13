@@ -109,7 +109,7 @@
       }
     },
     {
-      "total": 65,
+      "total": 66,
       "author": {
         "login": "a1gorhythm7",
         "id": 198067605,
@@ -127,7 +127,7 @@
       }
     },
     {
-      "total": 371,
+      "total": 373,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -137,7 +137,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-07T00:35:09.030Z",
+    "generatedAt": "2026-08-11T19:57:00.193Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-website/stats/contributors"
   }
 }
