@@ -14,14 +14,14 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 623
+      "contributions": 625
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 332
+      "contributions": 333
     },
     {
       "id": 29089388,
@@ -77,7 +77,7 @@
       "name": "a1gorhythm7",
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "github": "https://github.com/a1gorhythm7",
-      "contributions": 66
+      "contributions": 67
     },
     {
       "id": 62790279,
@@ -101,18 +101,18 @@
       "contributions": 45
     },
     {
+      "id": 95552651,
+      "name": "sisungo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
+      "github": "https://github.com/sisungo",
+      "contributions": 39
+    },
+    {
       "id": 9902643,
       "name": "imkiva",
       "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
       "github": "https://github.com/imkiva",
       "contributions": 39
-    },
-    {
-      "id": 95552651,
-      "name": "sisungo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
-      "github": "https://github.com/sisungo",
-      "contributions": 37
     },
     {
       "id": 132126433,
@@ -474,15 +474,15 @@
   ],
   "totals": {
     "contributors": 67,
-    "commits": 4759,
-    "pullRequests": 2179,
-    "issues": 107,
+    "commits": 4765,
+    "pullRequests": 2181,
+    "issues": 104,
     "stars": 123,
     "forks": 176,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-07T00:56:10.978Z",
+    "generatedAt": "2026-08-11T20:13:48.695Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
