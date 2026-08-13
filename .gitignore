@@ -11,7 +11,6 @@
 # Build-time generated data (do not commit)
 src/generated/latest_pm.json
 src/pages/Community/generated_contributors.json
-static/api/
 
 # Misc
 .DS_Store
