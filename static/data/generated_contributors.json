@@ -7,28 +7,28 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2216
+      "contributions": 2219
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 625
+      "contributions": 630
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 333
+      "contributions": 335
     },
     {
       "id": 29089388,
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 225
+      "contributions": 231
     },
     {
       "id": 54484233,
@@ -49,7 +49,7 @@
       "name": "U2FsdGVkX1",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 97
+      "contributions": 98
     },
     {
       "id": 22784008,
@@ -70,7 +70,7 @@
       "name": "pz9115",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
       "github": "https://github.com/pz9115",
-      "contributions": 73
+      "contributions": 74
     },
     {
       "id": 198067605,
@@ -105,14 +105,14 @@
       "name": "sisungo",
       "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
       "github": "https://github.com/sisungo",
-      "contributions": 39
+      "contributions": 41
     },
     {
       "id": 9902643,
       "name": "imkiva",
       "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
       "github": "https://github.com/imkiva",
-      "contributions": 39
+      "contributions": 40
     },
     {
       "id": 132126433,
@@ -126,7 +126,7 @@
       "name": "qjivy",
       "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
       "github": "https://github.com/qjivy",
-      "contributions": 24
+      "contributions": 25
     },
     {
       "id": 14993992,
@@ -185,18 +185,18 @@
       "contributions": 13
     },
     {
+      "id": 149551813,
+      "name": "SmulllLu",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/149551813?v=4",
+      "github": "https://github.com/SmulllLu",
+      "contributions": 12
+    },
+    {
       "id": 200599239,
       "name": "Rhapsodier",
       "avatarUrl": "https://avatars.githubusercontent.com/u/200599239?v=4",
       "github": "https://github.com/Rhapsodier",
       "contributions": 12
-    },
-    {
-      "id": 149551813,
-      "name": "SmulllLu",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/149551813?v=4",
-      "github": "https://github.com/SmulllLu",
-      "contributions": 11
     },
     {
       "id": 138308906,
@@ -234,6 +234,13 @@
       "contributions": 9
     },
     {
+      "id": 43837589,
+      "name": "joy2myself",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/43837589?v=4",
+      "github": "https://github.com/joy2myself",
+      "contributions": 9
+    },
+    {
       "id": 192414661,
       "name": "exceed-zk",
       "avatarUrl": "https://avatars.githubusercontent.com/u/192414661?v=4",
@@ -241,10 +248,10 @@
       "contributions": 9
     },
     {
-      "id": 43837589,
-      "name": "joy2myself",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/43837589?v=4",
-      "github": "https://github.com/joy2myself",
+      "id": 885662,
+      "name": "mengzhuo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/885662?v=4",
+      "github": "https://github.com/mengzhuo",
       "contributions": 8
     },
     {
@@ -255,10 +262,10 @@
       "contributions": 8
     },
     {
-      "id": 885662,
-      "name": "mengzhuo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/885662?v=4",
-      "github": "https://github.com/mengzhuo",
+      "id": 70937056,
+      "name": "RealFYang",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/70937056?v=4",
+      "github": "https://github.com/RealFYang",
       "contributions": 7
     },
     {
@@ -274,13 +281,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/168000702?v=4",
       "github": "https://github.com/ddsfda99",
       "contributions": 7
-    },
-    {
-      "id": 70937056,
-      "name": "RealFYang",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/70937056?v=4",
-      "github": "https://github.com/RealFYang",
-      "contributions": 6
     },
     {
       "id": 26591790,
@@ -474,15 +474,15 @@
   ],
   "totals": {
     "contributors": 67,
-    "commits": 4765,
-    "pullRequests": 2181,
-    "issues": 104,
-    "stars": 123,
+    "commits": 4791,
+    "pullRequests": null,
+    "issues": 101,
+    "stars": 122,
     "forks": 176,
     "watches": 27
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-11T20:13:48.695Z",
+    "generatedAt": "2026-08-20T19:43:11.161Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
