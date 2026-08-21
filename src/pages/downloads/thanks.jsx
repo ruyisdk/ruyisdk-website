@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
-import ReactDOM from 'react-dom';
+import { PageBackground } from '@site/src/components/Home/Background';
 
 // Keep this page self-contained, same rationale as /downloads.
 const COLOR_VARS = {
@@ -135,24 +135,6 @@ function LoadingDots() {
   );
 }
 
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
-      />
-    </div>,
-    document.body,
-  );
-}
 
 export default function DownloadThanksPage() {
   const [isClient, setIsClient] = useState(false);
@@ -208,7 +190,7 @@ export default function DownloadThanksPage() {
       title={translate({ id: 'downloads.thanks.meta.title', message: '感谢下载' })}
       description={translate({ id: 'downloads.thanks.meta.description', message: '感谢下载 RuyiSDK 包管理器' })}
     >
-      <PageBackground isClient={isClient} />
+      <PageBackground fixed isClient={isClient} />
 
       <div className="relative text-gray-800 font-inter">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">

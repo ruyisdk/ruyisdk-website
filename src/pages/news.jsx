@@ -2,7 +2,8 @@ import Translate, { translate } from "@docusaurus/Translate";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+
+import { PageBackground } from "@site/src/components/Home/Background";
 
 import WeChatLink from "@site/src/components/common/WeChatLink";
 import Articles from "@site/src/components/News/Articles";
@@ -36,7 +37,7 @@ const NewsPage = () => {
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <PageBackground isClient={isClient} />
+      <PageBackground fixed isClient={isClient} />
       <div className="relative overflow-visible py-8 text-gray-800 font-inter">
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (
@@ -109,22 +110,3 @@ const NewsPage = () => {
 
 export default NewsPage;
 
-// Background blobs similar to Contributors page
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
-      />
-    </div>,
-    document.body,
-  );
-}
