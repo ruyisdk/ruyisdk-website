@@ -8,6 +8,7 @@ import { PageBackground } from "@site/src/components/Home/Background";
 import WeChatLink from "@site/src/components/common/WeChatLink";
 import Articles from "@site/src/components/News/Articles";
 import Card from "@site/src/components/News/Card";
+import LoadingSkeleton from "@site/src/components/News/LoadingSkeleton";
 import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
@@ -42,21 +43,7 @@ const NewsPage = () => {
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (
             <div className="flex w-full justify-center items-center py-12">
-              <div className="skeleton-card w-full max-w-4xl">
-                <div className="skeleton-title skeleton w-2/5 mb-4"></div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <div className="skeleton-line skeleton mb-3 h-6"></div>
-                    <div className="skeleton-line skeleton mb-3 h-6 w-5/6"></div>
-                    <div className="skeleton-line skeleton mb-3 h-40"></div>
-                  </div>
-                  <div>
-                    <div className="skeleton-line skeleton mb-3 h-6 w-3/4"></div>
-                    <div className="skeleton-line skeleton mb-3 h-6 w-2/3"></div>
-                    <div className="skeleton-line skeleton mb-3 h-40"></div>
-                  </div>
-                </div>
-              </div>
+              <LoadingSkeleton type="page" />
             </div>
           ) : (
             <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row md:gap-x-8 md:gap-y-6">
