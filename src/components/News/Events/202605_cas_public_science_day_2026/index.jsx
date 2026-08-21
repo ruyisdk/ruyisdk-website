@@ -3,6 +3,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { PageBackground } from "@site/src/components/Home/Background";
 import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 import MainEn from "./mdx/main.en.mdx";
 import MainZhHans from "./mdx/main.zh-Hans.mdx";
@@ -31,10 +32,6 @@ const CONTENT = {
     en: QqEn,
   },
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 export default function Events() {
   const { i18n } = useDocusaurusContext();

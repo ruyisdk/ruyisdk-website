@@ -8,10 +8,7 @@ import styles from "./ArticlePage.module.css";
 
 import authorMetadata from "./authors.json";
 import tagMetadata from "./tags.json";
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en || contentMap["zh-Hans"];
-}
+import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 function resolveAuthorLabel(authorKey) {
   return authorMetadata?.[authorKey]?.name || authorKey;
