@@ -1,6 +1,6 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import MarkdownCard from '@site/src/components/About/MarkdownCard';
+import MarkdownCard from '@site/src/components/common/MarkdownCard';
 import CodeBlock from '@theme/CodeBlock';
 import { resolveLocalizedContent } from '@site/src/utils/locale';
 

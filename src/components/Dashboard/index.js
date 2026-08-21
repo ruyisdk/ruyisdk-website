@@ -4,7 +4,7 @@ import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useDataWithApiFallback from "@site/src/utils/hooks/useDataWithApiFallback";
 import { PageBackground } from "@site/src/components/Home/Background";
-import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import MarkdownCard from "@site/src/components/common/MarkdownCard";
 import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json";

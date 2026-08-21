@@ -2,7 +2,7 @@ import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { PageBackground } from "@site/src/components/Home/Background";
-import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import MarkdownCard from "@site/src/components/common/MarkdownCard";
 import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 import MainEn from "./mdx/main.en.mdx";

@@ -1,7 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Admonition from '@theme/Admonition';
-import MarkdownCard from '@site/src/components/About/MarkdownCard';
+import MarkdownCard from '@site/src/components/common/MarkdownCard';
 import { resolveLocalizedContent } from '@site/src/utils/locale';
 
 import GuideEn from './mdx/guide.en.mdx';
