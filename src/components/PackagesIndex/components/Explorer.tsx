@@ -72,11 +72,15 @@ const compareSemverDescending = (left: string, right: string) => {
 
 const sortPackagesByIdAndVersion = (items: PackageItem[]) =>
   [...items].sort((left, right) => {
-    const idComparison = left.package.localeCompare(right.package, undefined, { sensitivity: 'base' });
+    const idComparison = `${left.category}/${left.package}`.localeCompare(
+      `${right.category}/${right.package}`,
+      undefined,
+      { sensitivity: 'base' },
+    );
     if (idComparison !== 0) return idComparison;
     const versionComparison = compareSemverDescending(left.version, right.version);
     if (versionComparison !== 0) return versionComparison;
-    return left.category.localeCompare(right.category, undefined, { sensitivity: 'base' });
+    return 0;
   });
 
 let lastScrollTop = 0;
@@ -222,7 +226,12 @@ export default function Explorer() {
     () => sortByDisplayName(entities.filter((entity) => entity.type === 'cpu')),
     [entities],
   );
-  const devices = useMemo(() => entities.filter((entity) => entity.type === 'device'), [entities]);
+  const devices = useMemo(
+    () => [...entities].filter((entity) => entity.type === 'device').sort((left, right) =>
+      left.id.localeCompare(right.id, undefined, { sensitivity: 'base' }),
+    ),
+    [entities],
+  );
   const categories = useMemo(
     () => Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
       left.localeCompare(right, undefined, { sensitivity: 'base' }),
