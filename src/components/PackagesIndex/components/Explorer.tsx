@@ -25,6 +25,54 @@ const sortByDisplayName = (items: Entity[]) =>
     }),
   );
 
+const semverPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
+
+const comparePrerelease = (left: string | undefined, right: string | undefined) => {
+  if (left === right) return 0;
+  if (!left) return 1;
+  if (!right) return -1;
+
+  const leftParts = left.split('.');
+  const rightParts = right.split('.');
+  for (let index = 0; index < Math.max(leftParts.length, rightParts.length); index += 1) {
+    const leftPart = leftParts[index];
+    const rightPart = rightParts[index];
+    if (leftPart === rightPart) continue;
+    if (leftPart === undefined) return -1;
+    if (rightPart === undefined) return 1;
+    const leftNumber = /^\d+$/.test(leftPart);
+    const rightNumber = /^\d+$/.test(rightPart);
+    if (leftNumber && rightNumber) return Number(leftPart) - Number(rightPart);
+    if (leftNumber) return -1;
+    if (rightNumber) return 1;
+    return leftPart.localeCompare(rightPart, undefined, { sensitivity: 'base' });
+  }
+  return 0;
+};
+
+const compareSemverDescending = (left: string, right: string) => {
+  const leftMatch = left.match(semverPattern);
+  const rightMatch = right.match(semverPattern);
+  if (!leftMatch || !rightMatch) {
+    return right.localeCompare(left, undefined, { sensitivity: 'base' });
+  }
+
+  for (let index = 1; index <= 3; index += 1) {
+    const difference = Number(rightMatch[index]) - Number(leftMatch[index]);
+    if (difference !== 0) return difference;
+  }
+  return -comparePrerelease(leftMatch[4], rightMatch[4]);
+};
+
+const sortPackagesByIdAndVersion = (items: PackageItem[]) =>
+  [...items].sort((left, right) => {
+    const idComparison = left.package.localeCompare(right.package, undefined, { sensitivity: 'base' });
+    if (idComparison !== 0) return idComparison;
+    const versionComparison = compareSemverDescending(left.version, right.version);
+    if (versionComparison !== 0) return versionComparison;
+    return left.category.localeCompare(right.category, undefined, { sensitivity: 'base' });
+  });
+
 let lastScrollTop = 0;
 let lastMainScrollTop = 0;
 let lastActiveTab: 'devices' | 'packages' = 'devices';
@@ -280,12 +328,12 @@ export default function Explorer() {
   }, [devices, selectedArchs, selectedCpus, searchQuery, hierarchy]);
 
   const filteredPackages = useMemo(() => {
-    return packages.filter((pkg) => {
+    return sortPackagesByIdAndVersion(packages.filter((pkg) => {
       if (selectedCategories.size > 0 && !selectedCategories.has(pkg.category)) return false;
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
       return [pkg.package, pkg.category, pkg.version, pkg.desc || ''].join(' ').toLowerCase().includes(q);
-    });
+    }));
   }, [packages, selectedCategories, searchQuery]);
 
   const activeFiltersCount = activeTab === 'devices'
