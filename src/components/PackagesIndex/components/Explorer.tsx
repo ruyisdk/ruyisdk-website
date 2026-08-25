@@ -27,6 +27,12 @@ const sortByDisplayName = (items: Entity[]) =>
 
 const semverPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
 
+const compareNumericIdentifiers = (left: string, right: string) => {
+  if (left.length !== right.length) return left.length - right.length;
+  if (left === right) return 0;
+  return left < right ? -1 : 1;
+};
+
 const comparePrerelease = (left: string | undefined, right: string | undefined) => {
   if (left === right) return 0;
   if (!left) return 1;
@@ -42,10 +48,10 @@ const comparePrerelease = (left: string | undefined, right: string | undefined) 
     if (rightPart === undefined) return 1;
     const leftNumber = /^\d+$/.test(leftPart);
     const rightNumber = /^\d+$/.test(rightPart);
-    if (leftNumber && rightNumber) return Number(leftPart) - Number(rightPart);
+    if (leftNumber && rightNumber) return compareNumericIdentifiers(leftPart, rightPart);
     if (leftNumber) return -1;
     if (rightNumber) return 1;
-    return leftPart.localeCompare(rightPart, undefined, { sensitivity: 'base' });
+    return leftPart < rightPart ? -1 : 1;
   }
   return 0;
 };
@@ -58,7 +64,7 @@ const compareSemverDescending = (left: string, right: string) => {
   }
 
   for (let index = 1; index <= 3; index += 1) {
-    const difference = Number(rightMatch[index]) - Number(leftMatch[index]);
+    const difference = compareNumericIdentifiers(rightMatch[index], leftMatch[index]);
     if (difference !== 0) return difference;
   }
   return -comparePrerelease(leftMatch[4], rightMatch[4]);
