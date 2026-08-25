@@ -6,14 +6,10 @@ import Translate from '@docusaurus/Translate';
 import ExternalLinkIcon from '@theme/Icon/ExternalLink';
 
 import styles from './styles.module.css';
+import { externalLinks } from '@site/src/utils/locale';
 
 export default function Footer() {
-  const { i18n, siteConfig } = useDocusaurusContext();
-
-  function externalLinks(key) {
-    return siteConfig.customFields.externalLinks[key][i18n.currentLocale] ??
-      siteConfig.customFields.externalLinks[key].en;
-  }
+  const { siteConfig } = useDocusaurusContext();
 
   const links = [
     {

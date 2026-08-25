@@ -8,6 +8,7 @@
 import clsx from "clsx";
 
 import BackgroundAnimation from "./Background";
+import SectionContainer from "./common/SectionContainer";
 import MainDisplay from "./MainDisplay";
 import WeChatLink from "../common/WeChatLink";
 import NewsShowcase from "./NewsShowcase";
@@ -23,25 +24,25 @@ function Hero() {
     <div className="relative min-h-screen">
       <BackgroundAnimation />
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mt-4" >
+        <SectionContainer className="mt-4">
           <MainDisplay />
           <VideoIntro />
           <CardNews />
           {/*<DemoBoardsDisplay />*/}
-        </div>
+        </SectionContainer>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
+        <SectionContainer className="border-t-2 border-black/5">
           <DevBoards />
-        </div>
+        </SectionContainer>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
+        <SectionContainer className="border-t-2 border-black/5">
           <RuyiInLive />
           <NewsShowcase />
-        </div>
+        </SectionContainer>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mb-18 border-t-2 border-black/5">
+        <SectionContainer className="border-t-2 border-black/5 mb-18">
           <Partners />
-        </div>
+        </SectionContainer>
 
     </div>
   );
