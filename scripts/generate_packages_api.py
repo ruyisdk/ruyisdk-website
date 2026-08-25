@@ -82,10 +82,10 @@ def load_data(repo_path: str):
     
     entities_dir = Path(repo_path) / "entities"
     if entities_dir.exists():
-        for type_dir in entities_dir.iterdir():
+        for type_dir in sorted(entities_dir.iterdir()):
             if not type_dir.is_dir() or type_dir.name.startswith("_"):
                 continue
-            for file_path in type_dir.glob("*.toml"):
+            for file_path in sorted(type_dir.glob("*.toml")):
                 with open(file_path, "rb") as f:
                     try:
                         data = tomllib.load(f)
@@ -103,13 +103,13 @@ def load_data(repo_path: str):
 
     packages_dir = Path(repo_path) / "packages"
     if packages_dir.exists():
-        for cat_dir in packages_dir.iterdir():
+        for cat_dir in sorted(packages_dir.iterdir()):
             if not cat_dir.is_dir():
                 continue
-            for pkg_dir in cat_dir.iterdir():
+            for pkg_dir in sorted(cat_dir.iterdir()):
                 if not pkg_dir.is_dir():
                     continue
-                for file_path in pkg_dir.glob("*.toml"):
+                for file_path in sorted(pkg_dir.glob("*.toml")):
                     with open(file_path, "rb") as f:
                         try:
                             data = tomllib.load(f)
