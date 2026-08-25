@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -27,9 +27,8 @@ jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
-    environment: cloudflare-pages
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -40,11 +39,8 @@ jobs:
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v4.0.0
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./build --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT_NAME }}
-          # Optional: Enable this if you want to have GitHub Deployments triggered
-          # gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
