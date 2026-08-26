@@ -3,7 +3,7 @@ import cardS from "./CardS"
 import cardM from "./CardM"
 import cardL from "./CardL"
 
-import { externalLinks } from "@site/src/utils/locale";
+import { externalLinks } from "../common/byLocale";
 
 function ruyiCard() {
 

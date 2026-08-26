@@ -1,8 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import MarkdownCard from '@site/src/components/common/MarkdownCard';
+import MarkdownCard from '@site/src/components/About/MarkdownCard';
 import CodeBlock from '@theme/CodeBlock';
-import { resolveLocalizedContent } from '@site/src/utils/locale';
 
 import InstallEn from './mdx/install.en.mdx';
 import InstallZhHans from './mdx/install.zh-Hans.mdx';
@@ -11,6 +10,10 @@ const INSTALL_CONTENT = {
   'zh-Hans': InstallZhHans,
   en: InstallEn,
 };
+
+function resolveLocalizedContent(contentMap, locale) {
+  return contentMap[locale] || contentMap.en;
+}
 
 function PreCodeBlock(props) {
   const children = React.Children.toArray(props.children);

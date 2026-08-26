@@ -1,0 +1,35 @@
+/* Useless. See: theme/Footer
+
+.footer {
+    background-color: #fff !important;
+    color: #000 !important;
+
+    &.footer--dark {
+        --ifm-footer-background-color: var(--deepdark);
+    }
+    &.footer--light {
+        background-color: #fff !important;
+        color: #000 !important;
+    }
+
+    a {
+        color: #000 !important;
+
+        &:hover,
+        &:focus {
+            color: #333 !important;
+        }
+    }
+
+    h2,
+    h3,
+    h4 {
+        color: #000 !important;
+    }
+
+    .footer__link-list-item::before,
+    .footer__item-separator {
+        background-color: #000 !important;
+    }
+}
+*/

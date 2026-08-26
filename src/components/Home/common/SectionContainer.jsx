@@ -2,14 +2,17 @@ import React from 'react';
 
 /**
  * SectionContainer
- * Unified wrapper for homepage sections: consistent max width, horizontal
- * paddings and vertical rhythm. Extra utilities (borders, spacing, etc.)
- * can be passed through className.
+ * Unified wrapper for homepage sections to ensure consistent max width,
+ * horizontal paddings, rounded corners on wide screens, and background.
  */
 export default function SectionContainer({ children, className = '' }) {
   return (
-    <div className={`max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 ${className}`}>
-      {children}
+    <div className="w-full bg-[#f5f5f7]">
+      <div className="w-full mx-auto px-4 md:px-8">
+        <div className={`w-full mx-auto max-w-[90rem] xl:rounded-[0.625rem] ${className}`}>
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

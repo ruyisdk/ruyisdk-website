@@ -2,13 +2,11 @@ import Translate, { translate } from "@docusaurus/Translate";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
 import React, { useState, useEffect } from "react";
-
-import { PageBackground } from "@site/src/components/Home/Background";
+import ReactDOM from "react-dom";
 
 import WeChatLink from "@site/src/components/common/WeChatLink";
 import Articles from "@site/src/components/News/Articles";
 import Card from "@site/src/components/News/Card";
-import LoadingSkeleton from "@site/src/components/News/LoadingSkeleton";
 import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
@@ -38,12 +36,26 @@ const NewsPage = () => {
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <PageBackground fixed isClient={isClient} />
+      <PageBackground isClient={isClient} />
       <div className="relative overflow-visible py-8 text-gray-800 font-inter">
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (
             <div className="flex w-full justify-center items-center py-12">
-              <LoadingSkeleton type="page" />
+              <div className="skeleton-card w-full max-w-4xl">
+                <div className="skeleton-title skeleton w-2/5 mb-4"></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <div className="skeleton-line skeleton mb-3 h-6"></div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-5/6"></div>
+                    <div className="skeleton-line skeleton mb-3 h-40"></div>
+                  </div>
+                  <div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-3/4"></div>
+                    <div className="skeleton-line skeleton mb-3 h-6 w-2/3"></div>
+                    <div className="skeleton-line skeleton mb-3 h-40"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row md:gap-x-8 md:gap-y-6">
@@ -97,3 +109,22 @@ const NewsPage = () => {
 
 export default NewsPage;
 
+// Background blobs similar to Contributors page
+function PageBackground({ isClient }) {
+  if (!isClient) return null;
+  return ReactDOM.createPortal(
+    <div>
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 rounded-full -z-10"
+        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
+      />
+      <div
+        aria-hidden
+        className="fixed bottom-0 right-0 rounded-full -z-10"
+        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
+      />
+    </div>,
+    document.body,
+  );
+}
