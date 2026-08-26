@@ -1,7 +1,7 @@
 
 import Translate from "@docusaurus/Translate";
 
-import { byLocale } from "@site/src/utils/locale"
+import { byLocale } from "../common/byLocale"
 
 export default function cardNews(card) {
   return (

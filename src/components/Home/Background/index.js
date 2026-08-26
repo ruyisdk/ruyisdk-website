@@ -1,6 +1,4 @@
 
-import { createPortal } from 'react-dom';
-
 // A decorative background animation with moving blobs.
 const HomeBackground = () => {
 
@@ -26,21 +24,8 @@ const HomeBackground = () => {
   );
 };
 
-const PageBackground = ({ fixed = false, isClient = true }) => {
-  const blobs = fixed ? (
-    <>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
-      />
-    </>
-  ) : (
+const PageBackground = () => {
+  return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <div
         aria-hidden
@@ -54,10 +39,6 @@ const PageBackground = ({ fixed = false, isClient = true }) => {
       />
     </div>
   );
-
-  if (!fixed) return blobs;
-  if (typeof document === 'undefined' || !isClient) return null;
-  return createPortal(blobs, document.body);
 };
 
 export default HomeBackground;

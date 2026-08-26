@@ -1,21 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback';
-import {
-  COLOR_VARS,
-  buttonStyle,
-  detectSource,
-  extractFileName,
-  headerGradientStyle,
-  safeParseUrl,
-} from './utils';
 import latestPmBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_pm.json';
 import latestVscodeBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_vscode.json';
 import latestEclipseBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_eclipse.json';
 import DownloadInstallScript from './DownloadInstallScript';
 
+export const COLOR_VARS = {
+  gold: 'var(--ruyi-gold, var(--ifm-color-warning))',
+  goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
+  blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
+  blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
+  eclipse: '#5f3dc4',
+  contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
+};
+
 const ARCH_ORDER = ['x86_64', 'aarch64', 'riscv64', 'universal'];
+const KNOWN_LOCALES = new Set(['zh-Hans', 'en', 'de']);
 
 const PM_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-pm';
 const VSCODE_RELEASE_LATEST_API = 'https://api.ruyisdk.cn/releases/latest-ide/vscode';
@@ -36,6 +37,74 @@ const IDE_VSCODE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-vscode-exten
 const ECLIPSE_MARKETPLACE_URL = 'https://marketplace.eclipse.org/content/ruyisdk';
 const ECLIPSE_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/';
 const IDE_ECLIPSE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases';
+
+function headerGradientStyle(accent) {
+  if (accent === 'gold') {
+    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
+  }
+  if (accent === 'eclipse') {
+    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
+  }
+  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
+}
+
+function latestButtonStyle(accent) {
+  if (accent === 'gold') {
+    return {
+      backgroundColor: 'rgba(232, 183, 22, 0.18)',
+      color: '#8c6b00',
+      boxShadow: 'none',
+    };
+  }
+  if (accent === 'eclipse') {
+    return {
+      backgroundColor: 'rgba(95, 61, 196, 0.14)',
+      color: COLOR_VARS.eclipse,
+      boxShadow: 'none',
+    };
+  }
+  return {
+    backgroundColor: 'rgba(45, 120, 255, 0.14)',
+    color: COLOR_VARS.blue,
+    boxShadow: 'none',
+  };
+}
+
+function safeParseUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function withLocalePrefix(path, localePrefix) {
+  if (!path.startsWith('/')) return `${localePrefix}/${path}`;
+  return `${localePrefix}${path}`;
+}
+
+function getLocalePrefixFromPathname(pathname) {
+  const segments = (pathname || '').split('/').filter(Boolean);
+  const first = segments[0];
+  return KNOWN_LOCALES.has(first) ? `/${first}` : '';
+}
+
+export function detectSource(url) {
+  const parsed = safeParseUrl(url);
+  if (!parsed) return 'unknown';
+  if (parsed.hostname.includes('mirror.iscas.ac.cn')) return 'mirror';
+  if (parsed.hostname.includes('github.com')) return 'github';
+  return 'unknown';
+}
+
+export function extractFileName(url) {
+  const parsed = safeParseUrl(url);
+  if (!parsed) return '';
+  const parts = parsed.pathname.split('/').filter(Boolean);
+  return decodeURIComponent(parts[parts.length - 1] || '');
+}
 
 function pickPreferredUrl(urls) {
   if (!Array.isArray(urls) || urls.length === 0) return '';
@@ -167,7 +236,10 @@ function DownloadButton({
   const className = variant === 'primary'
     ? 'primary-button text-sm font-semibold whitespace-nowrap'
     : 'secondary-button text-sm font-semibold whitespace-nowrap';
-  const style = buttonStyle(variant, accent);
+  const primaryStyle = latestButtonStyle(accent);
+  const style = variant === 'primary'
+    ? { ...primaryStyle, background: primaryStyle.backgroundColor }
+    : { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
   const disabledStyle = disabled ? { opacity: 0.55, cursor: 'not-allowed', transform: 'none' } : {};
 
   if (href) {
@@ -522,7 +594,10 @@ export default function DownloadCards({
     product: '',
   });
 
-  const thanksPath = useBaseUrl('/downloads/thanks');
+  const localePrefix = useMemo(() => {
+    if (typeof window === 'undefined') return '';
+    return getLocalePrefixFromPathname(window.location.pathname);
+  }, []);
 
   const handleOpenLatest = (payload) => {
     setModalState({
@@ -543,7 +618,7 @@ export default function DownloadCards({
     if (!item?.url) return;
 
     const source = item.source || detectSource(item.url);
-    const downloadPath = thanksPath;
+    const downloadPath = withLocalePrefix('/downloads/thanks', localePrefix);
     const query = new URLSearchParams({
       source,
       arch: arch || item.arch || '',

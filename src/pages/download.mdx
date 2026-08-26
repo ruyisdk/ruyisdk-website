@@ -1,0 +1,131 @@
+import ReleaseProvider from '@site/src/components/Docs/LatestReleases';
+import ArchSelector from '@site/src/components/Docs/LatestReleases/ArchSelector';
+import CodeBlock from '@site/src/components/Docs/CodeBlock';
+
+<ReleaseProvider>
+  <>
+
+::::tip
+下载页面已经更新，移步[新下载页面](/downloads)获取最新下载信息。
+::::
+
+::::tip
+下载并使用 RuyiSDK，即表示您同意许可条款和[隐私声明](https://ruyisdk.org/docs/legal/privacyPolicy/)。
+::::
+
+## 下载 RuyiSDK 包管理器
+
+Ruyi 包管理器当前发布了 x86_64、riscv64 和 aarch64 三种架构的二进制。
+
+### 使用安装脚本（推荐）
+
+安装脚本会自动识别系统架构，优先从 ISCAS 镜像下载最新稳定版，并安装到 ``~/.local/bin/ruyi``：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+`} />
+
+如需安装到系统目录，请使用 ``sudo`` 执行脚本并显式指定安装路径：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+`} />
+
+### 手动下载
+
+手动下载时，可以运行 ``uname -m`` 检查系统架构并下载对应的二进制。
+
+<ArchSelector />
+
+::::tip
+若页面没有正常显示下载链接，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) 以获取更新的版本。您也可以选择从 [GitHub releases](https://github.com/ruyisdk/ruyi/releases) 下载。
+::::
+
+### 安装 RuyiSDK 包管理器
+
+上方已根据您的架构自动生成命令。确保二进制安装为 ``ruyi`` 并位于 ``PATH`` 中的目录。
+
+::::tip
+注意二进制文件名必须为 ``ruyi``
+::::
+
+验证安装：
+
+<CodeBlock lang="bash" code={`
+$ ruyi version
+`} />
+
+若命令执行并正常打印了 Copyright 信息则安装已经成功；若出现了非预期的失败则需要检查安装过程和系统环境。
+
+### 启用自动补全
+
+RuyiSDK 包管理器已经支持 ``bash`` 和 ``zsh`` 的自动补全功能。若要使用命令行自动补全功能，可以在对应的 shell profile（如 ``.bashrc`` 或 ``.zshrc``）引入自动补全脚本：
+
+对于 ``bash`` 用户：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+对于 ``zsh`` 用户：
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+#compdef ruyi
+eval "$(ruyi --output-completion-script=zsh)"
+`} />
+
+## 下载 RuyiSDK IDE
+
+RuyiSDK IDE 同样发布了 x86_64、 riscv64 和 aarch64 三种架构的二进制。
+
+可以下载适合架构的 tarball：
+
+<CodeBlock lang="bash" code={`
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+::::tip
+文档具有时效性，如示范链接指向了旧版本，您可以浏览 [RuyiSDK 镜像](https://mirror.iscas.ac.cn/ruyisdk/ide/) 以获取更新的版本。
+::::
+
+### 安装 RuyiSDK IDE
+
+
+下面演示将 RuyiSDK IDE 安装至 ``/opt/ruyisdk`` 目录。
+
+首先建立目录：
+
+<CodeBlock lang="bash" code={`
+$ sudo mkdir /opt/ruyisdk
+`} />
+
+解包，这个步骤依赖 tar 和 gunzip，已经下载好的 tarball 路径请依据实际更改：
+
+<CodeBlock lang="bash" code={`
+$ cd /opt/ruyisdk
+$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+运行 RuyiSDK IDE：
+
+<CodeBlock lang="bash" code={`
+$ /opt/ruyisdk/ruyisdk/ruyisdk
+`} />
+
+除了 IDE 本身，您还需要下载 RuyiSDK IDE 插件。目前插件整合到 RuyiSDK IDE 的工程工作还在完善，当前需要手动下载插件并安装，未来我们会完善相关工程，提供更加便捷的安装和使用方式。当前您可以参考下方的插件使用说明来安装和使用。
+
+插件使用说明：
+
++ 从 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/)  或者[RuyiSDK 软件源](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/) 下载最新插件包
++ 参考 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/) 页面中对应版本的安装说明进行安装
+
+### 安装 RuyiSDK VSCode 插件
+
+从 [GitHub Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases) 或者[RuyiSDK 软件源](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/) 下载最新 .vsix，在 VS Code 或者 VS Codium 中选择 “从 VSIX 安装”。
+
+## 开始使用
+
+阅读[文档](/docs/intro)以了解 Ruyi 的强大功能！
+
+  </>
+</ReleaseProvider>
