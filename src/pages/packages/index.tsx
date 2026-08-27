@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import '@site/src/css/packages-index.css';
 
 export default function PackagesIndexPage() {
   return (

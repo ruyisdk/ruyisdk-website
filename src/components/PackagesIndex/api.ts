@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const API_PATH = 'data/api/api_packages_index';
 let apiBaseUrl: string | undefined;
 
@@ -14,24 +12,36 @@ const getApiUrl = (path: string) => {
   return `${apiBaseUrl}${path}`;
 };
 
+const fetchJson = async <T = any>(url: string): Promise<T> => {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+  }
+  return res.json();
+};
+
 export const getEntities = async (type?: string, query?: string) => {
-  const res = await axios.get(getApiUrl('/entities.json'));
-  let data = res.data;
+  let data = await fetchJson<any[]>(getApiUrl('/entities.json'));
   if (type) {
     data = data.filter((e: any) => e.type === type);
   }
   if (query) {
     const q = query.toLowerCase();
-    data = data.filter((e: any) => 
-      e.id.toLowerCase().includes(q) || e.display_name.toLowerCase().includes(q)
+    data = data.filter(
+      (e: any) =>
+        e.id.toLowerCase().includes(q) ||
+        e.display_name.toLowerCase().includes(q),
     );
   }
   return data;
 };
 
-export const getPackages = async (category?: string, pkg?: string, query?: string) => {
-  const res = await axios.get(getApiUrl('/packages.json'));
-  let data = res.data;
+export const getPackages = async (
+  category?: string,
+  pkg?: string,
+  query?: string,
+) => {
+  let data = await fetchJson<any[]>(getApiUrl('/packages.json'));
   if (category) {
     data = data.filter((p: any) => p.category === category);
   }
@@ -40,24 +50,29 @@ export const getPackages = async (category?: string, pkg?: string, query?: strin
   }
   if (query) {
     const q = query.toLowerCase();
-    data = data.filter((p: any) => 
-      p.package.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q)
+    data = data.filter(
+      (p: any) =>
+        p.package.toLowerCase().includes(q) ||
+        (p.desc || '').toLowerCase().includes(q),
     );
   }
   return data;
 };
 
 export const getHierarchy = async () => {
-  const res = await axios.get(getApiUrl('/hierarchy.json'));
-  return res.data;
+  return await fetchJson<Record<string, string[]>>(getApiUrl('/hierarchy.json'));
 };
 
 export const getEntityDetail = async (type: string, id: string) => {
-  const res = await axios.get(getApiUrl(`/entities/${type}/${id}.json`));
-  return res.data;
+  return await fetchJson<any>(getApiUrl(`/entities/${type}/${id}.json`));
 };
 
-export const getPackageDetail = async (category: string, pkg: string, version: string) => {
-  const res = await axios.get(getApiUrl(`/packages/${category}/${pkg}/${version}.json`));
-  return res.data;
+export const getPackageDetail = async (
+  category: string,
+  pkg: string,
+  version: string,
+) => {
+  return await fetchJson<any>(
+    getApiUrl(`/packages/${category}/${pkg}/${version}.json`),
+  );
 };

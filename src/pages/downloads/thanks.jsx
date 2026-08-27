@@ -1,55 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
-import ReactDOM from 'react-dom';
-
-// Keep this page self-contained, same rationale as /downloads.
-const COLOR_VARS = {
-  gold: 'var(--ruyi-gold, var(--ifm-color-warning))',
-  goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
-  blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
-  blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
-  eclipse: '#5f3dc4',
-  contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
-};
-
-function headerGradientStyle(accent) {
-  if (accent === 'gold') {
-    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
-  }
-  if (accent === 'eclipse') {
-    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
-  }
-  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
-}
-
-function buttonStyle(variant, accent) {
-  if (variant === 'secondary') {
-    return { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
-  }
-  if (accent === 'gold') {
-    return {
-      backgroundColor: 'rgba(232, 183, 22, 0.18)',
-      background: 'rgba(232, 183, 22, 0.18)',
-      color: '#8c6b00',
-      boxShadow: 'none',
-    };
-  }
-  if (accent === 'eclipse') {
-    return {
-      backgroundColor: 'rgba(95, 61, 196, 0.14)',
-      background: 'rgba(95, 61, 196, 0.14)',
-      color: COLOR_VARS.eclipse,
-      boxShadow: 'none',
-    };
-  }
-  return {
-    backgroundColor: 'rgba(45, 120, 255, 0.14)',
-    background: 'rgba(45, 120, 255, 0.14)',
-    color: COLOR_VARS.blue,
-    boxShadow: 'none',
-  };
-}
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import { PageBackground } from '@site/src/components/Home/Background';
+import useIsClient from '@site/src/utils/hooks/useIsClient';
+import {
+  COLOR_VARS,
+  buttonStyle,
+  headerGradientStyle,
+  safeParseUrl,
+} from '@site/src/components/Downloads/utils';
 
 function getDownloadAccent(product, download) {
   if (product === 'eclipse') return 'eclipse';
@@ -74,16 +34,6 @@ function iconColor(accent) {
   return COLOR_VARS.blueDark;
 }
 
-function safeParseUrl(url) {
-  try {
-    const parsed = new URL(url);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
 function triggerDownload(url) {
   const parsed = safeParseUrl(url);
   if (!parsed) return;
@@ -105,18 +55,6 @@ function triggerDownload(url) {
   }, 15_000);
 }
 
-function getLocalePrefixFromPathname(pathname) {
-  const segments = (pathname || '').split('/').filter(Boolean);
-  const known = new Set(['zh-Hans', 'en', 'de']);
-  const first = segments[0];
-  return known.has(first) ? `/${first}` : '';
-}
-
-function withLocalePrefix(path, localePrefix) {
-  if (!path.startsWith('/')) return `${localePrefix}/${path}`;
-  return `${localePrefix}${path}`;
-}
-
 function LoadingDots() {
   return (
     <>
@@ -135,32 +73,10 @@ function LoadingDots() {
   );
 }
 
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
-      />
-    </div>,
-    document.body,
-  );
-}
 
 export default function DownloadThanksPage() {
-  const [isClient, setIsClient] = useState(false);
+  const isClient = useIsClient();
   const [retryEnabled, setRetryEnabled] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const params = useMemo(() => {
     if (!isClient || typeof window === 'undefined') return null;
@@ -177,10 +93,7 @@ export default function DownloadThanksPage() {
   const accent = getDownloadAccent(product, download);
   const installDocsPath = getInstallDocsPath(accent);
 
-  const localePrefix = useMemo(() => {
-    if (typeof window === 'undefined') return '';
-    return getLocalePrefixFromPathname(window.location.pathname);
-  }, []);
+  const installDocsHref = useBaseUrl(installDocsPath);
 
   useEffect(() => {
     if (!isClient) return;
@@ -208,7 +121,7 @@ export default function DownloadThanksPage() {
       title={translate({ id: 'downloads.thanks.meta.title', message: '感谢下载' })}
       description={translate({ id: 'downloads.thanks.meta.description', message: '感谢下载 RuyiSDK 包管理器' })}
     >
-      <PageBackground isClient={isClient} />
+      <PageBackground fixed isClient={isClient} />
 
       <div className="relative text-gray-800 font-inter">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">
@@ -297,7 +210,7 @@ export default function DownloadThanksPage() {
                     )}
 
                     <a
-                      href={withLocalePrefix(installDocsPath, localePrefix)}
+                      href={installDocsHref}
                       className="primary-button text-sm font-semibold whitespace-nowrap"
                       style={buttonStyle('primary', accent)}
                     >

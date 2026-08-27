@@ -1,11 +1,11 @@
 
-import cardS from "./CardS"
-import cardM from "./CardM"
-import cardL from "./CardL"
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
-import { externalLinks } from "../common/byLocale";
+import cardS from "./CardS";
 
-function ruyiCard() {
+import { getExternalLink } from "@site/src/utils/locale";
+
+function ruyiCard(locale, externalLinkMap) {
 
   const cards = [
     {
@@ -29,7 +29,7 @@ function ruyiCard() {
         en: "RISC-V Board and OS Support Matrix"
       },
       Image: "img/home/cardnews/home-cardnews-matrix.webp",
-      Links: externalLinks("support-matrix"),
+      Links: getExternalLink(externalLinkMap, "support-matrix", locale),
     },
     {
       index: 3,
@@ -69,14 +69,18 @@ function ruyiCard() {
     },
   ];
 
-  return cardS(cards);
+  return cardS(cards, locale);
 }
 
 
 export default function CardNews() {
+  const { i18n, siteConfig } = useDocusaurusContext();
+  const locale = i18n.currentLocale;
+  const externalLinkMap = siteConfig.customFields.externalLinks;
+
   return (
     <div className={`flex flex-wrap gap-4 w-full`}>
-      {ruyiCard()}
+      {ruyiCard(locale, externalLinkMap)}
     </div>
   );
 }
