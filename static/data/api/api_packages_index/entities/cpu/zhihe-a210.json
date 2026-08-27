@@ -1,0 +1,1 @@
+{"type": "cpu", "id": "zhihe-a210", "file_path": "entities/cpu/zhihe-a210.toml", "data": {"ruyi-entity": "v0", "related": ["uarch:xuantie-c920v2"], "unique_among_type_during_traversal": true, "cpu": {"id": "zhihe-a210", "display_name": "Zhihe Computing A210"}}}
