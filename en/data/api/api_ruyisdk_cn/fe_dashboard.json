@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-08-25T16:00:10.174362Z",
+  "last_updated": "2026-08-28T00:59:59.214342Z",
   "downloads": {
     "total": 59308
   },
   "pm_downloads": {
-    "total": 88232
+    "total": 88568
   },
   "other_categories_downloads": {
     "3rdparty": {
@@ -22,13 +22,13 @@
       "total": 59308
     },
     "pm:github": {
-      "total": 6392
+      "total": 6472
     },
     "pm:mirror": {
       "total": 72127
     },
     "pm:pypi": {
-      "total": 9713
+      "total": 9969
     },
     "3rdparty": {
       "total": 23557
@@ -53,12 +53,12 @@
     }
   },
   "installs": {
-    "total": 24579
+    "total": 30798
   },
   "top_packages": {},
   "top_commands": {
     "ruyi update": {
-      "total": 27693
+      "total": 33909
     },
     "ruyi admin format-manifest": {
       "total": 20698
@@ -94,8 +94,8 @@
       "watchers_count": 66,
       "forks_count": 287,
       "stars_count": 238,
-      "prs_count": 2764,
-      "issues_count": 646,
+      "prs_count": 2776,
+      "issues_count": 650,
       "contributors_count": 100,
       "detail_by_repo": [
         {
@@ -103,7 +103,7 @@
           "watchers_count": 2,
           "forks_count": 16,
           "stars_count": 2,
-          "prs_count": 320,
+          "prs_count": 321,
           "issues_count": 0,
           "contributors_count": 19
         },
@@ -230,7 +230,7 @@
           "forks_count": 19,
           "stars_count": 38,
           "prs_count": 284,
-          "issues_count": 206,
+          "issues_count": 208,
           "contributors_count": 8
         },
         {
@@ -239,7 +239,7 @@
           "forks_count": 2,
           "stars_count": 6,
           "prs_count": 6,
-          "issues_count": 71,
+          "issues_count": 72,
           "contributors_count": 2
         },
         {
@@ -256,7 +256,7 @@
           "watchers_count": 2,
           "forks_count": 23,
           "stars_count": 8,
-          "prs_count": 492,
+          "prs_count": 497,
           "issues_count": 71,
           "contributors_count": 19
         },
@@ -328,7 +328,7 @@
           "watchers_count": 4,
           "forks_count": 36,
           "stars_count": 59,
-          "prs_count": 334,
+          "prs_count": 335,
           "issues_count": 50,
           "contributors_count": 25
         },
@@ -346,7 +346,7 @@
           "watchers_count": 6,
           "forks_count": 41,
           "stars_count": 42,
-          "prs_count": 272,
+          "prs_count": 274,
           "issues_count": 6,
           "contributors_count": 0
         },
@@ -364,7 +364,7 @@
           "watchers_count": 3,
           "forks_count": 2,
           "stars_count": 0,
-          "prs_count": 99,
+          "prs_count": 100,
           "issues_count": 20,
           "contributors_count": 3
         },
@@ -463,8 +463,8 @@
           "watchers_count": 1,
           "forks_count": 11,
           "stars_count": 2,
-          "prs_count": 178,
-          "issues_count": 55,
+          "prs_count": 179,
+          "issues_count": 56,
           "contributors_count": 11
         },
         {
@@ -499,7 +499,7 @@
           "watchers_count": 0,
           "forks_count": 4,
           "stars_count": 1,
-          "prs_count": 32,
+          "prs_count": 33,
           "issues_count": 0,
           "contributors_count": 0
         },
@@ -516,7 +516,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-25T19:43:29.013Z",
+    "generatedAt": "2026-08-28T02:44:09.796Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }

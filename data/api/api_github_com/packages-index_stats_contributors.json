@@ -64,7 +64,7 @@
       }
     },
     {
-      "total": 84,
+      "total": 87,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -83,7 +83,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-25T19:26:35.804Z",
+    "generatedAt": "2026-08-28T02:27:17.992Z",
     "source": "https://api.github.com/repos/ruyisdk/packages-index/stats/contributors"
   }
 }
