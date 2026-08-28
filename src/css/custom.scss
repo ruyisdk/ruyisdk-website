@@ -1,6 +1,5 @@
 @import "./homepage.css";
 @import "./button.css";
-@import "./packages-index.css";
 
 :root {
   // Document Infima variables https://github.com/facebook/docusaurus/issues/3955
@@ -117,7 +116,6 @@ html[data-theme="light"] {
 }
 
 @import "./navbar.css";
-@import "./footer.css";
 
 .hover-wechat-link {
   position: relative;
@@ -367,4 +365,3 @@ html[data-theme="dark"] .hash-link {
 }
 
 @import "./docs-sidebar.css";
-@import "./news-skeleton.css";

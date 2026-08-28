@@ -1,18 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import style from "./styles.module.css"
 
-// A terminal simulation that cycles through a set of commands.
-const Terminal = () => {
-  const [currentCommand, setCurrentCommand] = useState(0);
-  const [typing, setTyping] = useState(true);
-  const [text, setText] = useState("");
-  const terminalRef = useRef(null);
-
-  // Define commands and their outputs for the terminal animation.
-  const commands = [
-    {
-      command: "ruyi update",
-      output: `There are 5 new news item(s):
+// Define commands and their outputs for the terminal animation.
+const COMMANDS = [
+  {
+    command: "ruyi update",
+    output: `There are 5 new news item(s):
  No.   ID                             Title
 ─────────────────────────────────────────────────────────
  1     2025-02-25-ruyi-0.28           Release notes for RuyiSDK 0.28
@@ -21,10 +14,10 @@ const Terminal = () => {
  4     2025-04-08-ruyi-0.31           Release notes for RuyiSDK 0.31
  5     2025-04-22-ruyi-0.32           Release notes for RuyiSDK 0.32
 You can read them with ruyi news read.`,
-    },
-    {
-      command: "ruyi list --name-contains 'riscv'",
-      output: `List of available packages:
+  },
+  {
+    command: "ruyi list --name-contains 'riscv'",
+    output: `List of available packages:
 * board-image/openkylin-riscv64-sifive-unmatched
   - 1.0.0 (latest)
 * board-image/freebsd-riscv64-mini-live
@@ -43,21 +36,28 @@ You can read them with ruyi news read.`,
 * emulator/qemu-user-riscv-upstream
   - 8.2.0-ruyi.20240128 (latest)
   - 8.1.2-ruyi.20231121 ()`,
-    },
-    {
-      command: "ruyi install emulator/qemu-user-riscv-upstream",
-      output: `info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst to /home/we/.cache/ruyi/distfiles/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst
+  },
+  {
+    command: "ruyi install emulator/qemu-user-riscv-upstream",
+    output: `info: downloading https://mirror.iscas.ac.cn/ruyisdk/dist/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst to /home/we/.cache/ruyi/distfiles/qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 14.5M  100 14.5M    0     0  1116k       0  0:00:13  0:00:13 --:--:-- 1143k
 info: extracting qemu-user-riscv-upstream-8.2.0.ruyi-20240128.amd64.tar.zst for package qemu-user-riscv-upstream-8.2.0-ruyi.20240128
 info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/we/.local/share/ruyi/binaries/x86_64/qemu-user-riscv-upstream-8.2.0-ruyi.20240128`,
-    },
-  ];
+  },
+];
+
+// A terminal simulation that cycles through a set of commands.
+const Terminal = () => {
+  const [currentCommand, setCurrentCommand] = useState(0);
+  const [typing, setTyping] = useState(true);
+  const [text, setText] = useState("");
+  const terminalRef = useRef(null);
 
   // Animation for typing and showing output
   useEffect(() => {
-    if (currentCommand >= commands.length) {
+    if (currentCommand >= COMMANDS.length) {
       // Loop back to the first command
       setTimeout(() => {
         setText("");
@@ -67,7 +67,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/we
       return;
     }
 
-    const cmd = commands[currentCommand];
+    const cmd = COMMANDS[currentCommand];
     const prefix = "we@RuyiSDK ~ $ ";
 
     if (typing) {

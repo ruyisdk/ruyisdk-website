@@ -1,23 +1,13 @@
-﻿import React from 'react';
+import React from 'react';
 import Translate from '@docusaurus/Translate';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
+import { resolveImg } from '@site/src/utils/img';
 
 const NewsShowcase = () => {
   const { siteConfig } = useDocusaurusContext();
   const baseUrl = siteConfig?.baseUrl || '/';
   const pluginData = usePluginData('docusaurus-news-generator');
-
-  const resolveImg = (src) => {
-    if (!src) return null;
-    try {
-      new URL(src);
-      return src;
-    } catch {}
-    if (src.startsWith('/')) return baseUrl + src.slice(1);
-    return baseUrl + src;
-  };
 
   const now = Date.now();
   const newsData = (pluginData?.articles || [])
@@ -49,7 +39,7 @@ const NewsShowcase = () => {
             className="group flex h-full flex-col overflow-hidden rounded-[0.625rem] border border-[rgba(230,230,230,1)] bg-white no-underline !text-[#1a1a1a] shadow-[0_8px_30px_rgba(0,0,0,0.1)] transition-all"
           >
             <img
-              src={resolveImg(news.img) || resolveImg('img/downloads/ruyi-logo-720.svg')}
+              src={resolveImg(news.img, baseUrl) || resolveImg('img/downloads/ruyi-logo-720.svg', baseUrl)}
               alt={news.title}
               className="block aspect-[3/2] w-full rounded-t-[0.625rem] border-0 object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />

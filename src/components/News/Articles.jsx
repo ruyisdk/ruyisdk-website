@@ -3,6 +3,8 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import LoadingSkeleton from "./LoadingSkeleton";
+import { resolveImg } from "@site/src/utils/img";
+import { formatDate } from "@site/src/utils/date";
 
 const getPageFromUrl = () => {
   if (typeof window === "undefined") return 0;
@@ -26,31 +28,6 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
   const { siteConfig, i18n } = useDocusaurusContext();
   const baseUrl = siteConfig?.baseUrl || "/";
   const currentLocale = i18n?.currentLocale;
-
-  const resolveImg = (src) => {
-    if (!src) return null;
-    try {
-      new URL(src);
-      return src;
-    } catch {}
-    if (src.startsWith("/")) return baseUrl + src.slice(1);
-    return baseUrl + src;
-  };
-
-  const formatDate = (date) => {
-    const parsed = new Date(date);
-    if (Number.isNaN(parsed.getTime())) return "";
-
-    if (currentLocale === "zh-Hans") {
-      return new Intl.DateTimeFormat("zh-CN", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }).format(parsed);
-    }
-
-    return parsed.toLocaleDateString();
-  };
 
   const totalPages = useMemo(
     () => Math.ceil(items.length / pageSize),
@@ -139,7 +116,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
                   {article.title}
                 </span>
                 <span className="flex-shrink-0 whitespace-nowrap text-sm text-gray-600">
-                  {formatDate(article.date)}
+                  {formatDate(article.date, currentLocale)}
                 </span>
               </div>
               <p className="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
@@ -148,11 +125,11 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             {/* Image section */}
             <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
               <img
-                src={resolveImg(article.image) || resolveImg("img/downloads/ruyi-logo-720.svg")}
+                src={resolveImg(article.image, baseUrl) || resolveImg("img/downloads/ruyi-logo-720.svg", baseUrl)}
                 alt={article.title}
                 className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
-                  e.target.src = resolveImg("img/downloads/ruyi-logo-720.svg");
+                  e.target.src = resolveImg("img/downloads/ruyi-logo-720.svg", baseUrl);
                 }}
               />
             </div>

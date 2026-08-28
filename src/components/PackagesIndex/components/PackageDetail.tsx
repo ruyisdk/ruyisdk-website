@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getHierarchy, getEntities, getPackageDetail } from '../api';
 import { useI18n } from '../i18n';
-import { ArrowLeft, Package as PackageIcon, Server, FileBox, Info, Terminal, Copy, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Server, FileBox, Info, Terminal, Copy, ExternalLink } from 'lucide-react';
 
 function formatBytes(size?: number) {
   if (!size || Number.isNaN(size)) return null;
@@ -135,7 +135,7 @@ export default function PackageDetail() {
     try {
       if (window.history.length > 1) navigate(-1);
       else navigate('/');
-    } catch (e) {
+    } catch {
       navigate('/');
     }
   };
