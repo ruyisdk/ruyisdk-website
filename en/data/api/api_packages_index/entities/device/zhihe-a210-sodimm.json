@@ -1,0 +1,1 @@
+{"type": "device", "id": "zhihe-a210-sodimm", "file_path": "entities/device/zhihe-a210-sodimm.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:zhihe-a210-sodimm@v2"], "unique_among_type_during_traversal": true, "device": {"id": "zhihe-a210-sodimm", "display_name": "Zhihe Computing A210 SODDIMM"}}}
