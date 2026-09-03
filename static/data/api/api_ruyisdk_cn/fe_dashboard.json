@@ -1,111 +1,111 @@
 {
-  "last_updated": "2026-08-28T00:59:59.214342Z",
+  "last_updated": "2026-09-03T17:59:59.347878Z",
   "downloads": {
-    "total": 59308
+    "total": 68128
   },
   "pm_downloads": {
-    "total": 88568
+    "total": 111337
   },
   "other_categories_downloads": {
     "3rdparty": {
-      "total": 23557
+      "total": 27817
     },
     "humans": {
-      "total": 29290
+      "total": 58830
     },
     "ide": {
-      "total": 3265
+      "total": 3894
     }
   },
   "downloads_by_categories_v1": {
     "pkg": {
-      "total": 59308
+      "total": 68128
     },
     "pm:github": {
-      "total": 6472
+      "total": 6542
     },
     "pm:mirror": {
-      "total": 72127
+      "total": 94620
     },
     "pm:pypi": {
-      "total": 9969
+      "total": 10175
     },
     "3rdparty": {
-      "total": 23557
+      "total": 27817
     },
     "humans": {
-      "total": 29290
+      "total": 58830
     },
     "ide:eclipse:mirror": {
-      "total": 2063
+      "total": 2316
     },
     "ide:plugin:eclipse:mirror": {
-      "total": 477
+      "total": 610
     },
     "ide:plugin:eclipse:github": {
-      "total": 155
+      "total": 156
     },
     "ide:plugin:vscode:mirror": {
-      "total": 446
+      "total": 686
     },
     "ide:plugin:vscode:github": {
-      "total": 124
+      "total": 126
     }
   },
   "installs": {
-    "total": 30798
+    "total": 32403
   },
   "top_packages": {},
   "top_commands": {
     "ruyi update": {
-      "total": 33909
+      "total": 35564
     },
     "ruyi admin format-manifest": {
-      "total": 20698
+      "total": 20700
     },
     "ruyi list": {
-      "total": 16148
+      "total": 16278
     },
     "ruyi": {
-      "total": 14950
+      "total": 15077
     },
     "ruyi news list": {
-      "total": 6223
+      "total": 6284
     },
     "ruyi news read": {
       "total": 5121
     },
     "ruyi telemetry status": {
-      "total": 3388
+      "total": 3437
     },
     "ruyi telemetry consent": {
-      "total": 3207
+      "total": 3253
     },
     "ruyi list profiles": {
       "total": 2943
     },
     "ruyi install": {
-      "total": 2821
+      "total": 2834
     }
   },
   "github_org_stats": [
     {
       "name": "ruyisdk",
       "watchers_count": 66,
-      "forks_count": 287,
-      "stars_count": 238,
-      "prs_count": 2776,
+      "forks_count": 290,
+      "stars_count": 242,
+      "prs_count": 2823,
       "issues_count": 650,
-      "contributors_count": 100,
+      "contributors_count": 103,
       "detail_by_repo": [
         {
           "name": "wechat-articles",
           "watchers_count": 2,
-          "forks_count": 16,
+          "forks_count": 19,
           "stars_count": 2,
-          "prs_count": 321,
+          "prs_count": 335,
           "issues_count": 0,
-          "contributors_count": 19
+          "contributors_count": 22
         },
         {
           "name": "revyos",
@@ -139,7 +139,7 @@
           "watchers_count": 1,
           "forks_count": 9,
           "stars_count": 4,
-          "prs_count": 14,
+          "prs_count": 15,
           "issues_count": 2,
           "contributors_count": 0
         },
@@ -155,11 +155,11 @@
         {
           "name": "docs",
           "watchers_count": 1,
-          "forks_count": 32,
+          "forks_count": 31,
           "stars_count": 6,
-          "prs_count": 133,
+          "prs_count": 134,
           "issues_count": 14,
-          "contributors_count": 26
+          "contributors_count": 27
         },
         {
           "name": "ruyibuild",
@@ -227,11 +227,11 @@
         {
           "name": "ruyi",
           "watchers_count": 1,
-          "forks_count": 19,
+          "forks_count": 20,
           "stars_count": 38,
-          "prs_count": 284,
+          "prs_count": 286,
           "issues_count": 208,
-          "contributors_count": 8
+          "contributors_count": 9
         },
         {
           "name": "ruyisdk",
@@ -256,7 +256,7 @@
           "watchers_count": 2,
           "forks_count": 23,
           "stars_count": 8,
-          "prs_count": 497,
+          "prs_count": 500,
           "issues_count": 71,
           "contributors_count": 19
         },
@@ -265,7 +265,7 @@
           "watchers_count": 2,
           "forks_count": 17,
           "stars_count": 3,
-          "prs_count": 169,
+          "prs_count": 174,
           "issues_count": 41,
           "contributors_count": 16
         },
@@ -327,8 +327,8 @@
           "name": "support-matrix",
           "watchers_count": 4,
           "forks_count": 36,
-          "stars_count": 59,
-          "prs_count": 335,
+          "stars_count": 60,
+          "prs_count": 337,
           "issues_count": 50,
           "contributors_count": 25
         },
@@ -346,7 +346,7 @@
           "watchers_count": 6,
           "forks_count": 41,
           "stars_count": 42,
-          "prs_count": 274,
+          "prs_count": 275,
           "issues_count": 6,
           "contributors_count": 0
         },
@@ -364,14 +364,14 @@
           "watchers_count": 3,
           "forks_count": 2,
           "stars_count": 0,
-          "prs_count": 100,
+          "prs_count": 102,
           "issues_count": 20,
           "contributors_count": 3
         },
         {
           "name": "openwrt-eic770x",
           "watchers_count": 1,
-          "forks_count": 1,
+          "forks_count": 0,
           "stars_count": 2,
           "prs_count": 0,
           "issues_count": 0,
@@ -461,9 +461,9 @@
         {
           "name": "ruyisdk-vscode-extension",
           "watchers_count": 1,
-          "forks_count": 11,
+          "forks_count": 12,
           "stars_count": 2,
-          "prs_count": 179,
+          "prs_count": 186,
           "issues_count": 56,
           "contributors_count": 11
         },
@@ -499,7 +499,7 @@
           "watchers_count": 0,
           "forks_count": 4,
           "stars_count": 1,
-          "prs_count": 33,
+          "prs_count": 42,
           "issues_count": 0,
           "contributors_count": 0
         },
@@ -507,7 +507,7 @@
           "name": "ruyi-tuner",
           "watchers_count": 0,
           "forks_count": 0,
-          "stars_count": 2,
+          "stars_count": 5,
           "prs_count": 0,
           "issues_count": 0,
           "contributors_count": 0
@@ -516,7 +516,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-28T02:44:09.796Z",
+    "generatedAt": "2026-09-03T21:49:35.083Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }
