@@ -2,14 +2,18 @@
 
 set -u
 
-DEFAULT_RELEASE_API_URL="https://api.ruyisdk.cn/releases/latest-pm"
-DEFAULT_CHANNEL="stable"
+PRIMARY_RELEASES_URL="https://api.ruyisdk.cn/releases/latest-pm"
+FALLBACK_RELEASES_URL="https://ruyisdk.org/data/api/api_ruyisdk_cn/releases_latest_pm.json"
+INSTALLER_URL="https://ruyisdk.org/install.sh"
+PRIVACY_POLICY_URL="https://ruyisdk.org/docs/legal/privacyPolicy/"
+INSTALLER_VERSION="20260831"
 
-CHANNEL=${RUYI_CHANNEL:-$DEFAULT_CHANNEL}
-INSTALL_DIR=${RUYI_INSTALL_DIR:-}
-RELEASE_API_URL=${RUYI_RELEASE_API_URL:-$DEFAULT_RELEASE_API_URL}
+INSTALL_DIR=${RUYI_INSTALL_DIR:-/usr/local/bin}
+UPGRADE=0
 DRY_RUN=0
-TMP_ROOT=
+INSTALL_UPGRADE_HELPER=0
+STAGED_FILE=
+USE_SUDO=0
 
 log() {
   printf '%s\n' "$*"
@@ -25,43 +29,37 @@ die() {
 }
 
 usage() {
-  cat <<'EOF'
+  cat <<EOF
 RuyiSDK installer
 
 Usage:
   sh install.sh [OPTIONS]
-  curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+  curl --proto '=https' --tlsv1.2 -fL $INSTALLER_URL | sh
 
 Options:
-  --channel CHANNEL      Install from stable or testing. Default: stable
-  --install-dir DIR      Install ruyi into DIR. Default: $HOME/.local/bin
+  -v                     Show the installer version
+  --install-dir DIR      Install ruyi into DIR. Default: /usr/local/bin
+                         Ignored with --upgrade; this script's directory is used instead
+  --upgrade              Upgrade the ruyi executable next to this script
   --dry-run              Print the selected download URLs without installing
   -h, --help             Show this help message
 
 Environment:
-  RUYI_CHANNEL           Default channel when --channel is not provided
   RUYI_INSTALL_DIR       Default install directory when --install-dir is not provided
-  RUYI_RELEASE_API_URL   Release metadata URL
 EOF
 }
 
 cleanup() {
-  if [ -n "${TMP_ROOT:-}" ] && [ -d "$TMP_ROOT" ]; then
-    rm -rf "$TMP_ROOT"
-  fi
+  [ -z "$STAGED_FILE" ] || run_privileged rm -f "$STAGED_FILE" >/dev/null 2>&1 || :
+  rm -rf "$TMP_ROOT"
 }
+
+SCRIPT_DIR=$(cd -P "$(dirname "$0")" 2>/dev/null && pwd) \
+  || die "failed to resolve the installer directory: $0"
+[ "${0##*/}" = ruyi-upgrade ] && UPGRADE=1
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --channel)
-      [ "$#" -ge 2 ] || die "--channel requires a value"
-      CHANNEL=$2
-      shift 2
-      ;;
-    --channel=*)
-      CHANNEL=${1#*=}
-      shift
-      ;;
     --install-dir)
       [ "$#" -ge 2 ] || die "--install-dir requires a value"
       INSTALL_DIR=$2
@@ -71,9 +69,17 @@ while [ "$#" -gt 0 ]; do
       INSTALL_DIR=${1#*=}
       shift
       ;;
+    --upgrade)
+      UPGRADE=1
+      shift
+      ;;
     --dry-run)
       DRY_RUN=1
       shift
+      ;;
+    -v|--version)
+      printf '%s\n' "$INSTALLER_VERSION"
+      exit 0
       ;;
     -h|--help)
       usage
@@ -85,43 +91,51 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-case "$CHANNEL" in
-  stable|testing) ;;
-  *) die "unsupported channel: $CHANNEL" ;;
-esac
-
-if [ -z "$INSTALL_DIR" ]; then
-  if [ -z "${HOME:-}" ]; then
-    die "HOME is not set; pass --install-dir explicitly"
-  fi
-  INSTALL_DIR=$HOME/.local/bin
-fi
+[ "$UPGRADE" -eq 0 ] || INSTALL_DIR=$SCRIPT_DIR
 
 case "$INSTALL_DIR" in
-  /*) ;;
+  /*)
+    [ "$INSTALL_DIR" = / ] || INSTALL_DIR=${INSTALL_DIR%/}
+    ;;
   *) die "install directory must be an absolute path: $INSTALL_DIR" ;;
 esac
 
-if [ "$(uname -s 2>/dev/null)" != "Linux" ]; then
-  die "this installer currently supports Linux only"
-fi
-
-RAW_ARCH=$(uname -m 2>/dev/null || printf unknown)
-case "$RAW_ARCH" in
-  x86_64|amd64) ARCH=x86_64 ;;
-  aarch64|arm64) ARCH=aarch64 ;;
-  riscv64) ARCH=riscv64 ;;
-  *) die "unsupported architecture: $RAW_ARCH" ;;
+RAW_SYSTEM=$(uname -s)
+RAW_ARCH=$(uname -m)
+TARGET_NAME=ruyi
+case "$RAW_SYSTEM:$RAW_ARCH" in
+  Linux:x86_64|Linux:amd64)
+    PLATFORM_KEY=linux/x86_64
+    ;;
+  Linux:aarch64|Linux:arm64)
+    PLATFORM_KEY=linux/aarch64
+    ;;
+  Linux:riscv64)
+    PLATFORM_KEY=linux/riscv64
+    ;;
+  Darwin:arm64|Darwin:aarch64)
+    PLATFORM_KEY=darwin/aarch64
+    ;;
+  MINGW*:x86_64|MINGW*:amd64|MSYS*:x86_64|MSYS*:amd64|CYGWIN*:x86_64|CYGWIN*:amd64)
+    PLATFORM_KEY=windows/x86_64
+    [ "$UPGRADE" -eq 1 ] || TARGET_NAME=ruyi.exe
+    ;;
+  *)
+    die "no official ruyi binary is published for $RAW_SYSTEM/$RAW_ARCH"
+    ;;
 esac
 
-if command -v mktemp >/dev/null 2>&1; then
-  TMP_PARENT=${TMPDIR:-/tmp}
-  TMP_ROOT=$(mktemp -d "${TMP_PARENT%/}/ruyi-install.XXXXXX") || die "failed to create temporary directory"
-else
-  die "mktemp is required"
+TARGET_FILE=$INSTALL_DIR/$TARGET_NAME
+
+TMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/ruyi-install.XXXXXX") \
+  || die "failed to create temporary directory"
+if [ "$(id -u 2>/dev/null)" = 0 ] \
+  && [ -n "${SUDO_USER:-}" ] \
+  && [ "$SUDO_USER" != root ]; then
+  chmod 711 "$TMP_ROOT" || die "failed to prepare the temporary directory"
 fi
 
-trap cleanup EXIT HUP INT TERM
+trap cleanup 0
 
 if command -v curl >/dev/null 2>&1; then
   FETCH_TOOL=curl
@@ -131,137 +145,181 @@ else
   die "curl or wget is required"
 fi
 
-fetch_to_stdout() {
+fetch() {
   url=$1
-  case "$FETCH_TOOL" in
-    curl)
-      curl --proto '=https' --tlsv1.2 -fsSL "$url"
-      ;;
-    wget)
-      wget -q -O - "$url"
-      ;;
-    *)
-      return 1
-      ;;
-  esac
+  output=${2:-}
+
+  if [ "$FETCH_TOOL" = curl ]; then
+    if [ -n "$output" ]; then
+      curl --proto '=https' --proto-redir '=https' --tlsv1.2 -fL -o "$output" "$url"
+    else
+      curl --proto '=https' --proto-redir '=https' --tlsv1.2 -fsSL "$url"
+    fi
+  elif [ -n "$output" ]; then
+    wget -O "$output" "$url"
+  else
+    wget -q -O - "$url"
+  fi
 }
 
-download_to_file() {
-  url=$1
-  output=$2
-  case "$FETCH_TOOL" in
-    curl)
-      curl --proto '=https' --tlsv1.2 -fL "$url" -o "$output"
-      ;;
-    wget)
-      wget -q -O "$output" "$url"
-      ;;
-    *)
-      return 1
-      ;;
-  esac
-}
-
-is_allowed_download_url() {
-  case "$1" in
-    https://mirror.iscas.ac.cn/ruyisdk/ruyi/*) return 0 ;;
-    https://github.com/ruyisdk/ruyi/releases/download/*) return 0 ;;
+ask_yes_no() {
+  if ! {
+    printf '%s [y/N] ' "$1" > /dev/tty \
+      && IFS= read -r answer < /dev/tty
+  } 2>/dev/null; then
+    printf '%s [y/N] ' "$1" >&2 || return 2
+    IFS= read -r answer || return 2
+  fi
+  case "$answer" in
+    y|Y|yes|YES|Yes) return 0 ;;
     *) return 1 ;;
   esac
 }
 
-is_install_dir_on_path() {
+confirm_privacy_policy() {
+  [ "$UPGRADE" -eq 0 ] || return 0
+
+  printf '%s\n%s\n' \
+    "By downloading and using RuyiSDK, you agree to the license terms and the privacy policy." \
+    "$PRIVACY_POLICY_URL"
+
+  ask_yes_no "Do you agree to the license terms and privacy policy?"
+  case "$?" in
+    0) ;;
+    1) die "license terms and privacy policy not accepted" ;;
+    *) die "downloading Ruyi requires interactive acceptance of the license terms and privacy policy" ;;
+  esac
+}
+
+confirm_install_target() {
+  [ "$UPGRADE" -eq 0 ] && [ "$DRY_RUN" -eq 0 ] || return 0
+  if [ -e "$TARGET_FILE" ] || [ -L "$TARGET_FILE" ]; then
+    ask_yes_no "Overwrite $TARGET_FILE?"
+  else
+    ask_yes_no "Continue installing Ruyi to $TARGET_FILE?"
+  fi
+  case "$?" in
+    0) ;;
+    1) die "installation cancelled" ;;
+    *) die "installation requires interactive confirmation" ;;
+  esac
+}
+
+warn_if_path_missing() {
+  [ "$UPGRADE" -eq 0 ] || return 0
   case ":${PATH:-}:" in
     *":$INSTALL_DIR:"*) return 0 ;;
-    *) return 1 ;;
+  esac
+  warn "install directory is not in PATH: $INSTALL_DIR"
+}
+
+is_supported_binary() {
+  magic=$(LC_ALL=C od -An -N4 -tx1 "$1" 2>/dev/null | tr -d '[:space:]')
+  [ "$magic" = 7f454c46 ] || [ "$magic" = cffaedfe ]
+}
+
+run_ruyi() {
+  if [ "$(id -u 2>/dev/null)" = 0 ] \
+    && [ -n "${SUDO_USER:-}" ] \
+    && [ "$SUDO_USER" != root ]; then
+    sudo -u "$SUDO_USER" -H env RUYI_TELEMETRY_OPTOUT=1 "$@"
+  else
+    RUYI_TELEMETRY_OPTOUT=1 "$@"
+  fi
+}
+
+version_is_newer() {
+  awk -v newer="$1" -v older="$2" '
+    BEGIN {
+      split(newer, n, ".")
+      split(older, o, ".")
+      for (i = 1; i <= 3; i++)
+        if (n[i] + 0 != o[i] + 0) exit(n[i] + 0 > o[i] + 0 ? 0 : 1)
+      exit(index(newer, "-") == 0 && index(older, "-") > 0 ? 0 : 1)
+    }
+  '
+}
+
+prepare_upgrade() {
+  [ "$UPGRADE" -eq 1 ] || return 0
+  is_supported_binary "$TARGET_FILE" \
+    || die "upgrade target is not an ELF or Mach-O executable: $TARGET_FILE"
+  current_output=$(run_ruyi "$TARGET_FILE" version) \
+    || die "failed to read the current ruyi version: $TARGET_FILE"
+  CURRENT_VERSION=$(printf '%s\n' "$current_output" | awk '$1 == "Ruyi" { print $2; exit }')
+  [ -n "$CURRENT_VERSION" ] || die "failed to read the current ruyi version: $TARGET_FILE"
+}
+
+confirm_upgrade_helper() {
+  [ "$UPGRADE" -eq 0 ] && [ "$DRY_RUN" -eq 0 ] || return 0
+  helper_file=$INSTALL_DIR/ruyi-upgrade
+  if [ -e "$helper_file" ] || [ -L "$helper_file" ]; then
+    ask_yes_no "Overwrite $helper_file?"
+  else
+    ask_yes_no "Install ruyi-upgrade into $helper_file?"
+  fi
+  prompt_status=$?
+  case "$prompt_status" in
+    0) INSTALL_UPGRADE_HELPER=1 ;;
+    2) warn "no interactive terminal detected; skipping ruyi-upgrade installation"; return 0 ;;
+    *) log "Skipped ruyi-upgrade installation."; return 0 ;;
   esac
 }
 
-show_path_guidance() {
-  {
-    printf 'warning: install directory is not in PATH: %s\n' "$INSTALL_DIR"
-    printf 'After installation, your shell may not find the ruyi command automatically.\n'
-    printf 'Add the install directory to PATH, for example:\n'
-    printf '\n'
-    printf '  export PATH="%s:$PATH"\n' "$INSTALL_DIR"
-    printf '\n'
-    printf 'Then restart your shell, or reload the profile file where you added it.\n'
-  } >&2
-}
-
-confirm_path_guidance() {
-  if is_install_dir_on_path; then
+install_upgrade_helper() {
+  [ "$INSTALL_UPGRADE_HELPER" -eq 1 ] || return 0
+  helper_file=$INSTALL_DIR/ruyi-upgrade
+  if [ -f "$0" ]; then
+    cp "$0" "$TMP_ROOT/ruyi-upgrade.new"
+  else
+    fetch "$INSTALLER_URL" "$TMP_ROOT/ruyi-upgrade.new"
+  fi || {
+    warn "failed to prepare ruyi-upgrade"
+    return 0
+  }
+  if ! sh -n "$TMP_ROOT/ruyi-upgrade.new"; then
+    warn "ruyi-upgrade failed the shell syntax check"
     return 0
   fi
-
-  show_path_guidance
-
-  if [ "$DRY_RUN" -eq 1 ]; then
-    warn "dry run requested; skipping interactive PATH confirmation"
-    return 0
-  fi
-
-  if [ -r /dev/tty ] && [ -w /dev/tty ]; then
-    printf 'Continue installing to %s anyway? [Y/n] ' "$INSTALL_DIR" > /dev/tty
-    IFS= read -r answer < /dev/tty || die "failed to read confirmation from terminal"
-    case "$answer" in
-      ""|y|Y|yes|YES|Yes) return 0 ;;
-      *) die "installation cancelled" ;;
-    esac
-  fi
-
-  warn "no interactive terminal detected; continuing without confirmation"
+  install_binary "$TMP_ROOT/ruyi-upgrade.new" "$helper_file"
+  log "Installed ruyi-upgrade: $helper_file"
 }
 
 extract_urls() {
-  awk -v channel="$CHANNEL" -v arch="$ARCH" '
+  awk -v platform="$PLATFORM_KEY" -v error_file="$PARSE_ERROR" '
+    function fail(message) {
+      print message > error_file
+      exit 1
+    }
     {
       gsub(/[[:space:]]/, "", $0)
       json = json $0
     }
     END {
-      channel_key = "\"" channel "\":{"
-      arch_key = "\"linux/" arch "\":["
+      stable_start = index(json, "\"stable\":{")
+      if (stable_start == 0) fail("channel stable is missing")
+      stable = substr(json, stable_start)
+      version_key = "\"version\":\""
+      version_start = index(stable, version_key)
+      if (version_start == 0) fail("version is missing from channel stable")
+      version = substr(stable, version_start + length(version_key))
+      sub(/".*/, "", version)
+      if (version !~ /^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$/)
+        fail("invalid semantic version: " version)
 
-      channel_start = index(json, channel_key)
-      if (channel_start == 0) exit 1
+      platform_key = "\"" platform "\":["
+      platform_start = index(stable, platform_key)
+      if (platform_start == 0) fail("platform " platform " is missing")
 
-      object_start = channel_start + length("\"" channel "\":")
-      depth = 0
-      channel_object = ""
-      for (i = object_start; i <= length(json); i++) {
-        ch = substr(json, i, 1)
-        if (ch == "{") depth++
-        if (ch == "}") depth--
-        if (depth == 0) {
-          channel_object = substr(json, object_start, i - object_start + 1)
-          break
-        }
-      }
-      if (channel_object == "") exit 1
+      array_body = substr(stable, platform_start + length(platform_key))
+      sub(/\].*/, "", array_body)
+      if (array_body == "") fail("download URL list for " platform " is empty or malformed")
 
-      arch_start = index(channel_object, arch_key)
-      if (arch_start == 0) exit 2
-
-      array_start = arch_start + length("\"linux/" arch "\":")
-      depth = 0
-      array_body = ""
-      for (i = array_start; i <= length(channel_object); i++) {
-        ch = substr(channel_object, i, 1)
-        if (ch == "[") depth++
-        if (ch == "]") depth--
-        if (depth == 0) {
-          array_body = substr(channel_object, array_start + 1, i - array_start - 1)
-          break
-        }
-      }
-      if (array_body == "") exit 2
-
+      print version
       count = split(array_body, urls, ",")
       for (i = 1; i <= count; i++) {
         url = urls[i]
-        gsub(/^"/, "", url)
-        gsub(/"$/, "", url)
+        gsub(/"/, "", url)
         if (url != "") print url
       }
     }
@@ -270,105 +328,181 @@ extract_urls() {
 
 install_binary() {
   source_file=$1
-  target_file=$INSTALL_DIR/ruyi
+  target_file=$2
 
-  if mkdir -p "$INSTALL_DIR" 2>/dev/null && [ -w "$INSTALL_DIR" ]; then
-    if command -v install >/dev/null 2>&1; then
-      install -m 0755 "$source_file" "$target_file"
-    else
-      cp "$source_file" "$target_file" && chmod 0755 "$target_file"
-    fi
-    return $?
+  [ ! -d "$target_file" ] || die "install target is a directory: $target_file"
+
+  if ! mkdir -p "$INSTALL_DIR" 2>/dev/null; then
+    request_sudo
+    run_privileged mkdir -p "$INSTALL_DIR" || die "failed to create install directory: $INSTALL_DIR"
   fi
 
-  die "cannot write to $INSTALL_DIR; rerun this installer with sudo for a system directory, for example: curl -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin"
+  STAGED_FILE=$(mktemp "$INSTALL_DIR/.ruyi.install.XXXXXX" 2>/dev/null) || {
+    request_sudo
+    STAGED_FILE=$(run_privileged mktemp "$INSTALL_DIR/.ruyi.install.XXXXXX") \
+      || die "failed to create a staging file in $INSTALL_DIR"
+  }
+  run_privileged cp "$source_file" "$STAGED_FILE" || die "failed to stage the ruyi binary"
+  run_privileged chmod 0755 "$STAGED_FILE" || die "failed to set executable permissions"
+  if [ "$UPGRADE" -eq 1 ]; then
+    is_supported_binary "$target_file" \
+      || die "upgrade target changed and is no longer an ELF or Mach-O executable: $target_file"
+  fi
+  run_privileged mv "$STAGED_FILE" "$target_file" \
+    || die "failed to install $target_file"
+  STAGED_FILE=
 }
 
-confirm_path_guidance
+fetch_release_data() {
+  for release_url in "$PRIMARY_RELEASES_URL" "$FALLBACK_RELEASES_URL"; do
+    log "Fetching release metadata from $release_url"
+    : > "$PARSE_ERROR"
+    if fetch "$release_url" | extract_urls - > "$RELEASE_DATA"; then
+      VERSION=$(sed -n '1p' "$RELEASE_DATA")
+      return 0
+    fi
+    parse_error=$(sed -n '1p' "$PARSE_ERROR")
+    [ -n "$parse_error" ] || parse_error="download failed or response contains no release data"
+    warn "release metadata from $release_url is unavailable or invalid: $parse_error"
+  done
+  return 1
+}
 
-log "Fetching release metadata from $RELEASE_API_URL"
-API_JSON=$TMP_ROOT/latest-pm.json
-if ! fetch_to_stdout "$RELEASE_API_URL" > "$API_JSON"; then
-  die "failed to fetch release metadata"
-fi
+ping_host() {
+  case "$RAW_SYSTEM" in
+    Darwin) LC_ALL=C ping -c 1 -W 1000 "$1" ;;
+    MINGW*|MSYS*|CYGWIN*) LC_ALL=C ping -n 1 -w 1000 "$1" ;;
+    *) LC_ALL=C ping -c 1 -W 1 "$1" ;;
+  esac
+}
 
-RAW_URLS=$TMP_ROOT/urls.raw
-VALID_URLS=$TMP_ROOT/urls.valid
-CANDIDATE_URLS=$TMP_ROOT/urls.candidates
+sort_download_urls() {
+  urls_file=$1
+  command -v ping >/dev/null 2>&1 && command -v sort >/dev/null 2>&1 || return 0
+  ping_data=$TMP_ROOT/urls.ping
+  : > "$ping_data"
+  order=0
+  while IFS= read -r url; do
+    [ -n "$url" ] || continue
+    order=$((order + 1))
+    host=${url#https://}
+    host=${host%%/*}
+    latency=$(ping_host "$host" 2>/dev/null \
+      | awk 'match($0, /time[=<][0-9.]+/) { print substr($0, RSTART + 5, RLENGTH - 5); exit }')
+    if [ -n "$latency" ]; then
+      log "Ping $host: $latency ms"
+    else
+      warn "could not measure latency for $host; trying it last"
+      latency=999999999
+    fi
+    printf '%s\t%s\t%s\n' "$latency" "$order" "$url" >> "$ping_data"
+  done < "$urls_file"
 
-if ! extract_urls "$API_JSON" > "$RAW_URLS"; then
-  die "failed to find download URLs for channel $CHANNEL and linux/$ARCH"
-fi
+  LC_ALL=C sort -t "$(printf '\t')" -k1,1n -k2,2n "$ping_data" \
+    | awk -F '\t' '{ print $3 }' > "$urls_file"
+}
 
-: > "$VALID_URLS"
-while IFS= read -r url; do
-  [ -n "$url" ] || continue
-  if is_allowed_download_url "$url"; then
-    printf '%s\n' "$url" >> "$VALID_URLS"
-  else
-    warn "ignored untrusted download URL: $url"
+show_selection() {
+  log "Selected platform: $PLATFORM_KEY"
+  log "Selected version: $VERSION"
+  log "Install path: $TARGET_FILE"
+  log "$1"
+  sed 's/^/  /' "$CANDIDATE_URLS"
+}
+
+verify_binary() {
+  binary_file=$1
+  chmod 0755 "$binary_file" || return 1
+  if ! run_ruyi "$binary_file" version > "$VERSION_OUTPUT" 2>&1; then
+    warn "downloaded binary failed its version check: $2"
+    return 1
   fi
-done < "$RAW_URLS"
+  reported_version=$(sed -n '1p' "$VERSION_OUTPUT")
+  if [ "$reported_version" != "Ruyi $VERSION" ]; then
+    warn "downloaded binary reports '$reported_version', expected 'Ruyi $VERSION'"
+    return 1
+  fi
+}
 
-if [ ! -s "$VALID_URLS" ]; then
-  die "no trusted download URLs found for channel $CHANNEL and linux/$ARCH"
+run_privileged() {
+  if [ "$USE_SUDO" -eq 1 ]; then
+    sudo "$@"
+  else
+    "$@"
+  fi
+}
+
+request_sudo() {
+  if [ "$USE_SUDO" -eq 1 ] || [ "$(id -u 2>/dev/null)" = 0 ]; then
+    return 0
+  fi
+  command -v sudo >/dev/null 2>&1 || die "sudo is required to install into $INSTALL_DIR"
+
+  ask_yes_no "Use sudo to install Ruyi into $INSTALL_DIR?"
+  prompt_status=$?
+  case "$prompt_status" in
+    0) ;;
+    2) die "installation into $INSTALL_DIR requires interactive confirmation to use sudo" ;;
+    *) die "installation cancelled" ;;
+  esac
+
+  sudo -v || die "sudo authorization failed"
+  USE_SUDO=1
+}
+
+prepare_upgrade
+warn_if_path_missing
+
+RELEASE_DATA=$TMP_ROOT/release.data
+PARSE_ERROR=$TMP_ROOT/release.error
+CANDIDATE_URLS=$TMP_ROOT/urls.candidates
+VERSION_OUTPUT=$TMP_ROOT/version.out
+
+confirm_privacy_policy
+confirm_install_target
+confirm_upgrade_helper
+fetch_release_data || die "failed to fetch valid release metadata from the official endpoints"
+if [ "$UPGRADE" -eq 1 ] && ! version_is_newer "$VERSION" "$CURRENT_VERSION"; then
+  log "Ruyi $CURRENT_VERSION is already $VERSION or newer; no upgrade is needed."
+  exit 0
 fi
-
-: > "$CANDIDATE_URLS"
-while IFS= read -r url; do
-  case "$url" in
-    https://mirror.iscas.ac.cn/*) printf '%s\n' "$url" >> "$CANDIDATE_URLS" ;;
-  esac
-done < "$VALID_URLS"
-while IFS= read -r url; do
-  case "$url" in
-    https://github.com/*) printf '%s\n' "$url" >> "$CANDIDATE_URLS" ;;
-  esac
-done < "$VALID_URLS"
-
-log "Selected platform: linux/$ARCH"
-log "Selected channel: $CHANNEL"
-log "Install directory: $INSTALL_DIR"
-log "Download candidates:"
-sed 's/^/  /' "$CANDIDATE_URLS"
+awk '
+  NR == 1 { next }
+  /^https:\/\/mirror\.iscas\.ac\.cn\/ruyisdk\/ruyi\// { print; next }
+  /^https:\/\/github\.com\/ruyisdk\/ruyi\/releases\/download\// {
+    github[++count] = $0
+    next
+  }
+  { print "warning: ignored unexpected download URL: " $0 > "/dev/stderr" }
+  END { for (i = 1; i <= count; i++) print github[i] }
+' "$RELEASE_DATA" > "$CANDIDATE_URLS"
+[ -s "$CANDIDATE_URLS" ] || die "no trusted download URLs found for the stable channel on $PLATFORM_KEY"
 
 if [ "$DRY_RUN" -eq 1 ]; then
-  log "Dry run requested; no files were downloaded or installed."
+  show_selection "Download candidates:"
+  log "Dry run complete; no Ruyi binary was downloaded or installed."
   exit 0
 fi
 
-BINARY_FILE=$TMP_ROOT/ruyi
-SELECTED_URL=
+sort_download_urls "$CANDIDATE_URLS" || die "failed to sort download URLs by latency"
+show_selection "Download candidates (lowest latency first):"
+
+BINARY_FILE=$TMP_ROOT/$TARGET_NAME
 
 while IFS= read -r url; do
   [ -n "$url" ] || continue
   log "Downloading $url"
-  if download_to_file "$url" "$BINARY_FILE"; then
-    SELECTED_URL=$url
+  if fetch "$url" "$BINARY_FILE" && verify_binary "$BINARY_FILE" "$url"; then
     break
   fi
-  warn "download failed: $url"
+  rm -f "$BINARY_FILE"
+  warn "ignoring unusable download: $url"
 done < "$CANDIDATE_URLS"
 
-if [ -z "$SELECTED_URL" ]; then
-  die "failed to download ruyi from all trusted sources"
-fi
+[ -f "$BINARY_FILE" ] || die "all download candidates failed"
 
-chmod 0755 "$BINARY_FILE" || die "failed to mark downloaded binary executable"
+install_binary "$BINARY_FILE" "$TARGET_FILE"
 
-install_binary "$BINARY_FILE" || die "failed to install ruyi"
+log "Ruyi $VERSION was installed successfully: $TARGET_FILE"
 
-TARGET_FILE=$INSTALL_DIR/ruyi
-
-if "$TARGET_FILE" version > "$TMP_ROOT/version.out" 2>&1; then
-  log "Ruyi was installed successfully: $TARGET_FILE"
-  sed -n '1,5p' "$TMP_ROOT/version.out"
-else
-  cat "$TMP_ROOT/version.out" >&2
-  die "installed binary did not run successfully: $TARGET_FILE"
-fi
-
-case ":${PATH:-}:" in
-  *":$INSTALL_DIR:"*) ;;
-  *) warn "install directory is not in PATH: $INSTALL_DIR" ;;
-esac
+install_upgrade_helper

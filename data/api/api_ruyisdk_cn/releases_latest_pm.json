@@ -1,5 +1,24 @@
 {
   "channels": {
+    "stable": {
+      "version": "0.52.0",
+      "channel": "stable",
+      "release_date": "2026-09-02T14:07:04Z",
+      "download_urls": {
+        "linux/x86_64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.52.0/ruyi-0.52.0.amd64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.52.0/ruyi-0.52.0.amd64"
+        ],
+        "linux/aarch64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.52.0/ruyi-0.52.0.arm64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.52.0/ruyi-0.52.0.arm64"
+        ],
+        "linux/riscv64": [
+          "https://github.com/ruyisdk/ruyi/releases/download/0.52.0/ruyi-0.52.0.riscv64",
+          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.52.0/ruyi-0.52.0.riscv64"
+        ]
+      }
+    },
     "testing": {
       "version": "0.52.0-beta.20260824",
       "channel": "testing",
@@ -22,29 +41,10 @@
           "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.52.0-beta.20260824/ruyi-0.52.0-beta.20260824.riscv64"
         ]
       }
-    },
-    "stable": {
-      "version": "0.51.0",
-      "channel": "stable",
-      "release_date": "2026-07-20T23:01:27Z",
-      "download_urls": {
-        "linux/x86_64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.amd64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.amd64"
-        ],
-        "linux/aarch64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.arm64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.arm64"
-        ],
-        "linux/riscv64": [
-          "https://github.com/ruyisdk/ruyi/releases/download/0.51.0/ruyi-0.51.0.riscv64",
-          "https://mirror.iscas.ac.cn/ruyisdk/ruyi/tags/0.51.0/ruyi-0.51.0.riscv64"
-        ]
-      }
     }
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-28T02:44:08.523Z",
+    "generatedAt": "2026-09-03T21:49:33.575Z",
     "source": "https://api.ruyisdk.cn/releases/latest-pm"
   }
 }

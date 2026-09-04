@@ -1,13 +1,13 @@
 {
   "data": {
-    "stargazers_count": 59,
+    "stargazers_count": 60,
     "forks_count": 36,
     "subscribers_count": 4,
-    "open_issues_count": 3,
-    "prs_count": 335
+    "open_issues_count": 5,
+    "prs_count": 337
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-28T02:23:01.593Z",
+    "generatedAt": "2026-09-03T21:28:27.480Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix"
   }
 }

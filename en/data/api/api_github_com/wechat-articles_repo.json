@@ -1,13 +1,13 @@
 {
   "data": {
     "stargazers_count": 2,
-    "forks_count": 16,
+    "forks_count": 19,
     "subscribers_count": 2,
     "open_issues_count": 0,
-    "prs_count": 321
+    "prs_count": 335
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-08-28T02:22:59.799Z",
+    "generatedAt": "2026-09-03T21:28:25.405Z",
     "source": "https://api.github.com/repos/ruyisdk/wechat-articles"
   }
 }
