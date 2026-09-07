@@ -116,10 +116,10 @@ case "$RAW_SYSTEM:$RAW_ARCH" in
   Darwin:arm64|Darwin:aarch64)
     PLATFORM_KEY=darwin/aarch64
     ;;
-  MINGW*:x86_64|MINGW*:amd64|MSYS*:x86_64|MSYS*:amd64|CYGWIN*:x86_64|CYGWIN*:amd64)
-    PLATFORM_KEY=windows/x86_64
-    [ "$UPGRADE" -eq 1 ] || TARGET_NAME=ruyi.exe
-    ;;
+#  MINGW*:x86_64|MINGW*:amd64|MSYS*:x86_64|MSYS*:amd64|CYGWIN*:x86_64|CYGWIN*:amd64)
+#    PLATFORM_KEY=windows/x86_64
+#    [ "$UPGRADE" -eq 1 ] || TARGET_NAME=ruyi.exe
+#    ;;
   *)
     die "no official ruyi binary is published for $RAW_SYSTEM/$RAW_ARCH"
     ;;
@@ -285,6 +285,27 @@ install_upgrade_helper() {
   log "Installed ruyi-upgrade: $helper_file"
 }
 
+init_ruyi_config() {
+  [ "$UPGRADE" -eq 0 ] && [ "$DRY_RUN" -eq 0 ] || return 0
+  case "$1" in
+    https://mirror.iscas.ac.cn/*)
+      ruyi_mirror="https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git"
+      ;;
+    *) return 0 ;;
+  esac
+
+  current_remote=$(run_ruyi "$TARGET_FILE" config get repo.remote 2>/dev/null) || current_remote=
+  [ -z "$current_remote" ] || return 0
+  if ask_yes_no "Configure Ruyi to use the nearest detected mirror?"; then
+    if run_ruyi "$TARGET_FILE" config set repo.remote "$ruyi_mirror"; then
+      log "Configured Ruyi package index mirror: $ruyi_mirror"
+    else
+      warn "failed to configure Ruyi package index mirror"
+    fi
+  fi
+  return 0
+}
+
 extract_urls() {
   awk -v platform="$PLATFORM_KEY" -v error_file="$PARSE_ERROR" '
     function fail(message) {
@@ -304,7 +325,8 @@ extract_urls() {
       if (version_start == 0) fail("version is missing from channel stable")
       version = substr(stable, version_start + length(version_key))
       sub(/".*/, "", version)
-      if (version !~ /^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$/)
+      # The stable API publishes plain X.Y.Z releases only.
+      if (version !~ /^[0-9]+\.[0-9]+\.[0-9]+$/)
         fail("invalid semantic version: " version)
 
       platform_key = "\"" platform "\":["
@@ -390,7 +412,8 @@ sort_download_urls() {
     latency=$(ping_host "$host" 2>/dev/null \
       | awk 'match($0, /time[=<][0-9.]+/) { print substr($0, RSTART + 5, RLENGTH - 5); exit }')
     if [ -n "$latency" ]; then
-      log "Ping $host: $latency ms"
+      # log "Ping $host: $latency ms"
+      true
     else
       warn "could not measure latency for $host; trying it last"
       latency=999999999
@@ -488,11 +511,13 @@ sort_download_urls "$CANDIDATE_URLS" || die "failed to sort download URLs by lat
 show_selection "Download candidates (lowest latency first):"
 
 BINARY_FILE=$TMP_ROOT/$TARGET_NAME
+SELECTED_URL=
 
 while IFS= read -r url; do
   [ -n "$url" ] || continue
   log "Downloading $url"
   if fetch "$url" "$BINARY_FILE" && verify_binary "$BINARY_FILE" "$url"; then
+    SELECTED_URL=$url
     break
   fi
   rm -f "$BINARY_FILE"
@@ -506,3 +531,5 @@ install_binary "$BINARY_FILE" "$TARGET_FILE"
 log "Ruyi $VERSION was installed successfully: $TARGET_FILE"
 
 install_upgrade_helper
+
+init_ruyi_config "$SELECTED_URL"
