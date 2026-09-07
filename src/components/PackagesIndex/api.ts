@@ -41,7 +41,9 @@ export const getPackages = async (category?: string, pkg?: string, query?: strin
   if (query) {
     const q = query.toLowerCase();
     data = data.filter((p: any) => 
-      p.package.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q)
+      p.package.toLowerCase().includes(q) ||
+      (p.desc || '').toLowerCase().includes(q) ||
+      (p.vendor || '').toLowerCase().includes(q)
     );
   }
   return data;

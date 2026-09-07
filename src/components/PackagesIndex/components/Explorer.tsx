@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getEntities, getPackages, getHierarchy } from '../api';
 import { Link } from 'react-router-dom';
-import { Search, Package, Server, Cpu, Layers, Tag, X, Filter } from 'lucide-react';
+import { Search, Package, Server, Cpu, Layers, Tag, X, Filter, Factory } from 'lucide-react';
 import { useI18n } from '../i18n';
 
 type Entity = {
@@ -16,6 +16,7 @@ type PackageItem = {
   package: string;
   version: string;
   desc?: string;
+  vendor?: string;
 };
 
 const sortByDisplayName = (items: Entity[]) =>
@@ -90,6 +91,7 @@ let lastSearchQuery = '';
 let lastSelectedArchs = new Set<string>();
 let lastSelectedCpus = new Set<string>();
 let lastSelectedCategories = new Set<string>();
+let lastSelectedVendors = new Set<string>();
 
 let cachedEntities: Entity[] | null = null;
 let cachedPackages: PackageItem[] | null = null;
@@ -109,6 +111,7 @@ export default function Explorer() {
   const [selectedArchs, setSelectedArchs] = useState<Set<string>>(lastSelectedArchs);
   const [selectedCpus, setSelectedCpus] = useState<Set<string>>(lastSelectedCpus);
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(lastSelectedCategories);
+  const [selectedVendors, setSelectedVendors] = useState<Set<string>>(lastSelectedVendors);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   useEffect(() => {
@@ -136,6 +139,10 @@ export default function Explorer() {
   useEffect(() => {
     lastSelectedCategories = selectedCategories;
   }, [selectedCategories]);
+
+  useEffect(() => {
+    lastSelectedVendors = selectedVendors;
+  }, [selectedVendors]);
 
   useEffect(() => {
     const handleWindowScroll = () => {
@@ -234,6 +241,14 @@ export default function Explorer() {
   );
   const categories = useMemo(
     () => Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
+      left.localeCompare(right, undefined, { sensitivity: 'base' }),
+    ),
+    [packages],
+  );
+  const vendors = useMemo(
+    () => Array.from(
+      new Set(packages.map((pkg) => pkg.vendor).filter((vendor): vendor is string => Boolean(vendor))),
+    ).sort((left, right) =>
       left.localeCompare(right, undefined, { sensitivity: 'base' }),
     ),
     [packages],
@@ -345,15 +360,16 @@ export default function Explorer() {
   const filteredPackages = useMemo(() => {
     return sortPackagesByIdAndVersion(packages.filter((pkg) => {
       if (selectedCategories.size > 0 && !selectedCategories.has(pkg.category)) return false;
+      if (selectedVendors.size > 0 && (!pkg.vendor || !selectedVendors.has(pkg.vendor))) return false;
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
-      return [pkg.package, pkg.category, pkg.version, pkg.desc || ''].join(' ').toLowerCase().includes(q);
+      return [pkg.package, pkg.category, pkg.vendor || '', pkg.version, pkg.desc || ''].join(' ').toLowerCase().includes(q);
     }));
-  }, [packages, selectedCategories, searchQuery]);
+  }, [packages, selectedCategories, selectedVendors, searchQuery]);
 
   const activeFiltersCount = activeTab === 'devices'
     ? selectedArchs.size + selectedCpus.size
-    : selectedCategories.size;
+    : selectedCategories.size + selectedVendors.size;
 
   const searchPlaceholder = activeTab === 'devices' ? t('searchPlaceholderDevices') : t('searchPlaceholderPackages');
   const showingCount = activeTab === 'devices' ? filteredDevices.length : filteredPackages.length;
@@ -366,7 +382,7 @@ export default function Explorer() {
       {mobileFiltersOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileFiltersOpen(false)} />
-          <aside className="absolute right-0 top-0 h-full w-80 bg-white p-4 shadow-lg pi-surface">
+          <aside className="absolute right-0 top-0 h-full w-80 overflow-y-auto bg-white p-4 shadow-lg pi-surface">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-[var(--text)]">{t('activeFilters')}</h3>
               <button onClick={() => setMobileFiltersOpen(false)} aria-label={t('clearFilters')} className="text-[var(--subtle)]">✕</button>
@@ -416,19 +432,35 @@ export default function Explorer() {
                 </section>
               </div>
             ) : (
-              <section>
-                <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
-                </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
-                  {categories.map((category) => (
-                    <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                      <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
-                      <span className="truncate">{category}</span>
-                    </label>
-                  ))}
-                </div>
-              </section>
+              <div className="space-y-6">
+                <section>
+                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                    <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
+                  </h2>
+                  <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                    {categories.map((category) => (
+                      <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                        <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                        <span className="truncate">{category}</span>
+                      </label>
+                    ))}
+                  </div>
+                </section>
+
+                <section>
+                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                    <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('vendors')}
+                  </h2>
+                  <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                    {vendors.map((vendor) => (
+                      <label key={vendor} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                        <input type="checkbox" checked={selectedVendors.has(vendor)} onChange={() => toggleFilter(selectedVendors, vendor, setSelectedVendors)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                        <span className="truncate" title={vendor}>{vendor}</span>
+                      </label>
+                    ))}
+                  </div>
+                </section>
+              </div>
             )}
           </aside>
         </div>
@@ -494,24 +526,45 @@ export default function Explorer() {
                 </section>
               </div>
             ) : (
-              <section>
-                <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
-                </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
-                  {categories.map((category) => (
-                    <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                      <input
-                        type="checkbox"
-                        checked={selectedCategories.has(category)}
-                        onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)}
-                        className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
-                      />
-                      <span className="truncate">{category}</span>
-                    </label>
-                  ))}
-                </div>
-              </section>
+              <div className="space-y-6">
+                <section>
+                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                    <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
+                  </h2>
+                  <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                    {categories.map((category) => (
+                      <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                        <input
+                          type="checkbox"
+                          checked={selectedCategories.has(category)}
+                          onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)}
+                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
+                        />
+                        <span className="truncate">{category}</span>
+                      </label>
+                    ))}
+                  </div>
+                </section>
+
+                <section>
+                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
+                    <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('vendors')}
+                  </h2>
+                  <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                    {vendors.map((vendor) => (
+                      <label key={vendor} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                        <input
+                          type="checkbox"
+                          checked={selectedVendors.has(vendor)}
+                          onChange={() => toggleFilter(selectedVendors, vendor, setSelectedVendors)}
+                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
+                        />
+                        <span className="truncate" title={vendor}>{vendor}</span>
+                      </label>
+                    ))}
+                  </div>
+                </section>
+              </div>
             )}
           </div>
         </aside>
@@ -563,6 +616,7 @@ export default function Explorer() {
                   setSelectedArchs(new Set());
                   setSelectedCpus(new Set());
                   setSelectedCategories(new Set());
+                  setSelectedVendors(new Set());
                 }}
                 className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[var(--subtle)] transition hover:bg-[var(--tintColor)] hover:text-[var(--text)]"
               >
@@ -625,9 +679,16 @@ export default function Explorer() {
                         </div>
                         <p className="mt-2 text-sm text-[var(--light)]">{pkg.desc || t('noDescription')}</p>
                       </div>
-                      <span className="pi-chip px-3 py-1 text-xs font-medium">
-                        {pkg.category}
-                      </span>
+                      <div className="flex shrink-0 flex-wrap gap-2 sm:justify-end">
+                        {pkg.vendor && (
+                          <span className="pi-chip inline-flex items-center gap-1 px-3 py-1 text-xs font-medium">
+                            <Factory className="h-3.5 w-3.5" /> {pkg.vendor}
+                          </span>
+                        )}
+                        <span className="pi-chip px-3 py-1 text-xs font-medium">
+                          {pkg.category}
+                        </span>
+                      </div>
                     </div>
                   </article>
                 </Link>

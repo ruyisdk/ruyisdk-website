@@ -224,11 +224,14 @@ def generate_static_api(repo_path: str, output_dir: str):
     for p in sorted(PACKAGES, key=cmp_to_key(compare_packages)):
         meta = p["data"].get("metadata", {})
         desc = meta.get("desc", "")
+        vendor_data = meta.get("vendor")
+        vendor = vendor_data.get("name", "") if isinstance(vendor_data, dict) else ""
         packages_res.append({
             "category": p["category"],
             "package": p["package"],
             "version": p["version"],
             "desc": desc,
+            "vendor": vendor,
             "file_path": p["file_path"]
         })
         
