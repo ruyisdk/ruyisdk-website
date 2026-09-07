@@ -1,13 +1,13 @@
 ## Installation Script (Recommended)
 
-The installer detects your architecture, downloads the latest stable release from the ISCAS mirror first, and installs it to ``~/.local/bin/ruyi``:
+The installer detects your architecture, downloads the latest stable release from the nearest mirror, and installs it to ``/usr/local/bin/ruyi``:
 
 ```bash input="1"
 $ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
 ```
 
-To install into a system directory, run the script with ``sudo`` and pass an explicit install path:
+To install into home directory, run the script and pass an explicit install path:
 
 ```bash input="1"
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh -s -- --install-dir ~/.local/bin
 ```
