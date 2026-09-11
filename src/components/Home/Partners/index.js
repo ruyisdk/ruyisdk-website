@@ -42,6 +42,7 @@ const partnersData = [
     { id: 13, name: "秦派软件", logoUrl: "/img/home/partners/about-partners-qinware.webp", url: "https://www.qinware.com/" },
     { id: 14, name: "匠芯创", logoUrl: "/img/home/partners/about-partners-artinchip.webp", url: "https://www.artinchip.com/", logoClass: "lg:scale-120" },
     { id: 15, name: "跃昉科技", logoUrl: "/img/home/partners/about-partners-leapfive.webp", url: "https://www.leapfive.com/", logoClass: "lg:scale-150" },
+    { id: 16, name: "进迭时空", logoUrl: "/img/home/partners/about-partners-spacemit.webp", url: "https://www.spacemit.com/", logoClass: "lg:scale-90" },
   ];
 
 export default function PartnersSection() {
