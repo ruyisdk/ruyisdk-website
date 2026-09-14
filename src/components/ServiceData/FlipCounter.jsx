@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CloudServerOutlined } from '@ant-design/icons';
 import styles from './FlipCounter.module.css';
+
+const CloudServerOutlined = () => (
+  <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+    <path d="M840 500H682c0-79.5-64.5-144-144-144s-144 64.5-144 144H236c-46.3 0-84 37.7-84 84v220c0 46.3 37.7 84 84 84h604c46.3 0 84-37.7 84-84V584c0-46.3-37.7-84-84-84zm-56 288H240V584h600v204zM538 212c-98.3 0-182 62.5-212.7 151.7 19.3 5.4 37.2 14.3 52.8 26.2C402.6 331 465 284 538 284c100.5 0 182 81.5 182 182 0 11.2-1 22.1-3 32.7 22.2 4.4 43 13 61.6 25 3.5-18.7 5.4-38 5.4-57.7 0-139.2-110.8-254-246-254z" />
+  </svg>
+);
 
 const FlipDigit = ({ digit }) => {
   const [currentDigit, setCurrentDigit] = useState(digit);
@@ -30,7 +35,7 @@ const FlipDigit = ({ digit }) => {
   );
 };
 
-const FlipCounter = ({ value, title, icon, color, loading, standalone = false }) => {
+const FlipCounter = ({ value, title, icon: _icon, color, loading, standalone = false }) => {
   const [displayValue, setDisplayValue] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);

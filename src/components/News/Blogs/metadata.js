@@ -16,7 +16,7 @@ export const BLOG_ARTICLES = [
     date: "2024-07-30",
     title: {
       "zh-Hans": "嘉楠勘智K230D: 首款基于新32位 RuyiSDK 的AIoT量产芯片",
-      en: "K230D: The First Mass-Produced AIoT Chip Based on the New 32-bit RuyiSDK",
+      en: "Canaan Kendryte K230D: The First Mass-Produced AIoT Chip Based on the New 32-bit RuyiSDK",
     },
     description: {
       "zh-Hans": "介绍基于新32位 RuyiSDK 的 K230D AIoT 量产芯片及其内存、性能收益。",
