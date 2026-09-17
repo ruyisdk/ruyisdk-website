@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Translate, { translate } from '@docusaurus/Translate';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import useDataWithApiFallback from '@site/src/utils/hooks/useDataWithApiFallback';
 import latestPmBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_pm.json';
 import latestVscodeBuilt from '@site/static/data/api/api_ruyisdk_cn/releases_latest_vscode.json';
@@ -477,6 +479,43 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
   );
 }
 
+function ImagerSection({ sectionId }) {
+  useBrokenLinks().collectAnchor(sectionId);
+  const docsUrl = useBaseUrl('/docs/Imager/');
+
+  return (
+    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
+      <ProductHeader
+        titleId="imager.name"
+        titleMessage="Ruyi Imager"
+        descriptionId="imager.downloads.description"
+        descriptionMessage="RISC-V 图形化镜像刷写工具"
+        accent="blue"
+        iconPath="M5 3h14v18H5V3zm3 4h8M8 11h8m-4 3v4m-2-2 2 2 2-2"
+      />
+      <div className="p-6 sm:p-8">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="text-sm font-semibold text-gray-600">
+            <Translate id="downloads.source.github">GitHub Release 下载：</Translate>
+          </div>
+          <div className="flex flex-wrap justify-start gap-3">
+            <DownloadButton accent="blue" href="https://github.com/Glavo/ruyi-imager/releases/latest">
+              <Translate id="downloads.button.latest">最新版本</Translate>
+            </DownloadButton>
+            <DownloadButton variant="secondary" href="https://github.com/Glavo/ruyi-imager/releases">
+              <Translate id="downloads.button.allVersions">所有版本</Translate>
+            </DownloadButton>
+          </div>
+        </div>
+      </div>
+      <ExternalLinks links={[
+        { href: docsUrl, label: <Translate id="downloads.viewDocs">安装文档</Translate> },
+        { href: 'https://github.com/Glavo/ruyi-imager', external: true, label: <Translate id="imager.source">项目源码</Translate> },
+      ]} />
+    </section>
+  );
+}
+
 function MarketplaceCard({ titleId, titleMessage, children }) {
   return (
     <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
@@ -716,6 +755,7 @@ export default function DownloadCards({
           }}
           onDirectLatest={handleDirectLatest}
         />
+        <ImagerSection sectionId={sectionIds.imager} />
       </div>
 
       <ArchSelectModal modalState={modalState} onClose={handleCloseModal} onSelect={handleSelectArch} />
