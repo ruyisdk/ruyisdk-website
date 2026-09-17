@@ -9,13 +9,14 @@ const SECTION_IDS = {
   packageManager: 'ruyisdk-package-manager',
   vscodeExtension: 'ruyisdk-vscode-extension',
   eclipseExtension: 'ruyisdk-eclipse-extension',
+  imager: 'ruyi-imager',
 };
 
 export default function DownloadsPage() {
   return (
     <Layout
       title={translate({ id: 'downloads.meta.title', message: '下载' })}
-      description={translate({ id: 'downloads.meta.description', message: '下载 RuyiSDK 包管理器与 IDE' })}
+      description={translate({ id: 'downloads.meta.description', message: '下载 RuyiSDK 包管理器、IDE 扩展和 Ruyi Imager' })}
     >
       <div className="relative min-h-screen text-gray-800 font-inter">
         <PageBackground />
@@ -25,7 +26,7 @@ export default function DownloadsPage() {
             <Translate id="downloads.title">下载 RuyiSDK</Translate>
           </h2>
           <p className="text-gray-500 text-lg md:text-xl leading-relaxed text-center mt-8">
-            <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器和 IDE，开启您的 RISC-V 开发之旅</Translate>
+            <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器、IDE 扩展和 Ruyi Imager，开启您的 RISC-V 开发之旅</Translate>
           </p>
 
           <DownloadGuide />
