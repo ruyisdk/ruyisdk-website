@@ -3,10 +3,10 @@
     {
       "total": 1,
       "author": {
-        "login": "KevinMX",
-        "id": 17025286,
-        "avatar_url": "https://avatars.githubusercontent.com/u/17025286?v=4",
-        "html_url": "https://github.com/KevinMX"
+        "login": "NX-lite",
+        "id": 281237347,
+        "avatar_url": "https://avatars.githubusercontent.com/u/281237347?v=4",
+        "html_url": "https://github.com/NX-lite"
       }
     },
     {
@@ -16,6 +16,15 @@
         "id": 23239892,
         "avatar_url": "https://avatars.githubusercontent.com/u/23239892?v=4",
         "html_url": "https://github.com/alapha23"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
+        "login": "KevinMX",
+        "id": 17025286,
+        "avatar_url": "https://avatars.githubusercontent.com/u/17025286?v=4",
+        "html_url": "https://github.com/KevinMX"
       }
     },
     {
@@ -30,10 +39,10 @@
     {
       "total": 4,
       "author": {
-        "login": "shenghailing00-stack",
-        "id": 256837162,
-        "avatar_url": "https://avatars.githubusercontent.com/u/256837162?v=4",
-        "html_url": "https://github.com/shenghailing00-stack"
+        "login": "lazyparser",
+        "id": 1802104,
+        "avatar_url": "https://avatars.githubusercontent.com/u/1802104?v=4",
+        "html_url": "https://github.com/lazyparser"
       }
     },
     {
@@ -48,10 +57,10 @@
     {
       "total": 4,
       "author": {
-        "login": "lazyparser",
-        "id": 1802104,
-        "avatar_url": "https://avatars.githubusercontent.com/u/1802104?v=4",
-        "html_url": "https://github.com/lazyparser"
+        "login": "shenghailing00-stack",
+        "id": 256837162,
+        "avatar_url": "https://avatars.githubusercontent.com/u/256837162?v=4",
+        "html_url": "https://github.com/shenghailing00-stack"
       }
     },
     {
@@ -127,7 +136,7 @@
       }
     },
     {
-      "total": 398,
+      "total": 400,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -137,7 +146,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-10T21:21:10.955Z",
+    "generatedAt": "2026-09-17T21:49:53.829Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-website/stats/contributors"
   }
 }

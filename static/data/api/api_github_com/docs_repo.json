@@ -1,13 +1,13 @@
 {
   "data": {
     "stargazers_count": 6,
-    "forks_count": 31,
-    "subscribers_count": 1,
-    "open_issues_count": 7,
-    "prs_count": 134
+    "forks_count": 32,
+    "subscribers_count": 0,
+    "open_issues_count": 9,
+    "prs_count": 136
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-10T21:16:52.242Z",
+    "generatedAt": "2026-09-17T21:49:49.774Z",
     "source": "https://api.github.com/repos/ruyisdk/docs"
   }
 }
