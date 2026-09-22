@@ -19,7 +19,7 @@
       }
     },
     {
-      "total": 2,
+      "total": 3,
       "author": {
         "login": "zhangyuxii",
         "id": 282112564,
@@ -28,7 +28,7 @@
       }
     },
     {
-      "total": 2,
+      "total": 3,
       "author": {
         "login": "DuoQilai",
         "id": 101803232,
@@ -109,7 +109,7 @@
       }
     },
     {
-      "total": 21,
+      "total": 22,
       "author": {
         "login": "U2FsdGVkX1",
         "id": 11484206,
@@ -118,7 +118,7 @@
       }
     },
     {
-      "total": 24,
+      "total": 25,
       "author": {
         "login": "pzhlkj6612",
         "id": 29089388,
@@ -127,7 +127,7 @@
       }
     },
     {
-      "total": 29,
+      "total": 30,
       "author": {
         "login": "qjivy",
         "id": 24410810,
@@ -145,7 +145,7 @@
       }
     },
     {
-      "total": 43,
+      "total": 44,
       "author": {
         "login": "imkiva",
         "id": 9902643,
@@ -182,7 +182,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-17T21:49:53.188Z",
+    "generatedAt": "2026-09-22T21:47:31.654Z",
     "source": "https://api.github.com/repos/ruyisdk/wechat-articles/stats/contributors"
   }
 }
