@@ -3,19 +3,19 @@
     {
       "total": 1,
       "author": {
-        "login": "NX-lite",
-        "id": 281237347,
-        "avatar_url": "https://avatars.githubusercontent.com/u/281237347?v=4",
-        "html_url": "https://github.com/NX-lite"
+        "login": "alapha23",
+        "id": 23239892,
+        "avatar_url": "https://avatars.githubusercontent.com/u/23239892?v=4",
+        "html_url": "https://github.com/alapha23"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "alapha23",
-        "id": 23239892,
-        "avatar_url": "https://avatars.githubusercontent.com/u/23239892?v=4",
-        "html_url": "https://github.com/alapha23"
+        "login": "NX-lite",
+        "id": 281237347,
+        "avatar_url": "https://avatars.githubusercontent.com/u/281237347?v=4",
+        "html_url": "https://github.com/NX-lite"
       }
     },
     {
@@ -136,7 +136,7 @@
       }
     },
     {
-      "total": 400,
+      "total": 402,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -146,7 +146,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-17T21:49:53.829Z",
+    "generatedAt": "2026-09-22T21:47:32.197Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-website/stats/contributors"
   }
 }

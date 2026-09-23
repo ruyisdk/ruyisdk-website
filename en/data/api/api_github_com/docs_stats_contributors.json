@@ -3,6 +3,15 @@
     {
       "total": 1,
       "author": {
+        "login": "Glavo",
+        "id": 20694662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/20694662?v=4",
+        "html_url": "https://github.com/Glavo"
+      }
+    },
+    {
+      "total": 1,
+      "author": {
         "login": "3077126169lin-rgb",
         "id": 289712896,
         "avatar_url": "https://avatars.githubusercontent.com/u/289712896?v=4",
@@ -191,7 +200,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-17T21:49:53.571Z",
+    "generatedAt": "2026-09-22T21:47:31.958Z",
     "source": "https://api.github.com/repos/ruyisdk/docs/stats/contributors"
   }
 }
