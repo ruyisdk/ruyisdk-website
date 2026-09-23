@@ -12,19 +12,19 @@
     {
       "total": 1,
       "author": {
-        "login": "dongdigua",
-        "id": 79030590,
-        "avatar_url": "https://avatars.githubusercontent.com/u/79030590?v=4",
-        "html_url": "https://github.com/dongdigua"
+        "login": "Gekyume777",
+        "id": 147403260,
+        "avatar_url": "https://avatars.githubusercontent.com/u/147403260?v=4",
+        "html_url": "https://github.com/Gekyume777"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "Gekyume777",
-        "id": 147403260,
-        "avatar_url": "https://avatars.githubusercontent.com/u/147403260?v=4",
-        "html_url": "https://github.com/Gekyume777"
+        "login": "dongdigua",
+        "id": 79030590,
+        "avatar_url": "https://avatars.githubusercontent.com/u/79030590?v=4",
+        "html_url": "https://github.com/dongdigua"
       }
     },
     {
@@ -52,6 +52,15 @@
         "id": 84754181,
         "avatar_url": "https://avatars.githubusercontent.com/u/84754181?v=4",
         "html_url": "https://github.com/xijing21"
+      }
+    },
+    {
+      "total": 2,
+      "author": {
+        "login": "ZihanCheng63",
+        "id": 183165673,
+        "avatar_url": "https://avatars.githubusercontent.com/u/183165673?v=4",
+        "html_url": "https://github.com/ZihanCheng63"
       }
     },
     {
@@ -93,10 +102,10 @@
     {
       "total": 3,
       "author": {
-        "login": "DuoQilai",
-        "id": 101803232,
-        "avatar_url": "https://avatars.githubusercontent.com/u/101803232?v=4",
-        "html_url": "https://github.com/DuoQilai"
+        "login": "zhiyao310",
+        "id": 235062947,
+        "avatar_url": "https://avatars.githubusercontent.com/u/235062947?v=4",
+        "html_url": "https://github.com/zhiyao310"
       }
     },
     {
@@ -133,6 +142,15 @@
         "id": 19223209,
         "avatar_url": "https://avatars.githubusercontent.com/u/19223209?v=4",
         "html_url": "https://github.com/cyjin-yl"
+      }
+    },
+    {
+      "total": 7,
+      "author": {
+        "login": "DuoQilai",
+        "id": 101803232,
+        "avatar_url": "https://avatars.githubusercontent.com/u/101803232?v=4",
+        "html_url": "https://github.com/DuoQilai"
       }
     },
     {
@@ -218,7 +236,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-17T21:49:54.843Z",
+    "generatedAt": "2026-09-22T21:43:18.568Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix/stats/contributors"
   }
 }
