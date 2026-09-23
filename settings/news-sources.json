@@ -1,0 +1,44 @@
+{
+  "zh-Hans": {
+    "articles": {
+      "prefix": "https://mp.weixin.qq.com/s/",
+      "path": "news/articles/*"
+    },
+    "ruyinews": {
+      "prefix": "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      "path": "news/ruyinews/news/20??*zh_CN.md"
+    },
+    "weeklies": {
+      "prefix": "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      "path": "news/weeklies/20??*.md"
+    }
+  },
+  "en": {
+    "articles": {
+      "prefix": "https://mp.weixin.qq.com/s/",
+      "path": "news/articles/*"
+    },
+    "ruyinews": {
+      "prefix": "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      "path": "news/ruyinews/news/20??*en_US.md"
+    },
+    "weeklies": {
+      "prefix": "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      "path": "news/weeklies/20??*.md"
+    }
+  },
+  "de": {
+    "articles": {
+      "prefix": "https://mp.weixin.qq.com/s/",
+      "path": "news/articles/*"
+    },
+    "ruyinews": {
+      "prefix": "https://github.com/ruyisdk/packages-index/blob/main/news/",
+      "path": "news/ruyinews/news/20??*en_US.md"
+    },
+    "weeklies": {
+      "prefix": "https://github.com/ruyisdk/wechat-articles/blob/main/",
+      "path": "news/weeklies/20??*.md"
+    }
+  }
+}

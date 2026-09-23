@@ -6,25 +6,23 @@ import Translate from '@docusaurus/Translate';
 import ExternalLinkIcon from '@theme/Icon/ExternalLink';
 
 import styles from './styles.module.css';
+import { getExternalLink } from '@site/src/utils/locale';
 
 export default function Footer() {
   const { i18n, siteConfig } = useDocusaurusContext();
-
-  function externalLinks(key) {
-    return siteConfig.customFields.externalLinks[key][i18n.currentLocale] ??
-      siteConfig.customFields.externalLinks[key].en;
-  }
+  const externalLinkMap = siteConfig.customFields.externalLinks;
+  const externalLink = (key) => getExternalLink(externalLinkMap, key, i18n.currentLocale);
 
   const links = [
     {
       title: <Translate id="footer.ecosystem">生态</Translate>,
       items: [
         { label: <Translate id="footer.ruyisdk">RuyiSDK</Translate>, to: "/docs/intro" },
-        { label: <Translate id="footer.matrix">Support Matrix</Translate>, href: externalLinks("support-matrix") },
+        { label: <Translate id="footer.matrix">Support Matrix</Translate>, href: externalLink("support-matrix") },
         { label: <Translate id="footer.ruyiai">RuyiAI</Translate>, href: "https://github.com/RuyiAI-Stack" },
         { label: <Translate id="footer.openruyi">openRuyi</Translate>, href: "https://github.com/openRuyi-Project" },
         { label: <Translate id="footer.rvck">RVCK</Translate>, href: "https://github.com/RVCK-Project/rvck" },
-        { label: <Translate id="footer.revyos">RevyOS</Translate>, href: externalLinks("revyos") },
+        { label: <Translate id="footer.revyos">RevyOS</Translate>, href: externalLink("revyos") },
       ],
     },
     {
@@ -41,7 +39,7 @@ export default function Footer() {
       items: [
         { label: <Translate id="footer.wechat">微信公众号</Translate>, className: 'hover-wechat-link', to: '/about' },
         { label: <Translate id="footer.qqgroup">QQ群</Translate>, className: 'hover-qq-link', to: '/about' },
-        // { label: <Translate id="footer.plct">PLCT 实验室</Translate>, href: externalLinks("plct") },
+        // { label: <Translate id="footer.plct">PLCT 实验室</Translate>, href: externalLink("plct") },
         { label: <Translate id="footer.intern">实习生招聘</Translate>, href: "https://github.com/plctlab/weloveinterns/blob/master/open-internships.md" },
       ],
     },

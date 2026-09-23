@@ -1,4 +1,4 @@
-import { Button, Card, ConfigProvider, Divider, Flex, Image } from "antd";
+import { Button, Card, ConfigProvider } from "antd";
 import styles from "./styles.module.css";
 
 const demoBoardData = [
