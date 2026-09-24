@@ -14,58 +14,163 @@
 
 .statsSection {
   background: transparent;
+  position: relative;
+  z-index: 1;
+  overflow: visible;
 }
 
+.statsRow {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Card layout on desktop (absolute overlay on map coordinates) - evenly distributed */
+@media (min-width: 992px) {
+  .statsSection {
+    position: relative;
+    width: 100%;
+    height: 520px; /* fixed height for map alignment */
+    margin: 0 auto;
+    overflow: visible;
+  }
+  
+  .statsRow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    margin: 0 !important;
+    overflow: visible;
+  }
+
+  .statCol0 { position: absolute; left: 5%; top: 18%; width: 250px; }
+  .statCol1 { position: absolute; left: 42%; top: 10%; width: 250px; }
+  .statCol2 { position: absolute; left: 26%; bottom: 41%; width: 250px; }
+  .statCol3 { position: absolute; left: 70%; bottom: 55%; width: 250px; }
+  .statCol4 { position: absolute; left: 8%; bottom: 19%; width: 250px; }
+  .statCol5 { position: absolute; left: 50%; bottom: 25%; width: 250px; }
+}
+
+/* Mobile & Tablet Card Layout: Normal size, fully expanded text */
 .statCard {
   position: relative;
-  height: 100%;
+  height: auto;
+  padding: 0.85rem 1rem;
   overflow: hidden;
-  background: #ffffff;
-  border: 1px solid rgba(15, 35, 70, 0.04);
-  border-radius: 16px;
-  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--card-border, rgba(15, 35, 70, 0.08));
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(12, 30, 60, 0.05);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  cursor: default;
+}
+
+/* Desktop Expandable Hover Card Layout */
+@media (min-width: 992px) {
+  .statCard {
+    cursor: pointer;
+    min-height: 78px;
+    max-height: 78px; /* collapsed state height */
+    padding: 0.65rem 0.95rem;
+    margin-bottom: 0;
+    z-index: 1;
+    /* transition z-index with a delay on collapse so it doesn't get covered while closing */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.3s ease, 
+                z-index 0.15s step-end;
+  }
+
+  .statCard:hover,
+  .statCard:focus-within {
+    max-height: 550px; /* expanded height limit (increased to fit telemetry description) */
+    z-index: 15; /* bring card to the front immediately */
+    box-shadow: 0 16px 32px rgba(12, 30, 60, 0.16);
+    border-color: rgba(10, 44, 126, 0.2);
+    /* elevate z-index instantly upon hover */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.3s ease, 
+                z-index 0s step-start;
+  }
 }
 
 .statTitle {
-  margin: 0 0 0.85rem;
-  color: #00163f;
-  font-size: 0.95rem;
+  margin: 0;
+  color: #0A2C7E; /* deep blue title */
+  font-size: 0.78rem;
   font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0;
+  line-height: 1.2;
+  text-align: left;
+  letter-spacing: 0.01em;
 }
 
 .statValue {
   display: flex;
   align-items: baseline;
-  justify-content: flex-start;
-  min-height: 44px;
-  gap: 0.35rem;
+  justify-content: center; /* centered inside the card */
+  flex-grow: 0;
+  margin-top: 0.2rem;
+  gap: 0.2rem;
 }
 
 .valueNumber {
-  color: #00163f;
-  font-weight: 800;
+  color: #000000; /* display value numbers in black */
+  font-size: 1.8rem;
+  font-weight: 850;
   line-height: 1;
 }
 
 .statUnit {
-  color: #2f4e86;
-  font-size: 0.85rem;
-  font-weight: 500;
+  color: #0A2C7E; /* keep unit in deep blue */
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.95;
 }
 
+/* Hide old divider and note visuals */
 .statDivider {
-  width: 100%;
-  height: 1px;
-  margin: 0.9rem 0 0.65rem;
-  background: #dfe6f1;
+  display: none !important;
 }
 
 .statNote {
-  margin: 0;
-  color: #6c7fa6;
-  line-height: 1.5;
+  display: none !important;
+}
+
+/* Inline Description Container */
+.cardDescription {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--card-divider, rgba(15, 35, 70, 0.08));
+  color: var(--card-desc-text, #4a5568);
+  text-align: left;
+  opacity: 1;
+  visibility: visible;
+  box-sizing: border-box;
+}
+
+/* Desktop Expand/Collapse Transition for the description */
+@media (min-width: 992px) {
+  .cardDescription {
+    opacity: 0;
+    visibility: hidden;
+    /* quick fadeout when collapsing */
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .statCard:hover .cardDescription,
+  .statCard:focus-within .cardDescription {
+    opacity: 1;
+    visibility: visible;
+    /* delay fadein slightly when expanding so text doesn't overlap during height resizing */
+    transition: opacity 0.3s ease 0.12s, visibility 0.3s ease 0.12s;
+  }
 }
 
 .updateTime {
@@ -73,9 +178,185 @@
   color: #6c7fa6;
   line-height: 1.5;
   text-align: right;
+  position: relative;
+  z-index: 1;
 }
 
 .markdownSection {
   margin: 3rem auto 0;
   width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* World Map Background */
+.worldMapWrapper {
+  --map-fill-light: rgba(10, 44, 126, 0.11);
+  --map-stroke-light: rgba(10, 44, 126, 0.17);
+  --map-fill-dark: rgba(138, 180, 248, 0.11);
+  --map-stroke-dark: rgba(138, 180, 248, 0.19);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1250px;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.95;
+}
+
+.worldMapWrapper :global(svg) {
+  width: 100%;
+  height: auto;
+}
+
+.worldMapWrapper :global(svg) path {
+  fill: var(--map-fill-light);
+  stroke: var(--map-stroke-light);
+  stroke-width: 0.5px;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* Dark theme overrides */
+:global([data-theme='dark']) .statCard {
+  --card-bg: #1b1b1d;
+  --card-border: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 992px) {
+  :global([data-theme='dark']) .statCard:hover,
+  :global([data-theme='dark']) .statCard:focus-within {
+    border-color: rgba(138, 180, 248, 0.3);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+  }
+}
+
+:global([data-theme='dark']) .statTitle {
+  color: #8ab4f8; /* light blue for dark mode titles */
+}
+
+:global([data-theme='dark']) .valueNumber {
+  color: #f5f6f8; /* off-white values in dark mode for accessibility */
+}
+
+:global([data-theme='dark']) .statUnit {
+  color: #8ab4f8;
+}
+
+:global([data-theme='dark']) .updateTime {
+  color: #8b929d;
+}
+
+:global([data-theme='dark']) .worldMapWrapper :global(svg) path {
+  fill: var(--map-fill-dark);
+  stroke: var(--map-stroke-dark);
+}
+
+/* Accessibility */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Custom classes for the details inside the cards, adapting to light/dark themes */
+.tooltipLabel {
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+  color: var(--tooltip-label, #0a2c7e); /* deep blue labels */
+}
+
+.tooltipWarning {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: var(--tooltip-warning, #b7791f); /* dark yellow/amber warning in light mode */
+}
+
+:global([data-theme='dark']) {
+  --tooltip-bg: #1c1c1e;
+  --tooltip-text: #e3e8f0;
+  --tooltip-label: #8ab4f8;
+  --tooltip-warning: #e0a13e;
+  --card-desc-text: #a0aec0;
+  --card-divider: rgba(255, 255, 255, 0.08);
+}.detailToggle {
+  color: #8a9cbd; /* small gray text by default */
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  margin: 3.5rem auto 0;
+  width: fit-content;
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  background: rgba(10, 44, 126, 0.02);
+  border: 1px dashed rgba(10, 44, 126, 0.12);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.detailToggle:hover {
+  color: #0A2C7E; /* deep blue on hover */
+  background: rgba(10, 44, 126, 0.05);
+  border-color: rgba(10, 44, 126, 0.35);
+}
+
+.collapseBtn {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  color: #8a9cbd;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 35, 70, 0.08);
+  background: var(--card-bg, #ffffff);
+  transition: all 0.2s ease;
+  z-index: 10;
+  user-select: none;
+}
+
+.collapseBtn:hover {
+  color: #0A2C7E;
+  background: rgba(10, 44, 126, 0.04);
+  border-color: rgba(10, 44, 126, 0.2);
+}
+
+:global([data-theme='dark']) .detailToggle {
+  color: #8b929d;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme='dark']) .detailToggle:hover {
+  color: #8ab4f8;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(138, 180, 248, 0.3);
+}
+
+:global([data-theme='dark']) .collapseBtn {
+  color: #8b929d;
+  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--card-bg, #1b1b1d);
+}
+
+:global([data-theme='dark']) .collapseBtn:hover {
+  color: #8ab4f8;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(138, 180, 248, 0.2);
 }
