@@ -9,10 +9,6 @@ export default function PaginatorNavLink(props) {
     <Link
       className={clsx(
         'pagination-nav__link',
-        // reset bg/border and link visuals
-        'bg-transparent border-0 shadow-none no-underline',
-        'block transition-colors duration-200',
-        'hover:text-[var(--ifm-link-color)]',
         className,
         { 'pagination-nav__link--next': isNext, 'pagination-nav__link--prev': !isNext }
       )}

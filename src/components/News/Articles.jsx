@@ -129,7 +129,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
         {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row md:items-stretch md:aspect-[4/1]`}
+            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row md:items-stretch md:min-h-[160px]`}
             onClick={() => onClick(article.link)}
           >
             {/* Content section (left on md+) */}
@@ -146,11 +146,11 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             </div>
 
             {/* Image section */}
-            <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
+            <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden aspect-video md:aspect-auto md:h-full">
               <img
                 src={resolveImg(article.image) || resolveImg("img/downloads/ruyi-logo-720.svg")}
                 alt={article.title}
-                className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="block h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
                   e.target.src = resolveImg("img/downloads/ruyi-logo-720.svg");
                 }}

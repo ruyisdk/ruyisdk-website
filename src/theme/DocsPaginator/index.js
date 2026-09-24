@@ -10,10 +10,9 @@ export default function DocsPaginator(props) {
     <nav
       className={clsx(
         'pagination-nav',
+        'docusaurus-mt-lg',
         // top border divider + spacing
-        'border-t border-[var(--ifm-hr-border-color)] mt-6 pt-4',
-        // two columns, items pinned left/right
-        'grid grid-cols-2 gap-8 items-start'
+        'border-t border-[var(--ifm-hr-border-color)] pt-6 mt-6'
       )}
       aria-label={Translate({
         id: 'theme.docs.paginator.navAriaLabel',
@@ -24,7 +23,6 @@ export default function DocsPaginator(props) {
         <PaginatorNavLink
           permalink={previous.permalink}
           title={previous.title}
-          className={clsx('justify-self-start text-left')}
           subLabel={Translate({
             id: 'theme.docs.paginator.previous',
             message: 'Previous',
@@ -36,7 +34,6 @@ export default function DocsPaginator(props) {
         <PaginatorNavLink
           permalink={next.permalink}
           title={next.title}
-          className={clsx('justify-self-end text-right')}
           subLabel={Translate({
             id: 'theme.docs.paginator.next',
             message: 'Next',
