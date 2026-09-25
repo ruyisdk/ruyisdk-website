@@ -1,70 +1,70 @@
 {
-  "last_updated": "2026-09-22T16:00:10.887183Z",
+  "last_updated": "2026-09-24T20:00:20.371534Z",
   "downloads": {
-    "total": 74070
+    "total": 74492
   },
   "pm_downloads": {
-    "total": 119696
+    "total": 119921
   },
   "other_categories_downloads": {
     "3rdparty": {
-      "total": 29321
+      "total": 29472
     },
     "humans": {
-      "total": 72064
+      "total": 76821
     },
     "ide": {
-      "total": 3998
+      "total": 4003
     }
   },
   "downloads_by_categories_v1": {
     "pkg": {
-      "total": 74070
+      "total": 74492
     },
     "pm:github": {
       "total": 6606
     },
     "pm:mirror": {
-      "total": 102329
+      "total": 102544
     },
     "pm:pypi": {
-      "total": 10761
+      "total": 10771
     },
     "3rdparty": {
-      "total": 29321
+      "total": 29472
     },
     "humans": {
-      "total": 72064
+      "total": 76821
     },
     "ide:eclipse:mirror": {
-      "total": 2379
+      "total": 2381
     },
     "ide:plugin:eclipse:mirror": {
-      "total": 635
+      "total": 636
     },
     "ide:plugin:eclipse:github": {
       "total": 156
     },
     "ide:plugin:vscode:mirror": {
-      "total": 702
+      "total": 704
     },
     "ide:plugin:vscode:github": {
       "total": 126
     }
   },
   "installs": {
-    "total": 39794
+    "total": 40034
   },
   "top_packages": {},
   "top_commands": {
     "ruyi update": {
-      "total": 43006
+      "total": 43241
     },
     "ruyi admin format-manifest": {
       "total": 20700
     },
     "ruyi list": {
-      "total": 16525
+      "total": 16527
     },
     "ruyi": {
       "total": 15456
@@ -76,7 +76,7 @@
       "total": 5123
     },
     "ruyi telemetry status": {
-      "total": 3570
+      "total": 3571
     },
     "ruyi telemetry consent": {
       "total": 3374
@@ -85,7 +85,7 @@
       "total": 2943
     },
     "ruyi install": {
-      "total": 2864
+      "total": 2872
     }
   },
   "github_org_stats": [
@@ -516,7 +516,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-22T22:04:23.610Z",
+    "generatedAt": "2026-09-24T22:13:42.584Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }

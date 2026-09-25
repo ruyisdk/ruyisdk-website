@@ -57,15 +57,6 @@
     {
       "total": 2,
       "author": {
-        "login": "ZihanCheng63",
-        "id": 183165673,
-        "avatar_url": "https://avatars.githubusercontent.com/u/183165673?v=4",
-        "html_url": "https://github.com/ZihanCheng63"
-      }
-    },
-    {
-      "total": 2,
-      "author": {
         "login": "ChestNutICE",
         "id": 114720311,
         "avatar_url": "https://avatars.githubusercontent.com/u/114720311?v=4",
@@ -100,7 +91,7 @@
       }
     },
     {
-      "total": 3,
+      "total": 4,
       "author": {
         "login": "zhiyao310",
         "id": 235062947,
@@ -124,6 +115,15 @@
         "id": 63940407,
         "avatar_url": "https://avatars.githubusercontent.com/u/63940407?v=4",
         "html_url": "https://github.com/Sharelter"
+      }
+    },
+    {
+      "total": 5,
+      "author": {
+        "login": "ZihanCheng63",
+        "id": 183165673,
+        "avatar_url": "https://avatars.githubusercontent.com/u/183165673?v=4",
+        "html_url": "https://github.com/ZihanCheng63"
       }
     },
     {
@@ -236,7 +236,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-22T21:43:18.568Z",
+    "generatedAt": "2026-09-24T21:56:50.904Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix/stats/contributors"
   }
 }
