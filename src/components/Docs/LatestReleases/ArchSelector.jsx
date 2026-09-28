@@ -29,7 +29,7 @@ export default function ArchSelector({ language = 'zh' }) {
       const url = new URL(link);
       const last = url.pathname.split('/').filter(Boolean).pop();
       return last || '';
-    } catch (e) {
+    } catch {
       return link.split('/').pop() || '';
     }
   }, [link]);

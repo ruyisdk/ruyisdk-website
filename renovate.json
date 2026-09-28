@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@docusaurus/"],
+      "groupName": "docusaurus packages"
+    },
+    {
+      "matchPackagePatterns": ["^react", "^@types/react"],
+      "groupName": "react ecosystem"
+    },
+    {
+      "matchPackagePatterns": ["^eslint", "^@typescript-eslint/"],
+      "groupName": "linting tools"
+    }
+  ]
+}

@@ -6,8 +6,29 @@ on:
       - main
 
 jobs:
+  quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.4.1
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run quality checks
+        run: pnpm lint && pnpm typecheck && pnpm test && pnpm run check:news-images && pnpm run check:blog-metadata && pnpm run check-deps-usage
+
   build:
     name: Build Docusaurus
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

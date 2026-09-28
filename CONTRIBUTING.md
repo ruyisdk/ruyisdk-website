@@ -83,14 +83,34 @@ git config --global user.email "your.email@example.com"
 
 All pull requests go through an automated DCO check in our continuous integration (CI) pipeline. This check verifies that all commits in your pull request have a proper DCO sign-off. If any commits are missing the sign-off, the CI check will fail, and your pull request cannot be merged until the issue is fixed.
 
+## Quality Assurance & Pre-flight Checks
+
+Before creating a pull request, make sure all automated checks pass locally:
+
+```bash
+pnpm run lint              # ESLint checks
+pnpm run typecheck         # TypeScript checks
+pnpm run test              # Vitest unit tests
+pnpm run check:news-images # News image validation
+pnpm run check:blog-metadata # Blog registration validation
+pnpm run check-deps-usage  # Dependency audit
+pnpm run build             # Multi-locale production build
+```
+
+For design guidelines and news/blog publishing workflows, please consult:
+- [Code & Style Guide](./STYLEGUIDE.md)
+- [Architecture Overview](./ARCHITECTURE.md)
+- [News & Blog Publishing Guide](./NEWS_GUIDE.md)
+
 ## Pull Request Process
 
 1. Fork the repository and create your branch from `main`.
-2. Make your changes, ensuring they follow the project's coding style and conventions.
-3. Add tests if applicable.
-4. Ensure your commits are signed-off with the DCO.
-5. Update documentation if necessary.
-6. Submit a pull request to the main repository.
+2. Make your changes, ensuring they follow the [Style Guide](./STYLEGUIDE.md).
+3. Add unit tests in `tests/unit/` if applicable.
+4. Ensure all quality checks (`pnpm run lint`, `pnpm run typecheck`, `pnpm test`, `pnpm run build`) pass.
+5. Ensure your commits are signed-off with the DCO.
+6. Update documentation if necessary.
+7. Submit a pull request to the main repository.
 
 ## Development Setup
 

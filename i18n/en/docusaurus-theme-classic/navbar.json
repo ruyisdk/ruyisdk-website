@@ -27,9 +27,9 @@
     "message": "Download",
     "description": "Navbar item with label 下载"
   },
-  "item.label.软件包": {
-    "message": "Packages",
-    "description": "Navbar item with label 软件包"
+  "item.label.包索引": {
+    "message": "Packages Index",
+    "description": "Navbar item with label 包索引"
   },
   "item.label.GitHub": {
     "message": "GitHub",

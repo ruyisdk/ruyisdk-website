@@ -68,13 +68,11 @@ export default function ContributorsPage() {
   // Try to load generated contributors file produced at build time
   let initialPeopleData = { coreTeam: [], interns: [], contributors: [] };
   try {
-    // This will be present after running the generate script during build/dev start
-    // eslint-disable-next-line import/no-dynamic-require, global-require
     const generated = require('@site/static/data/generated_contributors.json');
     if (generated && Array.isArray(generated.contributors)) {
       initialPeopleData = generated;
     }
-  } catch (e) {
+  } catch {
     // ignore, will fallback to locale JSON in effect below
   }
 
@@ -83,24 +81,20 @@ export default function ContributorsPage() {
   useEffect(() => {
     const detectedLocale = typeof window !== 'undefined' ? (window.location.pathname.split('/').filter(Boolean)[0] || 'zh-Hans') : 'zh-Hans';
 
-    // If generated data isn't available, use local peoples_*.json fallback
-    // TODO: core teams, should remove these code
     if (!peopleData || !(peopleData.contributors || []).length) {
       try {
-        // eslint-disable-next-line import/no-dynamic-require, global-require
         const module = require(`@site/src/components/Community/peoples_${detectedLocale === 'zh-Hans' ? 'zh-Hans' : detectedLocale}.json`);
         setPeopleData(module);
-      } catch (e) {
+      } catch {
         try {
-          // eslint-disable-next-line import/no-dynamic-require, global-require
           const module = require('@site/src/components/Community/peoples_en.json');
           setPeopleData(module);
-        } catch (err) {
+        } catch {
           setPeopleData({ coreTeam: [], interns: [], contributors: [] });
         }
       }
     }
-  }, []);
+  }, [peopleData]);
 
   const allPeople = [
     ...(peopleData.coreTeam || []),

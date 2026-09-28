@@ -1,9 +1,6 @@
-/* eslint-disable no-console */
-
 const fs = require('fs');
 const path = require('path');
-
-const glob = require('glob');
+const { glob } = require('glob');
 const matter = require('gray-matter');
 
 function parseArgs() {
@@ -13,9 +10,8 @@ function parseArgs() {
 
 function isAbsoluteUrl(url) {
   try {
-    // eslint-disable-next-line no-new
-    new URL(url);
-    return true;
+    const parsed = new URL(url);
+    return Boolean(parsed.protocol);
   } catch {
     return false;
   }

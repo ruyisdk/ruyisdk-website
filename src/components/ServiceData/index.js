@@ -150,7 +150,7 @@ const TopList = ({ data, title }) => {
 
   const barData = useMemo(() => {
     if (!debouncedData) return [];
-    return Object.entries(data)
+    return Object.entries(debouncedData)
       .map(([action, { total }]) => ({ 
         action, 
         total, 
@@ -179,7 +179,7 @@ const TopList = ({ data, title }) => {
     chart
       .interval()
       .style({ 
-        fill: (d, index) => {
+        fill: (d) => {
           const maxValue = Math.max(...barData.map(item => item.total));
           const minValue = Math.min(...barData.map(item => item.total));
           const normalizedValue = (d.total - minValue) / (maxValue - minValue);
@@ -433,7 +433,7 @@ const ServiceData = () => {
         setLoading(true);
         const response = await axiosInstance.post('/fe/dashboard', {});
         setData(response.data);
-      } catch (error) {
+      } catch {
         retryTimer = setTimeout(fetchData, Math.pow(2, retryCount) * RETRY_DELAY_BASE);
         retryCount++;
       } finally {

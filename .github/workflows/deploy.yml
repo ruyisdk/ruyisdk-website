@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -7,19 +7,21 @@ on:
     paths:
       - .github/workflows/deploy.yml
       - .github/workflows/composite_npm_build/**
-      - biweekly/**
-      - blog/**
       - docs/**
       - i18n/**
       - news/**
+      - scripts/**
+      - settings/**
       - src/**
       - static/**
       - package.json
       - pnpm-lock.yaml
       - docusaurus.config.js
+      - eslint.config.js
+      - tsconfig.json
+      - vitest.config.ts
       - postcss.config.cjs
       - tailwind.config.cjs
-      - uno.config.ts
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
@@ -27,8 +29,9 @@ jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
+    environment: cloudflare-pages
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +42,11 @@ jobs:
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4.0.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./build --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT_NAME }}
+          # Optional: Enable this if you want to have GitHub Deployments triggered
+          # gitHubToken: ${{ secrets.GITHUB_TOKEN }}

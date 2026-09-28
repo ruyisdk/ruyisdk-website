@@ -10,7 +10,6 @@ export default function AnnouncementBarContent(props) {
       {...props}
       className={clsx(styles.content, props.className)}
       // Developer provided the HTML, so assume it's safe.
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{__html: content}}
     />
   );

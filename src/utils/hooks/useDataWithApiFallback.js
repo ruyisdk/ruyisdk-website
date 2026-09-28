@@ -51,7 +51,7 @@ const useDataWithApiFallback = (
           setData(remoteData);
           setHasRemoteData(true);
         }
-      } catch (error) {
+      } catch {
         retryTimer = setTimeout(fetchData, Math.pow(2, retryCount) * retryDelayBase);
         retryCount++;
       }
