@@ -123,6 +123,13 @@
     box-shadow: none;
 }
 
+/* "返回主菜单" back button — use muted highlight instead of Docusaurus default primary */
+.navbar-sidebar__back {
+    background: #E5E0EC !important;
+    color: #000000 !important;
+    border-radius: 6px;
+}
+
 /* Remove centering on mobile devices */
 @media (max-width: 768px) {
     .navbar__inner {
