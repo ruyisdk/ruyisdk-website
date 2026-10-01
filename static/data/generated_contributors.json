@@ -14,7 +14,7 @@
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 668
+      "contributions": 669
     },
     {
       "id": 84754181,
@@ -129,17 +129,17 @@
       "contributions": 28
     },
     {
-      "id": 14993992,
-      "name": "Cyl18",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
-      "github": "https://github.com/Cyl18",
-      "contributions": 22
-    },
-    {
       "id": 147904598,
       "name": "Platohykj",
       "avatarUrl": "https://avatars.githubusercontent.com/u/147904598?v=4",
       "github": "https://github.com/Platohykj",
+      "contributions": 23
+    },
+    {
+      "id": 14993992,
+      "name": "Cyl18",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/14993992?v=4",
+      "github": "https://github.com/Cyl18",
       "contributions": 22
     },
     {
@@ -523,15 +523,15 @@
   ],
   "totals": {
     "contributors": 74,
-    "commits": 5065,
-    "pullRequests": 2359,
-    "issues": 98,
+    "commits": 5067,
+    "pullRequests": 2360,
+    "issues": 94,
     "stars": 123,
     "forks": 185,
     "watches": 20
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-09-29T23:05:30.573Z",
+    "generatedAt": "2026-10-01T23:18:04.865Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
