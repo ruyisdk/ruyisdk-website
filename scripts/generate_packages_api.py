@@ -1,77 +1,12 @@
 import os
 import json
-import re
 from pathlib import Path
 from copy import deepcopy
-from functools import cmp_to_key
 
 try:
     import tomllib
 except ImportError:
     import tomli as tomllib
-
-SEMVER_PATTERN = re.compile(
-    r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
-    r"(?:-((?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)"
-    r"(?:\.(?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*))?"
-    r"(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$"
-)
-
-def compare_numeric_identifiers(left: str, right: str):
-    if len(left) != len(right):
-        return len(left) - len(right)
-    return (left > right) - (left < right)
-
-def compare_prerelease(left: str | None, right: str | None):
-    if left == right:
-        return 0
-    if left is None:
-        return 1
-    if right is None:
-        return -1
-
-    for left_part, right_part in zip(left.split("."), right.split(".")):
-        if left_part == right_part:
-            continue
-        left_numeric = left_part.isdigit()
-        right_numeric = right_part.isdigit()
-        if left_numeric and right_numeric:
-            return compare_numeric_identifiers(left_part, right_part)
-        if left_numeric:
-            return -1
-        if right_numeric:
-            return 1
-        return (left_part > right_part) - (left_part < right_part)
-
-    return (len(left.split(".")) > len(right.split("."))) - (len(left.split(".")) < len(right.split(".")))
-
-def compare_semver_descending(left: str, right: str):
-    left_match = SEMVER_PATTERN.match(left)
-    right_match = SEMVER_PATTERN.match(right)
-    if not left_match or not right_match:
-        return (right > left) - (right < left)
-
-    for left_part, right_part in zip(left_match.group(1, 2, 3), right_match.group(1, 2, 3)):
-        difference = compare_numeric_identifiers(right_part, left_part)
-        if difference:
-            return difference
-    return -compare_prerelease(left_match.group(4), right_match.group(4))
-
-def compare_packages(left: dict, right: dict):
-    left_id = f"{left['category']}/{left['package']}"
-    right_id = f"{right['category']}/{right['package']}"
-    if left_id != right_id:
-        return (left_id > right_id) - (left_id < right_id)
-
-    version_comparison = compare_semver_descending(left["version"], right["version"])
-    if version_comparison:
-        return version_comparison
-    return (left["file_path"] > right["file_path"]) - (left["file_path"] < right["file_path"])
-
-def compare_entities(left: dict, right: dict):
-    left_id = f"{left['type']}/{left['id']}"
-    right_id = f"{right['type']}/{right['id']}"
-    return (left_id > right_id) - (left_id < right_id)
 
 def load_mirror_map(repo_path: str):
     config_path = Path(repo_path) / "config.toml"
@@ -147,10 +82,10 @@ def load_data(repo_path: str):
     
     entities_dir = Path(repo_path) / "entities"
     if entities_dir.exists():
-        for type_dir in sorted(entities_dir.iterdir()):
+        for type_dir in entities_dir.iterdir():
             if not type_dir.is_dir() or type_dir.name.startswith("_"):
                 continue
-            for file_path in sorted(type_dir.glob("*.toml")):
+            for file_path in type_dir.glob("*.toml"):
                 with open(file_path, "rb") as f:
                     try:
                         data = tomllib.load(f)
@@ -168,13 +103,13 @@ def load_data(repo_path: str):
 
     packages_dir = Path(repo_path) / "packages"
     if packages_dir.exists():
-        for cat_dir in sorted(packages_dir.iterdir()):
+        for cat_dir in packages_dir.iterdir():
             if not cat_dir.is_dir():
                 continue
-            for pkg_dir in sorted(cat_dir.iterdir()):
+            for pkg_dir in cat_dir.iterdir():
                 if not pkg_dir.is_dir():
                     continue
-                for file_path in sorted(pkg_dir.glob("*.toml")):
+                for file_path in pkg_dir.glob("*.toml"):
                     with open(file_path, "rb") as f:
                         try:
                             data = tomllib.load(f)
@@ -199,8 +134,7 @@ def generate_static_api(repo_path: str, output_dir: str):
     
     print("Generating entities.json...")
     entities_res = []
-    sorted_entities = sorted(ENTITIES, key=cmp_to_key(compare_entities))
-    for e in sorted_entities:
+    for e in ENTITIES:
         name = get_entity_display_name(e)
         eid = e["id"]
         entities_res.append({
@@ -221,7 +155,7 @@ def generate_static_api(repo_path: str, output_dir: str):
 
     print("Generating packages.json...")
     packages_res = []
-    for p in sorted(PACKAGES, key=cmp_to_key(compare_packages)):
+    for p in PACKAGES:
         meta = p["data"].get("metadata", {})
         desc = meta.get("desc", "")
         packages_res.append({
@@ -242,7 +176,7 @@ def generate_static_api(repo_path: str, output_dir: str):
         
     print("Generating hierarchy.json...")
     relations = {}
-    for e in sorted_entities:
+    for e in ENTITIES:
         my_ref = f"{e['type']}:{e['id']}"
         for rel in e["data"].get("related", []):
             if rel not in relations:

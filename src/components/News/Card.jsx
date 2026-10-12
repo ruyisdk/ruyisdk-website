@@ -1,7 +1,7 @@
 import React from "react";
 import LoadingSkeleton from "./LoadingSkeleton";
 
-const Card = ({ label, color, borderColor, items, onClick, loading }) => {
+const Card = ({ label, color, items, onClick, loading }) => {
   return (
     <div className={`rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-3 shadow-md`}>
       <div className="mb-2 flex items-center">
@@ -9,13 +9,7 @@ const Card = ({ label, color, borderColor, items, onClick, loading }) => {
         <span className="text-lg font-semibold text-gray-800">{label}</span>
       </div>
       {loading ? (
-        <div className="space-y-2">
-          {Array.from({ length: 6 }).map((_, idx) => (
-            <div key={idx} className="flex items-center justify-between rounded-md px-2 py-1.5">
-              <div className="skeleton-line skeleton w-3/4"></div>
-            </div>
-          ))}
-        </div>
+        <LoadingSkeleton type="sidebar" rows={6} color={color} />
       ) : (
         <div className="space-y-1.5">
           {items.map((item, index) => (

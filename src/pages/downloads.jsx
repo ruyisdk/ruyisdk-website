@@ -1,7 +1,8 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
-import DownloadCards, { COLOR_VARS } from '@site/src/components/Downloads/DownloadCards';
+import DownloadCards from '@site/src/components/Downloads/DownloadCards';
+import { COLOR_VARS } from '@site/src/components/Downloads/utils';
 import DownloadGuide from '@site/src/components/Downloads/DownloadGuide';
 import { PageBackground } from '@site/src/components/Home/Background';
 

@@ -1,87 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { getEntities, getPackages, getHierarchy } from '../api';
-import { Link } from 'react-router-dom';
-import { Search, Package, Server, Cpu, Layers, Tag, X, Filter } from 'lucide-react';
+import { Search, X, Filter } from 'lucide-react';
 import { useI18n } from '../i18n';
-
-type Entity = {
-  type: string;
-  id: string;
-  display_name: string;
-  related?: string[];
-};
-
-type PackageItem = {
-  category: string;
-  package: string;
-  version: string;
-  desc?: string;
-};
-
-const sortByDisplayName = (items: Entity[]) =>
-  [...items].sort((left, right) =>
-    left.display_name.localeCompare(right.display_name, undefined, {
-      sensitivity: 'base',
-    }),
-  );
-
-const semverPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
-
-const compareNumericIdentifiers = (left: string, right: string) => {
-  if (left.length !== right.length) return left.length - right.length;
-  if (left === right) return 0;
-  return left < right ? -1 : 1;
-};
-
-const comparePrerelease = (left: string | undefined, right: string | undefined) => {
-  if (left === right) return 0;
-  if (!left) return 1;
-  if (!right) return -1;
-
-  const leftParts = left.split('.');
-  const rightParts = right.split('.');
-  for (let index = 0; index < Math.max(leftParts.length, rightParts.length); index += 1) {
-    const leftPart = leftParts[index];
-    const rightPart = rightParts[index];
-    if (leftPart === rightPart) continue;
-    if (leftPart === undefined) return -1;
-    if (rightPart === undefined) return 1;
-    const leftNumber = /^\d+$/.test(leftPart);
-    const rightNumber = /^\d+$/.test(rightPart);
-    if (leftNumber && rightNumber) return compareNumericIdentifiers(leftPart, rightPart);
-    if (leftNumber) return -1;
-    if (rightNumber) return 1;
-    return leftPart < rightPart ? -1 : 1;
-  }
-  return 0;
-};
-
-const compareSemverDescending = (left: string, right: string) => {
-  const leftMatch = left.match(semverPattern);
-  const rightMatch = right.match(semverPattern);
-  if (!leftMatch || !rightMatch) {
-    return right.localeCompare(left, undefined, { sensitivity: 'base' });
-  }
-
-  for (let index = 1; index <= 3; index += 1) {
-    const difference = compareNumericIdentifiers(rightMatch[index], leftMatch[index]);
-    if (difference !== 0) return difference;
-  }
-  return -comparePrerelease(leftMatch[4], rightMatch[4]);
-};
-
-const sortPackagesByIdAndVersion = (items: PackageItem[]) =>
-  [...items].sort((left, right) => {
-    const idComparison = `${left.category}/${left.package}`.localeCompare(
-      `${right.category}/${right.package}`,
-      undefined,
-      { sensitivity: 'base' },
-    );
-    if (idComparison !== 0) return idComparison;
-    const versionComparison = compareSemverDescending(left.version, right.version);
-    if (versionComparison !== 0) return versionComparison;
-    return 0;
-  });
+import {
+  Entity,
+  PackageItem,
+  sortByDisplayName,
+  filterDevices,
+  filterPackages,
+} from './Explorer.filters';
+import { FilterSections, DeviceList, PackageList } from './Explorer.tree';
 
 let lastScrollTop = 0;
 let lastMainScrollTop = 0;
@@ -99,7 +27,7 @@ let isRestoring = false;
 
 export default function Explorer() {
   const { t } = useI18n();
-  const mainRef = React.useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
   const [entities, setEntities] = useState<Entity[]>(cachedEntities || []);
   const [packages, setPackages] = useState<PackageItem[]>(cachedPackages || []);
   const [hierarchy, setHierarchy] = useState<Record<string, string[]>>(cachedHierarchy || {});
@@ -181,7 +109,9 @@ export default function Explorer() {
         if (!isDone && attempts < 15) {
           setTimeout(restoreScroll, 30);
         } else {
-          setTimeout(() => { isRestoring = false; }, 50);
+          setTimeout(() => {
+            isRestoring = false;
+          }, 50);
         }
       };
 
@@ -201,7 +131,11 @@ export default function Explorer() {
       }
       setLoading(true);
       try {
-        const [ents, pkgs, hier] = await Promise.all([getEntities(), getPackages(), getHierarchy()]);
+        const [ents, pkgs, hier] = await Promise.all([
+          getEntities(),
+          getPackages(),
+          getHierarchy(),
+        ]);
         cachedEntities = ents;
         cachedPackages = pkgs;
         cachedHierarchy = hier;
@@ -227,29 +161,60 @@ export default function Explorer() {
     [entities],
   );
   const devices = useMemo(
-    () => [...entities].filter((entity) => entity.type === 'device').sort((left, right) =>
-      left.id.localeCompare(right.id, undefined, { sensitivity: 'base' }),
-    ),
+    () => entities.filter((entity) => entity.type === 'device'),
     [entities],
   );
   const categories = useMemo(
-    () => Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
-      left.localeCompare(right, undefined, { sensitivity: 'base' }),
-    ),
+    () =>
+      Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
+        left.localeCompare(right, undefined, { sensitivity: 'base' }),
+      ),
     [packages],
   );
   const variantNames = useMemo(
-    () => new Map(
-      entities
-        .filter((entity) => entity.type === 'device-variant')
-        .map((entity) => [entity.id, entity.display_name]),
-    ),
+    () =>
+      new Map(
+        entities
+          .filter((entity) => entity.type === 'device-variant')
+          .map((entity) => [entity.id, entity.display_name]),
+      ),
     [entities],
   );
 
+  const toggleFilter = (
+    set: Set<string>,
+    value: string,
+    setter: (next: Set<string>) => void,
+  ) => {
+    const next = new Set(set);
+    if (next.has(value)) next.delete(value);
+    else next.add(value);
+    setter(next);
+  };
+
+  const filteredDevices = useMemo(
+    () => filterDevices(devices, selectedArchs, selectedCpus, searchQuery, hierarchy),
+    [devices, selectedArchs, selectedCpus, searchQuery, hierarchy],
+  );
+
+  const filteredPackages = useMemo(
+    () => filterPackages(packages, selectedCategories, searchQuery),
+    [packages, selectedCategories, searchQuery],
+  );
+
+  const activeFiltersCount =
+    activeTab === 'devices'
+      ? selectedArchs.size + selectedCpus.size
+      : selectedCategories.size;
+
+  const searchPlaceholder =
+    activeTab === 'devices' ? t('searchPlaceholderDevices') : t('searchPlaceholderPackages');
+  const showingCount = activeTab === 'devices' ? filteredDevices.length : filteredPackages.length;
+  const listLabel = activeTab === 'devices' ? t('listByDevice') : t('listByPackages');
+
   const renderIosSelector = () => (
     <div className="relative flex bg-[#e3e3e6] dark:bg-zinc-800 p-0.5 rounded-lg w-full mb-4">
-      <div 
+      <div
         className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] bg-white dark:bg-zinc-700 rounded-md shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeTab === 'packages' ? 'translate-x-full' : 'translate-x-0'
         }`}
@@ -264,9 +229,13 @@ export default function Explorer() {
         }`}
       >
         {t('listByDevice')}
-        <span className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
-          activeTab === 'devices' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
-        }`}>
+        <span
+          className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
+            activeTab === 'devices'
+              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+              : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
+          }`}
+        >
           {devices.length}
         </span>
       </button>
@@ -280,96 +249,37 @@ export default function Explorer() {
         }`}
       >
         {t('listByPackages')}
-        <span className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
-          activeTab === 'packages' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
-        }`}>
+        <span
+          className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
+            activeTab === 'packages'
+              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+              : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
+          }`}
+        >
           {packages.length}
         </span>
       </button>
     </div>
   );
 
-  const toggleFilter = (set: Set<string>, value: string, setter: (next: Set<string>) => void) => {
-    const next = new Set(set);
-    if (next.has(value)) next.delete(value);
-    else next.add(value);
-    setter(next);
-  };
-
-  const getDescendants = (startNodes: string[]) => {
-    const visited = new Set<string>();
-    const queue = [...startNodes];
-
-    while (queue.length > 0) {
-      const node = queue.shift()!;
-      if (visited.has(node)) continue;
-      visited.add(node);
-      for (const child of hierarchy[node] || []) {
-        queue.push(child);
-      }
-    }
-
-    return visited;
-  };
-
-  const filteredDevices = useMemo(() => {
-    let validDeviceIds: Set<string> | null = null;
-
-    if (selectedArchs.size > 0 || selectedCpus.size > 0) {
-      const archDescendants = selectedArchs.size > 0
-        ? getDescendants(Array.from(selectedArchs).map((arch) => `arch:${arch}`))
-        : null;
-      const cpuDescendants = selectedCpus.size > 0
-        ? getDescendants(Array.from(selectedCpus).map((cpu) => `cpu:${cpu}`))
-        : null;
-
-      validDeviceIds = new Set(devices.map((device) => `device:${device.id}`));
-
-      if (archDescendants) {
-        validDeviceIds = new Set([...validDeviceIds].filter((id) => archDescendants.has(id)));
-      }
-      if (cpuDescendants) {
-        validDeviceIds = new Set([...validDeviceIds].filter((id) => cpuDescendants.has(id)));
-      }
-    }
-
-    return devices.filter((device) => {
-      if (validDeviceIds && !validDeviceIds.has(`device:${device.id}`)) return false;
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      const haystack = [device.display_name, device.id, ...(device.related || [])].join(' ').toLowerCase();
-      return haystack.includes(q);
-    });
-  }, [devices, selectedArchs, selectedCpus, searchQuery, hierarchy]);
-
-  const filteredPackages = useMemo(() => {
-    return sortPackagesByIdAndVersion(packages.filter((pkg) => {
-      if (selectedCategories.size > 0 && !selectedCategories.has(pkg.category)) return false;
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      return [pkg.package, pkg.category, pkg.version, pkg.desc || ''].join(' ').toLowerCase().includes(q);
-    }));
-  }, [packages, selectedCategories, searchQuery]);
-
-  const activeFiltersCount = activeTab === 'devices'
-    ? selectedArchs.size + selectedCpus.size
-    : selectedCategories.size;
-
-  const searchPlaceholder = activeTab === 'devices' ? t('searchPlaceholderDevices') : t('searchPlaceholderPackages');
-  const showingCount = activeTab === 'devices' ? filteredDevices.length : filteredPackages.length;
-  const listLabel = activeTab === 'devices' ? t('listByDevice') : t('listByPackages');
-  const activeDescription = activeTab === 'devices' ? t('deviceListDescription') : t('packageListDescription');
-
   return (
     <div className="pi-animate-fade-in-up flex h-full flex-col text-[var(--text)]">
-
       {mobileFiltersOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setMobileFiltersOpen(false)} />
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setMobileFiltersOpen(false)}
+          />
           <aside className="absolute right-0 top-0 h-full w-80 bg-white p-4 shadow-lg pi-surface">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-semibold text-[var(--text)]">{t('activeFilters')}</h3>
-              <button onClick={() => setMobileFiltersOpen(false)} aria-label={t('clearFilters')} className="text-[var(--subtle)]">✕</button>
+              <button
+                onClick={() => setMobileFiltersOpen(false)}
+                aria-label={t('clearFilters')}
+                className="text-[var(--subtle)]"
+              >
+                ✕
+              </button>
             </div>
             <div className="mb-4">
               <label className="relative block">
@@ -385,51 +295,20 @@ export default function Explorer() {
               </label>
             </div>
             {renderIosSelector()}
-            {activeTab === 'devices' ? (
-              <div className="space-y-6">
-                <section>
-                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Layers className="h-4 w-4 text-[var(--subtle)]" /> {t('architectures')}
-                  </h2>
-                  <div className="space-y-2">
-                    {archs.map((arch) => (
-                      <label key={arch.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input type="checkbox" checked={selectedArchs.has(arch.id)} onChange={() => toggleFilter(selectedArchs, arch.id, setSelectedArchs)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
-                        <span className="truncate" title={arch.display_name}>{arch.display_name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Cpu className="h-4 w-4 text-[var(--subtle)]" /> {t('cpus')}
-                  </h2>
-                  <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
-                    {cpus.map((cpu) => (
-                      <label key={cpu.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input type="checkbox" checked={selectedCpus.has(cpu.id)} onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
-                        <span className="truncate" title={cpu.display_name}>{cpu.display_name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </section>
-              </div>
-            ) : (
-              <section>
-                <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
-                </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
-                  {categories.map((category) => (
-                    <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                      <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
-                      <span className="truncate">{category}</span>
-                    </label>
-                  ))}
-                </div>
-              </section>
-            )}
+            <FilterSections
+              activeTab={activeTab}
+              archs={archs}
+              cpus={cpus}
+              categories={categories}
+              selectedArchs={selectedArchs}
+              selectedCpus={selectedCpus}
+              selectedCategories={selectedCategories}
+              toggleFilter={toggleFilter}
+              setSelectedArchs={setSelectedArchs}
+              setSelectedCpus={setSelectedCpus}
+              setSelectedCategories={setSelectedCategories}
+              t={t}
+            />
           </aside>
         </div>
       )}
@@ -453,66 +332,20 @@ export default function Explorer() {
 
             {renderIosSelector()}
 
-            {activeTab === 'devices' ? (
-              <div className="space-y-6">
-                <section>
-                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Layers className="h-4 w-4 text-[var(--subtle)]" /> {t('architectures')}
-                  </h2>
-                  <div className="space-y-2">
-                    {archs.map((arch) => (
-                      <label key={arch.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input
-                          type="checkbox"
-                          checked={selectedArchs.has(arch.id)}
-                          onChange={() => toggleFilter(selectedArchs, arch.id, setSelectedArchs)}
-                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
-                        />
-                        <span className="truncate" title={arch.display_name}>{arch.display_name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </section>
-
-                <section>
-                  <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Cpu className="h-4 w-4 text-[var(--subtle)]" /> {t('cpus')}
-                  </h2>
-                  <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
-                    {cpus.map((cpu) => (
-                      <label key={cpu.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input
-                          type="checkbox"
-                          checked={selectedCpus.has(cpu.id)}
-                          onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)}
-                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
-                        />
-                        <span className="truncate" title={cpu.display_name}>{cpu.display_name}</span>
-                      </label>
-                    ))}
-                  </div>
-                </section>
-              </div>
-            ) : (
-              <section>
-                <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
-                </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
-                  {categories.map((category) => (
-                    <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                      <input
-                        type="checkbox"
-                        checked={selectedCategories.has(category)}
-                        onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)}
-                        className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
-                      />
-                      <span className="truncate">{category}</span>
-                    </label>
-                  ))}
-                </div>
-              </section>
-            )}
+            <FilterSections
+              activeTab={activeTab}
+              archs={archs}
+              cpus={cpus}
+              categories={categories}
+              selectedArchs={selectedArchs}
+              selectedCpus={selectedCpus}
+              selectedCategories={selectedCategories}
+              toggleFilter={toggleFilter}
+              setSelectedArchs={setSelectedArchs}
+              setSelectedCpus={setSelectedCpus}
+              setSelectedCategories={setSelectedCategories}
+              t={t}
+            />
           </div>
         </aside>
 
@@ -554,7 +387,9 @@ export default function Explorer() {
             <div>
               <span className="font-medium text-[var(--text)]">{listLabel}</span>
               <span className="mx-2">·</span>
-              <span>{t('results')}: {showingCount}</span>
+              <span>
+                {t('results')}: {showingCount}
+              </span>
             </div>
             {activeFiltersCount > 0 && (
               <button
@@ -572,75 +407,17 @@ export default function Explorer() {
           </div>
 
           {loading ? (
-            <div className="flex min-h-[40vh] items-center justify-center text-sm text-[var(--subtle)]">{t('loading')}</div>
+            <div className="flex min-h-[40vh] items-center justify-center text-sm text-[var(--subtle)]">
+              {t('loading')}
+            </div>
           ) : activeTab === 'devices' ? (
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {filteredDevices.map((device) => {
-                const relatedVariants = (device.related || [])
-                  .filter((ref) => ref.startsWith('device-variant:'))
-                  .map((ref) => {
-                    const variantId = ref.slice('device-variant:'.length);
-                    return variantNames.get(variantId) || variantId;
-                  });
-
-                return (
-                  <Link to={`/device/${device.id}`} key={device.id} className="block">
-                    <article className="pi-card h-full p-4">
-                      <div className="mb-2 flex items-start justify-between gap-3">
-                        <div>
-                          <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{device.display_name}</h3>
-                          <p className="mt-1 text-xs font-mono text-[var(--subtle)]">{device.id}</p>
-                        </div>
-                        <span className="pi-chip px-2 py-1 text-[11px] font-medium">{t('deviceType')}</span>
-                      </div>
-                      {relatedVariants.length > 0 && (
-                        <div className="text-sm text-[var(--light)]">
-                          <span className="font-medium">{t('variants')}:</span>{' '}
-                          {relatedVariants.join(', ')}
-                        </div>
-                      )}
-                    </article>
-                  </Link>
-                );
-              })}
-
-              {filteredDevices.length === 0 && (
-                <div className="col-span-full flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white text-center shadow-sm">
-                  <Server className="h-10 w-10 text-[var(--home-ruyi-blue)]" />
-                  <div className="text-lg font-medium">{t('noDevices')}</div>
-                  <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
-                </div>
-              )}
-            </div>
+            <DeviceList
+              devices={filteredDevices}
+              variantNames={variantNames}
+              t={t}
+            />
           ) : (
-            <div className="space-y-3">
-              {filteredPackages.map((pkg) => (
-                <Link to={`/package/${pkg.category}/${pkg.package}/${pkg.version}`} key={`${pkg.category}-${pkg.package}-${pkg.version}`} className="block">
-                  <article className="pi-card p-4">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{pkg.package}</h3>
-                          <span className="rounded-md bg-[var(--tintColor)] px-2 py-0.5 text-xs font-mono text-[var(--subtle)]">{pkg.version}</span>
-                        </div>
-                        <p className="mt-2 text-sm text-[var(--light)]">{pkg.desc || t('noDescription')}</p>
-                      </div>
-                      <span className="pi-chip px-3 py-1 text-xs font-medium">
-                        {pkg.category}
-                      </span>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-
-              {filteredPackages.length === 0 && (
-                <div className="flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white text-center shadow-sm">
-                  <Package className="h-10 w-10 text-[var(--home-ruyi-blue)]" />
-                  <div className="text-lg font-medium">{t('noPackages')}</div>
-                  <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
-                </div>
-              )}
-            </div>
+            <PackageList packages={filteredPackages} t={t} />
           )}
         </main>
       </div>
