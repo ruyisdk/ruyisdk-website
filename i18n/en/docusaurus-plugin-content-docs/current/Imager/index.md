@@ -8,7 +8,7 @@ Ruyi Imager is a graphical image writer for RISC-V boards.
 
 ## Installation
 
-Download the package matching the current operating system and processor architecture from [GitHub Releases](https://github.com/Glavo/ruyi-imager/releases/latest).
+Download the package matching the current operating system and processor architecture from [GitHub Releases](https://github.com/ruyisdk/ruyi-imager/releases/latest).
 
 | Operating system | Processor architecture   | Packages            |
 |------------------|--------------------------|---------------------|
@@ -30,5 +30,5 @@ Flashing overwrites data on the target device. Back up the data and confirm the 
 
 ## Related Resources
 
-- [Source code and issue tracker](https://github.com/Glavo/ruyi-imager)
+- [Source code and issue tracker](https://github.com/ruyisdk/ruyi-imager)
 - [Download page](/en/downloads#ruyi-imager)

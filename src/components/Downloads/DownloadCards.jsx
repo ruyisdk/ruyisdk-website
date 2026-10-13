@@ -499,10 +499,10 @@ function ImagerSection({ sectionId }) {
             <Translate id="downloads.source.github">GitHub Release 下载：</Translate>
           </div>
           <div className="flex flex-wrap justify-start gap-3">
-            <DownloadButton accent="blue" href="https://github.com/Glavo/ruyi-imager/releases/latest">
+            <DownloadButton accent="blue" href="https://github.com/ruyisdk/ruyi-imager/releases/latest">
               <Translate id="downloads.button.latest">最新版本</Translate>
             </DownloadButton>
-            <DownloadButton variant="secondary" href="https://github.com/Glavo/ruyi-imager/releases">
+            <DownloadButton variant="secondary" href="https://github.com/ruyisdk/ruyi-imager/releases">
               <Translate id="downloads.button.allVersions">所有版本</Translate>
             </DownloadButton>
           </div>
@@ -510,7 +510,7 @@ function ImagerSection({ sectionId }) {
       </div>
       <ExternalLinks links={[
         { href: docsUrl, label: <Translate id="downloads.viewDocs">安装文档</Translate> },
-        { href: 'https://github.com/Glavo/ruyi-imager', external: true, label: <Translate id="imager.source">项目源码</Translate> },
+        { href: 'https://github.com/ruyisdk/ruyi-imager', external: true, label: <Translate id="imager.source">项目源码</Translate> },
       ]} />
     </section>
   );
