@@ -152,6 +152,13 @@
     white-space: nowrap;
 }
 
+/* Preserve collapsed navigation on smaller screens. */
+@media (max-width: 996px) {
+    .navbar__item {
+        display: none;
+    }
+}
+
 .navbar__item .navbar__link,
 .navbar__item .dropdown__link {
     display: flex;
