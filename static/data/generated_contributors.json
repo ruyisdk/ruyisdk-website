@@ -7,14 +7,14 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2336
+      "contributions": 2337
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 672
+      "contributions": 674
     },
     {
       "id": 84754181,
@@ -73,18 +73,18 @@
       "contributions": 78
     },
     {
+      "id": 95552651,
+      "name": "sisungo",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
+      "github": "https://github.com/sisungo",
+      "contributions": 68
+    },
+    {
       "id": 198067605,
       "name": "a1gorhythm7",
       "avatarUrl": "https://avatars.githubusercontent.com/u/198067605?v=4",
       "github": "https://github.com/a1gorhythm7",
       "contributions": 68
-    },
-    {
-      "id": 95552651,
-      "name": "sisungo",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
-      "github": "https://github.com/sisungo",
-      "contributions": 65
     },
     {
       "id": 62790279,
@@ -297,6 +297,13 @@
       "contributions": 7
     },
     {
+      "id": 183165673,
+      "name": "ZihanCheng63",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/183165673?v=4",
+      "github": "https://github.com/ZihanCheng63",
+      "contributions": 7
+    },
+    {
       "id": 36284558,
       "name": "stc15f104w",
       "avatarUrl": "https://avatars.githubusercontent.com/u/36284558?v=4",
@@ -329,13 +336,6 @@
       "name": "Master-Hash",
       "avatarUrl": "https://avatars.githubusercontent.com/u/56669192?v=4",
       "github": "https://github.com/Master-Hash",
-      "contributions": 5
-    },
-    {
-      "id": 183165673,
-      "name": "ZihanCheng63",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/183165673?v=4",
-      "github": "https://github.com/ZihanCheng63",
       "contributions": 5
     },
     {
@@ -523,15 +523,15 @@
   ],
   "totals": {
     "contributors": 74,
-    "commits": 5089,
-    "pullRequests": 2368,
+    "commits": 5097,
+    "pullRequests": 2392,
     "issues": 98,
-    "stars": 123,
-    "forks": 185,
+    "stars": 124,
+    "forks": 186,
     "watches": 20
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-10-15T22:12:53.453Z",
+    "generatedAt": "2026-10-20T22:20:18.221Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
