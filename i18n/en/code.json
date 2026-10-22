@@ -1233,5 +1233,515 @@
   },
   "no.data": {
     "message": "No statistical data available currently."
+  },
+  "flasher.title": {
+    "message": "Online image flasher"
+  },
+  "flasher.description": {
+    "message": "Flash RISC-V board images over USB with fastboot. Supports ZIP, TAR.GZ and Zstandard images."
+  },
+  "flasher.loading": {
+    "message": "Loading image flasher…"
+  },
+  "flasher.intro": {
+    "message": "Flash images to your board using Fastboot."
+  },
+  "flasher.browserHelp": {
+    "message": "Open this page over HTTPS in desktop Chrome or Edge to use WebUSB."
+  },
+  "flasher.prepare": {
+    "message": "Choose images"
+  },
+  "flasher.fileHelp": {
+    "message": "Add your downloaded images or archives together or one at a time."
+  },
+  "flasher.retry": {
+    "message": "Try again"
+  },
+  "flasher.addFiles": {
+    "message": "Add files"
+  },
+  "flasher.remove": {
+    "message": "Remove"
+  },
+  "flasher.removeFile": {
+    "message": "Remove {name}"
+  },
+  "flasher.missingFiles": {
+    "message": "Add the following files to continue:"
+  },
+  "flasher.selectFiles": {
+    "message": "Choose files"
+  },
+  "flasher.ambiguous": {
+    "message": "These filenames match several releases. Choose the release you want to flash."
+  },
+  "flasher.detected": {
+    "message": "Detected: {name} · {version}"
+  },
+  "flasher.selected": {
+    "message": "Selected: {name} · {version}"
+  },
+  "flasher.customHelp": {
+    "message": "Enter the target partition for this custom image."
+  },
+  "flasher.chooseMatching": {
+    "message": "Choose an image release"
+  },
+  "flasher.chooseRelease": {
+    "message": "Choose a release…"
+  },
+  "flasher.connect": {
+    "message": "Connect your board"
+  },
+  "flasher.connectHelp": {
+    "message": "Follow your board’s instructions to enter fastboot mode, then connect it with a USB data cable."
+  },
+  "flasher.noDevice": {
+    "message": "No device connected"
+  },
+  "flasher.deviceIdentity": {
+    "message": "USB {id} · Serial: {serial}"
+  },
+  "flasher.connectionHelp": {
+    "message": "USB connection guide"
+  },
+  "flasher.newDeviceHelp": {
+    "message": "You may need to select the device again during flashing. Follow the prompt when it appears."
+  },
+  "flasher.browse": {
+    "message": "Browse boards and images →"
+  },
+  "flasher.connecting": {
+    "message": "Connecting…"
+  },
+  "flasher.reconnect": {
+    "message": "Reconnect board"
+  },
+  "flasher.selectDevice": {
+    "message": "Select USB device"
+  },
+  "flasher.review": {
+    "message": "Review and flash"
+  },
+  "flasher.image": {
+    "message": "Image to write"
+  },
+  "flasher.partition": {
+    "message": "Target partition"
+  },
+  "flasher.partitionExample": {
+    "message": "e.g. boot"
+  },
+  "flasher.partitionHelp": {
+    "message": "Use the partition name from your board’s flashing instructions."
+  },
+  "flasher.step": {
+    "message": "Step"
+  },
+  "flasher.operation": {
+    "message": "Operation"
+  },
+  "flasher.size": {
+    "message": "Image size"
+  },
+  "flasher.verified": {
+    "message": "Original files passed checksum verification."
+  },
+  "flasher.unverified": {
+    "message": "Some files have no checksum to verify against. Make sure you trust their source."
+  },
+  "flasher.confirmation": {
+    "message": "I have checked the board model, image release and target partitions, and agree to overwrite data on the selected device."
+  },
+  "flasher.reconnectHelp": {
+    "message": "Select the same board again, check the device, then continue flashing."
+  },
+  "flasher.continue": {
+    "message": "Continue flashing"
+  },
+  "flasher.flash": {
+    "message": "Start flashing"
+  },
+  "flasher.cancel": {
+    "message": "Cancel loading"
+  },
+  "flasher.stopping": {
+    "message": "Stopping after the current step…"
+  },
+  "flasher.stop": {
+    "message": "Stop after this step"
+  },
+  "flasher.preparationProgress": {
+    "message": "Image loading progress"
+  },
+  "flasher.transferProgress": {
+    "message": "Current step transfer progress"
+  },
+  "flasher.transferStatus": {
+    "message": "Transferred {percent}%. Wait for the device to finish writing."
+  },
+  "flasher.reboot": {
+    "message": "Reboot device"
+  },
+  "flasher.clear": {
+    "message": "Clear images"
+  },
+  "flasher.sessionLog": {
+    "message": "Flashing log"
+  },
+  "flasher.sessionLogLabel": {
+    "message": "Flashing log"
+  },
+  "flasher.preparing": {
+    "message": "Loading images…"
+  },
+  "flasher.ready": {
+    "message": "Images loaded. Check the target partitions."
+  },
+  "flasher.prepared": {
+    "message": "Loaded {count} image file(s)."
+  },
+  "flasher.fastbootDevice": {
+    "message": "Fastboot device"
+  },
+  "flasher.notReported": {
+    "message": "Not reported"
+  },
+  "flasher.noSerial": {
+    "message": "no serial number"
+  },
+  "flasher.connected": {
+    "message": "Connected: {name} ({serial})"
+  },
+  "flasher.stepCompleted": {
+    "message": "Completed step {current} of {total}"
+  },
+  "flasher.done": {
+    "message": "Flashing complete."
+  },
+  "flasher.flashFailed": {
+    "message": "{detail} Flashing stopped. Completed writes are kept."
+  },
+  "flasher.cleanupFailed": {
+    "message": "Could not clear temporary files: {detail}"
+  },
+  "flasher.rebootRequested": {
+    "message": "Reboot requested."
+  },
+  "flasher.verifying": {
+    "message": "Verifying: {name}"
+  },
+  "flasher.extracting": {
+    "message": "Extracting: {name}"
+  },
+  "flasher.decompressing": {
+    "message": "Extracting: {name}"
+  },
+  "flasher.reconnectStep": {
+    "message": "{command} → reconnect"
+  },
+  "flasher.externalError": {
+    "message": "Operation failed: {detail}"
+  },
+  "flasher.deviceError": {
+    "message": "Device rejected the command: {detail}"
+  },
+  "flasher.entry": {
+    "message": "Flash online"
+  },
+  "flasher.error.pageClosed": {
+    "message": "Page closed"
+  },
+  "flasher.error.storageUnsupported": {
+    "message": "This browser does not support temporary file storage. Use a current desktop Chrome or Edge."
+  },
+  "flasher.error.preparation": {
+    "message": "Could not load images"
+  },
+  "flasher.error.stopped": {
+    "message": "Stopped before the next step. Completed writes have been retained."
+  },
+  "flasher.error.stoppedBeforeReconnect": {
+    "message": "Stopped before reconnection. Completed writes have been retained."
+  },
+  "flasher.error.cancelled": {
+    "message": "Image loading cancelled"
+  },
+  "flasher.error.stoppedWhileReconnecting": {
+    "message": "Stopped while waiting for reconnection"
+  },
+  "flasher.error.downloadSize": {
+    "message": "Download size mismatch: {name}"
+  },
+  "flasher.error.noChecksum": {
+    "message": "No checksum is available for {name}"
+  },
+  "flasher.error.checksum": {
+    "message": "Checksum mismatch: {name}"
+  },
+  "flasher.error.duplicate": {
+    "message": "Duplicate image: {name}"
+  },
+  "flasher.error.tooManyImages": {
+    "message": "Too many image files"
+  },
+  "flasher.error.storageInsufficient": {
+    "message": "Not enough browser storage for the extracted images"
+  },
+  "flasher.error.storageLimit": {
+    "message": "Browser storage limit exceeded"
+  },
+  "flasher.error.storageWrite": {
+    "message": "Failed to write extracted image"
+  },
+  "flasher.error.truncatedImage": {
+    "message": "Truncated image: {name}"
+  },
+  "flasher.error.emptyInput": {
+    "message": "Empty input file: {name}"
+  },
+  "flasher.error.encryptedZip": {
+    "message": "Encrypted ZIP files are not supported"
+  },
+  "flasher.error.profileMismatch": {
+    "message": "This image does not belong to the selected profile: {name}"
+  },
+  "flasher.error.zstdInit": {
+    "message": "Could not initialize Zstandard"
+  },
+  "flasher.error.invalidZstd": {
+    "message": "Invalid Zstandard image"
+  },
+  "flasher.error.truncatedZstd": {
+    "message": "Truncated Zstandard image"
+  },
+  "flasher.error.unsupportedFile": {
+    "message": "Unsupported file or image does not match the selected profile: {name}"
+  },
+  "flasher.error.noImages": {
+    "message": "No matching images found"
+  },
+  "flasher.error.noInterface": {
+    "message": "The selected device does not expose a fastboot interface"
+  },
+  "flasher.error.usbTimeout": {
+    "message": "USB operation timed out. Reconnect the device before continuing."
+  },
+  "flasher.error.disconnected": {
+    "message": "Device disconnected"
+  },
+  "flasher.error.usbResponse": {
+    "message": "Invalid USB response"
+  },
+  "flasher.error.fastbootResponse": {
+    "message": "Unexpected fastboot response: {status}"
+  },
+  "flasher.error.tooManyResponses": {
+    "message": "Too many fastboot status messages"
+  },
+  "flasher.error.command": {
+    "message": "Invalid fastboot command"
+  },
+  "flasher.error.commandTransfer": {
+    "message": "Incomplete USB command transfer"
+  },
+  "flasher.error.unexpectedData": {
+    "message": "Unexpected DATA response to {command}"
+  },
+  "flasher.error.downloadLimit": {
+    "message": "Invalid max-download-size"
+  },
+  "flasher.error.imageTransfer": {
+    "message": "Incomplete USB image transfer"
+  },
+  "flasher.error.downloadLength": {
+    "message": "Invalid fastboot download size"
+  },
+  "flasher.error.acceptedLength": {
+    "message": "Device accepted an unexpected download size"
+  },
+  "flasher.error.dataAfterTransfer": {
+    "message": "Unexpected DATA after image transfer"
+  },
+  "flasher.error.partitionName": {
+    "message": "Invalid partition name"
+  },
+  "flasher.error.ramLimit": {
+    "message": "RAM image exceeds the device download limit"
+  },
+  "flasher.error.stageLimit": {
+    "message": "Boot-stage image exceeds the device download limit"
+  },
+  "flasher.error.archivePath": {
+    "message": "Invalid archive path"
+  },
+  "flasher.error.ambiguousImage": {
+    "message": "Ambiguous image: {name}"
+  },
+  "flasher.error.missingImage": {
+    "message": "Missing image: {name}"
+  },
+  "flasher.error.emptyNamedImage": {
+    "message": "Empty image: {name}"
+  },
+  "flasher.error.strategy": {
+    "message": "Unsupported flashing strategy: {strategy}"
+  },
+  "flasher.error.emptyPlan": {
+    "message": "The flashing plan is empty"
+  },
+  "flasher.error.emptyImage": {
+    "message": "Empty image"
+  },
+  "flasher.error.sparseHeader": {
+    "message": "Unsupported sparse image header"
+  },
+  "flasher.error.sparseDimensions": {
+    "message": "Invalid sparse image dimensions"
+  },
+  "flasher.error.sparseChunkHeader": {
+    "message": "Truncated sparse chunk header"
+  },
+  "flasher.error.sparseChunk": {
+    "message": "Invalid sparse chunk"
+  },
+  "flasher.error.sparseLength": {
+    "message": "Sparse image length mismatch"
+  },
+  "flasher.error.sparseBlockLimit": {
+    "message": "Image exceeds sparse block count limit"
+  },
+  "flasher.error.sparseDownloadLimit": {
+    "message": "Device download limit is too small for sparse images"
+  },
+  "flasher.error.truncatedArchive": {
+    "message": "Truncated archive"
+  },
+  "flasher.error.negativeTarSize": {
+    "message": "Negative tar size"
+  },
+  "flasher.error.tarNumber": {
+    "message": "Invalid tar number"
+  },
+  "flasher.error.tarEntrySize": {
+    "message": "Tar entry is too large"
+  },
+  "flasher.error.paxHeader": {
+    "message": "Invalid PAX header"
+  },
+  "flasher.error.paxRecord": {
+    "message": "Invalid PAX record"
+  },
+  "flasher.error.paxField": {
+    "message": "Invalid PAX field"
+  },
+  "flasher.error.sparseTar": {
+    "message": "Sparse tar archives must be extracted before use"
+  },
+  "flasher.error.tarEnd": {
+    "message": "Invalid tar end marker"
+  },
+  "flasher.error.tarTrailingData": {
+    "message": "Unexpected data after tar end marker"
+  },
+  "flasher.error.tarChecksum": {
+    "message": "Invalid tar header checksum"
+  },
+  "flasher.error.tarMetadataSize": {
+    "message": "Tar metadata is too large"
+  },
+  "flasher.error.paxSize": {
+    "message": "Invalid PAX size"
+  },
+  "flasher.error.zstdMagic": {
+    "message": "Invalid Zstandard frame magic"
+  },
+  "flasher.error.zstdFlags": {
+    "message": "Reserved Zstandard frame flags"
+  },
+  "flasher.error.zstdBlockType": {
+    "message": "Invalid Zstandard block type"
+  },
+  "flasher.error.zstdBlockSize": {
+    "message": "Invalid Zstandard block size"
+  },
+  "flasher.help.tryFirst": {
+    "message": "Try selecting your USB device first. Extra setup is only needed if your computer cannot access the board."
+  },
+  "flasher.help.fastboot": {
+    "message": "Follow your board's instructions to enter fastboot mode and use its USB flashing port. A power-only or serial-console port will not work."
+  },
+  "flasher.help.cable": {
+    "message": "Connect directly to your computer with a USB data cable. If the board does not appear, try another cable or port and disconnect USB hubs."
+  },
+  "flasher.help.permission": {
+    "message": "Click Select USB device, choose your board, and allow the connection in the browser dialog. This permission does not install a driver or change your computer's USB permissions."
+  },
+  "flasher.help.platform": {
+    "message": "Your operating system"
+  },
+  "flasher.help.other": {
+    "message": "Other / not sure"
+  },
+  "flasher.help.windows": {
+    "message": "Open Device Manager while the board is in fastboot mode. If its USB device has a warning or cannot be opened, follow the board vendor's instructions to install a compatible WinUSB driver. Some boards configure this automatically."
+  },
+  "flasher.help.windowsDevice": {
+    "message": "Check the board's USB device or fastboot interface, not its serial port. Google USB Driver is for supported Google devices; use the driver recommended for your board."
+  },
+  "flasher.help.windowsLink": {
+    "message": "WinUSB setup reference"
+  },
+  "flasher.help.linux": {
+    "message": "Your distribution may already grant access to fastboot devices. If access is denied, install your board vendor's udev rules, or add a rule for this board on systems using systemd-logind."
+  },
+  "flasher.help.linuxIdentify": {
+    "message": "Run lsusb with the board connected in fastboot mode. Find its ID in the form vvvv:pppp (vendor ID:product ID). Compare the list before and after connecting if needed."
+  },
+  "flasher.help.linuxEdit": {
+    "message": "Open the following rule file as administrator. Add the example rule, replacing vvvv and pppp with the board's actual four-digit hexadecimal IDs in lowercase, then save it."
+  },
+  "flasher.help.linuxReload": {
+    "message": "Reload the rules, unplug and reconnect the board, then select it in the browser again. This grants access to the active local desktop user; the browser should run as your normal user."
+  },
+  "flasher.help.linuxStages": {
+    "message": "A board may use a different USB ID after a boot-stage transition. If access fails after reconnecting, check lsusb again and add a separate rule for that ID."
+  },
+  "flasher.help.linuxLink": {
+    "message": "Linux USB permissions reference"
+  },
+  "flasher.help.noDriver": {
+    "message": "Usually no additional USB driver or permission rule is needed. Use Chrome or another WebUSB-capable browser, select your board, and close any other application using its USB interface."
+  },
+  "flasher.help.otherPlatform": {
+    "message": "Use a desktop browser that supports WebUSB, such as Chrome or Edge, over HTTPS or localhost. Follow your operating system and board vendor's USB setup instructions if the device cannot be opened."
+  },
+  "flasher.help.stillFailing": {
+    "message": "Still unable to connect?"
+  },
+  "flasher.help.busy": {
+    "message": "Close other flashing tools, browser tabs, and applications using the board, then reconnect. If an ADB server is running and holding the device, stop it with adb kill-server."
+  },
+  "flasher.help.reconnectIdentity": {
+    "message": "The device name can change between boot stages. Select the same physical board and check its identity before continuing."
+  },
+  "flasher.profileConflict": {
+    "message": "These files do not belong to one compatible release. Remove unrelated files or a mismatched U-Boot image before continuing."
+  },
+  "flasher.chooseBoardVariant": {
+    "message": "Choose the release matching your board's RAM capacity"
+  },
+  "flasher.lpi4aBootstrap": {
+    "message": "LicheePi 4A needs a matching U-Boot image before boot/root can be written from BOOT mode. Add the U-Boot file for your board's RAM capacity and this release. The plan loads it into RAM, reboots, then writes U-Boot and the system images."
+  },
+  "flasher.lpi4aConnect": {
+    "message": "Start with the board powered off. Hold BOOT while connecting USB, then release BOOT. After the temporary U-Boot starts, select the same board again without holding BOOT or disconnecting power."
+  },
+  "flasher.lpi4aReconnect": {
+    "message": "Temporary U-Boot has started. Keep power connected and leave BOOT released. Select the same board again, check the device, then continue flashing."
+  },
+  "flasher.deviceCommandError": {
+    "message": "Device rejected {command}: {detail}"
   }
 }

@@ -1,0 +1,353 @@
+.page {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  color: var(--ifm-font-color-base);
+}
+.hero {
+  margin-bottom: 32px;
+}
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.035em;
+}
+.hero p {
+  font-size: 1.15rem;
+  color: #526179;
+  max-width: 650px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.steps {
+  margin-bottom: 24px;
+}
+.steps > .card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+.cardActions {
+  display: flex;
+  margin-top: 16px;
+}
+.cardActions button {
+  margin: 0;
+}
+.card {
+  min-width: 0;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid #dde5ee;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 5px 20px #1f395208;
+}
+.card h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  margin: 0 0 16px;
+}
+.number {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e8f2fa;
+  color: #265980;
+  font-size: 0.9rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.field select,
+.field input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #cad6e3;
+  border-radius: 9px;
+  padding: 12px;
+  background: var(--ifm-background-surface-color);
+  color: inherit;
+  font: inherit;
+  font-size: 0.9rem;
+}
+.field small {
+  font-weight: 400;
+  color: #526179;
+}
+.muted,
+.hint {
+  color: #526179;
+}
+.hint {
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
+.upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #98b5d1;
+  border-radius: 10px;
+  padding: 24px 16px;
+  background: #f7fafd;
+  cursor: pointer;
+}
+.upload:focus-within {
+  outline: 3px solid #62a7d9;
+  outline-offset: 3px;
+}
+.upload:has(input:disabled) {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.upload input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: inherit;
+}
+.browse {
+  display: inline-block;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+.fileList {
+  padding-left: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.fileList small {
+  display: block;
+  color: #526179;
+}
+.fileList li {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.removeFile {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--ifm-color-primary);
+  font: inherit;
+  cursor: pointer;
+}
+.removeFile:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.device {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: #f3f7fb;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.device svg {
+  flex-shrink: 0;
+  color: #427ca4;
+}
+.device small {
+  display: block;
+  color: #526179;
+  margin-top: 4px;
+}
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 4px 10px 4px 0;
+}
+.primary {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: 1px solid var(--ifm-color-primary);
+}
+.secondary {
+  background: transparent;
+  border: 1px solid #b5c6d7;
+  color: inherit;
+}
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.page button:focus-visible,
+.page input:focus-visible,
+.page select:focus-visible {
+  outline: 3px solid #62a7d9;
+  outline-offset: 3px;
+}
+.help {
+  margin: 12px 0;
+  color: #526179;
+  font-size: 0.9rem;
+}
+.help summary {
+  cursor: pointer;
+  color: var(--ifm-color-primary);
+  margin-bottom: 10px;
+}
+.connectionHelp {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.connectionHelp h3 {
+  margin-top: 20px;
+  font-size: 1rem;
+}
+.connectionHelp li + li {
+  margin-top: 10px;
+}
+.connectionHelp ol,
+.connectionHelp ul {
+  padding-left: 1.5rem;
+}
+.connectionHelp ol {
+  list-style-type: decimal;
+}
+.connectionHelp ul {
+  list-style-type: disc;
+}
+.connectionHelp pre {
+  margin: 10px 0;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.warning,
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  overflow-wrap: anywhere;
+}
+.warning {
+  background: #fff8e7;
+  color: #694c17;
+  flex-wrap: wrap;
+}
+.error {
+  background: #fff0f0;
+  color: #9d2c2c;
+}
+.warning svg,
+.error svg {
+  flex-shrink: 0;
+}
+.tableWrap {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.tableWrap table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.tableWrap th {
+  text-align: left;
+}
+.tableWrap code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  background: none;
+  border: 0;
+}
+.activeRow {
+  background: #eaf4fc !important;
+}
+.confirm {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 24px 0;
+  font-size: 0.9rem;
+}
+.confirm input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.progress {
+  margin-top: 24px;
+}
+.progress p {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+.progress progress {
+  width: 100%;
+  height: 12px;
+  accent-color: var(--ifm-color-primary);
+}
+.progress small {
+  color: #526179;
+}
+.log {
+  max-height: 320px;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: #142235;
+  color: #d7e6f4;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .steps {
+    gap: 24px;
+  }
+  .page {
+    padding: 28px 16px 48px;
+  }
+  .card {
+    padding: 20px;
+  }
+}
