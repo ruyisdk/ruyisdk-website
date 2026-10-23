@@ -98,7 +98,9 @@ For detailed instructions, refer to [here](/docs/Package-Manager/installation).
 
 ### Obtain and Install OS
 
-First step:
+#### Using the Ruyi Package Manager
+
+After installing `ruyi`, run the command-line flashing wizard:
 
 ```bash
 $ ruyi device provision
@@ -107,3 +109,7 @@ $ ruyi device provision
 > This command identifies hardware information and automatically executes the corresponding program to deploy the RISC-V development environment for the user. Follow the prompts step by step.
 
 For detailed instructions, refer to [Flashing a Development Board Using dd (Using MilkV Duo as an Example)](/docs/Package-Manager/cases/case3) and [Flashing a Development Board Using fastboot (Using Licheepi 4A as an Example)](/docs/Package-Manager/cases/case4).
+
+#### Using Ruyi Imager
+
+Use [Ruyi Imager](./Imager/index.md) to flash a system image through a graphical interface.

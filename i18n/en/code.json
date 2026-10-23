@@ -292,13 +292,13 @@
     "message": "Downloads"
   },
   "downloads.meta.description": {
-    "message": "Download RuyiSDK Package Manager and IDE"
+    "message": "Download RuyiSDK Package Manager, IDE extensions, and Ruyi Imager"
   },
   "downloads.title": {
     "message": "Download RuyiSDK"
   },
   "downloads.subtitle": {
-    "message": "Get the RuyiSDK Package Manager and IDE to start your RISC-V development journey."
+    "message": "Get RuyiSDK Package Manager, IDE extensions, and Ruyi Imager for RISC-V development"
   },
   "downloads.installScript.title": {
     "message": "Install with the Script"
@@ -504,6 +504,16 @@
   },
   "downloads.thanks.gotoInstallDocs": {
     "message": "Next: read the installation docs"
+  },
+
+  "imager.name": {
+    "message": "Ruyi Imager"
+  },
+  "imager.downloads.description": {
+    "message": "A graphical image writer for RISC-V boards"
+  },
+  "imager.source": {
+    "message": "Source code"
   },
 
   "========== issue ==========": { "message": "" },
