@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const { fetchJsonWithTimeout } = require('./lib/fetch-with-timeout.cjs');
 
 const API_URL = 'https://api.ruyisdk.cn';
 const API_LATEST_PM = '/releases/latest-pm';
@@ -13,37 +13,15 @@ const OUT_FILE_ECLIPSE = path.join(__dirname, '..', 'static', 'data', 'api', 'ap
 const OUT_FILE_DASHBOARD = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'fe_dashboard.json');
 
 async function apiFetch(url) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
-
-  try {
-    const res = await fetch(url, {
-      headers: {
-        accept: 'application/json',
-      },
-      signal: controller.signal,
-    });
-
-    if (!res.ok) {
-      console.error(`[generate-api-ruyisdk-cn] API return HTTP ${res.status} ${res.statusText}`);
-      return
-    }
-
-    return await res.json()
-
-  } catch (err) {
-    // why error?
-    throw err;
-  } finally {
-    clearTimeout(timeout);
-  }
+  const res = await fetchJsonWithTimeout(url, {
+    logPrefix: '[generate-api-ruyisdk-cn]',
+  });
+  return res ? res.data : null;
 }
 
 function withGeneratedInfo(json, source) {
   return {
     ...json,
-
-    // auto generate info
     ruyisdk_org_data: {
       generatedAt: new Date().toISOString(),
       source,
@@ -66,20 +44,15 @@ async function generateApiSnapshot({ name, endpoint, outputFile }) {
 }
 
 async function main() {
-  try {
-    const snapshots = [
-      { name: 'releases/latest-pm', endpoint: API_LATEST_PM, outputFile: OUT_FILE },
-      { name: 'releases/latest-ide/vscode', endpoint: API_LATEST_VSCODE, outputFile: OUT_FILE_VSCODE },
-      { name: 'releases/latest-ide/eclipse', endpoint: API_LATEST_ECLIPSE, outputFile: OUT_FILE_ECLIPSE },
-      { name: 'fe/dashboard', endpoint: API_DASHBOARD, outputFile: OUT_FILE_DASHBOARD },
-    ];
+  const snapshots = [
+    { name: 'releases/latest-pm', endpoint: API_LATEST_PM, outputFile: OUT_FILE },
+    { name: 'releases/latest-ide/vscode', endpoint: API_LATEST_VSCODE, outputFile: OUT_FILE_VSCODE },
+    { name: 'releases/latest-ide/eclipse', endpoint: API_LATEST_ECLIPSE, outputFile: OUT_FILE_ECLIPSE },
+    { name: 'fe/dashboard', endpoint: API_DASHBOARD, outputFile: OUT_FILE_DASHBOARD },
+  ];
 
-    for (const snapshot of snapshots) {
-      await generateApiSnapshot(snapshot);
-    }
-  } catch (err) {
-    // why error?
-    throw err;
+  for (const snapshot of snapshots) {
+    await generateApiSnapshot(snapshot);
   }
 }
 

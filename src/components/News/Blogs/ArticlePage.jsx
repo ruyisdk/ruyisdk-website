@@ -2,16 +2,13 @@ import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { PageBackground } from "@site/src/components/Home/Background";
-import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import MarkdownCard from "@site/src/components/common/MarkdownCard";
 
 import styles from "./ArticlePage.module.css";
 
 import authorMetadata from "./authors.json";
 import tagMetadata from "./tags.json";
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en || contentMap["zh-Hans"];
-}
+import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 function resolveAuthorLabel(authorKey) {
   return authorMetadata?.[authorKey]?.name || authorKey;

@@ -1,10 +1,10 @@
-import { Col, Row } from "antd";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useDataWithApiFallback from "@site/src/utils/hooks/useDataWithApiFallback";
 import { PageBackground } from "@site/src/components/Home/Background";
-import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import MarkdownCard from "@site/src/components/common/MarkdownCard";
+import { resolveLocalizedContent } from "@site/src/utils/locale";
 
 import dashboardData from "@site/static/data/api/api_ruyisdk_cn/fe_dashboard.json";
 import StatsDetailDe from "./mdx/stats_detail.de.md";
@@ -20,10 +20,6 @@ const STATS_DETAIL_CONTENT = {
   de: StatsDetailDe,
   en: StatsDetailEn,
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 const PageHeader = ({ title }) => (
   <header className="text-center pt-14 px-8">
@@ -170,15 +166,13 @@ const CategorySection = ({ data, animate }) => {
 
   return (
     <section className={styles.statsSection}>
-      <Row gutter={[24, 24]} className={styles.statsRow}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stats.map((item) => (
-          <Col key={item.title} xs={24} md={12} lg={8}>
-            <div className="mx-auto h-full max-w-md md:max-w-none">
-              <AnimatedStatistic {...item} animate={animate} />
-            </div>
-          </Col>
+          <div key={item.title} className="mx-auto h-full w-full max-w-md md:max-w-none">
+            <AnimatedStatistic {...item} animate={animate} />
+          </div>
         ))}
-      </Row>
+      </div>
       <div className={`${styles.updateTime} text-[0.74rem]`}>
         {translate({ id: "dashboard.数据更新时间", message: "数据更新时间" })}: {String(data.last_updated).slice(0, 16).replace("T", " ")}
       </div>

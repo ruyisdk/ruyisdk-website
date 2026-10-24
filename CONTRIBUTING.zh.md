@@ -82,14 +82,34 @@ git config --global user.email "your.email@example.com"
 
 所有拉取请求（PR）都会在我们的持续集成 (CI) 流程中接受自动化 DCO 检查。此检查会验证您的拉取请求中的所有提交是否都有适当的 DCO 签名。如果任何提交缺少签名，CI 检查将失败，在解决问题之前，您的拉取请求将无法被合并。
 
+## 质量保障与本地预检
+
+在创建拉取请求（PR）之前，请确保以下自动化检查在本地全部通过：
+
+```bash
+pnpm run lint              # ESLint 语法与规范检查
+pnpm run typecheck         # TypeScript 类型检查
+pnpm run test              # Vitest 单元测试
+pnpm run check:news-images # 新闻封面图有效性检查
+pnpm run check:blog-metadata # 博客注册与元数据一致性检查
+pnpm run check-deps-usage  # 依赖项使用情况审计
+pnpm run build             # 多语言全站生产构建
+```
+
+关于代码设计原则与内容发布规范，请参阅：
+- [代码与样式规范](./STYLEGUIDE.md)
+- [系统架构文档](./ARCHITECTURE.md)
+- [新闻与博客发布指南](./NEWS_GUIDE.md)
+
 ## 拉取请求流程
 
 1. 从 `main` 分支派生（fork）相应的仓库并创建您的分支。
-2. 进行更改，确保它们遵循项目的编码风格和约定。
-3. 必要时添加测试。
-4. 确保您的提交已包含 DCO 签名。
-5. 必要时更新文档。
-6. 向主仓库提交拉取请求。
+2. 进行更改，确保它们遵循[代码与样式规范](./STYLEGUIDE.md)。
+3. 必要时在 `tests/unit/` 中添加单元测试。
+4. 确保所有质量检查（`pnpm run lint`、`pnpm run typecheck`、`pnpm test`、`pnpm run build`）全部通过。
+5. 确保您的提交已包含 DCO 签名。
+6. 必要时更新文档。
+7. 向主仓库提交拉取请求。
 
 ## 开发环境设置
 
