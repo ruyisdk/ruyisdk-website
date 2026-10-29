@@ -82,7 +82,9 @@
 
 .pi-chip {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
+  white-space: nowrap;
   border-radius: 9999px;
   border: 1px solid var(--divider);
   background: #fff;
