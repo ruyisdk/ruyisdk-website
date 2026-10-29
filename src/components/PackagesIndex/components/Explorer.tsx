@@ -269,7 +269,7 @@ export default function Explorer() {
   );
 
   const renderIosSelector = () => (
-    <div className="relative flex bg-[#e3e3e6] dark:bg-zinc-800 p-0.5 rounded-lg w-full mb-4">
+    <div className="relative mb-4 flex w-full shrink-0 rounded-lg bg-[#e3e3e6] p-0.5 dark:bg-zinc-800">
       <div 
         className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] bg-white dark:bg-zinc-700 rounded-md shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeTab === 'packages' ? 'translate-x-full' : 'translate-x-0'
@@ -383,12 +383,12 @@ export default function Explorer() {
       {mobileFiltersOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileFiltersOpen(false)} />
-          <aside className="absolute right-0 top-0 h-full w-80 bg-white p-4 shadow-lg pi-surface">
-            <div className="flex items-center justify-between mb-4">
+          <aside className="pi-surface absolute right-0 top-0 flex h-dvh max-h-dvh w-80 flex-col overflow-hidden bg-white p-4 shadow-lg">
+            <div className="mb-4 flex shrink-0 items-center justify-between">
               <h3 className="font-semibold text-[var(--text)]">{t('activeFilters')}</h3>
               <button onClick={() => setMobileFiltersOpen(false)} aria-label={t('clearFilters')} className="text-[var(--subtle)]">✕</button>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 shrink-0">
               <label className="relative block">
                 <span className="sr-only">{searchPlaceholder}</span>
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--subtle)]" />
@@ -403,7 +403,7 @@ export default function Explorer() {
             </div>
             {renderIosSelector()}
             {activeTab === 'devices' ? (
-              <div className="space-y-6">
+              <div className="min-h-0 flex-1 space-y-6 overflow-y-auto pr-1">
                 <section>
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                     <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('boardVendors')}
@@ -422,7 +422,7 @@ export default function Explorer() {
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                     <Cpu className="h-4 w-4 text-[var(--subtle)]" /> {t('cpus')}
                   </h2>
-                  <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
+                  <div className="space-y-2">
                     {cpus.map((cpu) => (
                       <label key={cpu.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
                         <input type="checkbox" checked={selectedCpus.has(cpu.id)} onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
@@ -433,11 +433,11 @@ export default function Explorer() {
                 </section>
               </div>
             ) : (
-              <section>
+              <section className="min-h-0 flex-1 overflow-y-auto pr-1">
                 <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                   <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
                 </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
+                <div className="space-y-2">
                   {categories.map((category) => (
                     <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
                       <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
@@ -453,8 +453,8 @@ export default function Explorer() {
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 overflow-hidden px-4 pt-6 pb-5">
         <aside className="hidden w-72 shrink-0 overflow-y-auto pr-6 md:block">
-          <div className="pi-surface rounded-[1.5rem] p-4">
-            <div className="mb-3">
+          <div className="pi-surface flex max-h-[calc(100dvh-7rem)] flex-col rounded-[1.5rem] p-4">
+            <div className="mb-3 shrink-0">
               <label className="relative block">
                 <span className="sr-only">{searchPlaceholder}</span>
                 <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--subtle)]" />
@@ -471,7 +471,7 @@ export default function Explorer() {
             {renderIosSelector()}
 
             {activeTab === 'devices' ? (
-              <div className="space-y-6">
+              <div className="min-h-0 flex-1 space-y-6 overflow-y-auto pr-1">
                 <section>
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                     <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('boardVendors')}
@@ -495,7 +495,7 @@ export default function Explorer() {
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                     <Cpu className="h-4 w-4 text-[var(--subtle)]" /> {t('cpus')}
                   </h2>
-                  <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
+                  <div className="space-y-2">
                     {cpus.map((cpu) => (
                       <label key={cpu.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
                         <input
@@ -511,11 +511,11 @@ export default function Explorer() {
                 </section>
               </div>
             ) : (
-              <section>
+              <section className="min-h-0 flex-1 overflow-y-auto pr-1">
                 <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
                   <Tag className="h-4 w-4 text-[var(--subtle)]" /> {t('categories')}
                 </h2>
-                <div className="max-h-96 space-y-2 overflow-y-auto pr-1">
+                <div className="space-y-2">
                   {categories.map((category) => (
                     <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
                       <input
