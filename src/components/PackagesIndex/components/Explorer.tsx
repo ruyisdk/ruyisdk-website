@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { getEntities, getPackages, getHierarchy } from '../api';
+import { getEntities, getPackages, getHierarchy, getVendors } from '../api';
 import { Link } from 'react-router-dom';
-import { Search, Package, Server, Cpu, Layers, Tag, X, Filter } from 'lucide-react';
+import { Search, Package, Server, Cpu, Factory, Tag, X, Filter } from 'lucide-react';
 import { useI18n } from '../i18n';
 
 type Entity = {
@@ -17,6 +17,10 @@ type PackageItem = {
   version: string;
   desc?: string;
 };
+
+type VendorMap = Record<string, string>;
+
+const getVendorId = (deviceId: string) => deviceId.split('-', 1)[0];
 
 const sortByDisplayName = (items: Entity[]) =>
   [...items].sort((left, right) =>
@@ -87,26 +91,29 @@ let lastScrollTop = 0;
 let lastMainScrollTop = 0;
 let lastActiveTab: 'devices' | 'packages' = 'devices';
 let lastSearchQuery = '';
-let lastSelectedArchs = new Set<string>();
+let lastSelectedVendors = new Set<string>();
 let lastSelectedCpus = new Set<string>();
 let lastSelectedCategories = new Set<string>();
 
 let cachedEntities: Entity[] | null = null;
 let cachedPackages: PackageItem[] | null = null;
 let cachedHierarchy: Record<string, string[]> | null = null;
+const cachedVendors: Partial<Record<'en' | 'zh-Hans', VendorMap>> = {};
 
 let isRestoring = false;
 
 export default function Explorer() {
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
+  const vendorLocale = locale === 'zh-CN' ? 'zh-Hans' : 'en';
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [entities, setEntities] = useState<Entity[]>(cachedEntities || []);
   const [packages, setPackages] = useState<PackageItem[]>(cachedPackages || []);
   const [hierarchy, setHierarchy] = useState<Record<string, string[]>>(cachedHierarchy || {});
-  const [loading, setLoading] = useState(!cachedEntities);
+  const [vendors, setVendors] = useState<VendorMap>(cachedVendors[vendorLocale] || {});
+  const [loading, setLoading] = useState(!cachedEntities || !cachedVendors[vendorLocale]);
   const [activeTab, setActiveTab] = useState<'devices' | 'packages'>(lastActiveTab);
   const [searchQuery, setSearchQuery] = useState(lastSearchQuery);
-  const [selectedArchs, setSelectedArchs] = useState<Set<string>>(lastSelectedArchs);
+  const [selectedVendors, setSelectedVendors] = useState<Set<string>>(lastSelectedVendors);
   const [selectedCpus, setSelectedCpus] = useState<Set<string>>(lastSelectedCpus);
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(lastSelectedCategories);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -126,8 +133,8 @@ export default function Explorer() {
   }, [searchQuery]);
 
   useEffect(() => {
-    lastSelectedArchs = selectedArchs;
-  }, [selectedArchs]);
+    lastSelectedVendors = selectedVendors;
+  }, [selectedVendors]);
 
   useEffect(() => {
     lastSelectedCpus = selectedCpus;
@@ -195,19 +202,28 @@ export default function Explorer() {
 
   useEffect(() => {
     const fetchAll = async () => {
-      if (cachedEntities && cachedPackages && cachedHierarchy) {
+      const cachedVendorMap = cachedVendors[vendorLocale];
+      if (cachedEntities && cachedPackages && cachedHierarchy && cachedVendorMap) {
+        setVendors(cachedVendorMap);
         setLoading(false);
         return;
       }
       setLoading(true);
       try {
-        const [ents, pkgs, hier] = await Promise.all([getEntities(), getPackages(), getHierarchy()]);
+        const [ents, pkgs, hier, vendorMap] = await Promise.all([
+          getEntities(),
+          getPackages(),
+          getHierarchy(),
+          getVendors(vendorLocale),
+        ]);
         cachedEntities = ents;
         cachedPackages = pkgs;
         cachedHierarchy = hier;
+        cachedVendors[vendorLocale] = vendorMap;
         setEntities(ents);
         setPackages(pkgs);
         setHierarchy(hier);
+        setVendors(vendorMap);
       } catch (error) {
         console.error('Failed to load data', error);
       } finally {
@@ -216,12 +232,8 @@ export default function Explorer() {
     };
 
     fetchAll();
-  }, []);
+  }, [vendorLocale]);
 
-  const archs = useMemo(
-    () => sortByDisplayName(entities.filter((entity) => entity.type === 'arch')),
-    [entities],
-  );
   const cpus = useMemo(
     () => sortByDisplayName(entities.filter((entity) => entity.type === 'cpu')),
     [entities],
@@ -231,6 +243,12 @@ export default function Explorer() {
       left.id.localeCompare(right.id, undefined, { sensitivity: 'base' }),
     ),
     [entities],
+  );
+  const vendorOptions = useMemo(
+    () => Array.from(new Set(devices.map((device) => getVendorId(device.id))))
+      .map((id) => ({ id, name: vendors[id] || id }))
+      .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' })),
+    [devices, vendors],
   );
   const categories = useMemo(
     () => Array.from(new Set(packages.map((pkg) => pkg.category))).sort((left, right) =>
@@ -315,19 +333,13 @@ export default function Explorer() {
   const filteredDevices = useMemo(() => {
     let validDeviceIds: Set<string> | null = null;
 
-    if (selectedArchs.size > 0 || selectedCpus.size > 0) {
-      const archDescendants = selectedArchs.size > 0
-        ? getDescendants(Array.from(selectedArchs).map((arch) => `arch:${arch}`))
-        : null;
+    if (selectedCpus.size > 0) {
       const cpuDescendants = selectedCpus.size > 0
         ? getDescendants(Array.from(selectedCpus).map((cpu) => `cpu:${cpu}`))
         : null;
 
       validDeviceIds = new Set(devices.map((device) => `device:${device.id}`));
 
-      if (archDescendants) {
-        validDeviceIds = new Set([...validDeviceIds].filter((id) => archDescendants.has(id)));
-      }
       if (cpuDescendants) {
         validDeviceIds = new Set([...validDeviceIds].filter((id) => cpuDescendants.has(id)));
       }
@@ -335,12 +347,14 @@ export default function Explorer() {
 
     return devices.filter((device) => {
       if (validDeviceIds && !validDeviceIds.has(`device:${device.id}`)) return false;
+      const vendorId = getVendorId(device.id);
+      if (selectedVendors.size > 0 && !selectedVendors.has(vendorId)) return false;
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
-      const haystack = [device.display_name, device.id, ...(device.related || [])].join(' ').toLowerCase();
+      const haystack = [device.display_name, device.id, vendorId, vendors[vendorId] || '', ...(device.related || [])].join(' ').toLowerCase();
       return haystack.includes(q);
     });
-  }, [devices, selectedArchs, selectedCpus, searchQuery, hierarchy]);
+  }, [devices, selectedVendors, selectedCpus, searchQuery, hierarchy, vendors]);
 
   const filteredPackages = useMemo(() => {
     return sortPackagesByIdAndVersion(packages.filter((pkg) => {
@@ -352,7 +366,7 @@ export default function Explorer() {
   }, [packages, selectedCategories, searchQuery]);
 
   const activeFiltersCount = activeTab === 'devices'
-    ? selectedArchs.size + selectedCpus.size
+    ? selectedVendors.size + selectedCpus.size
     : selectedCategories.size;
 
   const searchPlaceholder = activeTab === 'devices' ? t('searchPlaceholderDevices') : t('searchPlaceholderPackages');
@@ -389,13 +403,13 @@ export default function Explorer() {
               <div className="space-y-6">
                 <section>
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Layers className="h-4 w-4 text-[var(--subtle)]" /> {t('architectures')}
+                    <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('boardVendors')}
                   </h2>
                   <div className="space-y-2">
-                    {archs.map((arch) => (
-                      <label key={arch.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input type="checkbox" checked={selectedArchs.has(arch.id)} onChange={() => toggleFilter(selectedArchs, arch.id, setSelectedArchs)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
-                        <span className="truncate" title={arch.display_name}>{arch.display_name}</span>
+                    {vendorOptions.map((vendor) => (
+                      <label key={vendor.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                        <input type="checkbox" checked={selectedVendors.has(vendor.id)} onChange={() => toggleFilter(selectedVendors, vendor.id, setSelectedVendors)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                        <span className="truncate" title={vendor.name}>{vendor.name}</span>
                       </label>
                     ))}
                   </div>
@@ -457,18 +471,18 @@ export default function Explorer() {
               <div className="space-y-6">
                 <section>
                   <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                    <Layers className="h-4 w-4 text-[var(--subtle)]" /> {t('architectures')}
+                    <Factory className="h-4 w-4 text-[var(--subtle)]" /> {t('boardVendors')}
                   </h2>
                   <div className="space-y-2">
-                    {archs.map((arch) => (
-                      <label key={arch.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
+                    {vendorOptions.map((vendor) => (
+                      <label key={vendor.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
                         <input
                           type="checkbox"
-                          checked={selectedArchs.has(arch.id)}
-                          onChange={() => toggleFilter(selectedArchs, arch.id, setSelectedArchs)}
+                          checked={selectedVendors.has(vendor.id)}
+                          onChange={() => toggleFilter(selectedVendors, vendor.id, setSelectedVendors)}
                           className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
                         />
-                        <span className="truncate" title={arch.display_name}>{arch.display_name}</span>
+                        <span className="truncate" title={vendor.name}>{vendor.name}</span>
                       </label>
                     ))}
                   </div>
@@ -560,7 +574,7 @@ export default function Explorer() {
               <button
                 type="button"
                 onClick={() => {
-                  setSelectedArchs(new Set());
+                  setSelectedVendors(new Set());
                   setSelectedCpus(new Set());
                   setSelectedCategories(new Set());
                 }}

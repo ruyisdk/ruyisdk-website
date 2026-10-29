@@ -52,6 +52,11 @@ export const getHierarchy = async () => {
   return res.data;
 };
 
+export const getVendors = async (locale: 'en' | 'zh-Hans') => {
+  const res = await axios.get(getApiUrl(`/vendors/${locale}.json`));
+  return res.data;
+};
+
 export const getEntityDetail = async (type: string, id: string) => {
   const res = await axios.get(getApiUrl(`/entities/${type}/${id}.json`));
   return res.data;
