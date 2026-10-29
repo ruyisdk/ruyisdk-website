@@ -487,10 +487,10 @@ function ImagerSection({ sectionId }) {
     <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
       <ProductHeader
         titleId="imager.name"
-        titleMessage="Ruyi Imager"
+        titleMessage="Ruyi 镜像刷写工具"
         descriptionId="imager.downloads.description"
         descriptionMessage="RISC-V 图形化镜像刷写工具"
-        accent="blue"
+        accent="gold"
         iconPath="M5 3h14v18H5V3zm3 4h8M8 11h8m-4 3v4m-2-2 2 2 2-2"
       />
       <div className="p-6 sm:p-8">
@@ -499,7 +499,7 @@ function ImagerSection({ sectionId }) {
             <Translate id="downloads.source.github">GitHub Release 下载：</Translate>
           </div>
           <div className="flex flex-wrap justify-start gap-3">
-            <DownloadButton accent="blue" href="https://github.com/ruyisdk/ruyi-imager/releases/latest">
+            <DownloadButton accent="gold" href="https://github.com/ruyisdk/ruyi-imager/releases/latest">
               <Translate id="downloads.button.latest">最新版本</Translate>
             </DownloadButton>
             <DownloadButton variant="secondary" href="https://github.com/ruyisdk/ruyi-imager/releases">
@@ -699,6 +699,7 @@ export default function DownloadCards({
           releaseData={releaseData}
           onOpenLatest={handleOpenLatest}
         />
+        <ImagerSection sectionId={sectionIds.imager} />
         <ExtensionSection
           sectionId={sectionIds.vscodeExtension}
           titleId="downloads.vscode.title"
@@ -755,7 +756,6 @@ export default function DownloadCards({
           }}
           onDirectLatest={handleDirectLatest}
         />
-        <ImagerSection sectionId={sectionIds.imager} />
       </div>
 
       <ArchSelectModal modalState={modalState} onClose={handleCloseModal} onSelect={handleSelectArch} />
