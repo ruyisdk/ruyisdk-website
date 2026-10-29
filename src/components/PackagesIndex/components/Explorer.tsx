@@ -22,6 +22,9 @@ type VendorMap = Record<string, string>;
 
 const getVendorId = (deviceId: string) => deviceId.split('-', 1)[0];
 
+const getVendorName = (vendorId: string, vendors: VendorMap) =>
+  vendors[vendorId] || `${vendorId.charAt(0).toUpperCase()}${vendorId.slice(1)}`;
+
 const sortByDisplayName = (items: Entity[]) =>
   [...items].sort((left, right) =>
     left.display_name.localeCompare(right.display_name, undefined, {
@@ -246,7 +249,7 @@ export default function Explorer() {
   );
   const vendorOptions = useMemo(
     () => Array.from(new Set(devices.map((device) => getVendorId(device.id))))
-      .map((id) => ({ id, name: vendors[id] || id }))
+      .map((id) => ({ id, name: getVendorName(id, vendors) }))
       .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' })),
     [devices, vendors],
   );

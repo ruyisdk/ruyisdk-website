@@ -52,9 +52,15 @@ export const getHierarchy = async () => {
   return res.data;
 };
 
-export const getVendors = async (locale: 'en' | 'zh-Hans') => {
-  const res = await axios.get(getApiUrl(`/vendors/${locale}.json`));
-  return res.data;
+export const getVendors = async (locale: string): Promise<Record<string, string>> => {
+  try {
+    const res = await axios.get(getApiUrl(`/vendors/${locale}.json`));
+    return res.data;
+  } catch (error) {
+    if (locale === 'en' || !axios.isAxiosError(error) || error.response?.status !== 404) throw error;
+    const res = await axios.get(getApiUrl('/vendors/en.json'));
+    return res.data;
+  }
 };
 
 export const getEntityDetail = async (type: string, id: string) => {
