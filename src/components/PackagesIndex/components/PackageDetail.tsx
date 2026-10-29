@@ -214,7 +214,7 @@ export default function PackageDetail() {
 
   return (
     <div className="pi-animate-fade-in-up flex min-h-screen flex-col text-[var(--text)]">
-      <main className="mx-auto w-full max-w-[90rem] flex-1 px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="md:col-span-1 space-y-6">
             <div className="flex items-center gap-3 mb-2 flex-wrap">

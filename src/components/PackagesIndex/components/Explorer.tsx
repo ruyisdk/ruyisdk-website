@@ -434,7 +434,7 @@ export default function Explorer() {
         </div>
       )}
 
-      <div className="mx-auto flex w-full max-w-[90rem] flex-1 overflow-hidden px-4 pt-6 pb-5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 overflow-hidden px-4 pt-6 pb-5">
         <aside className="hidden w-72 shrink-0 overflow-y-auto pr-6 md:block">
           <div className="pi-surface rounded-[1.5rem] p-4">
             <div className="mb-3">
@@ -523,7 +523,7 @@ export default function Explorer() {
               lastMainScrollTop = e.currentTarget.scrollTop;
             }
           }}
-          className="flex-1 overflow-y-auto p-8"
+          className="flex-1 overflow-y-auto py-8 md:pl-8"
         >
           <div className="block md:hidden mb-4">
             <div className="flex items-center gap-2 mb-3">
