@@ -13,7 +13,7 @@ function App() {
 
   return (
     <I18nProvider>
-      <div className="pi-shell min-h-screen w-screen text-left">
+      <div className="pi-shell min-h-screen w-full text-left">
         <Router>
           <Routes>
             <Route path="/" element={<Explorer />} />
