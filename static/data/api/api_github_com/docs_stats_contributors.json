@@ -12,19 +12,19 @@
     {
       "total": 1,
       "author": {
-        "login": "3077126169lin-rgb",
-        "id": 289712896,
-        "avatar_url": "https://avatars.githubusercontent.com/u/289712896?v=4",
-        "html_url": "https://github.com/3077126169lin-rgb"
+        "login": "Z572",
+        "id": 37945516,
+        "avatar_url": "https://avatars.githubusercontent.com/u/37945516?v=4",
+        "html_url": "https://github.com/Z572"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "Z572",
-        "id": 37945516,
-        "avatar_url": "https://avatars.githubusercontent.com/u/37945516?v=4",
-        "html_url": "https://github.com/Z572"
+        "login": "3077126169lin-rgb",
+        "id": 289712896,
+        "avatar_url": "https://avatars.githubusercontent.com/u/289712896?v=4",
+        "html_url": "https://github.com/3077126169lin-rgb"
       }
     },
     {
@@ -39,19 +39,19 @@
     {
       "total": 1,
       "author": {
-        "login": "sisungo",
-        "id": 95552651,
-        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
-        "html_url": "https://github.com/sisungo"
+        "login": "mengzhuo",
+        "id": 885662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
+        "html_url": "https://github.com/mengzhuo"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "mengzhuo",
-        "id": 885662,
-        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
-        "html_url": "https://github.com/mengzhuo"
+        "login": "sisungo",
+        "id": 95552651,
+        "avatar_url": "https://avatars.githubusercontent.com/u/95552651?v=4",
+        "html_url": "https://github.com/sisungo"
       }
     },
     {
@@ -190,7 +190,7 @@
       }
     },
     {
-      "total": 51,
+      "total": 52,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -200,7 +200,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-10-27T22:43:06.671Z",
+    "generatedAt": "2026-10-29T23:06:09.760Z",
     "source": "https://api.github.com/repos/ruyisdk/docs/stats/contributors"
   }
 }
