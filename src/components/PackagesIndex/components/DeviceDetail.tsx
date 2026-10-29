@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getEntities, getEntityDetail, getHierarchy, getPackages } from '../api';
 import { useI18n } from '../i18n';
-import { ArrowLeft, Server, Package as PackageIcon, Cpu, Layers } from 'lucide-react';
+import { ArrowLeft, Package as PackageIcon, Cpu, Layers } from 'lucide-react';
 
 export default function DeviceDetail() {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +12,7 @@ export default function DeviceDetail() {
     try {
       if (window.history.length > 1) navigate(-1);
       else navigate('/');
-    } catch (e) {
+    } catch {
       navigate('/');
     }
   };
