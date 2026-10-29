@@ -278,14 +278,14 @@ export default function Explorer() {
       <button
         type="button"
         onClick={() => setActiveTab('devices')}
-        className={`z-10 flex-1 flex justify-center items-center gap-1 py-1.5 text-xs font-semibold rounded-md transition-colors duration-200 ${
+        className={`z-10 flex flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-md py-1.5 text-xs font-semibold transition-colors duration-200 ${
           activeTab === 'devices'
             ? 'text-zinc-900 dark:text-white'
             : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
         }`}
       >
         {t('listByDevice')}
-        <span className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
+        <span className={`shrink-0 rounded-full px-1.5 py-0.2 text-[10px] transition-colors duration-200 ${
           activeTab === 'devices' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
         }`}>
           {devices.length}
@@ -294,14 +294,14 @@ export default function Explorer() {
       <button
         type="button"
         onClick={() => setActiveTab('packages')}
-        className={`z-10 flex-1 flex justify-center items-center gap-1 py-1.5 text-xs font-semibold rounded-md transition-colors duration-200 ${
+        className={`z-10 flex flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-md py-1.5 text-xs font-semibold transition-colors duration-200 ${
           activeTab === 'packages'
             ? 'text-zinc-900 dark:text-white'
             : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
         }`}
       >
         {t('listByPackages')}
-        <span className={`px-1.5 py-0.2 rounded-full text-[10px] transition-colors duration-200 ${
+        <span className={`shrink-0 rounded-full px-1.5 py-0.2 text-[10px] transition-colors duration-200 ${
           activeTab === 'packages' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
         }`}>
           {packages.length}
@@ -567,8 +567,8 @@ export default function Explorer() {
             {renderIosSelector()}
           </div>
 
-          <div className="mb-4 flex items-center justify-between gap-4 text-sm text-[var(--subtle)]">
-            <div>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm text-[var(--subtle)]">
+            <div className="min-w-0">
               <span className="font-medium text-[var(--text)]">{listLabel}</span>
               <span className="mx-2">·</span>
               <span>{t('results')}: {showingCount}</span>
@@ -581,7 +581,7 @@ export default function Explorer() {
                   setSelectedCpus(new Set());
                   setSelectedCategories(new Set());
                 }}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[var(--subtle)] transition hover:bg-[var(--tintColor)] hover:text-[var(--text)]"
+                className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-3 py-1 text-[var(--subtle)] transition hover:bg-[var(--tintColor)] hover:text-[var(--text)]"
               >
                 <X className="h-4 w-4" /> {t('clearFilters')}
               </button>
@@ -604,7 +604,7 @@ export default function Explorer() {
                   <Link to={`/device/${device.id}`} key={device.id} className="block">
                     <article className="pi-card h-full p-4">
                       <div className="mb-2 flex items-start justify-between gap-3">
-                        <div>
+                        <div className="min-w-0">
                           <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{device.display_name}</h3>
                           <p className="mt-1 text-xs font-mono text-[var(--subtle)]">{device.id}</p>
                         </div>
@@ -635,14 +635,14 @@ export default function Explorer() {
                 <Link to={`/package/${pkg.category}/${pkg.package}/${pkg.version}`} key={`${pkg.category}-${pkg.package}-${pkg.version}`} className="block">
                   <article className="pi-card p-4">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
+                      <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{pkg.package}</h3>
                           <span className="rounded-md bg-[var(--tintColor)] px-2 py-0.5 text-xs font-mono text-[var(--subtle)]">{pkg.version}</span>
                         </div>
                         <p className="mt-2 text-sm text-[var(--light)]">{pkg.desc || t('noDescription')}</p>
                       </div>
-                      <span className="pi-chip px-3 py-1 text-xs font-medium">
+                      <span className="pi-chip self-start px-3 py-1 text-xs font-medium">
                         {pkg.category}
                       </span>
                     </div>
