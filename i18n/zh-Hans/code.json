@@ -1,0 +1,512 @@
+{
+  "flasher.title": {
+    "message": "在线刷写"
+  },
+  "flasher.description": {
+    "message": "通过 USB 使用 fastboot 刷写 RISC-V 开发板镜像，支持 ZIP、TAR.GZ 和 Zstandard 镜像。"
+  },
+  "flasher.loading": {
+    "message": "正在加载刷写页面…"
+  },
+  "flasher.intro": {
+    "message": "通过 Fastboot 为开发板刷写镜像。"
+  },
+  "flasher.browserHelp": {
+    "message": "请在桌面版 Chrome 或 Edge 中通过 HTTPS 打开此页面，以使用 WebUSB。"
+  },
+  "flasher.prepare": {
+    "message": "选择镜像"
+  },
+  "flasher.fileHelp": {
+    "message": "选择下载好的镜像或压缩包，可以分次添加。"
+  },
+  "flasher.retry": {
+    "message": "重试"
+  },
+  "flasher.addFiles": {
+    "message": "继续添加文件"
+  },
+  "flasher.remove": {
+    "message": "移除"
+  },
+  "flasher.removeFile": {
+    "message": "移除 {name}"
+  },
+  "flasher.missingFiles": {
+    "message": "还需添加以下文件："
+  },
+  "flasher.selectFiles": {
+    "message": "选择文件"
+  },
+  "flasher.ambiguous": {
+    "message": "这些文件名对应多个版本，请选择要刷写的版本。"
+  },
+  "flasher.detected": {
+    "message": "识别到：{name} · {version}"
+  },
+  "flasher.selected": {
+    "message": "已选择：{name} · {version}"
+  },
+  "flasher.customHelp": {
+    "message": "请填写自定义镜像的目标分区。"
+  },
+  "flasher.chooseMatching": {
+    "message": "选择镜像版本"
+  },
+  "flasher.chooseRelease": {
+    "message": "选择版本…"
+  },
+  "flasher.connect": {
+    "message": "连接开发板"
+  },
+  "flasher.connectHelp": {
+    "message": "按开发板说明进入 fastboot 模式，再用 USB 数据线连接电脑。"
+  },
+  "flasher.noDevice": {
+    "message": "尚未连接设备"
+  },
+  "flasher.deviceIdentity": {
+    "message": "USB {id} · 序列号：{serial}"
+  },
+  "flasher.connectionHelp": {
+    "message": "USB 连接指引"
+  },
+  "flasher.newDeviceHelp": {
+    "message": "刷写过程中可能需要重新选择设备，请按页面提示操作。"
+  },
+  "flasher.browse": {
+    "message": "查看开发板与镜像 →"
+  },
+  "flasher.connecting": {
+    "message": "正在连接…"
+  },
+  "flasher.reconnect": {
+    "message": "重新连接开发板"
+  },
+  "flasher.selectDevice": {
+    "message": "选择 USB 设备"
+  },
+  "flasher.review": {
+    "message": "确认并刷写"
+  },
+  "flasher.image": {
+    "message": "待写入镜像"
+  },
+  "flasher.partition": {
+    "message": "目标分区"
+  },
+  "flasher.partitionExample": {
+    "message": "例如 boot"
+  },
+  "flasher.partitionHelp": {
+    "message": "分区名称请参照开发板的刷写说明填写。"
+  },
+  "flasher.step": {
+    "message": "步骤"
+  },
+  "flasher.operation": {
+    "message": "操作"
+  },
+  "flasher.size": {
+    "message": "镜像大小"
+  },
+  "flasher.verified": {
+    "message": "原始文件校验通过。"
+  },
+  "flasher.unverified": {
+    "message": "部分文件没有可用的校验值，请确认文件来源可靠。"
+  },
+  "flasher.confirmation": {
+    "message": "我已核对开发板型号、镜像版本和目标分区，确认覆盖所选设备的数据。"
+  },
+  "flasher.reconnectHelp": {
+    "message": "请重新选择同一块开发板，确认设备后继续刷写。"
+  },
+  "flasher.continue": {
+    "message": "继续刷写"
+  },
+  "flasher.flash": {
+    "message": "开始刷写"
+  },
+  "flasher.cancel": {
+    "message": "取消载入"
+  },
+  "flasher.stopping": {
+    "message": "将在当前步骤完成后停止…"
+  },
+  "flasher.stop": {
+    "message": "完成当前步骤后停止"
+  },
+  "flasher.preparationProgress": {
+    "message": "镜像载入进度"
+  },
+  "flasher.transferProgress": {
+    "message": "当前步骤传输进度"
+  },
+  "flasher.transferStatus": {
+    "message": "已传输 {percent}%，请等待设备完成写入。"
+  },
+  "flasher.reboot": {
+    "message": "重启设备"
+  },
+  "flasher.clear": {
+    "message": "清空镜像"
+  },
+  "flasher.sessionLog": {
+    "message": "刷写日志"
+  },
+  "flasher.sessionLogLabel": {
+    "message": "刷写日志"
+  },
+  "flasher.preparing": {
+    "message": "正在载入镜像…"
+  },
+  "flasher.ready": {
+    "message": "镜像已载入，请核对目标分区。"
+  },
+  "flasher.prepared": {
+    "message": "已载入 {count} 个镜像文件。"
+  },
+  "flasher.fastbootDevice": {
+    "message": "Fastboot 设备"
+  },
+  "flasher.notReported": {
+    "message": "未提供"
+  },
+  "flasher.noSerial": {
+    "message": "无序列号"
+  },
+  "flasher.connected": {
+    "message": "已连接：{name}（{serial}）"
+  },
+  "flasher.stepCompleted": {
+    "message": "已完成第 {current} 步，共 {total} 步"
+  },
+  "flasher.done": {
+    "message": "刷写完成。"
+  },
+  "flasher.flashFailed": {
+    "message": "{detail} 刷写已停止，已写入的内容会保留。"
+  },
+  "flasher.cleanupFailed": {
+    "message": "无法清除临时文件：{detail}"
+  },
+  "flasher.rebootRequested": {
+    "message": "已发送重启请求。"
+  },
+  "flasher.verifying": {
+    "message": "正在校验：{name}"
+  },
+  "flasher.extracting": {
+    "message": "正在解压：{name}"
+  },
+  "flasher.decompressing": {
+    "message": "正在解压：{name}"
+  },
+  "flasher.reconnectStep": {
+    "message": "{command} → 重新连接"
+  },
+  "flasher.externalError": {
+    "message": "操作失败：{detail}"
+  },
+  "flasher.deviceError": {
+    "message": "设备拒绝了命令：{detail}"
+  },
+  "flasher.entry": {
+    "message": "在线刷写"
+  },
+  "flasher.error.pageClosed": {
+    "message": "页面已关闭"
+  },
+  "flasher.error.storageUnsupported": {
+    "message": "此浏览器不支持临时文件存储，请使用最新版桌面 Chrome 或 Edge。"
+  },
+  "flasher.error.preparation": {
+    "message": "镜像载入失败"
+  },
+  "flasher.error.stopped": {
+    "message": "已在下一步开始前停止，已完成的写入已保留。"
+  },
+  "flasher.error.stoppedBeforeReconnect": {
+    "message": "已在重新连接前停止，已完成的写入已保留。"
+  },
+  "flasher.error.cancelled": {
+    "message": "已取消载入镜像"
+  },
+  "flasher.error.stoppedWhileReconnecting": {
+    "message": "已在等待重新连接时停止"
+  },
+  "flasher.error.downloadSize": {
+    "message": "下载文件大小不符：{name}"
+  },
+  "flasher.error.noChecksum": {
+    "message": "没有可用的校验值：{name}"
+  },
+  "flasher.error.checksum": {
+    "message": "校验值不符：{name}"
+  },
+  "flasher.error.duplicate": {
+    "message": "镜像重复：{name}"
+  },
+  "flasher.error.tooManyImages": {
+    "message": "镜像文件过多"
+  },
+  "flasher.error.storageInsufficient": {
+    "message": "浏览器存储空间不足，无法存放解压后的镜像"
+  },
+  "flasher.error.storageLimit": {
+    "message": "超出浏览器存储空间限制"
+  },
+  "flasher.error.storageWrite": {
+    "message": "无法写入解压后的镜像"
+  },
+  "flasher.error.truncatedImage": {
+    "message": "镜像不完整：{name}"
+  },
+  "flasher.error.emptyInput": {
+    "message": "输入文件为空：{name}"
+  },
+  "flasher.error.encryptedZip": {
+    "message": "不支持加密 ZIP 文件"
+  },
+  "flasher.error.profileMismatch": {
+    "message": "此镜像不属于所选刷写配置：{name}"
+  },
+  "flasher.error.zstdInit": {
+    "message": "无法初始化 Zstandard"
+  },
+  "flasher.error.invalidZstd": {
+    "message": "无效的 Zstandard 镜像"
+  },
+  "flasher.error.truncatedZstd": {
+    "message": "Zstandard 镜像不完整"
+  },
+  "flasher.error.unsupportedFile": {
+    "message": "文件不受支持，或镜像与所选刷写配置不匹配：{name}"
+  },
+  "flasher.error.noImages": {
+    "message": "未找到匹配的镜像"
+  },
+  "flasher.error.noInterface": {
+    "message": "所选设备未提供 fastboot 接口"
+  },
+  "flasher.error.usbTimeout": {
+    "message": "USB 操作超时，请重新连接设备后继续。"
+  },
+  "flasher.error.disconnected": {
+    "message": "设备已断开"
+  },
+  "flasher.error.usbResponse": {
+    "message": "无效的 USB 响应"
+  },
+  "flasher.error.fastbootResponse": {
+    "message": "意外的 fastboot 响应：{status}"
+  },
+  "flasher.error.tooManyResponses": {
+    "message": "fastboot 状态消息过多"
+  },
+  "flasher.error.command": {
+    "message": "无效的 fastboot 命令"
+  },
+  "flasher.error.commandTransfer": {
+    "message": "USB 命令传输不完整"
+  },
+  "flasher.error.unexpectedData": {
+    "message": "命令 {command} 收到了意外的 DATA 响应"
+  },
+  "flasher.error.downloadLimit": {
+    "message": "无效的 max-download-size"
+  },
+  "flasher.error.imageTransfer": {
+    "message": "USB 镜像传输不完整"
+  },
+  "flasher.error.downloadLength": {
+    "message": "无效的 fastboot 下载大小"
+  },
+  "flasher.error.acceptedLength": {
+    "message": "设备接受的下载大小与预期不符"
+  },
+  "flasher.error.dataAfterTransfer": {
+    "message": "镜像传输后收到了意外的 DATA 响应"
+  },
+  "flasher.error.partitionName": {
+    "message": "无效的分区名称"
+  },
+  "flasher.error.ramLimit": {
+    "message": "RAM 镜像超出设备下载大小限制"
+  },
+  "flasher.error.stageLimit": {
+    "message": "引导阶段镜像超出设备下载大小限制"
+  },
+  "flasher.error.archivePath": {
+    "message": "无效的压缩包内路径"
+  },
+  "flasher.error.ambiguousImage": {
+    "message": "存在多个匹配镜像：{name}"
+  },
+  "flasher.error.missingImage": {
+    "message": "缺少镜像：{name}"
+  },
+  "flasher.error.emptyNamedImage": {
+    "message": "镜像为空：{name}"
+  },
+  "flasher.error.strategy": {
+    "message": "不支持的刷写策略：{strategy}"
+  },
+  "flasher.error.emptyPlan": {
+    "message": "刷写计划为空"
+  },
+  "flasher.error.emptyImage": {
+    "message": "镜像为空"
+  },
+  "flasher.error.sparseHeader": {
+    "message": "不支持的 sparse 镜像头"
+  },
+  "flasher.error.sparseDimensions": {
+    "message": "无效的 sparse 镜像尺寸"
+  },
+  "flasher.error.sparseChunkHeader": {
+    "message": "sparse 数据块头不完整"
+  },
+  "flasher.error.sparseChunk": {
+    "message": "无效的 sparse 数据块"
+  },
+  "flasher.error.sparseLength": {
+    "message": "sparse 镜像长度不符"
+  },
+  "flasher.error.sparseBlockLimit": {
+    "message": "镜像超出 sparse 块数量限制"
+  },
+  "flasher.error.sparseDownloadLimit": {
+    "message": "设备下载大小限制过小，无法传输 sparse 镜像"
+  },
+  "flasher.error.truncatedArchive": {
+    "message": "压缩包不完整"
+  },
+  "flasher.error.negativeTarSize": {
+    "message": "TAR 文件大小为负数"
+  },
+  "flasher.error.tarNumber": {
+    "message": "无效的 TAR 数值"
+  },
+  "flasher.error.tarEntrySize": {
+    "message": "TAR 条目过大"
+  },
+  "flasher.error.paxHeader": {
+    "message": "无效的 PAX 头"
+  },
+  "flasher.error.paxRecord": {
+    "message": "无效的 PAX 记录"
+  },
+  "flasher.error.paxField": {
+    "message": "无效的 PAX 字段"
+  },
+  "flasher.error.sparseTar": {
+    "message": "包含 sparse 成员的 TAR 压缩包需要先在本地解压"
+  },
+  "flasher.error.tarEnd": {
+    "message": "无效的 TAR 结束标记"
+  },
+  "flasher.error.tarTrailingData": {
+    "message": "TAR 结束标记后存在意外数据"
+  },
+  "flasher.error.tarChecksum": {
+    "message": "TAR 头校验值无效"
+  },
+  "flasher.error.tarMetadataSize": {
+    "message": "TAR 元数据过大"
+  },
+  "flasher.error.paxSize": {
+    "message": "无效的 PAX 大小"
+  },
+  "flasher.error.zstdMagic": {
+    "message": "无效的 Zstandard 帧标识"
+  },
+  "flasher.error.zstdFlags": {
+    "message": "Zstandard 帧使用了保留标志"
+  },
+  "flasher.error.zstdBlockType": {
+    "message": "无效的 Zstandard 数据块类型"
+  },
+  "flasher.error.zstdBlockSize": {
+    "message": "无效的 Zstandard 数据块大小"
+  },
+  "flasher.help.tryFirst": {
+    "message": "请先尝试选择 USB 设备。只有电脑无法访问开发板时，才需要额外配置。"
+  },
+  "flasher.help.fastboot": {
+    "message": "按开发板说明进入 fastboot 模式，并连接用于刷写的 USB 接口。仅供电接口或串口控制台接口不能用于此操作。"
+  },
+  "flasher.help.cable": {
+    "message": "使用 USB 数据线直接连接电脑。如果列表中没有开发板，请尝试更换数据线或接口，并移除 USB 集线器。"
+  },
+  "flasher.help.permission": {
+    "message": "点击“选择 USB 设备”，在浏览器弹窗中选择开发板并允许连接。此授权不会安装驱动或更改电脑的 USB 访问权限。"
+  },
+  "flasher.help.platform": {
+    "message": "你的操作系统"
+  },
+  "flasher.help.other": {
+    "message": "其他 / 不确定"
+  },
+  "flasher.help.windows": {
+    "message": "让开发板保持 fastboot 模式，打开设备管理器。如果对应的 USB 设备显示警告或无法打开，请按开发板厂商的说明安装兼容的 WinUSB 驱动。部分开发板可以自动完成配置。"
+  },
+  "flasher.help.windowsDevice": {
+    "message": "请检查开发板的 USB 设备或 fastboot 接口，而非串口。Google USB Driver 适用于其支持的 Google 设备；请使用开发板厂商推荐的驱动。"
+  },
+  "flasher.help.windowsLink": {
+    "message": "WinUSB 配置参考"
+  },
+  "flasher.help.linux": {
+    "message": "你的发行版可能已经允许访问 fastboot 设备。如果访问被拒绝，请安装开发板厂商提供的 udev 规则；使用 systemd-logind 的系统也可以按以下步骤为此开发板添加规则。"
+  },
+  "flasher.help.linuxIdentify": {
+    "message": "连接处于 fastboot 模式的开发板并运行 lsusb，找到形如 vvvv:pppp 的 ID（厂商 ID:产品 ID）。如不确定，可以对比连接前后的设备列表。"
+  },
+  "flasher.help.linuxEdit": {
+    "message": "以管理员权限打开以下规则文件。添加示例规则，将 vvvv 和 pppp 替换为开发板实际的四位小写十六进制 ID，然后保存。"
+  },
+  "flasher.help.linuxReload": {
+    "message": "重新加载规则，拔插开发板，再在浏览器中选择设备。此规则向当前本地桌面用户授予访问权限；浏览器应以普通用户身份运行。"
+  },
+  "flasher.help.linuxStages": {
+    "message": "开发板切换引导阶段后可能使用不同的 USB ID。如果重新连接后访问失败，请再次查看 lsusb，并为新的 ID 单独添加一条规则。"
+  },
+  "flasher.help.linuxLink": {
+    "message": "Linux USB 权限参考"
+  },
+  "flasher.help.noDriver": {
+    "message": "通常无需额外安装 USB 驱动或配置权限规则。请使用 Chrome 等支持 WebUSB 的浏览器，选择开发板，并关闭正在使用其 USB 接口的其他应用。"
+  },
+  "flasher.help.otherPlatform": {
+    "message": "请在桌面版 Chrome 或 Edge 等支持 WebUSB 的浏览器中，通过 HTTPS 或 localhost 打开页面。如果无法打开设备，请参考操作系统和开发板厂商的 USB 配置说明。"
+  },
+  "flasher.help.stillFailing": {
+    "message": "仍然无法连接？"
+  },
+  "flasher.help.busy": {
+    "message": "关闭正在使用开发板的其他刷写工具、浏览器标签页和应用，再重新连接。如果正在运行的 ADB 服务占用了设备，请使用 adb kill-server 停止它。"
+  },
+  "flasher.help.reconnectIdentity": {
+    "message": "切换引导阶段后，设备名称可能发生变化。请选择同一块开发板，并在继续刷写前核对设备信息。"
+  },
+  "flasher.profileConflict": {
+    "message": "所选文件不属于同一套兼容的镜像。请移除无关文件或不匹配的 U-Boot 镜像后继续。"
+  },
+  "flasher.chooseBoardVariant": {
+    "message": "选择与开发板内存容量匹配的镜像版本"
+  },
+  "flasher.lpi4aBootstrap": {
+    "message": "LicheePi 4A 从 BOOT 模式刷写 boot/root 前，需要先加载配套的 U-Boot。请添加与开发板内存容量和当前镜像版本匹配的 U-Boot 文件。刷写计划会先将其加载到内存并重启，再写入 U-Boot 和系统镜像。"
+  },
+  "flasher.lpi4aConnect": {
+    "message": "请先将开发板断电，按住 BOOT 接入 USB，然后松开 BOOT。临时 U-Boot 启动后，重新选择同一块开发板；此时不要按 BOOT，也不要断电。"
+  },
+  "flasher.lpi4aReconnect": {
+    "message": "已请求启动临时 U-Boot。请保持供电并松开 BOOT，重新选择同一块开发板，核对设备后继续刷写。"
+  },
+  "flasher.deviceCommandError": {
+    "message": "设备拒绝了命令 {command}：{detail}"
+  }
+}
