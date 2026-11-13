@@ -3,11 +3,11 @@
     "stargazers_count": 3,
     "forks_count": 18,
     "subscribers_count": 1,
-    "open_issues_count": 13,
-    "prs_count": 187
+    "open_issues_count": 24,
+    "prs_count": 198
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-03T23:44:40.255Z",
+    "generatedAt": "2026-11-12T23:55:12.715Z",
     "source": "https://api.github.com/repos/ruyisdk/packages-index"
   }
 }
