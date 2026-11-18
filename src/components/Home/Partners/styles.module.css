@@ -1,0 +1,12 @@
+.section {
+  padding-inline: clamp(1.25rem, 5vw, 2rem);
+}
+
+.grid {
+  --partner-gap: 1.25rem;
+  --two-column-width: calc((100% - var(--partner-gap)) / 2);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--two-column-width), 15rem), 1fr));
+  gap: var(--partner-gap);
+}
