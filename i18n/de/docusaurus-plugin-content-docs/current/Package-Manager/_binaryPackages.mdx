@@ -1,0 +1,43 @@
+import ReleaseProvider from '@site/src/components/Docs/LatestReleases';
+import ArchSelector from '@site/src/components/Docs/LatestReleases/ArchSelector';
+
+<ReleaseProvider>
+  <>
+
+## Installation mit einer vorkompilierten Binärdatei
+> Unterstützte Systeme: Linux auf x86_64, arm64 und riscv64
+
+### Den RuyiSDK-Paketmanager herunterladen
+
+Der RuyiSDK-Paketmanager ist für **Linux** als vorkompilierte Binärdatei für **amd64** (x86_64), **arm64** und **riscv64** verfügbar. Die Binärdateien benötigen keine Python-Installation des Systems.
+
+- [GitHub Releases](https://github.com/ruyisdk/ruyi/releases/)
+- [ISCAS-Spiegelserver](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
+
+Prüfen Sie die Architektur mit `uname -m`. Wählen Sie unten die passende Architektur für den Download vom ISCAS-Spiegelserver aus.
+
+<ArchSelector language="de" />
+
+### Den RuyiSDK-Paketmanager installieren
+
+Die oben angezeigten Befehle passen zur ausgewählten Architektur. Installieren Sie die Datei unter dem Namen `ruyi` in einem Verzeichnis in Ihrem `PATH`.
+
+```bash input="1"
+$ ruyi version
+```
+
+Erscheinen die Versions- und Copyrightangaben, war die Installation erfolgreich. Prüfen Sie bei einer unerwarteten Ausgabe die Installationsschritte und die Systemumgebung.
+
+:::tip Fehlerbehebung
+- Die installierte Datei muss `ruyi` heißen. Entfernen Sie einen etwaigen Architekturzusatz.
+- Stellen Sie sicher, dass die Datei ausführbar ist.
+- Prüfen Sie mit `echo $PATH`, ob das Verzeichnis mit `ruyi` im `PATH` steht.
+:::
+
+:::tip Anderes Installationsverzeichnis
+- Ersetzen Sie `/usr/local/bin` im Installationsbefehl durch ein anderes Verzeichnis in Ihrem `PATH`.
+- `~/.local/bin` ist ein geeignetes Verzeichnis für die Installation ohne Administratorrechte. Nehmen Sie es bei Bedarf in den `PATH` auf.
+:::
+
+  </>
+</ReleaseProvider>

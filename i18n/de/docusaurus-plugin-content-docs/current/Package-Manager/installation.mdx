@@ -2,154 +2,44 @@
 sidebar_position: 2
 ---
 
-import ReleaseProvider, { DownloadRuyi, ChmodCommand, CpCommand } from '@site/src/components/Docs/LatestReleases';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import BinaryPackagesContent from './_binaryPackages.mdx';
+import LinuxPkgContent from './_linuxPkg.mdx';
+import PythonPipContent from './_pythonPip.mdx';
 
 # Installation
 
-Lassen Sie uns mit der Installation des RuyiSDK-Paketmanagers beginnen.
+:::tip Vor der Installation
+- Mit dem Download und der Nutzung von RuyiSDK akzeptieren Sie die Lizenzbedingungen und die [Datenschutzerklärung](../legal/privacyPolicy.md).
+- `~` bezeichnet das Home-Verzeichnis des angemeldeten Benutzers. Nutzen Sie bei Bedarf einen absoluten Pfad. Ersetzen Sie Platzhalter wie `/home/foo` durch Ihren tatsächlichen Pfad.
+- Die Installationsmethoden unterstützen unterschiedliche Betriebssysteme und Architekturen. Prüfen Sie vorab die Systemanforderungen im jeweiligen Abschnitt.
+:::
 
-Dieses Dokument verwendet ``~`` als Kurznotation für das Home-Verzeichnis des aktuellen regulären Benutzers und verwendet, falls erforderlich, ``/home/myhone`` als Beispiel für einen absoluten Pfad zum Home-Verzeichnis.
+Für den RuyiSDK-Paketmanager stehen drei Installationsmethoden zur Verfügung:
 
-<ReleaseProvider>
-  <>
+1. **Vorkompilierte Binärdatei (empfohlen)**. Diese Methode unterstützt die meisten Plattformen und stellt die geringsten Anforderungen an das vorhandene System.
+2. **Systempaketmanager**. Verwenden Sie Werkzeuge wie `apt` oder `yum`, wenn Ihre Linux-Distribution das Paket `ruyi` bereitstellt.
+3. **Python-Paketmanager**. Wenn Sie bereits eine Python-Entwicklungsumgebung eingerichtet haben, können Sie `pip` verwenden.
 
-## Installation mit vorgefertigten Binärdateien
-
-Derzeit wurden für das RuyiSDK-Paketmanagement-Tool vorgefertigte Binärdateien für die **Linux**-Betriebssysteme mit den Architekturen **amd64**, **arm64** und **riscv64** bereitgestellt. Dieses Tool ist unabhängig vom System-Python und hat ein breiteres Anwendungsgebiet.
-
-Wir empfehlen die Installation mit dem Skript. Es erkennt Ihre Architektur automatisch, lädt zuerst die neueste stabile Version vom ISCAS-Mirror herunter und installiert sie nach `~/.local/bin/ruyi`:
-
-```bash
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
-```
-
-Für eine Installation in einem Systemverzeichnis führen Sie das Skript mit `sudo` aus und geben Sie den Installationspfad explizit an:
-
-```bash
-$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sudo sh -s -- --install-dir /usr/local/bin
-```
-
-Sie können die vorgefertigte Binärdatei auch manuell herunterladen.
-
-Diese werden sowohl auf GitHub Release als auch auf dem ISCAS-Repository veröffentlicht:
-
-- [ruyi GitHub Releases](https://github.com/RuyiSDK/ruyi/releases/)
-- [ISCAS-Mirror-Source](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/)
-
-Um den manuellen Download zu beschreiben, verwenden wir das ISCAS-Mirror-Source-Beispiel. Führen Sie beim manuellen Download zunächst ``uname -m`` aus, um die Systemarchitektur zu überprüfen und die entsprechende Binärdatei herunterzuladen.
-
-Wenn die Ausgabe ``x86_64`` ist:
-
-<DownloadRuyi arch="x86_64" />
-
-Wenn die Ausgabe ``aarch64`` ist:
-
-<DownloadRuyi arch="aarch64" />
-
-Wenn die Ausgabe ``riscv64`` ist:
-
-<DownloadRuyi arch="riscv64" />
-
-Sie können das [RuyiSDK-Mirror](https://mirror.iscas.ac.cn/ruyisdk/ruyi/releases/) besuchen, um die neuesten Binärdateien herunterzuladen. Alternativ finden Sie diese auch unter den [GitHub-Releases](https://github.com/ruyisdk/ruyi/releases).
-
-Im Folgenden nehmen wir die Architektur ``x86_64`` als Beispiel, um dem heruntergeladenen Binary Ausführungsrechte zu erteilen:
-
-<ChmodCommand arch="x86_64" />
-
-Installieren Sie die Binärdatei in das Verzeichnis, das im ``PATH`` enthalten ist:
-
-<CpCommand arch="x86_64" />
-
-Das Standardinstallationsverzeichnis ist ``~/.local/bin``. Wenn ``ruyi`` nach der Installation nicht gefunden wird, stellen Sie sicher, dass ``~/.local/bin`` in Ihrem ``PATH`` enthalten ist, und melden Sie sich bei Bedarf erneut an oder starten Sie Ihre Shell neu.
-
-Bitte beachten Sie, dass der Name der Binärdatei ``ruyi`` sein muss.
-
-## Installation mit dem System-Paketmanager
-
-### Arch Linux
-
-Derzeit können Arch-Linux-Benutzer den Ruyi-Paketmanager über den System-Paketmanager installieren und deinstallieren. Im Vergleich zur Verwendung der vorgefertigten Binärdateien ist die Wartung einfacher; die Verwendung von System-Python kann auch bessere Leistung bieten.
-
-Installieren Sie aus dem AUR, Beispiel mit ``yay``, beachten Sie, dass Sie als regulärer Benutzer arbeiten sollten:
-
-```bash
-$ yay -S ruyi
-```
-
-Um aus dem Arch Linux CN Software-Repository zu installieren, fügen Sie eine Konfiguration hinzu, indem Sie das ISCAS Open Source Mirror verwenden:
-
-```bash
-[archlinuxcn]
-Server = https://mirror.iscas.ac.cn/archlinuxcn/$arch
-```
-
-Installieren Sie mit ``pacman``:
-
-```bash
-$ sudo pacman -Sy
-$ sudo pacman -S ruyi
-```
-
-### Gentoo Linux
-
-Gentoo-Linux-Nutzer können die folgenden Schritte ausführen, um den Ruyi-Paketmanager (`ruyi`) mithilfe des offiziell bereitgestellten `ruyisdk-overlay` zu installieren und zu konfigurieren.
-
-1. Installieren Sie `eselect-repository` und den Git-Client:
-
-```bash
-sudo emerge --ask app-eselect/eselect-repository dev-vcs/git
-```
-
-2. Stellen Sie sicher, dass das System das Hauptrepository von Gentoo hinzugefügt hat (dies ist in der Regel standardmäßig konfiguriert).
-
-3. Fügen Sie mit `eselect-repository` das Overlay `ruyisdk-overlay` hinzu:
-
-```bash
-sudo eselect repository add ruyisdk git https://github.com/ruyisdk/ruyisdk-overlay.git
-```
-
-4. Synchronisieren Sie das Repository
-
-```bash
-sudo emaint sync -r ruyisdk
-```
-
-5. Test-Keywords akzeptieren (Entmaskieren)
-
-Das Ebuild für Ruyi ist als Testversion (`~amd64`) gekennzeichnet und muss vor der Installation entmaskiert werden.
-
-```bash
-sudo emerge dev-util/ruyi --autounmask-write --autounmask
-sudo dispatch-conf
-```
-
-1. Der erste Befehl generiert die notwendigen Änderungen an `package.accept_keywords`.
-2. Führen Sie `dispatch-conf` aus und geben Sie im Interface `u` (use-new) ein, um die Änderungen zu übernehmen.
-3. Installieren Sie anschließend den Ruyi-Paketmanager:
-
-```bash
-sudo emerge --ask dev-util/ruyi
-```
+<Tabs groupId="ruyi-installation">
+  <TabItem value="BinaryPackages" label="Binärdatei" default>
+    <BinaryPackagesContent />
+  </TabItem>
+  <TabItem value="LinuxPkg" label="Systempaketmanager">
+    <LinuxPkgContent />
+  </TabItem>
+  <TabItem value="PythonPip" label="Python-Paketmanager">
+    <PythonPipContent />
+  </TabItem>
+</Tabs>
 
 ---
 
-## Überprüfen Sie Ihre Installation
-
-```bash
-$ ruyi version
-```
-
-Der Befehl sollte ordnungsgemäß ausgeführt werden und die Version sowie Copyright-Informationen anzeigen. Wenn dies nicht der Fall ist, überprüfen Sie die Systemumgebung oder versuchen Sie die Installation erneut.
-
 ## Erste Schritte
 
-Damit ist der Ruyi-Paketmanager erfolgreich auf Ihrem System installiert. Sie können die Hilfe von Ruyi selbst konsultieren, um sich mit der Anwendung vertraut zu machen, oder dieses Dokument weiter lesen.
+Nach der Installation können Sie die integrierte Hilfe aufrufen oder mit der Dokumentation fortfahren.
 
-Hilfeinformationen auflisten:
-
-```bash
+```bash input="1"
 $ ruyi --help
 ```
-
-  </>
-</ReleaseProvider>

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Flashing the Development Board via Fastboot (Using Licheepi 4A as an Example)
 
-Currently, the ruyi package manager provides a more convenient method for installing the operating system. By following the steps below and the related instructions, the installation can be completed.
+Currently, the RuyiSDK Package Manager provides a more convenient method for installing the operating system. By following the steps below and the related instructions, the installation can be completed.
 
 ## Environment
 
@@ -12,7 +12,7 @@ This document is based on the following environment:
 - Hardware: x86_64 PC
 - Software: Ubuntu 22.04
 
-### Attach the Device to the Host
+## Attach the Device to the Host
 
 The Licheepi 4A supports booting from onboard eMMC or SD card, and there are two different connection methods for flashing:
 
@@ -49,11 +49,11 @@ SUBSYSTEM=="usb", ATTR{idVendor}="1234", ATTR{idProduct}=="8888", MODE="0666", G
 
 After applying the configuration, verify that `fastboot` can detect the device by running `fastboot devices`. If you see an output line like `0123456789abcdef fastboot`, the setup is successful.
 
-### Installing the Operating System
+## Flash the Operating System
 
-Ensure that the ruyi package manager is installed and that `ruyi -V` outputs the version information correctly. Then, proceed with the following steps.
+Ensure that the RuyiSDK Package Manager is installed and that `ruyi -V` outputs the version information correctly. Then, proceed with the following steps.
 
-The ruyi package manager provides the functionality to install an operating system on a RISC-V development board. To install an image for any model of RISC-V development board, simply execute:
+The RuyiSDK Package Manager provides the functionality to install an operating system on a RISC-V development board. To install an image for any model of RISC-V development board, simply execute:
 
 ```bash
 $ ruyi device provision

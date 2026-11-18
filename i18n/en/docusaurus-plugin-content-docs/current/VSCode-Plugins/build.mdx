@@ -1,0 +1,134 @@
+---
+sidebar_position: 7
+---
+
+# Build a project with RuyiSDK
+
+Use the extension to build a project in one click, run builds in a virtual environment (venv), or define build rules for your workspace.
+
+## 1. What the build feature does
+
+- Detects the workspace's build system.
+- Runs the steps in the order defined by the selected rule.
+- Runs build commands in the active Ruyi venv, if there is one.
+- Shows the full log in an Output panel.
+
+The default rules support CMake (`CMakeLists.txt`), GNU Make (`Makefile`, `GNUmakefile`, or `makefile`), and GCC C projects (`*.c` in the workspace root), in that order.
+
+## 2. Start a build
+
+- Click **Build** at the lower left of the status bar.
+
+  ![Build button in the status bar](@site/docs/VSCode-Plugins/image/image-8.png)
+
+- Click **Build Project** in the editor title bar.
+
+  ![Build Project button in the editor title bar](@site/docs/VSCode-Plugins/image/image-9.png)
+
+- Run **Ruyi: Build Project** from the Command Palette.
+
+  ![Build command in the Command Palette](@site/docs/VSCode-Plugins/image/image-10.png)
+
+Start by opening the project root as your workspace.
+
+## 3. Build workflow
+
+1. Install and configure RuyiSDK.
+2. Optionally activate a venv in **RuyiSDK Virtual Environment**.
+3. Open the project root.
+4. Click **Build**.
+5. Check the notification and the log in **RuyiSDK Build**.
+
+A successful build shows `Build succeeded`. If a build fails, the notification identifies the failed step and exit code.
+
+## 4. How detection works
+
+The extension checks the workspace root and uses the first matching rule:
+
+- `CMakeLists.txt` → CMake
+- `Makefile`, `GNUmakefile`, or `makefile` → GNU Make
+- `*.c` → GCC C
+
+If no rule matches, the extension reports that it could not recognize a build system. For example, in a workspace with both `CMakeLists.txt` and `Makefile`, the CMake rule wins.
+
+## 5. Build with a venv
+
+When a Ruyi venv is active, the build runs in that environment with access to its tools and environment variables. The **Build** button's tooltip shows the active venv name.
+
+For a project with its own build configuration, the extension starts the existing build command in the active venv. Configure the project to use the toolchain yourself. In CMake, set `CMAKE_TOOLCHAIN_FILE`, a preset, or the relevant cache entries. In Make, set `CC`, `CXX`, or other variables used by the project. The extension does not inject these settings.
+
+Without an active venv, the build uses system tools such as `cmake`, `gcc`, and `make`.
+
+## 6. Build output
+
+The **RuyiSDK Build** panel shows the selected build system, whether a venv is active, each step's working directory and command, and any failed step, exit code, or error output. Check this panel first when a build fails.
+
+![RuyiSDK Build output panel](@site/docs/VSCode-Plugins/image/image-11.png)
+
+## 7. Custom build rules
+
+To override the default rules, create `.ruyi-build-rules.json` in the workspace root. The file replaces the built-in rules in full.
+
+### 7.1 Rule file structure
+
+The top-level fields are `version` (a version string), `description` (optional), and `rules` (a list of rules).
+
+Each rule has an `id` (unique identifier), `name` (display name), `priority` (higher numbers take precedence), `indicators` (exact filenames in the root), optional `indicatorGlobs` (glob patterns), and `steps` (an ordered list).
+
+Each step has a `name`, `command`, and `args` array. It can also specify `workdir` relative to the workspace root and `useShell` to run the command through a shell.
+
+### 7.2 A minimal Make rule
+
+```json
+{
+  "version": "1",
+  "description": "Workspace custom build rules",
+  "rules": [
+    {
+      "id": "my-make",
+      "name": "My GNU Make",
+      "priority": 50,
+      "indicators": ["Makefile"],
+      "steps": [
+        {
+          "name": "Build",
+          "command": "make",
+          "args": ["-j4"],
+          "workdir": "."
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 7.3 Run a step through a shell
+
+Use `useShell: true` for wildcard expansion, pipelines, or loops. You can reference environment variables from an active venv, such as `${RUYI_VENV_PROMPT}`. Quote arguments containing spaces or special characters.
+
+This example builds every `*.c` file in the workspace root. The `for` loop and wildcard require `useShell: true`.
+
+```json
+{
+  "version": "1",
+  "description": "Build all C files with shell loop",
+  "rules": [
+    {
+      "id": "c-shell-loop",
+      "name": "GCC C with Shell Loop",
+      "priority": 20,
+      "indicators": [],
+      "indicatorGlobs": ["*.c"],
+      "steps": [
+        {
+          "name": "Compile All",
+          "command": "for f in *.c; do gcc \"$f\" -O2 -Wall -o \"${f%.c}\"; done",
+          "args": [],
+          "workdir": ".",
+          "useShell": true
+        }
+      ]
+    }
+  ]
+}
+```

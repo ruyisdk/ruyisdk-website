@@ -4,20 +4,20 @@ sidebar_position: 1
 
 # Building with Ruyi Compilation Environment (Using Licheepi 4A as an Example)
 
-This guide demonstrates the process of installing the Ruyi package manager, setting up a RISC-V compilation and simulation environment using Ruyi, and completing the local compilation of the CoreMark source code, followed by running it on the Licheepi 4A development board.
+This guide demonstrates the process of installing the RuyiSDK Package Manager, setting up a RISC-V compilation and simulation environment using Ruyi, and completing the local compilation of the CoreMark source code, followed by running it on the Licheepi 4A development board.
 
 ## Environment Description
 
 - Hardware Environment: Licheepi 4A Development Board (th1520)
 - Software Environment: Debian/openEuler for RISC-V
 
-## Installation of Ruyi Package Manager
+## Installation of RuyiSDK Package Manager
 
 1. Please refer to the [RuyiSDK Package Manager Installation Guide](https://ruyisdk.org/download#%E4%B8%8B%E8%BD%BD-ruyisdk-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8) to complete the installation of Ruyi.
    
    > In this document, the hardware environment is a RISC-V device, and the downloaded and installed version of Ruyi is built for the riscv64 architecture.
 
-## Setting Up the Development Environment Using Ruyi Package Manager
+## Setting Up the Development Environment Using RuyiSDK Package Manager
 
 2. View the software repository package index information
 

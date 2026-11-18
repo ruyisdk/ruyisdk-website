@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Feature Overview
 
-The ruyi package manager primarily provides the following functionalities.
+The RuyiSDK Package Manager primarily provides the following functionalities.
 
 ## Command Reference
 
@@ -28,11 +28,11 @@ The ruyi package manager primarily provides the following functionalities.
 | `ruyi uninstall gnu-upstream` | Uninstall an installed package. | You can also use `ruyi remove` or `ruyi rm`. |
 | `ruyi extract ruyisdk-demo`                                                                  | Download and unpack ruyisdk-demo source package.      | By default, unpacks into a directory named after the package and version. |
 | `ruyi venv --toolchain gnu-upstream --emulator qemu-user-riscv-upstream generic ./ruyi_venv` | Create virtual environment with toolchain and emulator in specified directory.      | Uses predefined generic configuration.                   |
-| `ruyi version`                                                                               | Display version of ruyi package manager.              |                                     |
-| `ruyi self uninstall`                                                                        | Uninstall ruyi package manager.               | Command will prompt for confirmation.                          |
-| `ruyi self uninstall -y`                                                                     | Uninstall ruyi package manager without confirmation.         | Executes directly without confirmation.                           |
-| `ruyi self uninstall --purge`                                                                | Completely uninstall ruyi package manager, including cache and installed packages. | Includes cache and installed packages.                       |
-| `ruyi self uninstall --purge -y`                                                             | Completely uninstall ruyi package manager without confirmation.         | Executes directly without confirmation.                           |
+| `ruyi version`                                                                               | Display version of RuyiSDK Package Manager.              |                                     |
+| `ruyi self uninstall`                                                                        | Uninstall RuyiSDK Package Manager.               | Command will prompt for confirmation.                          |
+| `ruyi self uninstall -y`                                                                     | Uninstall RuyiSDK Package Manager without confirmation.         | Executes directly without confirmation.                           |
+| `ruyi self uninstall --purge`                                                                | Completely uninstall RuyiSDK Package Manager, including cache and installed packages. | Includes cache and installed packages.                       |
+| `ruyi self uninstall --purge -y`                                                             | Completely uninstall RuyiSDK Package Manager without confirmation.         | Executes directly without confirmation.                           |
 | `ruyi self clean`                                                                            | Clean data directories.                           | Can specify which directories to clean via parameters               |
 | `ruyi device provision`                                                                      | Download required system image and provision device.          | Follows guided system installation process.                         |
 
@@ -48,4 +48,4 @@ Ruyi supports configuring these directories using XDG environment variables.
 
 ## More Information
 
-Refer to ruyi package manager [repository documentation](https://github.com/ruyisdk/ruyi) (currently English only).
+Refer to RuyiSDK Package Manager [repository documentation](https://github.com/ruyisdk/ruyi) (currently English only).

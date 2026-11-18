@@ -31,7 +31,7 @@ Ein Problem bei der bisherigen Entwicklung für RISC-V war das Fehlen einer zent
 
 RuyiSDK besteht aus den folgenden drei Teilen:
 
-### [Ruyi Paketmanager](/docs/category/ruyi-包管理器)
+### [RuyiSDK-Paketmanager](/docs/category/ruyi-包管理器)
 
 Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstellt:
 
@@ -48,7 +48,7 @@ Der Paketmanager ist eine Online-Softwarequelle, die folgende Inhalte bereitstel
 
 ### [Ruyi IDE](/docs/category/ruyisdk-ide)
 
-Diese IDE ist ein Entwicklungstoolkit, das speziell für die RISC-V-Architektur entwickelt wurde. Entwickler können es einfach über den Ruyi-Paketmanager beziehen und es für die Codeerstellung und das Debugging in realen Entwicklungsszenarien verwenden. Mit dem Paketmanager können Entwickler die Toolchain, Debugging-Tools und Emulatoren aus dem Toolkit beziehen. Entwickler können den Emulator oder RISC-V-Entwicklungsboards verwenden, um ihre Programme zu schreiben und zu debuggen.
+Diese IDE ist ein Entwicklungstoolkit, das speziell für die RISC-V-Architektur entwickelt wurde. Entwickler können es einfach über den RuyiSDK-Paketmanager beziehen und es für die Codeerstellung und das Debugging in realen Entwicklungsszenarien verwenden. Mit dem Paketmanager können Entwickler die Toolchain, Debugging-Tools und Emulatoren aus dem Toolkit beziehen. Entwickler können den Emulator oder RISC-V-Entwicklungsboards verwenden, um ihre Programme zu schreiben und zu debuggen.
 
 ### [Community](/about)
 
@@ -98,7 +98,9 @@ Weitere Informationen finden Sie [hier](/docs/Package-Manager/installation).
 
 ### Betriebssystem herunterladen und installieren
 
-Der erste Schritt:
+#### Mit dem RuyiSDK-Paketmanager
+
+Starten Sie nach der Installation von `ruyi` den Assistenten zum Flashen:
 
 ```bash
 $ ruyi device provision
@@ -107,3 +109,7 @@ $ ruyi device provision
 > Dieser Befehl erkennt die Hardwareinformationen und beginnt automatisch mit der Bereitstellung der RISC-V-Entwicklungsumgebung. Folgen Sie einfach den Anweisungen.
 
 Weitere Informationen finden Sie unter [Entwicklungsboard-Flash mit dd (am Beispiel von MilkV Duo)](/docs/Package-Manager/cases/case3) und [Entwicklungsboard-Flash mit fastboot (am Beispiel von Licheepi 4A)](/docs/Package-Manager/cases/case4).
+
+#### Mit Ruyi Imager
+
+Mit [Ruyi Imager](./Imager/index.md) können Sie Systemabbilder über eine grafische Oberfläche flashen.

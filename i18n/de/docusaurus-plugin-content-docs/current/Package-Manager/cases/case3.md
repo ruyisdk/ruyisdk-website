@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # dd-Methode zur Installation auf einem Entwicklungsboard (am Beispiel MilkV Duo)
 
-Derzeit bietet der Ruyi-Paketmanager eine einfachere Möglichkeit zur Installation von Betriebssystemen, die durch die folgenden Schritte und entsprechenden Anleitungen abgeschlossen werden kann.
+Derzeit bietet der RuyiSDK-Paketmanager eine einfachere Möglichkeit zur Installation von Betriebssystemen, die durch die folgenden Schritte und entsprechenden Anleitungen abgeschlossen werden kann.
 
 ## Umgebung
 
@@ -16,15 +16,15 @@ Dieser Artikel basiert auf folgender Umgebung:
 
 Die meisten RISC-V-Entwicklungsboards unterstützen das Booten von Micro SD-Karten oder NVME SSDs und verwenden typischerweise das ``dd``-Tool, um das Abbild direkt auf das Laufwerk zu schreiben. ``ruyi device provision`` unterstützt diese Schreibweise.
 
-Obwohl der Ruyi-Paketmanager so konzipiert ist, dass er keine Operationen ausführt, die Superuser-Rechte benötigen, ist das Schreiben auf das Laufwerk oft eine Berechtigung erforderlich. Daher wird der Ruyi-Paketmanager, wenn der Aufruf des ``dd``-Befehls durch einen normalen Benutzer fehlschlägt, versuchen, die Berechtigungen mit ``sudo`` zu erhöhen. In diesem Fall muss der Benutzer möglicherweise ein Passwort eingeben, das direkt von ``sudo`` gelesen wird und für den Ruyi-Paketmanager transparent ist.
+Obwohl der RuyiSDK-Paketmanager so konzipiert ist, dass er keine Operationen ausführt, die Superuser-Rechte benötigen, ist das Schreiben auf das Laufwerk oft eine Berechtigung erforderlich. Daher wird der RuyiSDK-Paketmanager, wenn der Aufruf des ``dd``-Befehls durch einen normalen Benutzer fehlschlägt, versuchen, die Berechtigungen mit ``sudo`` zu erhöhen. In diesem Fall muss der Benutzer möglicherweise ein Passwort eingeben, das direkt von ``sudo`` gelesen wird und für den RuyiSDK-Paketmanager transparent ist.
 
-Festplattabbilder beanspruchen nach dem Entpacken oft viel Speicherplatz. Vor der Verwendung des Ruyi-Paketmanagers zum Schreiben eines Abbildes sollte unbedingt genügend Speicherplatz vorhanden sein; einige vom Hersteller bereitgestellte Abbilder erweitern nach dem Schreiben nicht automatisch die Partitionen, um den gesamten Speicherplatz zu nutzen, sodass der Benutzer möglicherweise selbst die Partitionsgröße erweitern muss.
+Festplattabbilder beanspruchen nach dem Entpacken oft viel Speicherplatz. Vor der Verwendung des RuyiSDK-Paketmanagers zum Schreiben eines Abbildes sollte unbedingt genügend Speicherplatz vorhanden sein; einige vom Hersteller bereitgestellte Abbilder erweitern nach dem Schreiben nicht automatisch die Partitionen, um den gesamten Speicherplatz zu nutzen, sodass der Benutzer möglicherweise selbst die Partitionsgröße erweitern muss.
 
 ## Installation des Betriebssystems
 
-Stellen Sie sicher, dass der Ruyi-Paketmanager installiert ist und dass der Test `ruyi -V` korrekt Versionsinformationen anzeigt, bevor Sie mit folgenden Schritten fortfahren.
+Stellen Sie sicher, dass der RuyiSDK-Paketmanager installiert ist und dass der Test `ruyi -V` korrekt Versionsinformationen anzeigt, bevor Sie mit folgenden Schritten fortfahren.
 
-Der Ruyi-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Abbild für ein beliebiges Modell eines RISC-V-Entwicklungsboards zu installieren, muss lediglich ausgeführt werden:
+Der RuyiSDK-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Abbild für ein beliebiges Modell eines RISC-V-Entwicklungsboards zu installieren, muss lediglich ausgeführt werden:
 
 ```bash
 $ ruyi device provision

@@ -1,0 +1,134 @@
+---
+sidebar_position: 7
+---
+
+# Projekte mit RuyiSDK bauen
+
+Mit der Erweiterung können Sie Projekte per Mausklick bauen, Builds in einer virtuellen Umgebung (venv) ausführen und eigene Build-Regeln für Ihren Arbeitsbereich festlegen.
+
+## 1. Was die Build-Funktion bietet
+
+- Sie erkennt das Build-System des Arbeitsbereichs.
+- Sie führt die Schritte in der Reihenfolge der gewählten Regel aus.
+- Bei aktivem Ruyi-venv führt sie die Befehle in dieser Umgebung aus.
+- Sie zeigt das vollständige Protokoll in der Ausgabeansicht an.
+
+Die Standardregeln unterstützen in dieser Reihenfolge CMake (`CMakeLists.txt`), GNU Make (`Makefile`, `GNUmakefile` oder `makefile`) und C-Projekte für GCC (`*.c` im Stammverzeichnis des Arbeitsbereichs).
+
+## 2. Einen Build starten
+
+- Klicken Sie links unten in der Statusleiste auf **Build**.
+
+  ![Schaltfläche Build in der Statusleiste](@site/docs/VSCode-Plugins/image/image-8.png)
+
+- Klicken Sie in der Titelleiste des Editors auf **Build Project**.
+
+  ![Schaltfläche Build Project in der Titelleiste](@site/docs/VSCode-Plugins/image/image-9.png)
+
+- Führen Sie in der Befehlspalette **Ruyi: Build Project** aus.
+
+  ![Build-Befehl in der Befehlspalette](@site/docs/VSCode-Plugins/image/image-10.png)
+
+Öffnen Sie zunächst das Stammverzeichnis des Projekts als Arbeitsbereich.
+
+## 3. Ablauf
+
+1. Installieren und konfigurieren Sie RuyiSDK.
+2. Aktivieren Sie bei Bedarf ein venv in **RuyiSDK Virtual Environment**.
+3. Öffnen Sie das Stammverzeichnis des Projekts.
+4. Klicken Sie auf **Build**.
+5. Prüfen Sie die Meldung und das Protokoll unter **RuyiSDK Build**.
+
+Nach einem erfolgreichen Build erscheint `Build succeeded`. Schlägt der Build fehl, nennt die Meldung den fehlgeschlagenen Schritt und den Exitcode.
+
+## 4. Erkennung des Build-Systems
+
+Die Erweiterung prüft das Stammverzeichnis des Arbeitsbereichs und verwendet die erste passende Regel:
+
+- `CMakeLists.txt` → CMake
+- `Makefile`, `GNUmakefile` oder `makefile` → GNU Make
+- `*.c` → GCC C
+
+Wenn keine Regel passt, meldet die Erweiterung, dass sie kein Build-System erkennen konnte. Liegen sowohl `CMakeLists.txt` als auch `Makefile` vor, hat CMake Vorrang.
+
+## 5. Builds in einer virtuellen Umgebung
+
+Bei aktivem Ruyi-venv läuft der Build in dieser Umgebung und kann deren Werkzeuge und Umgebungsvariablen verwenden. Der Tooltip der Schaltfläche **Build** nennt den Namen des aktiven venv.
+
+Bei Projekten mit eigener Build-Konfiguration startet die Erweiterung den vorhandenen Build-Befehl im aktiven venv. Richten Sie die Toolchain selbst im Projekt ein. Setzen Sie für CMake beispielsweise `CMAKE_TOOLCHAIN_FILE`, einen Preset oder die entsprechenden Cache-Einträge. In Make-Projekten setzen Sie `CC`, `CXX` oder die vom Projekt verwendeten Variablen. Die Erweiterung übernimmt diese Einstellungen nicht automatisch.
+
+Ohne aktives venv verwendet der Build die Systemwerkzeuge, etwa `cmake`, `gcc` und `make`.
+
+## 6. Build-Ausgabe
+
+Die Ansicht **RuyiSDK Build** zeigt das erkannte Build-System, den venv-Status sowie Arbeitsverzeichnis und Befehl jedes Schritts. Bei einem Fehler sehen Sie dort auch den fehlgeschlagenen Schritt, den Exitcode und die Fehlerausgabe. Prüfen Sie bei einem Fehler zuerst diese Ansicht.
+
+![Ausgabeansicht RuyiSDK Build](@site/docs/VSCode-Plugins/image/image-11.png)
+
+## 7. Eigene Build-Regeln
+
+Legen Sie `.ruyi-build-rules.json` im Stammverzeichnis des Arbeitsbereichs an. Die Datei ersetzt die eingebauten Regeln vollständig.
+
+### 7.1 Aufbau der Regeldatei
+
+Auf oberster Ebene stehen `version` (Versionszeichenfolge), `description` (optional) und `rules` (Liste der Regeln).
+
+Eine Regel enthält `id` (eindeutige Kennung), `name` (Anzeigename), `priority` (höhere Werte haben Vorrang), `indicators` (exakte Dateinamen im Stammverzeichnis), optional `indicatorGlobs` (Glob-Muster) und `steps` (Liste der Schritte).
+
+Jeder Schritt enthält `name`, `command` und das Argument-Array `args`. Optional können Sie mit `workdir` das Arbeitsverzeichnis relativ zum Arbeitsbereich angeben und mit `useShell` den Befehl über eine Shell ausführen.
+
+### 7.2 Einfache Make-Regel
+
+```json
+{
+  "version": "1",
+  "description": "Workspace custom build rules",
+  "rules": [
+    {
+      "id": "my-make",
+      "name": "My GNU Make",
+      "priority": 50,
+      "indicators": ["Makefile"],
+      "steps": [
+        {
+          "name": "Build",
+          "command": "make",
+          "args": ["-j4"],
+          "workdir": "."
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 7.3 Einen Schritt über die Shell ausführen
+
+Verwenden Sie `useShell: true` für Platzhalter, Pipes und Schleifen. Bei aktivem venv können Sie dessen Umgebungsvariablen verwenden, etwa `${RUYI_VENV_PROMPT}`. Setzen Sie Argumente mit Leer- oder Sonderzeichen in geeignete Anführungszeichen.
+
+Das Beispiel kompiliert alle `*.c`-Dateien im Stammverzeichnis des Arbeitsbereichs. Die `for`-Schleife und der Platzhalter setzen `useShell: true` voraus.
+
+```json
+{
+  "version": "1",
+  "description": "Build all C files with shell loop",
+  "rules": [
+    {
+      "id": "c-shell-loop",
+      "name": "GCC C with Shell Loop",
+      "priority": 20,
+      "indicators": [],
+      "indicatorGlobs": ["*.c"],
+      "steps": [
+        {
+          "name": "Compile All",
+          "command": "for f in *.c; do gcc \"$f\" -O2 -Wall -o \"${f%.c}\"; done",
+          "args": [],
+          "workdir": ".",
+          "useShell": true
+        }
+      ]
+    }
+  ]
+}
+```

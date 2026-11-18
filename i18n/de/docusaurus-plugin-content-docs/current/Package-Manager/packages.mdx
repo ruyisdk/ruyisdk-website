@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Verwaltung des Ruyi-Pakets
+# Ruyi-Pakete verwalten
 
 ## Aktualisieren des lokalen Paket-Cache
 
@@ -18,7 +18,7 @@ Der Paket-Cache wird im Benutzerverzeichnis gespeichert, normalerweise unter ``~
 
 Da die aktuellen Paketindexinformationen im GitHub-Repository gehostet werden, kann es bei instabilen Repository-Zugriffen erforderlich sein, in der Konfigurationsdatei ein [alternatives Repository](https://mirror.iscas.ac.cn/git/ruyisdk/packages-index.git) zu konfigurieren.
 
-Die Konfigurationsdatei des Ruyi-Paketmanagers wird standardmäßig unter ``~/.config/ruyi/config.toml`` gespeichert, wenn ``XDG_CONFIG_HOME`` konfiguriert ist, befindet sie sich unter ``$XDG_CONFIG_HOME/ruyi/config.toml``. Wenn die Datei nicht existiert, können Sie sie selbst erstellen.
+Die Konfigurationsdatei des RuyiSDK-Paketmanagers wird standardmäßig unter ``~/.config/ruyi/config.toml`` gespeichert, wenn ``XDG_CONFIG_HOME`` konfiguriert ist, befindet sie sich unter ``$XDG_CONFIG_HOME/ruyi/config.toml``. Wenn die Datei nicht existiert, können Sie sie selbst erstellen.
 
 ```~/.config/ruyi/config.toml
 [repo]
@@ -37,7 +37,7 @@ $ ruyi update
 
 ## Nachrichten lesen
 
-Als Sie im vorherigen Abschnitt ``ruyi update`` ausgeführt haben, um die lokale Softwarequelle zu aktualisieren, haben Sie wahrscheinlich gesehen, dass der Ruyi-Paketmanager ungelesene Nachrichten (news item(s)) aufgelistet hat. Hier können Sie rechtzeitig über die Aktualisierungen der Ruyi-Pakete oder andere wichtige Mitteilungen informiert werden.
+Als Sie im vorherigen Abschnitt ``ruyi update`` ausgeführt haben, um die lokale Softwarequelle zu aktualisieren, haben Sie wahrscheinlich gesehen, dass der RuyiSDK-Paketmanager ungelesene Nachrichten (news item(s)) aufgelistet hat. Hier können Sie rechtzeitig über die Aktualisierungen der Ruyi-Pakete oder andere wichtige Mitteilungen informiert werden.
 
 Durch Ausführen von ``ruyi news list`` können Sie ebenfalls diese Seite aufrufen. Der Unterschied besteht darin, dass alle Nachrichten angezeigt werden, während ungelesene Nachrichten in unterstützten Terminals grün hervorgehoben werden.
 
@@ -133,7 +133,7 @@ Kennzeichnet die neueste Version eines Pakets, die auch die Version ist, die sta
 
 Eine Vorabversion. Dies bedeutet, dass dieses Paket diese Version vor der Veröffentlichung durch upstream bereitgestellt hat. Neue Versionen beheben oft Bugs der alten Version, insbesondere wenn eine Vorabversion als notwendig erachtet wird.
 
-Standardmäßig ignoriert der Ruyi-Paketmanager Vorabversionen. Sie können den Ruyi-Paketmanager so konfigurieren, dass Vorabversionen installiert werden, müssen jedoch die damit verbundenen Risiken selbst tragen.
+Standardmäßig ignoriert der RuyiSDK-Paketmanager Vorabversionen. Sie können den RuyiSDK-Paketmanager so konfigurieren, dass Vorabversionen installiert werden, müssen jedoch die damit verbundenen Risiken selbst tragen.
 
 ### ``latest-prerelease``
 
@@ -208,24 +208,56 @@ Die folgenden Kategorien von Paketen sind offensichtlich Quellpakete:
 
 - source Quellpaket
 
-Quellpakete können mit dem ``extract``-Befehl heruntergeladen und im aktuellen Verzeichnis entpackt werden:
+Mit `extract` laden Sie ein Quellpaket herunter und entpacken es. Standardmäßig legt Ruyi dafür ein Unterverzeichnis mit Paketname und Version an:
 
-```bash
+```bash input="1-3"
 $ ruyi extract ruyisdk-demo
+$ cd ruyisdk-demo-0.20231114.0
 $ ls
 README.md  rvv-autovec
+```
+
+Mit `--extract-without-subdir` entpacken Sie das Paket direkt ins aktuelle Verzeichnis. Das war in früheren Versionen die Standardeinstellung:
+
+```bash input="1-2"
+$ ruyi extract --extract-without-subdir ruyisdk-demo
+$ ls
+README.md  rvv-autovec
+```
+
+Mit `--dest-dir` oder `-d` geben Sie ein anderes Zielverzeichnis an:
+
+```bash input="1"
+$ ruyi extract -d /path/to/destination ruyisdk-demo
+```
+
+Mit `--fetch-only` oder `-f` laden Sie das Paket herunter, ohne es zu entpacken:
+
+```bash input="1"
+$ ruyi extract -f ruyisdk-demo
 ```
 
 Der ``extract``-Befehl unterstützt die gleichen Versionsausdrücke wie der ``install``-Befehl.
 
 ## Deinstallation von Paketen
 
-Der Ruyi-Paketmanager hat keine Funktion implementiert, um ein bestimmtes Ruyi-Paket zu deinstallieren. Sie können jedoch den folgenden Befehl verwenden, um alle heruntergeladenen und installierten Pakete zu löschen:
+Mit `ruyi uninstall` deinstallieren Sie ein einzelnes Paket:
 
-```bash
+```bash input="1"
+$ ruyi uninstall gnu-upstream
+```
+
+`ruyi remove` und `ruyi rm` sind Kurzformen desselben Befehls:
+
+```bash input="1,2"
+$ ruyi remove gnu-upstream
+$ ruyi rm gnu-upstream
+```
+
+Wenn Sie alle heruntergeladenen und installierten Pakete löschen möchten, verwenden Sie:
+
+```bash input="1"
 $ ruyi self clean --distfiles --installed-pkgs
 ```
 
-Wenn Sie darauf bestehen, ein bestimmtes Paket zu löschen, obwohl dies nicht empfohlen wird, können Sie es manuell löschen. Wenn Sie versehentlich einige Dateien gelöscht haben, Ruyi jedoch weiterhin glaubt, dass das Paket installiert ist, können Sie versuchen, es mit ``install --reinstall`` wiederherzustellen.
-
-Bitte beachten Sie, dass, wenn ein Werkzeugkettenpaket gelöscht wird, bereits erstellte virtuelle Umgebungen, die von diesem Paket abhängen, ungültig werden und beim Aktivieren dieser Build-Umgebung keine entsprechenden Warnungen angezeigt werden.
+Wenn Sie eine Toolchain entfernen, funktionieren bestehende virtuelle Umgebungen mit dieser Toolchain nicht mehr. Beim Aktivieren zeigt Ruyi dafür keine Warnung an.

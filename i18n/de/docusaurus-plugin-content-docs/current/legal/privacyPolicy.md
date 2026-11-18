@@ -6,7 +6,10 @@ RuyiSDK ist ein von der Softwareforschungsinstitut der Chinesischen Akademie der
 
 RuyiSDK konzentriert sich auf die Optimierung der Produktnutzung und Benutzererfahrung und verfolgt das Prinzip der Minimierung der Informationssammlung, um die Erhebung persönlicher Identifikationsinformationen zu vermeiden. Wir bevorzugen die anonymisierte Erhebung von Informationen zur Verbesserung des Betriebs und der Dienstleistungen des Produkts. Folgendes sind unsere Erhebungs- und Verarbeitungsmethoden:
 
-- Website-Besuch: Beim bloßen Besuch dieser Website sind keine persönlichen Informationen erforderlich.
+- **Website-Besuch**: Wenn Sie [ruyisdk.org](https://ruyisdk.org/) oder die [Website mit Board-Beispielen](https://board-docs-frontend.pages.dev/) besuchen, erfassen wir über den Analysedienst von Cloudflare anonymisierte, zusammengefasste Besuchsstatistiken. Damit können wir die allgemeine Nutzung und die Interessen der Besucher besser verstehen und die Inhalte sowie die Bedienung verbessern. Für den Besuch der Websites müssen Sie keine personenbezogenen Daten angeben. Der Analysedienst schützt die Privatsphäre wie folgt:
+  - Er verwendet keine Cookies oder ähnlichen Techniken, um Ihre Aktivitäten auf diesen Websites zu verfolgen.
+  - Er verwendet keine IP-Adressen, User-Agent-Kennungen oder vergleichbaren Merkmale, um Besucher per Fingerprinting wiederzuerkennen.
+  - Er liefert ausschließlich anonymisierte, zusammengefasste Statistiken, etwa zu Seitenaufrufen, beliebten Seiten und ungefähren Standorten. Damit lassen sich einzelne Besucher weder identifizieren noch verfolgen.
 - E-Mail-Abonnement: Wenn Sie unseren E-Mail-Abonnementdienst nutzen, erheben wir Ihre E-Mail-Adresse, um die entsprechenden Dienste bereitzustellen.
 - Teilnahme und Beitrag: Die RuyiSDK-Community ist eine Open-Source-Community, deren Code auf der GitHub-Plattform gehostet wird. Sie können über die GitHub-Repository-Issues und -Diskussionen an der Kommunikation und dem Feedback teilnehmen oder direkt an der Entwicklung mitwirken. Bei der Teilnahme an Community-Aktivitäten über die GitHub-Plattform müssen Sie die Datenschutzrichtlinie von GitHub [*GitHub General Privacy Statement*](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) einhalten.
 - Installation und Nutzung von Tools: Bei der Verwendung des RuyiSDK-Paketmanagers können wir anonymisierte Nutzungsdaten erheben; Einzelheiten finden Sie im Abschnitt 2.
@@ -17,9 +20,9 @@ Um RuyiSDK zu verbessern, können wir ab Version 0.23 (einschließlich) Ihre Nut
 
 ### 2.1 Datenbeschaffungsmodi
 
-* **local (lokaler Modus)**: Daten werden nur lokal erfasst und nicht übermittelt.
-* **on (Aktivierungsmodus)**: Daten werden lokal erfasst und regelmäßig übermittelt. Dies ist der Standardmodus.
-* **off (Deaktivierungsmodus)**: Die Datenerfassung wird vollständig gestoppt.
+* **`local` (lokaler Modus)**: Daten werden nur lokal erfasst und nicht übermittelt. Dies ist seit `ruyi` 0.42.0 der Standardmodus.
+* **`on` (aktiviert)**: Daten werden lokal erfasst und regelmäßig übermittelt, üblicherweise einmal pro Woche. Die anonyme Installations-ID bestimmt den Upload-Tag.
+* **`off` (deaktiviert)**: Es werden keine Daten mehr erfasst.
 
 Wir hoffen, dass Sie der Datenerhebung zustimmen, um uns zu helfen, die Nutzung des RuyiSDK-Tools zu verstehen und das RuyiSDK-Produkt zu verbessern. Wenn Sie nicht möchten, dass wir Ihre Nutzungsdaten erhalten, lesen Sie bitte Abschnitt 2.3.
 

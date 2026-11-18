@@ -1,12 +1,11 @@
-# Sipeed Lichee Pi 4A: Building a Hello World Project in RuyiSDK IDE
+# Build and Debug Hello World on Sipeed Lichee Pi 4A with RuyiSDK IDE
 
 ## Test Environment
 
-- Operating System: Ubuntu 22.04.5 x86_64
+- Operating system: Ubuntu 24.04 x86_64
+- IDE: Eclipse IDE for Embedded C/C++ Developers 2026-06 (4.40.0)
 
-- IDE: Eclipse IDE for Embedded C/C++ Developers 2025.12
-
-## Installing the Ruyi Package Manager via IDE
+## Installing the RuyiSDK Package Manager via IDE
 
 Launch the IDE, expand the top menu bar "RuyiSDK", and click "Ruyi Installation" to open the installation wizard. Follow the instructions to complete the setup. After installation, expand the "File" menu and click "Restart" to restart the IDE.
 
@@ -30,29 +29,23 @@ On the "GNU RISC-V Cross Toolchain" page, no configuration is required—simply 
 
 ![new-project-3-toolchain](image/sipeed-lpi4a-ide-hello-world/new-project-3-toolchain.jpg)
 
-At this point, the project may fail to build.
+You can skip building the project for now.
 
 ## Creating a Virtual Environment for the New Project
 
-Expand the top menu bar "RuyiSDK" and click "Venv (Virtual Environments)" to open the "Ruyi Venv" view.
+In **Project Explorer**, right-click the project and choose **RuyiSDK → New Venv...**. In **New virtual environment**, select `sipeed-lpi4a` under **Profiles** and the latest `gnu-plct-xthead` under **Toolchains**. Select **Enable** next to **Emulators** and pick the latest `qemu-user-riscv-xthead`. Click **Finish** and wait for the IDE to create the environment.
 
-![menu-ruyi-venv-view](image/sipeed-lpi4a-ide-hello-world/menu-ruyi-venv-view.jpg)
-
-Click "New virtual environment..." in the view to open the "New virtual environment" window. In "Profiles", select "sipeed-lpi4a"; in "Toolchains", choose the latest "gnu-plct-xthead"; check "Enable" on the right side of "Emulators" and select the latest "qemu-user-riscv-xthead". After completing the selections, click "Next >".
-
-![new-venv-0-conf](image/sipeed-lpi4a-ide-hello-world/new-venv-0-conf.jpg)
-
-Verify the information in "Summary". In "Venv Name", give the new virtual environment a name, and in "Venv Path", select the path of the project you just created. After filling in the information, click "Finish".
-
-![new-venv-1-location](image/sipeed-lpi4a-ide-hello-world/new-venv-1-location.jpg)
-
-After a short while, the window will close automatically, and the newly created virtual environment will appear in the table of the "Ruyi Venv" view.
+![Virtual environment settings](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/project-new-venv-conf.jpg)
 
 ## Applying the Virtual Environment and Building the Project
 
-In the "Ruyi Venv" view, select the newly created virtual environment and click "Apply to Project".
+In **Project Explorer**, right-click the project and choose **RuyiSDK → Apply Venv...**. Select a virtual environment and click **OK**.
 
-![venv-application](image/sipeed-lpi4a-ide-hello-world/venv-application.jpg)
+![Apply venv dialog](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/project-apply-venv.jpg)
+
+Note the names of the Run and Debug configurations in the confirmation dialog.
+
+![Launch configuration names](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/venv-apply-info-dialog.jpg)
 
 In "Project Explorer", right‑click the project and click "Build Project".
 
@@ -60,19 +53,22 @@ In "Project Explorer", right‑click the project and click "Build Project".
 
 The project builds successfully, generating an executable file with the ".elf" extension.
 
-## Running the Built Program with QEMU
+## Running and Debugging with QEMU
 
-Currently, the program can only be executed manually. Users may modify the command as needed.
+### Run
 
-In "Project Explorer", right‑click the project, expand "Show in Local Terminal", click "Terminal" to open a terminal, and run the following commands:
+Click the arrow next to the green Run button in the toolbar and choose **Run Configurations...**. Expand **C/C++ Application** and choose the entry for your project and virtual environment. Click **Run** to start the program.
 
-    ```bash input="1,2,4"
-$ source ./.venv/bin/ruyi-activate
-«Ruyi .venv» $ ruyi-qemu ./Debug/hello-risc5.elf
-Hello RISC-V World!
-«Ruyi .venv» $
-    ```
+![Result of running Hello World](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/toolbar-run-configuration-result.jpg)
 
-![terminal-execution](image/sipeed-lpi4a-ide-hello-world/terminal-execution.jpg)
+The program runs successfully.
 
-The program executes successfully.
+### Debug
+
+Click the arrow next to the green Debug button and choose **Debug Configurations...**. Expand **C/C++ Remote Application** and select the entry for your project and virtual environment. Click **Debug** to start debugging.
+
+![Debug configuration](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/toolbar-debug-configuration.jpg)
+
+![Hello World in the debugger](@site/docs/IDE/cases/image/sipeed-lpi4a-ide-hello-world/debug-in-progress.jpg)
+
+The debugger displays threads, stack frames, and data types.

@@ -31,7 +31,7 @@ Historically, RISC-V development faced challenges due to the lack of a unified p
 
 RuyiSDK is divided into the following three components:
 
-### [Ruyi Package Manager](/docs/category/ruyi-包管理器)
+### [RuyiSDK Package Manager](/docs/category/ruyi-包管理器)
 
 This package manager is an online software repository that provides the following:
 
@@ -48,7 +48,7 @@ This package manager is an online software repository that provides the followin
 
 ### [Ruyi IDE](/docs/category/ruyisdk-ide)
 
-This IDE is a development toolbox designed for the RISC-V architecture. Developers can easily obtain it through the Ruyi package manager, enabling efficient code writing and debugging for real-world development scenarios. Using the package manager, developers can access toolchains, debugging tools, and simulators, allowing them to write and debug programs either on simulators or RISC-V development boards.
+This IDE is a development toolbox designed for the RISC-V architecture. Developers can easily obtain it through the RuyiSDK Package Manager, enabling efficient code writing and debugging for real-world development scenarios. Using the package manager, developers can access toolchains, debugging tools, and simulators, allowing them to write and debug programs either on simulators or RISC-V development boards.
 
 ### [Community](/about)
 
@@ -98,7 +98,7 @@ For detailed instructions, refer to [here](/docs/Package-Manager/installation).
 
 ### Obtain and Install OS
 
-#### Using the Ruyi Package Manager
+#### Using the RuyiSDK Package Manager
 
 After installing `ruyi`, run the command-line flashing wizard:
 

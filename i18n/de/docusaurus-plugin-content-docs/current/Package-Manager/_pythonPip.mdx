@@ -1,0 +1,51 @@
+## Installation mit dem Python-Paketmanager
+> Unterstützte Systeme: Linux auf x86_64 und arm64
+
+Der RuyiSDK-Paketmanager ist auch auf [PyPI](https://pypi.org/project/ruyi/) verfügbar. Unter Linux auf x86_64 und arm64 können Sie `pip` oder `pipx` verwenden. Für RISC-V64 empfehlen wir die vorkompilierte Binärdatei.
+
+:::info Hinweis zu RISC-V
+Einige Python-Abhängigkeiten von `ruyi` haben auf PyPI noch keine vorkompilierten Pakete für RISC-V. `pip` versucht daher, sie aus dem Quellcode zu bauen. Das kann lange dauern und scheitern. Verwenden Sie auf RISC-V nach Möglichkeit die vorkompilierte Binärdatei.
+
+Wir prüfen die Verfügbarkeit der Abhängigkeiten regelmäßig. Wenn Sie die Installation mit `pip` dennoch ausprobieren, können Sie Ihre Erfahrungen in der [chinesischen RuyiSDK-Community](https://ruyisdk.cn/) teilen.
+:::
+
+### Mit `pipx` installieren
+
+`pipx` installiert Python-Kommandozeilenwerkzeuge in separaten Umgebungen und verlinkt ihre ausführbaren Dateien in den `PATH`.
+
+```bash input="1"
+$ pipx install ruyi
+```
+
+Der Befehl `ruyi` ist anschließend über den `PATH` verfügbar, in der Regel unter `~/.local/bin`.
+
+```bash input="1"
+$ ruyi version
+```
+
+Wenn der Befehl die Copyrightangaben ausgibt, war die Installation erfolgreich. Prüfen Sie bei einem Fehler die Installationsschritte und die Umgebungsvariablen.
+
+### In einer virtuellen Umgebung installieren
+
+Ersetzen Sie `/path/to/some/venv` durch den Pfad zu Ihrer virtuellen Umgebung.
+
+```bash input="3"
+# Use the absolute path to your virtual environment.
+# Replace the sample path with the actual path on your system.
+$ /path/to/some/venv/bin/pip install ruyi
+```
+
+Die ausführbare Datei liegt im Verzeichnis `bin` der Umgebung und wird dem System-`PATH` nicht automatisch hinzugefügt. Nutzen Sie den absoluten Pfad oder aktivieren Sie die Umgebung.
+
+```bash input="3,7,8"
+# Run ruyi using the full path.
+# Replace the sample path with the actual path on your system.
+$ /path/to/some/venv/bin/ruyi version
+
+# Or activate the virtual environment first.
+# Replace the sample path with the actual path on your system.
+$ source /path/to/some/venv/bin/activate
+$ ruyi version
+```
+
+Wenn die Copyrightangaben erscheinen, ist die Installation erfolgreich abgeschlossen.
