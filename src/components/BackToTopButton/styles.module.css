@@ -2,6 +2,7 @@
   --back-to-top-size: 3rem;
   --back-to-top-bottom: 2rem;
   --back-to-top-footer-offset: 0px;
+  --back-to-top-footer-gap: calc((var(--ruyi-page-end) - var(--back-to-top-size)) / 2);
   --back-to-top-inset-inline: max(
     1rem,
     calc((100vw - 90rem) / 2 + 2rem)
@@ -9,7 +10,11 @@
 
   position: fixed;
   right: var(--back-to-top-inset-inline);
-  bottom: calc(var(--back-to-top-bottom) + var(--back-to-top-footer-offset));
+  bottom: clamp(
+    var(--back-to-top-bottom),
+    calc(var(--back-to-top-footer-gap) + var(--back-to-top-footer-offset)),
+    calc(100% - var(--ifm-navbar-height) - var(--back-to-top-size) - 0.5rem)
+  );
   display: inline-flex;
   align-items: center;
   justify-content: center;
