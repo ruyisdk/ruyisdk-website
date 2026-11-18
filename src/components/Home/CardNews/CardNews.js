@@ -1,5 +1,6 @@
 
 import Translate from "@docusaurus/Translate";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 import { byLocale } from "../common/byLocale"
 
@@ -22,7 +23,7 @@ export default function cardNews(card) {
           {byLocale(card.subtitle)}
         </p>
         <div className="flex gap-3 mt-4 flex-wrap justify-center">
-          <a target="_blank" href={byLocale(card.Links)} className="secondary-button" rel="noopener noreferrer">
+          <a target="_blank" href={useBaseUrl(byLocale(card.Links))} className="secondary-button" rel="noopener noreferrer">
             <Translate id="home.cardnews.learnmore">了解更多</Translate>
           </a>
           {card.subLink && (

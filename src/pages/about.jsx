@@ -1,13 +1,13 @@
 import React from "react";
+import { translate } from "@docusaurus/Translate";
 import Layout from "@theme/Layout";
 import About from "@site/src/components/About";
 
 export default function AboutPage() {
   return (
-    // TODO: const pageTitle = i18n?.currentLocale === "zh-Hans" ? "关于我们" : i18n?.currentLocale === "de" ? "Über uns" : "About";
     <Layout
-      title="About"
-      description="RuyiSDK 项目介绍与联系方式"
+      title={translate({ id: "about.meta.title", message: "关于 RuyiSDK" })}
+      description={translate({ id: "about.meta.description", message: "RuyiSDK 项目介绍与联系方式" })}
     >
       <About />
     </Layout>

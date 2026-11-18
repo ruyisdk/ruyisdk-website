@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useMemo, type ReactNode } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-type Locale = 'en-US' | 'zh-CN';
+type Locale = 'en-US' | 'zh-CN' | 'de-DE';
 type Dict = Record<string, string>;
 
 type I18nContextValue = {
@@ -89,6 +89,84 @@ const dictionaries: Record<Locale, Dict> = {
     source: 'Source',
     blob: 'Blob',
   },
+  'de-DE': {
+    appTitle: 'Paketindex',
+    appSubtitle: '',
+    searchPlaceholderDevices: 'Geräte, Hersteller, Varianten oder CPUs suchen…',
+    searchPlaceholderPackages: 'Pakete, Kategorien oder Beschreibungen suchen…',
+    listByDevice: 'Nach Geräten',
+    listByPackages: 'Nach Paketen',
+    devices: 'Geräte',
+    packages: 'Pakete',
+    architectures: 'Architekturen',
+    cpus: 'CPUs',
+    boardVendors: 'Board-Hersteller',
+    categories: 'Kategorien',
+    clearFilters: 'Filter zurücksetzen',
+    results: 'Ergebnisse',
+    loading: 'Wird geladen…',
+    noDevices: 'Keine Geräte gefunden',
+    noPackages: 'Keine Pakete gefunden',
+    noMatches: 'Keine Treffer',
+    adjustFilters: 'Passen Sie den Suchbegriff oder die Filter an.',
+    variants: 'Varianten',
+    deviceType: 'Gerät',
+    packageType: 'Paket',
+    noDescription: 'Keine Beschreibung verfügbar',
+    language: 'Sprache',
+    english: 'English',
+    chinese: '中文',
+    activeFilters: 'Aktive Filter',
+    filterHelp: 'Schränken Sie die Liste mit Filtern ein.',
+    deviceListDescription: '',
+    packageListDescription: '',
+    backToHome: 'Zurück',
+    back: 'Zurück',
+    supportedPackages: 'Unterstützte Pakete',
+    supportedDevices: 'Unterstützte Geräte',
+    notFound: 'Nicht gefunden',
+    version: 'Version',
+    categoryLabel: 'Kategorie',
+    descriptionLabel: 'Beschreibung',
+    details: 'Details',
+    id: 'ID',
+    manufacturer: 'Hersteller',
+    vendor: 'Anbieter',
+    eula: 'Lizenzvereinbarung',
+    slug: 'Kurzname',
+    upstreamVersion: 'Upstream-Version',
+    serviceLevel: 'Supportstufe',
+    distfiles: 'Distributionsdateien',
+    size: 'Größe',
+    checksums: 'Prüfsummen',
+    urls: 'URLs',
+    downloadMirrors: 'Download-Spiegelserver',
+    primaryMirror: 'Primär',
+    copyLink: 'Link kopieren',
+    openLink: 'Link öffnen',
+    sourceUrl: 'Quell-URL',
+    noChecksum: 'Keine Prüfsumme verfügbar',
+    downloadHint: '{count} Download-Datei(en). Die Spiegelserver sind nach Priorität sortiert.',
+    fetchRestriction: 'Download-Beschränkung',
+    toolchain: 'Toolchain',
+    target: 'Ziel',
+    components: 'Komponenten',
+    quirks: 'Besonderheiten',
+    binary: 'Binärdatei',
+    host: 'Host',
+    commands: 'Befehle',
+    emulator: 'Emulator',
+    programs: 'Programme',
+    flavor: 'Ausführung',
+    path: 'Pfad',
+    binfmtMisc: 'Binfmt Misc',
+    supportedArches: 'Unterstützte Architekturen',
+    provisionable: 'Bereitstellbar',
+    strategy: 'Strategie',
+    partitionMap: 'Partitionstabelle',
+    source: 'Quelle',
+    blob: 'Blob',
+  },
   'zh-CN': {
     appTitle: 'Packages Index',
     appSubtitle: '',
@@ -174,7 +252,8 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 export function I18nProvider({ children }: { children: ReactNode }) {
   const { i18n } = useDocusaurusContext();
   const docusaurusLocale = i18n?.currentLocale || 'zh-Hans';
-  const locale: Locale = docusaurusLocale === 'zh-Hans' ? 'zh-CN' : 'en-US';
+  const locales: Record<string, Locale> = { 'zh-Hans': 'zh-CN', en: 'en-US', de: 'de-DE' };
+  const locale = locales[docusaurusLocale] ?? 'en-US';
 
   const value = useMemo<I18nContextValue>(() => {
     const t = (key: string, params?: Record<string, string | number>) => {

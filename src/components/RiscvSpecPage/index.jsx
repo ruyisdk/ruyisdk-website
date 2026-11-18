@@ -2,21 +2,24 @@ import React from "react";
 import Translate, { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
+import SpecOverviewDe from "./content/spec-overview.de.mdx";
 import SpecOverviewEn from "./content/spec-overview.en.mdx";
 import SpecOverviewZhHans from "./content/spec-overview.zh-Hans.mdx";
+import specCardsDe from "./content/spec-cards.de.json";
 import specCardsEn from "./content/spec-cards.en.json";
 import specCardsZhHans from "./content/spec-cards.zh-Hans.json";
 
 import styles from "./styles.module.css";
 
-const CATEGORY_ORDER = [
-  "Core Architecture",
-  "Profiles",
-  "Hardware",
-  "Debug, Trace, and RAS",
-  "Platform Software",
-  "Application Enablement",
-];
+const CATEGORY_LABELS = {
+  "Core Architecture": <Translate id="riscvSpecs.category.core.title">Core Architecture</Translate>,
+  Profiles: <Translate id="riscvSpecs.category.profiles.title">Profiles</Translate>,
+  Hardware: <Translate id="riscvSpecs.category.hardware.title">Hardware</Translate>,
+  "Debug, Trace, and RAS": <Translate id="riscvSpecs.category.debugTraceRas.title">Debug, Trace, and RAS</Translate>,
+  "Platform Software": <Translate id="riscvSpecs.category.platformSoftware.title">Platform Software</Translate>,
+  "Application Enablement": <Translate id="riscvSpecs.category.applicationEnablement.title">Application Enablement</Translate>,
+};
+const CATEGORY_ORDER = Object.keys(CATEGORY_LABELS);
 
 const LOCALIZED_CONTENT = {
   "zh-Hans": {
@@ -26,6 +29,10 @@ const LOCALIZED_CONTENT = {
   en: {
     Overview: SpecOverviewEn,
     cards: specCardsEn,
+  },
+  de: {
+    Overview: SpecOverviewDe,
+    cards: specCardsDe,
   },
 };
 
@@ -126,7 +133,7 @@ function CategoryNav({ groupedCards }) {
     >
       {CATEGORY_ORDER.map((category) => (
         <a key={category} href={`#${toSectionId(category)}`}>
-          <span>{category}</span>
+          <span>{CATEGORY_LABELS[category]}</span>
           <strong>{groupedCards[category]?.length || 0}</strong>
         </a>
       ))}
@@ -151,7 +158,7 @@ function AudienceGuide() {
             </span>
             <strong>
               <Translate id="riscvSpecs.guide.categoryLabel">对应分类：</Translate>
-              <span>{item.category}</span>
+              <span>{CATEGORY_LABELS[item.category]}</span>
             </strong>
             <p>
               <Translate id={item.descriptionId}>{item.descriptionMessage}</Translate>
@@ -214,7 +221,7 @@ function CategorySection({ category, specs }) {
     <section className={styles.categorySection} id={toSectionId(category)}>
       <div className={styles.categoryHeader}>
         <div>
-          <h2>{category}</h2>
+          <h2>{CATEGORY_LABELS[category]}</h2>
           <p>
             <Translate id={CATEGORY_DESCRIPTION_IDS[category].id}>
               {CATEGORY_DESCRIPTION_IDS[category].message}

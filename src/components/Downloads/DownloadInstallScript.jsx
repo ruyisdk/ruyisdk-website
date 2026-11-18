@@ -3,12 +3,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import MarkdownCard from '@site/src/components/About/MarkdownCard';
 import CodeBlock from '@theme/CodeBlock';
 
+import InstallDe from './mdx/install.de.mdx';
 import InstallEn from './mdx/install.en.mdx';
 import InstallZhHans from './mdx/install.zh-Hans.mdx';
 
 const INSTALL_CONTENT = {
   'zh-Hans': InstallZhHans,
   en: InstallEn,
+  de: InstallDe,
 };
 
 function resolveLocalizedContent(contentMap, locale) {

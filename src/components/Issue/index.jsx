@@ -3,12 +3,14 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { PageBackground } from "@site/src/components/Home/Background";
 import MarkdownCard from "@site/src/components/About/MarkdownCard";
 
+import IssueDe from "./mdx/issue.de.mdx";
 import IssueEn from "./mdx/issue.en.mdx";
 import IssueZhHans from "./mdx/issue.zh-Hans.mdx";
 
 const ISSUE_CONTENT = {
   "zh-Hans": IssueZhHans,
   en: IssueEn,
+  de: IssueDe,
 };
 
 export default function Issue() {

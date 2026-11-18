@@ -85,7 +85,7 @@ The following explanations correspond to the six core metrics on the official st
 
 ### 4. RuyiSDK Package Manager Downloads
 
-**Definition**: cumulative downloads of the Ruyi package manager CLI tool `ruyi` across the following three channels:
+**Definition**: cumulative downloads of the RuyiSDK Package Manager CLI tool `ruyi` across the following three channels:
 - ISCAS mirrors: multi-architecture and multi-version downloads under the `ruyi/` directory.
 - GitHub Releases: prebuilt binary packages.
 - PyPI: `pip install ruyi`.

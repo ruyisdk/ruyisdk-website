@@ -3,12 +3,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Admonition from '@theme/Admonition';
 import MarkdownCard from '@site/src/components/About/MarkdownCard';
 
+import GuideDe from './mdx/guide.de.mdx';
 import GuideEn from './mdx/guide.en.mdx';
 import GuideZhHans from './mdx/guide.zh-Hans.mdx';
 
 const GUIDE_CONTENT = {
   'zh-Hans': GuideZhHans,
   en: GuideEn,
+  de: GuideDe,
 };
 
 const MDX_COMPONENTS = {

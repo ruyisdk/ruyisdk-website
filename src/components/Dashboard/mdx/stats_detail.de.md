@@ -85,7 +85,7 @@ Die folgenden Erläuterungen entsprechen den sechs Kernkennzahlen der offizielle
 
 ### 4. Downloads des RuyiSDK-Paketmanagers
 
-**Definition**: kumulierte Downloads des Ruyi-Paketmanager-CLI-Werkzeugs `ruyi` über die folgenden drei Kanäle:
+**Definition**: kumulierte Downloads des RuyiSDK-Paketmanager-CLI-Werkzeugs `ruyi` über die folgenden drei Kanäle:
 - ISCAS-Spiegelserver: Downloads verschiedener Architekturen und Versionen im Verzeichnis `ruyi/`.
 - GitHub Releases: vorkompilierte Binärpakete.
 - PyPI: `pip install ruyi`.
