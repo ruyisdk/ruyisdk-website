@@ -57,7 +57,7 @@
   --ifm-font-color-base: #0f172a;
   --ifm-font-color-secondary: #475569;
 
-  --ifm-navbar-sidebar-width: 75vw;
+  --ifm-navbar-sidebar-width: min(82vw, 22rem);
 
   --home-button-primary: #133B9E;
   --home-button-primary-end: #0A2C7E;
@@ -98,7 +98,7 @@
   --ifm-navbar-background-color: var(--deepdark);
   --home-navbar-bg-glass: rgba(255, 255, 255, 0.8);
   --home-navbar-bg-glass-dark: rgba(13, 17, 23, 0.8);
-  --home-navbar-bg-solid: rgba(255, 255, 255, 0.97);
+  --home-navbar-bg-solid: rgba(255, 255, 255, 0.995);
   --home-navbar-bg-solid-dark: rgba(21, 27, 35, 0.98);
   --ifm-transition-fast: 0;
   --ifm-transition-slow: 0;
