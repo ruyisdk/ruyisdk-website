@@ -70,15 +70,15 @@ function ButtonSubscription() {
             email.length === 0
               ? undefined
               : isValidEmail(email)
-              ? "#dfffe0" // more pronounced green
-              : "#ffdede", // more pronounced red
-          borderColor: email.length === 0 ? undefined : isValidEmail(email) ? "#2ecc71" : "#ff4d4d",
+              ? "#f0fdf4"
+              : "#fef2f2",
+          borderColor: email.length === 0 ? undefined : isValidEmail(email) ? "#16a34a" : "#dc2626",
           boxShadow:
             email.length === 0
               ? undefined
               : isValidEmail(email)
-              ? "0 0 0 4px rgba(46,204,113,0.08)"
-              : "0 0 0 4px rgba(255,77,77,0.08)",
+              ? "0 0 0 3px rgba(22,163,74,0.12)"
+              : "0 0 0 3px rgba(220,38,38,0.12)",
           transition: "background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease",
         }}
       />

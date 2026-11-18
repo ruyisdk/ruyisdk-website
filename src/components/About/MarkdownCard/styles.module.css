@@ -1,27 +1,28 @@
 .card {
   padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 1rem;
-  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 28px rgba(10, 44, 126, 0.055);
   backdrop-filter: blur(12px);
 }
 
 .default {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .strong {
-  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(10, 44, 126, 0.12);
+  background: #ffffff;
 }
 
 .soft {
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(15, 23, 42, 0.07);
+  background: rgba(248, 250, 253, 0.92);
 }
 
 .solid {
-  border-color: rgba(15, 35, 70, 0.06);
-  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(15, 23, 42, 0.08);
+  background: #ffffff;
 }
 
 .plain {
@@ -33,7 +34,7 @@
 }
 
 .markdown {
-  color: #4b5563;
+  color: #334155;
   line-height: 1.75;
   font-size: 0.95rem;
 }
@@ -41,7 +42,7 @@
 .markdown h1,
 .markdown h2,
 .markdown h3 {
-  color: #111827;
+  color: #0f172a;
   line-height: 1.3;
 }
 
@@ -86,17 +87,20 @@
 }
 
 .markdown a {
-  color: #0284c7;
+  color: #1648B8;
+  font-weight: 500;
   text-decoration: none;
 }
 
 .markdown a:hover {
-  color: #0369a1;
+  color: #0A2C7E;
   text-decoration: underline;
 }
 
 .markdown code {
-  background: rgba(15, 23, 42, 0.06);
+  background: #f1f5fb;
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.07);
   border-radius: 0.25rem;
   font-size: 0.85em;
   padding: 0.1rem 0.3rem;
@@ -104,6 +108,8 @@
 
 .markdown pre > code {
   background: transparent;
+  color: inherit;
+  border: 0;
   border-radius: 0;
   font-size: inherit;
   padding: 0;
@@ -112,16 +118,16 @@
 .markdown blockquote {
   margin: 1rem 0;
   padding: 0.8rem 1rem;
-  border-left: 4px solid #8fc5de;
+  border-left: 4px solid #1648B8;
   border-radius: 0 8px 8px 0;
-  background: rgba(53, 125, 161, 0.08);
-  color: #334b6d;
+  background: #eff6ff;
+  color: #1e3a8a;
 }
 
 .markdown hr {
   margin: 2rem 0;
   border: 0;
-  border-top: 1px solid rgba(15, 35, 70, 0.1);
+  border-top: 1px solid #e2e8f0;
 }
 
 .markdown table {
@@ -134,14 +140,90 @@
 
 .markdown th,
 .markdown td {
-  border: 1px solid rgba(15, 35, 70, 0.12);
+  border: 1px solid #e2e8f0;
   padding: 0.65rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
 .markdown th {
-  background: rgba(53, 125, 161, 0.1);
-  color: #111827;
+  background: #f8fafc;
+  color: #0f172a;
   font-weight: 700;
+}
+
+:global(html[data-theme="dark"]) .card {
+  border-color: rgba(240, 246, 252, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
+}
+
+:global(html[data-theme="dark"]) .default,
+:global(html[data-theme="dark"]) .solid {
+  background: rgba(21, 27, 35, 0.92);
+}
+
+:global(html[data-theme="dark"]) .strong {
+  border-color: rgba(121, 168, 255, 0.18);
+  background: #151b23;
+}
+
+:global(html[data-theme="dark"]) .soft {
+  border-color: rgba(240, 246, 252, 0.08);
+  background: rgba(28, 35, 48, 0.82);
+}
+
+:global(html[data-theme="dark"]) .plain {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+:global(html[data-theme="dark"]) .markdown {
+  color: #cbd5e1;
+}
+
+:global(html[data-theme="dark"]) .markdown h1,
+:global(html[data-theme="dark"]) .markdown h2,
+:global(html[data-theme="dark"]) .markdown h3 {
+  color: #f1f5f9;
+}
+
+:global(html[data-theme="dark"]) .markdown a {
+  color: #79a8ff;
+}
+
+:global(html[data-theme="dark"]) .markdown a:hover {
+  color: #a5c5ff;
+}
+
+:global(html[data-theme="dark"]) .markdown code {
+  background: rgba(240, 246, 252, 0.1);
+  color: #e6edf3;
+  border-color: rgba(240, 246, 252, 0.12);
+}
+
+:global(html[data-theme="dark"]) .markdown pre > code {
+  background: transparent;
+  color: inherit;
+  border: 0;
+}
+
+:global(html[data-theme="dark"]) .markdown blockquote {
+  border-left-color: #58a6ff;
+  background: rgba(56, 139, 253, 0.12);
+  color: #dbeafe;
+}
+
+:global(html[data-theme="dark"]) .markdown hr {
+  border-top-color: rgba(240, 246, 252, 0.1);
+}
+
+:global(html[data-theme="dark"]) .markdown th,
+:global(html[data-theme="dark"]) .markdown td {
+  border-color: rgba(240, 246, 252, 0.12);
+}
+
+:global(html[data-theme="dark"]) .markdown th {
+  background: #1c2330;
+  color: #f1f5f9;
 }

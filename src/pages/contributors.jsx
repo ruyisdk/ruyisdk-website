@@ -24,13 +24,12 @@ const ContributorAvatar = ({ avatarUrl, name, githubUrl}) => {
   }, [avatarUrl]);
 
   return (
-    <div className={`relative rounded-full overflow-hidden shadow-lg w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28`}>
+    <div className="relative rounded-full overflow-hidden bg-slate-50 dark:bg-slate-800 ring-1 ring-slate-200/80 dark:ring-white/10 shadow-[0_6px_16px_rgba(10,44,126,0.08)] w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
       <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name}'s GitHub profile`} className="block w-full h-full">
         <div className="absolute inset-0 flex items-center justify-center">
           <IconUserCircle
             stroke={0.5}
-            color="black"
-            className={`w-full h-full transition-opacity duration-200 ${
+            className={`w-full h-full text-slate-400 dark:text-slate-500 transition-opacity duration-200 ${
               loaded ? "opacity-0" : "opacity-15"
             }`}
           />
@@ -58,7 +57,7 @@ const ContributorCard = ({ person }) => {
     <div className="flex flex-col items-center justify-center gap-3 p-2 transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.03]">
       <ContributorAvatar avatarUrl={avatarUrl} name={name} githubUrl={github} />
 
-      <p className="text-sm font-semibold text-slate-900 text-center truncate lg:max-w-42 md:max-w-36 sm:max-w-24 max-w-22">{name}</p>
+      <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 text-center truncate lg:max-w-42 md:max-w-36 sm:max-w-24 max-w-22">{name}</p>
       </div>
   );
 };
@@ -121,38 +120,38 @@ export default function ContributorsPage() {
         <div className="relative mx-auto w-full z-10">
           {/* Title and intro removed per request */}
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 drop-shadow-sm">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-slate-100 tracking-tight">
             <Translate id="community.contributors.title">贡献者</Translate>
           </h2>
-          <p className="text-gray-500 text-lg md:text-xl leading-relaxed text-center mt-8">
+          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed text-center mt-6">
             <Translate id="community.contributors.subtitle">RuyiSDK社区由贡献者们共同驱动</Translate>
           </p>
           {/* Totals / stats bar (populated at build time by generator) */}
           <div className="flex flex-wrap w-full gap-4 justify-center items-stretch mt-8">
-            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><IconUser size={28} stroke={1.5} color="black" /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.contributors">贡献者</Translate></div>
-              <div className="font-extrabold text-slate-900 text-2xl">{totals.contributors ?? allPeople.length}</div>
+            <div className="flex-1 min-w-[140px] bg-white/95 dark:bg-[#151b23]/92 border border-slate-200/85 dark:border-white/10 rounded-2xl p-4 flex flex-col items-center shadow-[0_6px_20px_rgba(10,44,126,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(10,44,126,0.1)]">
+              <div className="text-[#0A2C7E] dark:text-[#79a8ff] mb-1.5 text-2xl"><IconUser size={28} stroke={1.65} /></div>
+              <div className="text-slate-500 dark:text-slate-400 text-sm mb-1"><Translate id="community.stats.contributors">贡献者</Translate></div>
+              <div className="font-extrabold text-slate-900 dark:text-slate-100 text-2xl">{totals.contributors ?? allPeople.length}</div>
             </div>
-            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><IconGitCommit size={28} stroke={1.5} color="black" style={{transform: 'rotate(90deg)'}} /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.commits">提交数</Translate></div>
-              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">暂无</Translate>}</div>
+            <div className="flex-1 min-w-[140px] bg-white/95 dark:bg-[#151b23]/92 border border-slate-200/85 dark:border-white/10 rounded-2xl p-4 flex flex-col items-center shadow-[0_6px_20px_rgba(10,44,126,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(10,44,126,0.1)]">
+              <div className="text-[#0A2C7E] dark:text-[#79a8ff] mb-1.5 text-2xl"><IconGitCommit size={28} stroke={1.65} style={{transform: 'rotate(90deg)'}} /></div>
+              <div className="text-slate-500 dark:text-slate-400 text-sm mb-1"><Translate id="community.stats.commits">提交数</Translate></div>
+              <div className="font-extrabold text-slate-900 dark:text-slate-100 text-2xl">{typeof totals.commits === 'number' ? totals.commits : <Translate id="community.stats.unknown">暂无</Translate>}</div>
             </div>
-            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><IconGitPullRequest size={28} stroke={1.5} color="black" /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.prs">Pull Requests</Translate></div>
-              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">暂无</Translate>}</div>
+            <div className="flex-1 min-w-[140px] bg-white/95 dark:bg-[#151b23]/92 border border-slate-200/85 dark:border-white/10 rounded-2xl p-4 flex flex-col items-center shadow-[0_6px_20px_rgba(10,44,126,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(10,44,126,0.1)]">
+              <div className="text-[#0A2C7E] dark:text-[#79a8ff] mb-1.5 text-2xl"><IconGitPullRequest size={28} stroke={1.65} /></div>
+              <div className="text-slate-500 dark:text-slate-400 text-sm mb-1"><Translate id="community.stats.prs">Pull Requests</Translate></div>
+              <div className="font-extrabold text-slate-900 dark:text-slate-100 text-2xl">{typeof totals.pullRequests === 'number' ? totals.pullRequests : <Translate id="community.stats.unknown">暂无</Translate>}</div>
             </div>
             {/* issues count card */}
-            <div className="flex-1 min-w-[140px] bg-white/90 rounded-xl p-3 flex flex-col items-center shadow-md transition-transform duration-200 hover:scale-105">
-              <div className="text-slate-900 mb-1 text-2xl"><IconCircleDot size={28} stroke={1.5} color="black" /></div>
-              <div className="text-slate-500 text-sm mb-1"><Translate id="community.stats.issues">Issues</Translate></div>
-              <div className="font-extrabold text-slate-900 text-2xl">{typeof totals.issues === 'number' ? totals.issues : <Translate id="community.stats.unknown">暂无</Translate>}</div>
+            <div className="flex-1 min-w-[140px] bg-white/95 dark:bg-[#151b23]/92 border border-slate-200/85 dark:border-white/10 rounded-2xl p-4 flex flex-col items-center shadow-[0_6px_20px_rgba(10,44,126,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(10,44,126,0.1)]">
+              <div className="text-[#0A2C7E] dark:text-[#79a8ff] mb-1.5 text-2xl"><IconCircleDot size={28} stroke={1.65} /></div>
+              <div className="text-slate-500 dark:text-slate-400 text-sm mb-1"><Translate id="community.stats.issues">Issues</Translate></div>
+              <div className="font-extrabold text-slate-900 dark:text-slate-100 text-2xl">{typeof totals.issues === 'number' ? totals.issues : <Translate id="community.stats.unknown">暂无</Translate>}</div>
             </div>
           </div>
 
-          <div className="relative w-full bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-6 mt-8 mb-24">
+          <div className="relative w-full bg-white/92 dark:bg-[#151b23]/88 backdrop-blur-md rounded-2xl border border-slate-200/85 dark:border-white/10 shadow-[0_10px_28px_rgba(10,44,126,0.06)] p-6 mt-8 mb-24">
             <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-items-center items-start">
               {allPeople.map((p, i) => (
                 <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />
