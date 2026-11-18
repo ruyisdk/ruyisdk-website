@@ -74,7 +74,8 @@ const config = {
     ({
       colorMode: {
         defaultMode: "light",
-        disableSwitch: true,
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
       },
       image: "img/downloads/ruyi-logo-720.svg",
       navbar: {

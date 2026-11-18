@@ -96,6 +96,66 @@
   letter-spacing: -0.02em;
 }
 
+html[data-theme="dark"] .pi-shell {
+  background:
+    radial-gradient(circle at top left, rgba(56, 139, 253, 0.12), transparent 32%),
+    linear-gradient(180deg, #11161d 0%, var(--ifm-background-color) 100%);
+  color: var(--text);
+}
+
+html[data-theme="dark"] .pi-navbar {
+  background: rgba(21, 27, 35, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--divider);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .pi-surface {
+  background: rgba(21, 27, 35, 0.92);
+  border: 1px solid var(--divider);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .pi-card {
+  background: #151b23;
+  border: 1px solid var(--divider);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] .pi-card:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+  border-color: rgba(121, 168, 255, 0.34);
+}
+
+html[data-theme="dark"] .pi-button-primary {
+  color: #fff;
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.32);
+}
+
+html[data-theme="dark"] .pi-button-secondary {
+  color: #e6edf3;
+  background: #232c3d;
+  border: 1px solid rgba(240, 246, 252, 0.14);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .pi-button-tertiary {
+  color: #0d1117;
+  background: #f5b926;
+  box-shadow: 0 8px 20px rgba(245, 185, 38, 0.22);
+}
+
+html[data-theme="dark"] .pi-chip {
+  border-color: rgba(240, 246, 252, 0.12);
+  background: #1c2330;
+  color: #9ca3af;
+}
+
+html[data-theme="dark"] .pi-section-title {
+  color: #f0f6fc;
+}
+
 @keyframes pi-fade-in-up {
   from {
     opacity: 0;
@@ -110,4 +170,3 @@
 .pi-animate-fade-in-up {
   animation: pi-fade-in-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
