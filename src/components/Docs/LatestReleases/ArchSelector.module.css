@@ -40,4 +40,16 @@
   margin: 8px 0;
   color: var(--ifm-color-emphasis-700);
   font-size: 0.92rem;
-} 
+}
+
+:global(html[data-theme="dark"]) .select {
+  border-color: rgba(240, 246, 252, 0.16);
+  background-color: #1c2330;
+  color: #e6edf3;
+  color-scheme: dark;
+}
+
+:global(html[data-theme="dark"]) .select:focus {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(121, 168, 255, 0.2);
+}

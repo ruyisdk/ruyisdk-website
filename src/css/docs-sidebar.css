@@ -18,6 +18,7 @@
   --docs-sidebar-logo-row-height: 0px;
 }
 
+html[data-theme="dark"].docs-wrapper,
 html[data-theme="dark"] .docs-wrapper,
 html[data-theme="dark"] .theme-doc-wrapper {
   --ifm-heading-color: #f0f6fc;
