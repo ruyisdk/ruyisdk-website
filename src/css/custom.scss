@@ -57,7 +57,7 @@
   --ifm-font-color-base: #0f172a;
   --ifm-font-color-secondary: #475569;
 
-  --ifm-navbar-sidebar-width: min(82vw, 22rem);
+  --ifm-navbar-sidebar-width: 75vw;
 
   --home-button-primary: #133B9E;
   --home-button-primary-end: #0A2C7E;
@@ -98,8 +98,9 @@
   --ifm-navbar-background-color: var(--deepdark);
   --home-navbar-bg-glass: rgba(255, 255, 255, 0.8);
   --home-navbar-bg-glass-dark: rgba(13, 17, 23, 0.8);
-  --home-navbar-bg-solid: rgba(255, 255, 255, 0.995);
-  --home-navbar-bg-solid-dark: rgba(21, 27, 35, 0.98);
+  --home-navbar-bg-solid: rgba(255, 255, 255, 0.96);
+  --home-navbar-bg-solid-dark: rgba(21, 27, 35, 0.96);
+  --ruyi-sidebar-bg-glass: rgba(255, 255, 255, 0.3);
   --ifm-transition-fast: 0;
   --ifm-transition-slow: 0;
   --ifm-pre-line-height: 1.5;
@@ -229,6 +230,7 @@ html[data-theme="dark"] {
   --home-button-tertiary-text: #0d1117;
   --home-menu-focus-color: #79a8ff;
   --home-sidebar-color: #e6edf3;
+  --ruyi-sidebar-bg-glass: rgba(21, 27, 35, 0.3);
 
   --brand: #79a8ff;
   --dark: #151b23;
