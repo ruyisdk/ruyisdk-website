@@ -172,11 +172,11 @@ export default function PackageDetail() {
   }, [category, name, version]);
 
   if (loading) {
-    return <div className="p-8 text-center text-zinc-500">{t('loading')}</div>;
+    return <div className="p-8 text-center text-[var(--subtle)]">{t('loading')}</div>;
   }
 
   if (!pkg) {
-    return <div className="p-8 text-center text-red-500">{t('notFound')}</div>;
+    return <div className="p-8 text-center text-red-500 dark:text-red-400">{t('notFound')}</div>;
   }
 
   const pkgRef = `package:${category}/${name}`;
@@ -349,7 +349,7 @@ export default function PackageDetail() {
                                   const isPrimary = uidx === 0;
                                   const mirrorLabel = getMirrorLabel(url, uidx);
                                   return (
-                                    <div key={`${url}-${uidx}`} className={`rounded-xl border px-3 py-3 ${isPrimary ? 'border-[var(--ifm-color-primary)] bg-[var(--ifm-color-primary)]/5' : 'border-[var(--divider)] bg-white'}`}>
+                                    <div key={`${url}-${uidx}`} className={`rounded-xl border px-3 py-3 ${isPrimary ? 'border-[var(--ifm-color-primary)] bg-[var(--ifm-color-primary)]/5 dark:bg-[var(--ifm-color-primary)]/10' : 'border-[var(--divider)] bg-white dark:bg-[#1c2330]'}`}>
                                       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                                         <div className="min-w-0">
                                           <div className="flex flex-wrap items-center gap-2">
@@ -381,18 +381,18 @@ export default function PackageDetail() {
                             <div>
                               <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--subtle)]">{t('checksums')}</div>
                               <div className="space-y-2 text-xs font-mono break-all text-[var(--light)]">
-                                {file.checksums?.sha256 && <div className="rounded-lg bg-white px-3 py-2"><span className="mr-2 font-semibold text-[var(--text)]">SHA256</span>{file.checksums.sha256}</div>}
-                                {file.checksums?.sha512 && <div className="rounded-lg bg-white px-3 py-2"><span className="mr-2 font-semibold text-[var(--text)]">SHA512</span>{file.checksums.sha512}</div>}
+                                {file.checksums?.sha256 && <div className="rounded-lg border border-[var(--divider)] bg-white dark:bg-[#151b23] px-3 py-2"><span className="mr-2 font-semibold text-[var(--text)]">SHA256</span>{file.checksums.sha256}</div>}
+                                {file.checksums?.sha512 && <div className="rounded-lg border border-[var(--divider)] bg-white dark:bg-[#151b23] px-3 py-2"><span className="mr-2 font-semibold text-[var(--text)]">SHA512</span>{file.checksums.sha512}</div>}
                                 {!file.checksums?.sha256 && !file.checksums?.sha512 && <div className="text-[var(--subtle)]">{t('noChecksum')}</div>}
                               </div>
                             </div>
 
                             {file.fetch_restriction && (
-                              <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900">
+                              <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-400/25 dark:bg-amber-500/10 dark:text-amber-200">
                                 <div className="font-semibold">{t('fetchRestriction')}</div>
                                 <div className="mt-1 font-mono">{file.fetch_restriction.msgid}</div>
                                 {file.fetch_restriction.params && (
-                                  <pre className="mt-2 overflow-auto rounded-lg bg-white/70 p-2 text-[10px]">{JSON.stringify(file.fetch_restriction.params, null, 2)}</pre>
+                                  <pre className="mt-2 overflow-auto rounded-lg bg-white/70 dark:bg-[#0d1117]/70 p-2 text-[10px]">{JSON.stringify(file.fetch_restriction.params, null, 2)}</pre>
                                 )}
                               </div>
                             )}
@@ -430,7 +430,7 @@ export default function PackageDetail() {
                   ))}
                 </div>
               ) : (
-                <div className="rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white p-8 text-center text-sm text-[var(--subtle)] shadow-sm">
+                <div className="rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] p-8 text-center text-sm text-[var(--subtle)] shadow-sm">
                   {t('noDevices')}
                 </div>
               )}

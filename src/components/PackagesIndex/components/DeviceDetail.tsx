@@ -55,11 +55,11 @@ export default function DeviceDetail() {
   }, [id]);
 
   if (loading) {
-    return <div className="p-8 text-center text-zinc-500">{t('loading')}</div>;
+    return <div className="p-8 text-center text-[var(--subtle)]">{t('loading')}</div>;
   }
 
   if (!device || device.error) {
-    return <div className="p-8 text-center text-red-500">{t('notFound')}</div>;
+    return <div className="p-8 text-center text-red-500 dark:text-red-400">{t('notFound')}</div>;
   }
 
   const deviceId = `device:${id}`;
@@ -220,7 +220,7 @@ export default function DeviceDetail() {
                   ))}
                 </div>
               ) : (
-                <div className="rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white p-8 text-center text-sm text-[var(--subtle)] shadow-sm">
+                <div className="rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] p-8 text-center text-sm text-[var(--subtle)] shadow-sm">
                   {t('noPackages')}
                 </div>
               )}
