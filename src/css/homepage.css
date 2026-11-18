@@ -1,15 +1,27 @@
-
 .homepage {
-    --home-title-color: #123D91;
-    --home-subtitle-color: #515154;
-    --home-little-title-color: #000000;
+  --home-title-color: #123D91;
+  --home-subtitle-color: #666666;
+  --home-little-title-color: #000000;
 
-    --home-ruyi-light-blue: #D9E0F3;
-    --home-ruyi-light-gold: #FDEFC3;
-    --home-ruyi-blue: #90b3ff;
+  --home-ruyi-light-blue: #D9E0F3;
+  --home-ruyi-light-gold: #FDEFC3;
+  --home-ruyi-blue: #90b3ff;
 
-    --ifm-link-color: #86868B;
-    --ifm-link-hover-color: #002677;
-    --ifm-link-decoration: none;
-    --ifm-link-hover-decoration: none;
+  --ifm-link-color: #86868B;
+  --ifm-link-hover-color: #002677;
+  --ifm-link-decoration: none;
+  --ifm-link-hover-decoration: none;
+}
+
+html[data-theme="dark"] .homepage {
+  --home-title-color: #8ab4ff;
+  --home-subtitle-color: #9ca3af;
+  --home-little-title-color: #f0f6fc;
+
+  --home-ruyi-light-blue: rgba(37, 99, 235, 0.16);
+  --home-ruyi-light-gold: rgba(245, 185, 38, 0.08);
+  --home-ruyi-blue: rgba(29, 78, 216, 0.12);
+
+  --ifm-link-color: #9ca3af;
+  --ifm-link-hover-color: #79c0ff;
 }

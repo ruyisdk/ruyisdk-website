@@ -1,83 +1,94 @@
 .primary-button {
-    background: linear-gradient(180deg, var(--home-button-primary) 0%, var(--home-button-primary-end) 100%);
-    color: var(--home-button-primary-text);
-    border: none;
-    border-radius: 9999px;
-    padding: 0.72rem 1.6rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: all 0.2s ease-out;
-
-    box-shadow: 0 0.2rem 0.7rem rgba(10, 44, 126, 0.26);
+  background: linear-gradient(180deg, var(--home-button-primary) 0%, var(--home-button-primary-end) 100%);
+  color: var(--home-button-primary-text);
+  border: none;
+  border-radius: 9999px;
+  padding: 0.72rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0.2rem 0.7rem rgba(10, 44, 126, 0.26);
 }
 
 .primary-button:hover {
-    color: var(--home-button-primary-text);
-    box-shadow: 0 0.4rem 1.1rem rgba(10, 44, 126, 0.35);
-    transform: translateY(-0.125rem);
+  color: var(--home-button-primary-text);
+  box-shadow: 0 0.4rem 1.1rem rgba(10, 44, 126, 0.35);
+  transform: translateY(-0.125rem);
 }
 
 .secondary-button {
-    background: var(--home-button-secondary);
-    color: var(--home-button-secondary-text);
-    border: var(--home-button-secondary-border);
-
-    border-radius: 9999px;
-    padding: 0.72rem 1.6rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-
-    cursor: pointer;
-    text-decoration: none;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: all 0.2s ease-out;
-
-    box-shadow: 0 0.15rem 0.5rem rgba(173, 145, 87, 0.16);
+  background: var(--home-button-secondary);
+  color: var(--home-button-secondary-text);
+  border: var(--home-button-secondary-border);
+  border-radius: 9999px;
+  padding: 0.72rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0.15rem 0.5rem rgba(173, 145, 87, 0.16);
 }
 
 .secondary-button:hover {
-    color: var(--home-button-secondary-text);
-    box-shadow: 0 0.3rem 1rem rgba(173, 145, 87, 0.22);
-    transform: translateY(-0.125rem);
-    background: var(--home-button-secondary-hover);
+  color: var(--home-button-secondary-text);
+  box-shadow: 0 0.3rem 1rem rgba(173, 145, 87, 0.22);
+  transform: translateY(-0.125rem);
+  background: var(--home-button-secondary-hover);
 }
 
 .tertiary-button {
-    background: var(--home-button-tertiary);
-    color: var(--home-button-tertiary-text);
-    border: none;
-
-    border-radius: 9999px;
-    padding: 0.72rem 1.6rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-
-    cursor: pointer;
-    text-decoration: none;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: all 0.2s ease-out;
-
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  background: var(--home-button-tertiary);
+  color: var(--home-button-tertiary-text);
+  border: none;
+  border-radius: 9999px;
+  padding: 0.72rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .tertiary-button:hover {
-    color: var(--home-button-tertiary-text);
-    box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
-    transform: translateY(-0.125rem);
-    background: var(--home-button-tertiary-hover);
+  color: var(--home-button-tertiary-text);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.125rem);
+  background: var(--home-button-tertiary-hover);
+}
+
+html[data-theme="dark"] .primary-button {
+  box-shadow: 0 0.25rem 0.85rem rgba(37, 99, 235, 0.34);
+}
+
+html[data-theme="dark"] .primary-button:hover {
+  box-shadow: 0 0.45rem 1.2rem rgba(37, 99, 235, 0.46);
+}
+
+html[data-theme="dark"] .secondary-button {
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="dark"] .secondary-button:hover {
+  box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="dark"] .tertiary-button {
+  box-shadow: 0 0.2rem 0.65rem rgba(245, 185, 38, 0.22);
+}
+
+html[data-theme="dark"] .tertiary-button:hover {
+  box-shadow: 0 0.4rem 1.1rem rgba(245, 185, 38, 0.34);
 }
