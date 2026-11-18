@@ -21,14 +21,14 @@
   height: 100%;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid rgba(15, 35, 70, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 16px;
-  box-shadow: 0 8px 18px rgba(12, 30, 60, 0.08);
+  box-shadow: 0 10px 26px rgba(10, 44, 126, 0.06);
 }
 
 .statTitle {
   margin: 0 0 0.85rem;
-  color: #00163f;
+  color: #0f172a;
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.35;
@@ -44,13 +44,13 @@
 }
 
 .valueNumber {
-  color: #00163f;
+  color: #0A2C7E;
   font-weight: 800;
   line-height: 1;
 }
 
 .statUnit {
-  color: #2f4e86;
+  color: #475569;
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -59,18 +59,18 @@
   width: 100%;
   height: 1px;
   margin: 0.9rem 0 0.65rem;
-  background: #dfe6f1;
+  background: #e2e8f0;
 }
 
 .statNote {
   margin: 0;
-  color: #6c7fa6;
+  color: #64748b;
   line-height: 1.5;
 }
 
 .updateTime {
   margin-top: 2rem;
-  color: #6c7fa6;
+  color: #64748b;
   line-height: 1.5;
   text-align: right;
 }
@@ -78,4 +78,31 @@
 .markdownSection {
   margin: 3rem auto 0;
   width: 100%;
+}
+
+:global(html[data-theme="dark"]) .statCard {
+  background: #151b23;
+  border-color: rgba(240, 246, 252, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+}
+
+:global(html[data-theme="dark"]) .statTitle {
+  color: #f1f5f9;
+}
+
+:global(html[data-theme="dark"]) .valueNumber {
+  color: #79a8ff;
+}
+
+:global(html[data-theme="dark"]) .statUnit {
+  color: #94a3b8;
+}
+
+:global(html[data-theme="dark"]) .statDivider {
+  background: rgba(240, 246, 252, 0.1);
+}
+
+:global(html[data-theme="dark"]) .statNote,
+:global(html[data-theme="dark"]) .updateTime {
+  color: #8b949e;
 }

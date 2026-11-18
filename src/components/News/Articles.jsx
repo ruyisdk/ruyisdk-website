@@ -121,7 +121,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
         {loading && <LoadingSkeleton type="articles" count={pageSize > 0 ? pageSize : 3} />}
 
         {!loading && currentPageItems.length === 0 && (
-          <div className="rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-4 shadow-sm text-gray-600">
+          <div className="rounded-2xl border border-slate-200/85 dark:border-white/10 bg-white/95 dark:bg-[#151b23]/92 backdrop-blur-md p-4 shadow-[0_6px_20px_rgba(10,44,126,0.05)] text-slate-600 dark:text-slate-400">
             {translate({ id: "news.articles.empty", message: "暂无文章" })}
           </div>
         )}
@@ -129,20 +129,20 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
         {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`group cursor-pointer rounded-xl border border-white/60 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden flex flex-col md:flex-row md:items-stretch md:aspect-[4/1]`}
+            className={`group cursor-pointer rounded-2xl border border-slate-200/85 dark:border-white/10 bg-white/95 dark:bg-[#151b23]/92 backdrop-blur-md shadow-[0_6px_20px_rgba(10,44,126,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1648B8]/25 hover:shadow-[0_14px_30px_rgba(10,44,126,0.1)] overflow-hidden flex flex-col md:flex-row md:items-stretch md:aspect-[4/1]`}
             onClick={() => onClick(article.link)}
           >
             {/* Content section (left on md+) */}
             <div className="min-w-0 flex flex-1 flex-col p-6 md:h-full">
               <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug font-bold text-gray-800">
+                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#0A2C7E] dark:group-hover:text-[#79a8ff] transition-colors">
                   {article.title}
                 </span>
-                <span className="flex-shrink-0 whitespace-nowrap text-sm text-gray-600">
+                <span className="flex-shrink-0 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
                   {formatDate(article.date)}
                 </span>
               </div>
-              <p className="mt-2 text-sm text-gray-600 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
             </div>
 
             {/* Image section */}
@@ -171,8 +171,8 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
             {translate({ id: "news.pagination.prev", message: "上一页" })}
           </Button>
 
-          <div className="flex items-center gap-2 rounded-lg bg-white/70 backdrop-blur px-4 py-2 shadow-sm">
-            <span className="text-sm text-gray-700">
+          <div className="flex items-center gap-2 rounded-full border border-slate-200/85 dark:border-white/10 bg-white/95 dark:bg-[#151b23] px-4 py-2 shadow-xs">
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
               {currentPage + 1} / {totalPages}
             </span>
           </div>

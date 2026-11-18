@@ -1,16 +1,15 @@
 import Translate, { translate } from "@docusaurus/Translate";
 import { usePluginData } from "@docusaurus/useGlobalData";
 import Layout from "@theme/Layout";
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 
+import { PageBackground } from "@site/src/components/Home/Background";
 import WeChatLink from "@site/src/components/common/WeChatLink";
 import Articles from "@site/src/components/News/Articles";
 import Card from "@site/src/components/News/Card";
 import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSubscription";
 
 const NewsPage = () => {
-  const [isClient, setIsClient] = useState(false);
   const pluginData = usePluginData("docusaurus-news-generator");
 
   const handleClick = (link) => {
@@ -30,14 +29,10 @@ const NewsPage = () => {
   const weeklies = filterFutureItems(pluginData?.weeklies).slice(0, 10);
   const loading = !pluginData;
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <PageBackground isClient={isClient} />
-      <div className="relative overflow-visible py-8 text-gray-800 font-inter">
+      <div className="relative overflow-visible py-8 text-slate-900 dark:text-slate-100 font-inter">
+        <PageBackground />
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (
             <div className="flex w-full justify-center items-center py-12">
@@ -62,10 +57,10 @@ const NewsPage = () => {
               {/* left */}
                 <div className="min-w-0 flex-1 md:flex-[3] md:pr-0 lg:pr-0">
                 <div className="mb-6 flex min-h-[57px] items-end gap-4">
-                  <h1 className="m-0 text-3xl font-bold leading-none text-gray-900 md:text-[2rem]">
+                  <h1 className="m-0 text-3xl font-bold leading-none text-slate-900 dark:text-slate-100 md:text-[2rem]">
                     <Translate id="news.title">新闻</Translate>
                   </h1>
-                  <p className="m-0 text-[1.05rem] font-medium leading-6 text-gray-600">
+                  <p className="m-0 text-[1.05rem] font-medium leading-6 text-slate-600 dark:text-slate-400">
                     <Translate id="news.subtitle">随时看到来自 RuyiSDK 团队的重大消息</Translate>
                   </p>
                 </div>
@@ -108,23 +103,3 @@ const NewsPage = () => {
 };
 
 export default NewsPage;
-
-// Background blobs similar to Contributors page
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: "rgba(221, 190, 221, 0.2)", filter: "blur(120px)" }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: "rgba(168, 218, 220, 0.2)", filter: "blur(120px)" }}
-      />
-    </div>,
-    document.body,
-  );
-}

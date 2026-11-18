@@ -27,10 +27,10 @@ function resolveLocalizedContent(contentMap, locale) {
 
 const PageHeader = ({ title }) => (
   <header className="text-center pt-14 px-8">
-    <h1 className="text-3xl font-extrabold text-blue-900">
+    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
       {title}
     </h1>
-    <div className="mx-auto mt-6 max-w-screen-xl border-b border-black/5" />
+    <div className="mx-auto mt-6 max-w-screen-xl border-b border-slate-200/80 dark:border-white/10" />
   </header>
 );
 
