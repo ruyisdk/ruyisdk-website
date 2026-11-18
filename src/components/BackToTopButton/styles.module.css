@@ -16,21 +16,28 @@
   width: var(--back-to-top-size);
   height: var(--back-to-top-size);
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(10, 44, 126, 0.16);
   border-radius: 50%;
-  background: var(--ifm-color-emphasis-200);
-  box-shadow: var(--ifm-global-shadow-lw);
-  color: var(--ifm-color-emphasis-1000);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 8px 24px rgba(10, 44, 126, 0.14),
+    0 2px 6px rgba(15, 23, 42, 0.06);
+  color: #0A2C7E;
   cursor: pointer;
   opacity: 0;
   transform: translateX(calc(100% + 2rem));
   visibility: hidden;
-  z-index: var(--ifm-z-index-fixed);
+  z-index: calc(var(--ifm-z-index-fixed) - 1);
   transition:
     opacity 180ms var(--ifm-transition-timing-default),
     transform 180ms var(--ifm-transition-timing-default),
     visibility 0s linear 180ms,
-    background-color 180ms var(--ifm-transition-timing-default);
+    background-color 180ms var(--ifm-transition-timing-default),
+    border-color 180ms var(--ifm-transition-timing-default),
+    box-shadow 180ms var(--ifm-transition-timing-default),
+    color 180ms var(--ifm-transition-timing-default);
 }
 
 .buttonVisible {
@@ -41,12 +48,20 @@
     opacity 180ms var(--ifm-transition-timing-default),
     transform 180ms var(--ifm-transition-timing-default),
     visibility 0s,
-    background-color 180ms var(--ifm-transition-timing-default);
+    background-color 180ms var(--ifm-transition-timing-default),
+    border-color 180ms var(--ifm-transition-timing-default),
+    box-shadow 180ms var(--ifm-transition-timing-default),
+    color 180ms var(--ifm-transition-timing-default);
 }
 
 @media (hover: hover) {
   .button:hover {
-    background: var(--ifm-color-emphasis-300);
+    background: #eef4ff;
+    border-color: rgba(10, 44, 126, 0.3);
+    box-shadow:
+      0 12px 28px rgba(10, 44, 126, 0.2),
+      0 3px 8px rgba(15, 23, 42, 0.08);
+    color: #08256A;
   }
 }
 
@@ -71,15 +86,19 @@
 }
 
 :global(html[data-theme="dark"]) .button {
-  background: #1c2330;
-  border: 1px solid rgba(240, 246, 252, 0.14);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background: rgba(28, 35, 48, 0.94);
+  border: 1px solid rgba(240, 246, 252, 0.16);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(13, 17, 23, 0.4);
   color: #e6edf3;
 }
 
 @media (hover: hover) {
   :global(html[data-theme="dark"]) .button:hover {
     background: #253042;
+    border-color: rgba(121, 168, 255, 0.36);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
     color: #ffffff;
   }
 }
