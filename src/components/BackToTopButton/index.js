@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import {translate} from '@docusaurus/Translate';
+import { translate } from '@docusaurus/Translate';
+import { ArrowUp } from 'lucide-react';
 
 import styles from './styles.module.css';
 
@@ -22,7 +23,7 @@ export default function BackToTopButton() {
     };
 
     updateButton();
-    window.addEventListener('scroll', updateButton, {passive: true});
+    window.addEventListener('scroll', updateButton, { passive: true });
     window.addEventListener('resize', updateButton);
     return () => {
       window.removeEventListener('scroll', updateButton);
@@ -31,7 +32,7 @@ export default function BackToTopButton() {
   }, []);
 
   const scrollToTop = useCallback(() => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
@@ -42,10 +43,11 @@ export default function BackToTopButton() {
         description: 'The ARIA label for the back to top button',
       })}
       className={clsx(styles.button, shown && styles.buttonVisible)}
-      style={{'--back-to-top-footer-offset': `${footerOffset}px`}}
+      style={{ '--back-to-top-footer-offset': `${footerOffset}px` }}
       type="button"
-      onClick={scrollToTop}>
-      <span className={styles.arrow} aria-hidden="true" />
+      onClick={scrollToTop}
+    >
+      <ArrowUp size={18} strokeWidth={2.2} aria-hidden="true" />
     </button>
   );
 }
