@@ -78,6 +78,7 @@
   top: -10px;
   text-align: center;
   margin-top: 0;
+  padding-inline: max(4rem, calc(env(safe-area-inset-right) + 3rem));
   color: #64748b;
   line-height: 20px;
   letter-spacing: normal;
