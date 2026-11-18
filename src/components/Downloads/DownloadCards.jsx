@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Translate, { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
@@ -159,10 +160,10 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
     };
   }, [modalState.open]);
 
-  if (!modalState.open) return null;
+  if (!modalState.open || typeof document === 'undefined') return null;
 
-  return (
-    <div className={`fixed inset-0 z-50 transition-opacity duration-200 ${entered ? 'opacity-100' : 'opacity-0'}`}>
+  return createPortal(
+    <div className={`fixed inset-0 z-[var(--ifm-z-index-overlay)] transition-opacity duration-200 ${entered ? 'opacity-100' : 'opacity-0'}`}>
       <button aria-label="close" type="button" className="absolute inset-0 bg-slate-900/35 backdrop-blur-[2px]" onClick={onClose} />
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div
@@ -202,7 +203,8 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

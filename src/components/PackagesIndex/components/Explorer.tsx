@@ -378,10 +378,9 @@ export default function Explorer() {
   const activeDescription = activeTab === 'devices' ? t('deviceListDescription') : t('packageListDescription');
 
   return (
-    <div className="pi-animate-fade-in-up flex h-full flex-col text-[var(--text)]">
-
+    <>
       {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div className="fixed inset-0 z-[var(--ifm-z-index-overlay)] md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileFiltersOpen(false)} />
           <aside className="pi-surface absolute right-0 top-0 flex h-dvh max-h-dvh w-80 flex-col overflow-hidden bg-white dark:bg-[#151b23] p-4 shadow-lg">
             <div className="mb-4 flex shrink-0 items-center justify-between">
@@ -451,6 +450,7 @@ export default function Explorer() {
         </div>
       )}
 
+      <div className="pi-animate-fade-in-up flex h-full flex-col text-[var(--text)]">
       <div className="mx-auto flex w-full max-w-7xl flex-1 overflow-hidden px-4 pt-6 pb-5">
         <aside className="hidden w-72 shrink-0 overflow-y-auto pr-6 md:block">
           <div className="pi-surface flex max-h-[calc(100dvh-7rem)] flex-col rounded-[1.5rem] p-4">
@@ -661,6 +661,7 @@ export default function Explorer() {
           )}
         </main>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
