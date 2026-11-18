@@ -1,5 +1,6 @@
 import Translate, { translate } from "@docusaurus/Translate";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import { useBaseUrlUtils } from "@docusaurus/useBaseUrl";
 import Layout from "@theme/Layout";
 import React from "react";
 
@@ -11,9 +12,10 @@ import ButtonSubscription from "@site/src/components/News/Subscription/ButtonSub
 
 const NewsPage = () => {
   const pluginData = usePluginData("docusaurus-news-generator");
+  const { withBaseUrl } = useBaseUrlUtils();
 
   const handleClick = (link) => {
-    window.open(link, "_blank");
+    window.open(withBaseUrl(link), "_blank");
   };
 
   const filterFutureItems = (items) => {
@@ -30,7 +32,10 @@ const NewsPage = () => {
   const loading = !pluginData;
 
   return (
-    <Layout title="News" description="RuyiSDK News and Updates">
+    <Layout
+      title={translate({ id: "news.title", message: "新闻" })}
+      description={translate({ id: "news.meta.description", message: "RuyiSDK 新闻与动态" })}
+    >
       <div className="relative overflow-visible pt-(--ruyi-page-start) pb-[calc(var(--ruyi-page-end)-3rem)] md:pb-(--ruyi-page-end) text-slate-900 dark:text-slate-100 font-inter">
         <PageBackground />
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">

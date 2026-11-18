@@ -4,12 +4,16 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { PageBackground } from "@site/src/components/Home/Background";
 import MarkdownCard from "@site/src/components/About/MarkdownCard";
 
+import MainDe from "./mdx/main.de.mdx";
 import MainEn from "./mdx/main.en.mdx";
 import MainZhHans from "./mdx/main.zh-Hans.mdx";
+import QqDe from "./mdx/qq.de.mdx";
 import QqEn from "./mdx/qq.en.mdx";
 import QqZhHans from "./mdx/qq.zh-Hans.mdx";
+import SignupDe from "./mdx/signup.de.mdx";
 import SignupEn from "./mdx/signup.en.mdx";
 import SignupZhHans from "./mdx/signup.zh-Hans.mdx";
+import SurveyDe from "./mdx/survey.de.mdx";
 import SurveyEn from "./mdx/survey.en.mdx";
 import SurveyZhHans from "./mdx/survey.zh-Hans.mdx";
 
@@ -17,18 +21,22 @@ const CONTENT = {
   main: {
     "zh-Hans": MainZhHans,
     en: MainEn,
+    de: MainDe,
   },
   signup: {
     "zh-Hans": SignupZhHans,
     en: SignupEn,
+    de: SignupDe,
   },
   survey: {
     "zh-Hans": SurveyZhHans,
     en: SurveyEn,
+    de: SurveyDe,
   },
   qq: {
     "zh-Hans": QqZhHans,
     en: QqEn,
+    de: QqDe,
   },
 };
 
