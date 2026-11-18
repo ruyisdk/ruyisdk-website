@@ -9,10 +9,8 @@
 
   position: fixed;
   right: var(--back-to-top-inset-inline);
-  bottom: calc(
-    var(--back-to-top-bottom) + var(--back-to-top-footer-offset)
-  );
-  display: flex;
+  bottom: calc(var(--back-to-top-bottom) + var(--back-to-top-footer-offset));
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: var(--back-to-top-size);
@@ -46,14 +44,6 @@
     background-color 180ms var(--ifm-transition-timing-default);
 }
 
-.arrow {
-  width: 0.9rem;
-  height: 0.9rem;
-  border-top: 0.18rem solid currentColor;
-  border-left: 0.18rem solid currentColor;
-  transform: translateY(0.25rem) rotate(45deg);
-}
-
 @media (hover: hover) {
   .button:hover {
     background: var(--ifm-color-emphasis-300);
@@ -77,5 +67,19 @@
   .button,
   .buttonVisible {
     transition: none;
+  }
+}
+
+:global(html[data-theme="dark"]) .button {
+  background: #1c2330;
+  border: 1px solid rgba(240, 246, 252, 0.14);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  color: #e6edf3;
+}
+
+@media (hover: hover) {
+  :global(html[data-theme="dark"]) .button:hover {
+    background: #253042;
+    color: #ffffff;
   }
 }
