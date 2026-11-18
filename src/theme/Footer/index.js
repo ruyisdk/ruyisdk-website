@@ -20,28 +20,28 @@ export default function Footer() {
     {
       title: <Translate id="footer.ecosystem">生态</Translate>,
       items: [
-        { label: <Translate id="footer.ruyisdk">RuyiSDK</Translate>, to: '/downloads' },
+        { label: <Translate id="footer.ruyisdk">RuyiSDK</Translate>, to: '/docs/intro' },
         {
           label: <Translate id="footer.matrix">Support Matrix</Translate>,
           href: externalLinks('support-matrix'),
         },
-        { label: <Translate id="footer.ruyi">RuyiAI</Translate>, href: 'https://github.com/ruyisdk/ruyi-ai' },
-        { label: <Translate id="footer.openruyi">openRuyi</Translate>, href: 'https://github.com/openruyi' },
-        { label: <Translate id="footer.rvck">RVCK</Translate>, href: 'https://github.com/rvck-proj/rvck' },
+        { label: <Translate id="footer.ruyiai">RuyiAI</Translate>, href: 'https://github.com/RuyiAI-Stack' },
+        { label: <Translate id="footer.openruyi">openRuyi</Translate>, href: 'https://github.com/openRuyi-Project' },
+        { label: <Translate id="footer.rvck">RVCK</Translate>, href: 'https://github.com/RVCK-Project/rvck' },
         { label: <Translate id="footer.revyos">RevyOS</Translate>, href: externalLinks('revyos') },
       ],
     },
     {
       title: <Translate id="footer.community">社区</Translate>,
       items: [
-        { label: <Translate id="footer.discussion">RISC-V 开发者社区</Translate>, href: 'https://ruyisdk.cn' },
-        { label: <Translate id="footer.githubDiscussions">讨论组</Translate>, href: 'https://github.com/ruyisdk/ruyisdk/discussions' },
+        { label: <Translate id="footer.riscv-community">RISC-V 开发者社区</Translate>, href: 'https://ruyisdk.cn' },
+        { label: <Translate id="footer.discussion">讨论组</Translate>, href: 'https://github.com/ruyisdk/ruyisdk/discussions' },
         { label: <Translate id="footer.stats">数据统计</Translate>, to: '/dashboard' },
-        { label: <Translate id="footer.coc">社区守则</Translate>, to: '/code_of_conduct' },
+        { label: <Translate id="footer.community-code">社区守则</Translate>, to: '/code_of_conduct' },
       ],
     },
     {
-      title: <Translate id="footer.follow">关注我们</Translate>,
+      title: <Translate id="footer.followus">关注我们</Translate>,
       items: [
         { label: <Translate id="footer.wechat">微信公众号</Translate>, className: 'hover-wechat-link', to: '/about' },
         { label: <Translate id="footer.qqgroup">QQ群</Translate>, className: 'hover-qq-link', to: '/about' },
