@@ -97,3 +97,34 @@
   flex-wrap: wrap;
   gap: 0.75rem;
 }
+
+:global(html[data-theme="dark"]) .title {
+  color: #f1f5f9;
+}
+
+:global(html[data-theme="dark"]) .authorCard {
+  border-color: rgba(240, 246, 252, 0.12);
+  background: rgba(21, 27, 35, 0.9);
+}
+
+:global(html[data-theme="dark"]) .authorName {
+  color: #79a8ff;
+}
+
+:global(html[data-theme="dark"]) .authorTitle {
+  color: #9ca3af;
+}
+
+:global(html[data-theme="dark"]) .chip {
+  border-color: rgba(121, 168, 255, 0.24);
+  background: rgba(28, 35, 48, 0.9);
+  color: #96bbff;
+}
+
+:global(html[data-theme="dark"]) .tags {
+  border-top-color: rgba(240, 246, 252, 0.1);
+}
+
+:global(html[data-theme="dark"]) .tagsTitle {
+  color: #9ca3af;
+}

@@ -227,3 +227,9 @@
   background: #1c2330;
   color: #f1f5f9;
 }
+
+:global(html[data-theme="dark"]) .markdown img[src*="QRCode_img"] {
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 0.5rem;
+}

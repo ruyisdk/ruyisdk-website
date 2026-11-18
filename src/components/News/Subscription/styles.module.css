@@ -42,6 +42,19 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 28rem; /* avoid overly-wide input on desktop; still responsive */
+  transition: background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.inputValid {
+  background: #f0fdf4;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.inputInvalid {
+  background: #fef2f2;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
 }
 
 .input::placeholder {
@@ -100,6 +113,20 @@
 :global(html[data-theme="dark"]) .input:focus {
   border-color: #58a6ff;
   box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.18);
+}
+
+:global(html[data-theme="dark"]) .inputValid,
+:global(html[data-theme="dark"]) .inputValid:focus {
+  background: rgba(22, 163, 74, 0.14);
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+}
+
+:global(html[data-theme="dark"]) .inputInvalid,
+:global(html[data-theme="dark"]) .inputInvalid:focus {
+  background: rgba(220, 38, 38, 0.14);
+  border-color: #f87171;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.18);
 }
 
 :global(html[data-theme="dark"]) .button {
