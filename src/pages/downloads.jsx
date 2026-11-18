@@ -18,26 +18,26 @@ export default function DownloadsPage() {
       title={translate({ id: 'downloads.meta.title', message: '下载' })}
       description={translate({ id: 'downloads.meta.description', message: '下载 RuyiSDK 包管理器、IDE 扩展和 Ruyi 镜像刷写工具' })}
     >
-      <div className="relative min-h-screen text-gray-800 font-inter">
+      <div className="relative min-h-screen text-slate-900 dark:text-slate-100 font-inter">
         <PageBackground />
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16">
         <div className="relative mx-auto w-full z-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 drop-shadow-sm">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-slate-100 tracking-tight">
             <Translate id="downloads.title">下载 RuyiSDK</Translate>
           </h2>
-          <p className="text-gray-500 text-lg md:text-xl leading-relaxed text-center mt-8">
+          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed text-center mt-6">
             <Translate id="downloads.subtitle">获取 RuyiSDK 包管理器、IDE 扩展和 Ruyi 镜像刷写工具，开启您的 RISC-V 开发之旅</Translate>
           </p>
 
           <DownloadGuide />
 
-          <div className="mb-8 text-center text-gray-500 text-sm">
+          <div className="mb-8 text-center text-slate-500 dark:text-slate-400 text-sm">
             <p>
               <Translate
                 id="downloads.agreement"
                 values={{
                   privacyLink: (
-                    <a href="/docs/legal/privacyPolicy/" className="hover:underline" style={{ color: COLOR_VARS.blue }}>
+                    <a href="/docs/legal/privacyPolicy/" className="font-medium text-[#1648B8] hover:text-[#0A2C7E] dark:text-[#79a8ff] hover:underline">
                       <Translate id="downloads.privacy">隐私声明</Translate>
                     </a>
                   ),
