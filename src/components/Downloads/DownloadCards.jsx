@@ -340,7 +340,11 @@ function ProductHeader({
         <img
           src={logoSrc}
           alt={logoAlt}
-          className="hidden md:block pointer-events-none select-none absolute right-6 top-2 h-36 w-auto object-contain"
+          className={`hidden md:block pointer-events-none select-none absolute right-6 top-2 h-36 w-auto object-contain ${
+            accent === 'eclipse'
+              ? 'dark:drop-shadow-[0_0_18px_rgba(165,180,252,0.38)]'
+              : 'dark:drop-shadow-[0_0_14px_rgba(121,168,255,0.14)]'
+          }`}
           style={{ transform: 'translateY(12px)' }}
         />
       )}

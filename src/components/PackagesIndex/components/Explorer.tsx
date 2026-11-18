@@ -269,9 +269,9 @@ export default function Explorer() {
   );
 
   const renderIosSelector = () => (
-    <div className="relative mb-4 flex w-full shrink-0 rounded-lg bg-slate-200/80 p-0.5 dark:bg-zinc-800">
+    <div className="relative mb-4 flex w-full shrink-0 rounded-lg bg-slate-200/80 p-0.5 dark:bg-[#11161d] dark:ring-1 dark:ring-white/8">
       <div 
-        className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] bg-white dark:bg-zinc-700 rounded-md shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] bg-white dark:bg-[#232c3d] rounded-md shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeTab === 'packages' ? 'translate-x-full' : 'translate-x-0'
         }`}
       />
@@ -280,13 +280,13 @@ export default function Explorer() {
         onClick={() => setActiveTab('devices')}
         className={`z-10 flex flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-md py-1.5 text-xs font-semibold transition-colors duration-200 ${
           activeTab === 'devices'
-            ? 'text-zinc-900 dark:text-white'
-            : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+            ? 'text-slate-900 dark:text-slate-100'
+            : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
         }`}
       >
         {t('listByDevice')}
         <span className={`shrink-0 rounded-full px-1.5 py-0.2 text-[10px] transition-colors duration-200 ${
-          activeTab === 'devices' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
+          activeTab === 'devices' ? 'bg-slate-100 dark:bg-[#151b23] text-slate-600 dark:text-slate-300' : 'bg-slate-200/50 dark:bg-white/6 text-slate-500 dark:text-slate-400'
         }`}>
           {devices.length}
         </span>
@@ -296,13 +296,13 @@ export default function Explorer() {
         onClick={() => setActiveTab('packages')}
         className={`z-10 flex flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-md py-1.5 text-xs font-semibold transition-colors duration-200 ${
           activeTab === 'packages'
-            ? 'text-zinc-900 dark:text-white'
-            : 'text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+            ? 'text-slate-900 dark:text-slate-100'
+            : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
         }`}
       >
         {t('listByPackages')}
         <span className={`shrink-0 rounded-full px-1.5 py-0.2 text-[10px] transition-colors duration-200 ${
-          activeTab === 'packages' ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300' : 'bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-500 dark:text-zinc-400'
+          activeTab === 'packages' ? 'bg-slate-100 dark:bg-[#151b23] text-slate-600 dark:text-slate-300' : 'bg-slate-200/50 dark:bg-white/6 text-slate-500 dark:text-slate-400'
         }`}>
           {packages.length}
         </span>
@@ -383,7 +383,7 @@ export default function Explorer() {
       {mobileFiltersOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileFiltersOpen(false)} />
-          <aside className="pi-surface absolute right-0 top-0 flex h-dvh max-h-dvh w-80 flex-col overflow-hidden bg-white p-4 shadow-lg">
+          <aside className="pi-surface absolute right-0 top-0 flex h-dvh max-h-dvh w-80 flex-col overflow-hidden bg-white dark:bg-[#151b23] p-4 shadow-lg">
             <div className="mb-4 flex shrink-0 items-center justify-between">
               <h3 className="font-semibold text-[var(--text)]">{t('activeFilters')}</h3>
               <button onClick={() => setMobileFiltersOpen(false)} aria-label={t('clearFilters')} className="text-[var(--subtle)]">✕</button>
@@ -397,7 +397,7 @@ export default function Explorer() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={searchPlaceholder}
-                  className="w-full rounded-full border border-[var(--divider)] bg-white py-2 pl-9 pr-3 text-sm outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
+                  className="w-full rounded-full border border-[var(--divider)] bg-white dark:bg-[#0d1117]/90 py-2 pl-9 pr-3 text-sm text-[var(--text)] placeholder:text-[var(--subtle)] outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
                 />
               </label>
             </div>
@@ -411,7 +411,7 @@ export default function Explorer() {
                   <div className="space-y-2">
                     {vendorOptions.map((vendor) => (
                       <label key={vendor.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input type="checkbox" checked={selectedVendors.has(vendor.id)} onChange={() => toggleFilter(selectedVendors, vendor.id, setSelectedVendors)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                        <input type="checkbox" checked={selectedVendors.has(vendor.id)} onChange={() => toggleFilter(selectedVendors, vendor.id, setSelectedVendors)} className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
                         <span className="truncate" title={vendor.name}>{vendor.name}</span>
                       </label>
                     ))}
@@ -425,7 +425,7 @@ export default function Explorer() {
                   <div className="space-y-2">
                     {cpus.map((cpu) => (
                       <label key={cpu.id} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                        <input type="checkbox" checked={selectedCpus.has(cpu.id)} onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                        <input type="checkbox" checked={selectedCpus.has(cpu.id)} onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)} className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
                         <span className="truncate" title={cpu.display_name}>{cpu.display_name}</span>
                       </label>
                     ))}
@@ -440,7 +440,7 @@ export default function Explorer() {
                 <div className="space-y-2">
                   {categories.map((category) => (
                     <label key={category} className="flex cursor-pointer items-center gap-2 text-sm text-[var(--light)] transition hover:text-[var(--ifm-color-primary)]">
-                      <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
+                      <input type="checkbox" checked={selectedCategories.has(category)} onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)} className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]" />
                       <span className="truncate">{category}</span>
                     </label>
                   ))}
@@ -463,7 +463,7 @@ export default function Explorer() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={searchPlaceholder}
-                  className="w-full rounded-full border border-[var(--divider)] bg-white py-2 pl-9 pr-3 text-sm outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
+                  className="w-full rounded-full border border-[var(--divider)] bg-white dark:bg-[#0d1117]/90 py-2 pl-9 pr-3 text-sm text-[var(--text)] placeholder:text-[var(--subtle)] outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
                 />
               </label>
             </div>
@@ -483,7 +483,7 @@ export default function Explorer() {
                           type="checkbox"
                           checked={selectedVendors.has(vendor.id)}
                           onChange={() => toggleFilter(selectedVendors, vendor.id, setSelectedVendors)}
-                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
+                          className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
                         />
                         <span className="truncate" title={vendor.name}>{vendor.name}</span>
                       </label>
@@ -502,7 +502,7 @@ export default function Explorer() {
                           type="checkbox"
                           checked={selectedCpus.has(cpu.id)}
                           onChange={() => toggleFilter(selectedCpus, cpu.id, setSelectedCpus)}
-                          className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
+                          className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
                         />
                         <span className="truncate" title={cpu.display_name}>{cpu.display_name}</span>
                       </label>
@@ -522,7 +522,7 @@ export default function Explorer() {
                         type="checkbox"
                         checked={selectedCategories.has(category)}
                         onChange={() => toggleFilter(selectedCategories, category, setSelectedCategories)}
-                        className="rounded border-[var(--divider)] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
+                        className="rounded border-[var(--divider)] accent-[var(--ifm-color-primary)] dark:bg-[#0d1117] text-[var(--ifm-color-primary)] focus:ring-[var(--ifm-color-primary)]"
                       />
                       <span className="truncate">{category}</span>
                     </label>
@@ -552,13 +552,13 @@ export default function Explorer() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={searchPlaceholder}
-                  className="w-full rounded-full border border-[var(--divider)] bg-white py-2 pl-9 pr-3 text-sm outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
+                  className="w-full rounded-full border border-[var(--divider)] bg-white dark:bg-[#0d1117]/90 py-2 pl-9 pr-3 text-sm text-[var(--text)] placeholder:text-[var(--subtle)] outline-none transition focus:border-[var(--ifm-color-primary)] focus:ring-2 focus:ring-[var(--ifm-color-primary)]/15"
                 />
               </label>
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(true)}
-                className="inline-flex shrink-0 items-center justify-center rounded-full border border-[var(--divider)] bg-white p-2 text-[var(--subtle)] shadow-sm"
+                className="inline-flex shrink-0 items-center justify-center rounded-full border border-[var(--divider)] bg-white dark:bg-[#151b23] p-2 text-[var(--subtle)] shadow-sm"
                 aria-label={t('activeFilters')}
               >
                 <Filter className="h-4 w-4" />
@@ -622,8 +622,8 @@ export default function Explorer() {
               })}
 
               {filteredDevices.length === 0 && (
-                <div className="col-span-full flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white text-center shadow-sm">
-                  <Server className="h-10 w-10 text-[var(--home-ruyi-blue)]" />
+                <div className="col-span-full flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] text-center shadow-sm">
+                  <Server className="h-10 w-10 text-[var(--ifm-color-primary)]" />
                   <div className="text-lg font-medium">{t('noDevices')}</div>
                   <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
                 </div>
@@ -651,8 +651,8 @@ export default function Explorer() {
               ))}
 
               {filteredPackages.length === 0 && (
-                <div className="flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white text-center shadow-sm">
-                  <Package className="h-10 w-10 text-[var(--home-ruyi-blue)]" />
+                <div className="flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] text-center shadow-sm">
+                  <Package className="h-10 w-10 text-[var(--ifm-color-primary)]" />
                   <div className="text-lg font-medium">{t('noPackages')}</div>
                   <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
                 </div>
