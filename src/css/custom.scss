@@ -382,7 +382,6 @@ html[data-theme="dark"] .alert--secondary {
 .hover-wechat-link::after {
   content: "";
   color: #000;
-  border-radius: 5%;
   text-align: center;
   font-weight: bolder;
   font-size: medium;
@@ -416,7 +415,6 @@ html[data-theme="dark"] .alert--secondary {
 .hover-qq-link::after {
   content: "";
   color: #000;
-  border-radius: 5%;
   text-align: center;
   font-weight: bolder;
   font-size: medium;
@@ -440,11 +438,16 @@ html[data-theme="dark"] .alert--secondary {
   opacity: 1;
 }
 
-html[data-theme="dark"] .hover-wechat-link::after,
-html[data-theme="dark"] .hover-qq-link::after {
+.hover-wechat-link::after,
+.hover-qq-link::after {
   background-color: #ffffff;
   border: 6px solid #ffffff;
   border-radius: 0.65rem;
+  box-shadow: var(--ruyi-shadow-lg);
+}
+
+html[data-theme="dark"] .hover-wechat-link::after,
+html[data-theme="dark"] .hover-qq-link::after {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
