@@ -86,7 +86,7 @@
 .boardCard {
   display: flex;
   min-width: 0;
-  aspect-ratio: 16 / 18;
+  height: 100%;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.08);
@@ -108,7 +108,9 @@
 
 .boardImageWrap {
   display: flex;
-  flex: 0 0 42%;
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 7.6;
+  width: 100%;
   align-items: center;
   justify-content: center;
   min-height: 0;
@@ -233,11 +235,12 @@
   }
 
   .boardCard h3 {
-    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .boardCard p {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .cardLink {

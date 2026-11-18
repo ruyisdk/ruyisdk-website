@@ -49,9 +49,9 @@ export default function PartnersSection() {
   // convenience wrapper with title and padding; when used on the about page we only want the
   // outer card, so ask <Partners> not to render its own inner box.
   return (
-    <div className="bg-white/92 backdrop-blur-md rounded-2xl border border-slate-200/85 shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:bg-[#151b23] dark:border-white/10 p-8">
-      <div className="flex justify-between items-baseline mb-4">
-      <p className="text-3xl font-bold mb-4 text-(--home-title-color)">
+    <div className="bg-white/92 backdrop-blur-md rounded-2xl border border-slate-200/85 shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:bg-[#151b23] dark:border-white/10 p-5 sm:p-8">
+      <div className="flex flex-wrap justify-between items-baseline gap-2 mb-4">
+      <p className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4 text-(--home-title-color)">
         <Translate id='home.partners.title'>合作伙伴</Translate>
       </p>
       <a
