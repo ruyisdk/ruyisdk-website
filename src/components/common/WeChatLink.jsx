@@ -50,11 +50,9 @@ const WeChatLink = ({
           href={linkUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-[9.375rem] rounded-full bg-[#FCE8A4] px-5 py-2.5
-            font-semibold shadow transition hover:-translate-y-0.5
-            hover:bg-[#F8F3E2] hover:shadow-lg"
+          className="tertiary-button w-[9.375rem] px-5 py-2.5 font-semibold"
         >
-          <div className="text-emphasis text-center">{buttonText}</div>
+          <div className="text-center">{buttonText}</div>
         </a>
       </div>
     </div>

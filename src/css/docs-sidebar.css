@@ -2,12 +2,12 @@
 .theme-doc-wrapper {
   --ifm-font-family-base: Geist, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --ifm-heading-font-family: var(--ifm-font-family-base);
-  --ifm-heading-color: #171717;
-  --ifm-font-color-base: #171717;
-  --ifm-menu-color: #4b5563;
-  --ifm-menu-color-active: #0f172a;
-  --ifm-menu-color-background-hover: rgba(15, 23, 42, 0.05);
-  --ifm-menu-color-background-active: rgba(15, 23, 42, 0.08);
+  --ifm-heading-color: #0f172a;
+  --ifm-font-color-base: #1e293b;
+  --ifm-menu-color: #475569;
+  --ifm-menu-color-active: #0A2C7E;
+  --ifm-menu-color-background-hover: rgba(22, 72, 184, 0.05);
+  --ifm-menu-color-background-active: rgba(22, 72, 184, 0.09);
   --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-menu-link-padding-horizontal: 0.5rem;
   --ifm-menu-link-sublist-icon-filter: none;

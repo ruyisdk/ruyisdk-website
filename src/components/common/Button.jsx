@@ -16,13 +16,13 @@ const Button = ({
   const variantClasses = {
     primary: {
       enabled:
-        "bg-amber-400 text-white hover:bg-amber-500 hover:shadow-amber hover:shadow-[0_0_7px_rgba(245,158,11,0.5)]",
-      disabled: "bg-gray-200 text-gray-500",
+        "bg-[#0A2C7E] text-white shadow-[0_4px_12px_rgba(10,44,126,0.2)] hover:bg-[#133B9E] hover:shadow-[0_6px_16px_rgba(10,44,126,0.28)] dark:bg-[#2563eb] dark:hover:bg-[#3b82f6]",
+      disabled: "bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-500",
     },
     secondary: {
       enabled:
-        "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-[0_0_7px_rgba(156,163,175,0.4)]",
-      disabled: "bg-gray-100 text-gray-400",
+        "bg-white text-[#0A2C7E] ring-1 ring-inset ring-[#0A2C7E]/20 shadow-xs hover:bg-[#eef4ff] dark:bg-[#232c3d] dark:text-slate-100 dark:ring-white/15 dark:hover:bg-[#2d384d]",
+      disabled: "bg-slate-100 text-slate-400 dark:bg-slate-800/60 dark:text-slate-500",
     },
   };
 
