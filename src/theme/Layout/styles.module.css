@@ -9,6 +9,11 @@ body {
   flex-direction: column;
 }
 
+.mainWrapper > :global(main.container.margin-vert--lg),
+.mainWrapper > :global(main.container.margin-vert--xl) {
+  margin-block: var(--ruyi-page-start) var(--ruyi-page-end) !important;
+}
+
 /* Docusaurus-specific utility class */
 :global(.docusaurus-mt-lg) {
   margin-top: 3rem;

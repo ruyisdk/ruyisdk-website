@@ -218,21 +218,26 @@ main[class*="docMainContainer"] {
 .docs-wrapper div[class*="docRoot"] {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 24px 32px 80px;
+  padding-block: var(--ruyi-page-start) var(--ruyi-page-end);
+  padding-inline: 32px;
   display: flex;
   gap: 32px;
 }
 
+.docs-wrapper main[class*="docMainContainer"] > .container.padding-top--md.padding-bottom--lg {
+  padding-block: 0 !important;
+}
+
 @media (max-width: 996px) {
   .docs-wrapper div[class*="docRoot"] {
-    padding: 20px 16px 56px;
+    padding-inline: 16px;
     gap: 0;
   }
 }
 
 @media (min-width: 997px) and (max-width: 1180px) {
   .docs-wrapper div[class*="docRoot"] {
-    padding: 24px 20px 80px;
+    padding-inline: 20px;
     gap: 20px;
   }
 }
