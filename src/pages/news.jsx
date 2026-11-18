@@ -31,7 +31,7 @@ const NewsPage = () => {
 
   return (
     <Layout title="News" description="RuyiSDK News and Updates">
-      <div className="relative overflow-visible py-8 text-slate-900 dark:text-slate-100 font-inter">
+      <div className="relative overflow-visible pt-(--ruyi-page-start) pb-[calc(var(--ruyi-page-end)-3rem)] md:pb-(--ruyi-page-end) text-slate-900 dark:text-slate-100 font-inter">
         <PageBackground />
         <div className="mx-auto relative z-10 max-w-screen-xl px-4">
           {loading ? (

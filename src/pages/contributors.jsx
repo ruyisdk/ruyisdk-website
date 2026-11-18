@@ -115,7 +115,7 @@ export default function ContributorsPage() {
       <div className={`relative min-h-screen` }>
         <PageBackground />
 
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-(--ruyi-page-start)">
 
         <div className="relative mx-auto w-full z-10">
           {/* Title and intro removed per request */}
@@ -151,7 +151,7 @@ export default function ContributorsPage() {
             </div>
           </div>
 
-          <div className="relative w-full bg-white/92 dark:bg-[#151b23]/88 backdrop-blur-md rounded-2xl border border-slate-200/85 dark:border-white/10 shadow-[0_10px_28px_rgba(10,44,126,0.06)] p-6 mt-8 mb-24">
+          <div className="relative w-full bg-white/92 dark:bg-[#151b23]/88 backdrop-blur-md rounded-2xl border border-slate-200/85 dark:border-white/10 shadow-[0_10px_28px_rgba(10,44,126,0.06)] p-6 mt-8 mb-(--ruyi-page-end)">
             <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 justify-items-center items-start">
               {allPeople.map((p, i) => (
                 <ContributorCard key={p.id ? `${p.id}` : `p-${i}`} person={p} />

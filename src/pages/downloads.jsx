@@ -20,7 +20,7 @@ export default function DownloadsPage() {
     >
       <div className="relative min-h-screen text-slate-900 dark:text-slate-100 font-inter">
         <PageBackground />
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-(--ruyi-page-start)">
         <div className="relative mx-auto w-full z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 dark:text-slate-100 tracking-tight">
             <Translate id="downloads.title">下载 RuyiSDK</Translate>
@@ -48,7 +48,7 @@ export default function DownloadsPage() {
             </p>
           </div>
 
-          <div className="mb-24">
+          <div className="mb-(--ruyi-page-end)">
             <DownloadCards sectionIds={SECTION_IDS} />
           </div>
         </div>

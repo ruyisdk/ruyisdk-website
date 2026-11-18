@@ -42,7 +42,7 @@ export default function About() {
   const QrContent = resolveLocalizedContent(QR_CONTENT, i18n?.currentLocale);
 
   return (
-    <div className="relative overflow-hidden py-10 text-slate-900 dark:text-slate-100 font-inter">
+    <div className="relative overflow-hidden pt-(--ruyi-page-start) pb-(--ruyi-page-end) text-slate-900 dark:text-slate-100 font-inter">
       <PageBackground />
       <div className="mx-auto relative z-10 max-w-screen-xl flex flex-col items-center px-4">
         <div className="w-full grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-stretch">

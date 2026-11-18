@@ -3,7 +3,7 @@ import ServiceData from '@site/src/components/ServiceData';
 import { translate } from "@docusaurus/Translate";
 
 const PageHeader = ({ title }) => (
-  <header className="text-center pt-14 px-8 pb-6 border-b border-black/5">
+  <header className="text-center pt-(--ruyi-page-start) px-8 pb-6 border-b border-black/5">
     <h1 className="text-3xl font-extrabold text-blue-900">
       {title}
     </h1>
@@ -21,7 +21,7 @@ const Dashboard = () => {
           })}
         />
 
-        <section className="flex-1 flex justify-center pt-10 pb-16 px-6">
+        <section className="flex-1 flex justify-center pt-10 pb-(--ruyi-page-end) px-6">
           <div className="w-full max-w-screen-xl mx-auto">
             <ServiceData />
           </div>
