@@ -1,4 +1,5 @@
 import React from "react";
+import Translate from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { PageBackground } from "@site/src/components/Home/Background";
@@ -85,7 +86,7 @@ export default function ArticlePage({ contentMap }) {
             <MainContent />
             {tagKeys.length > 0 && (
               <div className={styles.tags}>
-                <p className={styles.tagsTitle}>Tags</p>
+                <p className={styles.tagsTitle}><Translate id="news.blog.tags">标签</Translate></p>
                 <div className={styles.tagList}>
                   {tagKeys.map((tag) => (
                     <span key={tag} className={styles.chip}>

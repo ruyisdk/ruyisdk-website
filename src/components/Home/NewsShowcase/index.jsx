@@ -2,10 +2,12 @@
 import Translate from '@docusaurus/Translate';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 
 
 const NewsShowcase = () => {
   const { siteConfig } = useDocusaurusContext();
+  const { withBaseUrl } = useBaseUrlUtils();
   const baseUrl = siteConfig?.baseUrl || '/';
   const pluginData = usePluginData('docusaurus-news-generator');
 
@@ -43,7 +45,7 @@ const NewsShowcase = () => {
         {newsData.map((news, idx) => (
           <a
             key={idx}
-            href={news.link}
+            href={withBaseUrl(news.link)}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200/85 bg-white no-underline !text-slate-900 shadow-[0_10px_28px_rgba(10,44,126,0.06)] transition-all hover:border-[#0A2C7E]/20 hover:shadow-[0_14px_34px_rgba(10,44,126,0.11)] dark:border-white/10 dark:bg-[#151b23] dark:!text-slate-100"
@@ -56,7 +58,7 @@ const NewsShowcase = () => {
 
             <div className="flex flex-1 flex-col bg-white dark:bg-[#151b23] p-5">
               <h2 className="text-xl font-bold leading-tight text-slate-900 dark:text-slate-100">
-                <Translate>{news.title}</Translate>
+                {news.title}
               </h2>
 
 
