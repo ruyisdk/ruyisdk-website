@@ -1,0 +1,8 @@
+{
+  "label": "RuyiSDK-Erweiterung für VS Code",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Die offizielle Erweiterung für VS Code integriert den RuyiSDK-Paketmanager in die IDE. Damit lassen sich Toolchains installieren und aktualisieren, virtuelle Umgebungen erstellen, Neuigkeiten lesen und Quellpakete entpacken."
+  }
+}

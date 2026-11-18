@@ -1,30 +1,62 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "Nächste Version",
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.Ruyi 包管理器": {
-    "message": "Ruyi Paketmanager",
+    "message": "RuyiSDK-Paketmanager",
     "description": "The label for category Ruyi 包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Ruyi 包管理器.link.generated-index.description": {
-    "message": "Erfahren Sie in 5 Minuten, was der Ruyi Paketmanager ist.",
-    "description": "The generated-index page description for category ruyi包管理器 in sidebar tutorialSidebar"
+    "message": "Lernen Sie den RuyiSDK-Paketmanager in fünf Minuten kennen.",
+    "description": "The generated-index page description for category Ruyi 包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.使用案例": {
     "message": "Anwendungsfälle",
     "description": "The label for category 使用案例 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.使用案例.link.generated-index.description": {
+    "message": "Anwendungsfälle des RuyiSDK-Paketmanagers",
+    "description": "The generated-index page description for category 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK IDE": {
+    "message": "RuyiSDK-IDE",
+    "description": "The label for category RuyiSDK IDE in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK IDE.link.generated-index.description": {
+    "message": "Benutzerhandbuch zur RuyiSDK-IDE",
+    "description": "The generated-index page description for category RuyiSDK IDE in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.IDE 使用案例": {
+    "message": "IDE-Anwendungsfälle",
+    "description": "The label for category IDE 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.IDE 使用案例.link.generated-index.description": {
     "message": "Anwendungsfälle der RuyiSDK-IDE",
-    "description": "The generated-index page description for the 使用案例 category in sidebar tutorialSidebar"
+    "description": "The generated-index page description for category IDE 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK VSCode 插件": {
+    "message": "RuyiSDK-Erweiterung für VS Code",
+    "description": "The label for category RuyiSDK VSCode 插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK VSCode 插件.link.generated-index.description": {
+    "message": "Die offizielle Erweiterung für VS Code integriert den RuyiSDK-Paketmanager in die IDE. Damit lassen sich Toolchains installieren und aktualisieren, virtuelle Umgebungen erstellen, Neuigkeiten lesen und Quellpakete entpacken.",
+    "description": "The generated-index page description for category RuyiSDK VSCode 插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.插件使用案例": {
+    "message": "Anwendungsfälle der Erweiterung",
+    "description": "The label for category 插件使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.插件使用案例.link.generated-index.description": {
+    "message": "Beispiele zum Erstellen und Debuggen mit der VS-Code-Erweiterung.",
+    "description": "The generated-index page description for category 插件使用案例 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.其他说明": {
-    "message": "andere Anweisungen",
+    "message": "Weitere Anleitungen",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.法律信息": {
-    "message": "Gesetz",
+    "message": "Rechtliche Informationen",
     "description": "The label for category 法律信息 in sidebar tutorialSidebar"
   }
 }

@@ -3,6 +3,6 @@
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "The official VS Code extension that integrates the capabilities of the Ruyi Package Manager into the IDE with a visual interface. It enables developers to install and update toolchains, create and manage virtual environments, view news, and extract source packages directly within VS Code."
+    "description": "The official VS Code extension brings the RuyiSDK Package Manager into the IDE. Install and update toolchains, create virtual environments, read news, and extract source packages."
   }
 }

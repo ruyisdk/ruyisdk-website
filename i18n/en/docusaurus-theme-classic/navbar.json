@@ -7,9 +7,41 @@
     "message": "RuyiSDK Logo",
     "description": "The alt text of navbar logo"
   },
+  "item.label.下载": {
+    "message": "Downloads",
+    "description": "Navbar item with label 下载"
+  },
+  "item.label.软件包": {
+    "message": "Packages",
+    "description": "Navbar item with label 软件包"
+  },
+  "item.label.新闻": {
+    "message": "News",
+    "description": "Navbar item with label 新闻"
+  },
+  "item.label.贡献者": {
+    "message": "Contributors",
+    "description": "Navbar item with label 贡献者"
+  },
+  "item.label.社区": {
+    "message": "Community",
+    "description": "Navbar item with label 社区"
+  },
+  "item.label.关于": {
+    "message": "About",
+    "description": "Navbar item with label 关于"
+  },
   "item.label.文档": {
     "message": "Docs",
     "description": "Navbar item with label 文档"
+  },
+  "item.label.报告问题": {
+    "message": "Report an Issue",
+    "description": "Navbar item with label 报告问题"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
   },
   "item.label.博客": {
     "message": "Blog",
@@ -18,38 +50,6 @@
   "item.label.双周报": {
     "message": "Newsletter",
     "description": "Navbar item with label 双周报"
-  },
-  "item.label.新闻": {
-    "message": "News",
-    "description": "Navbar item with label 新闻"
-  },
-  "item.label.下载": {
-    "message": "Download",
-    "description": "Navbar item with label 下载"
-  },
-  "item.label.软件包": {
-    "message": "Packages",
-    "description": "Navbar item with label 软件包"
-  },
-  "item.label.GitHub": {
-    "message": "GitHub",
-    "description": "Navbar item with label GitHub"
-  },
-  "item.label.社区": {
-    "message": "Community",
-    "description": "Navbar item with label 社区"
-  },
-  "item.label.贡献者": {
-    "message": "Contributors",
-    "description": "Navbar item with label 贡献者"
-  },
-  "item.label.关于": {
-    "message": "About",
-    "description": "Navbar item with label 关于"
-  },
-  "item.label.报告问题": {
-    "message": "Issues",
-    "description": "Navbar item with label 报告问题"
   },
   "item.label.Discussion": {
     "message": "Discussion",
@@ -60,7 +60,7 @@
     "description": "Navbar item with label 社区活动"
   },
   "item.label.社区守则": {
-    "message": "Community Code",
+    "message": "Code of Conduct",
     "description": "Navbar item with label 社区守则"
   },
   "item.label.数据统计": {

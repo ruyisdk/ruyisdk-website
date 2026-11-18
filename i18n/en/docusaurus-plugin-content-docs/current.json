@@ -4,23 +4,59 @@
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.Ruyi 包管理器": {
-    "message": "Ruyi Package Manager",
+    "message": "RuyiSDK Package Manager",
     "description": "The label for category Ruyi 包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Ruyi 包管理器.link.generated-index.description": {
-    "message": "Learn what ruyi package manager is in 5 minutes.",
-    "description": "The generated-index page description for category ruyi包管理器 in sidebar tutorialSidebar"
+    "message": "Get to know the RuyiSDK Package Manager in five minutes.",
+    "description": "The generated-index page description for category Ruyi 包管理器 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.使用案例": {
-    "message": "Cases",
+    "message": "Use Cases",
     "description": "The label for category 使用案例 in sidebar tutorialSidebar"
   },
+  "sidebar.tutorialSidebar.category.使用案例.link.generated-index.description": {
+    "message": "RuyiSDK Package Manager use cases",
+    "description": "The generated-index page description for category 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK IDE": {
+    "message": "RuyiSDK IDE",
+    "description": "The label for category RuyiSDK IDE in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK IDE.link.generated-index.description": {
+    "message": "RuyiSDK IDE user guide",
+    "description": "The generated-index page description for category RuyiSDK IDE in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.IDE 使用案例": {
+    "message": "IDE Use Cases",
+    "description": "The label for category IDE 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.IDE 使用案例.link.generated-index.description": {
+    "message": "RuyiSDK IDE use cases",
+    "description": "The generated-index page description for category IDE 使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK VSCode 插件": {
+    "message": "RuyiSDK VS Code Extension",
+    "description": "The label for category RuyiSDK VSCode 插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.RuyiSDK VSCode 插件.link.generated-index.description": {
+    "message": "The official VS Code extension brings the RuyiSDK Package Manager into the IDE. Install and update toolchains, create virtual environments, read news, and extract source packages.",
+    "description": "The generated-index page description for category RuyiSDK VSCode 插件 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.插件使用案例": {
+    "message": "Extension Use Cases",
+    "description": "The label for category 插件使用案例 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.插件使用案例.link.generated-index.description": {
+    "message": "Examples of building and debugging with the VS Code extension.",
+    "description": "The generated-index page description for category 插件使用案例 in sidebar tutorialSidebar"
+  },
   "sidebar.tutorialSidebar.category.其他说明": {
-    "message": "Other instructions",
+    "message": "Other Guides",
     "description": "The label for category 其他说明 in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.法律信息": {
-    "message": "Legal",
+    "message": "Legal Information",
     "description": "The label for category 法律信息 in sidebar tutorialSidebar"
   }
 }
