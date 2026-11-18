@@ -132,8 +132,8 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/we
 
   return (
     <div
-      className="flex h-full w-full flex-col overflow-hidden rounded-lg
-        bg-[#1e1f29] text-[#f8f8f2] shadow-xl"
+      className="flex h-full w-full flex-col overflow-hidden rounded-xl border border-slate-900/15
+        bg-[#1e1f29] text-[#f8f8f2] shadow-xl dark:border-white/12 dark:shadow-[0_20px_48px_rgba(0,0,0,0.55)]"
     >
       <div
         className="flex flex-shrink-0 items-center border-b border-[#44475a]
@@ -156,7 +156,7 @@ info: package qemu-user-riscv-upstream-8.2.0-ruyi.20240128 installed to /home/we
           className="w-full h-full overflow-hidden text-sm leading-6"
              ref={terminalRef}
         >
-        <pre className="font-mono break-all whitespace-pre-wrap">
+        <pre className="!m-0 !border-0 !bg-transparent !p-0 font-mono break-all whitespace-pre-wrap text-[#f8f8f2]">
           {text}
         </pre>
         </div>

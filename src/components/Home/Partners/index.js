@@ -6,7 +6,7 @@ const Partners = ({ partners, noWrapper = false }) => {
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
       {partners.map((partner) => (
         <a key={partner.id} href={partner.url} target="_blank" rel="noopener noreferrer" className="group block">
-          <div className="flex justify-center items-center w-full aspect-5/2 p-3 rounded-xl border border-slate-200/60 bg-slate-50/70 transition-all duration-300 ease-in-out group-hover:border-[#0A2C7E]/20 group-hover:bg-white group-hover:shadow-[0_8px_20px_rgba(10,44,126,0.08)] dark:bg-white/95 dark:border-white/20">
+          <div className="flex justify-center items-center w-full aspect-5/2 p-3 rounded-xl border border-slate-200/60 bg-slate-50/70 transition-all duration-300 ease-in-out group-hover:border-[#0A2C7E]/20 group-hover:bg-white group-hover:shadow-[0_8px_20px_rgba(10,44,126,0.08)] dark:bg-[#f1f5f9]/95 dark:border-white/15 dark:group-hover:bg-white dark:group-hover:border-[#79a8ff]/40">
             <img src={partner.logoUrl} alt={partner.name} className={`max-h-full max-w-full object-contain ${partner.logoClass || ''}`}
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/200x80/ffffff/000000?text=" + partner.name; }} />
           </div>

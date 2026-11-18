@@ -42,7 +42,7 @@ const RuyiInLive = () => {
   return (
     <>
         <div className="w-full flex justify-center items-center">
-          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] rounded-xl border border-slate-200/85 shadow-[0_12px_32px_rgba(10,44,126,0.07)] dark:border-white/10 overflow-hidden text-[#0A2C7E]">
+          <div className="w-full mx-auto flex flex-col lg:flex-row h-auto lg:h-[21.875rem] rounded-xl border border-slate-200/85 shadow-[0_12px_32px_rgba(10,44,126,0.07)] dark:border-white/10 dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] overflow-hidden text-[#0A2C7E] dark:text-slate-100">
 
           <div
             className="w-full lg:w-2/5 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden text-white"
@@ -62,7 +62,7 @@ const RuyiInLive = () => {
                 rel="noopener noreferrer"
                 className="tertiary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
-                <IconLink size={18} stroke={2} color="#002677" />&nbsp;
+                <IconLink size={18} stroke={2} />&nbsp;
                 <Translate id="home.ruyiinlive.seecommunity">随便逛逛</Translate>
               </a>
 
@@ -72,7 +72,7 @@ const RuyiInLive = () => {
                 rel="noopener noreferrer"
                 className="secondary-button items-center justify-center rounded-full px-4 py-2.5 font-semibold"
               >
-                <IconLogin2 size={18} stroke={2} color="#002677" />&nbsp;
+                <IconLogin2 size={18} stroke={2} />&nbsp;
                 <Translate id="home.ruyiinlive.joincommunity">现在加入</Translate>
               </a>
             </div>
@@ -114,6 +114,7 @@ const RuyiInLive = () => {
                         <div key={item.action} className="flex items-center min-h-[2rem]">
                           <div className="w-full h-7 rounded-md bg-[#eef4ff] dark:bg-[#1c2330] overflow-hidden">
                             <div
+                              className="bg-gradient-to-r from-[#0A2C7E] to-[#1648B8] dark:from-[#1d4ed8] dark:to-[#3b82f6]"
                               style={{
                                 height: '100%',
                                 borderRadius: '0.375rem',
@@ -122,7 +123,6 @@ const RuyiInLive = () => {
                                 alignItems: 'center',
                                 position: 'relative',
                                 width: `${barWidth}%`,
-                                background: 'linear-gradient(90deg, #0A2C7E 0%, #1648B8 100%)',
                               }}
                             >
                               <span
