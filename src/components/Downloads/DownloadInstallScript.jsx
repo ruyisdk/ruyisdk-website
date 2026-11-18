@@ -42,7 +42,7 @@ export default function DownloadInstallScript({ variant = 'default' }) {
     if (variant === 'plain') {
       base.h2 = (props) => (
         <h3
-          className="text-xl font-bold text-gray-900 mb-4"
+          className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4"
           style={{
             marginTop: 0,
             marginBottom: '1rem',

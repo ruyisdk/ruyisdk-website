@@ -1,54 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
-import ReactDOM from 'react-dom';
+import { PageBackground } from '@site/src/components/Home/Background';
 
-// Keep this page self-contained, same rationale as /downloads.
-const COLOR_VARS = {
-  gold: 'var(--ruyi-gold, var(--ifm-color-warning))',
-  goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
-  blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
-  blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
-  eclipse: '#5f3dc4',
-  contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
-};
-
-function headerGradientStyle(accent) {
+function headerGradientClass(accent) {
   if (accent === 'gold') {
-    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
+    return 'bg-gradient-to-r from-[#fffbeb] via-[#fffef7] to-white dark:from-amber-500/12 dark:via-[#181f2a] dark:to-[#151b23]';
   }
   if (accent === 'eclipse') {
-    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
+    return 'bg-gradient-to-r from-[#f3f4ff] via-[#f9faff] to-white dark:from-indigo-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
   }
-  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
+  return 'bg-gradient-to-r from-[#eff5ff] via-[#f8fbff] to-white dark:from-blue-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
 }
 
-function buttonStyle(variant, accent) {
-  if (variant === 'secondary') {
-    return { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
-  }
-  if (accent === 'gold') {
-    return {
-      backgroundColor: 'rgba(232, 183, 22, 0.18)',
-      background: 'rgba(232, 183, 22, 0.18)',
-      color: '#8c6b00',
-      boxShadow: 'none',
-    };
-  }
-  if (accent === 'eclipse') {
-    return {
-      backgroundColor: 'rgba(95, 61, 196, 0.14)',
-      background: 'rgba(95, 61, 196, 0.14)',
-      color: COLOR_VARS.eclipse,
-      boxShadow: 'none',
-    };
-  }
-  return {
-    backgroundColor: 'rgba(45, 120, 255, 0.14)',
-    background: 'rgba(45, 120, 255, 0.14)',
-    color: COLOR_VARS.blue,
-    boxShadow: 'none',
-  };
+function iconColorClass(accent) {
+  if (accent === 'eclipse') return 'text-[#3730a3] dark:text-indigo-300';
+  if (accent === 'gold') return 'text-[#c88a04] dark:text-amber-400';
+  return 'text-[#1648B8] dark:text-[#79a8ff]';
 }
 
 function getDownloadAccent(product, download) {
@@ -66,12 +34,6 @@ function getInstallDocsPath(accent) {
   if (accent === 'blue') return '/docs/VSCode-Plugins/';
   if (accent === 'eclipse') return '/docs/IDE/';
   return '/docs/Package-Manager/installation';
-}
-
-function iconColor(accent) {
-  if (accent === 'eclipse') return COLOR_VARS.eclipse;
-  if (accent === 'gold') return COLOR_VARS.goldDark;
-  return COLOR_VARS.blueDark;
 }
 
 function safeParseUrl(url) {
@@ -135,25 +97,6 @@ function LoadingDots() {
   );
 }
 
-function PageBackground({ isClient }) {
-  if (!isClient) return null;
-  return ReactDOM.createPortal(
-    <div>
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
-      />
-      <div
-        aria-hidden
-        className="fixed bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
-      />
-    </div>,
-    document.body,
-  );
-}
-
 export default function DownloadThanksPage() {
   const [isClient, setIsClient] = useState(false);
   const [retryEnabled, setRetryEnabled] = useState(false);
@@ -208,16 +151,15 @@ export default function DownloadThanksPage() {
       title={translate({ id: 'downloads.thanks.meta.title', message: '感谢下载' })}
       description={translate({ id: 'downloads.thanks.meta.description', message: '感谢下载 RuyiSDK 包管理器' })}
     >
-      <PageBackground isClient={isClient} />
-
-      <div className="relative text-gray-800 font-inter">
+      <div className="relative min-h-[70vh] text-slate-900 dark:text-slate-100 font-inter">
+        <PageBackground />
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">
         {params && (
         <div className="relative mx-auto w-full z-10">
-          <section className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-            <div className="px-8 py-6" style={headerGradientStyle(accent)}>
-              <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: iconColor(accent) }}>
+          <section className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden">
+            <div className={`px-8 py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
+              <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
+                <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 shrink-0 ${iconColorClass(accent)}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -227,42 +169,42 @@ export default function DownloadThanksPage() {
                 </svg>
                 <Translate id="downloads.thanks.title">感谢下载 RuyiSDK</Translate>
               </h1>
-              <p className="mt-2 text-lg text-gray-700">
+              <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
                 <Translate id="downloads.thanks.subtitle">下载已经开始（若遇浏览器拦截，请检查下载设置）</Translate>
               </p>
             </div>
 
             <div className="p-6 sm:p-8">
-              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-                <div className="text-gray-800">
-                  <div className="font-bold text-gray-900" style={{ color: COLOR_VARS.contrast }}>
+              <div className="bg-[#f8fafd] dark:bg-[#1c2330]/75 rounded-2xl p-6 border border-slate-200/85 dark:border-white/10">
+                <div className="text-slate-800 dark:text-slate-200">
+                  <div className="font-bold text-slate-900 dark:text-slate-100">
                     <Translate id="downloads.thanks.details">下载详情</Translate>
                   </div>
 
-                  <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <div className="text-gray-500">
+                  <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-700 dark:text-slate-200">
+                    <div className="bg-white dark:bg-[#151b23] rounded-xl border border-slate-200/85 dark:border-white/10 p-4">
+                      <div className="text-slate-500 dark:text-slate-400">
                         <Translate id="downloads.thanks.field.source">来源</Translate>
                       </div>
                       <div className="font-semibold mt-1">{sourceLabel}</div>
                     </div>
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <div className="text-gray-500">
+                    <div className="bg-white dark:bg-[#151b23] rounded-xl border border-slate-200/85 dark:border-white/10 p-4">
+                      <div className="text-slate-500 dark:text-slate-400">
                         <Translate id="downloads.thanks.field.arch">架构</Translate>
                       </div>
                       <div className="font-semibold mt-1">{arch || '-'}</div>
                     </div>
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <div className="text-gray-500">
+                    <div className="bg-white dark:bg-[#151b23] rounded-xl border border-slate-200/85 dark:border-white/10 p-4">
+                      <div className="text-slate-500 dark:text-slate-400">
                         <Translate id="downloads.thanks.field.version">版本</Translate>
                       </div>
                       <div className="font-semibold mt-1">{version || '-'}</div>
                     </div>
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <div className="text-gray-500">
+                    <div className="bg-white dark:bg-[#151b23] rounded-xl border border-slate-200/85 dark:border-white/10 p-4">
+                      <div className="text-slate-500 dark:text-slate-400">
                         <Translate id="downloads.thanks.field.file">文件名</Translate>
                       </div>
                       <div className="font-semibold mt-1" style={{ wordBreak: 'break-all' }}>
@@ -279,7 +221,6 @@ export default function DownloadThanksPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="secondary-button text-sm font-semibold whitespace-nowrap"
-                        style={buttonStyle('secondary', accent)}
                       >
                         <Translate id="downloads.thanks.retry">无响应？点此重试</Translate>
                       </a>
@@ -289,7 +230,7 @@ export default function DownloadThanksPage() {
                         type="button"
                         disabled
                         className="secondary-button text-sm font-semibold whitespace-nowrap"
-                        style={{ ...buttonStyle('secondary', accent), opacity: 0.55, cursor: 'not-allowed', transform: 'none' }}
+                        style={{ opacity: 0.5, cursor: 'not-allowed', transform: 'none', boxShadow: 'none' }}
                       >
                         <Translate id="downloads.thanks.retryWaiting">正在开始下载</Translate>
                         <LoadingDots />
@@ -299,7 +240,6 @@ export default function DownloadThanksPage() {
                     <a
                       href={withLocalePrefix(installDocsPath, localePrefix)}
                       className="primary-button text-sm font-semibold whitespace-nowrap"
-                      style={buttonStyle('primary', accent)}
                     >
                       <Translate id="downloads.thanks.gotoInstallDocs">下一步：阅读安装文档</Translate>
                     </a>

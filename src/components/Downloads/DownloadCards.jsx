@@ -13,7 +13,7 @@ export const COLOR_VARS = {
   goldDark: 'var(--ruyi-gold-dark, var(--ifm-color-warning-dark, var(--ifm-color-warning)))',
   blue: 'var(--ruyi-blue, var(--ifm-color-primary))',
   blueDark: 'var(--ruyi-blue-dark, var(--ifm-color-primary-dark, var(--ifm-color-primary)))',
-  eclipse: '#5f3dc4',
+  eclipse: '#3730a3',
   contrast: 'var(--ruyi-primary-contrast, var(--ifm-font-color-base))',
 };
 
@@ -40,36 +40,24 @@ const ECLIPSE_MARKETPLACE_URL = 'https://marketplace.eclipse.org/content/ruyisdk
 const ECLIPSE_MIRROR_RELEASES_URL = 'https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/';
 const IDE_ECLIPSE_RELEASES_URL = 'https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases';
 
-function headerGradientStyle(accent) {
+function headerGradientClass(accent) {
   if (accent === 'gold') {
-    return { background: 'linear-gradient(90deg, rgba(255, 247, 230, 0.98) 0%, rgba(255, 253, 245, 0.98) 100%)' };
+    return 'bg-gradient-to-r from-[#fffbeb] via-[#fffef7] to-white dark:from-amber-500/12 dark:via-[#181f2a] dark:to-[#151b23]';
   }
   if (accent === 'eclipse') {
-    return { background: 'linear-gradient(90deg, rgba(239, 235, 255, 0.96) 0%, rgba(250, 248, 255, 0.98) 100%)' };
+    return 'bg-gradient-to-r from-[#f3f4ff] via-[#f9faff] to-white dark:from-indigo-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
   }
-  return { background: 'linear-gradient(90deg, rgba(236, 246, 255, 0.98) 0%, rgba(248, 252, 255, 0.98) 100%)' };
+  return 'bg-gradient-to-r from-[#eff5ff] via-[#f8fbff] to-white dark:from-blue-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
 }
 
-function latestButtonStyle(accent) {
+function headerIconClass(accent) {
   if (accent === 'gold') {
-    return {
-      backgroundColor: 'rgba(232, 183, 22, 0.18)',
-      color: '#8c6b00',
-      boxShadow: 'none',
-    };
+    return 'text-[#c88a04] dark:text-amber-400';
   }
   if (accent === 'eclipse') {
-    return {
-      backgroundColor: 'rgba(95, 61, 196, 0.14)',
-      color: COLOR_VARS.eclipse,
-      boxShadow: 'none',
-    };
+    return 'text-[#3730a3] dark:text-indigo-300';
   }
-  return {
-    backgroundColor: 'rgba(45, 120, 255, 0.14)',
-    color: COLOR_VARS.blue,
-    boxShadow: 'none',
-  };
+  return 'text-[#1648B8] dark:text-[#79a8ff]';
 }
 
 function safeParseUrl(url) {
@@ -175,16 +163,16 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
 
   return (
     <div className={`fixed inset-0 z-50 transition-opacity duration-200 ${entered ? 'opacity-100' : 'opacity-0'}`}>
-      <button aria-label="close" type="button" className="absolute inset-0 bg-black/25" onClick={onClose} />
+      <button aria-label="close" type="button" className="absolute inset-0 bg-slate-900/35 backdrop-blur-[2px]" onClick={onClose} />
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div
-          className={`w-full max-w-lg rounded-2xl bg-white border border-gray-200 shadow-2xl transition-all duration-200 ${entered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
+          className={`w-full max-w-lg rounded-2xl bg-white dark:bg-[#151b23] border border-slate-200/90 dark:border-white/12 shadow-[0_24px_48px_rgba(10,44,126,0.16)] transition-all duration-200 ${entered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
         >
-          <div className="px-6 py-5 border-b border-gray-100">
-            <div className="text-lg font-bold text-gray-900">
+          <div className="px-6 py-5 border-b border-slate-200/80 dark:border-white/10">
+            <div className="text-lg font-bold text-slate-900 dark:text-slate-100">
               <Translate id="downloads.modal.title">选择架构并下载</Translate>
             </div>
-            <div className="mt-1 text-sm text-gray-600">
+            <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
               {modalState.projectLabel} · <Translate id="downloads.modal.latestVersion">最新版本</Translate> {modalState.version || '-'}
             </div>
           </div>
@@ -194,20 +182,19 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
               <button
                 key={`${item.arch}-${item.url}`}
                 type="button"
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 hover:bg-white hover:shadow-md transition-all px-4 py-3 text-left"
+                className="w-full rounded-xl border border-slate-200/85 dark:border-white/10 bg-[#f8fafd] dark:bg-[#1c2330] hover:bg-[#eef4ff]/65 dark:hover:bg-[#253042] hover:border-[#1648B8]/30 hover:shadow-sm transition-all px-4 py-3 text-left cursor-pointer"
                 onClick={() => onSelect(item)}
               >
-                <div className="font-semibold text-gray-900">{archLabel(item.arch)}</div>
-                <div className="mt-1 text-xs text-gray-500" style={{ wordBreak: 'break-all' }}>{item.fileName || item.url}</div>
+                <div className="font-semibold text-slate-900 dark:text-slate-100">{archLabel(item.arch)}</div>
+                <div className="mt-1 text-xs text-slate-500 dark:text-slate-400" style={{ wordBreak: 'break-all' }}>{item.fileName || item.url}</div>
               </button>
             ))}
           </div>
 
-          <div className="px-6 py-4 border-t border-gray-100 flex justify-end">
+          <div className="px-6 py-4 border-t border-slate-200/80 dark:border-white/10 flex justify-end">
             <button
               type="button"
               className="secondary-button text-sm font-semibold whitespace-nowrap"
-              style={{ color: COLOR_VARS.contrast, borderColor: 'rgba(0,0,0,0.16)' }}
               onClick={onClose}
             >
               <Translate id="downloads.modal.cancel">取消</Translate>
@@ -220,8 +207,12 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
 }
 
 function VersionBadge({ labelId, labelMessage }) {
+  const isTesting = labelId === 'downloads.badge.testing';
+  const badgeTone = isTesting
+    ? 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-400/30'
+    : 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/30';
   return (
-    <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-green-700">
+    <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${badgeTone}`}>
       <Translate id={labelId}>{labelMessage}</Translate>
     </span>
   );
@@ -232,28 +223,25 @@ function DownloadButton({
   href,
   onClick,
   variant = 'primary',
-  accent = 'blue',
   disabled = false,
 }) {
   const className = variant === 'primary'
     ? 'primary-button text-sm font-semibold whitespace-nowrap'
     : 'secondary-button text-sm font-semibold whitespace-nowrap';
-  const primaryStyle = latestButtonStyle(accent);
-  const style = variant === 'primary'
-    ? { ...primaryStyle, background: primaryStyle.backgroundColor }
-    : { color: COLOR_VARS.contrast, background: '#fff', border: '1px solid rgba(0,0,0,0.16)' };
-  const disabledStyle = disabled ? { opacity: 0.55, cursor: 'not-allowed', transform: 'none' } : {};
+  const disabledStyle = disabled
+    ? { opacity: 0.5, cursor: 'not-allowed', transform: 'none', boxShadow: 'none' }
+    : undefined;
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={{ ...style, ...disabledStyle }}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className} style={disabledStyle}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type="button" className={className} style={{ ...style, ...disabledStyle }} onClick={onClick} disabled={disabled}>
+    <button type="button" className={className} style={disabledStyle} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );
@@ -269,7 +257,7 @@ function DownloadSourceRow({
 }) {
   return (
     <div>
-      <div className="mb-2 text-sm font-semibold text-gray-600">
+      <div className="mb-2 text-sm font-semibold text-slate-600 dark:text-slate-300">
         <Translate id={labelId}>{labelMessage}</Translate>
       </div>
       <div className="flex flex-wrap justify-end gap-3">
@@ -297,10 +285,10 @@ function ReleaseCard({
   githubLatestDisabled = false,
 }) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
+    <div className="rounded-2xl border border-slate-200/85 dark:border-white/10 bg-[#f8fafd] dark:bg-[#1c2330]/75 p-6">
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <VersionBadge labelId={badgeId} labelMessage={badgeMessage} />
-        <span className="text-sm font-semibold text-gray-700">{channel?.version || '-'}</span>
+        <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{channel?.version || '-'}</span>
       </div>
 
       <div className="grid gap-5">
@@ -336,15 +324,15 @@ function ProductHeader({
   iconPath,
 }) {
   return (
-    <div className="relative overflow-hidden px-8 py-6" style={headerGradientStyle(accent)}>
+    <div className={`relative overflow-hidden px-8 py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
       <div className="min-w-0 md:pr-44">
-        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" style={{ color: accent === 'eclipse' ? COLOR_VARS.eclipse : accent === 'gold' ? COLOR_VARS.goldDark : COLOR_VARS.blueDark }}>
+        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
+          <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 shrink-0 ${headerIconClass(accent)}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPath} />
           </svg>
           <Translate id={titleId}>{titleMessage}</Translate>
         </h2>
-        <p className="mt-2 text-lg text-gray-700">
+        <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
           <Translate id={descriptionId}>{descriptionMessage}</Translate>
         </p>
       </div>
@@ -362,11 +350,11 @@ function ProductHeader({
 
 function ExternalLinks({ links }) {
   return (
-    <div className="bg-gray-50 px-8 py-4 border-t border-gray-200 text-sm text-gray-500 flex flex-wrap gap-4 justify-center md:justify-start">
+    <div className="bg-[#f8fafd] dark:bg-[#11161d]/80 px-8 py-4 border-t border-slate-200/80 dark:border-white/10 text-sm text-slate-500 dark:text-slate-400 flex flex-wrap gap-4 justify-center md:justify-start">
       {links.map((link, index) => (
         <React.Fragment key={link.href}>
-          {index > 0 && <span className="text-gray-300">|</span>}
-          <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined} className="hover:underline font-medium transition-colors" style={{ color: COLOR_VARS.contrast }}>
+          {index > 0 && <span className="text-slate-300 dark:text-slate-700">|</span>}
+          <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined} className="font-medium text-[#1648B8] hover:text-[#0A2C7E] dark:text-[#79a8ff] dark:hover:text-[#a5c5ff] hover:underline transition-colors">
             {link.label}
           </a>
         </React.Fragment>
@@ -384,7 +372,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
   const testingGithubOptions = useMemo(() => getChannelOptions(testing, 'github'), [testing]);
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
+    <section id={sectionId} className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden scroll-mt-24">
       <ProductHeader
         titleId="downloads.pm.title"
         titleMessage="Ruyi 包管理器"
@@ -401,8 +389,8 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
           <DownloadInstallScript variant="plain" />
         </div>
 
-        <div className="border-t border-gray-100 pt-6 mt-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
+        <div className="border-t border-slate-200/80 dark:border-white/10 pt-6 mt-6">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">
             <Translate id="downloads.manualDownload.title">手动下载安装</Translate>
           </h3>
           <div className="grid gap-6 md:grid-cols-2">
@@ -484,7 +472,7 @@ function ImagerSection({ sectionId }) {
   const docsUrl = useBaseUrl('/docs/Imager/');
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
+    <section id={sectionId} className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden scroll-mt-24">
       <ProductHeader
         titleId="imager.name"
         titleMessage="Ruyi 镜像刷写工具"
@@ -495,7 +483,7 @@ function ImagerSection({ sectionId }) {
       />
       <div className="p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <div className="text-sm font-semibold text-gray-600">
+          <div className="text-sm font-semibold text-slate-600 dark:text-slate-300">
             <Translate id="downloads.source.github">GitHub Release 下载：</Translate>
           </div>
           <div className="flex flex-wrap justify-start gap-3">
@@ -518,8 +506,8 @@ function ImagerSection({ sectionId }) {
 
 function MarketplaceCard({ titleId, titleMessage, children }) {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6">
-      <h3 className="m-0 mb-5 text-lg font-bold text-gray-900">
+    <div className="rounded-2xl border border-slate-200/85 dark:border-white/10 bg-[#f8fafd] dark:bg-[#1c2330]/75 p-6">
+      <h3 className="m-0 mb-5 text-lg font-bold text-slate-900 dark:text-slate-100">
         <Translate id={titleId}>{titleMessage}</Translate>
       </h3>
       <div className="flex flex-wrap justify-end gap-3">
@@ -551,7 +539,7 @@ function ExtensionSection({
   const githubItem = useMemo(() => getSingleChannelItem(stable, 'github'), [stable]);
 
   return (
-    <section id={sectionId} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden scroll-mt-24">
+    <section id={sectionId} className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden scroll-mt-24">
       <ProductHeader
         titleId={titleId}
         titleMessage={titleMessage}
