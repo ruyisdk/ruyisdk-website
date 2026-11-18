@@ -26,7 +26,7 @@ function resolveLocalizedContent(contentMap, locale) {
 }
 
 const PageHeader = ({ title }) => (
-  <header className="text-center pt-14 px-8">
+  <header className="text-center pt-(--ruyi-page-start) px-8">
     <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
       {title}
     </h1>
@@ -195,7 +195,7 @@ const Dashboard = () => {
     <div className={styles.container}>
       <PageBackground />
       <PageHeader title={translate({ id: "dashboard.title", message: "RuyiSDK 下载统计" })} />
-      <div className={`${styles.mainContent} max-w-screen-xl px-3 py-6 md:px-4 md:py-8 lg:px-8 lg:py-14`}>
+      <div className={`${styles.mainContent} max-w-screen-xl px-3 pt-6 pb-(--ruyi-page-end) md:px-4 md:pt-8 lg:px-8 lg:pt-14`}>
         <CategorySection data={data} animate={hasRemoteData} />
         <MarkdownCard variant="solid" className={styles.markdownSection}>
           <StatsDetail />

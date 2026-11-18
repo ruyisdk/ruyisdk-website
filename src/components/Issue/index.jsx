@@ -16,7 +16,7 @@ export default function Issue() {
   const IssueContent = ISSUE_CONTENT[i18n?.currentLocale] || ISSUE_CONTENT.en;
 
   return (
-    <div className="relative overflow-hidden py-10 text-slate-900 dark:text-slate-100 font-inter">
+    <div className="relative overflow-hidden pt-(--ruyi-page-start) pb-(--ruyi-page-end) text-slate-900 dark:text-slate-100 font-inter">
       <PageBackground />
       <div className="mx-auto relative z-10 max-w-screen-xl px-4">
         <MarkdownCard className="w-full">

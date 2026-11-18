@@ -9,7 +9,7 @@
 .container {
   width: min(1280px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 44px 0 72px;
+  padding-block: var(--ruyi-page-start) var(--ruyi-page-end);
 }
 
 .overview {
@@ -417,7 +417,6 @@
 @media (max-width: 760px) {
   .container {
     width: calc(100% - 48px);
-    padding: 28px 0 48px;
   }
 
   .overview {

@@ -153,7 +153,7 @@ export default function DownloadThanksPage() {
     >
       <div className="relative min-h-[70vh] text-slate-900 dark:text-slate-100 font-inter">
         <PageBackground />
-        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-16 mb-24">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-(--ruyi-page-start) mb-(--ruyi-page-end)">
         {params && (
         <div className="relative mx-auto w-full z-10">
           <section className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden">
