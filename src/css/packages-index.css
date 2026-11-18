@@ -3,7 +3,8 @@
 .pi-shell {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(10, 44, 126, 0.08), transparent 30%),
+    radial-gradient(circle at top left, rgba(22, 72, 184, 0.075), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(245, 185, 38, 0.065), transparent 36%),
     linear-gradient(180deg, #ffffff 0%, var(--ifm-background-color) 100%);
   color: var(--text);
 }
@@ -16,9 +17,9 @@
 }
 
 .pi-surface {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(236, 236, 236, 0.95);
-  box-shadow: 0 12px 32px rgba(12, 30, 60, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--divider);
+  box-shadow: 0 10px 28px rgba(10, 44, 126, 0.06);
 }
 
 .pi-card {
@@ -56,28 +57,37 @@
 
 .pi-button-primary {
   color: #fff;
-  background: linear-gradient(180deg, var(--ifm-color-primary) 0%, #071e58 100%);
-  box-shadow: 0 10px 24px rgba(10, 44, 126, 0.26);
+  background: linear-gradient(180deg, #133B9E 0%, #0A2C7E 100%);
+  box-shadow: 0 6px 16px rgba(10, 44, 126, 0.22);
 }
 
 .pi-button-primary:hover {
-  box-shadow: 0 14px 28px rgba(10, 44, 126, 0.34);
+  background: linear-gradient(180deg, #1947B8 0%, #0D3594 100%);
+  box-shadow: 0 10px 22px rgba(10, 44, 126, 0.3);
 }
 
 .pi-button-secondary {
   color: var(--ifm-color-primary);
-  background: #f4eedb;
-  box-shadow: 0 10px 24px rgba(173, 145, 87, 0.16);
+  background: #ffffff;
+  border: 1px solid rgba(10, 44, 126, 0.18);
+  box-shadow: 0 2px 8px rgba(10, 44, 126, 0.06);
 }
 
 .pi-button-secondary:hover {
-  box-shadow: 0 14px 28px rgba(173, 145, 87, 0.24);
+  background: #eef4ff;
+  border-color: rgba(10, 44, 126, 0.3);
+  box-shadow: 0 6px 16px rgba(10, 44, 126, 0.12);
 }
 
 .pi-button-tertiary {
-  color: #002677;
-  background: #fce8a4;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  color: #08205e;
+  background: #f7c948;
+  box-shadow: 0 4px 14px rgba(200, 138, 4, 0.2);
+}
+
+.pi-button-tertiary:hover {
+  background: #f5b926;
+  box-shadow: 0 8px 20px rgba(200, 138, 4, 0.28);
 }
 
 .pi-chip {
@@ -87,7 +97,7 @@
   white-space: nowrap;
   border-radius: 9999px;
   border: 1px solid var(--divider);
-  background: #fff;
+  background: #f8fafc;
   color: var(--subtle);
 }
 

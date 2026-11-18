@@ -269,7 +269,7 @@ export default function Explorer() {
   );
 
   const renderIosSelector = () => (
-    <div className="relative mb-4 flex w-full shrink-0 rounded-lg bg-[#e3e3e6] p-0.5 dark:bg-zinc-800">
+    <div className="relative mb-4 flex w-full shrink-0 rounded-lg bg-slate-200/80 p-0.5 dark:bg-zinc-800">
       <div 
         className={`absolute top-0.5 bottom-0.5 left-0.5 w-[calc(50%-2px)] bg-white dark:bg-zinc-700 rounded-md shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeTab === 'packages' ? 'translate-x-full' : 'translate-x-0'

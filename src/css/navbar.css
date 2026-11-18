@@ -1,38 +1,48 @@
 .navbar {
     --ifm-link-color: var(--home-menu-focus-color);
+    --ifm-navbar-link-color: #0f172a;
+    --ifm-navbar-link-hover-color: #1648B8;
+    --ifm-menu-color-active: #0A2C7E;
 
     background-color: var(--home-navbar-bg-glass);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(10, 44, 126, 0.08);
+    box-shadow: 0 1px 3px rgba(10, 44, 126, 0.04);
     transition: background-color 0.6s ease 0.6s, backdrop-filter 0.6s ease 0.6s, -webkit-backdrop-filter 0.6s ease 0.6s;
-    color: #000;
+    color: #0f172a;
 
     &.navbar--dark {
         background-color: var(--home-navbar-bg-glass-dark);
     }
     &.navbar--light {
         background-color: var(--home-navbar-bg-glass);
-        color: #000;
+        color: #0f172a;
     }
 
     .navbar__brand {
-        color: #000;
+        color: #0f172a;
         opacity: 1;
 
+        &:hover,
         &:focus {
-            color: #333;
+            color: #0A2C7E;
         }
     }
 
     .navbar__item,
     .navbar__link {
-        color: #000;
+        color: #1e293b;
         opacity: 1;
 
         &:hover,
         &:focus {
-            color: #333;
+            color: #1648B8;
         }
+    }
+
+    .navbar__link--active {
+        color: #0A2C7E;
     }
 
     .navbar__item--github {
@@ -178,13 +188,13 @@
 }
 
 .navbar button[class*="toggleButton"] {
-    color: #000;
+    color: #1e293b;
     border-radius: 0.5rem;
 }
 
 .navbar button[class*="toggleButton"]:hover {
-    color: #333;
-    background-color: rgba(0, 0, 0, 0.06);
+    color: #0A2C7E;
+    background-color: rgba(10, 44, 126, 0.06);
 }
 
 .navbar__item .navbar__link,

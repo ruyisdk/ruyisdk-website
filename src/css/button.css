@@ -12,12 +12,13 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-out;
-  box-shadow: 0 0.2rem 0.7rem rgba(10, 44, 126, 0.26);
+  box-shadow: 0 4px 14px rgba(10, 44, 126, 0.22);
 }
 
 .primary-button:hover {
   color: var(--home-button-primary-text);
-  box-shadow: 0 0.4rem 1.1rem rgba(10, 44, 126, 0.35);
+  background: linear-gradient(180deg, #1947B8 0%, #0D3594 100%);
+  box-shadow: 0 8px 20px rgba(10, 44, 126, 0.3);
   transform: translateY(-0.125rem);
 }
 
@@ -35,12 +36,13 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-out;
-  box-shadow: 0 0.15rem 0.5rem rgba(173, 145, 87, 0.16);
+  box-shadow: 0 2px 8px rgba(10, 44, 126, 0.06);
 }
 
 .secondary-button:hover {
   color: var(--home-button-secondary-text);
-  box-shadow: 0 0.3rem 1rem rgba(173, 145, 87, 0.22);
+  border-color: rgba(10, 44, 126, 0.3);
+  box-shadow: 0 6px 16px rgba(10, 44, 126, 0.12);
   transform: translateY(-0.125rem);
   background: var(--home-button-secondary-hover);
 }
@@ -59,12 +61,12 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-out;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(200, 138, 4, 0.2);
 }
 
 .tertiary-button:hover {
   color: var(--home-button-tertiary-text);
-  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(200, 138, 4, 0.28);
   transform: translateY(-0.125rem);
   background: var(--home-button-tertiary-hover);
 }
@@ -74,6 +76,7 @@ html[data-theme="dark"] .primary-button {
 }
 
 html[data-theme="dark"] .primary-button:hover {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   box-shadow: 0 0.45rem 1.2rem rgba(37, 99, 235, 0.46);
 }
 
