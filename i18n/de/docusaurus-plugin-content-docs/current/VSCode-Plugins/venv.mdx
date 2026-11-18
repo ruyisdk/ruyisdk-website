@@ -1,0 +1,24 @@
+---
+sidebar_position: 4
+---
+
+# Virtuelle Umgebungen
+
+Der Assistent der VS-Code-Erweiterung erstellt und verwaltet virtuelle Ruyi-Umgebungen für das Terminal und die Build-Werkzeuge.
+
+![Liste der virtuellen Umgebungen](@site/docs/VSCode-Plugins/image/image-6.png)
+
+## Umgebung erstellen und aktivieren
+
+- Öffnen Sie die Ansicht **Ruyi** > **Virtual Environments** und klicken Sie auf `+`.
+- Wählen Sie ein Profil wie `generic`, `sipeed-lpi4a` oder `milkv-duo` aus.
+- Wählen Sie eine oder mehrere Toolchains und bei Bedarf einen Emulator aus.
+- Geben Sie einen Namen und einen Pfad an und erstellen Sie die Umgebung.
+- Klicken Sie auf ihren Namen, um sie zu aktivieren oder zu deaktivieren. Die Statusleiste zeigt die aktive Umgebung an.
+
+> Das VS-Code-Terminal übernimmt nach der Aktivierung den `PATH` und die Einstellungen für die Cross-Kompilierung. Im Umgebungsverzeichnis liegen unter anderem `toolchain.cmake` und `meson-cross.ini` für CMake bzw. Meson.
+
+## Hinweise
+
+- Installieren Sie die benötigten Toolchains und Emulatoren zunächst in der Ansicht **Packages**.
+- Virtuelle Umgebungen verhalten sich wie in der CLI. Weitere Informationen finden Sie unter [Virtuelle Umgebungen und Geräteintegration](../Package-Manager/intergration.mdx).

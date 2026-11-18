@@ -80,52 +80,53 @@ ruyi extract milkv-duo-examples
    - Um die automatische Kopie vom Build zum Zielprogramm auf das Zielgerät zu realisieren, wurde im Makefile auch das Upload-Ziel hinzugefügt (dies setzt voraus, dass die SSH-Authentifizierung zwischen PC und Zielgerät abgeschlossen ist; bitte beachten Sie die "SSH-Schlüsselkonfiguration" am Ende). Außerdem müssen die entsprechenden Verzeichnisse auf dem Zielgerät im Voraus erstellt werden (der Speicherort kann angepasst werden, aber bitte ändern Sie den Pfad nach dem scp-Befehl, um sicherzustellen, dass er mit der tatsächlichen Umgebung übereinstimmt).
    - Sie können das folgende Makefile weiter anpassen; dieser Artikel bietet nur einen Referenzansatz.
 
-   ```makefile
+```makefile
 # Eclipse Toolchain Einstellungen
 #TOOLCHAIN_PREFIX := ~/milkv/duo/duo-examples/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-
 TOOLCHAIN_PREFIX := ~/.local/share/ruyi/binaries/x86_64/gnu-milkv-milkv-duo-musl-bin-0.20240731.0+git.67688c7335e7/bin/riscv64-unknown-linux-musl-
-   
-# Kompilierungsoptionen -O3  
+
+# Kompilierungsoptionen -O3
 #CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -DNDEBUG -I/home/phebe/milkv/duo/duo-examples/include/system
 #LDFLAGS := -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -L/home/phebe/milkv/duo/duo-examples/libs/system/musl_riscv64
 CFLAGS := -mcpu=c906fdv -march=rv64imafdcv0p7xthead -g  #-mcpu=c906fdv -march=rv64imafdcv0p7xthead : Eines von beiden muss gesetzt werden
-LDFLAGS := 
-   
+LDFLAGS :=
+
 TARGET=helloworld
-   
+
 ifeq (,$(TOOLCHAIN_PREFIX))
 $(error TOOLCHAIN_PREFIX ist nicht gesetzt)
 endif
-   
+
 ifeq (,$(CFLAGS))
 $(error CFLAGS ist nicht gesetzt)
 endif
-   
+
 CC = $(TOOLCHAIN_PREFIX)gcc
-   
+
 SOURCE = $(wildcard *.c)
 OBJS = $(patsubst %.c,%.o,$(SOURCE))
-   
+
 # Standardziel
 all: $(TARGET)
-   
+
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
-   
+
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
-   
+
 # Upload-Ziel
 upload: $(TARGET)
 	scp $(TARGET) root@192.168.42.1:/root/target/$(TARGET)
-   
+
 .PHONY: clean upload
 clean:
 	rm -f *.o $(TARGET)
-   
+
 # Lassen Sie das 'all' Ziel von 'upload' abhängen, um es nach dem Build automatisch hochzuladen
 all: upload
-   ```
+```
+
 6. Öffnen Sie das Terminalfenster in der IDE und erstellen Sie ein SSH-Terminal, um sich bequem in das Zielgerät einzuloggen und relevante Operationen durchzuführen. Wenn nötig, können Sie auch ein zusätzliches lokales Terminalfenster erstellen. Dies hängt von Ihren persönlichen Vorlieben ab. Die spezifischen Schritte sind:
 
    - Fenster > Ansicht anzeigen > Terminal

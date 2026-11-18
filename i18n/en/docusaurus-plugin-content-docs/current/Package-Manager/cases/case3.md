@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Flashing Development Board Using dd Method (Taking MilkV Duo as an Example)
 
-Currently, the ruyi package manager provides a more convenient method for installing operating systems. The installation can be completed by following the steps and related instructions below.
+Currently, the RuyiSDK Package Manager provides a more convenient method for installing operating systems. The installation can be completed by following the steps and related instructions below.
 
 ## Environment
 
@@ -16,15 +16,15 @@ This document is based on the following environment:
 
 Most RISC-V development boards support booting from Micro SD cards or NVME SSDs, typically using the ``dd`` tool to directly write images to the disk. The ``ruyi device provision`` command supports this writing method.
 
-Although the Ruyi package manager is designed not to perform operations that require superuser privileges, writing to a disk using ``dd`` often requires superuser privileges. Therefore, if an attempt to use the ``dd`` command to flash an image as a regular user fails, the Ruyi package manager will attempt to escalate privileges using ``sudo``. At this point, the user may need to enter a password, which is directly read by ``sudo`` and is transparent to the Ruyi package manager.
+Although the RuyiSDK Package Manager is designed not to perform operations that require superuser privileges, writing to a disk using ``dd`` often requires superuser privileges. Therefore, if an attempt to use the ``dd`` command to flash an image as a regular user fails, the RuyiSDK Package Manager will attempt to escalate privileges using ``sudo``. At this point, the user may need to enter a password, which is directly read by ``sudo`` and is transparent to the RuyiSDK Package Manager.
 
-Disk images often occupy a large amount of disk space after unpacking. Please ensure sufficient disk space is available before using the Ruyi package manager to flash an image. Some manufacturer-provided images do not automatically expand partitions to fully utilize the entire disk after flashing, and users may need to manually expand the disk partition size.
+Disk images often occupy a large amount of disk space after unpacking. Please ensure sufficient disk space is available before using the RuyiSDK Package Manager to flash an image. Some manufacturer-provided images do not automatically expand partitions to fully utilize the entire disk after flashing, and users may need to manually expand the disk partition size.
 
 ## Installing the Operating System
 
-After ensuring that the ruyi package manager is installed and testing that `ruyi -V` outputs the version information correctly, proceed with the following steps.
+After ensuring that the RuyiSDK Package Manager is installed and testing that `ruyi -V` outputs the version information correctly, proceed with the following steps.
 
-The ruyi package manager provides the functionality to install operating systems for RISC-V development boards. To install an image for any model of RISC-V development board, simply execute:
+The RuyiSDK Package Manager provides the functionality to install operating systems for RISC-V development boards. To install an image for any model of RISC-V development board, simply execute:
 
 ```bash
 $ ruyi device provision

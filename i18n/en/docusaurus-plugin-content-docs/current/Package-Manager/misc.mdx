@@ -4,11 +4,11 @@ sidebar_position: 6
 
 # More Information
 
-## Updating the Ruyi Package Manager
+## Updating the RuyiSDK Package Manager
 
-If you installed the Ruyi Package Manager using the precompiled single binary, simply download the new version of the binary and re-execute the installation process to overwrite the old version of the Ruyi Package Manager binary.
+If you installed the RuyiSDK Package Manager using the precompiled single binary, simply download the new version of the binary and re-execute the installation process to overwrite the old version of the RuyiSDK Package Manager binary.
 
-If you installed the Ruyi Package Manager using the system package manager, you can directly upgrade it using the system package manager:
+If you installed the RuyiSDK Package Manager using the system package manager, you can directly upgrade it using the system package manager:
 
 ```bash
 $ sudo pacman -Syuu
@@ -16,35 +16,35 @@ $ sudo pacman -Syuu
 
 This command will perform a comprehensive upgrade on Arch Linux. Note that Arch Linux does not support partial upgrades.
 
-## Uninstalling the Ruyi Package Manager
+## Uninstalling the RuyiSDK Package Manager
 
-If you installed the Ruyi Package Manager using the system package manager, please use the system package manager to uninstall it.
+If you installed the RuyiSDK Package Manager using the system package manager, please use the system package manager to uninstall it.
 
-If you installed the Ruyi Package Manager using the precompiled single binary, you can use the following command to uninstall the Ruyi Package Manager:
+If you installed the RuyiSDK Package Manager using the precompiled single binary, you can use the following command to uninstall the RuyiSDK Package Manager:
 
 ```bash
 $ ruyi self uninstall
 ```
 
-This command will prompt for a secondary confirmation of the operation. If you wish for the Ruyi Package Manager to execute without asking:
+This command will prompt for a secondary confirmation of the operation. If you wish for the RuyiSDK Package Manager to execute without asking:
 
 ```bash
 $ ruyi self uninstall -y
 ```
 
-The above command only removes the Ruyi Package Manager itself. If you wish to delete all caches and installed packages for a clean uninstallation:
+The above command only removes the RuyiSDK Package Manager itself. If you wish to delete all caches and installed packages for a clean uninstallation:
 
 ```bash
 $ ruyi self uninstall --purge
 ```
 
-Similarly, this command will prompt for a secondary confirmation of the operation. If you wish for the Ruyi Package Manager to execute without asking:
+Similarly, this command will prompt for a secondary confirmation of the operation. If you wish for the RuyiSDK Package Manager to execute without asking:
 
 ```bash
 $ ruyi self uninstall --purge -y
 ```
 
-The Ruyi Package Manager is designed to avoid operations that require superuser privileges. If the Ruyi Package Manager is installed in directories such as ``/usr/local/bin/`` that require superuser privileges to modify, the ``ruyi self uninstall`` command will fail.
+The RuyiSDK Package Manager is designed to avoid operations that require superuser privileges. If the RuyiSDK Package Manager is installed in directories such as ``/usr/local/bin/`` that require superuser privileges to modify, the ``ruyi self uninstall`` command will fail.
 
 In this case, you can manually delete all caches and installed packages (they are installed in the home directory and thus do not require superuser privileges to delete):
 
@@ -52,15 +52,15 @@ In this case, you can manually delete all caches and installed packages (they ar
 $ ruyi self clean --all
 ```
 
-Then manually delete the Ruyi Package Manager itself.
+Then manually delete the RuyiSDK Package Manager itself.
 
 ## Reporting Issues
 
-Submit an issue in the Ruyi Package Manager repository [here](https://github.com/ruyisdk/ruyi/issues/new).
+Submit an issue in the RuyiSDK Package Manager repository [here](https://github.com/ruyisdk/ruyi/issues/new).
 
 ## Telemetry Data Collection
 
-The Ruyi Package Manager collects some operational data from users through telemetry data collection to better understand user usage and improve the Ruyi Package Manager accordingly.
+The RuyiSDK Package Manager collects some operational data from users through telemetry data collection to better understand user usage and improve the RuyiSDK Package Manager accordingly.
 You can choose whether to enable telemetry data collection by setting the `RUYI_TELEMETRY_OPTOUT` environment variable. Any of `1`, `true`, `x`, `y`, or `yes` (case-insensitive) disables telemetry and is equivalent to the `off` mode below.
 
 There are three levels of telemetry data collection:

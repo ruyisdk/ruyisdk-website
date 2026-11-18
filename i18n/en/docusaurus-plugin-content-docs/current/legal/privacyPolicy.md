@@ -6,7 +6,10 @@ RuyiSDK is a development tool suite for RISC-V developers developed and maintain
 
 RuyiSDK focuses on product usage and user experience optimization, adhering to the principle of minimal information collection, and strives to avoid collecting personally identifiable information. We prefer to collect information in an anonymized manner for product operation and service improvement. Below are our collection and processing methods:
 
-- **Browsing the Website**: No personal information is required when simply browsing this website.
+- **Browsing the websites**: When you visit [ruyisdk.org](https://ruyisdk.org/) or the [board examples website](https://board-docs-frontend.pages.dev/), we use Cloudflare's analytics service to collect anonymized, aggregated visit statistics. These help us understand overall usage and preferences and improve the content and browsing experience. You do not need to provide personal information to browse either site. Cloudflare's analytics service is designed to protect privacy:
+  - It does not use cookies or similar technology to track your activity on these sites.
+  - It does not use IP addresses, user-agent strings, or similar information to fingerprint visitors.
+  - It only provides anonymized, aggregated statistics, such as page views, popular pages, and approximate visitor locations. These cannot be used to identify or track you individually.
 - **Email Subscription**: When you use our email subscription service, we collect your email address to provide relevant services.
 - **Community Participation**: The RuyiSDK community is an open-source community, and its code is hosted on the GitHub platform. You can participate in communication and feedback through GitHub repository issues and discussions, or directly contribute to development. When participating in community activities through the GitHub platform, you will need to comply with GitHub's privacy policy [*GitHub General Privacy Statement*](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 - **Tool Installation and Usage**: When using the RuyiSDK package manager, we may collect anonymized usage data. For details, please refer to Section 2.

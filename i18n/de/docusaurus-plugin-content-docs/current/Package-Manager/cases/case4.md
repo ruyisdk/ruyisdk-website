@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Fastboot-Methode zum Flashen des Entwicklungsboards (am Beispiel von Licheepi 4A)
 
-Derzeit bietet der ruyi-Paketmanager eine einfachere Methode zur Installation des Betriebssystems. Durch die folgenden Schritte und die entsprechende Anleitung kann die Installation abgeschlossen werden.
+Derzeit bietet der RuyiSDK-Paketmanager eine einfachere Methode zur Installation des Betriebssystems. Durch die folgenden Schritte und die entsprechende Anleitung kann die Installation abgeschlossen werden.
 
 ## Umgebung
 
@@ -12,48 +12,72 @@ Dieser Artikel basiert auf der folgenden Umgebung:
 - Hardware: x86_64 PC
 - Software: Ubuntu 22.04
 
-#### Weitere Hinweise
+## Board mit dem Host verbinden
 
 Licheepi 4A unterstützt das Booten vom onboard eMMC oder von der SD-Karte. Das Flashen kann auf zwei verschiedene Arten erfolgen:
 
-1. Das RISC-V-Entwicklungsboard wird über ein USB-Kabel mit dem PC verbunden.
-2. Die SD-Karte des RISC-V-Entwicklungsboards wird über einen Kartenleser mit dem PC verbunden.
+1. Verbinden Sie das Board per USB mit dem PC und flashen Sie es mit `fastboot`.
+2. Schließen Sie die SD-Karte per Kartenleser an den PC an, schreiben Sie das Abbild mit `dd` darauf und setzen Sie die Karte in das Board ein.
 
 In diesem Beispiel wird die erste Methode verwendet. Diese Flashing-Methode ist auch für das Flashen von Images auf das onboard eMMC des MilkV Meles geeignet.
 
-Wenn das Flashen des Images mit einem normalen Benutzer fehlschlägt, versucht ruyi, die Berechtigungen mit ``sudo`` zu erhöhen.
+:::info Systemkonfiguration für `fastboot`
+
+`ruyi` fragt erst nach einem fehlgeschlagenen Befehl, ob es diesen mit `sudo` ausführen soll. `fastboot flash` wartet jedoch unbegrenzt, wenn es kein Gerät erkennt. Deshalb fordert Ruyi Sie vor dem Flashen dazu auf, die Ausgabe von `fastboot devices` zu prüfen:
+
+```text
+Some flashing steps require the use of fastboot, in which case you should
+ensure the target device is showing up in fastboot devices output.
+Please confirm it yourself before the flashing begins.
+
+Is the device identified by fastboot now? (y/N)
+```
+
+Führen Sie `fastboot devices` in einem zweiten Terminal aus und antworten Sie erst mit `y`, wenn das Gerät erkannt wird. Andernfalls kann der Flash-Vorgang hängen bleiben.
+
+Ruyi richtet die benötigten `udev`-Regeln nicht ein, da sie von der Distribution und der Systemkonfiguration abhängen. Führen Sie `ruyi` aus Sicherheitsgründen nicht als `root` aus. Passen Sie das folgende Beispiel bei Bedarf an und beachten Sie die Dokumentation Ihrer Distribution.
+:::
 
 Licheepi 4A wird über ein USB-Kabel mit dem PC verbunden und über fastboot geflasht. Wenn Sie den Flashing-Prozess nur mit einem normalen Benutzer durchführen möchten, müssen möglicherweise udev-Regeln konfiguriert werden. Hier finden Sie ein Beispiel für eine Regel, die nur als Referenz dient:
 
-```99-custom.rules
+```udev
 SUBSYSTEM=="usb", ATTR{idVendor}="2345", ATTR{idProduct}=="7654", MODE="0666", GROUP="plugdev"
 SUBSYSTEM=="usb", ATTR{idVendor}="1234", ATTR{idProduct}=="8888", MODE="0666", GROUP="plugdev"
 ```
 
-## Betriebssysteminstallation
+Prüfen Sie anschließend mit `fastboot devices`, ob das Board erkannt wird. Die Ausgabe sollte eine Zeile wie `0123456789abcdef fastboot` enthalten.
 
-Stellen Sie sicher, dass der ruyi-Paketmanager installiert ist und dass `ruyi -V` korrekt die Versionsinformationen ausgibt, bevor Sie fortfahren.
+## Betriebssystem flashen
 
-Der ruyi-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Image auf ein RISC-V-Entwicklungsboard zu installieren, führen Sie einfach den folgenden Befehl aus:
+Stellen Sie sicher, dass der RuyiSDK-Paketmanager installiert ist und dass `ruyi -V` korrekt die Versionsinformationen ausgibt, bevor Sie fortfahren.
 
-```bash
-ruyi device provision
+Der RuyiSDK-Paketmanager bietet die Funktion, Betriebssysteme auf RISC-V-Entwicklungsboards zu installieren. Um ein Image auf ein RISC-V-Entwicklungsboard zu installieren, führen Sie einfach den folgenden Befehl aus:
+
+```bash input="1"
+$ ruyi device provision
 ```
 
 Dieser Befehl gibt die derzeit unterstützten RISC-V-Entwicklungsboards zurück. Nach der Auswahl des Entwicklungsboards werden alle unterstützten Betriebssysteme für das ausgewählte Board angezeigt:
 
-```bash
+```text
 RuyiSDK Device Provisioning Wizard
 
-Dieser Assistent soll Ihnen helfen, ein System auf Ihrem Gerät für Ihre Entwicklungszwecke zu installieren, und das alles mit Leichtigkeit.
+This is a wizard intended to help you install a system on your device for your
+development pleasure, all with ease.
 
-Es werden einige Fragen gestellt, die RuyiSDK helfen, Ihr Gerät und Ihre gewünschte Konfiguration zu verstehen. Anschließend werden Pakete heruntergeladen und auf den Speicher des Geräts geflasht, den Sie zuvor auf diesem Hostsystem verfügbar machen sollten.
+You will be asked some questions that help RuyiSDK understand your device and
+your intended configuration, then packages will be downloaded and flashed onto
+the device's storage, that you should somehow make available on this host
+system beforehand.
 
-$ Beachten Sie, dass Ruyi nicht als root ausgeführt wird, aber der Zugriff auf Rohdatenträger höchstwahrscheinlich erforderlich ist, um Images zu flashen. Sie sollten daher sicherstellen, dass Ihr Benutzerkonto sudo-Zugriff auf notwendige Befehle wie dd hat. Das Flashen schlägt fehl, wenn die sudo-Konfiguration dies nicht zulässt.
+Note that, as Ruyi does not run as root, but raw disk access is most likely
+required to flash images, you should arrange to allow your user account sudo
+access to necessary commands such as dd. Flashing will fail if the sudo
+configuration does not allow so.
 
-Fortfahren? (y/N) y
+Continue? (y/N) y
 
-Die folgenden Geräte werden derzeit vom Assistenten unterstützt. Bitte wählen Sie Ihr Gerät aus:
+The following devices are currently supported by the wizard. Please pick your device:
 
 1. Allwinner Nezha D1
 2. Canaan Kendryte K230
@@ -65,37 +89,38 @@ Die folgenden Geräte werden derzeit vom Assistenten unterstützt. Bitte wählen
 8. StarFive VisionFive
 9. StarFive VisionFive2
 
-Auswahl? (1-9)
+Choice? (1-9)
 
 ```
 
 Im obigen Beispiel, wenn Sie ein Image auf das Sipeed LicheePi 4A installieren möchten, geben Sie einfach die entsprechende Nummer ein: `7`
 
 
-```bash
-Auswahl? (1-9) 7
+```text
+Choice? (1-9) 7
 
-Das Gerät hat die folgenden Varianten. Bitte wählen Sie diejenige aus, die Ihrer Hardware entspricht:
+The device has the following variants. Please choose the one corresponding to your hardware at hand:
 
   1. Sipeed LicheePi 4A (8G RAM)
   2. Sipeed LicheePi 4A (16G RAM)
 
-Auswahl? (1-2) 2
+Choice? (1-2) 2
 
-Die folgenden Systemkonfigurationen werden von der ausgewählten Gerätevariante unterstützt. Bitte wählen Sie diejenige aus, die Sie auf dem Gerät installieren möchten:
+The following system configurations are supported by the device variant you have chosen. Please pick the one you want
+to put on the device:
 
-  1. openEuler RISC-V (headless) für Sipeed LicheePi 4A (16G RAM)
-  2. openEuler RISC-V (XFCE) für Sipeed LicheePi 4A (16G RAM)
-  3. RevyOS für Sipeed LicheePi 4A (16G RAM)
+  1. openEuler RISC-V (headless) for Sipeed LicheePi 4A (16G RAM)
+  2. openEuler RISC-V (XFCE) for Sipeed LicheePi 4A (16G RAM)
+  3. RevyOS for Sipeed LicheePi 4A (16G RAM)
 
-Auswahl? (1-3) 3
+Choice? (1-3) 3
 
-Wir sind dabei, die folgenden Pakete für Ihr Gerät herunterzuladen und zu installieren:
+We are about to download and install the following packages for your device:
 
  * board-image/revyos-sipeed-lpi4a
  * board-image/uboot-revyos-sipeed-lpi4a-16g
 
-Fortfahren? (y/N)
+Proceed? (y/N)
 
 ```
 

@@ -6,32 +6,69 @@ sidebar_position: 1
 
 ## Einführung
 
-RuyiSDK IDE ist eine grafische integrierte Entwicklungsumgebung, die auf der Open-Source-Software Eclipse basiert und sich hauptsächlich an RISC-V-Entwickler richtet. Dieses Tool plant, auf der Unterstützung von Eclipse für die Embedded-Entwicklung aufzubauen und schrittweise mehrere gängige SDKs für RISC-V-Entwicklungsboards zu integrieren, um die RISC-V-Entwicklung zu erleichtern.
+Die RuyiSDK-IDE ist eine grafische Entwicklungsumgebung für RISC-V auf Basis des quelloffenen Eclipse Embedded CDT. Sie übernimmt die Unterstützung von Eclipse für eingebettete Systeme und soll nach und nach die SDKs gängiger RISC-V-Entwicklungsboards integrieren.
 
-## Installation und Start
+## Download
 
-### Download IDE
+[RuyiSDK-IDE herunterladen](https://fast-mirror.isrc.ac.cn/ruyisdk/ide/0.0.3/). Lassen Sie den abschließenden Schrägstrich in der Adresse stehen.
 
-RuyiSDK IDE Download-Adresse: https://mirror.iscas.ac.cn/ruyisdk/ide
+Wählen Sie das Archiv für Ihre Architektur: x86_64, aarch64 oder riscv64. Die IDE enthält eine Java-Laufzeitumgebung (JRE). Eine separate Java-Installation ist nicht nötig.
 
-Laden Sie die neueste Version der IDE von der oben genannten Adresse herunter. Achten Sie darauf, das Installationspaket auszuwählen, das mit Ihrer Architektur übereinstimmt. Wenn Sie in einer x86_64-Umgebung entwickeln möchten, müssen Sie das neueste Paket `linux.gtk.x86_64.tar.gz` herunterladen; wenn Sie auf ARM-Geräten entwickeln möchten, benötigen Sie das Paket `linux.gtk.aarch64.tar.gz`; wenn Sie auf RISC-V-Geräten arbeiten möchten, laden Sie das Paket `linux.gtk.riscv64.tar.gz` herunter.
+## IDE starten
 
-### Starten der IDE
+1. Entpacken Sie das tar.gz-Archiv und doppelklicken Sie im Ordner `ruyisdk` auf `ruyisdk`.
 
-Nach dem Entpacken führen Sie im Terminal `./ruyisdk` aus, um RuyiSDK IDE zu starten.
+![Startdatei der RuyiSDK-IDE](@site/docs/IDE/image/ruyisdk-ide-startup-0-download-logo.jpg)
 
-1. Entpacken Sie das heruntergeladene IDE-Paket an einen beliebigen Ort, wechseln Sie in das ruyisdk-Verzeichnis und führen Sie im Terminal `./ruyisdk` aus, um die IDE zu starten.
-2. Anschließend wird die IDE Sie auffordern, einen Arbeitsbereich (WorkSpace) auszuwählen. Sie können ein neues Verzeichnis als Arbeitsbereich erstellen oder einen vorhandenen Arbeitsbereich angeben.
-3. Klicken Sie dann auf die Schaltfläche `Launch`, um die IDE zu starten.
-4. Nach einem erfolgreichen Start gelangen Sie in die IDE, und Sie können mit der Nutzung beginnen.
+2. Wählen Sie einen Ordner als Arbeitsbereich (Workspace). Beim ersten Start können Sie einen neuen Ordner wählen. Um an bestehenden Projekten weiterzuarbeiten, geben Sie den Pfad des bisherigen Arbeitsbereichs an.
 
-> Hinweis: RuyiSDK IDE hat openJDK (openJDK 21) integriert, um den Betrieb der Anwendung selbst zu ermöglichen, sodass keine zusätzliche JDK-Installation erforderlich ist. Dieses openJDK 21 wird hauptsächlich für den Betrieb von RuyiSDK IDE verwendet; für die von Ihnen erstellten Java-Projekte können Sie die erforderliche Java-Umgebung festlegen.
+![Arbeitsbereich auswählen](@site/docs/IDE/image/ruyisdk-ide-startup-1-workspace-configuration.jpg)
 
-## Aktualisierung
+3. Klicken Sie auf **Launch**, um die IDE zu öffnen.
 
-Um RuyiSDK IDE zu verwenden, müssen Sie die neueste Version herunterladen, um die alte Version zu ersetzen. Beim Start der neuen IDE-Version können Sie den zuvor erstellten Arbeitsbereich auswählen, um frühere Arbeitsergebnisse zu importieren und die Entwicklung fortzusetzen.
+![Startansicht der RuyiSDK-IDE](@site/docs/IDE/image/ruyisdk-ide-startup-2-main-ui.jpg)
 
-## Dokumentationshinweise
+## Plug-in installieren
 
-1. Die Dokumentation von RuyiSDK IDE und die Screenshots in der Dokumentation basieren auf Ubuntu 22.04 LTS x86_64. Wenn Sie eine andere Umgebung verwenden, kann es zu Abweichungen kommen, die Sie selbst anpassen müssen.
-2. RuyiSDK IDE wird derzeit im Entwicklungszweig gepflegt und erhält kontinuierliche Updates. Die Dokumentation wird mit der neuesten Version aktualisiert. Es wird empfohlen, immer die neueste Version herunterzuladen.
+Um alle RuyiSDK-Funktionen zu nutzen, installieren Sie das RuyiSDK-IDE-Plug-in. Die Installation ist online oder aus einem ZIP-Archiv möglich.
+
+### Online installieren (empfohlen)
+
+Öffnen Sie **Help → Install New Software...**. Klicken Sie auf **Add...**, tragen Sie die folgenden Werte ein und klicken Sie auf **Add**:
+
+- Name: `RuyiSDK Updates (GitHub)`
+- Location: `https://ruyisdk.github.io/ruyisdk-eclipse-plugins/`
+
+![RuyiSDK-Update-Site hinzufügen](@site/docs/IDE/image/ruyisdk-ide-eclipse-update-site-online-0-add-repository.jpg)
+
+Sobald die Liste geladen ist, wählen Sie **RuyiSDK IDE** und klicken auf **Next >**, um das Plug-in zu installieren.
+
+![RuyiSDK IDE zur Installation auswählen](@site/docs/IDE/image/ruyisdk-ide-eclipse-update-site-online-1-select-feature.jpg)
+
+Über **Help → Check for Updates** können Sie das Plug-in später aktualisieren.
+
+### Offline installieren
+
+Bei eingeschränktem Netzwerkzugang laden Sie `ruyisdk-eclipse-plugins-<Version>.zip` aus den [GitHub-Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest) herunter. Die Abbildungen zeigen Version 0.1.4.
+
+![ZIP-Archiv des Plug-ins herunterladen](@site/docs/IDE/image/ruyisdk-ide-eclipse-update-site-offline-0-download-zip.jpg)
+
+Öffnen Sie **Help → Install New Software...**. Klicken Sie auf **Add...**, wählen Sie über **Archive...** die ZIP-Datei und klicken Sie auf **Add**.
+
+![Heruntergeladenes ZIP-Archiv auswählen](@site/docs/IDE/image/ruyisdk-ide-eclipse-update-site-offline-1-select-zip.jpg)
+
+Wählen Sie **RuyiSDK IDE** und klicken Sie auf **Next >**, um das Plug-in zu installieren.
+
+![RuyiSDK IDE aus dem Archiv installieren](@site/docs/IDE/image/ruyisdk-ide-eclipse-update-site-offline-2-select-feature.jpg)
+
+Laden Sie für ein Update das aktuelle ZIP-Archiv herunter und wiederholen Sie diese Schritte.
+
+## Beispiel
+
+- [Hello World für Sipeed Lichee Pi 4A bauen und debuggen](./cases/sipeed-lpi4a-ide-hello-world.md)
+
+Die Dokumentation zur RuyiSDK-IDE verwendet Ubuntu 22.04 LTS auf x86_64 als Beispiel. Wenn Sie mit einer anderen Ubuntu-Version oder Distribution auf Probleme stoßen, teilen Sie Screenshots und Fehlermeldungen in der [RISC-V-Entwicklercommunity](https://ruyisdk.cn/) oder im [Issue-Tracker](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/issues).
+
+## Aktualisieren
+
+Nach einem Update der IDE oder des RuyiSDK-Plug-ins können Sie im vorhandenen Arbeitsbereich weiterarbeiten. Die Dokumentation wird mit der IDE weiterentwickelt. Verwenden Sie die aktuelle Version, um Fehlerkorrekturen und neue Funktionen zu erhalten.
