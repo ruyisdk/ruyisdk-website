@@ -451,7 +451,7 @@ export default function Explorer() {
       )}
 
       <div className="pi-animate-fade-in-up flex h-full flex-col text-[var(--text)]">
-      <div className="mx-auto flex w-full max-w-7xl flex-1 overflow-hidden px-4 pt-6 pb-5">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 overflow-hidden px-4 pt-(--ruyi-page-start) pb-[calc(var(--ruyi-page-end)-2rem)]">
         <aside className="hidden w-72 shrink-0 overflow-y-auto pr-6 md:block">
           <div className="pi-surface flex max-h-[calc(100dvh-7rem)] flex-col rounded-[1.5rem] p-4">
             <div className="mb-3 shrink-0">
@@ -540,7 +540,7 @@ export default function Explorer() {
               lastMainScrollTop = e.currentTarget.scrollTop;
             }
           }}
-          className="-mr-4 flex-1 overflow-y-auto py-8 pr-4 md:pl-8"
+          className="-mr-4 flex-1 overflow-y-auto pb-8 pr-4 md:pt-8 md:pl-8"
         >
           <div className="block md:hidden mb-4">
             <div className="flex items-center gap-2 mb-3">
