@@ -138,8 +138,14 @@
   border-collapse: collapse;
 }
 
+.markdown img {
+  max-width: 100%;
+  height: auto;
+}
+
 .markdown th,
 .markdown td {
+  min-width: 7rem;
   border: 1px solid #e2e8f0;
   padding: 0.65rem 0.75rem;
   text-align: left;
@@ -150,6 +156,18 @@
   background: #f8fafc;
   color: #0f172a;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1.15rem;
+    border-radius: 1rem;
+  }
+
+  .plain {
+    padding: 0;
+  }
 }
 
 :global(html[data-theme="dark"]) .card {

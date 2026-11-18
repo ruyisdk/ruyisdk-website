@@ -167,9 +167,9 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
       <button aria-label="close" type="button" className="absolute inset-0 bg-slate-900/35 backdrop-blur-[2px]" onClick={onClose} />
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div
-          className={`w-full max-w-lg rounded-2xl bg-white dark:bg-[#151b23] border border-slate-200/90 dark:border-white/12 shadow-[0_24px_48px_rgba(10,44,126,0.16)] transition-all duration-200 ${entered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
+          className={`flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col rounded-2xl bg-white dark:bg-[#151b23] border border-slate-200/90 dark:border-white/12 shadow-[0_24px_48px_rgba(10,44,126,0.16)] transition-all duration-200 ${entered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
         >
-          <div className="px-6 py-5 border-b border-slate-200/80 dark:border-white/10">
+          <div className="shrink-0 px-5 py-4 sm:px-6 sm:py-5 border-b border-slate-200/80 dark:border-white/10">
             <div className="text-lg font-bold text-slate-900 dark:text-slate-100">
               <Translate id="downloads.modal.title">选择架构并下载</Translate>
             </div>
@@ -178,7 +178,7 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
             </div>
           </div>
 
-          <div className="p-4 grid gap-3">
+          <div className="min-h-0 overflow-y-auto p-4 grid gap-3">
             {modalState.options.map((item) => (
               <button
                 key={`${item.arch}-${item.url}`}
@@ -192,7 +192,7 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
             ))}
           </div>
 
-          <div className="px-6 py-4 border-t border-slate-200/80 dark:border-white/10 flex justify-end">
+          <div className="shrink-0 px-5 py-3.5 sm:px-6 sm:py-4 border-t border-slate-200/80 dark:border-white/10 flex justify-end">
             <button
               type="button"
               className="secondary-button text-sm font-semibold whitespace-nowrap"
@@ -326,7 +326,7 @@ function ProductHeader({
   iconPath,
 }) {
   return (
-    <div className={`relative overflow-hidden px-8 py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
+    <div className={`relative overflow-hidden px-5 py-5 sm:px-8 sm:py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
       <div className="min-w-0 md:pr-44">
         <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
           <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 shrink-0 ${headerIconClass(accent)}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -356,7 +356,7 @@ function ProductHeader({
 
 function ExternalLinks({ links }) {
   return (
-    <div className="bg-[#f8fafd] dark:bg-[#11161d]/80 px-8 py-4 border-t border-slate-200/80 dark:border-white/10 text-sm text-slate-500 dark:text-slate-400 flex flex-wrap gap-4 justify-center md:justify-start">
+    <div className="bg-[#f8fafd] dark:bg-[#11161d]/80 px-5 py-4 sm:px-8 border-t border-slate-200/80 dark:border-white/10 text-sm text-slate-500 dark:text-slate-400 flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start">
       {links.map((link, index) => (
         <React.Fragment key={link.href}>
           {index > 0 && <span className="text-slate-300 dark:text-slate-700">|</span>}

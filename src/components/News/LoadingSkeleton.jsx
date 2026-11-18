@@ -1,7 +1,7 @@
 import React from "react";
 
 const SkeletonArticle = () => (
-  <div className="skeleton-card group rounded-xl p-4 flex flex-col md:flex-row gap-4 md:aspect-[4/1]" aria-hidden>
+  <div className="skeleton-card group rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row gap-4 sm:min-h-[11.5rem]" aria-hidden>
     <div className="flex-1">
       <div className="flex items-center justify-between gap-4 mb-3">
         <div className="skeleton-title skeleton w-3/4"></div>
@@ -11,8 +11,8 @@ const SkeletonArticle = () => (
       <div className="skeleton-line skeleton mb-2 w-5/6"></div>
       <div className="skeleton-line skeleton mb-2 w-2/3"></div>
     </div>
-    <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 md:h-full">
-      <div className="skeleton-image skeleton h-48 w-full" />
+    <div className="w-full sm:w-48 xl:w-64 flex-shrink-0 order-first sm:order-last">
+      <div className="skeleton-image skeleton h-44 sm:h-full w-full" />
     </div>
   </div>
 );

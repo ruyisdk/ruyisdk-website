@@ -53,27 +53,27 @@ const NewsPage = () => {
               </div>
             </div>
           ) : (
-            <div className="flex min-h-0 flex-1 flex-col gap-6 md:flex-row md:gap-x-8 md:gap-y-6">
+            <div className="flex min-h-0 flex-1 flex-col gap-6 lg:flex-row lg:gap-x-8 lg:gap-y-6">
               {/* left */}
-                <div className="min-w-0 flex-1 md:flex-[3] md:pr-0 lg:pr-0">
-                <div className="mb-6 flex min-h-[57px] items-end gap-4">
-                  <h1 className="m-0 text-3xl font-bold leading-none text-slate-900 dark:text-slate-100 md:text-[2rem]">
+              <div className="min-w-0 flex-1 lg:flex-[3]">
+                <div className="mb-6 flex flex-col gap-2 sm:min-h-[57px] sm:flex-row sm:items-end sm:gap-4">
+                  <h1 className="m-0 shrink-0 text-3xl font-bold leading-none text-slate-900 dark:text-slate-100 md:text-[2rem]">
                     <Translate id="news.title">新闻</Translate>
                   </h1>
-                  <p className="m-0 text-[1.05rem] font-medium leading-6 text-slate-600 dark:text-slate-400">
+                  <p className="m-0 text-[0.98rem] sm:text-[1.05rem] font-medium leading-6 text-slate-600 dark:text-slate-400">
                     <Translate id="news.subtitle">随时看到来自 RuyiSDK 团队的重大消息</Translate>
                   </p>
                 </div>
                 <Articles items={articles} loading={loading} onClick={handleClick} />
               </div>
 
-              {/* right (will be fixed on md+ screens) */}
-                <div className="relative md:w-64 md:flex-initial">
-                <div className="md:sticky md:top-6 self-start md:w-64">
+              {/* right (sticky on lg+ screens, 2-col grid on sm/md tablets) */}
+              <div className="relative lg:w-64 lg:flex-initial">
+                <div className="lg:sticky lg:top-20 self-start lg:w-64">
                   <div className="p-2">
                     <ButtonSubscription />
                   </div>
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                     <Card
                       items={weeklies}
                       label={translate({ id: "news.biweekly", message: "双周报" })}

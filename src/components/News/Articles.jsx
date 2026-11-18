@@ -129,28 +129,28 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
         {!loading && currentPageItems.map((article, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className={`group cursor-pointer rounded-2xl border border-slate-200/85 dark:border-white/10 bg-white/95 dark:bg-[#151b23]/92 backdrop-blur-md shadow-[0_6px_20px_rgba(10,44,126,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1648B8]/25 hover:shadow-[0_14px_30px_rgba(10,44,126,0.1)] overflow-hidden flex flex-col md:flex-row md:items-stretch md:aspect-[4/1]`}
+            className="group cursor-pointer rounded-2xl border border-slate-200/85 dark:border-white/10 bg-white/95 dark:bg-[#151b23]/92 backdrop-blur-md shadow-[0_6px_20px_rgba(10,44,126,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#1648B8]/25 hover:shadow-[0_14px_30px_rgba(10,44,126,0.1)] overflow-hidden flex flex-col sm:flex-row sm:items-stretch sm:min-h-[11.5rem]"
             onClick={() => onClick(article.link)}
           >
-            {/* Content section (left on md+) */}
-            <div className="min-w-0 flex flex-1 flex-col p-6 md:h-full">
-              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <span className="min-w-0 flex-1 break-words line-clamp-2 text-xl leading-snug font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#0A2C7E] dark:group-hover:text-[#79a8ff] transition-colors">
+            {/* Content section (left on sm+) */}
+            <div className="min-w-0 flex flex-1 flex-col justify-center p-5 sm:p-6">
+              <div className="flex min-w-0 flex-col gap-1.5 md:flex-row md:items-start md:justify-between md:gap-4">
+                <span className="min-w-0 flex-1 break-words line-clamp-2 text-lg sm:text-xl leading-snug font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#0A2C7E] dark:group-hover:text-[#79a8ff] transition-colors">
                   {article.title}
                 </span>
-                <span className="flex-shrink-0 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                <span className="flex-shrink-0 whitespace-nowrap text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                   {formatDate(article.date)}
                 </span>
               </div>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
+              <p className="mt-2.5 mb-0 text-sm text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed break-words">{article.summary}</p>
             </div>
 
             {/* Image section */}
-            <div className="w-full md:w-48 lg:w-64 flex-shrink-0 order-1 md:order-2 relative overflow-hidden md:h-full">
+            <div className="w-full sm:w-48 xl:w-64 flex-shrink-0 order-first sm:order-last relative overflow-hidden">
               <img
                 src={resolveImg(article.image) || resolveImg("img/downloads/ruyi-logo-720.svg")}
                 alt={article.title}
-                className="block h-48 md:h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="block h-44 sm:h-full sm:absolute sm:inset-0 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
                   e.target.src = resolveImg("img/downloads/ruyi-logo-720.svg");
                 }}
@@ -162,7 +162,7 @@ const Articles = ({ items, onClick, pageSize = 10, loading = false }) => {
 
       {/* page controller */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           <Button
             disabled={!canGoPrev || isTransitioning}
             onClick={() => changePage("prev")}

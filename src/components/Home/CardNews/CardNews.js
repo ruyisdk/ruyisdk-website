@@ -14,7 +14,7 @@ export default function cardNews(card) {
         }}
       />
 
-      <div className="relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]">
+      <div className="relative flex flex-col justify-center items-center text-center z-10 px-5 py-7 sm:p-8 w-full sm:w-[88%]">
         <p className="text-2xl font-bold mb-3 tracking-tight text-(--home-little-title-color)">
           {byLocale(card.title)}
         </p>

@@ -159,7 +159,7 @@ main[class*="docMainContainer"] {
 }
 
 .theme-doc-wrapper .theme-doc-markdown h1 {
-  font-size: 36px;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -230,6 +230,13 @@ main[class*="docMainContainer"] {
   }
 }
 
+@media (min-width: 997px) and (max-width: 1180px) {
+  .docs-wrapper div[class*="docRoot"] {
+    padding: 24px 20px 80px;
+    gap: 20px;
+  }
+}
+
 @media (min-width: 997px) {
   .theme-doc-wrapper .theme-doc-sidebar-container {
     margin-top: calc(-1 * var(--docs-sidebar-logo-row-height));
@@ -239,18 +246,21 @@ main[class*="docMainContainer"] {
     padding-top: var(--docs-sidebar-logo-row-height);
     min-height: var(--docs-sidebar-logo-row-height);
   }
+
+  .theme-doc-wrapper [class*="docItemCol"] {
+    flex: 1 1 0%;
+    min-width: 0;
+    max-width: 760px;
+  }
+
+  .theme-doc-wrapper .col.col--3 {
+    flex: 0 0 clamp(160px, 16vw, 200px);
+    max-width: 200px;
+  }
 }
 
 .theme-doc-wrapper aside.theme-doc-sidebar-container {
   flex: 0 0 220px;
-}
-
-.theme-doc-wrapper [class*="docItemCol"] {
-  max-width: 760px;
-}
-
-.theme-doc-wrapper .col.col--3 {
-  flex: 0 0 200px;
 }
 
 .theme-doc-wrapper div[class*="sidebarViewport"] {
