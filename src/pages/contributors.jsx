@@ -30,7 +30,7 @@ const ContributorAvatar = ({ avatarUrl, name, githubUrl}) => {
           <IconUserCircle
             stroke={0.5}
             className={`w-full h-full text-slate-400 dark:text-slate-500 transition-opacity duration-200 ${
-              loaded ? "opacity-0" : "opacity-15"
+              loaded ? "opacity-0" : "opacity-35"
             }`}
           />
         </div>

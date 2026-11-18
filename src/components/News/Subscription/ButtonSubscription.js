@@ -62,24 +62,16 @@ function ButtonSubscription() {
         placeholder={translate({ id: "subscription.emailPlaceholder", message: "请输入邮箱" })}
         aria-label={translate({ id: "subscription.emailAriaLabel", message: "邮箱地址" })}
         onChange={(e) => setEmail(e.target.value)}
-        className={styles.input}
+        className={`${styles.input} ${
+          email.length === 0
+            ? ""
+            : isValidEmail(email)
+            ? styles.inputValid
+            : styles.inputInvalid
+        }`}
         style={{
           flex: "1 1 auto",
           minWidth: 0, // allow input to shrink properly in flex container
-          backgroundColor:
-            email.length === 0
-              ? undefined
-              : isValidEmail(email)
-              ? "#f0fdf4"
-              : "#fef2f2",
-          borderColor: email.length === 0 ? undefined : isValidEmail(email) ? "#16a34a" : "#dc2626",
-          boxShadow:
-            email.length === 0
-              ? undefined
-              : isValidEmail(email)
-              ? "0 0 0 3px rgba(22,163,74,0.12)"
-              : "0 0 0 3px rgba(220,38,38,0.12)",
-          transition: "background-color 160ms ease, box-shadow 160ms ease, border-color 160ms ease",
         }}
       />
       {

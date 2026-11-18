@@ -30,9 +30,9 @@ export default function PdfPreview({ href, linkText }) {
   }
 
   return (
-    <div className="-mx-6 mt-4 aspect-[4/3] overflow-hidden bg-white">
+    <div className="-mx-6 mt-4 aspect-[4/3] overflow-hidden border-y border-slate-200/70 bg-white dark:border-white/10 dark:bg-[#151b23]">
       <iframe
-        className="block h-full w-full border-0 bg-white"
+        className="block h-full w-full border-0 bg-white dark:bg-[#151b23]"
         src={href}
         title={linkText}
         onError={() => setCanPreview(false)}

@@ -500,3 +500,95 @@
     text-align: center;
   }
 }
+
+:global(html[data-theme="dark"]) .page {
+  background:
+    radial-gradient(circle at top left, rgba(56, 139, 253, 0.12), transparent 34%),
+    linear-gradient(180deg, #11161d 0%, var(--ifm-background-color) 100%);
+}
+
+:global(html[data-theme="dark"]) .overview {
+  border-color: rgba(240, 246, 252, 0.1);
+  background: rgba(21, 27, 35, 0.92);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+}
+
+:global(html[data-theme="dark"]) .overviewContent blockquote {
+  border-color: rgba(245, 185, 38, 0.28);
+  border-left-color: var(--ruyi-logo-yellow);
+  background: rgba(245, 185, 38, 0.08);
+}
+
+:global(html[data-theme="dark"]) .overviewContent blockquote p:first-child {
+  color: #fbbf24;
+}
+
+:global(html[data-theme="dark"]) .overviewContent :global(.ratified-step) {
+  border-color: rgba(240, 246, 252, 0.1);
+  background: #1c2330;
+}
+
+:global(html[data-theme="dark"]) .overviewContent :global(.ratified-step:not(:last-child)::after) {
+  border-top-color: rgba(121, 168, 255, 0.45);
+  border-right-color: rgba(121, 168, 255, 0.45);
+}
+
+:global(html[data-theme="dark"]) .overviewContent :global(.spec-note) {
+  border-color: rgba(121, 168, 255, 0.2);
+  border-left-color: var(--ifm-color-primary);
+  background: rgba(56, 139, 253, 0.1);
+}
+
+:global(html[data-theme="dark"]) .audienceGuide,
+:global(html[data-theme="dark"]) .categoryNav,
+:global(html[data-theme="dark"]) .pageNote {
+  border-top-color: rgba(240, 246, 252, 0.1);
+}
+
+:global(html[data-theme="dark"]) .guideCard {
+  border-color: rgba(240, 246, 252, 0.1);
+  background: #1c2330;
+}
+
+:global(html[data-theme="dark"]) .guideCard:hover {
+  border-color: rgba(121, 168, 255, 0.34);
+  background: #232c3d;
+}
+
+:global(html[data-theme="dark"]) .guideBadge {
+  background: rgba(245, 185, 38, 0.16);
+  color: #fbbf24;
+}
+
+:global(html[data-theme="dark"]) .categoryNav a {
+  border-color: rgba(240, 246, 252, 0.1);
+  background: #1c2330;
+}
+
+:global(html[data-theme="dark"]) .categoryNav a:hover {
+  border-color: rgba(121, 168, 255, 0.34);
+  background: #232c3d;
+}
+
+:global(html[data-theme="dark"]) .categoryNav strong,
+:global(html[data-theme="dark"]) .version {
+  border-color: rgba(121, 168, 255, 0.24);
+  background: rgba(121, 168, 255, 0.12);
+}
+
+:global(html[data-theme="dark"]) .card {
+  border-color: rgba(240, 246, 252, 0.1);
+  background: #151b23;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.36);
+}
+
+:global(html[data-theme="dark"]) .downloadButton {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.32);
+}
+
+:global(html[data-theme="dark"]) .downloadButton:hover {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+}

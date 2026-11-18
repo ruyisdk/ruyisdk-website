@@ -18,7 +18,7 @@ const SkeletonArticle = () => (
 );
 
 const SidebarSkeleton = ({ rows = 6 }) => (
-  <div className="rounded-xl border border-white/60 bg-white/80 backdrop-blur-md p-3 shadow-md">
+  <div className="rounded-2xl border border-slate-200/85 bg-white/95 dark:border-white/10 dark:bg-[#151b23]/92 backdrop-blur-md p-4 shadow-[0_6px_20px_rgba(10,44,126,0.05)]">
     <div className="mb-2 flex items-center">
       <div className="mr-2 h-2 w-2 rounded-full bg-blue-500"></div>
       <div className="skeleton-title skeleton w-1/2"></div>
