@@ -1,4 +1,5 @@
 import Translate from "@docusaurus/Translate";
+import Link from "@docusaurus/Link";
 import React from "react";
 import styles from "./styles.module.css";
 
@@ -60,12 +61,12 @@ export default function PartnersSection() {
       <p className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4 text-(--home-title-color)">
         <Translate id='home.partners.title'>合作伙伴</Translate>
       </p>
-      <a
-        href="/docs/Other/partner-guide"
+      <Link
+        to="/docs/Other/partner-guide"
         className="text-sm font-medium"
       >
         <Translate id="home.partners.joindoc">生态接入指南</Translate>&nbsp;&gt;
-      </a>
+      </Link>
       </div>
       <div className="mt-6">
         <Partners partners={partnersData} noWrapper />

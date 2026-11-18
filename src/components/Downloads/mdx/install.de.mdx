@@ -1,0 +1,13 @@
+## Installationsskript (empfohlen)
+
+Das Installationsskript erkennt Ihre Architektur, lädt die aktuelle stabile Version vom nächstgelegenen Spiegelserver herunter und installiert sie unter `/usr/local/bin/ruyi`:
+
+```bash input="1"
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh
+```
+
+Für die Installation im eigenen Benutzerverzeichnis geben Sie das Zielverzeichnis ausdrücklich an:
+
+```bash input="1"
+$ curl --proto '=https' --tlsv1.2 -fsSL https://ruyisdk.org/install.sh | sh -s -- --install-dir ~/.local/bin
+```

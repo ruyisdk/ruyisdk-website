@@ -6,10 +6,14 @@ import CodeBlock from '@site/src/components/Docs/CodeBlock';
   <>
 
 :::tip
-Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](https://ruyisdk.org/docs/legal/privacyPolicy/) zu.
+Die aktuellen Versionen finden Sie auf der [neuen Downloadseite](/downloads).
 :::
 
-## Ruyi herunterladen
+:::tip
+Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der [Datenschutzerklärung](/docs/legal/privacyPolicy/) zu.
+:::
+
+## RuyiSDK-Paketmanager herunterladen
 
 Ruyi bietet vorgefertigte Binärdateien für die Architekturen x86_64, riscv64 und aarch64 an.
 
@@ -53,9 +57,68 @@ $ ruyi version
 
 Wenn der Befehl die Versions- und Copyrightinformationen ausgibt, wurde Ruyi erfolgreich installiert. Falls der Befehl fehlschlägt, überprüfen Sie Ihre Systemumgebung und wiederholen Sie die Schritte.
 
-## Ruyi verwenden
+### Shell-Vervollständigung aktivieren
 
-Lesen Sie die Dokumentation, um zu erfahren, wie Sie Ruyi effektiv nutzen können.
+Fügen Sie den passenden Befehl in die Startdatei Ihrer Shell ein, etwa `.bashrc` oder `.zshrc`.
+
+Für Bash:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+Für Zsh:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+#compdef ruyi
+eval "$(ruyi --output-completion-script=zsh)"
+`} />
+
+## RuyiSDK-IDE herunterladen
+
+Die RuyiSDK-IDE ist für x86_64, riscv64 und aarch64 verfügbar. Laden Sie das Archiv für Ihre Architektur herunter:
+
+<CodeBlock lang="bash" code={`
+$ wget https://mirror.iscas.ac.cn/ruyisdk/ide/0.0.3/ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+:::tip
+Aktuellere Versionen finden Sie auf dem [RuyiSDK-Spiegelserver](https://mirror.iscas.ac.cn/ruyisdk/ide/).
+:::
+
+### RuyiSDK-IDE installieren
+
+Das folgende Beispiel installiert die IDE unter `/opt/ruyisdk`. Legen Sie zuerst das Zielverzeichnis an:
+
+<CodeBlock lang="bash" code={`
+$ sudo mkdir /opt/ruyisdk
+`} />
+
+Entpacken Sie das Archiv mit `tar` und `gunzip`. Passen Sie den Pfad zum heruntergeladenen Archiv bei Bedarf an:
+
+<CodeBlock lang="bash" code={`
+$ cd /opt/ruyisdk
+$ sudo tar -zxvf ruyisdk-0.0.3-linux.gtk."$(uname -m)".tar.gz
+`} />
+
+Starten Sie die IDE:
+
+<CodeBlock lang="bash" code={`
+$ /opt/ruyisdk/ruyisdk/ruyisdk
+`} />
+
+Solange das RuyiSDK-IDE-Plug-in noch nicht in die IDE integriert ist, installieren Sie es separat:
+
++ Laden Sie das aktuelle Plug-in aus den [GitHub-Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/) oder vom [RuyiSDK-Spiegelserver](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/) herunter.
++ Folgen Sie den Installationshinweisen für die jeweilige Version in den GitHub-Releases.
+
+### RuyiSDK-Erweiterung für VS Code installieren
+
+Laden Sie die aktuelle `.vsix`-Datei aus den [GitHub-Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases) oder vom [RuyiSDK-Spiegelserver](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/) herunter. Wählen Sie in VS Code oder VSCodium **Install from VSIX...**.
+
+## Erste Schritte
+
+Die [Dokumentation](/docs/intro) zeigt Ihnen, wie Sie Ruyi verwenden.
 
   </>
 </ReleaseProvider>

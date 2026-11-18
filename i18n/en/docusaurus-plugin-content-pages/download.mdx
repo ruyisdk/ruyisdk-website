@@ -6,7 +6,11 @@ import CodeBlock from '@site/src/components/Docs/CodeBlock';
   <>
 
 :::tip
-By downloading and using RuyiSDK, you agree to the license terms and the [privacy statement](https://ruyisdk.org/docs/legal/privacyPolicy/).
+For current releases, visit the [new downloads page](/downloads).
+:::
+
+:::tip
+By downloading and using RuyiSDK, you agree to the license terms and the [privacy statement](/docs/legal/privacyPolicy/).
 :::
 
 ## Download RuyiSDK Package Manager
@@ -53,6 +57,23 @@ $ ruyi version
 
 If the command outputs the version and copyright information, Ruyi is installed successfully. If it fails, check your system environment and repeat the steps.
 
+### Enable shell completion
+
+Add the appropriate command to your shell startup file, such as `.bashrc` or `.zshrc`.
+
+For Bash:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+eval "$(ruyi --output-completion-script=bash)"
+`} />
+
+For Zsh:
+
+<CodeBlock lang="bash" showTitleCopyButton="true" code={`
+#compdef ruyi
+eval "$(ruyi --output-completion-script=zsh)"
+`} />
+
 ## Download RuyiSDK IDE
 
 RuyiSDK IDE has also released binaries for three architectures: x86_64, riscv64, and aarch64.
@@ -90,14 +111,18 @@ Run RuyiSDK IDE:
 $ /opt/ruyisdk/ruyisdk/ruyisdk
 `} />
 
-In addition to the IDE itself, you will need to install the RuyiSDK IDE plugin. Currently, integration work is still in progress, so the plugin must be installed manually by copying it into the dropins directory of the RuyiSDK IDE. We plan to improve this experience in future releases to enable easier installation and usage. You can follow the steps below to install and use the plugin:
+The RuyiSDK IDE plugin is installed separately while integration work continues:
 
-+ Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/latest)
-+ Extract the `org.ruyisdk.ide_*.zip` archive into the `dropins` directory inside your RuyiSDK IDE installation path
++ Download the latest plugin package from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-eclipse-plugins/releases/) or the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/eclipse/).
++ Follow the installation instructions for that version on GitHub Releases.
 
-## Use ruyi
+### Install the RuyiSDK VS Code extension
 
-Refer to the [documentation](https://ruyisdk.org/en/docs/intro/) to learn how to use Ruyi effectively.
+Download the latest `.vsix` from [GitHub Releases](https://github.com/ruyisdk/ruyisdk-vscode-extension/releases) or the [RuyiSDK mirror](https://mirror.iscas.ac.cn/ruyisdk/ide/plugins/vscode/). In VS Code or VSCodium, choose **Install from VSIX...**.
+
+## Get started
+
+See the [documentation](/docs/intro) to learn how to use Ruyi.
 
   </>
 </ReleaseProvider>

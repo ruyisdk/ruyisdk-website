@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { IconUser, IconUserCircle, IconGitCommit, IconGitPullRequest, IconCircleDot } from '@tabler/icons-react';
 
 import Layout from "@theme/Layout";
-import Translate from "@docusaurus/Translate";
+import Translate, { translate } from "@docusaurus/Translate";
 
 import { PageBackground } from "@site/src/components/Home/Background";
 
@@ -111,7 +111,10 @@ export default function ContributorsPage() {
   const totals = (peopleData && peopleData.totals) || { contributors: allPeople.length, commits: null, pullRequests: null, issues: null };
 
   return (
-    <Layout title="Contributors" description="RuyiSDK 贡献者">
+    <Layout
+      title={translate({ id: "community.contributors.title", message: "贡献者" })}
+      description={translate({ id: "community.contributors.subtitle", message: "RuyiSDK社区由贡献者们共同驱动" })}
+    >
       <div className={`relative min-h-screen` }>
         <PageBackground />
 

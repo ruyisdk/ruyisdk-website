@@ -1,5 +1,6 @@
 
 import React from "react";
+import Link from '@docusaurus/Link';
 import { IconCode, IconBrandGithub } from '@tabler/icons-react';
 import Translate from '@docusaurus/Translate';
 
@@ -27,10 +28,10 @@ const MainDisplay = () => {
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
-              <a href="/docs/intro" className="primary-button">
+              <Link to="/docs/intro" className="primary-button">
                 <IconCode size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.getstarted">现在开始</Translate>
-              </a>
+              </Link>
               <a href="https://github.com/ruyisdk" target="_blank" className="secondary-button" rel="noopener noreferrer">
                 <IconBrandGithub size={18} stroke={2} />&nbsp;
                 <Translate id="home.maindisplay.source">源码库</Translate>

@@ -12,7 +12,10 @@ const PageHeader = ({ title }) => (
 
 const Dashboard = () => {
   return (
-    <Layout title="Data Panel" description="RuyiSDK Data Panel">
+    <Layout
+      title={translate({ id: 'dashboard.title', message: 'RuyiSDK 下载统计' })}
+      description={translate({ id: 'dashboard.meta.description', message: 'RuyiSDK 下载与使用统计' })}
+    >
       <main className="min-h-screen flex flex-col font-sans bg-gray-100 text-gray-900">
         <PageHeader
           title={translate({

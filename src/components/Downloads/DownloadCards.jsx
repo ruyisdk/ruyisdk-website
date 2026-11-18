@@ -164,7 +164,7 @@ export function ArchSelectModal({ modalState, onClose, onSelect }) {
 
   return createPortal(
     <div className={`fixed inset-0 z-[var(--ifm-z-index-overlay)] transition-opacity duration-200 ${entered ? 'opacity-100' : 'opacity-0'}`}>
-      <button aria-label="close" type="button" className="absolute inset-0 bg-slate-900/35 backdrop-blur-[2px]" onClick={onClose} />
+      <button aria-label={translate({ id: 'downloads.modal.close', message: '关闭' })} type="button" className="absolute inset-0 bg-slate-900/35 backdrop-blur-[2px]" onClick={onClose} />
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div
           className={`flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col rounded-2xl bg-white dark:bg-[#151b23] border border-slate-200/90 dark:border-white/12 shadow-[0_24px_48px_rgba(10,44,126,0.16)] transition-all duration-200 ${entered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
