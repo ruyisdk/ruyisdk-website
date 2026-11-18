@@ -30,16 +30,16 @@ function Hero() {
           {/*<DemoBoardsDisplay />*/}
         </div>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t border-slate-200/80 dark:border-white/8" >
           <DevBoards />
         </div>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t-2 border-black/5" >
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 border-t border-slate-200/80 dark:border-white/8" >
           <RuyiInLive />
           <NewsShowcase />
         </div>
 
-        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mb-18 border-t-2 border-black/5">
+        <div className="max-w-7xl mx-auto flex flex-col px-4 py-8 gap-6 mb-18 border-t border-slate-200/80 dark:border-white/8">
           <Partners />
         </div>
 

@@ -3,10 +3,10 @@ import React from "react";
 
 const Partners = ({ partners, noWrapper = false }) => {
   const grid = (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
       {partners.map((partner) => (
         <a key={partner.id} href={partner.url} target="_blank" rel="noopener noreferrer" className="group block">
-          <div className="flex justify-center items-center w-full aspect-5/2 p-1 rounded-sm transition-shadow duration-300 ease-in-out group-hover:shadow-lg">
+          <div className="flex justify-center items-center w-full aspect-5/2 p-3 rounded-xl border border-slate-200/60 bg-slate-50/70 transition-all duration-300 ease-in-out group-hover:border-[#0A2C7E]/20 group-hover:bg-white group-hover:shadow-[0_8px_20px_rgba(10,44,126,0.08)] dark:bg-white/95 dark:border-white/20">
             <img src={partner.logoUrl} alt={partner.name} className={`max-h-full max-w-full object-contain ${partner.logoClass || ''}`}
               onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/200x80/ffffff/000000?text=" + partner.name; }} />
           </div>
@@ -20,7 +20,7 @@ const Partners = ({ partners, noWrapper = false }) => {
   }
 
   return (
-    <div className="bg-white/45 border-white/60 backdrop-blur-md rounded-2xl border shadow-lg p-6 mt-6">
+    <div className="bg-white/92 border-slate-200/85 backdrop-blur-md rounded-2xl border shadow-[0_10px_28px_rgba(10,44,126,0.06)] dark:bg-[#151b23] dark:border-white/10 p-6 mt-6">
       {grid}
     </div>
   );
@@ -49,14 +49,14 @@ export default function PartnersSection() {
   // convenience wrapper with title and padding; when used on the about page we only want the
   // outer card, so ask <Partners> not to render its own inner box.
   return (
-    <div className="bg-white/45 backdrop-blur-md rounded-2xl border border-white/60 shadow-lg p-8">
+    <div className="bg-white/92 backdrop-blur-md rounded-2xl border border-slate-200/85 shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:bg-[#151b23] dark:border-white/10 p-8">
       <div className="flex justify-between items-baseline mb-4">
       <p className="text-3xl font-bold mb-4 text-(--home-title-color)">
         <Translate id='home.partners.title'>合作伙伴</Translate>
       </p>
       <a
         href="/docs/Other/partner-guide"
-        className="text-sm"
+        className="text-sm font-medium"
       >
         <Translate id="home.partners.joindoc">生态接入指南</Translate>&nbsp;&gt;
       </a>

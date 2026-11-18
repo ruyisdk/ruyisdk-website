@@ -9,9 +9,8 @@ const HomeBackground = () => {
     top: '-25%',
     left: '-25%',
     borderRadius: '50%',
-    filter: 'blur(50px)',
-    opacity: 0.5,
-    mixBlendMode: 'soft-light',
+    filter: 'blur(64px)',
+    opacity: 0.85,
     pointerEvents: 'none',
   };
 
@@ -19,7 +18,7 @@ const HomeBackground = () => {
     <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-transparent to-(--ifm-background-color) pointer-events-none">
       <div style={{ ...blobBase, background: `radial-gradient(circle at 30% 30%, var(--home-ruyi-light-blue), transparent 60%)`}} />
       <div style={{ ...blobBase, background: `radial-gradient(circle at 70% 40%, var(--home-ruyi-light-gold), transparent 60%)`}} />
-      <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, var(--home-ruyi-blue), transparent 60%)`, opacity: 0.4 }} />
+      <div style={{ ...blobBase, background: `radial-gradient(circle at 50% 20%, var(--home-ruyi-blue), transparent 60%)`, opacity: 0.65 }} />
     </div>
   );
 };
@@ -30,12 +29,12 @@ const PageBackground = () => {
       <div
         aria-hidden
         className="absolute top-0 left-0 rounded-full -z-10"
-        style={{ width: 600, height: 600, background: 'rgba(221, 190, 221, 0.2)', filter: 'blur(120px)' }}
+        style={{ width: 640, height: 640, background: 'var(--ruyi-page-glow-1)', filter: 'blur(120px)' }}
       />
       <div
         aria-hidden
         className="absolute bottom-0 right-0 rounded-full -z-10"
-        style={{ width: 700, height: 700, background: 'rgba(168, 218, 220, 0.2)', filter: 'blur(120px)' }}
+        style={{ width: 720, height: 720, background: 'var(--ruyi-page-glow-2)', filter: 'blur(130px)' }}
       />
     </div>
   );
