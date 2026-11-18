@@ -1,4 +1,644 @@
 {
+  "========== homepage ==========": { "message": "" },
+
+  "home.title": {
+    "message": "RuyiSDK: Bereit für eine Million RISC-V-Softwareentwickler"
+  },
+  "home.description": {
+    "message": "Integrierte Entwicklungsumgebung für die RISC-V-Architektur"
+  },
+  "home.ruyisdk": {
+    "message": "RuyiSDK"
+  },
+  "home.maindisplay.getstarted": {
+    "message": "Erste Schritte"
+  },
+  "home.maindisplay.source": {
+    "message": "GitHub"
+  },
+  "home.cardnews.learnmore": {
+    "message": "Mehr erfahren"
+  },
+  "home.ruyiinlive.community": {
+    "message": "RuyiSDK-Community"
+  },
+  "home.ruyiinlive.community.subtitle": {
+    "message": "Die RuyiSDK-Entwicklercommunity ist eröffnet.\n(Derzeit auf Chinesisch verfügbar)"
+  },
+  "home.ruyiinlive.seecommunity": {
+    "message": "Entdecken",
+    "description": "Button text linking to RuyiSDK community"
+  },
+  "home.ruyiinlive.joincommunity": {
+    "message": "Beitreten",
+    "description": "Button text linking to community signup"
+  },
+  "home.ruyiinlive.viewmore": {
+    "message": "Mehr anzeigen"
+  },
+  "home.ruyiinlive.statistics": {
+    "message": "Live-Statistiken"
+  },
+  "home.partners.joindoc": {
+    "message": "Leitfaden für Partner"
+  },
+  "home.partners.title": {
+    "message": "Partner",
+    "description": "Title for partners page"
+  },
+  "home.videointro.title": {
+    "message": "RuyiSDK im Überblick"
+  },
+  "home.videointro.description": {
+    "message": "Eine integrierte Entwicklungsumgebung für die native und plattformübergreifende Entwicklung mit RISC-V. Das Video stellt Toolchains, Simulatoren, Laufzeitumgebungen und Debugging-Werkzeuge vor und zeigt, was RuyiSDK bietet."
+  },
+  "home.videointro.unsupportedPrefix": {
+    "message": "Ihr Browser unterstützt keine HTML5-Videowiedergabe. Sie können "
+  },
+  "home.videointro.downloadVideo": {
+    "message": "das Video herunterladen"
+  },
+  "home.videointro.unsupportedSuffix": {
+    "message": ", um es anzusehen."
+  },
+  "home.devboards.eyebrow": {
+    "message": "Mit RuyiSDK loslegen"
+  },
+  "home.devboards.titlePrefix": {
+    "message": "Erste Schritte mit"
+  },
+  "home.devboards.titleSuffix": {
+    "message": "Entwicklungsboards"
+  },
+  "home.devboards.description": {
+    "message": "Entdecken Sie beliebte RISC-V-Entwicklungsboards anhand von Einstiegsbeispielen zur Einrichtung, zum Flashen von Firmware und zum Debugging. RuyiSDK erleichtert den Einstieg in die Entwicklung."
+  },
+  "home.devboards.cta": {
+    "message": "Alle Board-Beispiele anzeigen"
+  },
+  "home.devboards.examplesTitle": {
+    "message": "Aktuelle Anleitungen für beliebte Entwicklungsboards"
+  },
+  "home.devboards.cardLink": {
+    "message": "Beispiel ansehen"
+  },
+  "home.devboards.visionfive2.description": {
+    "message": "Ein zugänglicher und vielseitiger RISC-V-Einplatinencomputer"
+  },
+  "home.devboards.bpif3.description": {
+    "message": "Ein offenes RISC-V-Entwicklungsboard mit acht Kernen für industrielle Anwendungen"
+  },
+  "home.devboards.milkvDuo256m.description": {
+    "message": "Eine erweiterte Duo-Variante für Anwendungen mit höherem Speicherbedarf"
+  },
+  "home.devboards.licheepi4a.description": {
+    "message": "Ein leistungsstarker RISC-V-Einplatinencomputer mit TH1520-Prozessor"
+  },
+  "home.devboards.hero.config.title": {
+    "message": "Umgebung einrichten"
+  },
+  "home.devboards.hero.config.description": {
+    "message": "RuyiSDK in einem Schritt installieren"
+  },
+  "home.devboards.hero.flash.title": {
+    "message": "System flashen"
+  },
+  "home.devboards.hero.flash.description": {
+    "message": "Systemabbilder schnell auf Entwicklungsboards flashen"
+  },
+  "home.devboards.hero.demo.title": {
+    "message": "Beispiele ausführen"
+  },
+  "home.devboards.hero.demo.description": {
+    "message": "Direkt verwendbarer Beispielcode"
+  },
+
+  "========== Contributors ==========": { "message": "" },
+
+  "community.contributors.title": {
+    "message": "Mitwirkende",
+    "description": "Title for contributors page"
+  },
+  "community.contributors.subtitle": {
+    "message": "Die RuyiSDK-Community wird von ihren Mitwirkenden getragen."
+  },
+  "community.stats.contributors": {
+    "message": "Mitwirkende",
+    "description": "Label for contributors stat"
+  },
+  "community.stats.commits": {
+    "message": "Commits",
+    "description": "Label for commits stat"
+  },
+  "community.stats.prs": {
+    "message": "Pull Requests",
+    "description": "Label for pull requests stat"
+  },
+  "community.stats.issues": {
+    "message": "Issues",
+    "description": "Label for issue count on contributors page"
+  },
+
+  "========== footer ==========": { "message": "" },
+
+  "footer.ecosystem": {
+    "message": "Ökosystem"
+  },
+  "footer.ruyiai": {
+    "message": "RuyiAI"
+  },
+  "footer.openruyi": {
+    "message": "openRuyi"
+  },
+  "footer.rvck": {
+    "message": "RVCK"
+  },
+  "footer.ruyisdk": {
+    "message": "RuyiSDK"
+  },
+  "footer.revyos": {
+    "message": "RevyOS"
+  },
+  "footer.matrix": {
+    "message": "Support Matrix"
+  },
+  "footer.community": {
+    "message": "Community"
+  },
+  "footer.riscv-community": {
+    "message": "RuyiSDK Community (Chinese Website)"
+  },
+  "footer.discussion": {
+    "message": "Diskussion"
+  },
+  "footer.stats": {
+    "message": "Datenübersicht"
+  },
+  "footer.community-code": {
+    "message": "Verhaltenskodex"
+  },
+  "footer.intern": {
+    "message": "Praktikumsstellen"
+  },
+  "footer.followus": {
+    "message": "Folgen Sie uns"
+  },
+  "footer.wechat": {
+    "message": "WeChat-Account"
+  },
+  "footer.qqgroup": {
+    "message": "QQ Gruppe"
+  },
+  "footer.plct": {
+    "message": "PLCT Lab"
+  },
+  "footer.tools": {
+    "message": "Weitere Entwickler-Tools"
+  },
+  "footer.rvi-specs": {
+    "message": "RVI Specs"
+  },
+  "footer.jetbrains": {
+    "message": "JetBrains IDE Multiarch"
+  },
+
+  "========== dashboard ==========": { "message": "" },
+
+  "dashboard.title": {
+    "message": "RuyiSDK-Downloadstatistik"
+  },
+  "dashboard.meta.description": {
+    "message": "Download- und Nutzungsstatistik von RuyiSDK"
+  },
+  "dashboard.RuyiSDK 组件包下载量": {
+    "message": "Downloads von RuyiSDK-Komponenten"
+  },
+  "dashboard.RuyiSDK 遥测设备数": {
+    "message": "Geräte mit Ruyi-Telemetrie"
+  },
+  "dashboard.RuyiSDK 文档下载量": {
+    "message": "Downloads der RuyiSDK-Dokumentation"
+  },
+  "dashboard.RuyiSDK 包管理器下载量": {
+    "message": "Downloads des RuyiSDK-Paketmanagers"
+  },
+  "dashboard.RuyiSDK VS Code 插件下载量": {
+    "message": "Downloads der RuyiSDK-Erweiterung für VS Code"
+  },
+  "dashboard.RuyiSDK Eclipse 组件下载量": {
+    "message": "Downloads der RuyiSDK-Komponenten für Eclipse"
+  },
+  "dashboard.包含 GNU/LLVM 工具链、QEMU 等组件": {
+    "message": "Umfasst GNU- und LLVM-Toolchains, QEMU und weitere Komponenten"
+  },
+  "dashboard.上报设备数": {
+    "message": "Anzahl der Geräte, die Telemetriedaten melden"
+  },
+  "dashboard.含用户手册、峰会演示稿、规格书": {
+    "message": "Umfasst Benutzerhandbücher, Konferenzfolien und Spezifikationen"
+  },
+  "dashboard.RuyiSDK CLI 工具，三渠道下载量汇总": {
+    "message": "RuyiSDK-Kommandozeilenwerkzeug, Downloads aus drei Quellen"
+  },
+  "dashboard.不含两个市场 Open VSX、Visual Studio Marketplace": {
+    "message": "Ohne Open VSX und Visual Studio Marketplace"
+  },
+  "dashboard.IDE定制包 + 插件，不含 Eclipse Marketplace 市场": {
+    "message": "Angepasste IDE-Pakete und Erweiterungen, ohne Eclipse Marketplace"
+  },
+  "dashboard.次": {
+    "message": "Downloads"
+  },
+  "dashboard.台": {
+    "message": "Geräte"
+  },
+  "dashboard.数据更新时间": {
+    "message": "Datenstand"
+  },
+
+  "========== news ==========": { "message": "" },
+
+  "news.title": {
+    "message": "Neuigkeiten"
+  },
+  "news.subtitle": {
+    "message": "Aktuelle Meldungen des RuyiSDK-Teams"
+  },
+  "news.biweekly": {
+    "message": "Zweiwochenbericht"
+  },
+  "news.news": {
+    "message": "RuyiSDK-Neuigkeiten"
+  },
+  "news.pagination.prev": {
+    "message": "Zurück"
+  },
+  "news.pagination.next": {
+    "message": "Weiter"
+  },
+  "news.articles.empty": {
+    "message": "Noch keine Artikel"
+  },
+
+  "========== news subscription ==========": { "message": "" },
+
+  "subscription.emailPlaceholder": {
+    "message": "E-Mail eingeben"
+  },
+  "subscription.emailAriaLabel": {
+    "message": "E-Mail-Adresse"
+  },
+  "subscription.subscribe": {
+    "message": "Abonnieren"
+  },
+  "subscription.submitting": {
+    "message": "Wird gesendet..."
+  },
+  "subscription.failed": {
+    "message": "Abonnement fehlgeschlagen. Bitte erneut versuchen."
+  },
+  "subscription.responseReceived": {
+    "message": "Antwort zur Anmeldung erhalten."
+  },
+
+  "========== downloads ==========": { "message": "" },
+
+  "downloads.meta.title": {
+    "message": "Download"
+  },
+  "downloads.meta.description": {
+    "message": "RuyiSDK Paketmanager und IDE herunterladen"
+  },
+  "downloads.title": {
+    "message": "RuyiSDK herunterladen"
+  },
+  "downloads.subtitle": {
+    "message": "Laden Sie den RuyiSDK-Paketmanager und die IDE herunter und starten Sie Ihre RISC-V-Entwicklung."
+  },
+  "downloads.installScript.title": {
+    "message": "Installation per Skript"
+  },
+  "downloads.manualDownload.title": {
+    "message": "Manuell herunterladen und installieren"
+  },
+  "downloads.pm.title": {
+    "message": "RuyiSDK Paketmanager"
+  },
+  "downloads.pm.description": {
+    "message": "Der RuyiSDK-Paketmanager ist die Kernkomponente von RuyiSDK und bietet Paketverwaltung sowie Umgebungs-Konfiguration."
+  },
+  "downloads.pm.latestOnly": {
+    "message": "Zur Download-Seite"
+  },
+  "downloads.badge.stable": {
+    "message": "Stabil"
+  },
+  "downloads.badge.testing": {
+    "message": "Testversion"
+  },
+  "downloads.label.version": {
+    "message": "Version"
+  },
+  "downloads.label.mirror": {
+    "message": "Mirror"
+  },
+  "downloads.label.githubReleases": {
+    "message": "GitHub Releases"
+  },
+  "downloads.label.pypi": {
+    "message": "PyPI"
+  },
+  "downloads.button.latest": {
+    "message": "Neueste Version"
+  },
+  "downloads.button.version": {
+    "message": "Version"
+  },
+  "downloads.button.otherVersions": {
+    "message": "Weitere Versionen"
+  },
+  "downloads.button.allVersions": {
+    "message": "Alle Versionen"
+  },
+  "downloads.button.loading": {
+    "message": "Lädt"
+  },
+  "downloads.arch.x86_64": {
+    "message": "x86_64"
+  },
+  "downloads.arch.aarch64": {
+    "message": "aarch64"
+  },
+  "downloads.arch.riscv64": {
+    "message": "riscv64"
+  },
+  "downloads.arch.universal": {
+    "message": "Universell (keine Architekturunterscheidung)"
+  },
+  "downloads.modal.title": {
+    "message": "Architektur wählen und herunterladen"
+  },
+  "downloads.modal.latestVersion": {
+    "message": "Neueste Version"
+  },
+  "downloads.modal.cancel": {
+    "message": "Abbrechen"
+  },
+  "downloads.otherMethods": {
+    "message": "Weitere Links:"
+  },
+  "downloads.viewDocs": {
+    "message": "Installationsanleitung"
+  },
+  "downloads.source.mirror": {
+    "message": "Downloads vom ISCAS-Spiegelserver:"
+  },
+  "downloads.source.github": {
+    "message": "Downloads von GitHub Releases:"
+  },
+  "downloads.pm.other.ideMirror": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.label.debianTesting": {
+    "message": "Debian testing"
+  },
+  "downloads.label.ruyisdkOverlay": {
+    "message": "ruyisdk-overlay"
+  },
+  "downloads.label.aur": {
+    "message": "AUR"
+  },
+  "downloads.vscode.title": {
+    "message": "RuyiSDK VS Code Extension"
+  },
+  "downloads.vscode.description": {
+    "message": "Download- und Release-Einstieg für die VS-Code-Erweiterung."
+  },
+  "downloads.vscode.marketplace.title": {
+    "message": "VS Code: Erweiterungsmarktplätze"
+  },
+  "downloads.vscode.openVsx": {
+    "message": "Von Open VSX herunterladen"
+  },
+  "downloads.vscode.marketplace": {
+    "message": "Vom Marketplace herunterladen"
+  },
+  "downloads.eclipse.title": {
+    "message": "RuyiSDK Eclipse Extension"
+  },
+  "downloads.eclipse.description": {
+    "message": "Download- und Release-Einstieg für die Eclipse-Erweiterung."
+  },
+  "downloads.eclipse.marketplace.title": {
+    "message": "Eclipse Marketplace"
+  },
+  "downloads.eclipse.marketplace": {
+    "message": "Vom Marketplace herunterladen"
+  },
+  "downloads.ide.title": {
+    "message": "RuyiSDK IDE"
+  },
+  "downloads.ide.description": {
+    "message": "Downloads und Release-Links rund um die IDE."
+  },
+  "downloads.ide.latestOnly": {
+    "message": "Zur Download-Seite"
+  },
+  "downloads.ide.entry.mirror": {
+    "message": "IDE-Mirror-Verzeichnis"
+  },
+  "downloads.ide.entry.mirror.desc": {
+    "message": "Neueste IDE-Builds/Releases abrufen."
+  },
+  "downloads.ide.entry.vscode": {
+    "message": "RuyiSDK VS Code Extension (Releases)"
+  },
+  "downloads.ide.entry.vscode.desc": {
+    "message": "Release-Seite der VS-Code-basierten RuyiSDK-Erweiterung."
+  },
+  "downloads.ide.entry.eclipse": {
+    "message": "RuyiSDK Eclipse (Releases)"
+  },
+  "downloads.ide.entry.eclipse.desc": {
+    "message": "Release-Seite des Eclipse-basierten RuyiSDK-Projekts."
+  },
+  "downloads.agreement": {
+    "message": "Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der {privacyLink} zu."
+  },
+  "downloads.privacy": {
+    "message": "Datenschutzerklärung"
+  },
+  "downloads.thanks.source.mirror": {
+    "message": "ISCAS-Spiegelserver"
+  },
+  "downloads.thanks.source.github": {
+    "message": "GitHub Releases"
+  },
+  "downloads.thanks.source.unknown": {
+    "message": "Downloadquelle"
+  },
+  "downloads.thanks.meta.title": {
+    "message": "Vielen Dank für den Download"
+  },
+  "downloads.thanks.meta.description": {
+    "message": "Vielen Dank für den Download des RuyiSDK-Paketmanagers"
+  },
+  "downloads.thanks.title": {
+    "message": "Vielen Dank für den Download von RuyiSDK"
+  },
+  "downloads.thanks.subtitle": {
+    "message": "Der Download wurde gestartet. Falls der Browser ihn blockiert, prüfen Sie die Download-Einstellungen."
+  },
+  "downloads.thanks.details": {
+    "message": "Download-Details"
+  },
+  "downloads.thanks.field.source": {
+    "message": "Quelle"
+  },
+  "downloads.thanks.field.arch": {
+    "message": "Architektur"
+  },
+  "downloads.thanks.field.version": {
+    "message": "Version"
+  },
+  "downloads.thanks.field.file": {
+    "message": "Dateiname"
+  },
+  "downloads.thanks.retry": {
+    "message": "Erneut laden"
+  },
+  "downloads.thanks.retryWaiting": {
+    "message": "Download wird gestartet"
+  },
+  "downloads.thanks.gotoInstallDocs": {
+    "message": "Zur Anleitung"
+  },
+  "imager.name": {
+    "message": "Ruyi Imager"
+  },
+  "imager.downloads.description": {
+    "message": "Ein grafisches Werkzeug zum Schreiben von Systemabbildern für RISC-V-Boards"
+  },
+  "imager.source": {
+    "message": "Quellcode"
+  },
+
+  "========== issue ==========": { "message": "" },
+
+  "issue.meta.title": {
+    "message": "Ein Problem melden"
+  },
+  "issue.meta.description": {
+    "message": "So melden Sie Probleme und reichen Anfragen für Funktionen oder Pakete für RuyiSDK ein"
+  },
+
+  "========== riscv specs ==========": { "message": "" },
+
+  "riscvSpecs.page.title": {
+    "message": "Ratifizierte RISC-V-Spezifikationen"
+  },
+  "riscvSpecs.page.description": {
+    "message": "Übersicht und Downloads der ratifizierten RISC-V-Spezifikationen"
+  },
+  "riscvSpecs.category.core.description": {
+    "message": "Grundlagen zu Prozessoren, Befehlen, Privilegstufen und Interrupts."
+  },
+  "riscvSpecs.category.profiles.description": {
+    "message": "Anforderungssätze, anhand derer Software die Plattformkompatibilität beurteilen kann."
+  },
+  "riscvSpecs.category.hardware.description": {
+    "message": "Hardwarethemen für SoCs, Geräte, IOMMUs, Serverplattformen und Ressourcenverwaltung."
+  },
+  "riscvSpecs.category.debugTraceRas.description": {
+    "message": "Debugging, Ablaufverfolgung, Fehleraufzeichnungen und Zuverlässigkeitsfunktionen."
+  },
+  "riscvSpecs.category.platformSoftware.description": {
+    "message": "Systemsoftware-Schnittstellen für Firmware, Systemstart, SBI, UEFI und Plattformverwaltung."
+  },
+  "riscvSpecs.category.applicationEnablement.description": {
+    "message": "Unterstützung für Toolchains und Anwendungen in den Bereichen ABI, Portierung, Semihosting und Vektor-Intrinsics."
+  },
+  "riscvSpecs.guide.isa.audience": {
+    "message": "ISA-Grundlagen"
+  },
+  "riscvSpecs.guide.isa.description": {
+    "message": "Beginnen Sie mit dem für Anwendungen sichtbaren Ausführungsmodell, den Privilegstufen, Ausnahmen und Interrupts."
+  },
+  "riscvSpecs.guide.platformSoftware.audience": {
+    "message": "Systemsoftware und Firmware"
+  },
+  "riscvSpecs.guide.platformSoftware.description": {
+    "message": "Beginnen Sie mit den Schnittstellen für Systemstart, SBI, UEFI und Plattformverwaltung."
+  },
+  "riscvSpecs.guide.profiles.audience": {
+    "message": "Kompatibilität im Softwareökosystem"
+  },
+  "riscvSpecs.guide.profiles.description": {
+    "message": "Die Profile beschreiben, welche grundlegenden Funktionen Software voraussetzen kann."
+  },
+  "riscvSpecs.guide.hardware.audience": {
+    "message": "Hardware, SoCs und Validierung"
+  },
+  "riscvSpecs.guide.hardware.description": {
+    "message": "Konzentrieren Sie sich auf die Plattformintegration und Hardwareschnittstellen wie IOMMU, PLIC, Server-SoC und QoS."
+  },
+  "riscvSpecs.guide.debugTraceRas.audience": {
+    "message": "Debugging, Ablaufverfolgung und Inbetriebnahme"
+  },
+  "riscvSpecs.guide.debugTraceRas.description": {
+    "message": "Beginnen Sie zur hardwarenahen Diagnose mit dem Debug-Modell, den Trace-Daten und den Schnittstellen für Fehleraufzeichnungen."
+  },
+  "riscvSpecs.guide.applicationEnablement.audience": {
+    "message": "Compiler, Laufzeitumgebungen und Vektorbibliotheken"
+  },
+  "riscvSpecs.guide.applicationEnablement.description": {
+    "message": "Konzentrieren Sie sich bei der Optimierung auf ABI, Semihosting und Vektor-Intrinsics."
+  },
+  "riscvSpecs.categoryNav.ariaLabel": {
+    "message": "Kategorien der RISC-V-Spezifikationen"
+  },
+  "riscvSpecs.guide.title": {
+    "message": "Einstieg nach Themengebiet"
+  },
+  "riscvSpecs.guide.categoryLabel": {
+    "message": "Kategorie: "
+  },
+  "riscvSpecs.card.summaryLabel": {
+    "message": "Kurzbeschreibung: "
+  },
+  "riscvSpecs.card.audienceLabel": {
+    "message": "Zielgruppe: "
+  },
+  "riscvSpecs.card.mirrorDate": {
+    "message": "Stand des Spiegelservers: {date}"
+  },
+  "riscvSpecs.card.downloadPdf": {
+    "message": "PDF herunterladen"
+  },
+  "riscvSpecs.category.count": {
+    "message": "{count} Spezifikationen"
+  },
+  "riscvSpecs.specs.ariaLabel": {
+    "message": "Kategorien der ratifizierten RISC-V-Spezifikationen"
+  },
+  "riscvSpecs.officialSite": {
+    "message": "offizielle technische Website von RISC-V International"
+  },
+  "riscvSpecs.pageNote": {
+    "message": "Diese Seite bietet eine Übersicht und verweist auf gespiegelte Downloads. Maßgeblich für die technischen Standards ist die {link}."
+  },
+
+  "========== about ==========": { "message": "" },
+
+  "about.meta.title": {
+    "message": "Über RuyiSDK"
+  },
+  "about.meta.description": {
+    "message": "Das Projekt RuyiSDK und seine Kontaktdaten"
+  },
+
+  "========== some old code ==========": { "message": "" },
+
   "meetup": {
     "message": "Unsere letzten Veranstaltungen"
   },
@@ -216,58 +856,94 @@
     "message": "Lesen Sie den Verhaltenskodex der Beitragenden, um freundliche und qualitativ hochwertige Zusammenarbeit sicherzustellen.",
     "description": "Code of conduct card description"
   },
-  "community.contributors.title": {
-    "message": "Mitwirkende",
-    "description": "Title for contributors page"
-  },
-  "community.partners.title": {
-    "message": "Partner",
-    "description": "Title for partners page"
-  },
-  "community.stats.contributors": {
-    "message": "Mitwirkende",
-    "description": "Label for contributors stat"
-  },
-  "community.stats.commits": {
-    "message": "Commits",
-    "description": "Label for commits stat"
-  },
-  "community.stats.prs": {
-    "message": "Pull Requests",
-    "description": "Label for pull requests stat"
-  },
   "community.stats.unknown": {
     "message": "N/A",
     "description": "Fallback label when a stat is unavailable"
   },
-  "about.intro.title": { "message": "Über uns" },
-  "about.project.title": { "message": "Projektübersicht" },
-  "about.project.description": { "message": "RUYISDK ist eine umfassende, integrierte Entwicklungsumgebung für RISC-V-Entwickler. Geleitet vom Institute of Software der Chinesischen Akademie der Wissenschaften (ISCAS) zielt RUYISDK darauf ab, eine One-Stop-Entwicklungsplattform für RISC-V bereitzustellen. Das Projekt wurde in der zweiten Hälfte 2022 geplant und verwendet seit Anfang 2024 einen zweiwöchigen agilen Veröffentlichungszyklus. Seit dem Start wird das Produkt kontinuierlich verbessert, um der RISC-V-Community hochwertigen Support zu bieten." },
-  "about.goals.title": { "message": "Kernziele" },
-  "about.goals.item1": { "message": "Entwickler, die (fast) jede RISC-V-Platine oder jedes Modul erwerben, sollen über RUYISDK Hardware-Dokumentation, Firmware-/Software-Updates und Debugging-Support erhalten können." },
-  "about.goals.item2": { "message": "Entwickler können übliche RISC-V-ISA-Erweiterungskombinationen angeben und über RUYISDK das benötigte Betriebssystem, Toolchains, Laufzeitumgebungen/VMs, Bibliotheken und Anwendungsframeworks generieren lassen." },
-  "about.goals.item3": { "message": "Aufbau und Betrieb einer aktiven, integrativen Entwickler-Community." },
-  "about.products.title": { "message": "Unsere Produkte" },
-  "about.products.revyos": { "message": "RISC-V-Betriebssystem (für XuanTie-Chips optimiert): RevyOS" },
-  "about.products.ruyi": { "message": "RISC-V-Paketmanager: ruyi" },
-  "about.products.provision": { "message": "RISC-V-OS-Installationswerkzeug: ruyi device provision" },
-  "about.products.ide": { "message": "RISC-V IDE: RuyiSDK IDE" },
-  "about.products.toolchains": { "message": "RISC-V-Toolchains: PLCT-GCC, PLCT-LLVM" },
-  "about.products.software.title": { "message": "Wesentliche upstream-Software, die in RuyiSDK integriert ist:" },
-  "about.opensource.title": { "message": "Open Source & Community" },
-  "about.opensource.description1": { "message": "Das RUYISDK-Projekt wird offen verwaltet und auf GitHub gehostet. Wir begrüßen Beiträger und Mitwirkende, um das RISC-V-Ökosystem gemeinsam voranzubringen." },
-  "about.opensource.description2": { "message": "Die RUYISDK-Community soll offen, freundlich, vielfältig, inklusiv und gesund sein." },
-  "about.opensource.description3": { "message": "Wir suchen engagierte und talentierte Mitwirkende — senden Sie Lebensläufe an: wuwei2016@iscas.ac.cn." },
-  "about.opensource.description4": { "message": "Bitte lesen Sie vor der Teilnahme an Community-Diskussionen den Verhaltenskodex, um eine konstruktive Community zu gewährleisten." },
-  "about.opensource.codeOfConduct": { "message": "Verhaltenskodex" },
-  "about.contact.title": { "message": "Kontakt" },
-  "about.contact.emailLabel": { "message": "E-Mail:" },
-  "about.contact.websiteLabel": { "message": "Website:" },
-  "about.contact.wechatLabel": { "message": "WeChat Official Account:" },
-  "about.contact.qqLabel": { "message": "QQ-Gruppe:" },
-  "about.qr.title": { "message": "Community QR-Codes" },
-  "about.qr.wechat": { "message": "Scannen Sie den QR-Code, um dem offiziellen RuyiSDK WeChat-Konto zu folgen:" },
-  "about.qr.qq": { "message": "Treten Sie der RUYISDK QQ-Gruppe bei:" },
+  "about.intro.title": {
+    "message": "Über uns"
+  },
+  "about.project.title": {
+    "message": "Projektübersicht"
+  },
+  "about.project.description": {
+    "message": "RUYISDK ist eine umfassende, integrierte Entwicklungsumgebung für RISC-V-Entwickler. Geleitet vom Institute of Software der Chinesischen Akademie der Wissenschaften (ISCAS) zielt RUYISDK darauf ab, eine One-Stop-Entwicklungsplattform für RISC-V bereitzustellen. Das Projekt wurde in der zweiten Hälfte 2022 geplant und verwendet seit Anfang 2024 einen zweiwöchigen agilen Veröffentlichungszyklus. Seit dem Start wird das Produkt kontinuierlich verbessert, um der RISC-V-Community hochwertigen Support zu bieten."
+  },
+  "about.goals.title": {
+    "message": "Kernziele"
+  },
+  "about.goals.item1": {
+    "message": "Entwickler, die (fast) jede RISC-V-Platine oder jedes Modul erwerben, sollen über RUYISDK Hardware-Dokumentation, Firmware-/Software-Updates und Debugging-Support erhalten können."
+  },
+  "about.goals.item2": {
+    "message": "Entwickler können übliche RISC-V-ISA-Erweiterungskombinationen angeben und über RUYISDK das benötigte Betriebssystem, Toolchains, Laufzeitumgebungen/VMs, Bibliotheken und Anwendungsframeworks generieren lassen."
+  },
+  "about.goals.item3": {
+    "message": "Aufbau und Betrieb einer aktiven, integrativen Entwickler-Community."
+  },
+  "about.products.title": {
+    "message": "Unsere Produkte"
+  },
+  "about.products.revyos": {
+    "message": "RISC-V-Betriebssystem (für XuanTie-Chips optimiert): RevyOS"
+  },
+  "about.products.ruyi": {
+    "message": "RISC-V-Paketmanager: ruyi"
+  },
+  "about.products.provision": {
+    "message": "RISC-V-OS-Installationswerkzeug: ruyi device provision"
+  },
+  "about.products.ide": {
+    "message": "RISC-V IDE: RuyiSDK IDE"
+  },
+  "about.products.toolchains": {
+    "message": "RISC-V-Toolchains: PLCT-GCC, PLCT-LLVM"
+  },
+  "about.products.software.title": {
+    "message": "Wesentliche upstream-Software, die in RuyiSDK integriert ist:"
+  },
+  "about.opensource.title": {
+    "message": "Open Source & Community"
+  },
+  "about.opensource.description1": {
+    "message": "Das RUYISDK-Projekt wird offen verwaltet und auf GitHub gehostet. Wir begrüßen Beiträger und Mitwirkende, um das RISC-V-Ökosystem gemeinsam voranzubringen."
+  },
+  "about.opensource.description2": {
+    "message": "Die RUYISDK-Community soll offen, freundlich, vielfältig, inklusiv und gesund sein."
+  },
+  "about.opensource.description3": {
+    "message": "Wir suchen engagierte und talentierte Mitwirkende — senden Sie Lebensläufe an: wuwei2016@iscas.ac.cn."
+  },
+  "about.opensource.description4": {
+    "message": "Bitte lesen Sie vor der Teilnahme an Community-Diskussionen den Verhaltenskodex, um eine konstruktive Community zu gewährleisten."
+  },
+  "about.opensource.codeOfConduct": {
+    "message": "Verhaltenskodex"
+  },
+  "about.contact.title": {
+    "message": "Kontakt"
+  },
+  "about.contact.emailLabel": {
+    "message": "E-Mail:"
+  },
+  "about.contact.websiteLabel": {
+    "message": "Website:"
+  },
+  "about.contact.wechatLabel": {
+    "message": "WeChat Official Account:"
+  },
+  "about.contact.qqLabel": {
+    "message": "QQ-Gruppe:"
+  },
+  "about.qr.title": {
+    "message": "Community QR-Codes"
+  },
+  "about.qr.wechat": {
+    "message": "Scannen Sie den QR-Code, um dem offiziellen RuyiSDK WeChat-Konto zu folgen:"
+  },
+  "about.qr.qq": {
+    "message": "Treten Sie der RUYISDK QQ-Gruppe bei:"
+  },
   "theme.DocSidebarItem.expandCategoryAriaLabel": {
     "message": "Expand sidebar category '{label}'",
     "description": "The ARIA label to expand the sidebar category"
@@ -364,6 +1040,14 @@
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
   },
+  "wechatlink.title": {
+    "message": "Offizieller RuyiSDK WeChat-Account",
+    "description": "Title for WeChat link section"
+  },
+  "wechatlink.buttonText": {
+    "message": "Jetzt folgen",
+    "description": "Button text for WeChat link"
+  },
   "了解更多": {
     "message": "Lern mehr"
   },
@@ -375,6 +1059,12 @@
   },
   "立即跳转": {
     "message": "Jetzt öffnen"
+  },
+  "嘉楠勘智K230D": {
+    "message": "Canaan Kendryte K230D"
+  },
+  "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
+    "message": "The first AIoT mass-production chip based on the new 32-bit RuyiSDK."
   },
   "RuyiSDK 包管理器": {
     "message": "RuyiSDK-Paketmanager"
@@ -389,7 +1079,7 @@
     "message": "LicheePi 4A"
   },
   "将 Ruyi 包管理器带到桌面环境": {
-    "message": "Den Ruyi-Paketmanager auf den Desktop bringen"
+    "message": "Den RuyiSDK-Paketmanager auf den Desktop bringen"
   },
   "针对 XuanTie 生态芯片优化的 Debian 发行版": {
     "message": "Eine für das XuanTie-Ökosystem optimierte Debian-Distribution"
@@ -399,9 +1089,6 @@
   },
   "RuyiSDK 将作为 LicheePi 4A 开发板的上游支持平台，承担后续的系统维护、升级和软件支持工作。这不仅推动了 RISC-V 开发板的发展与广泛应用，还为开发者提供一个更加便捷高效的开发环境。": {
     "message": "Sipeed und das PLCT-Labor haben gemeinsam bekannt gegeben, dass RuyiSDK als Upstream-Support-Plattform für das LicheePi 4A-Entwicklungsboard fungieren wird und künftig für die Systemwartung, Updates und Softwareunterstützung verantwortlich ist. Dies fördert nicht nur die Entwicklung und breite Anwendung von RISC-V-Entwicklungsboards, sondern bietet Entwickler*innen auch eine bequemere und effizientere Entwicklungsumgebung."
-  },
-  "RISC-V 开发板与操作系统支持矩阵": {
-    "message": "RISC-V-Board- und OS-Unterstützungsmatrix"
   },
   "一个专门用来开发能够运行在 RISC-V 架构设备上的软件和应用的工具箱。可以帮助开发者编写和测试自己的程序，用户无需为环境搭建耗费精力。": {
     "message": "Eine Toolbox, die speziell für die Entwicklung von Software und Anwendungen entwickelt wurde, die auf Geräten mit RISC-V-Architektur ausgeführt werden können. Es kann Entwicklern helfen, ihre eigenen Programme zu schreiben und zu testen, und Benutzer müssen keine Energie für die Einrichtung der Umgebung aufwenden."
@@ -442,20 +1129,8 @@
   "actionstart": {
     "message": "Jetzt anfangen"
   },
-  "wechatlink.title": {
-    "message": "Offizieller RuyiSDK WeChat-Account"
-  },
-  "wechatlink.buttonText": {
-    "message": "Jetzt folgen"
-  },
   "RuyiSDK": {
     "message": "RuyiSDK"
-  },
-  "嘉楠勘智K230D": {
-    "message": "Canaan Kendryte K230D"
-  },
-  "首款基于新32位 RuyiSDK 的AIoT量产芯片": {
-    "message": "The first AIoT mass-production chip based on the new 32-bit RuyiSDK."
   },
   "面向 RISC-V 架构的一体化集成开发环境": {
     "message": "Eine integrierte All-in-One-Entwicklungsumgebung für die RISC-V-Architektur"
@@ -502,9 +1177,6 @@
   "博客": {
     "message": "Blog"
   },
-  "随时看到来自 RuyiSDK 团队的重大消息": {
-    "message": "Bleiben Sie mit aktuellen Nachrichten vom RuyiSDK-Team auf dem Laufenden"
-  },
   "RuyiSDK · 为 100 万 RISC-V 软件开发人员做好准备": {
     "message": "RuyiSDK: Vorbereitung für 1 Million RISC-V Softwareentwickler"
   },
@@ -520,8 +1192,8 @@
   "下载数量 Downloads": {
     "message": "Anzahl der Downloads"
   },
-  "ruyi包管理器工具下载数量": {
-    "message": "Ruyi-Paketmanager-Tool-Downloads"
+  "ruyi包管理器github下载数量": {
+    "message": "GitHub-Downloads des RuyiSDK-Paketmanagers"
   },
   "ruyi安装台数": {
     "message": "Ruyi-Telemetrie-Upload-Installationen"
@@ -533,7 +1205,7 @@
     "message": "Komponenten-Downloads"
   },
   "ruyi包管理器下载次数": {
-    "message": "Ruyi-Paketmanager-Downloads"
+    "message": "RuyiSDK-Paketmanager-Downloads"
   },
   "第三方软件下载次数": {
     "message": "Drittanbieter-Software-Downloads"
@@ -556,9 +1228,6 @@
   "实时监控 RuyiSDK 生态系统的使用情况和发展趋势": {
     "message": "Echtzeitüberwachung der Nutzung und Entwicklungstrends des RuyiSDK-Ökosystems"
   },
-  "数据更新时间": {
-    "message": "Data Update Time:"
-  },
   "安装台数 Installs": {
     "message": "Anzahl der Installationen"
   },
@@ -567,6 +1236,12 @@
   },
   "最常用包 Top Packages": {
     "message": "Meistgenutzte Pakete"
+  },
+  "数据更新时间": {
+    "message": "Data Update Time:"
+  },
+  "数据统计": {
+    "message": "Statistiken"
   },
   "暂无数据": {
     "message": "Keine Daten verfügbar"
@@ -595,50 +1270,14 @@
   "贡献者公约": {
     "message": "Contributor Covenant"
   },
-  "footer.社区守则": {
-    "message": "Community-Richtlinien",
-    "description": "Navbar item with label 社区守则"
-  },
-  "footer.ecosystem": { "message": "Ökosystem" },
-  "footer.revyos": { "message": "RevyOS" },
-  "footer.matrix": { "message": "Support Matrix" },
-  "footer.community": { "message": "Community" },
-  "footer.discussion": { "message": "Diskussion" },
-  "footer.stats": { "message": "Datenübersicht" },
-  "footer.intern": { "message": "Praktikumsstellen" },
-  "footer.followus": { "message": "Folgen Sie uns" },
-  "footer.wechat": { "message": "WeChat-Account" },
-  "footer.qqgroup": { "message": "QQ Gruppe" },
-  "footer.plct": { "message": "PLCT Lab" },
-  "footer.tools": { "message": "Weitere Entwickler-Tools" },
-  "footer.jetbrains": { "message": "JetBrains IDE Multiarch" },
-  "footer.ruyisdk": { "message": "RuyiSDK" },
-  "footer.riscv-community": {
-    "message": "RuyiSDK Community (Chinese Website)"
-  },
-  "ruyisdk.community": {
-    "message": "RuyiSDK Gemeinschaft"
-  },
-  "community.contributors.subtitle": {
-    "message": "Die RuyiSDK-Community wird von ihren Mitwirkenden getragen."
-  },
-  "ruyisdk.community.open": {
-    "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
-  },
   "ruyisdk.cn": {
     "message": "ruyisdk.cn"
   },
   "source.repository": {
     "message": "Quellcode-Repository"
   },
-  "statistics": {
-    "message": "Statistiken"
-  },
-  "view.more": {
-    "message": "Mehr anzeigen"
-  },
   "pm_downloads": {
-    "message": "Ruyi Paketmanager-Tool Downloads"
+    "message": "RuyiSDK-Paketmanager-Tool Downloads"
   },
   "downloads": {
     "message": "Anzahl der Downloads"
@@ -649,162 +1288,80 @@
   "no.data": {
     "message": "Derzeit keine statistischen Daten verfügbar."
   },
-  "news.biweekly": {
-    "message": "Zweiwochenbericht"
+  "前往查看 →": {
+    "message": "Ansehen →"
   },
-  "news.news": {
-    "message": "RuyiSDK-Neuigkeiten"
+  "社区共建计划": {
+    "message": "Community-Partnerschaften"
   },
-
-  "downloads.meta.title": {
-    "message": "Download"
+  "wechatlink.qrAriaLabel": {
+    "message": "Link über den QR-Code öffnen",
+    "description": "Accessibility label for QR code link"
   },
-  "downloads.meta.description": {
-    "message": "RuyiSDK Paketmanager und IDE herunterladen"
+  "wechatlink.qrAltText": {
+    "message": "QR-Code",
+    "description": "Alt text for QR code image"
   },
-  "downloads.title": {
-    "message": "RuyiSDK herunterladen"
+  "community.partners.title": {
+    "message": "Partner",
+    "description": "Title for partners page"
   },
-  "downloads.subtitle": {
-    "message": "Laden Sie den RuyiSDK-Paketmanager und die IDE herunter und starten Sie Ihre RISC-V-Entwicklung."
+  "RISC-V 开发板与操作系统支持矩阵": {
+    "message": "RISC-V-Board- und OS-Unterstützungsmatrix"
   },
-
-  "downloads.pm.title": {
-    "message": "RuyiSDK Paketmanager"
+  "随时看到来自 RuyiSDK 团队的重大消息": {
+    "message": "Bleiben Sie mit aktuellen Nachrichten vom RuyiSDK-Team auf dem Laufenden"
   },
-  "downloads.pm.description": {
-    "message": "Der Ruyi-Paketmanager ist die Kernkomponente von RuyiSDK und bietet Paketverwaltung sowie Umgebungs-Konfiguration."
+  "ruyi包管理器工具下载数量": {
+    "message": "RuyiSDK-Paketmanager-Tool-Downloads"
   },
-  "downloads.pm.latestOnly": {
-    "message": "Zur Download-Seite"
+  "footer.社区守则": {
+    "message": "Community-Richtlinien",
+    "description": "Navbar item with label 社区守则"
   },
-
-  "downloads.badge.stable": {
-    "message": "Stabil"
+  "ruyisdk.community": {
+    "message": "RuyiSDK Gemeinschaft"
   },
-  "downloads.label.version": {
-    "message": "Version"
+  "ruyisdk.community.open": {
+    "message": "RuyiSDK Entwicklergemeinschaft ist jetzt geöffnet"
   },
-  "downloads.label.mirror": {
-    "message": "Mirror"
+  "statistics": {
+    "message": "Statistiken"
   },
-  "downloads.label.githubReleases": {
-    "message": "GitHub Releases"
+  "view.more": {
+    "message": "Mehr anzeigen"
   },
-  "downloads.label.pypi": {
-    "message": "PyPI"
+  "社群共建计划": {
+    "message": "Community-Partnerschaften"
   },
-  "downloads.button.latest": {
-    "message": "Neueste Version"
+  "news.events.scienceDay2026.title": {
+    "message": "RuyiSDK beim öffentlichen Wissenschaftstag 2026 des ISCAS „Software bestimmt die Zukunft“"
   },
-  "downloads.button.version": {
-    "message": "Version"
+  "news.meta.description": {
+    "message": "Neuigkeiten rund um RuyiSDK"
   },
-  "downloads.button.otherVersions": {
-    "message": "Weitere Versionen"
+  "riscvSpecs.category.core.title": {
+    "message": "Kernarchitektur"
   },
-  "downloads.button.loading": {
-    "message": "Lädt"
+  "riscvSpecs.category.profiles.title": {
+    "message": "Profile"
   },
-  "downloads.arch.x86_64": {
-    "message": "x86_64"
+  "riscvSpecs.category.hardware.title": {
+    "message": "Hardware"
   },
-  "downloads.arch.aarch64": {
-    "message": "aarch64"
+  "riscvSpecs.category.debugTraceRas.title": {
+    "message": "Debugging, Tracing und RAS"
   },
-  "downloads.arch.riscv64": {
-    "message": "riscv64"
+  "riscvSpecs.category.platformSoftware.title": {
+    "message": "Plattformsoftware"
   },
-  "downloads.arch.universal": {
-    "message": "Universell (keine Architekturunterscheidung)"
+  "riscvSpecs.category.applicationEnablement.title": {
+    "message": "Anwendungsentwicklung"
   },
-  "downloads.modal.title": {
-    "message": "Architektur wählen und herunterladen"
+  "news.blog.tags": {
+    "message": "Schlagwörter"
   },
-  "downloads.modal.latestVersion": {
-    "message": "Neueste Version"
-  },
-  "downloads.modal.cancel": {
-    "message": "Abbrechen"
-  },
-
-  "downloads.otherMethods": {
-    "message": "Weitere Links:"
-  },
-  "downloads.viewDocs": {
-    "message": "Vollständige Installationsdoku ansehen"
-  },
-  "downloads.pm.other.ideMirror": {
-    "message": "RuyiSDK IDE"
-  },
-
-  "downloads.vscode.title": {
-    "message": "RuyiSDK VS Code Extension"
-  },
-  "downloads.vscode.description": {
-    "message": "Download- und Release-Einstieg für die VS-Code-Erweiterung."
-  },
-  "downloads.eclipse.title": {
-    "message": "RuyiSDK Eclipse Extension"
-  },
-  "downloads.eclipse.description": {
-    "message": "Download- und Release-Einstieg für die Eclipse-Erweiterung."
-  },
-
-  "downloads.ide.title": {
-    "message": "RuyiSDK IDE"
-  },
-  "downloads.ide.description": {
-    "message": "Downloads und Release-Links rund um die IDE."
-  },
-  "downloads.ide.latestOnly": {
-    "message": "Zur Download-Seite"
-  },
-
-  "downloads.ide.entry.mirror": {
-    "message": "IDE-Mirror-Verzeichnis"
-  },
-  "downloads.ide.entry.mirror.desc": {
-    "message": "Neueste IDE-Builds/Releases abrufen."
-  },
-  "downloads.ide.entry.vscode": {
-    "message": "RuyiSDK VS Code Extension (Releases)"
-  },
-  "downloads.ide.entry.vscode.desc": {
-    "message": "Release-Seite der VS-Code-basierten RuyiSDK-Erweiterung."
-  },
-  "downloads.ide.entry.eclipse": {
-    "message": "RuyiSDK Eclipse (Releases)"
-  },
-  "downloads.ide.entry.eclipse.desc": {
-    "message": "Release-Seite des Eclipse-basierten RuyiSDK-Projekts."
-  },
-
-  "downloads.agreement": {
-    "message": "Durch das Herunterladen und Verwenden von RuyiSDK stimmen Sie den Lizenzbedingungen und der {privacyLink} zu."
-  },
-  "downloads.privacy": {
-    "message": "Datenschutzerklärung"
-  },
-  "downloads.thanks.retry": {
-    "message": "Keine Reaktion? Hier klicken und erneut versuchen"
-  },
-  "subscription.emailPlaceholder": {
-    "message": "E-Mail eingeben"
-  },
-  "subscription.emailAriaLabel": {
-    "message": "E-Mail-Adresse"
-  },
-  "subscription.subscribe": {
-    "message": "Abonnieren"
-  },
-  "subscription.submitting": {
-    "message": "Wird gesendet..."
-  },
-  "subscription.failed": {
-    "message": "Abonnement fehlgeschlagen. Bitte erneut versuchen."
-  },
-  "subscription.responseReceived": {
-    "message": "Antwort zur Anmeldung erhalten."
+  "downloads.modal.close": {
+    "message": "Schließen"
   }
 }

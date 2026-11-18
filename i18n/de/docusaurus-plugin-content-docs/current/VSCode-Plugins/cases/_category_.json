@@ -1,0 +1,8 @@
+{
+  "label": "Anwendungsfälle der Erweiterung",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Beispiele zum Erstellen und Debuggen mit der VS-Code-Erweiterung."
+  }
+}
