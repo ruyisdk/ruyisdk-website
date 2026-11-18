@@ -3,7 +3,7 @@ import Translate from '@docusaurus/Translate';
 
 export default function VideoIntro() {
   return (
-    <section className="mb-4 w-full overflow-hidden rounded-[0.75rem] bg-[linear-gradient(135deg,rgba(232,237,249,0.9),rgba(250,251,254,0.82))] shadow-[0_1rem_2.75rem_rgba(18,61,145,0.09)] backdrop-blur">
+    <section className="mb-4 w-full overflow-hidden rounded-xl border border-slate-200/85 bg-[linear-gradient(135deg,#ffffff_0%,#f1f5fd_100%)] shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:border-white/10 dark:bg-[linear-gradient(135deg,#151b23_0%,#1c2330_100%)]">
       <div className="grid items-center gap-0 lg:grid-cols-2">
         <div className="overflow-hidden bg-black">
           <video

@@ -7,18 +7,18 @@ export default function cardNews(card) {
   return (
     <>
       <div
-        className="absolute inset-0 bg-cover bg-center z-0 bg-(--ifm-color-primary-lightest)/2 bg-blend-soft-light"
+        className="absolute inset-0 bg-cover bg-center z-0"
         style={{
           backgroundImage: `url(${card.Image})`,
-          opacity: 0.15,
+          opacity: 0.065,
         }}
       />
 
       <div className="relative flex flex-col justify-center items-center text-center z-10 p-8 w-[85%]">
-        <p className="text-2xl font-bold mb-4 tracking-tight text-(--home-little-title-color) drop-shadow-md">
+        <p className="text-2xl font-bold mb-3 tracking-tight text-(--home-little-title-color)">
           {byLocale(card.title)}
         </p>
-        <p className="font-medium text-[1.05rem] mb-4 text-(--home-subtitle-color) drop-shadow-md">
+        <p className="font-medium text-[1.02rem] mb-4 text-(--home-subtitle-color)">
           {byLocale(card.subtitle)}
         </p>
         <div className="flex gap-3 mt-4 flex-wrap justify-center">

@@ -1,14 +1,14 @@
 .homepage {
-  --home-title-color: #123D91;
-  --home-subtitle-color: #666666;
-  --home-little-title-color: #000000;
+  --home-title-color: #0A2C7E;
+  --home-subtitle-color: #475569;
+  --home-little-title-color: #0f172a;
 
-  --home-ruyi-light-blue: #D9E0F3;
-  --home-ruyi-light-gold: #FDEFC3;
-  --home-ruyi-blue: #90b3ff;
+  --home-ruyi-light-blue: rgba(22, 72, 184, 0.11);
+  --home-ruyi-light-gold: rgba(245, 185, 38, 0.13);
+  --home-ruyi-blue: rgba(59, 130, 246, 0.09);
 
-  --ifm-link-color: #86868B;
-  --ifm-link-hover-color: #002677;
+  --ifm-link-color: #1648B8;
+  --ifm-link-hover-color: #0A2C7E;
   --ifm-link-decoration: none;
   --ifm-link-hover-decoration: none;
 }
