@@ -81,13 +81,13 @@ $ ruyi venv -t gnu-plct xiangshan-nanhu ./nanhu-venv
 # LLVM benötigt in der Regel die sysroot von GCC:
 $ ruyi venv -t llvm-upstream --sysroot-from gnu-plct generic ./llvm-venv
 
-# Erstellen einer Livestream-virtuellen Umgebung mit einer bestimmten Version der Plattform-Toolchain:
+# Virtuelle Umgebung für Lichee Pi 4A mit einer bestimmten Version der T-Head-Toolchain erstellen:
 $ ruyi venv -t "gnu-plct-xthead(==0.20231212.0)" sipeed-lpi4a ./sipeed-venv
 
 # Ausführen eines cross-compilierten RISC-V-Binärs mit dem Upstream-QEMU-Emulator
 $ ruyi venv -t gnu-plct generic -e qemu-user-riscv-upstream ./qemu-venv
 
-# Ausführen eines cross-compilierten RISC-V-Binärs mit dem Tongfang QEMU-Emulator
+# Kreuzkompiliertes RISC-V-Programm mit dem T-Head-QEMU-Emulator ausführen
 $ ruyi venv -t gnu-plct-xthead sipeed-lpi4a -e qemu-user-riscv-xthead ./xthead-qemu-venv
 
 # Mehrere Toolchains, wobei gnu-upstream die sysroot bereitstellt
