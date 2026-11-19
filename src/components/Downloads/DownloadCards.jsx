@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Box, CodeXml } from 'lucide-react';
+import { Box, CodeXml, HardDriveDownload } from 'lucide-react';
 import Translate, { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
@@ -472,14 +472,6 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
   );
 }
 
-function ImagerIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M5 3h14v18H5V3zm3 4h8M8 11h8m-4 3v4m-2-2 2 2 2-2" />
-    </svg>
-  );
-}
-
 function ImagerSection({ sectionId }) {
   useBrokenLinks().collectAnchor(sectionId);
   const docsUrl = useBaseUrl('/docs/Imager/');
@@ -492,7 +484,7 @@ function ImagerSection({ sectionId }) {
         descriptionId="imager.downloads.description"
         descriptionMessage="RISC-V 图形化镜像刷写工具"
         accent="gold"
-        icon={ImagerIcon}
+        icon={HardDriveDownload}
       />
       <div className="p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
