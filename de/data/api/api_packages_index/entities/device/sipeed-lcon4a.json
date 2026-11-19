@@ -1,0 +1,1 @@
+{"type": "device", "id": "sipeed-lcon4a", "file_path": "entities/device/sipeed-lcon4a.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:sipeed-lcon4a@8g", "device-variant:sipeed-lcon4a@16g"], "unique_among_type_during_traversal": true, "device": {"id": "sipeed-lcon4a", "display_name": "Sipeed Lichee Console 4A"}}}

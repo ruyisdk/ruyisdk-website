@@ -1,0 +1,1 @@
+{"type": "device", "id": "spacemit-k3-pico-itx", "file_path": "entities/device/spacemit-k3-pico-itx.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:spacemit-k3-pico-itx@sd", "device-variant:spacemit-k3-pico-itx@ufs"], "unique_among_type_during_traversal": true, "device": {"id": "spacemit-k3-pico-itx", "display_name": "SpacemiT K3 Pico-ITX"}}}

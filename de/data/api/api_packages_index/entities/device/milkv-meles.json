@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-meles", "file_path": "entities/device/milkv-meles.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-meles@4g", "device-variant:milkv-meles@8g", "device-variant:milkv-meles@16g"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-meles", "display_name": "Milk-V Meles"}}}

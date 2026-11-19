@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "sifive-u54", "file_path": "entities/uarch/sifive-u54.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv64"], "unique_among_type_during_traversal": true, "uarch": {"id": "sifive-u54", "display_name": "SiFive U54", "arch": "riscv64", "riscv": {"isa": "rv64imafdc"}}}}

@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "wch-ch582f-evb@generic", "file_path": "entities/device-variant/wch-ch582f-evb@generic.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:wch-ch583"], "unique_among_type_during_traversal": true, "device-variant": {"id": "generic", "variant_name": "generic variant"}}}

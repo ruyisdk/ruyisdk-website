@@ -1,0 +1,1 @@
+{"type": "device", "id": "starfive-visionfive", "file_path": "entities/device/starfive-visionfive.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:starfive-visionfive@generic"], "unique_among_type_during_traversal": true, "device": {"id": "starfive-visionfive", "display_name": "StarFive VisionFive"}}}

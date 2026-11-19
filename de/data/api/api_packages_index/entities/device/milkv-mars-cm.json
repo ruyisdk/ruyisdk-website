@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-mars-cm", "file_path": "entities/device/milkv-mars-cm.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-mars-cm@generic"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-mars-cm", "display_name": "Milk-V Mars CM"}}}

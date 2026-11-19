@@ -1,0 +1,15 @@
+{
+	"awol":		"Allwinner",
+	"bananapi":	"BananaPi",
+	"canaan":	"Canaan",
+	"milkv":	"Milk-V",
+	"orangepi":	"OrangePi",
+	"pine64":	"Pine64",
+	"sifive":	"SiFive",
+	"sipeed":	"Sipeed",
+	"spacemit":	"SpacemiT",
+	"starfive":	"StarFive",
+	"wch":		"WinChipHead",
+	"xiangshan":	"XiangShan",
+	"zhihe":	"ZhiheComputing"
+}

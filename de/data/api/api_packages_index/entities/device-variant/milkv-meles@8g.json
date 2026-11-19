@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "milkv-meles@8g", "file_path": "entities/device-variant/milkv-meles@8g.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:generic-rv64gc"], "unique_among_type_during_traversal": true, "device-variant": {"id": "8g", "variant_name": "8G RAM"}}}

@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "wch-ch32v203-evb@c8u6", "file_path": "entities/device-variant/wch-ch32v203-evb@c8u6.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:wch-ch32v203"], "unique_among_type_during_traversal": true, "device-variant": {"id": "c8u6", "variant_name": "CH32V203C8U6"}}}

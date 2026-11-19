@@ -1,0 +1,1 @@
+{"type": "device", "id": "milkv-pioneer", "file_path": "entities/device/milkv-pioneer.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:milkv-pioneer@v1.1", "device-variant:milkv-pioneer@v1.2", "device-variant:milkv-pioneer@v1.3"], "unique_among_type_during_traversal": true, "device": {"id": "milkv-pioneer", "display_name": "Milk-V Pioneer Box"}}}

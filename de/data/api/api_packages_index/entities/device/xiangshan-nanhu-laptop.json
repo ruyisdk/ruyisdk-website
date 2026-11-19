@@ -1,0 +1,1 @@
+{"type": "device", "id": "xiangshan-nanhu-laptop", "file_path": "entities/device/xiangshan-nanhu-laptop.toml", "data": {"ruyi-entity": "v0", "related": ["device-variant:xiangshan-nanhu@generic"], "unique_among_type_during_traversal": true, "device": {"id": "xiangshan-nanhu-laptop", "display_name": "Xiangshan Nanhu Laptop"}}}

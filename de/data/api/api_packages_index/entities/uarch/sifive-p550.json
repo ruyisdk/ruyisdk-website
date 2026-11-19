@@ -1,0 +1,1 @@
+{"type": "uarch", "id": "sifive-p550", "file_path": "entities/uarch/sifive-p550.toml", "data": {"ruyi-entity": "v0", "related": ["arch:riscv64"], "unique_among_type_during_traversal": true, "uarch": {"id": "sifive-p550", "display_name": "SiFive P550", "arch": "riscv64", "riscv": {"isa": "rv64imafdch_zicntr_zicsr_zifencei_zihpm_zba_zbb_sscofpmf"}}}}

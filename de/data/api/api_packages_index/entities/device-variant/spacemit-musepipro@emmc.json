@@ -1,0 +1,1 @@
+{"type": "device-variant", "id": "spacemit-musepipro@emmc", "file_path": "entities/device-variant/spacemit-musepipro@emmc.toml", "data": {"ruyi-entity": "v0", "related": ["cpu:spacemit-m1"], "unique_among_type_during_traversal": true, "device-variant": {"id": "emmc", "variant_name": "eMMC storage"}}}
