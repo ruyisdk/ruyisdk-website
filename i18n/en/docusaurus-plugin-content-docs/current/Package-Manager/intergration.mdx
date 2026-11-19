@@ -68,13 +68,13 @@ $ ruyi venv -h
 Here are some examples:
 
 ```bash
-# 使用 GNU 上游工具链配置 RISC-V 虚拟环境：
+# Configure a RISC-V virtual environment using the upstream GNU toolchain:
 $ ruyi venv -t gnu-upstream generic ./generic-venv
 
-# Configure a RISC-V virtual environment using the GNU upstream toolchain:
+# Configure a Milk-V Duo virtual environment using the PLCT toolchain:
 $ ruyi venv -t gnu-plct milkv-duo ./milkv-venv
 
-# Configure a Milkv-Duo virtual environment using the PLCT toolchain:
+# Configure a XiangShan Nanhu virtual environment using the PLCT toolchain:
 $ ruyi venv -t gnu-plct xiangshan-nanhu ./nanhu-venv
 
 # LLVM usually requires the sysroot from GCC:

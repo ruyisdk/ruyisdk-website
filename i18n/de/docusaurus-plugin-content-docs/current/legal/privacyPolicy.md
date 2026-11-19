@@ -111,6 +111,6 @@ Wenn Sie uns kontaktieren oder Ihre entsprechenden Rechte ausüben möchten, kö
 
 Kontakt-E-Mail: contact@ruyisdk.cn
 
-Letzte Aktualisierung: 3. Dezember 2024
+Letzte Aktualisierung: 13. Oktober 2025
 
-Version der Datenschutzrichtlinie: v20241203
+Version der Datenschutzrichtlinie: v20251013
