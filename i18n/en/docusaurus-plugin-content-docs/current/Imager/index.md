@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: Ruyi Imager
+sidebar_label: Ruyi Imager
 description: Install an operating system on your RISC-V board with Ruyi Imager.
 ---
 
