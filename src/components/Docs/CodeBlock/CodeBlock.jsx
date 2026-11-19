@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { translate } from '@docusaurus/Translate';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Header from './Header';
@@ -50,6 +51,11 @@ const CodeBlock = ({
   const [currentLang, setCurrentLang] = useState(lang);
   const isDark = useIsDarkTheme();
   const copyButtonsRef = useRef(new Map());
+  const copyLineLabel = translate({
+    id: 'theme.CodeBlock.copyLine',
+    message: '复制此行',
+    description: 'The ARIA label for copying an individual code line',
+  });
 
   const inputLines = useMemo(() => {
     const lines = new Set();
@@ -341,7 +347,7 @@ const CodeBlock = ({
           const copyBtn = document.createElement('button');
           copyBtn.type = 'button';
           copyBtn.className = 'line-copy-button';
-          copyBtn.setAttribute('aria-label', 'Copy line');
+          copyBtn.setAttribute('aria-label', copyLineLabel);
           copyButtonsRef.current.set(index, copyBtn);
 
           const iconSize = isMobile ? '12' : '13';
@@ -556,7 +562,7 @@ const CodeBlock = ({
       cancelAnimationFrame(rafId);
       cleanupFns.forEach((cleanup) => cleanup());
     };
-  }, [highlightLines, displayCode, inputLines, isInputOutputBlock, isDark, copyToClipboard]);
+  }, [highlightLines, displayCode, inputLines, isInputOutputBlock, isDark, copyToClipboard, copyLineLabel]);
 
   return (
     <div

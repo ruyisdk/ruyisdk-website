@@ -1,4 +1,5 @@
 import React from 'react';
+import { translate } from '@docusaurus/Translate';
 
 const LangSwitcher = ({ langs, currentLang, onLangChange }) => {
   if (!langs || langs.length === 0) {
@@ -23,7 +24,14 @@ const LangSwitcher = ({ langs, currentLang, onLangChange }) => {
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800'
               }
             `}
-            aria-label={`Switch to ${langOption.lang}`}
+            aria-label={translate(
+              {
+                id: 'theme.CodeBlock.switchLanguage',
+                message: '切换到 {language}',
+                description: 'The ARIA label for switching the code block language',
+              },
+              { language: langOption.lang },
+            )}
           >
             {langOption.lang}
           </button>

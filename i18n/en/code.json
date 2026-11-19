@@ -836,6 +836,14 @@
     "message": "Toggle word wrap",
     "description": "The title attribute for toggle word wrapping button of code block lines"
   },
+  "theme.CodeBlock.copyLine": {
+    "message": "Copy line",
+    "description": "The ARIA label for copying an individual code line"
+  },
+  "theme.CodeBlock.switchLanguage": {
+    "message": "Switch to {language}",
+    "description": "The ARIA label for switching the code block language"
+  },
   "community.partners.subtitle": {
     "message": "RuyiSDK partners",
     "description": "Subtitle displayed under the Partners section"
