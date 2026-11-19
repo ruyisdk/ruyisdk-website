@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { Box, CodeXml } from 'lucide-react';
 import Translate, { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
@@ -323,15 +324,13 @@ function ProductHeader({
   accent,
   logoSrc,
   logoAlt,
-  iconPath,
+  icon: Icon,
 }) {
   return (
     <div className={`relative overflow-hidden px-5 py-5 sm:px-8 sm:py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
       <div className="min-w-0 md:pr-44">
         <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
-          <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 shrink-0 ${headerIconClass(accent)}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPath} />
-          </svg>
+          <Icon className={`h-8 w-8 shrink-0 ${headerIconClass(accent)}`} aria-hidden="true" />
           <Translate id={titleId}>{titleMessage}</Translate>
         </h2>
         <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
@@ -387,7 +386,7 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
         accent="gold"
         logoSrc="/img/downloads/ruyi-logo-720.svg"
         logoAlt="RuyiSDK"
-        iconPath="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+        icon={Box}
       />
 
       <div className="p-6 sm:p-8 pt-4 sm:pt-5">
@@ -473,6 +472,14 @@ function PackageManagerSection({ sectionId, releaseData, onOpenLatest }) {
   );
 }
 
+function ImagerIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M5 3h14v18H5V3zm3 4h8M8 11h8m-4 3v4m-2-2 2 2 2-2" />
+    </svg>
+  );
+}
+
 function ImagerSection({ sectionId }) {
   useBrokenLinks().collectAnchor(sectionId);
   const docsUrl = useBaseUrl('/docs/Imager/');
@@ -485,7 +492,7 @@ function ImagerSection({ sectionId }) {
         descriptionId="imager.downloads.description"
         descriptionMessage="RISC-V 图形化镜像刷写工具"
         accent="gold"
-        iconPath="M5 3h14v18H5V3zm3 4h8M8 11h8m-4 3v4m-2-2 2 2 2-2"
+        icon={ImagerIcon}
       />
       <div className="p-6 sm:p-8">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -554,7 +561,7 @@ function ExtensionSection({
         accent={accent}
         logoSrc={logoSrc}
         logoAlt={logoAlt}
-        iconPath="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+        icon={CodeXml}
       />
 
       <div className="p-6 sm:p-8">

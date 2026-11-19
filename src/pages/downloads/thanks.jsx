@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { CircleCheck } from 'lucide-react';
 import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import { PageBackground } from '@site/src/components/Home/Background';
@@ -159,14 +160,7 @@ export default function DownloadThanksPage() {
           <section className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden">
             <div className={`px-8 py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
               <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
-                <svg xmlns="http://www.w3.org/2000/svg" className={`h-8 w-8 shrink-0 ${iconColorClass(accent)}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <CircleCheck className={`h-8 w-8 shrink-0 ${iconColorClass(accent)}`} aria-hidden="true" />
                 <Translate id="downloads.thanks.title">感谢下载 RuyiSDK</Translate>
               </h1>
               <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
