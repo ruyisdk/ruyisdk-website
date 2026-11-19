@@ -1,8 +1,11 @@
+import Translate from '@docusaurus/Translate';
 import React, { useEffect, useState } from 'react';
+import SiteLink from '@docusaurus/Link';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getHierarchy, getEntities, getPackageDetail } from '../api';
 import { useI18n } from '../i18n';
-import { ArrowLeft, Package as PackageIcon, Server, FileBox, Info, Terminal, Copy, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Package as PackageIcon, Server, FileBox, Info, Terminal, Copy, ExternalLink, Usb } from 'lucide-react';
+import { STRATEGIES } from '../../Flasher/plan.mjs';
 
 function formatBytes(size?: number) {
   if (!size || Number.isNaN(size)) return null;
@@ -306,6 +309,15 @@ export default function PackageDetail() {
                       {t('downloadHint', { count: distfiles.length })}
                     </p>
                   </div>
+                  {STRATEGIES.includes(pkg.data?.provisionable?.strategy) && (
+                    <SiteLink
+                      className="inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-medium text-[var(--ifm-color-primary)] hover:underline sm:self-center"
+                      to={'/flash?profile=' + encodeURIComponent(`${pkg.category}/${pkg.package}/${pkg.version}`)}
+                    >
+                      <Usb className="h-4 w-4" aria-hidden="true" />
+                      <Translate id="flasher.entry">Flash online</Translate>
+                    </SiteLink>
+                  )}
                 </div>
                 <div className="space-y-4">
                   {distfiles.map((file: any, idx: number) => {

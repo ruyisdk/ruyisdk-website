@@ -134,6 +134,7 @@ const config = {
   plugins: [
     "docusaurus-plugin-sass",
     "./scripts/plugins/news-generator",
+    "./scripts/plugins/usb-flasher.cjs",
   ],
   // add custom script
   scripts: [
