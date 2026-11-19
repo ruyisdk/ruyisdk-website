@@ -1,18 +1,18 @@
-.button {
-  --back-to-top-size: 3rem;
-  --back-to-top-inset-inline: max(
-    1rem,
-    calc((100vw - 90rem) / 2 + 2rem)
-  );
+.themeToggle {
+  display: contents;
+}
 
+.themeToggle .button,
+.backToTop {
+  --button-size: 3rem;
   position: fixed;
-  right: var(--back-to-top-inset-inline);
+  right: max(1rem, calc((100vw - 90rem) / 2 + 2rem));
   bottom: max(2rem, env(safe-area-inset-bottom));
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--back-to-top-size);
-  height: var(--back-to-top-size);
+  width: var(--button-size);
+  height: var(--button-size);
   padding: 0;
   border: 1px solid rgba(10, 44, 126, 0.16);
   border-radius: 50%;
@@ -24,9 +24,6 @@
     0 2px 6px rgba(15, 23, 42, 0.06);
   color: #0A2C7E;
   cursor: pointer;
-  opacity: 0;
-  transform: translateX(calc(100% + 2rem));
-  visibility: hidden;
   z-index: calc(var(--ifm-z-index-fixed) - 1);
   transition:
     opacity 180ms var(--ifm-transition-timing-default),
@@ -36,6 +33,13 @@
     border-color 180ms var(--ifm-transition-timing-default),
     box-shadow 180ms var(--ifm-transition-timing-default),
     color 180ms var(--ifm-transition-timing-default);
+}
+
+.backToTop {
+  margin-bottom: calc(var(--button-size) + 0.5rem);
+  opacity: 0;
+  transform: translateX(calc(100% + 2rem));
+  visibility: hidden;
 }
 
 .buttonVisible {
@@ -64,9 +68,10 @@
 }
 
 @media (max-width: 768px) {
-  .button {
-    --back-to-top-size: 2.75rem;
-    --back-to-top-inset-inline: max(1rem, env(safe-area-inset-right));
+  .themeToggle .button,
+  .backToTop {
+    --button-size: 2.75rem;
+    right: max(1rem, env(safe-area-inset-right));
   }
 }
 
@@ -76,7 +81,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .button,
+  .themeToggle .button,
+  .backToTop,
   .buttonVisible {
     transition: none;
   }

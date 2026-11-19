@@ -4,7 +4,7 @@ import { useLocation } from '@docusaurus/router';
 import { translate } from '@docusaurus/Translate';
 import { ArrowUp } from 'lucide-react';
 
-import styles from './styles.module.css';
+import styles from '@site/src/css/floating-buttons.module.css';
 
 const THRESHOLD = 300;
 
@@ -36,7 +36,7 @@ export default function BackToTopButton() {
         message: 'Scroll back to top',
         description: 'The ARIA label for the back to top button',
       })}
-      className={clsx(styles.button, shown && styles.buttonVisible)}
+      className={clsx(styles.button, styles.backToTop, shown && styles.buttonVisible)}
       type="button"
       onClick={scrollToTop}
     >

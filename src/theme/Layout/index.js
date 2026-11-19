@@ -15,6 +15,7 @@ import Footer from '@theme/Footer';
 import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import BackToTopButton from '@theme/BackToTopButton';
+import FloatingColorModeToggle from './FloatingColorModeToggle';
 import styles from './styles.module.css';
 
 export default function Layout(props) {
@@ -53,6 +54,7 @@ export default function Layout(props) {
       </div>
 
       {!isDocsPage && <BackToTopButton />}
+      <FloatingColorModeToggle />
 
       {!noFooter && <Footer />}
     </LayoutProvider>
