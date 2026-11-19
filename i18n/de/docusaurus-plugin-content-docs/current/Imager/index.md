@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: Ruyi Imager
+sidebar_label: Ruyi Imager
 description: Mit Ruyi Imager ein Betriebssystem auf RISC-V-Entwicklungsboards installieren.
 ---
 
