@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
+import { translate } from '@docusaurus/Translate';
 import { Link } from 'lucide-react';
 
 export default function Heading({as: As, id, ...props}) {
@@ -14,6 +15,14 @@ export default function Heading({as: As, id, ...props}) {
     return <As {...props} id={undefined} />;
   }
   brokenLinks.collectAnchor(id);
+  const anchorTitle = translate(
+    {
+      id: 'theme.common.headingLinkTitle',
+      message: 'Direct link to {heading}',
+      description: 'Title for link to heading',
+    },
+    { heading: typeof props.children === 'string' ? props.children : id },
+  );
   return (
     <As
       {...props}
@@ -31,8 +40,8 @@ export default function Heading({as: As, id, ...props}) {
       <a
         className="hash-link"
         href={`#${id}`}
-        aria-label={`${props.children} permalink`}
-        title={`${props.children} permalink`}
+        aria-label={anchorTitle}
+        title={anchorTitle}
       >
         <Link size="0.75em" />
       </a>
