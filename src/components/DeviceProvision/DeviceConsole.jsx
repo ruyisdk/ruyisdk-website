@@ -277,6 +277,56 @@ export default function DeviceConsole() {
       setIssue(`${message} ${error.message ?? String(error)}`);
     }
   };
+  const expectedFile = prompt?.kind === 'file' ? prompt.spec.name : '';
+  const extension = expectedFile.match(/\.[a-z0-9_+-]{1,15}$/i)?.[0];
+  function acceptImage(file) {
+    if (!file || pending.current?.kind !== 'file') return;
+    if (file.name !== expectedFile) {
+      setIssue(
+        translate(
+          {
+            id: 'tryruyi.device.fileNameMismatch',
+            message: '所选文件是 {selected}。请选择 {expected}。',
+          },
+          { selected: file.name, expected: expectedFile },
+        ),
+      );
+      return;
+    }
+    setIssue('');
+    settle(file);
+  }
+  async function selectImage() {
+    if (!window.showOpenFilePicker || !extension) {
+      filePicker.current?.click();
+      return;
+    }
+    const request = pending.current;
+    try {
+      const [handle] = await window.showOpenFilePicker({
+        id: 'ruyi-image-files',
+        startIn: 'downloads',
+        excludeAcceptAllOption: true,
+        types: [
+          {
+            description: expectedFile,
+            accept: { 'application/octet-stream': [extension] },
+          },
+        ],
+      });
+      const file = await handle.getFile();
+      if (pending.current === request) acceptImage(file);
+    } catch (error) {
+      if (pending.current === request)
+        report(
+          error,
+          translate({
+            id: 'tryruyi.device.filePickerError',
+            message: '无法打开镜像文件。',
+          }),
+        );
+    }
+  }
   async function selectDirectory() {
     try {
       const selected = await window.showDirectoryPicker({
@@ -501,7 +551,7 @@ export default function DeviceConsole() {
                     )}
                   </a>
                 ))}
-              <button type="button" onClick={() => filePicker.current?.click()}>
+              <button type="button" onClick={selectImage}>
                 {translate({
                   id: 'tryruyi.device.chooseFile',
                   message: '选择本地文件',
@@ -511,9 +561,11 @@ export default function DeviceConsole() {
                 ref={filePicker}
                 hidden
                 type="file"
+                accept={extension}
                 onChange={(event) => {
                   const file = event.target.files?.[0];
-                  if (file) settle(file);
+                  event.target.value = '';
+                  acceptImage(file);
                 }}
               />
             </section>
