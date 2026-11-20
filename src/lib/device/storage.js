@@ -105,9 +105,10 @@ export async function prepareImages(
         return candidate;
       };
       for (const url of urls) {
+        let response;
         try {
           progress({ name, phase: 'Download', bytes: 0, total: spec.size });
-          const response = await fetch(url, {
+          response = await fetch(url, {
             signal,
             credentials: 'omit',
             redirect: 'error',
@@ -116,14 +117,18 @@ export async function prepareImages(
             throw Error(`HTTP ${response.status}`);
           file = await save(response.body);
           break;
-        } catch (error) {
+        } catch {
           signal.throwIfAborted();
-          log(`${url}: ${error.message}`);
+          const reason =
+            response && !response.ok
+              ? `HTTP ${response.status}`
+              : 'Download failed';
+          log(`${new URL(url).host}: ${reason}`);
         }
       }
       if (!file) {
         progress(null);
-        const local = await localFile(spec);
+        const local = await localFile(spec, urls);
         if (local.size !== spec.size)
           throw Error(`Incorrect file size for ${name}`);
         if (!(await verified(local))) throw Error(`SHA-256 mismatch: ${name}`);
