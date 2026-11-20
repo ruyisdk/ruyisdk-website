@@ -150,22 +150,27 @@ for (const graphical of [true, false]) {
         `leaving during read-back holds protection until the host ${failed ? 'fails' : 'finishes'}`,
         async (subtest) => {
           const entered = Promise.withResolvers();
-          const readback = Promise.withResolvers();
+          const readbacks = [Promise.withResolvers(), Promise.withResolvers()];
+          let writesStarted = 0;
           const guard = [];
           const controller = new AbortController();
           class WorkerStub {
-            postMessage({ id, job }) {
+            postMessage({ id, job, reply }) {
+              if (reply !== undefined) return;
               if (job.kind === 'hash') return;
               assert.equal(job.kind, 'flash');
-              this.request = () =>
+              this.request = (request) =>
                 this.onmessage({
                   data: {
                     id,
-                    request: 1,
+                    request,
                     argv: ['dd', 'if=sd.img', 'of=SD reader', 'bs=4096'],
                   },
                 });
-              queueMicrotask(this.request);
+              queueMicrotask(() => {
+                this.first = this.request(1);
+                this.request(2);
+              });
             }
             terminate() {}
           }
@@ -175,9 +180,14 @@ for (const graphical of [true, false]) {
             delete globalThis.Worker;
             delete globalThis.location;
           });
-          const active = new ProvisionRuntime('/', assert.fail);
+          const active = new ProvisionRuntime(
+            '/',
+            assert.fail,
+            controller.signal,
+          );
           subtest.mock.method(capability, 'writeAndVerify', () => {
-            entered.resolve();
+            const readback = readbacks[writesStarted++];
+            if (writesStarted === readbacks.length) entered.resolve();
             return readback.promise;
           });
           capability.setFlashing = (value) => guard.push(value);
@@ -198,15 +208,22 @@ for (const graphical of [true, false]) {
             active.run({ kind: 'hash' }),
             /Session closed/,
           );
+          if (!failed) {
+            readbacks[0].resolve();
+            await active.worker.first;
+          }
           controller.abort();
-          active.dispose();
           await queued;
-          await active.worker.request();
+          if (failed) {
+            readbacks[0].reject(Error('Write failed'));
+            await active.worker.first;
+          }
+          await active.worker.request(3);
           await new Promise((resolve) => setImmediate(resolve));
           assert.deepEqual(guard, [true]);
-          assert.equal(capability.writeAndVerify.mock.callCount(), 1);
-          if (failed) readback.reject(Error('Read-back failed'));
-          else readback.resolve();
+          assert.equal(capability.writeAndVerify.mock.callCount(), 2);
+          if (failed) readbacks[1].reject(Error('Read-back failed'));
+          else readbacks[1].resolve();
           await stopped;
           assert.deepEqual(guard, [true, false]);
         },
