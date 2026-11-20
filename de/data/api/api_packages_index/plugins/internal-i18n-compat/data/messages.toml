@@ -1,0 +1,188 @@
+ruyi-repo-messages = "v1"
+
+# This has to be copied because the module loader checks the resolved path
+# that it's not outside of the originating plugin, for security.
+
+# Plugin messages
+
+# internal-device-provisioner-common
+
+["plugins/internal-device-provisioner-common/cmd-failed"]
+en_US = "The command failed with return code [yellow]{ret}[/], that may or may not be caused by lack of privileges."
+zh_CN = "命令执行失败了，返回码为 [yellow]{ret}[/]，可能是权限不足导致的，但也可能不是。"
+
+["plugins/internal-device-provisioner-common/prompt-retry-sudo"]
+en_US = "Do you want to retry the command with [yellow]sudo[/]?"
+zh_CN = "您想用 [yellow]sudo[/] 重试该命令吗？"
+
+["plugins/internal-device-provisioner-common/pretend-dd-to-blkdev"]
+en_US = "write [yellow]{img_path}[/] contents to [green]{blkdev_path}[/] with dd"
+zh_CN = "使用 dd 将 [yellow]{img_path}[/] 的内容写入 [green]{blkdev_path}[/]"
+
+["plugins/internal-device-provisioner-common/dd-to-blkdev"]
+en_US = "dd-ing [yellow]{infile}[/] to [green]{outfile}[/] with block size {blocksize}..."
+zh_CN = "正在 dd [yellow]{infile}[/] 到 [green]{outfile}[/]，块大小 {blocksize}..."
+
+["plugins/internal-device-provisioner-common/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] into device partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]"
+
+["plugins/internal-device-provisioner-common/flash-to-partition"]
+en_US = "flashing [yellow]{img_path}[/] into device partition [green]{part}[/]..."
+zh_CN = "正在将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]..."
+
+["plugins/internal-device-provisioner-common/flash-to-partition-failed"]
+en_US = "failed to flash the [green]{outfile}[/] disk/partition"
+zh_CN = "磁盘或分区 [green]{outfile}[/] 烧写失败"
+
+["plugins/internal-device-provisioner-common/device-inconsistent"]
+en_US = "the device could be in an inconsistent state now, check now"
+zh_CN = "设备现在可能处于不自洽的状态了，请立即检查"
+
+["plugins/internal-device-provisioner-common/file-flashed"]
+en_US = "successfully flashed [green]{outfile}[/]"
+zh_CN = "成功烧写了 [green]{outfile}[/]"
+
+["plugins/internal-device-provisioner-common/part-flash-failed"]
+en_US = "failed to flash [green]{part}[/] image into device storage"
+zh_CN = "烧写 [green]{part}[/] 映像到设备存储失败"
+
+["plugins/internal-device-provisioner-common/part-flashed"]
+en_US = "[green]{part}[/] image successfully flashed"
+zh_CN = "成功烧写了 [green]{part}[/] 映像"
+
+# ruyi-device-provision-strategy-std
+
+["plugins/ruyi-device-provision-strategy-std/pretend-flash-to-ram"]
+en_US = "flash [yellow]{img_path}[/] into device RAM"
+zh_CN = "将 [yellow]{img_path}[/] 写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-std/pretend-reboot"]
+en_US = "reboot the device"
+zh_CN = "重启设备"
+
+["plugins/ruyi-device-provision-strategy-std/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] into device partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]"
+
+["plugins/ruyi-device-provision-strategy-std/flashing-uboot-ram"]
+en_US = "flashing U-Boot image into device RAM"
+zh_CN = "正在将 U-Boot 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-std/flashing-uboot-ram-failed"]
+en_US = "failed to flash U-Boot image into device RAM"
+zh_CN = "将 U-Boot 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-std/recheck"]
+en_US = "the device state should be intact, but please re-check"
+zh_CN = "设备状态应当未被变更，但请您再次检查"
+
+["plugins/ruyi-device-provision-strategy-std/rebooting-to-uboot"]
+en_US = "rebooting device into new U-Boot"
+zh_CN = "正在重启设备以进入新的 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-std/reboot-failed"]
+en_US = "failed to reboot the device"
+zh_CN = "重启设备失败"
+
+["plugins/ruyi-device-provision-strategy-std/waiting-for-device"]
+en_US = "waiting {wait_secs}s for the device to come back online"
+zh_CN = "正在等待 {wait_secs}s 以便设备重新上线"
+
+# ruyi-device-provision-strategy-spacemit-k1
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/pretend-load-to-device"]
+en_US = "load {what} [yellow]{img_path}[/] to device"
+zh_CN = "将 {what} [yellow]{img_path}[/] 载入设备"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] to partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到分区 [green]{part}[/]"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-fsbl"]
+en_US = "staging the FSBL image"
+zh_CN = "正在暂存 FSBL 映像"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-fsbl-failed"]
+en_US = "failed to stage FSBL image"
+zh_CN = "暂存 FSBL 映像失败"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-fsbl"]
+en_US = "continuing to execute staged FSBL"
+zh_CN = "继续去执行已暂存的 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-fsbl-failed"]
+en_US = "failed to continue execution with FSBL"
+zh_CN = "无法继续执行 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/wait-fsbl"]
+en_US = "waiting {wait_secs}s for the device to load FSBL"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-uboot"]
+en_US = "staging the U-Boot image"
+zh_CN = "正在暂存 U-Boot 映像"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-uboot-failed"]
+en_US = "failed to stage u-boot image"
+zh_CN = "暂存 U-Boot 映像失败"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-uboot"]
+en_US = "continuing to execute staged U-Boot"
+zh_CN = "继续去执行已暂存的 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-uboot-failed"]
+en_US = "failed to continue execution with U-Boot"
+zh_CN = "无法继续执行 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/wait-uboot"]
+en_US = "waiting {wait_secs}s for the device to load U-Boot"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/flashing-partition"]
+en_US = "flashing the [yellow]{part}[/] partition"
+zh_CN = "正在烧写 [yellow]{part}[/] 分区"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/flashing-partition-failed"]
+en_US = "failed to flash the [yellow]{part}[/] partition"
+zh_CN = "烧写 [yellow]{part}[/] 分区失败"
+
+# ruyi-device-provision-strategy-spacemit-k3
+
+["plugins/ruyi-device-provision-strategy-spacemit-k3/oem-super-speed"]
+en_US = "set USB link to super speed mode"
+zh_CN = "配置 USB 连接到高速模式"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k3/oem-speed-failed"]
+en_US = "failed to set USB link to super speed mode"
+zh_CN = "配置高速模式失败"
+
+# ruyi-device-provision-strategy-zhihe-a210
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-bootzero-ram"]
+en_US = "flashing bootzero rvbl image into device RAM"
+zh_CN = "正在将 bootzero rvbl 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-bootzero-ram-failed"]
+en_US = "failed to flash bootzero rvbl image into device RAM"
+zh_CN = "将 bootzero rvbl 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/rebooting-to-bootzero"]
+en_US = "rebooting device into bootzero rvbl"
+zh_CN = "正在重启设备以进入 bootzero rvbl"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-spl-ram"]
+en_US = "flashing spl rvbl image into device RAM"
+zh_CN = "正在将 spl rvbl 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-spl-ram-failed"]
+en_US = "failed to flash spl rvbl image into device RAM"
+zh_CN = "将 spl rvbl 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/rebooting-to-spl"]
+en_US = "rebooting device into spl rvbl"
+zh_CN = "正在重启设备以进入 spl rvbl"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/wait-spl"]
+en_US = "waiting {wait_secs}s for the device to load SPL"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 SPL"

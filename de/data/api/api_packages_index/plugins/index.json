@@ -1,0 +1,20 @@
+{
+  "entrypoints": [
+    "ruyi-device-provision-strategy-spacemit-k1",
+    "ruyi-device-provision-strategy-spacemit-k3",
+    "ruyi-device-provision-strategy-std",
+    "ruyi-device-provision-strategy-zhihe-a210"
+  ],
+  "modules": {
+    "internal-device-provisioner-common": "internal-device-provisioner-common/mod.star",
+    "internal-i18n-compat": "internal-i18n-compat/mod.star",
+    "ruyi-device-provision-strategy-spacemit-k1": "ruyi-device-provision-strategy-spacemit-k1/mod.star",
+    "ruyi-device-provision-strategy-spacemit-k1-v1": "ruyi-device-provision-strategy-spacemit-k1/mod.star",
+    "ruyi-device-provision-strategy-spacemit-k3": "ruyi-device-provision-strategy-spacemit-k3/mod.star",
+    "ruyi-device-provision-strategy-spacemit-k3-v1": "ruyi-device-provision-strategy-spacemit-k3/mod.star",
+    "ruyi-device-provision-strategy-std": "ruyi-device-provision-strategy-std/mod.star",
+    "ruyi-device-provision-strategy-zhihe-a210": "ruyi-device-provision-strategy-zhihe-a210/mod.star",
+    "ruyi-device-provision-strategy-zhihe-a210-v1": "ruyi-device-provision-strategy-zhihe-a210/mod.star"
+  },
+  "revision": "0e383ae6da8983bbb596b41cc13f4a71cd2dbcaf"
+}
