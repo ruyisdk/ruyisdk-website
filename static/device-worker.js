@@ -89,7 +89,10 @@ self.onmessage = async ({ data }) => {
       },
     };
     const result = await runProvisionTask(job, host);
-    self.postMessage({ id, result });
+    self.postMessage(
+      { id, result },
+      result instanceof Uint8Array ? [result.buffer] : [],
+    );
   } catch (error) {
     if (writer) await writer.abort().catch(() => {});
     self.postMessage({ id, error: String(error) });

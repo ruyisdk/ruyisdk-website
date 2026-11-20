@@ -309,6 +309,21 @@ export default function DeviceConsole() {
             >
               {t('连接开发板', 'Connect board')}
             </button>
+            <label>
+              <input
+                type="checkbox"
+                checked={usb?.allowGzip ?? true}
+                disabled={!usb || session.current?.writing}
+                onChange={(event) => {
+                  usb.allowGzip = event.target.checked;
+                  usb.changed();
+                }}
+              />
+              {t(
+                'Bianbu USB 2 分区压缩',
+                'Compress eligible Bianbu partitions over USB 2',
+              )}
+            </label>
           </section>
           <section>
             <h2>

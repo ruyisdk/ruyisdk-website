@@ -1,3 +1,4 @@
+import { packageFastboot } from './spacemit.js';
 import { prepareImages } from './storage.js';
 
 async function get(url, signal, json = true) {
@@ -167,7 +168,8 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       localFile: ui.localFile,
       progress: ui.progress,
     });
-    plans.push({ ...plan, args, files });
+    const execute = await packageFastboot(usb, runtime, strategy, paths, files);
+    plans.push({ ...plan, args, execute });
   }
   plans.sort((left, right) => right.priority - left.priority);
   log(
@@ -201,9 +203,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   usb.changed();
   ui.flashing?.();
   for (const plan of plans)
-    await runtime.run({ kind: 'flash', ...plan.args }, (argv) =>
-      usb.execute(argv, plan.files),
-    );
+    await runtime.run({ kind: 'flash', ...plan.args }, plan.execute);
   log(t('刷写步骤成功完成。', 'Flashing finished successfully.'));
   await postInstall();
 }

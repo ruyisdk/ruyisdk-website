@@ -41,6 +41,14 @@ func main() {
 				var value any
 				var err error
 				switch job.Get("kind").String() {
+				case "gzip":
+					compressed, err := gzipChunk(job)
+					if err != nil {
+						reject.Invoke(err.Error())
+					} else {
+						resolve.Invoke(compressed)
+					}
+					return
 				case "hash", "extract":
 					value, err = processImage(job, host)
 				case "preview", "flash":
