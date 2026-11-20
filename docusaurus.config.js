@@ -5,6 +5,10 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import { themes as prismThemes } from "prism-react-renderer";
 
+const i18n = {
+  defaultLocale: 'zh-Hans',
+  locales: ['zh-Hans', 'en', 'de'],
+};
 
 const config = {
   title: "RuyiSDK",
@@ -48,10 +52,7 @@ const config = {
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
-  i18n: {
-    defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en", "de"],
-  },
+  i18n,
 
   presets: [
     [
@@ -137,6 +138,11 @@ const config = {
   ],
   // add custom script
   scripts: [
+    {
+      src: '/js/locale-preference.js',
+      'data-default-locale': i18n.defaultLocale,
+      'data-locales': i18n.locales.join(' '),
+    },
     {
       src: '/js/toc-smooth-scroll.js',
       async: true,
