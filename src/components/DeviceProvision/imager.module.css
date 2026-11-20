@@ -1,0 +1,93 @@
+.panels {
+  align-self: start;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.panel {
+  min-width: 0;
+  padding: clamp(18px, 3vw, 32px);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  background: var(--ifm-background-surface-color);
+}
+.heading,
+.heading h2,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.heading {
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+.panel h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.panel > p:last-child {
+  margin: 0.75rem 0 0;
+}
+.heading svg {
+  color: var(--ifm-color-primary);
+}
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+.field {
+  display: grid;
+  min-width: 0;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+.field select {
+  font: inherit;
+  color: inherit;
+  background: var(--ifm-background-color);
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--ifm-color-emphasis-400);
+  border-radius: 7px;
+}
+.field select {
+  width: 100%;
+  font-weight: 400;
+}
+.field select:disabled {
+  color: var(--ifm-color-emphasis-700);
+  background: var(--ifm-color-emphasis-100);
+}
+.actions {
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+.packages {
+  margin: 1rem 0;
+}
+.status,
+.question,
+.packages,
+.review {
+  overflow-wrap: anywhere;
+}
+.status {
+  white-space: pre-line;
+  color: var(--ifm-color-emphasis-800);
+  margin: 1rem 0 0;
+}
+.question {
+  font-weight: 600;
+  margin: 1rem 0 0;
+}
+.review ol {
+  list-style: decimal;
+  padding-inline-start: 1.4rem;
+  margin: 0.6rem 0;
+}
+@media (max-width: 600px) {
+  .fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

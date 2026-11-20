@@ -112,14 +112,6 @@
   margin-bottom: 12px;
   overflow-wrap: anywhere;
 }
-.aside button {
-  cursor: pointer;
-  border: 1px solid var(--ifm-color-emphasis-400);
-  background: var(--ifm-background-color);
-  color: inherit;
-  border-radius: 6px;
-  padding: 7px 14px;
-}
 .downloadLink {
   display: block;
   margin-bottom: 0.5rem;

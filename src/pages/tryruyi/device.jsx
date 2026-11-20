@@ -25,9 +25,9 @@ export default function DeviceProvisionPage() {
       <main className={styles.page}>
         <BrowserOnly fallback={<h1>ruyi device provision</h1>}>
           {() => {
-            const DeviceConsole =
-              require('../../components/DeviceProvision/DeviceConsole').default;
-            return <DeviceConsole />;
+            const ProvisionWorkspace =
+              require('../../components/DeviceProvision/ProvisionWorkspace').default;
+            return <ProvisionWorkspace />;
           }}
         </BrowserOnly>
         <MarkdownCard className={styles.guide}>
