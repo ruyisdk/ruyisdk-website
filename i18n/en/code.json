@@ -586,7 +586,7 @@
     "message": "Select image file"
   },
   "tryruyi.device.reconnecting": {
-    "message": "Waiting for reconnection"
+    "message": "Waiting for reconnection. The USB name or ID may change after reboot. If the board does not reconnect automatically, click Connect board and select its new entry."
   },
   "tryruyi.device.restart": {
     "message": "Restart"
