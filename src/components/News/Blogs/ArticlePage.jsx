@@ -1,4 +1,5 @@
 import React from "react";
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import Translate from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
@@ -9,10 +10,6 @@ import styles from "./ArticlePage.module.css";
 
 import authorMetadata from "./authors.json";
 import tagMetadata from "./tags.json";
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en || contentMap["zh-Hans"];
-}
 
 function resolveAuthorLabel(authorKey) {
   return authorMetadata?.[authorKey]?.name || authorKey;
@@ -29,7 +26,7 @@ function resolveTagLabel(tagKey) {
 export default function ArticlePage({ contentMap }) {
   const { i18n } = useDocusaurusContext();
   const locale = i18n?.currentLocale;
-  const MainContentModule = resolveLocalizedContent(contentMap, locale);
+  const MainContentModule = resolveLocalizedContent(contentMap, locale) || contentMap["zh-Hans"];
   const MainContent = MainContentModule.default || MainContentModule;
   const frontMatter =
     MainContentModule.frontMatter ||

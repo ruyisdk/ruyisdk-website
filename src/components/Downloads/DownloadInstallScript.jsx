@@ -1,4 +1,5 @@
 import React from 'react';
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import MarkdownCard from '@site/src/components/About/MarkdownCard';
 import CodeBlock from '@theme/CodeBlock';
@@ -12,10 +13,6 @@ const INSTALL_CONTENT = {
   en: InstallEn,
   de: InstallDe,
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 function PreCodeBlock(props) {
   const children = React.Children.toArray(props.children);
