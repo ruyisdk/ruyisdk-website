@@ -22,3 +22,6 @@ runs:
     - name: Build website
       shell: bash
       run: pnpm run build
+    - name: Test device provisioning
+      shell: bash
+      run: pnpm run test:device

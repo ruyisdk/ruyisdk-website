@@ -1,3 +1,23 @@
+const downloadOrigins = new Set([
+  'https://mirror.iscas.ac.cn',
+  'https://archive.spacemit.com',
+  'https://developer.zhcomputing.com',
+]);
+
+export function trustedDownload(value) {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'https:' &&
+      downloadOrigins.has(url.origin) &&
+      !url.username &&
+      !url.password
+    );
+  } catch {
+    return false;
+  }
+}
+
 function segment(value) {
   if (
     !value ||
@@ -47,7 +67,7 @@ export async function prepareImages(
     let file = await existing(archives, name);
     if (!(await verified(file))) {
       file = null;
-      const urls = spec.resolved_urls.filter((url) => /^https?:\/\//.test(url));
+      const urls = spec.resolved_urls.filter(trustedDownload);
       const save = async (stream) => {
         const writer = await (
           await archives.getFileHandle(segment(name), { create: true })
@@ -84,7 +104,11 @@ export async function prepareImages(
       };
       for (const url of urls) {
         try {
-          const response = await fetch(url, { signal, credentials: 'omit' });
+          const response = await fetch(url, {
+            signal,
+            credentials: 'omit',
+            redirect: 'error',
+          });
           if (!response.ok || !response.body)
             throw Error(`HTTP ${response.status}`);
           file = await save(response.body);

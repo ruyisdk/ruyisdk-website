@@ -5,6 +5,7 @@ const filter = { classCode: 0xff, subclassCode: 0x42, protocolCode: 0x03 };
 const encoder = new TextEncoder(),
   decoder = new TextDecoder();
 class RemoteFailure extends Error {}
+const maxInfoPackets = 128;
 
 async function gzipSkipReason(session, file, compress) {
   if (!compress) return 'no matching gzip rule';
@@ -39,6 +40,12 @@ export class FastbootSession {
     this.label = label;
     this.trace(`USB: ${label}`);
     this.changed();
+  }
+  confirmTarget(device, reconfirm) {
+    if (!device || this.device !== device || !device.opened)
+      throw Error('The device disconnected before confirmation');
+    this.confirmedDevice = device;
+    this.reconfirm = reconfirm;
   }
   async select() {
     if (!this.acceptSelection || this.selecting) return;
@@ -122,14 +129,20 @@ export class FastbootSession {
     while (!this.device?.opened) {
       this.signal.throwIfAborted();
       if (Date.now() > deadline) throw Error('Timed out waiting for the board');
-      if (
+      const previous = this.lastDevice;
+      const authorized =
+        previous &&
         !this.selecting &&
-        this.lastDevice &&
-        (await navigator.usb.getDevices()).includes(this.lastDevice)
+        (await navigator.usb.getDevices()).includes(previous);
+      if (
+        authorized &&
+        !this.selecting &&
+        !this.device?.opened &&
+        this.lastDevice === previous
       ) {
         this.selecting = true;
         try {
-          await this.open(this.lastDevice);
+          await this.open(previous);
         } catch (error) {
           if (error.message !== lastError)
             this.trace(`USB reconnect: ${error.message}`);
@@ -146,28 +159,39 @@ export class FastbootSession {
   }
   async send(bytes) {
     this.signal.throwIfAborted();
+    if (this.confirmedDevice && this.device !== this.confirmedDevice)
+      throw Error('USB target changed before transfer');
     const result = await this.device.transferOut(this.output, bytes);
     if (result.status !== 'ok' || result.bytesWritten !== bytes.byteLength)
       throw Error('Incomplete USB write');
   }
   async response() {
+    const info = [];
     for (;;) {
       this.signal.throwIfAborted();
       const result = await this.device.transferIn(this.input, 64);
-      if (result.status !== 'ok' || !result.data || result.data.byteLength < 4)
+      if (
+        result.status !== 'ok' ||
+        !result.data ||
+        result.data.byteLength < 4 ||
+        result.data.byteLength > 64
+      )
         throw Error('Invalid fastboot reply');
       const packet = decoder.decode(result.data),
         type = packet.slice(0, 4),
         value = packet.slice(4).replace(/\0+$/, '');
       this.trace(`← ${type}${value ? ` ${value}` : ''}`);
       if (type === 'INFO' || type === 'TEXT') {
+        if (info.length >= maxInfoPackets)
+          throw Error('Too many fastboot informational replies');
+        info.push(value);
         this.log(value);
         continue;
       }
       if (type === 'FAIL') throw new RemoteFailure(value);
       if (type !== 'OKAY' && type !== 'DATA')
         throw Error(`Unexpected fastboot response ${type}`);
-      return { type, value };
+      return { type, value, info };
     }
   }
   async command(text, expected = 'OKAY') {
@@ -178,6 +202,23 @@ export class FastbootSession {
     const reply = await this.response();
     if (reply.type !== expected)
       throw Error(`Expected ${expected}, received ${reply.type}`);
+    if (text === 'getvar:max-download-size') {
+      const limits = [...reply.info, reply.value]
+        .map(
+          (line) =>
+            /^\s*(?:\(bootloader\)\s*)?(?:max-download-size\s*[:=]\s*)?(0x[\da-f]+|\d+)\s*$/i.exec(
+              line,
+            )?.[1],
+        )
+        .filter(Boolean)
+        .map(Number);
+      if (limits.length) {
+        const limit = Math.min(...limits);
+        if (!Number.isSafeInteger(limit) || limit < 1)
+          throw Error('Invalid device download limit');
+        return String(limit);
+      }
+    }
     return reply.value;
   }
   async download(file) {
@@ -202,6 +243,17 @@ export class FastbootSession {
       await this.ready();
       this.acceptSelection = false;
       this.changed();
+      if (this.confirmedDevice && this.device !== this.confirmedDevice) {
+        const candidate = this.device;
+        if (
+          !(await this.reconfirm(this.label)) ||
+          this.device !== candidate ||
+          !candidate?.opened
+        )
+          throw Error('Reconnected device was not confirmed; flashing stopped');
+        this.signal.throwIfAborted();
+        this.confirmedDevice = candidate;
+      }
       if (action === 'getvar' && args.length === 1 && /^[\w.-]+$/.test(args[0]))
         return {
           status: 0,
@@ -245,6 +297,10 @@ export class FastbootSession {
           );
         }
         const file = files.get(args[1]);
+        if (file.size > this.limit && !this.reportedLimit)
+          throw Error(
+            `Cannot split ${args[1]} without a device-reported download limit`,
+          );
         const skipReason = await gzipSkipReason(this, file, compress);
         this.trace(
           `${args[0]}: image=${args[1]} (${file.size} B), gzip=${skipReason ? `off (${skipReason})` : 'on'}`,

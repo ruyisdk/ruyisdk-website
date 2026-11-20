@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "test:device": "node --test scripts/test-device-*.mjs",
     "docusaurus": "docusaurus",
     "check:news-images": "node ./scripts/check-news-images.cjs",
     "check:news-images:strict": "node ./scripts/check-news-images.cjs --strict",

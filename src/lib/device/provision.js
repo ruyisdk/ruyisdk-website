@@ -186,6 +186,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   );
   for (const plan of plans) for (const step of plan.steps) log(`  • ${step}`);
   await ui.device();
+  const target = usb.device;
   log(`${t('目标', 'Target')}: ${usb.label}`);
   if (
     !(await confirm(
@@ -206,11 +207,22 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   )
     return;
   usb.acceptSelection = false;
+  usb.confirmTarget(target, (label) =>
+    confirm(
+      t(
+        `重连后检测到新的 USB 设备 ${label}。确认这是同一块开发板，并继续写入？`,
+        `USB reconnected as ${label}. Confirm this is the same board and resume flashing?`,
+      ),
+    ),
+  );
   usb.changed();
   ui.flashing?.();
   for (const plan of plans) {
     ui.trace?.(`Flash: ${plan.description}`);
-    await runtime.run({ kind: 'flash', ...plan.args }, plan.execute);
+    await runtime.run(
+      { kind: 'flash', ...plan.args, snapshot: plan.snapshot },
+      plan.execute,
+    );
     ui.trace?.(`Flash OK: ${plan.description}`);
   }
   log(t('刷写步骤成功完成。', 'Flashing finished successfully.'));
