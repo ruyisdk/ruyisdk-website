@@ -1,6 +1,10 @@
+import ast
 import os
 import json
 import re
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 from copy import deepcopy
 from functools import cmp_to_key
@@ -190,12 +194,63 @@ def load_data(repo_path: str):
                             
     return entities, packages, mirrors
 
+def export_provision_plugins(repo_path: str, output: Path):
+    root = (Path(repo_path) / "plugins").resolve(strict=True)
+    entries = sorted(path.name for path in root.glob("ruyi-device-provision-strategy-*"))
+    if "ruyi-device-provision-strategy-std" not in entries:
+        raise ValueError(f"Missing standard provisioning plugin in {root}")
+    revision = subprocess.check_output(
+        ["git", "-C", repo_path, "rev-parse", "HEAD"], text=True
+    ).strip()
+    modules = {}
+    pending = list(entries)
+    with tempfile.TemporaryDirectory(dir=output) as temporary:
+        bundle = Path(temporary) / "plugins"
+        bundle.mkdir()
+        while pending:
+            name = pending.pop()
+            if name in modules:
+                continue
+            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_-]*", name):
+                raise ValueError(f"Invalid plugin ID: {name}")
+            source = (root / name).resolve(strict=True)
+            if source.parent != root:
+                raise ValueError(f"Plugin {name} resolves outside {root}")
+            modules[name] = f"{source.name}/mod.star"
+            destination = bundle / source.name
+            if destination.exists():
+                continue
+            if not (source / "mod.star").is_file():
+                raise ValueError(f"Missing entry point for plugin {name}")
+            for path in sorted([*source.rglob("*.star"), *(source / "data").rglob("*.toml")]):
+                if not path.resolve(strict=True).is_relative_to(source):
+                    raise ValueError(f"Plugin file resolves outside {source}: {path}")
+                target = destination / path.relative_to(source)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(path, target)
+                if path.suffix == ".star":
+                    for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"), filename=str(path))):
+                        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+                            if node.value.startswith("ruyi-plugin://"):
+                                pending.append(node.value.removeprefix("ruyi-plugin://"))
+                            elif node.value.startswith("ruyi-plugin-data://"):
+                                pending.append(node.value.removeprefix("ruyi-plugin-data://").split("/", 1)[0])
+        entrypoints = sorted({Path(modules[name]).parent.name for name in entries})
+        manifest = {"revision": revision, "entrypoints": entrypoints, "modules": modules}
+        (bundle / "index.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        previous = output / "plugins"
+        if previous.exists():
+            shutil.rmtree(previous)
+        bundle.rename(previous)
+
+
 def generate_static_api(repo_path: str, output_dir: str):
     print("Loading data...")
     ENTITIES, PACKAGES, MIRRORS = load_data(repo_path)
     
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
+    export_provision_plugins(repo_path, out)
     
     print("Generating entities.json...")
     entities_res = []
