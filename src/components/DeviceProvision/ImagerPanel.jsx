@@ -253,7 +253,12 @@ export default function ImagerPanel({
               onClick={restart}
             >
               <RotateCcw size={14} aria-hidden="true" />
-              {translate({ id: 'tryruyi.device.restart', message: '重新开始' })}
+              {complete && !catalog
+                ? translate({ id: 'tryruyi.imager.retry', message: '重试' })
+                : translate({
+                    id: 'tryruyi.device.restart',
+                    message: '重新开始',
+                  })}
             </Button>
           ) : null}
         </header>

@@ -630,6 +630,9 @@
   "tryruyi.imager.prepareHint": {
     "message": "Wählen Sie ein Systemabbild aus, um die zugehörigen Pakete hier zu prüfen und vorzubereiten."
   },
+  "tryruyi.imager.retry": {
+    "message": "Erneut versuchen"
+  },
   "tryruyi.imager.setup": {
     "message": "Board einrichten"
   },

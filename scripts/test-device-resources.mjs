@@ -1,8 +1,85 @@
+import { provision } from '../src/lib/device/provision.js';
+import { prepareImages, trustedDownload } from '../src/lib/device/storage.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
-import { prepareImages, trustedDownload } from '../src/lib/device/storage.js';
+
+const setupCatalog = (signal, selectSystem) =>
+  provision({
+    runtime: { api: '/api/' },
+    locale: 'zh_CN',
+    ui: { selectSystem },
+    signal,
+  });
+
+test('setup uses English vendor names when the Chinese map is unavailable', async (context) => {
+  const requests = [];
+  context.mock.method(globalThis, 'fetch', async (url) => {
+    requests.push(url);
+    if (url.endsWith('zh-Hans.json'))
+      return new Response(null, { status: 404 });
+    if (url.endsWith('en.json')) return Response.json({ sipeed: 'Sipeed' });
+    if (url.endsWith('combo.json'))
+      return Response.json({ data: { 'image-combo': { package_atoms: [] } } });
+    return Response.json([]);
+  });
+  await setupCatalog(new AbortController().signal, (catalog, vendors) => {
+    assert.deepEqual(vendors, { sipeed: 'Sipeed' });
+    return { file_path: 'combo.toml' };
+  });
+  assert.deepEqual(
+    requests.filter((url) => url.includes('/vendors/')),
+    ['/api/vendors/zh-Hans.json', '/api/vendors/en.json'],
+  );
+});
+
+test('stalled vendor response bodies time out, including the English fallback', async (context) => {
+  context.mock.timers.enable({ apis: ['setTimeout'] });
+  const requests = [];
+  context.mock.method(globalThis, 'fetch', async (url, { signal }) => {
+    if (!url.includes('/vendors/')) return Response.json([]);
+    return {
+      ok: true,
+      json: () =>
+        new Promise((resolve, reject) => {
+          requests.push(url);
+          signal.addEventListener(
+            'abort',
+            () => reject(new DOMException('Aborted', 'AbortError')),
+            { once: true },
+          );
+        }),
+    };
+  });
+  const done = assert.rejects(
+    setupCatalog(new AbortController().signal, assert.fail),
+    /读取索引超时.*vendors\/en\.json/,
+  );
+  await new Promise(setImmediate);
+  assert.deepEqual(requests, ['/api/vendors/zh-Hans.json']);
+  context.mock.timers.tick(15_000);
+  await new Promise(setImmediate);
+  assert.deepEqual(requests, [
+    '/api/vendors/zh-Hans.json',
+    '/api/vendors/en.json',
+  ]);
+  context.mock.timers.tick(15_000);
+  await done;
+});
+
+test('cancelling setup does not start an English fallback request', async (context) => {
+  const controller = new AbortController();
+  context.mock.method(globalThis, 'fetch', async (url, { signal }) => {
+    if (!url.includes('/vendors/')) return Response.json([]);
+    assert.ok(url.endsWith('zh-Hans.json'));
+    controller.abort();
+    signal.throwIfAborted();
+  });
+  await assert.rejects(setupCatalog(controller.signal, assert.fail), {
+    name: 'AbortError',
+  });
+});
 
 test('automatic downloads use trusted HTTPS origins and refuse redirects', async (context) => {
   const trusted =
