@@ -200,14 +200,19 @@ export default function DeviceConsole() {
         session.current.writing = true;
         update();
       },
-      localFile: async (spec) =>
+      localFile: async (spec, mirrors) =>
         await wait(
           'file',
-          t(
-            `请用侧栏的镜像链接下载 ${spec.name}，然后选择本地文件继续。`,
-            `Download ${spec.name} using the mirror link in the sidebar, then select the local file to continue.`,
-          ),
-          { spec },
+          mirrors.length
+            ? t(
+                `请用侧栏的镜像链接下载 ${spec.name}，然后选择本地文件继续。`,
+                `Download ${spec.name} using the mirror link in the sidebar, then select the local file to continue.`,
+              )
+            : t(
+                `请选择本地文件 ${spec.name} 继续。`,
+                `Select the local file ${spec.name} to continue.`,
+              ),
+          { spec, mirrors },
         ),
     };
     const execute = () =>
@@ -532,25 +537,23 @@ export default function DeviceConsole() {
                 })}
               </h2>
               <p>{prompt.spec.name}</p>
-              {prompt.spec.resolved_urls
-                .filter((url) => /^https?:\/\//.test(url))
-                .map((url) => (
-                  <a
-                    className={styles.downloadLink}
-                    key={url}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {translate(
-                      {
-                        id: 'tryruyi.device.downloadFrom',
-                        message: '从 {host} 下载',
-                      },
-                      { host: new URL(url).hostname },
-                    )}
-                  </a>
-                ))}
+              {prompt.mirrors.map((url) => (
+                <a
+                  className={styles.downloadLink}
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {translate(
+                    {
+                      id: 'tryruyi.device.downloadFrom',
+                      message: '从 {host} 下载',
+                    },
+                    { host: new URL(url).hostname },
+                  )}
+                </a>
+              ))}
               <button type="button" onClick={selectImage}>
                 {translate({
                   id: 'tryruyi.device.chooseFile',

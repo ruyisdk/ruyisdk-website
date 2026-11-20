@@ -5,8 +5,11 @@ import vm from 'node:vm';
 import { prepareImages, trustedDownload } from '../src/lib/device/storage.js';
 
 test('automatic downloads use trusted HTTPS origins and refuse redirects', async (context) => {
-  const trusted = 'https://mirror.iscas.ac.cn/revyos/image';
+  const trusted =
+    'https://mirror.iscas.ac.cn/revyos/image?signature=test-token';
   const blocked = [
+    'https://',
+    'https://example.org/image',
     'http://mirror.iscas.ac.cn/image',
     'https://mirror.iscas.ac.cn:8443/image',
     'https://mirror.iscas.ac.cn.example.org/image',
@@ -17,10 +20,11 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
   assert.ok(blocked.every((url) => !trustedDownload(url)));
   const requests = [];
   const phases = [];
+  const logs = [];
   context.mock.method(globalThis, 'fetch', async (url, options) => {
     requests.push(url);
     assert.equal(options.redirect, 'error');
-    throw new TypeError('redirect rejected');
+    throw new TypeError(`Failed to fetch ${url}`);
   });
   const root = {
     getDirectoryHandle: async () => root,
@@ -49,9 +53,10 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
       root,
       runtime: {},
       progress: (value) => phases.push(value?.phase ?? null),
-      log: () => {},
+      log: (line) => logs.push(line),
       signal: new AbortController().signal,
-      localFile: async () => {
+      localFile: async (spec, mirrors) => {
+        assert.deepEqual(mirrors, [trusted]);
         assert.deepEqual(phases, ['Download', null]);
         throw Error('manual import requested');
       },
@@ -59,6 +64,7 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
     /manual import requested/,
   );
   assert.deepEqual(requests, [trusted]);
+  assert.deepEqual(logs, ['mirror.iscas.ac.cn: Download failed']);
 });
 
 test('manual import verifies the selected file and extracts it without caching a copy', async () => {
