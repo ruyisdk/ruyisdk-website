@@ -58,6 +58,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
   const [preparing, setPreparing] = useState(false);
   const [packageOptions, setPackageOptions] = useState(null);
   const [steps, setSteps] = useState(null);
+  const [fastbootRequired, setFastbootRequired] = useState(true);
   const [panelStatus, setPanelStatus] = useState({});
   const [traceText, setTraceText] = useState('');
   const [traceOpen, setTraceOpen] = useState(false);
@@ -147,6 +148,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
     setPreparing(false);
     setPackageOptions(null);
     setSteps(null);
+    setFastbootRequired(true);
     setPanelStatus({});
     setComplete(false);
     setIssue('');
@@ -162,6 +164,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
     };
     let lastProgress = 0;
     const ui = {
+      fastbootRequired: setFastbootRequired,
       log: output,
       trace,
       confirm: async (title) => {
@@ -526,46 +529,48 @@ export default function ProvisionWorkspace({ graphical = false }) {
           </section>
         )}
         <aside className={styles.aside}>
-          <section>
-            <h2>
-              <Usb size={20} /> Fastboot
-            </h2>
-            <div className={styles.status}>
-              <i data-online={online} />
-              {!navigator.usb
-                ? translate({
-                    id: 'tryruyi.device.usbUnavailable',
-                    message: '浏览器不支持 WebUSB',
-                  })
-                : online
-                  ? usb.label
-                  : usb?.lastDevice
-                    ? translate({
-                        id: 'tryruyi.device.reconnecting',
-                        message: '等待设备重新连接',
-                      })
-                    : translate({
-                        id: 'tryruyi.device.disconnected',
-                        message: '未连接开发板',
-                      })}
-            </div>
-            <Button
-              variant="secondary"
-              size="sm"
-              disabled={
-                !navigator.usb ||
-                complete ||
-                !usb?.acceptSelection ||
-                usb?.selecting
-              }
-              onClick={connect}
-            >
-              {translate({
-                id: 'tryruyi.device.connect',
-                message: '连接开发板',
-              })}
-            </Button>
-          </section>
+          {fastbootRequired && (
+            <section>
+              <h2>
+                <Usb size={20} /> Fastboot
+              </h2>
+              <div className={styles.status}>
+                <i data-online={online} />
+                {!navigator.usb
+                  ? translate({
+                      id: 'tryruyi.device.usbUnavailable',
+                      message: '浏览器不支持 WebUSB',
+                    })
+                  : online
+                    ? usb.label
+                    : usb?.lastDevice
+                      ? translate({
+                          id: 'tryruyi.device.reconnecting',
+                          message: '等待设备重新连接',
+                        })
+                      : translate({
+                          id: 'tryruyi.device.disconnected',
+                          message: '未连接开发板',
+                        })}
+              </div>
+              <Button
+                variant="secondary"
+                size="sm"
+                disabled={
+                  !navigator.usb ||
+                  complete ||
+                  !usb?.acceptSelection ||
+                  usb?.selecting
+                }
+                onClick={connect}
+              >
+                {translate({
+                  id: 'tryruyi.device.connect',
+                  message: '连接开发板',
+                })}
+              </Button>
+            </section>
+          )}
           <section>
             <h2>
               <FolderOpen size={20} />
