@@ -22,6 +22,7 @@
   margin-top: 28px;
 }
 .console {
+  align-self: start;
   background: #111923;
   color: #e1eaf2;
   border: 1px solid #334453;
@@ -115,6 +116,11 @@
   color: inherit;
   border-radius: 6px;
   padding: 7px 14px;
+}
+.downloadLink {
+  display: block;
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
 }
 .status i {
   display: inline-block;
