@@ -1,4 +1,5 @@
 import { packageFastboot } from './spacemit.js';
+import { desktopDisks, diskCommand } from './disk.js';
 import { prepareImages } from './storage.js';
 
 const indexTimeoutMs = 15_000;
@@ -148,12 +149,19 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       rows.map((row) => detail(row, requestSignal)),
     );
     let issue;
-    if (packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1'))
+    if (
+      !desktopDisks() &&
+      packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1')
+    )
       issue = t(
-        'dd-v1 需要直接写入电脑连接的磁盘。网页不支持，请用本机 ruyi device provision。',
-        'dd-v1 writes a host block device. Web flashing is unsupported. Use native ruyi device provision.',
+        'dd-v1 需要直接写盘。请用 Ruyi Imager 桌面应用打开此页面，或在本机运行 ruyi device provision。',
+        'dd-v1 requires raw disk access. Open this page in the Ruyi Imager desktop app or run ruyi device provision locally.',
       );
-    else if (!navigator.usb || !window.showDirectoryPicker)
+    else if (
+      !window.showDirectoryPicker ||
+      (packages.some((pkg) => pkg.data.provisionable.strategy !== 'dd-v1') &&
+        !navigator.usb)
+    )
       issue = t(
         '此浏览器不支持设备刷写，请使用桌面 Chrome 或 Edge。',
         'Device flashing requires desktop Chrome or Edge.',
@@ -201,18 +209,42 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     )
       return;
   }
+  const usesFastboot = selected.some(
+    (pkg) => pkg.data.provisionable.strategy !== 'dd-v1',
+  );
+  ui.fastbootRequired?.(usesFastboot);
   const root = await ui.directory();
   log(`${root.name}/RuyiImages/`);
   const plans = [];
+  const disks = new Map();
+  const host = desktopDisks();
   ui.trace?.(`packages-index: ${plugins.revision}`);
   const messageCatalog = await messages();
   for (const pkg of selected) {
     const { strategy, partition_map: paths } = pkg.data.provisionable;
     const description = `${pkg.package} ${pkg.version} (${strategy})`;
+    const targets = Object.create(null);
+    if (strategy === 'dd-v1') {
+      for (const slot of Object.keys(paths)) {
+        if (!disks.has(slot)) {
+          signal.throwIfAborted();
+          const target = await host.selectDisk(slot);
+          if (!target) {
+            log(t('已取消。', 'Cancelled.'));
+            return;
+          }
+          disks.set(slot, target);
+        }
+        targets[slot] = disks.get(slot);
+      }
+    }
     ui.trace?.(`Prepare: ${description}`);
     const args = {
       strategy,
       paths,
+      blockDevices: Object.fromEntries(
+        Object.entries(targets).map(([key, target]) => [key, target.label]),
+      ),
       modules: plugins.modules,
       messages: messageCatalog,
       locale,
@@ -229,7 +261,20 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       localFile: ui.localFile,
       progress: ui.progress,
     });
-    const execute = await packageFastboot(usb, runtime, strategy, paths, files);
+    const execute =
+      strategy === 'dd-v1'
+        ? diskCommand({
+            paths,
+            targets,
+            files,
+            host,
+            runtime,
+            signal,
+            log: ui.trace ?? log,
+            directory: root.name,
+            pkg,
+          })
+        : await packageFastboot(usb, runtime, strategy, paths, files);
     plans.push({ ...plan, args, execute, description });
   }
   plans.sort((left, right) => right.priority - left.priority);
@@ -244,9 +289,11 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     );
     for (const step of steps) log(`  • ${step}`);
   }
-  await ui.device();
+  if (usesFastboot) {
+    await ui.device();
+    log(`${t('目标', 'Target')}: ${usb.label}`);
+  }
   const target = usb.device;
-  log(`${t('目标', 'Target')}: ${usb.label}`);
   if (
     !(await confirm(
       t(
@@ -257,6 +304,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   )
     return;
   if (
+    usesFastboot &&
     !(await confirm(
       t(
         '确认 fastboot 识别的是要刷写的这块开发板？',
@@ -265,24 +313,31 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     ))
   )
     return;
-  usb.acceptSelection = false;
-  usb.confirmTarget(target, (label) =>
-    confirm(
-      t(
-        `重连后检测到新的 USB 设备 ${label}。确认这是同一块开发板，并继续写入？`,
-        `USB reconnected as ${label}. Confirm this is the same board and resume flashing?`,
+  if (usesFastboot) {
+    usb.acceptSelection = false;
+    usb.confirmTarget(target, (label) =>
+      confirm(
+        t(
+          `重连后检测到新的 USB 设备 ${label}。确认这是同一块开发板，并继续写入？`,
+          `USB reconnected as ${label}. Confirm this is the same board and resume flashing?`,
+        ),
       ),
-    ),
-  );
-  usb.changed();
-  ui.flashing?.();
-  for (const plan of plans) {
-    ui.trace?.(`Flash: ${plan.description}`);
-    await runtime.run(
-      { kind: 'flash', ...plan.args, snapshot: plan.snapshot },
-      plan.execute,
     );
-    ui.trace?.(`Flash OK: ${plan.description}`);
+    usb.changed();
+  }
+  ui.flashing?.();
+  await host?.setFlashing?.(true);
+  try {
+    for (const plan of plans) {
+      ui.trace?.(`Flash: ${plan.description}`);
+      await runtime.run(
+        { kind: 'flash', ...plan.args, snapshot: plan.snapshot },
+        plan.execute,
+      );
+      ui.trace?.(`Flash OK: ${plan.description}`);
+    }
+  } finally {
+    await host?.setFlashing?.(false);
   }
   log(t('刷写步骤成功完成。', 'Flashing finished successfully.'));
   await postInstall();

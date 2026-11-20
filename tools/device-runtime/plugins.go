@@ -232,7 +232,24 @@ func runPlugin(job, host js.Value) (any, error) {
 	if fn == nil {
 		return nil, fmt.Errorf("Missing %s", function)
 	}
-	returned, err := starlark.Call(thread, fn, starlark.Tuple{mapping, starlark.NewDict(0)}, nil)
+	needs, _, _ := declaration.Get(starlark.String("need_host_blkdevs_fn"))
+	required, err := starlark.Call(thread, needs, starlark.Tuple{starlark.NewList(mapping.Keys())}, nil)
+	if err != nil {
+		return nil, err
+	}
+	slots, ok := required.(*starlark.List)
+	if !ok {
+		return nil, errors.New("Invalid block device requirements")
+	}
+	devices := starlark.NewDict(slots.Len())
+	for index := 0; index < slots.Len(); index++ {
+		key, ok := starlark.AsString(slots.Index(index))
+		if !ok || !job.Get("blockDevices").Truthy() || job.Get("blockDevices").Get(key).Type() != js.TypeString {
+			return nil, fmt.Errorf("Missing target disk for %q", key)
+		}
+		devices.SetKey(slots.Index(index), starlark.String(job.Get("blockDevices").Get(key).String()))
+	}
+	returned, err := starlark.Call(thread, fn, starlark.Tuple{mapping, devices}, nil)
 	if err != nil {
 		return nil, err
 	}
