@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { loadFilters, isFiltered } = require('./lib/contributor-filters.cjs');
 const { withRequestTimeout } = require('./lib/request-timeout.cjs');
 
 // Repos under ruyisdk org to aggregate contributors from
@@ -267,7 +268,7 @@ async function summarizeData() {
   const contributor_merged = Array.from(contributors.values()).sort((a, b) => b.contributions - a.contributions);
 
   // Apply filters from settings/community/contributor_filter.md
-  const filters = loadFilters();
+  const filters = loadFilters(FILTER_FILE);
   let contributor_filtered = contributor_merged;
   if (filters.length) {
     const before = contributor_merged.length;
@@ -304,35 +305,6 @@ async function summarizeData() {
 
   fs.writeFileSync(SUM_FILE, JSON.stringify(out, null, 2), 'utf8');
   console.log(`Wrote ${SUM_FILE} with ${contributor_filtered.length} contributors`);
-}
-
-
-function loadFilters() {
-  const patterns = [];
-  try {
-    if (!fs.existsSync(FILTER_FILE)) return patterns;
-    const raw = fs.readFileSync(FILTER_FILE, 'utf8');
-    raw.split(/\r?\n/).forEach((line) => {
-      const s = (line || '').trim();
-      if (!s || s.startsWith('#')) return;
-      try {
-        patterns.push(new RegExp(s, 'i'));
-      } catch (e) {
-        console.warn(`[contributors] Invalid regex in filter file skipped: ${s}`);
-      }
-    });
-  } catch (e) {
-    console.warn('[contributors] Failed to read filter file:', e.message || e);
-  }
-  return patterns;
-}
-
-
-function isFiltered(name, patterns) {
-  if (!name || !patterns || patterns.length === 0) return false;
-  return patterns.some((re) => {
-    try { return re.test(name); } catch { return false; }
-  });
 }
 
 
