@@ -4,6 +4,10 @@ description: Build website with pnpm
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-go@v5
+      with:
+        go-version-file: tools/device-runtime/go.mod
+        cache-dependency-path: tools/device-runtime/go.sum
     - uses: pnpm/action-setup@v4
       with:
         version: 10
