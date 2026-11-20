@@ -86,6 +86,18 @@
   padding-inline-start: 1.4rem;
   margin: 0.6rem 0;
 }
+.yellow {
+  color: #805900;
+}
+.green {
+  color: #18653a;
+}
+:global(html[data-theme='dark']) .yellow {
+  color: #ffd166;
+}
+:global(html[data-theme='dark']) .green {
+  color: #77dba5;
+}
 @media (max-width: 600px) {
   .fields {
     grid-template-columns: minmax(0, 1fr);

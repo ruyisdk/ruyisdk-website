@@ -58,6 +58,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
   const [preparing, setPreparing] = useState(false);
   const [packageOptions, setPackageOptions] = useState(null);
   const [steps, setSteps] = useState(null);
+  const [panelStatus, setPanelStatus] = useState({});
   const [traceText, setTraceText] = useState('');
   const [traceOpen, setTraceOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState(null);
@@ -112,11 +113,17 @@ export default function ProvisionWorkspace({ graphical = false }) {
     const controller = new AbortController();
     const t = (cn, en) => (zh ? cn : en);
     const { signal } = controller;
+    let activePanel = 'setup';
     const update = () => {
       if (!signal.aborted) refresh((value) => value + 1);
     };
     const output = (text) => {
-      if (!signal.aborted) log(text);
+      if (signal.aborted) return;
+      if (graphical) {
+        const panel = activePanel;
+        const message = clean(text).slice(0, 8192);
+        setPanelStatus((previous) => ({ ...previous, [panel]: message }));
+      } else log(text);
     };
     const trace = (text) => {
       if (signal.aborted) return;
@@ -140,6 +147,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
     setPreparing(false);
     setPackageOptions(null);
     setSteps(null);
+    setPanelStatus({});
     setComplete(false);
     setIssue('');
     setTransfer(null);
@@ -245,10 +253,12 @@ export default function ProvisionWorkspace({ graphical = false }) {
         ),
     };
     if (graphical) {
-      ui.selectSystem = (catalog, vendors) => {
+      ui.selectSystem = async (catalog, vendors) => {
         signal.throwIfAborted();
         setCatalog({ catalog, vendors });
-        return selectedImage.current ?? wait('system', '');
+        const image = selectedImage.current ?? (await wait('system', ''));
+        activePanel = 'prepare';
+        return image;
       };
       ui.preparePackages = (options) => {
         signal.throwIfAborted();
@@ -256,7 +266,9 @@ export default function ProvisionWorkspace({ graphical = false }) {
         return wait('packages', '');
       };
       ui.review = (items) => {
-        if (!signal.aborted) setSteps(items);
+        signal.throwIfAborted();
+        activePanel = 'flash';
+        setSteps(items);
       };
     }
     const execute = () =>
@@ -436,7 +448,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
             preparing={preparing}
             packageOptions={packageOptions}
             steps={steps}
-            status={lines.at(-1)}
+            panelStatus={panelStatus}
             complete={complete}
             writing={session.current?.writing}
             restart={() => {
