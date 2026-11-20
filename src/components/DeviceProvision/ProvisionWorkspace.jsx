@@ -546,7 +546,8 @@ export default function ProvisionWorkspace({ graphical = false }) {
                     : usb?.lastDevice
                       ? translate({
                           id: 'tryruyi.device.reconnecting',
-                          message: '等待设备重新连接',
+                          message:
+                            '等待设备重新连接。重启后 USB 名称或 ID 可能变化。若未自动重连，请点击“连接开发板”，选择这块板新出现的设备。',
                         })
                       : translate({
                           id: 'tryruyi.device.disconnected',

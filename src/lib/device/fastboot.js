@@ -120,9 +120,9 @@ export class FastbootSession {
   async ready() {
     if (this.device?.opened) return;
     this.acceptSelection = true;
-    this.status('Reconnect the same board in fastboot mode');
+    this.status('Waiting for the board to reconnect in fastboot mode');
     this.log(
-      'Waiting for the same board. If USB re-enumerated, use “Connect board” to authorize its next stage.',
+      'Waiting for Fastboot to reconnect. After a reboot, the board may appear under a new USB name or ID. If it does, click “Connect board”, select the new entry for this board, and confirm to continue.',
     );
     const deadline = Date.now() + 120000;
     let lastError;

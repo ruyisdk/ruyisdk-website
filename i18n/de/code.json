@@ -586,7 +586,7 @@
     "message": "Abbilddatei auswählen"
   },
   "tryruyi.device.reconnecting": {
-    "message": "Warten auf erneute Verbindung"
+    "message": "Warten auf erneute Verbindung. Nach dem Neustart können sich USB-Name oder ID ändern. Falls die Verbindung nicht automatisch hergestellt wird, klicke auf „Board verbinden“ und wähle den neuen Eintrag für dieses Board."
   },
   "tryruyi.device.restart": {
     "message": "Neu beginnen"
