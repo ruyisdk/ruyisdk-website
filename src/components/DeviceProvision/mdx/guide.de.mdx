@@ -1,9 +1,22 @@
 ## Anleitung zum Flashen
 
-Öffne diese Seite auf deinem Computer in Chrome oder Edge und verwende ein USB-Kabel, das Daten übertragen kann. Beim Flashen werden die Zielpartitionen überschrieben. Sichere vorher alle Daten auf dem Board, die du behalten möchtest.
+Sichere vor dem Flashen alle Daten, die du auf dem Board behalten möchtest.
 
 1. **System auswählen.** Gib im Terminal die Nummer der gewünschten Option ein und drücke die Eingabetaste. Wähle so das Board, die Hardwarevariante und das Systemabbild aus. Bei der Abfrage `(y/N)` gib `y` ein, um fortzufahren.
-2. **Abbilder vorbereiten.** Klicke auf **Verzeichnis auswählen**. Der Assistent prüft die SHA-256-Prüfsummen und entpackt die benötigten Dateien unter `RuyiImages/` im gewählten Verzeichnis. Wenn du eine lokale Datei auswählen sollst, achte auf den genauen Dateinamen. Falls du die Datei noch herunterladen musst, verwende den Download-Link in der Seitenleiste, sofern einer angezeigt wird.
-3. **Board verbinden und flashen.** Versetze das Board in den Fastboot-Modus und verbinde es über USB mit dem Computer. Klicke auf **Board verbinden** und wähle das Board im Browser aus. Prüfe die angezeigten Schritte und das Zielgerät, bevor du das Flashen bestätigst. Lass das Board angeschlossen, bis das Terminal den Abschluss meldet.
+2. **Abbilder vorbereiten.** Klicke auf **Verzeichnis auswählen**. Der Assistent prüft die SHA-256-Prüfsummen und entpackt die benötigten Dateien unter `RuyiImages/` im gewählten Verzeichnis. Falls du eine lokale Datei importieren sollst, wähle die Datei mit genau dem angezeigten Namen. Bei Bedarf kannst du sie über einen Download-Link in der Seitenleiste herunterladen.
 
-Falls ein Schritt fehlschlägt, öffne das **Flash-Protokoll** unten in der Seitenleiste. Wenn der Assistent für ein Abbild `dd-v1` anzeigt, führe `ruyi device provision` auf deinem Computer aus.
+### Board über Fastboot flashen
+
+Öffne diese Seite auf dem Computer in Chrome oder Edge. Versetze das Board gemäß seiner Dokumentation in den Flash-Modus, schließe es mit einem USB-Datenkabel an und klicke auf **Board verbinden**. Prüfe in der Seitenleiste den Gerätenamen, die USB-Hersteller- und Produkt-ID sowie die Seriennummer, sofern verfügbar. Kontrolliere das Ziel und die angezeigten Schritte, bevor du das Schreiben bestätigst.
+
+Bei manchen Verfahren startet das Board während des Flashens neu. Lass das Kabel angeschlossen. Das Gerät kann mit einem anderen Namen oder einer anderen USB-ID wieder erscheinen. Wartet der Assistent weiterhin auf die Verbindung, klicke erneut auf **Board verbinden** und wähle den aktuellen Eintrag für dasselbe physische Board. Bestätige die Auswahl, wenn du dazu aufgefordert wirst. Der Assistent setzt die verbleibenden Schritte fort, ohne dass du ihn neu starten musst.
+
+### Das USB-Gerät wird angezeigt, lässt sich aber nicht öffnen
+
+Schließe andere Flash-Programme oder Browser-Tabs, die das Gerät verwenden könnten. Zeigt der Browser das Gerät als gekoppelt an, meldet aber `Access denied`, prüfe den Zugriff des Betriebssystems auf die USB-Schnittstelle der aktuellen Phase.
+
+- **Linux:** Erscheint das Board nur bei `sudo fastboot devices`, ermittle die aktuellen USB-IDs mit `lsusb`. Richte nach der Anleitung deiner Distribution oder deines Boards eine passende udev-Regel ein, die dem Desktop-Benutzer Lese- und Schreibzugriff gewährt. Lade die Regeln neu, verbinde das Board erneut und prüfe `fastboot devices` als normaler Benutzer.
+- **Windows:** Prüfe im Geräte-Manager die Hardware-ID und den Treiberstatus der USB-Schnittstelle für die aktuelle Phase. Fehlt der Treiber oder ist er inkompatibel, richte nach der Anleitung des Herstellers einen WinUSB-kompatiblen Treiber für diese Schnittstelle ein.
+- **macOS:** Prüfe unter **Systeminformationen → USB**, ob das Gerät in der aktuellen Phase erscheint. Wenn macOS es anzeigt, Chrome aber keine Verbindung herstellen kann, sieh unter `chrome://device-log` nach dem Fehler dieses Verbindungsversuchs.
+
+Falls ein Schritt fehlschlägt, öffne das **Flash-Protokoll** unten in der Seitenleiste.

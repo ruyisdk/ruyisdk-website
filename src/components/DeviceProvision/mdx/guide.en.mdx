@@ -1,9 +1,22 @@
-## How to flash a board
+## How to flash an image
 
-Open this page in desktop Chrome or Edge and use a USB cable that supports data transfer. Flashing overwrites the target partitions. Back up any data you want to keep before you begin.
+Back up any data you want to keep on the board before flashing.
 
 1. **Select a system.** In the terminal, enter an option number and press Enter to select your board, hardware variant, and system image. At a `(y/N)` prompt, enter `y` to continue.
-2. **Prepare the images.** Click **Choose directory**. The wizard verifies the SHA-256 checksums and extracts the files for flashing under `RuyiImages/` in that directory. If prompted to import a local file, choose the file with the exact name shown. Use a mirror link in the sidebar if you need to download it.
-3. **Connect and flash.** Put the board in fastboot mode, connect it to your computer over USB, and click **Connect board**. Select the board in the browser, then review the flashing steps and target device before confirming. Keep the board connected until the terminal reports that flashing is complete.
+2. **Prepare the images.** Click **Choose directory**. The wizard verifies the SHA-256 checksums and extracts the files under `RuyiImages/` in that directory. If prompted to import a local file, choose the file with the exact name shown. Use a mirror link in the sidebar if you need to download it.
 
-If a step fails, open **Flashing log** at the bottom of the sidebar to see what happened. If the wizard reports that an image uses `dd-v1`, run `ruyi device provision` on your computer.
+### Flash a board over Fastboot
+
+Open this page in desktop Chrome or Edge. Follow the board’s documentation to enter flashing mode, connect it with a USB data cable, and click **Connect board**. Check the device name, USB vendor and product IDs, and serial number if available in the sidebar. Review the target and flashing steps before confirming the write.
+
+Some flashing procedures reboot the board. Keep the cable connected. The device may reappear with a different name or USB ID. If the wizard is still waiting for reconnection, click **Connect board** again and select the entry for the same physical board. Confirm when prompted. The wizard resumes the remaining steps without requiring **Restart**.
+
+### The USB device is listed but will not open
+
+Close other flashing tools or tabs that may have the device open. If the browser shows the device as paired but reports `Access denied`, check operating system access to the USB interface for the current stage.
+
+- **Linux:** If only `sudo fastboot devices` lists the board, use `lsusb` to identify its current USB IDs. Follow your distribution’s or board’s instructions to grant the desktop user read/write access with a matching udev rule. Reload the rules, reconnect, and check `fastboot devices` as your regular user.
+- **Windows:** In Device Manager, check the hardware ID and driver status of the USB interface for the current stage. If the driver is missing or incompatible, follow the vendor’s instructions to configure a WinUSB-compatible driver for that interface.
+- **macOS:** Check **System Information → USB** for the device at the current stage. If macOS lists it but Chrome cannot connect, check `chrome://device-log` for the error from that connection attempt.
+
+If a step fails, open **Flashing log** at the bottom of the sidebar to see what happened.
