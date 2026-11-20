@@ -115,13 +115,14 @@
   padding: 0;
 }
 
-.markdown blockquote {
+.markdown blockquote,
+.markdown :global(.markdown-note) {
   margin: 1rem 0;
   padding: 0.8rem 1rem;
-  border-left: 4px solid #1648B8;
+  border-left: 4px solid var(--markdown-note-border, #1648B8);
   border-radius: 0 8px 8px 0;
-  background: #eff6ff;
-  color: #1e3a8a;
+  background: var(--markdown-note-background, #eff6ff);
+  color: var(--markdown-note-text, #1e3a8a);
 }
 
 .markdown hr {
@@ -226,10 +227,11 @@
   border: 0;
 }
 
-:global(html[data-theme="dark"]) .markdown blockquote {
-  border-left-color: #58a6ff;
-  background: rgba(56, 139, 253, 0.12);
-  color: #dbeafe;
+:global(html[data-theme="dark"]) .markdown blockquote,
+:global(html[data-theme="dark"]) .markdown :global(.markdown-note) {
+  border-left-color: var(--markdown-note-border, #58a6ff);
+  background: var(--markdown-note-background, rgba(56, 139, 253, 0.12));
+  color: var(--markdown-note-text, #dbeafe);
 }
 
 :global(html[data-theme="dark"]) .markdown hr {
