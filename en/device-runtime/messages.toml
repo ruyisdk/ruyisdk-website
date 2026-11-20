@@ -1,0 +1,613 @@
+ruyi-repo-messages = "v1"
+
+["extras/wps-office"]
+en_US = """
+You need to download the package manually from the WPS Office download page:
+
+* Go to [yellow]https://linux.wps.cn[/]
+* Click "[yellow]立即下载[/]"
+* Ensure the version number shown below the "[yellow]64位 Deb格式[/]" column is [green]{{ version }}[/]
+* Click "[yellow]For {{ arch_humanized }}[/]" in that column to start downloading
+
+Place the downloaded file at [green]{{ dest_path }}[/] and re-run the install command.
+"""
+
+zh_CN = """
+您需要从 WPS Office 下载页面手工下载该软件包：
+
+* 访问 [yellow]https://linux.wps.cn[/]
+* 单击“[yellow]立即下载[/]”
+* 确保“[yellow]64位 Deb格式[/]”一列下显示的软件版本号为 [green]{{ version }}[/]
+* 单击该列中的“[yellow]For {{ arch_humanized }}[/]”以开始下载
+
+将下载完成的文件置于 [green]{{ dest_path }}[/] 并重新执行安装命令。
+"""
+
+["provisioner/doc-buildroot-sdk-canaan-k510"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the official documentation for
+instructions on how to build the SDK, as upstream does not provide pre-built
+images right now. The RuyiSDK Support Matrix record may be of use too.
+
+Link: https://github.com/kendryte/k510_buildroot
+Link: https://github.com/ruyisdk/support-matrix/blob/main/K510/BuildRoot/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅官方文档了解如何
+构建 SDK。RuyiSDK 支持矩阵记录也可能对您有所帮助。
+
+链接：https://github.com/kendryte/k510_buildroot
+链接：https://github.com/ruyisdk/support-matrix/blob/main/K510/BuildRoot/README.md
+"""
+
+["provisioner/doc-buildroot-sdk-milkv-vega"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the official documentation for
+instructions on how to build the SDK, as upstream does not provide pre-built
+images right now. The RuyiSDK Support Matrix record may be of use too.
+
+Link: https://milkv.io/zh/docs/vega/getting-started/buildroot-sdk
+Link: https://github.com/ruyisdk/support-matrix/blob/main/Vega/BuildRoot/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅官方文档了解如何
+构建 SDK。RuyiSDK 支持矩阵记录也可能对您有所帮助。
+
+链接：https://milkv.io/zh/docs/vega/getting-started/buildroot-sdk
+链接：https://github.com/ruyisdk/support-matrix/blob/main/Vega/BuildRoot/README.md
+"""
+
+["provisioner/doc-freertos-sipeed-maix1"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the official documentation for
+instructions on how to build the SDK, as upstream does not provide pre-built
+images right now. The RuyiSDK Support Matrix record may be of use too.
+
+Link: https://github.com/kendryte/kendryte-freertos-sdk
+Link: https://github.com/ruyisdk/support-matrix/blob/main/Maix-I_K210/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅官方文档了解如何
+构建 SDK。RuyiSDK 支持矩阵记录也可能对您有所帮助。
+
+链接：https://github.com/kendryte/kendryte-freertos-sdk
+链接：https://github.com/ruyisdk/support-matrix/blob/main/Maix-I_K210/FreeRTOS/README.md
+"""
+
+["provisioner/doc-freertos-sipeed-tangmega138kpro"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the official documentation for
+instructions on how to build the SDK, as upstream does not provide pre-built
+images right now. You also need a Windows system for running the FPGA
+programmer, which is proprietary and Windows-only.
+
+The RuyiSDK Support Matrix record may be of use too.
+
+Link: https://github.com/sipeed/TangMega-138KPro-example
+Link: https://github.com/ruyisdk/support-matrix/blob/main/Tang_Mega_138K/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅官方文档了解如何
+构建 SDK。您还需要一个 Windows 系统来运行 FPGA 编程器，因为它是专有的且仅支持 Windows。
+
+RuyiSDK 支持矩阵记录也可能对您有所帮助。
+
+链接：https://github.com/sipeed/TangMega-138KPro-example
+链接：https://github.com/ruyisdk/support-matrix/blob/main/Tang_Mega_138K/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-sipeed-tangmega138kpro"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the official documentation for
+instructions on how to build the SDK, as upstream does not provide pre-built
+images right now. You also need a Windows system for running the FPGA
+programmer, which is proprietary and Windows-only.
+
+The RuyiSDK Support Matrix record may be of use too.
+
+Link: https://github.com/sipeed/TangMega-138KPro-example
+Link: https://github.com/ruyisdk/support-matrix/blob/main/Tang_Mega_138K/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅官方文档了解如何
+构建 SDK。您还需要一个 Windows 系统来运行 FPGA 编程器，因为它是专有的且仅支持 Windows。
+
+RuyiSDK 支持矩阵记录也可能对您有所帮助。
+
+链接：https://github.com/sipeed/TangMega-138KPro-example
+链接：https://github.com/ruyisdk/support-matrix/blob/main/Tang_Mega_138K/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v103-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/FreeRTOS/README.md
+"""
+
+["provisioner/doc-freertos-pio-wch-ch32v103-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/FreeRTOS/README_pio.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/FreeRTOS/README_pio.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v103-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V103/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v203-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V203/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V203/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v203-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V203/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V203/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v208-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V208/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V208/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v208-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V208/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V208/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v303-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V303/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V303/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v303-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V303/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V303/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v305-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V305/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V305/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v305-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V305/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V305/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch32v307-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V307/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V307/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch32v307-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH32V307/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH32V307/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch582f-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH582F/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH582F/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch582f-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH582F/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH582F/RT-Thread/README.md
+"""
+
+["provisioner/doc-freertos-wch-ch592x-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH592X/FreeRTOS/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH592X/FreeRTOS/README.md
+"""
+
+["provisioner/doc-rtthread-wch-ch592x-evb"]
+en_US = """
+[bold green]NOTE[/]: You have to consult the RuyiSDK Support Matrix documentation
+for instructions on how to build the SDK, as upstream does not provide
+pre-built images right now. You may also need a Windows system for running
+the WCH-Link tool, which is Windows-only.
+
+Link: https://github.com/ruyisdk/support-matrix/blob/main/CH592X/RT-Thread/README.md
+"""
+zh_CN = """
+[bold green]注意[/]：由于上游目前不提供预构建镜像，您需要查阅 RuyiSDK 支持矩阵文档了解
+如何构建 SDK。您可能还需要一个 Windows 系统来运行 WCH-Link 工具，因为它仅支持 Windows。
+
+链接：https://github.com/ruyisdk/support-matrix/blob/main/CH592X/RT-Thread/README.md
+"""
+
+["provisioner/oerv-milkv-pioneer-nvme"]
+en_US = """
+[bold green]NOTE[/]: You will need to tweak the rootfs parameter for openEuler to properly
+boot on Milk-V Pioneer v1.2 and later models, whose rootfs resides on NVMe
+drive instead of TF card.
+
+Since [yellow]ruyi[/] does not run as [yellow]root[/], you will have to perform the following
+actions yourself before booting the target device:
+
+* mount the target device's [green]/boot[/] partition,
+* check the file [cyan]/extlinux/extlinux.conf[/] in the partition,
+* replace [yellow]mmcblk1p3[/] with [yellow]nvme0n1p3[/] as needed.
+"""
+zh_CN = """
+[bold green]注意[/]：您需要调整 openEuler 的 rootfs 参数，以便在 Milk-V Pioneer v1.2 及更高
+版本的设备上正确启动，这些设备的根文件系统位于 NVMe 驱动器而非 TF 卡上。
+
+由于 [yellow]ruyi[/] 不是以 [yellow]root[/] 身份运行，您需要在启动目标设备前自行执行以下操作：
+
+* 挂载目标设备的 [green]/boot[/] 分区，
+* 检查分区中的 [cyan]/extlinux/extlinux.conf[/] 文件，
+* 根据需要将 [yellow]mmcblk1p3[/] 替换为 [yellow]nvme0n1p3[/]。
+"""
+
+["provisioner/oerv-sifive-unmatched-readme"]
+en_US = """
+[bold green]NOTE[/]: Please also see the README provided by the openEuler devs for
+further instructions on image usage.
+
+Link: https://mirror.iscas.ac.cn/openeuler-sig-riscv/openEuler-RISC-V/preview/openEuler-23.09-V1-riscv64/Unmatched/README.unmatched.txt
+"""
+zh_CN = """
+[bold green]注意[/]：请同时参考 openEuler 开发者提供的 README 文件，以获取
+关于镜像使用的更多说明。
+
+链接：https://mirror.iscas.ac.cn/openeuler-sig-riscv/openEuler-RISC-V/preview/openEuler-23.09-V1-riscv64/Unmatched/README.unmatched.txt
+"""
+
+# Plugin messages
+
+# internal-device-provisioner-common
+
+["plugins/internal-device-provisioner-common/cmd-failed"]
+en_US = "The command failed with return code [yellow]{ret}[/], that may or may not be caused by lack of privileges."
+zh_CN = "命令执行失败了，返回码为 [yellow]{ret}[/]，可能是权限不足导致的，但也可能不是。"
+
+["plugins/internal-device-provisioner-common/prompt-retry-sudo"]
+en_US = "Do you want to retry the command with [yellow]sudo[/]?"
+zh_CN = "您想用 [yellow]sudo[/] 重试该命令吗？"
+
+["plugins/internal-device-provisioner-common/pretend-dd-to-blkdev"]
+en_US = "write [yellow]{img_path}[/] contents to [green]{blkdev_path}[/] with dd"
+zh_CN = "使用 dd 将 [yellow]{img_path}[/] 的内容写入 [green]{blkdev_path}[/]"
+
+["plugins/internal-device-provisioner-common/dd-to-blkdev"]
+en_US = "dd-ing [yellow]{infile}[/] to [green]{outfile}[/] with block size {blocksize}..."
+zh_CN = "正在 dd [yellow]{infile}[/] 到 [green]{outfile}[/]，块大小 {blocksize}..."
+
+["plugins/internal-device-provisioner-common/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] into device partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]"
+
+["plugins/internal-device-provisioner-common/flash-to-partition"]
+en_US = "flashing [yellow]{img_path}[/] into device partition [green]{part}[/]..."
+zh_CN = "正在将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]..."
+
+["plugins/internal-device-provisioner-common/flash-to-partition-failed"]
+en_US = "failed to flash the [green]{outfile}[/] disk/partition"
+zh_CN = "磁盘或分区 [green]{outfile}[/] 烧写失败"
+
+["plugins/internal-device-provisioner-common/device-inconsistent"]
+en_US = "the device could be in an inconsistent state now, check now"
+zh_CN = "设备现在可能处于不自洽的状态了，请立即检查"
+
+["plugins/internal-device-provisioner-common/file-flashed"]
+en_US = "successfully flashed [green]{outfile}[/]"
+zh_CN = "成功烧写了 [green]{outfile}[/]"
+
+["plugins/internal-device-provisioner-common/part-flash-failed"]
+en_US = "failed to flash [green]{part}[/] image into device storage"
+zh_CN = "烧写 [green]{part}[/] 映像到设备存储失败"
+
+["plugins/internal-device-provisioner-common/part-flashed"]
+en_US = "[green]{part}[/] image successfully flashed"
+zh_CN = "成功烧写了 [green]{part}[/] 映像"
+
+# ruyi-device-provision-strategy-std
+
+["plugins/ruyi-device-provision-strategy-std/pretend-flash-to-ram"]
+en_US = "flash [yellow]{img_path}[/] into device RAM"
+zh_CN = "将 [yellow]{img_path}[/] 写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-std/pretend-reboot"]
+en_US = "reboot the device"
+zh_CN = "重启设备"
+
+["plugins/ruyi-device-provision-strategy-std/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] into device partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到设备分区 [green]{part}[/]"
+
+["plugins/ruyi-device-provision-strategy-std/flashing-uboot-ram"]
+en_US = "flashing U-Boot image into device RAM"
+zh_CN = "正在将 U-Boot 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-std/flashing-uboot-ram-failed"]
+en_US = "failed to flash U-Boot image into device RAM"
+zh_CN = "将 U-Boot 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-std/recheck"]
+en_US = "the device state should be intact, but please re-check"
+zh_CN = "设备状态应当未被变更，但请您再次检查"
+
+["plugins/ruyi-device-provision-strategy-std/rebooting-to-uboot"]
+en_US = "rebooting device into new U-Boot"
+zh_CN = "正在重启设备以进入新的 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-std/reboot-failed"]
+en_US = "failed to reboot the device"
+zh_CN = "重启设备失败"
+
+["plugins/ruyi-device-provision-strategy-std/waiting-for-device"]
+en_US = "waiting {wait_secs}s for the device to come back online"
+zh_CN = "正在等待 {wait_secs}s 以便设备重新上线"
+
+# ruyi-device-provision-strategy-spacemit-k1
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/pretend-load-to-device"]
+en_US = "load {what} [yellow]{img_path}[/] to device"
+zh_CN = "将 {what} [yellow]{img_path}[/] 载入设备"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/pretend-flash-to-partition"]
+en_US = "flash [yellow]{img_path}[/] to partition [green]{part}[/]"
+zh_CN = "将 [yellow]{img_path}[/] 烧写到分区 [green]{part}[/]"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-fsbl"]
+en_US = "staging the FSBL image"
+zh_CN = "正在暂存 FSBL 映像"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-fsbl-failed"]
+en_US = "failed to stage FSBL image"
+zh_CN = "暂存 FSBL 映像失败"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-fsbl"]
+en_US = "continuing to execute staged FSBL"
+zh_CN = "继续去执行已暂存的 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-fsbl-failed"]
+en_US = "failed to continue execution with FSBL"
+zh_CN = "无法继续执行 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/wait-fsbl"]
+en_US = "waiting {wait_secs}s for the device to load FSBL"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 FSBL"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-uboot"]
+en_US = "staging the U-Boot image"
+zh_CN = "正在暂存 U-Boot 映像"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/staging-uboot-failed"]
+en_US = "failed to stage u-boot image"
+zh_CN = "暂存 U-Boot 映像失败"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-uboot"]
+en_US = "continuing to execute staged U-Boot"
+zh_CN = "继续去执行已暂存的 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/continuing-to-uboot-failed"]
+en_US = "failed to continue execution with U-Boot"
+zh_CN = "无法继续执行 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/wait-uboot"]
+en_US = "waiting {wait_secs}s for the device to load U-Boot"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 U-Boot"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/flashing-partition"]
+en_US = "flashing the [yellow]{part}[/] partition"
+zh_CN = "正在烧写 [yellow]{part}[/] 分区"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k1/flashing-partition-failed"]
+en_US = "failed to flash the [yellow]{part}[/] partition"
+zh_CN = "烧写 [yellow]{part}[/] 分区失败"
+
+# ruyi-device-provision-strategy-spacemit-k3
+
+["plugins/ruyi-device-provision-strategy-spacemit-k3/oem-super-speed"]
+en_US = "set USB link to super speed mode"
+zh_CN = "配置 USB 连接到高速模式"
+
+["plugins/ruyi-device-provision-strategy-spacemit-k3/oem-speed-failed"]
+en_US = "failed to set USB link to super speed mode"
+zh_CN = "配置高速模式失败"
+
+# ruyi-device-provision-strategy-zhihe-a210
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-bootzero-ram"]
+en_US = "flashing bootzero rvbl image into device RAM"
+zh_CN = "正在将 bootzero rvbl 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-bootzero-ram-failed"]
+en_US = "failed to flash bootzero rvbl image into device RAM"
+zh_CN = "将 bootzero rvbl 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/rebooting-to-bootzero"]
+en_US = "rebooting device into bootzero rvbl"
+zh_CN = "正在重启设备以进入 bootzero rvbl"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-spl-ram"]
+en_US = "flashing spl rvbl image into device RAM"
+zh_CN = "正在将 spl rvbl 映像写入设备 RAM"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/flashing-spl-ram-failed"]
+en_US = "failed to flash spl rvbl image into device RAM"
+zh_CN = "将 spl rvbl 映像写入设备 RAM 失败"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/rebooting-to-spl"]
+en_US = "rebooting device into spl rvbl"
+zh_CN = "正在重启设备以进入 spl rvbl"
+
+["plugins/ruyi-device-provision-strategy-zhihe-a210/wait-spl"]
+en_US = "waiting {wait_secs}s for the device to load SPL"
+zh_CN = "正在等待 {wait_secs}s 以便设备载入 SPL"
