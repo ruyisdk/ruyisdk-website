@@ -1,4 +1,5 @@
 import { Col, Row } from "antd";
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import { useEffect, useRef, useState } from "react";
 import { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -20,10 +21,6 @@ const STATS_DETAIL_CONTENT = {
   de: StatsDetailDe,
   en: StatsDetailEn,
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 const PageHeader = ({ title }) => (
   <header className="text-center pt-(--ruyi-page-start) px-8">

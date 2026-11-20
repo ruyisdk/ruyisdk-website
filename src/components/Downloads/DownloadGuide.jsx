@@ -1,4 +1,5 @@
 import React from 'react';
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Admonition from '@theme/Admonition';
 import MarkdownCard from '@site/src/components/About/MarkdownCard';
@@ -16,10 +17,6 @@ const GUIDE_CONTENT = {
 const MDX_COMPONENTS = {
   admonition: Admonition,
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 export default function DownloadGuide() {
   const { i18n } = useDocusaurusContext();

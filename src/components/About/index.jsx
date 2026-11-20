@@ -1,4 +1,5 @@
 import React from "react";
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { PageBackground } from "@site/src/components/Home/Background";
 import MarkdownCard from "@site/src/components/About/MarkdownCard";
@@ -30,10 +31,6 @@ const QR_CONTENT = {
   de: QrDe,
   en: QrEn,
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 export default function About() {
   const { i18n } = useDocusaurusContext();

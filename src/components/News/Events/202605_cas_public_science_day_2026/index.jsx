@@ -1,4 +1,5 @@
 import React from "react";
+import resolveLocalizedContent from '@site/src/utils/resolveLocalizedContent';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 import { PageBackground } from "@site/src/components/Home/Background";
@@ -39,10 +40,6 @@ const CONTENT = {
     de: QqDe,
   },
 };
-
-function resolveLocalizedContent(contentMap, locale) {
-  return contentMap[locale] || contentMap.en;
-}
 
 export default function Events() {
   const { i18n } = useDocusaurusContext();
