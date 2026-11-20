@@ -4,21 +4,7 @@ import Layout from '@theme/Layout';
 import Translate, { translate } from '@docusaurus/Translate';
 import { PageBackground } from '@site/src/components/Home/Background';
 
-function headerGradientClass(accent) {
-  if (accent === 'gold') {
-    return 'bg-gradient-to-r from-[#fffbeb] via-[#fffef7] to-white dark:from-amber-500/12 dark:via-[#181f2a] dark:to-[#151b23]';
-  }
-  if (accent === 'eclipse') {
-    return 'bg-gradient-to-r from-[#f3f4ff] via-[#f9faff] to-white dark:from-indigo-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
-  }
-  return 'bg-gradient-to-r from-[#eff5ff] via-[#f8fbff] to-white dark:from-blue-500/14 dark:via-[#181f2a] dark:to-[#151b23]';
-}
-
-function iconColorClass(accent) {
-  if (accent === 'eclipse') return 'text-[#3730a3] dark:text-indigo-300';
-  if (accent === 'gold') return 'text-[#c88a04] dark:text-amber-400';
-  return 'text-[#1648B8] dark:text-[#79a8ff]';
-}
+import { getLocalePrefixFromPathname, headerGradientClass, headerIconClass, safeParseUrl, withLocalePrefix } from '@site/src/components/Downloads/downloadUtils';
 
 function getDownloadAccent(product, download) {
   if (product === 'eclipse') return 'eclipse';
@@ -35,16 +21,6 @@ function getInstallDocsPath(accent) {
   if (accent === 'blue') return '/docs/VSCode-Plugins/';
   if (accent === 'eclipse') return '/docs/IDE/';
   return '/docs/Package-Manager/installation';
-}
-
-function safeParseUrl(url) {
-  try {
-    const parsed = new URL(url);
-    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
-    return parsed;
-  } catch {
-    return null;
-  }
 }
 
 function triggerDownload(url) {
@@ -66,18 +42,6 @@ function triggerDownload(url) {
       // no-op
     }
   }, 15_000);
-}
-
-function getLocalePrefixFromPathname(pathname) {
-  const segments = (pathname || '').split('/').filter(Boolean);
-  const known = new Set(['zh-Hans', 'en', 'de']);
-  const first = segments[0];
-  return known.has(first) ? `/${first}` : '';
-}
-
-function withLocalePrefix(path, localePrefix) {
-  if (!path.startsWith('/')) return `${localePrefix}/${path}`;
-  return `${localePrefix}${path}`;
 }
 
 function LoadingDots() {
@@ -160,7 +124,7 @@ export default function DownloadThanksPage() {
           <section className="bg-white dark:bg-[#151b23] rounded-3xl shadow-[0_12px_32px_rgba(10,44,126,0.06)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.4)] border border-slate-200/90 dark:border-white/10 overflow-hidden">
             <div className={`px-8 py-6 border-b border-slate-200/75 dark:border-white/10 ${headerGradientClass(accent)}`}>
               <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-3 m-0 text-slate-900 dark:text-slate-100">
-                <CircleCheck className={`h-8 w-8 shrink-0 ${iconColorClass(accent)}`} aria-hidden="true" />
+                <CircleCheck className={`h-8 w-8 shrink-0 ${headerIconClass(accent)}`} aria-hidden="true" />
                 <Translate id="downloads.thanks.title">感谢下载 RuyiSDK</Translate>
               </h1>
               <p className="mt-2 text-lg text-slate-600 dark:text-slate-300">
