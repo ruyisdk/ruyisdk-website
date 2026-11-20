@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { translate } from '@docusaurus/Translate';
 import { Terminal, Usb, FolderOpen, RotateCcw, Download } from 'lucide-react';
 import { ProvisionRuntime } from '../../lib/device/runtime';
 import { FastbootSession } from '../../lib/device/fastboot';
@@ -13,16 +14,48 @@ const clean = (text) =>
     '',
   );
 const formatBytes = (bytes) => `${(bytes / 1048576).toFixed(1)} MiB`;
+const logClock = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hourCycle: 'h23',
+});
+
+function phaseLabel(phase) {
+  switch (phase) {
+    case 'Download':
+      return translate({
+        id: 'tryruyi.device.downloading',
+        message: '正在下载',
+      });
+    case 'Extract':
+      return translate({
+        id: 'tryruyi.device.extracting',
+        message: '正在解包',
+      });
+    case 'SHA-256':
+      return translate({
+        id: 'tryruyi.device.verifying',
+        message: '正在校验 SHA-256',
+      });
+    default:
+      return phase;
+  }
+}
 
 export default function DeviceConsole() {
   const base = useBaseUrl('/');
   const { i18n } = useDocusaurusContext();
   const zh = i18n.currentLocale.startsWith('zh');
-  const t = (cn, en) => (zh ? cn : en);
   const [run, setRun] = useState(0),
     [lines, setLines] = useState([]),
     [prompt, setPrompt] = useState(null),
     [answer, setAnswer] = useState('');
+  const [traceText, setTraceText] = useState('');
+  const [traceOpen, setTraceOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState(null);
+  const traceView = useRef(null),
+    followTrace = useRef(true);
   const [complete, setComplete] = useState(false),
     [issue, setIssue] = useState(''),
     [directoryName, setDirectoryName] = useState(''),
@@ -31,6 +64,7 @@ export default function DeviceConsole() {
   const session = useRef(null),
     pending = useRef(null),
     directory = useRef(null),
+    filePicker = useRef(null),
     scroll = useRef(null),
     input = useRef(null);
   const log = (text) => setLines((list) => [...list, clean(text)]);
@@ -47,7 +81,17 @@ export default function DeviceConsole() {
     if (prompt?.kind === 'text') input.current?.focus({ preventScroll: true });
   }, [lines, prompt]);
   useEffect(() => {
+    if (traceOpen && traceView.current && followTrace.current)
+      traceView.current.scrollTop = traceView.current.scrollHeight;
+  }, [traceOpen, traceText]);
+  useEffect(() => {
+    if (copyStatus !== 'copied') return;
+    const timer = setTimeout(() => setCopyStatus(null), 2000);
+    return () => clearTimeout(timer);
+  }, [copyStatus]);
+  useEffect(() => {
     const controller = new AbortController();
+    const t = (cn, en) => (zh ? cn : en);
     const { signal } = controller;
     const update = () => {
       if (!signal.aborted) refresh((value) => value + 1);
@@ -55,9 +99,18 @@ export default function DeviceConsole() {
     const output = (text) => {
       if (!signal.aborted) log(text);
     };
-    const usb = new FastbootSession(update, output, signal);
-    const runtime = new ProvisionRuntime(base, output);
-    session.current = { usb, runtime, signal, writing: false };
+    const trace = (text) => {
+      if (signal.aborted) return;
+      const entry = `${logClock.format(Date.now())}  ${clean(text)}\n`;
+      setTraceText((previous) => previous + entry);
+    };
+    const usb = new FastbootSession(update, output, signal, trace);
+    const runtime = new ProvisionRuntime(base, output, trace);
+    session.current = { usb, runtime, signal, writing: false, trace };
+    setTraceText('');
+    setCopyStatus(null);
+    followTrace.current = true;
+    trace('ruyi device provision');
     setLines(['$ ruyi device provision']);
     setComplete(false);
     setIssue('');
@@ -74,6 +127,7 @@ export default function DeviceConsole() {
     let lastProgress = 0;
     const ui = {
       log: output,
+      trace,
       confirm: async (title) => {
         for (;;) {
           const value = await wait('text', `${title} (y/N)`);
@@ -167,9 +221,10 @@ export default function DeviceConsole() {
         )
       : execute();
     operation
-      .catch((error) =>
-        output(`${t('已停止', 'Stopped')}: ${error.message ?? error}`),
-      )
+      .catch((error) => {
+        trace(`ERROR: ${error.message ?? error}`);
+        output(`${t('已停止', 'Stopped')}: ${error.message ?? error}`);
+      })
       .finally(() => {
         if (!signal.aborted) {
           setComplete(true);
@@ -187,9 +242,25 @@ export default function DeviceConsole() {
       void usb.dispose();
     };
   }, [run, base, zh]);
-  const report = (error) => {
-    if (error.name !== 'AbortError' && error.name !== 'NotFoundError')
-      setIssue(error.message ?? String(error));
+  async function copyTrace() {
+    try {
+      await navigator.clipboard.writeText(traceText);
+      setCopyStatus('copied');
+    } catch {
+      if (!traceView.current) return;
+      const range = document.createRange();
+      range.selectNodeContents(traceView.current);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      setCopyStatus('manual');
+    }
+  }
+  const report = (error, message) => {
+    if (error.name !== 'AbortError' && error.name !== 'NotFoundError') {
+      session.current?.trace(`${message} ${error}`);
+      setIssue(`${message} ${error.message ?? String(error)}`);
+    }
   };
   async function selectDirectory() {
     try {
@@ -202,7 +273,13 @@ export default function DeviceConsole() {
       setIssue('');
       if (pending.current?.kind === 'directory') settle(selected);
     } catch (error) {
-      report(error);
+      report(
+        error,
+        translate({
+          id: 'tryruyi.device.directoryError',
+          message: '无法打开镜像目录。',
+        }),
+      );
     }
   }
   async function connect() {
@@ -214,7 +291,13 @@ export default function DeviceConsole() {
       if (usb.device?.opened && pending.current?.kind === 'device')
         settle(usb.device);
     } catch (error) {
-      report(error);
+      report(
+        error,
+        translate({
+          id: 'tryruyi.device.connectionError',
+          message: '无法连接开发板。',
+        }),
+      );
     }
   }
   const usb = session.current?.usb,
@@ -224,33 +307,38 @@ export default function DeviceConsole() {
       <header className={styles.header}>
         <h1>ruyi device provision</h1>
         <p>
-          {t(
-            '选择开发板和系统镜像，通过 USB 安装到设备。',
-            'Select a board and system image to install over USB.',
-          )}
+          {translate({
+            id: 'tryruyi.device.description',
+            message: '选择开发板和系统镜像，通过 USB 安装到设备。',
+          })}
         </p>
       </header>
       <div className={styles.grid}>
         <section
           className={styles.console}
-          aria-label={t('交互终端', 'Interactive terminal')}
+          aria-label={translate({
+            id: 'tryruyi.device.terminalLabel',
+            message: '交互终端',
+          })}
         >
           <div className={styles.bar}>
             <span>
-              <Terminal size={17} /> {t('终端', 'Terminal')}
+              <Terminal size={17} />{' '}
+              {translate({ id: 'tryruyi.device.terminal', message: '终端' })}
             </span>
             <button
               onClick={() => setRun((value) => value + 1)}
               disabled={!complete && session.current?.writing}
             >
               <RotateCcw size={14} />
-              {t('重新开始', 'Restart')}
+              {translate({ id: 'tryruyi.device.restart', message: '重新开始' })}
             </button>
           </div>
           <div
             ref={scroll}
             className={styles.output}
             role="log"
+            lang={zh ? 'zh-Hans' : 'en'}
             aria-live="polite"
           >
             {lines.map((line, index) => (
@@ -274,12 +362,15 @@ export default function DeviceConsole() {
               value={answer}
               onChange={(event) => setAnswer(event.target.value)}
               disabled={prompt?.kind !== 'text'}
-              aria-label={t('终端输入', 'Terminal input')}
+              aria-label={translate({
+                id: 'tryruyi.device.terminalInput',
+                message: '终端输入',
+              })}
               autoComplete="off"
               spellCheck="false"
             />
             <button disabled={prompt?.kind !== 'text'}>
-              {t('输入', 'Enter')} ↵
+              {translate({ id: 'tryruyi.device.enter', message: '输入' })} ↵
             </button>
           </form>
         </section>
@@ -291,12 +382,21 @@ export default function DeviceConsole() {
             <div className={styles.status}>
               <i data-online={online} />
               {!navigator.usb
-                ? t('浏览器不支持 WebUSB', 'WebUSB unavailable')
+                ? translate({
+                    id: 'tryruyi.device.usbUnavailable',
+                    message: '浏览器不支持 WebUSB',
+                  })
                 : online
                   ? usb.label
                   : usb?.lastDevice
-                    ? t('等待设备重新连接', 'Waiting for reconnection')
-                    : t('未连接开发板', 'No board connected')}
+                    ? translate({
+                        id: 'tryruyi.device.reconnecting',
+                        message: '等待设备重新连接',
+                      })
+                    : translate({
+                        id: 'tryruyi.device.disconnected',
+                        message: '未连接开发板',
+                      })}
             </div>
             <button
               disabled={
@@ -307,36 +407,27 @@ export default function DeviceConsole() {
               }
               onClick={connect}
             >
-              {t('连接开发板', 'Connect board')}
+              {translate({
+                id: 'tryruyi.device.connect',
+                message: '连接开发板',
+              })}
             </button>
-            <label>
-              <input
-                type="checkbox"
-                checked={usb?.allowGzip ?? true}
-                disabled={!usb || session.current?.writing}
-                onChange={(event) => {
-                  usb.allowGzip = event.target.checked;
-                  usb.changed();
-                }}
-              />
-              {t(
-                'Bianbu USB 2 分区压缩',
-                'Compress eligible Bianbu partitions over USB 2',
-              )}
-            </label>
           </section>
           <section>
             <h2>
               <FolderOpen size={20} />
-              {t('镜像目录', 'Image directory')}
+              {translate({
+                id: 'tryruyi.device.directory',
+                message: '镜像目录',
+              })}
             </h2>
             <p>
               {directoryName
                 ? `${directoryName}/RuyiImages/`
-                : t(
-                    '选择本机目录保存下载包和解包后的分区文件。',
-                    'Choose a local directory for downloads and extracted partition images.',
-                  )}
+                : translate({
+                    id: 'tryruyi.device.directoryHint',
+                    message: '选择本机目录保存下载包和解包后的分区文件。',
+                  })}
             </p>
             <button
               disabled={
@@ -347,14 +438,68 @@ export default function DeviceConsole() {
               }
               onClick={selectDirectory}
             >
-              {t('选择目录', 'Choose directory')}
+              {translate({
+                id: 'tryruyi.device.chooseDirectory',
+                message: '选择目录',
+              })}
             </button>
           </section>
+          <details
+            className={styles.traceCard}
+            onToggle={(event) => setTraceOpen(event.currentTarget.open)}
+          >
+            <summary>
+              {translate({
+                id: 'tryruyi.device.flashLog',
+                message: '刷写日志',
+              })}
+            </summary>
+            {traceOpen && (
+              <>
+                <div className={styles.traceActions}>
+                  <button
+                    type="button"
+                    disabled={!traceText}
+                    onClick={copyTrace}
+                  >
+                    {translate({
+                      id: 'tryruyi.device.copyLog',
+                      message: '复制日志',
+                    })}
+                  </button>
+                  <span role="status">
+                    {copyStatus === 'copied' &&
+                      translate({
+                        id: 'tryruyi.device.copiedLog',
+                        message: '已复制',
+                      })}
+                    {copyStatus === 'manual' &&
+                      translate({
+                        id: 'tryruyi.device.copyLogManually',
+                        message: '请手动复制已选中的日志。',
+                      })}
+                  </span>
+                </div>
+                <pre
+                  ref={traceView}
+                  tabIndex={0}
+                  onScroll={(event) => {
+                    const view = event.currentTarget;
+                    followTrace.current =
+                      view.scrollHeight - view.scrollTop - view.clientHeight <
+                      4;
+                  }}
+                >
+                  {traceText}
+                </pre>
+              </>
+            )}
+          </details>
           {transfer && (
             <section>
               <h2>
                 <Download size={20} />
-                {transfer.phase}
+                {phaseLabel(transfer.phase)}
               </h2>
               <p>{transfer.name}</p>
               <progress
@@ -366,7 +511,12 @@ export default function DeviceConsole() {
           )}
           {prompt?.kind === 'file' && (
             <section>
-              <h2>{t('选择镜像文件', 'Select image file')}</h2>
+              <h2>
+                {translate({
+                  id: 'tryruyi.device.imageFile',
+                  message: '选择镜像文件',
+                })}
+              </h2>
               <p>{prompt.spec.name}</p>
               {prompt.spec.resolved_urls
                 .filter((url) => /^https?:\/\//.test(url))
@@ -375,7 +525,15 @@ export default function DeviceConsole() {
                     {new URL(url).hostname} ↗{' '}
                   </a>
                 ))}
+              <button type="button" onClick={() => filePicker.current?.click()}>
+                {translate({
+                  id: 'tryruyi.device.chooseFile',
+                  message: '选择本地文件',
+                })}
+              </button>
               <input
+                ref={filePicker}
+                hidden
                 type="file"
                 onChange={(event) => {
                   const file = event.target.files?.[0];

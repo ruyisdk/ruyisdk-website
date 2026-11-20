@@ -523,6 +523,81 @@
     "message": "Quellcode"
   },
 
+  "========== tryruyi device ==========": { "message": "" },
+
+  "tryruyi.device.chooseDirectory": {
+    "message": "Verzeichnis auswählen"
+  },
+  "tryruyi.device.chooseFile": {
+    "message": "Lokale Datei auswählen"
+  },
+  "tryruyi.device.connect": {
+    "message": "Board verbinden"
+  },
+  "tryruyi.device.connectionError": {
+    "message": "Die Verbindung zum Board ist fehlgeschlagen."
+  },
+  "tryruyi.device.copiedLog": {
+    "message": "Kopiert"
+  },
+  "tryruyi.device.copyLog": {
+    "message": "Protokoll kopieren"
+  },
+  "tryruyi.device.copyLogManually": {
+    "message": "Das ausgewählte Protokoll bitte manuell kopieren."
+  },
+  "tryruyi.device.description": {
+    "message": "Board und Systemabbild auswählen und das System über USB installieren."
+  },
+  "tryruyi.device.directory": {
+    "message": "Abbildverzeichnis"
+  },
+  "tryruyi.device.directoryError": {
+    "message": "Das Abbildverzeichnis konnte nicht geöffnet werden."
+  },
+  "tryruyi.device.directoryHint": {
+    "message": "Ein lokales Verzeichnis für Downloads und entpackte Partitionsabbilder auswählen."
+  },
+  "tryruyi.device.disconnected": {
+    "message": "Kein Board verbunden"
+  },
+  "tryruyi.device.downloading": {
+    "message": "Wird heruntergeladen"
+  },
+  "tryruyi.device.enter": {
+    "message": "Eingabe senden"
+  },
+  "tryruyi.device.extracting": {
+    "message": "Wird entpackt"
+  },
+  "tryruyi.device.flashLog": {
+    "message": "Flash-Protokoll"
+  },
+  "tryruyi.device.imageFile": {
+    "message": "Abbilddatei auswählen"
+  },
+  "tryruyi.device.reconnecting": {
+    "message": "Warten auf erneute Verbindung"
+  },
+  "tryruyi.device.restart": {
+    "message": "Neu beginnen"
+  },
+  "tryruyi.device.terminal": {
+    "message": "Terminal"
+  },
+  "tryruyi.device.terminalInput": {
+    "message": "Terminaleingabe"
+  },
+  "tryruyi.device.terminalLabel": {
+    "message": "Interaktives Terminal"
+  },
+  "tryruyi.device.usbUnavailable": {
+    "message": "Dieser Browser unterstützt WebUSB nicht"
+  },
+  "tryruyi.device.verifying": {
+    "message": "SHA-256-Prüfsumme wird geprüft"
+  },
+
   "========== issue ==========": { "message": "" },
 
   "issue.meta.title": {

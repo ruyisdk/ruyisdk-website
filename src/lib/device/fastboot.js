@@ -6,14 +6,26 @@ const encoder = new TextEncoder(),
   decoder = new TextDecoder();
 class RemoteFailure extends Error {}
 
+async function gzipSkipReason(session, file, compress) {
+  if (!compress) return 'no matching gzip rule';
+  if (!session.usb2Bulk) return 'USB 2 bulk connection not detected';
+  if (!session.reportedLimit) return 'device download limit unknown';
+  if (session.limit < 8192) return 'device download limit too small';
+  if (file.size < 4) return 'image too small';
+  const header = new DataView(await file.slice(0, 4).arrayBuffer());
+  return header.getUint32(0, true) === 0xed26ff3a
+    ? 'Android sparse image'
+    : null;
+}
+
 export class FastbootSession {
-  constructor(changed, log, signal) {
+  constructor(changed, log, signal, trace = () => {}) {
     this.changed = changed;
     this.log = log;
+    this.trace = trace;
     this.signal = signal;
     this.label = 'Disconnected';
     this.acceptSelection = true;
-    this.allowGzip = true;
     this.disconnect = (event) => {
       if (event.device === this.device) {
         this.device = null;
@@ -25,6 +37,7 @@ export class FastbootSession {
   }
   status(label) {
     this.label = label;
+    this.trace(`USB: ${label}`);
     this.changed();
   }
   async select() {
@@ -89,6 +102,9 @@ export class FastbootSession {
       this.status(
         `${device.productName || 'Fastboot'} · ${device.vendorId.toString(16)}:${device.productId.toString(16)}${device.serialNumber ? ` · ${device.serialNumber}` : ''}`,
       );
+      this.trace(
+        `USB bulk: IN ${this.input} (${match.input.packetSize ?? '?'} B), OUT ${this.output} (${match.output.packetSize ?? '?'} B)`,
+      );
     } catch (error) {
       await device.close().catch(() => {});
       throw error;
@@ -102,6 +118,7 @@ export class FastbootSession {
       'Waiting for the same board. If USB re-enumerated, use “Connect board” to authorize its next stage.',
     );
     const deadline = Date.now() + 120000;
+    let lastError;
     while (!this.device?.opened) {
       this.signal.throwIfAborted();
       if (Date.now() > deadline) throw Error('Timed out waiting for the board');
@@ -113,7 +130,10 @@ export class FastbootSession {
         this.selecting = true;
         try {
           await this.open(this.lastDevice);
-        } catch {
+        } catch (error) {
+          if (error.message !== lastError)
+            this.trace(`USB reconnect: ${error.message}`);
+          lastError = error.message;
         } finally {
           this.selecting = false;
         }
@@ -139,6 +159,7 @@ export class FastbootSession {
       const packet = decoder.decode(result.data),
         type = packet.slice(0, 4),
         value = packet.slice(4).replace(/\0+$/, '');
+      this.trace(`← ${type}${value ? ` ${value}` : ''}`);
       if (type === 'INFO' || type === 'TEXT') {
         this.log(value);
         continue;
@@ -152,6 +173,7 @@ export class FastbootSession {
   async command(text, expected = 'OKAY') {
     const bytes = encoder.encode(text);
     if (bytes.length > 64) throw Error('Fastboot command exceeds 64 bytes');
+    this.trace(`→ ${text}`);
     await this.send(bytes);
     const reply = await this.response();
     if (reply.type !== expected)
@@ -174,10 +196,12 @@ export class FastbootSession {
     const [program, action, ...args] = argv;
     if (program !== 'fastboot')
       throw Error(`Unsupported device command: ${program}`);
-    await this.ready();
-    this.acceptSelection = false;
-    this.changed();
+    this.trace(argv.join(' '));
+    let chunk = 0;
     try {
+      await this.ready();
+      this.acceptSelection = false;
+      this.changed();
       if (action === 'getvar' && args.length === 1 && /^[\w.-]+$/.test(args[0]))
         return {
           status: 0,
@@ -216,30 +240,26 @@ export class FastbootSession {
           this.limit =
             limit > 0 ? Math.min(limit, 0xffffffff) : 16 * 1024 * 1024;
           this.reportedLimit = limit > 0;
+          this.trace(
+            `max-download-size=${this.limit} B (${this.reportedLimit ? 'device' : 'fallback'})`,
+          );
         }
         const file = files.get(args[1]);
-        const gzip =
-          compress &&
-          this.allowGzip &&
-          this.usb2Bulk &&
-          this.reportedLimit &&
-          this.limit >= 8192 &&
-          file.size >= 4 &&
-          new DataView(await file.slice(0, 4).arrayBuffer()).getUint32(
-            0,
-            true,
-          ) !== 0xed26ff3a;
-        if (gzip) this.log(`${args[0]} · USB gzip`);
-        const payloads = gzip
-          ? gzipPayloads(file, this.limit, compress)
-          : flashPayloads(file, this.limit);
-        let count = 0;
+        const skipReason = await gzipSkipReason(this, file, compress);
+        this.trace(
+          `${args[0]}: image=${args[1]} (${file.size} B), gzip=${skipReason ? `off (${skipReason})` : 'on'}`,
+        );
+        const payloads = skipReason
+          ? flashPayloads(file, this.limit)
+          : gzipPayloads(file, this.limit, compress);
+        let completed = 0;
         for await (const payload of payloads) {
+          chunk = completed + 1;
+          this.trace(`${args[0]}: chunk ${chunk}, payload=${payload.size} B`);
           await this.download(payload);
           await this.command(`flash:${args[0]}`);
-          this.log(
-            `${args[0]} · transfer ${++count} complete (${payload.size} bytes)`,
-          );
+          completed = chunk;
+          chunk = 0;
         }
       } else
         throw Error(
@@ -247,6 +267,9 @@ export class FastbootSession {
         );
       return { status: 0, output: '' };
     } catch (error) {
+      this.trace(
+        `ERROR ${argv.join(' ')}${chunk ? ` (chunk ${chunk})` : ''}: ${error.message}`,
+      );
       if (!(error instanceof RemoteFailure)) throw error;
       const output = `FAILED (remote: '${error.message}')`;
       this.log(output);

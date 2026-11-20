@@ -63,7 +63,7 @@ self.onmessage = async ({ data }) => {
           `${api}plugins/${modulePath(name).slice(0, -1).join('/')}/data/${parts(path).join('/')}`,
         ),
       log: (level, message) => {
-        if (level !== 'D') self.postMessage({ id, log: message });
+        self.postMessage({ id, level, log: message });
       },
       command: (argv) =>
         new Promise((resolve, reject) => {

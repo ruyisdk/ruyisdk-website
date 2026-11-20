@@ -149,9 +149,12 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   const root = await ui.directory();
   log(`${root.name}/RuyiImages/`);
   const plans = [];
+  ui.trace?.(`packages-index: ${plugins.revision}`);
   const catalog = await messages();
   for (const pkg of selected) {
     const { strategy, partition_map: paths } = pkg.data.provisionable;
+    const description = `${pkg.package} ${pkg.version} (${strategy})`;
+    ui.trace?.(`Prepare: ${description}`);
     const args = {
       strategy,
       paths,
@@ -164,12 +167,15 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       root,
       runtime,
       signal,
-      log,
+      log: (line) => {
+        ui.trace?.(line);
+        log(line);
+      },
       localFile: ui.localFile,
       progress: ui.progress,
     });
     const execute = await packageFastboot(usb, runtime, strategy, paths, files);
-    plans.push({ ...plan, args, execute });
+    plans.push({ ...plan, args, execute, description });
   }
   plans.sort((left, right) => right.priority - left.priority);
   log(
@@ -202,8 +208,11 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   usb.acceptSelection = false;
   usb.changed();
   ui.flashing?.();
-  for (const plan of plans)
+  for (const plan of plans) {
+    ui.trace?.(`Flash: ${plan.description}`);
     await runtime.run({ kind: 'flash', ...plan.args }, plan.execute);
+    ui.trace?.(`Flash OK: ${plan.description}`);
+  }
   log(t('刷写步骤成功完成。', 'Flashing finished successfully.'));
   await postInstall();
 }

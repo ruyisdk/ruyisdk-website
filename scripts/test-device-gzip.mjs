@@ -23,10 +23,12 @@ const layout = {
 };
 
 async function fixture(packetSize, raw, strategy = 'spacemit-k3-v1') {
+  const trace = [];
   const usb = new FastbootSession(
     () => {},
     () => {},
     new AbortController().signal,
+    (line) => trace.push(line),
   );
   const alternate = {
     alternateSetting: 0,
@@ -81,18 +83,24 @@ async function fixture(packetSize, raw, strategy = 'spacemit-k3-v1') {
   const execute = await packageFastboot(usb, runtime, strategy, paths, files);
   const flash = (partition, path) =>
     execute(['fastboot', 'flash', partition, path]);
-  return { usb, device, commands, payloads, levels, flash };
+  return { device, commands, payloads, levels, flash, trace };
 }
 
 test('USB 2 Bianbu writes independent gzip members at aligned partition offsets', async () => {
   const raw = randomBytes(limit * 3 + 193);
-  const { flash, payloads, levels, commands } = await fixture(512, raw);
+  const { flash, payloads, levels, commands, trace } = await fixture(512, raw);
   await flash('gpt', paths.gpt);
   await flash('rootfs', paths.rootfs);
   const blocks = payloads.slice(1).map((bytes) => gunzipSync(bytes));
   assert.ok(blocks.length > 1);
   for (const block of blocks.slice(0, -1)) assert.equal(block.length % 4096, 0);
   assert.deepEqual(Buffer.concat(blocks), raw);
+  assert.ok(trace.includes('GPT rootfs: root.ext4, gzip-5'));
+  assert.ok(
+    trace.some(
+      (line) => line.startsWith('rootfs: image=') && line.endsWith('gzip=on'),
+    ),
+  );
   assert.deepEqual(new Set(levels), new Set([5]));
   assert.equal(
     commands.filter((command) => command === 'flash:rootfs').length,
@@ -100,7 +108,7 @@ test('USB 2 Bianbu writes independent gzip members at aligned partition offsets'
   );
 });
 
-test('USB speed, strategy, layout, sparse magic and user preference gate compression', async () => {
+test('USB speed, strategy, layout and sparse magic gate compression', async () => {
   const raw = Buffer.alloc(4096, 1);
   for (const condition of [
     'usb3',
@@ -109,13 +117,12 @@ test('USB speed, strategy, layout, sparse magic and user preference gate compres
     'wrong-path',
     'no-gpt',
     'mtd',
-    'off',
     'other-strategy',
     'sparse',
   ]) {
     const data = Buffer.from(raw);
     if (condition === 'sparse') data.writeUInt32LE(0xed26ff3a);
-    const { usb, flash, levels, payloads } = await fixture(
+    const { flash, levels, payloads, trace } = await fixture(
       condition === 'usb3'
         ? 1024
         : condition === 'unknown-speed'
@@ -126,12 +133,16 @@ test('USB speed, strategy, layout, sparse magic and user preference gate compres
     );
     if (condition !== 'no-gpt') await flash('gpt', paths.gpt);
     if (condition === 'mtd') await flash('mtd', paths.gpt);
-    if (condition === 'off') usb.allowGzip = false;
     await flash(
       condition === 'unmarked' ? 'uboot' : 'rootfs',
       condition === 'wrong-path' ? paths.gpt : paths.rootfs,
     );
     assert.equal(levels.length, 0, condition);
+    assert.match(
+      trace.findLast((line) => line.includes('gzip=off')),
+      /gzip=off \(.+\)/,
+      condition,
+    );
     assert.deepEqual(
       payloads.at(-1),
       condition === 'wrong-path' ? Buffer.from(JSON.stringify(layout)) : data,
@@ -141,7 +152,7 @@ test('USB speed, strategy, layout, sparse magic and user preference gate compres
 });
 
 test('lost flash acknowledgement stops gzip without resending the block', async () => {
-  const { device, flash, commands, payloads } = await fixture(
+  const { device, flash, commands, payloads, trace } = await fixture(
     512,
     Buffer.alloc(limit * 4),
   );
@@ -149,6 +160,10 @@ test('lost flash acknowledgement stops gzip without resending the block', async 
   device.failAt = 3;
   await assert.rejects(flash('rootfs', paths.rootfs), /USB disconnected/);
   assert.equal(payloads.length, 3);
+  assert.match(
+    trace.at(-1),
+    /ERROR fastboot flash rootfs root.ext4 \(chunk 2\): USB disconnected/,
+  );
   assert.equal(
     commands.filter((command) => command === 'flash:rootfs').length,
     2,
