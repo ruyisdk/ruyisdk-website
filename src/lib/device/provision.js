@@ -7,25 +7,42 @@ async function get(url, signal, json = true) {
   return json ? response.json() : response.text();
 }
 
+function deviceCatalog(entities, hierarchy) {
+  const rows = (type, related) =>
+    entities
+      .filter(
+        (item) =>
+          item.type === type &&
+          (!related || related.includes(`${type}:${item.id}`)),
+      )
+      .sort((left, right) =>
+        left.display_name < right.display_name
+          ? -1
+          : left.display_name > right.display_name
+            ? 1
+            : 0,
+      );
+  return {
+    devices: rows('device'),
+    variants: (device) => rows('device-variant', device.related ?? []),
+    images: (variant) =>
+      rows('image-combo', hierarchy[`device-variant:${variant.id}`] ?? []),
+  };
+}
+
 export async function provision({ runtime, usb, ui, signal, locale }) {
   const t = (zh, en) => (locale === 'zh_CN' ? zh : en);
   const { log, confirm, choose } = ui;
   const index = runtime.api;
-  log(t('RuyiSDK 设备安装向导', 'RuyiSDK Device Provisioning Wizard'));
-  if (!(await confirm(t('继续？', 'Continue?')))) return;
+  if (!ui.selectSystem) {
+    log(t('RuyiSDK 设备安装向导', 'RuyiSDK Device Provisioning Wizard'));
+    if (!(await confirm(t('继续？', 'Continue?')))) return;
+  }
   const [entities, packages, hierarchy, plugins] = await Promise.all(
     ['entities', 'packages', 'hierarchy', 'plugins/index'].map((name) =>
       get(`${index}${name}.json`, signal),
     ),
   );
-  const sorted = (list) =>
-    list.sort((left, right) =>
-      left.display_name < right.display_name
-        ? -1
-        : left.display_name > right.display_name
-          ? 1
-          : 0,
-    );
   const pick = async (
     title,
     items,
@@ -35,34 +52,31 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       throw Error(t('索引中没有可用选项。', 'No options in this index.'));
     return items[await choose(title, labels)];
   };
-  const device = await pick(
-    t('请选择开发板', 'Select your device'),
-    sorted(entities.filter((item) => item.type === 'device')),
-  );
-  const variants = sorted(
-    entities.filter(
-      (item) =>
-        item.type === 'device-variant' &&
-        device.related.includes(`device-variant:${item.id}`),
-    ),
-  );
-  const variant = await pick(
-    t('请选择硬件变体', 'Select the hardware variant'),
-    variants,
-    variants.map((item) => `${device.display_name} (${item.display_name})`),
-  );
-  const related = hierarchy[`device-variant:${variant.id}`] ?? [];
-  const combo = await pick(
-    t('请选择系统配置', 'Select a system configuration'),
-    sorted(
-      entities.filter(
-        (item) =>
-          item.type === 'image-combo' &&
-          related.includes(`image-combo:${item.id}`),
-      ),
-    ),
-  );
-  const detail = async (row) =>
+  const catalog = deviceCatalog(entities, hierarchy);
+  let combo;
+  if (ui.selectSystem) {
+    const vendors = await get(
+      `${index}vendors/${locale === 'zh_CN' ? 'zh-Hans' : 'en'}.json`,
+      signal,
+    );
+    combo = await ui.selectSystem(catalog, vendors);
+  } else {
+    const device = await pick(
+      t('请选择开发板', 'Select your device'),
+      catalog.devices,
+    );
+    const variants = catalog.variants(device);
+    const variant = await pick(
+      t('请选择硬件变体', 'Select the hardware variant'),
+      variants,
+      variants.map((item) => `${device.display_name} (${item.display_name})`),
+    );
+    combo = await pick(
+      t('请选择系统配置', 'Select a system configuration'),
+      catalog.images(variant),
+    );
+  }
+  const detail = async (row, requestSignal = signal) =>
     get(
       index +
         row.file_path
@@ -70,7 +84,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
           .split('/')
           .map(encodeURIComponent)
           .join('/'),
-      signal,
+      requestSignal,
     );
   const config = (await detail(combo)).data['image-combo'];
   const messages = () =>
@@ -98,59 +112,72 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     if (!rows.length) throw Error(`Unavailable package: ${atom}`);
     return rows;
   });
-  const customize =
-    groups.some((group) => group.length > 1) &&
-    (await confirm(t('要自定义软件包版本吗？', 'Customize package versions?')));
-  const selected = [];
-  for (const group of groups) {
-    const stable = group.find((row) => !row.version.includes('-'));
-    const row =
-      customize && group.length > 1
-        ? await pick(
+  const defaults = groups.map(
+    (group) => group.find((row) => !row.version.includes('-')) ?? group[0],
+  );
+  const inspect = async (rows, requestSignal = signal) => {
+    const packages = await Promise.all(
+      rows.map((row) => detail(row, requestSignal)),
+    );
+    let issue;
+    if (packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1'))
+      issue = t(
+        'dd-v1 需要直接写入电脑连接的磁盘。网页不支持，请用本机 ruyi device provision。',
+        'dd-v1 writes a host block device. Web flashing is unsupported. Use native ruyi device provision.',
+      );
+    else if (!navigator.usb || !window.showDirectoryPicker)
+      issue = t(
+        '此浏览器不支持设备刷写，请使用桌面 Chrome 或 Edge。',
+        'Device flashing requires desktop Chrome or Edge.',
+      );
+    return { packages, issue };
+  };
+  let selected;
+  if (ui.preparePackages) {
+    selected = await ui.preparePackages({ groups, defaults, inspect });
+  } else {
+    const customize =
+      groups.some((group) => group.length > 1) &&
+      (await confirm(
+        t('要自定义软件包版本吗？', 'Customize package versions?'),
+      ));
+    const rows = [...defaults];
+    if (customize) {
+      for (const [index, group] of groups.entries()) {
+        if (group.length > 1)
+          rows[index] = await pick(
             group[0].package,
             group,
             group.map((item) => item.version),
-          )
-        : (stable ?? group[0]);
-    selected.push(await detail(row));
-  }
-  log(
-    selected
-      .map(
-        (pkg) =>
-          `${pkg.category}/${pkg.package} ${pkg.version}  (${pkg.data.provisionable.strategy})`,
-      )
-      .join('\n'),
-  );
-  if (selected.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1')) {
+          );
+      }
+    }
+    const result = await inspect(rows);
+    selected = result.packages;
     log(
-      t(
-        'dd-v1 需要直接写入电脑连接的磁盘。网页不支持，请用本机 ruyi device provision。',
-        'dd-v1 writes a host block device. Web flashing is unsupported. Use native ruyi device provision.',
-      ),
+      selected
+        .map(
+          (pkg) =>
+            `${pkg.category}/${pkg.package} ${pkg.version}  (${pkg.data.provisionable.strategy})`,
+        )
+        .join('\n'),
     );
-    return;
+    if (result.issue) {
+      log(result.issue);
+      return;
+    }
+    if (
+      !(await confirm(
+        t('下载并准备以上软件包？', 'Download and prepare these packages?'),
+      ))
+    )
+      return;
   }
-  if (!navigator.usb || !window.showDirectoryPicker) {
-    log(
-      t(
-        '此浏览器不支持设备刷写，请使用桌面 Chrome 或 Edge。',
-        'Device flashing requires desktop Chrome or Edge.',
-      ),
-    );
-    return;
-  }
-  if (
-    !(await confirm(
-      t('下载并准备以上软件包？', 'Download and prepare these packages?'),
-    ))
-  )
-    return;
   const root = await ui.directory();
   log(`${root.name}/RuyiImages/`);
   const plans = [];
   ui.trace?.(`packages-index: ${plugins.revision}`);
-  const catalog = await messages();
+  const messageCatalog = await messages();
   for (const pkg of selected) {
     const { strategy, partition_map: paths } = pkg.data.provisionable;
     const description = `${pkg.package} ${pkg.version} (${strategy})`;
@@ -159,7 +186,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       strategy,
       paths,
       modules: plugins.modules,
-      messages: catalog,
+      messages: messageCatalog,
       locale,
     };
     const plan = await runtime.run({ kind: 'preview', ...args });
@@ -178,13 +205,17 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     plans.push({ ...plan, args, execute, description });
   }
   plans.sort((left, right) => right.priority - left.priority);
-  log(
-    t(
-      '请核对目标设备和以下刷写步骤：',
-      'Review the target and the flashing steps:',
-    ),
-  );
-  for (const plan of plans) for (const step of plan.steps) log(`  • ${step}`);
+  const steps = plans.flatMap((plan) => plan.steps);
+  if (ui.review) ui.review(steps);
+  else {
+    log(
+      t(
+        '请核对目标设备和以下刷写步骤：',
+        'Review the target and the flashing steps:',
+      ),
+    );
+    for (const step of steps) log(`  • ${step}`);
+  }
   await ui.device();
   const target = usb.device;
   log(`${t('目标', 'Target')}: ${usb.label}`);

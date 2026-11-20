@@ -607,6 +607,51 @@
     "message": "Verifying SHA-256"
   },
 
+  "========== tryruyi imager ==========": { "message": "" },
+
+  "tryruyi.imager.board": {
+    "message": "Board model"
+  },
+  "tryruyi.imager.download": {
+    "message": "Download and prepare images"
+  },
+  "tryruyi.imager.image": {
+    "message": "System image"
+  },
+  "tryruyi.imager.loading": {
+    "message": "Loading the board catalog…"
+  },
+  "tryruyi.imager.no": {
+    "message": "No"
+  },
+  "tryruyi.imager.prepare": {
+    "message": "Prepare images"
+  },
+  "tryruyi.imager.prepareHint": {
+    "message": "Select a system image to review and prepare its packages here."
+  },
+  "tryruyi.imager.setup": {
+    "message": "Board setup"
+  },
+  "tryruyi.imager.steps": {
+    "message": "Flashing steps"
+  },
+  "tryruyi.imager.stepsHint": {
+    "message": "Once the images are ready, review the flashing steps and target board here."
+  },
+  "tryruyi.imager.unavailable": {
+    "message": "There are no images for this hardware in the catalog."
+  },
+  "tryruyi.imager.variant": {
+    "message": "Hardware variant"
+  },
+  "tryruyi.imager.vendor": {
+    "message": "Board manufacturer"
+  },
+  "tryruyi.imager.yes": {
+    "message": "Yes"
+  },
+
   "========== issue ==========": { "message": "" },
 
   "issue.meta.title": {

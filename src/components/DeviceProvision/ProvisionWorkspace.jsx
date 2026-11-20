@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { translate } from '@docusaurus/Translate';
-import { Terminal, Usb, FolderOpen, RotateCcw, Download } from 'lucide-react';
-import { ProvisionRuntime } from '../../lib/device/runtime';
 import { FastbootSession } from '../../lib/device/fastboot';
 import { provision } from '../../lib/device/provision';
+import { ProvisionRuntime } from '../../lib/device/runtime';
+import Button from '../common/Button';
+import ImagerPanel from './ImagerPanel';
 import styles from './device.module.css';
+import { translate } from '@docusaurus/Translate';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { Terminal, Usb, FolderOpen, RotateCcw, Download } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const clean = (text) =>
   String(text).replace(
@@ -43,7 +45,7 @@ function phaseLabel(phase) {
   }
 }
 
-export default function DeviceConsole() {
+export default function ProvisionWorkspace({ graphical = false }) {
   const base = useBaseUrl('/');
   const { i18n } = useDocusaurusContext();
   const zh = i18n.currentLocale.startsWith('zh');
@@ -51,6 +53,11 @@ export default function DeviceConsole() {
     [lines, setLines] = useState([]),
     [prompt, setPrompt] = useState(null),
     [answer, setAnswer] = useState('');
+  const [catalog, setCatalog] = useState(null);
+  const selectedImage = useRef(null);
+  const [preparing, setPreparing] = useState(false);
+  const [packageOptions, setPackageOptions] = useState(null);
+  const [steps, setSteps] = useState(null);
   const [traceText, setTraceText] = useState('');
   const [traceOpen, setTraceOpen] = useState(false);
   const [copyStatus, setCopyStatus] = useState(null);
@@ -70,14 +77,24 @@ export default function DeviceConsole() {
     input = useRef(null);
   const log = (text) =>
     setLines((list) => [...list.slice(-511), clean(text).slice(0, 8192)]);
-  const settle = (value) => {
+  const settle = useCallback((value) => {
     const current = pending.current;
     if (!current) return;
     pending.current = null;
     setPrompt(null);
     setAnswer('');
     current.resolve(value);
-  };
+  }, []);
+  const selectSystem = useCallback(
+    (image) => {
+      if (image?.id === selectedImage.current?.id) return;
+      selectedImage.current = image;
+      setPackageOptions(null);
+      if (image && pending.current?.kind === 'system') settle(image);
+      else setRun((value) => value + 1);
+    },
+    [settle],
+  );
   useEffect(() => {
     if (scroll.current) scroll.current.scrollTop = scroll.current.scrollHeight;
     if (prompt?.kind === 'text') input.current?.focus({ preventScroll: true });
@@ -119,7 +136,10 @@ export default function DeviceConsole() {
     setCopyStatus(null);
     followTrace.current = true;
     trace('ruyi device provision');
-    setLines(['$ ruyi device provision']);
+    setLines(graphical ? [] : ['$ ruyi device provision']);
+    setPreparing(false);
+    setPackageOptions(null);
+    setSteps(null);
     setComplete(false);
     setIssue('');
     setTransfer(null);
@@ -137,6 +157,11 @@ export default function DeviceConsole() {
       log: output,
       trace,
       confirm: async (title) => {
+        if (graphical) {
+          const accepted = await wait('confirm', title);
+          if (!accepted) output(t('已取消。', 'Cancelled.'));
+          return accepted;
+        }
         for (;;) {
           const value = await wait('text', `${title} (y/N)`);
           if (/^(y|yes)$/i.test(value)) return true;
@@ -163,15 +188,19 @@ export default function DeviceConsole() {
           output(t('请输入列表中的编号。', 'Enter a number from the list.'));
         }
       },
-      directory: async () =>
-        directory.current ??
-        (await wait(
-          'directory',
-          t(
-            '请在侧栏选择存放镜像的本地目录。',
-            'Choose a local image directory in the sidebar.',
-          ),
-        )),
+      directory: async () => {
+        if (graphical) setPreparing(true);
+        return (
+          directory.current ??
+          (await wait(
+            'directory',
+            t(
+              '请在侧栏选择存放镜像的本地目录。',
+              'Choose a local image directory in the sidebar.',
+            ),
+          ))
+        );
+      },
       device: async () => {
         if (!usb.device?.opened)
           await wait(
@@ -215,6 +244,21 @@ export default function DeviceConsole() {
           { spec, mirrors },
         ),
     };
+    if (graphical) {
+      ui.selectSystem = (catalog, vendors) => {
+        signal.throwIfAborted();
+        setCatalog({ catalog, vendors });
+        return selectedImage.current ?? wait('system', '');
+      };
+      ui.preparePackages = (options) => {
+        signal.throwIfAborted();
+        setPackageOptions(options);
+        return wait('packages', '');
+      };
+      ui.review = (items) => {
+        if (!signal.aborted) setSteps(items);
+      };
+    }
     const execute = () =>
       provision({ runtime, usb, ui, signal, locale: zh ? 'zh_CN' : 'en_US' });
     const start = async (previous) => {
@@ -261,7 +305,7 @@ export default function DeviceConsole() {
       pending.current = null;
       void close();
     };
-  }, [run, base, zh]);
+  }, [run, base, zh, graphical]);
   async function copyTrace() {
     try {
       await navigator.clipboard.writeText(traceText);
@@ -375,7 +419,7 @@ export default function DeviceConsole() {
   return (
     <>
       <header className={styles.header}>
-        <h1>ruyi device provision</h1>
+        <h1>{graphical ? 'Ruyi Imager' : 'ruyi device provision'}</h1>
         <p>
           {translate({
             id: 'tryruyi.device.description',
@@ -384,66 +428,91 @@ export default function DeviceConsole() {
         </p>
       </header>
       <div className={styles.grid}>
-        <section
-          className={styles.console}
-          aria-label={translate({
-            id: 'tryruyi.device.terminalLabel',
-            message: '交互终端',
-          })}
-        >
-          <div className={styles.bar}>
-            <span>
-              <Terminal size={17} />{' '}
-              {translate({ id: 'tryruyi.device.terminal', message: '终端' })}
-            </span>
-            <button
-              onClick={() => setRun((value) => value + 1)}
-              disabled={!complete && session.current?.writing}
-            >
-              <RotateCcw size={14} />
-              {translate({ id: 'tryruyi.device.restart', message: '重新开始' })}
-            </button>
-          </div>
-          <div
-            ref={scroll}
-            className={styles.output}
-            role="log"
-            lang={zh ? 'zh-Hans' : 'en'}
-            aria-live="polite"
-          >
-            {lines.map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-            {prompt && <div className={styles.current}>{prompt.title}</div>}
-          </div>
-          <form
-            className={styles.command}
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (prompt?.kind === 'text') {
-                log(`${prompt.title} ${answer}`);
-                settle(answer.trim());
-              }
+        {graphical ? (
+          <ImagerPanel
+            prompt={prompt}
+            catalog={catalog}
+            hasImage={Boolean(selectedImage.current)}
+            preparing={preparing}
+            packageOptions={packageOptions}
+            steps={steps}
+            status={lines.at(-1)}
+            complete={complete}
+            writing={session.current?.writing}
+            restart={() => {
+              selectedImage.current = null;
+              setPackageOptions(null);
+              setCatalog(null);
+              setRun((value) => value + 1);
             }}
+            settle={settle}
+            selectSystem={selectSystem}
+          />
+        ) : (
+          <section
+            className={styles.console}
+            aria-label={translate({
+              id: 'tryruyi.device.terminalLabel',
+              message: '交互终端',
+            })}
           >
-            <span aria-hidden="true">❯</span>
-            <input
-              ref={input}
-              value={answer}
-              onChange={(event) => setAnswer(event.target.value)}
-              disabled={prompt?.kind !== 'text'}
-              aria-label={translate({
-                id: 'tryruyi.device.terminalInput',
-                message: '终端输入',
-              })}
-              autoComplete="off"
-              spellCheck="false"
-            />
-            <button disabled={prompt?.kind !== 'text'}>
-              {translate({ id: 'tryruyi.device.enter', message: '输入' })} ↵
-            </button>
-          </form>
-        </section>
+            <div className={styles.bar}>
+              <span>
+                <Terminal size={17} />{' '}
+                {translate({ id: 'tryruyi.device.terminal', message: '终端' })}
+              </span>
+              <button
+                onClick={() => setRun((value) => value + 1)}
+                disabled={!complete && session.current?.writing}
+              >
+                <RotateCcw size={14} />
+                {translate({
+                  id: 'tryruyi.device.restart',
+                  message: '重新开始',
+                })}
+              </button>
+            </div>
+            <div
+              ref={scroll}
+              className={styles.output}
+              role="log"
+              lang={zh ? 'zh-Hans' : 'en'}
+              aria-live="polite"
+            >
+              {lines.map((line, index) => (
+                <div key={index}>{line}</div>
+              ))}
+              {prompt && <div className={styles.current}>{prompt.title}</div>}
+            </div>
+            <form
+              className={styles.command}
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (prompt?.kind === 'text') {
+                  log(`${prompt.title} ${answer}`);
+                  settle(answer.trim());
+                }
+              }}
+            >
+              <span aria-hidden="true">❯</span>
+              <input
+                ref={input}
+                value={answer}
+                onChange={(event) => setAnswer(event.target.value)}
+                disabled={prompt?.kind !== 'text'}
+                aria-label={translate({
+                  id: 'tryruyi.device.terminalInput',
+                  message: '终端输入',
+                })}
+                autoComplete="off"
+                spellCheck="false"
+              />
+              <button disabled={prompt?.kind !== 'text'}>
+                {translate({ id: 'tryruyi.device.enter', message: '输入' })} ↵
+              </button>
+            </form>
+          </section>
+        )}
         <aside className={styles.aside}>
           <section>
             <h2>
@@ -468,7 +537,9 @@ export default function DeviceConsole() {
                         message: '未连接开发板',
                       })}
             </div>
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               disabled={
                 !navigator.usb ||
                 complete ||
@@ -481,7 +552,7 @@ export default function DeviceConsole() {
                 id: 'tryruyi.device.connect',
                 message: '连接开发板',
               })}
-            </button>
+            </Button>
           </section>
           <section>
             <h2>
@@ -499,7 +570,9 @@ export default function DeviceConsole() {
                     message: '选择本机目录保存下载包和解包后的分区文件。',
                   })}
             </p>
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               disabled={
                 !window.showDirectoryPicker ||
                 (Boolean(directoryName) &&
@@ -512,7 +585,7 @@ export default function DeviceConsole() {
                 id: 'tryruyi.device.chooseDirectory',
                 message: '选择目录',
               })}
-            </button>
+            </Button>
           </section>
           {transfer && (
             <section>
@@ -554,12 +627,12 @@ export default function DeviceConsole() {
                   )}
                 </a>
               ))}
-              <button type="button" onClick={selectImage}>
+              <Button variant="secondary" size="sm" onClick={selectImage}>
                 {translate({
                   id: 'tryruyi.device.chooseFile',
                   message: '选择本地文件',
                 })}
-              </button>
+              </Button>
               <input
                 ref={filePicker}
                 hidden
@@ -591,8 +664,9 @@ export default function DeviceConsole() {
             {traceOpen && (
               <>
                 <div className={styles.traceActions}>
-                  <button
-                    type="button"
+                  <Button
+                    variant="secondary"
+                    size="sm"
                     disabled={!traceText}
                     onClick={copyTrace}
                   >
@@ -600,7 +674,7 @@ export default function DeviceConsole() {
                       id: 'tryruyi.device.copyLog',
                       message: '复制日志',
                     })}
-                  </button>
+                  </Button>
                   <span role="status">
                     {copyStatus === 'copied' &&
                       translate({

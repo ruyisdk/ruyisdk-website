@@ -607,6 +607,51 @@
     "message": "SHA-256-Prüfsumme wird geprüft"
   },
 
+  "========== tryruyi imager ==========": { "message": "" },
+
+  "tryruyi.imager.board": {
+    "message": "Board-Modell"
+  },
+  "tryruyi.imager.download": {
+    "message": "Abbilder herunterladen und vorbereiten"
+  },
+  "tryruyi.imager.image": {
+    "message": "Systemabbild"
+  },
+  "tryruyi.imager.loading": {
+    "message": "Board-Katalog wird geladen…"
+  },
+  "tryruyi.imager.no": {
+    "message": "Nein"
+  },
+  "tryruyi.imager.prepare": {
+    "message": "Abbilder vorbereiten"
+  },
+  "tryruyi.imager.prepareHint": {
+    "message": "Wählen Sie ein Systemabbild aus, um die zugehörigen Pakete hier zu prüfen und vorzubereiten."
+  },
+  "tryruyi.imager.setup": {
+    "message": "Board einrichten"
+  },
+  "tryruyi.imager.steps": {
+    "message": "Flash-Schritte"
+  },
+  "tryruyi.imager.stepsHint": {
+    "message": "Sobald die Abbilder bereit sind, können Sie hier die Flash-Schritte und das Zielboard prüfen."
+  },
+  "tryruyi.imager.unavailable": {
+    "message": "Für diese Hardware sind keine Abbilder im Katalog vorhanden."
+  },
+  "tryruyi.imager.variant": {
+    "message": "Hardwarevariante"
+  },
+  "tryruyi.imager.vendor": {
+    "message": "Board-Hersteller"
+  },
+  "tryruyi.imager.yes": {
+    "message": "Ja"
+  },
+
   "========== issue ==========": { "message": "" },
 
   "issue.meta.title": {
