@@ -1,3 +1,4 @@
+import { gzipPayloads } from './spacemit.js';
 import { flashPayloads } from './sparse.js';
 
 const filter = { classCode: 0xff, subclassCode: 0x42, protocolCode: 0x03 };
@@ -12,6 +13,7 @@ export class FastbootSession {
     this.signal = signal;
     this.label = 'Disconnected';
     this.acceptSelection = true;
+    this.allowGzip = true;
     this.disconnect = (event) => {
       if (event.device === this.device) {
         this.device = null;
@@ -80,6 +82,9 @@ export class FastbootSession {
       this.lastDevice = device;
       this.input = match.input.endpointNumber;
       this.output = match.output.endpointNumber;
+      this.usb2Bulk =
+        [8, 16, 32, 64, 512].includes(match.output.packetSize) &&
+        [8, 16, 32, 64, 512].includes(match.input.packetSize);
       this.limit = null;
       this.status(
         `${device.productName || 'Fastboot'} · ${device.vendorId.toString(16)}:${device.productId.toString(16)}${device.serialNumber ? ` · ${device.serialNumber}` : ''}`,
@@ -165,7 +170,7 @@ export class FastbootSession {
     if ((await this.response()).type !== 'OKAY')
       throw Error('Device did not accept the download');
   }
-  async execute(argv, files) {
+  async execute(argv, files, compress) {
     const [program, action, ...args] = argv;
     if (program !== 'fastboot')
       throw Error(`Unsupported device command: ${program}`);
@@ -210,12 +215,26 @@ export class FastbootSession {
             value && /^(?:0x[\da-f]+|\d+)$/i.test(value) ? Number(value) : 0;
           this.limit =
             limit > 0 ? Math.min(limit, 0xffffffff) : 16 * 1024 * 1024;
+          this.reportedLimit = limit > 0;
         }
+        const file = files.get(args[1]);
+        const gzip =
+          compress &&
+          this.allowGzip &&
+          this.usb2Bulk &&
+          this.reportedLimit &&
+          this.limit >= 8192 &&
+          file.size >= 4 &&
+          new DataView(await file.slice(0, 4).arrayBuffer()).getUint32(
+            0,
+            true,
+          ) !== 0xed26ff3a;
+        if (gzip) this.log(`${args[0]} · USB gzip`);
+        const payloads = gzip
+          ? gzipPayloads(file, this.limit, compress)
+          : flashPayloads(file, this.limit);
         let count = 0;
-        for await (const payload of flashPayloads(
-          files.get(args[1]),
-          this.limit,
-        )) {
+        for await (const payload of payloads) {
           await this.download(payload);
           await this.command(`flash:${args[0]}`);
           this.log(

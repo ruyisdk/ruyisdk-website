@@ -4,6 +4,7 @@ import (
 	"archive/tar"
 	"archive/zip"
 	"bufio"
+	"bytes"
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/hex"
@@ -46,6 +47,25 @@ func (reader blobReader) ReadAt(buffer []byte, offset int64) (int, error) {
 		return count, io.EOF
 	}
 	return count, nil
+}
+
+func gzipChunk(job js.Value) (js.Value, error) {
+	blob := job.Get("file")
+	source := blobReader{blob, int64(blob.Get("size").Float())}
+	var compressed bytes.Buffer
+	writer, err := gzip.NewWriterLevel(&compressed, job.Get("level").Int())
+	if err != nil {
+		return js.Undefined(), err
+	}
+	if _, err = io.CopyBuffer(writer, io.NewSectionReader(source, 0, source.size), make([]byte, bufferSize)); err != nil {
+		return js.Undefined(), err
+	}
+	if err = writer.Close(); err != nil {
+		return js.Undefined(), err
+	}
+	data := js.Global().Get("Uint8Array").New(compressed.Len())
+	js.CopyBytesToJS(data, compressed.Bytes())
+	return data, nil
 }
 
 func processImage(job, host js.Value) (any, error) {
