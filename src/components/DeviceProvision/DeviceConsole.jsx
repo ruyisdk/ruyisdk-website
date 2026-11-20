@@ -62,6 +62,7 @@ export default function DeviceConsole() {
     [transfer, setTransfer] = useState(null);
   const [, refresh] = useState(0);
   const session = useRef(null),
+    previousRun = useRef(null),
     pending = useRef(null),
     directory = useRef(null),
     filePicker = useRef(null),
@@ -204,42 +205,49 @@ export default function DeviceConsole() {
     };
     const execute = () =>
       provision({ runtime, usb, ui, signal, locale: zh ? 'zh_CN' : 'en_US' });
-    const operation = navigator.locks
-      ? navigator.locks.request(
-          'ruyi-device-provision',
-          { ifAvailable: true },
-          (lock) => {
-            if (!lock)
-              throw Error(
-                t(
-                  '另一个页面已打开刷写向导。请关闭它后重试。',
-                  'Another tab is running the provisioner. Close it and retry.',
-                ),
-              );
-            return execute();
-          },
-        )
-      : execute();
-    operation
+    const start = async (previous) => {
+      await previous;
+      signal.throwIfAborted();
+      if (!navigator.locks) return execute();
+      return navigator.locks.request(
+        'ruyi-device-provision',
+        { ifAvailable: true },
+        (lock) => {
+          signal.throwIfAborted();
+          if (!lock)
+            throw Error(
+              t(
+                '另一个页面已打开刷写向导。请关闭它后重试。',
+                'Another tab is running the provisioner. Close it and retry.',
+              ),
+            );
+          return execute();
+        },
+      );
+    };
+    let closing;
+    const close = () => {
+      runtime.dispose();
+      return (closing ??= usb.dispose());
+    };
+    previousRun.current = start(previousRun.current)
       .catch((error) => {
         trace(`ERROR: ${error.message ?? error}`);
         output(`${t('已停止', 'Stopped')}: ${error.message ?? error}`);
       })
-      .finally(() => {
+      .finally(async () => {
+        await close();
         if (!signal.aborted) {
           setComplete(true);
           setPrompt(null);
           setTransfer(null);
-          runtime.dispose();
-          void usb.dispose().then(update);
         }
       });
     return () => {
       controller.abort();
       pending.current?.reject(Error('Session closed'));
       pending.current = null;
-      runtime.dispose();
-      void usb.dispose();
+      void close();
     };
   }, [run, base, zh]);
   async function copyTrace() {
