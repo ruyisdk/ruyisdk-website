@@ -1,6 +1,9 @@
 import React from "react";
 import Translate, { translate } from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { Download } from "lucide-react";
+import MarkdownCard from "@site/src/components/About/MarkdownCard";
+import { PageBackground } from "@site/src/components/Home/Background";
 
 import SpecOverviewDe from "./content/spec-overview.de.mdx";
 import SpecOverviewEn from "./content/spec-overview.en.mdx";
@@ -143,17 +146,15 @@ function CategoryNav({ groupedCards }) {
 
 function AudienceGuide() {
   return (
-    <section className={styles.audienceGuide} aria-labelledby="audience-guide-title">
-      <div className={styles.guideHeader}>
-        <h2 id="audience-guide-title">
-          <Translate id="riscvSpecs.guide.title">按关注点阅读</Translate>
-        </h2>
-      </div>
+    <section aria-labelledby="audience-guide-title">
+      <h2 id="audience-guide-title" className={styles.sectionTitle}>
+        <Translate id="riscvSpecs.guide.title">按关注点阅读</Translate>
+      </h2>
 
       <div className={styles.guideGrid}>
         {AUDIENCE_GUIDE_MESSAGE_IDS.map((item) => (
           <a key={item.audienceId} className={styles.guideCard} href={`#${toSectionId(item.category)}`}>
-            <span className={styles.guideBadge}>
+            <span className={styles.guideTitle}>
               <Translate id={item.audienceId}>{item.audienceMessage}</Translate>
             </span>
             <strong>
@@ -204,11 +205,12 @@ function SpecCard({ spec }) {
           </Translate>
         </span>
         <a
-          className={styles.downloadButton}
+          className="primary-button gap-2 max-[760px]:w-full"
           href={spec.downloadUrl}
           target="_blank"
           rel="noopener noreferrer"
         >
+          <Download size={16} aria-hidden="true" />
           <Translate id="riscvSpecs.card.downloadPdf">下载 PDF</Translate>
         </a>
       </div>
@@ -221,7 +223,7 @@ function CategorySection({ category, specs }) {
     <section className={styles.categorySection} id={toSectionId(category)}>
       <div className={styles.categoryHeader}>
         <div>
-          <h2>{CATEGORY_LABELS[category]}</h2>
+          <h2 className={styles.sectionTitle}>{CATEGORY_LABELS[category]}</h2>
           <p>
             <Translate id={CATEGORY_DESCRIPTION_IDS[category].id}>
               {CATEGORY_DESCRIPTION_IDS[category].message}
@@ -252,16 +254,15 @@ export default function RiscvSpecPage() {
   const groupedCards = groupCardsByCategory(specCards);
 
   return (
-    <main className={styles.page}>
-      <div className={styles.container}>
-        <section className={styles.overview}>
-          <div className={styles.overviewContent}>
-            <SpecOverview />
-          </div>
+    <main className="relative isolate font-inter pt-(--ruyi-page-start) pb-(--ruyi-page-end)">
+      <PageBackground />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 wrap-anywhere">
+        <MarkdownCard className={styles.overview}>
+          <SpecOverview />
+        </MarkdownCard>
 
-          <AudienceGuide />
-          <CategoryNav groupedCards={groupedCards} />
-        </section>
+        <AudienceGuide />
+        <CategoryNav groupedCards={groupedCards} />
 
         <section
           className={styles.specs}
