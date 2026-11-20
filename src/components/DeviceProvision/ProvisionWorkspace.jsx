@@ -138,7 +138,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
       });
     };
     const usb = new FastbootSession(update, output, signal, trace);
-    const runtime = new ProvisionRuntime(base, output, trace);
+    const runtime = new ProvisionRuntime(base, output, signal, trace);
     session.current = { usb, runtime, signal, writing: false, trace };
     setTraceText('');
     setCopyStatus(null);
@@ -297,17 +297,15 @@ export default function ProvisionWorkspace({ graphical = false }) {
       );
     };
     let closing;
-    const close = () => {
-      runtime.dispose();
-      return (closing ??= usb.dispose());
-    };
+    const closeUsb = () => (closing ??= usb.dispose());
     previousRun.current = start(previousRun.current)
       .catch((error) => {
         trace(`ERROR: ${error.message ?? error}`);
         output(`${t('已停止', 'Stopped')}: ${error.message ?? error}`);
       })
       .finally(async () => {
-        await close();
+        runtime.dispose();
+        await closeUsb();
         if (!signal.aborted) {
           setComplete(true);
           setPrompt(null);
@@ -318,7 +316,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
       controller.abort();
       pending.current?.reject(Error('Session closed'));
       pending.current = null;
-      void close();
+      void closeUsb();
     };
   }, [run, base, zh, graphical]);
   async function copyTrace() {
