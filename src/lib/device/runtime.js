@@ -33,6 +33,7 @@ export class ProvisionRuntime {
     this.worker.onerror = (event) => this.dispose(event.message);
   }
   run(job, command) {
+    if (this.closedReason) return Promise.reject(Error(this.closedReason));
     const id = ++this.sequence;
     return new Promise((resolve, reject) => {
       this.pending.set(id, { resolve, reject, command });
@@ -45,6 +46,8 @@ export class ProvisionRuntime {
     });
   }
   dispose(reason = 'Session closed') {
+    if (this.closedReason) return;
+    this.closedReason = reason || 'Session closed';
     this.worker.terminate();
     for (const task of this.pending.values()) task.reject(Error(reason));
     this.pending.clear();
