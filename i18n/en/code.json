@@ -573,6 +573,12 @@
   "tryruyi.device.extracting": {
     "message": "Extracting"
   },
+  "tryruyi.device.fileNameMismatch": {
+    "message": "You selected {selected}. Choose {expected}."
+  },
+  "tryruyi.device.filePickerError": {
+    "message": "Could not open the image file."
+  },
   "tryruyi.device.flashLog": {
     "message": "Flashing log"
   },

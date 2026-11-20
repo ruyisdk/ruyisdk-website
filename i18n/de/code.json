@@ -573,6 +573,12 @@
   "tryruyi.device.extracting": {
     "message": "Wird entpackt"
   },
+  "tryruyi.device.fileNameMismatch": {
+    "message": "Du hast {selected} ausgewählt. Bitte wähle {expected}."
+  },
+  "tryruyi.device.filePickerError": {
+    "message": "Die Abbilddatei konnte nicht geöffnet werden."
+  },
   "tryruyi.device.flashLog": {
     "message": "Flash-Protokoll"
   },
