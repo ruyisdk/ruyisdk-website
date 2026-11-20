@@ -68,6 +68,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
   const [complete, setComplete] = useState(false),
     [issue, setIssue] = useState(''),
     [directoryName, setDirectoryName] = useState(''),
+    [pickingDirectory, setPickingDirectory] = useState(false),
     [transfer, setTransfer] = useState(null);
   const [, refresh] = useState(0);
   const session = useRef(null),
@@ -390,6 +391,8 @@ export default function ProvisionWorkspace({ graphical = false }) {
     }
   }
   async function selectDirectory() {
+    if (pickingDirectory) return;
+    setPickingDirectory(true);
     try {
       const selected = await window.showDirectoryPicker({
         mode: 'readwrite',
@@ -407,6 +410,8 @@ export default function ProvisionWorkspace({ graphical = false }) {
           message: '无法打开镜像目录。',
         }),
       );
+    } finally {
+      setPickingDirectory(false);
     }
   }
   async function connect() {
@@ -590,6 +595,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
               variant="secondary"
               size="sm"
               disabled={
+                pickingDirectory ||
                 !window.showDirectoryPicker ||
                 (Boolean(directoryName) &&
                   !complete &&
