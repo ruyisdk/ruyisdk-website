@@ -1,59 +1,59 @@
 {
-  "last_updated": "2026-11-17T02:59:51.970452Z",
+  "last_updated": "2026-11-19T15:59:51.486126Z",
   "downloads": {
-    "total": 84123
+    "total": 84164
   },
   "pm_downloads": {
-    "total": 143996
+    "total": 144839
   },
   "other_categories_downloads": {
     "3rdparty": {
-      "total": 32428
+      "total": 32495
     },
     "humans": {
-      "total": 128177
+      "total": 128554
     },
     "ide": {
-      "total": 4551
+      "total": 4561
     }
   },
   "downloads_by_categories_v1": {
     "pkg": {
-      "total": 84123
+      "total": 84164
     },
     "pm:github": {
       "total": 6606
     },
     "pm:mirror": {
-      "total": 125834
+      "total": 126650
     },
     "pm:pypi": {
-      "total": 11556
+      "total": 11583
     },
     "3rdparty": {
-      "total": 32428
+      "total": 32495
     },
     "humans": {
-      "total": 128177
+      "total": 128554
     },
     "ide:eclipse:mirror": {
-      "total": 2600
+      "total": 2604
     },
     "ide:plugin:eclipse:mirror": {
-      "total": 742
+      "total": 743
     },
     "ide:plugin:eclipse:github": {
       "total": 156
     },
     "ide:plugin:vscode:mirror": {
-      "total": 927
+      "total": 932
     },
     "ide:plugin:vscode:github": {
       "total": 126
     }
   },
   "installs": {
-    "total": 45982
+    "total": 46005
   },
   "top_packages": {},
   "top_commands": {
@@ -61,7 +61,7 @@
       "total": 49119
     },
     "ruyi admin format-manifest": {
-      "total": 20721
+      "total": 20723
     },
     "ruyi list": {
       "total": 17391
@@ -516,7 +516,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-18T01:46:43.918Z",
+    "generatedAt": "2026-11-20T01:19:18.083Z",
     "source": "https://api.ruyisdk.cn/fe/dashboard"
   }
 }

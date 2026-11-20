@@ -21,19 +21,19 @@
     {
       "total": 1,
       "author": {
-        "login": "WagiklinKasa",
-        "id": 42676335,
-        "avatar_url": "https://avatars.githubusercontent.com/u/42676335?v=4",
-        "html_url": "https://github.com/WagiklinKasa"
+        "login": "mengzhuo",
+        "id": 885662,
+        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
+        "html_url": "https://github.com/mengzhuo"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "mengzhuo",
-        "id": 885662,
-        "avatar_url": "https://avatars.githubusercontent.com/u/885662?v=4",
-        "html_url": "https://github.com/mengzhuo"
+        "login": "WagiklinKasa",
+        "id": 42676335,
+        "avatar_url": "https://avatars.githubusercontent.com/u/42676335?v=4",
+        "html_url": "https://github.com/WagiklinKasa"
       }
     },
     {
@@ -147,15 +147,6 @@
     {
       "total": 7,
       "author": {
-        "login": "DuoQilai",
-        "id": 101803232,
-        "avatar_url": "https://avatars.githubusercontent.com/u/101803232?v=4",
-        "html_url": "https://github.com/DuoQilai"
-      }
-    },
-    {
-      "total": 7,
-      "author": {
         "login": "cms19859230182-lang",
         "id": 276597748,
         "avatar_url": "https://avatars.githubusercontent.com/u/276597748?v=4",
@@ -169,6 +160,15 @@
         "id": 183165673,
         "avatar_url": "https://avatars.githubusercontent.com/u/183165673?v=4",
         "html_url": "https://github.com/ZihanCheng63"
+      }
+    },
+    {
+      "total": 9,
+      "author": {
+        "login": "DuoQilai",
+        "id": 101803232,
+        "avatar_url": "https://avatars.githubusercontent.com/u/101803232?v=4",
+        "html_url": "https://github.com/DuoQilai"
       }
     },
     {
@@ -254,7 +254,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-12T23:55:20.128Z",
+    "generatedAt": "2026-11-20T01:02:25.637Z",
     "source": "https://api.github.com/repos/ruyisdk/support-matrix/stats/contributors"
   }
 }

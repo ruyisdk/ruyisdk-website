@@ -7,28 +7,28 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2405
+      "contributions": 2410
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 693
+      "contributions": 747
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 360
+      "contributions": 362
     },
     {
       "id": 29089388,
       "name": "pzhlkj6612",
       "avatarUrl": "https://avatars.githubusercontent.com/u/29089388?v=4",
       "github": "https://github.com/pzhlkj6612",
-      "contributions": 242
+      "contributions": 243
     },
     {
       "id": 54484233,
@@ -49,7 +49,7 @@
       "name": "U2FsdGVkX1",
       "avatarUrl": "https://avatars.githubusercontent.com/u/11484206?v=4",
       "github": "https://github.com/U2FsdGVkX1",
-      "contributions": 115
+      "contributions": 116
     },
     {
       "id": 22784008,
@@ -59,17 +59,17 @@
       "contributions": 82
     },
     {
-      "id": 16155165,
-      "name": "ArchFeh",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
-      "github": "https://github.com/ArchFeh",
-      "contributions": 80
-    },
-    {
       "id": 43362020,
       "name": "pz9115",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43362020?v=4",
       "github": "https://github.com/pz9115",
+      "contributions": 81
+    },
+    {
+      "id": 16155165,
+      "name": "ArchFeh",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/16155165?v=4",
+      "github": "https://github.com/ArchFeh",
       "contributions": 80
     },
     {
@@ -105,7 +105,7 @@
       "name": "imkiva",
       "avatarUrl": "https://avatars.githubusercontent.com/u/9902643?v=4",
       "github": "https://github.com/imkiva",
-      "contributions": 47
+      "contributions": 48
     },
     {
       "id": 102520124,
@@ -119,7 +119,7 @@
       "name": "qjivy",
       "avatarUrl": "https://avatars.githubusercontent.com/u/24410810?v=4",
       "github": "https://github.com/qjivy",
-      "contributions": 33
+      "contributions": 34
     },
     {
       "id": 132126433,
@@ -185,32 +185,32 @@
       "contributions": 17
     },
     {
+      "id": 101803232,
+      "name": "DuoQilai",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/101803232?v=4",
+      "github": "https://github.com/DuoQilai",
+      "contributions": 16
+    },
+    {
       "id": 43837589,
       "name": "joy2myself",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43837589?v=4",
       "github": "https://github.com/joy2myself",
-      "contributions": 15
+      "contributions": 16
     },
     {
       "id": 885662,
       "name": "mengzhuo",
       "avatarUrl": "https://avatars.githubusercontent.com/u/885662?v=4",
       "github": "https://github.com/mengzhuo",
-      "contributions": 14
-    },
-    {
-      "id": 101803232,
-      "name": "DuoQilai",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/101803232?v=4",
-      "github": "https://github.com/DuoQilai",
-      "contributions": 13
+      "contributions": 15
     },
     {
       "id": 70937056,
       "name": "RealFYang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/70937056?v=4",
       "github": "https://github.com/RealFYang",
-      "contributions": 13
+      "contributions": 14
     },
     {
       "id": 43716472,
@@ -530,15 +530,15 @@
   ],
   "totals": {
     "contributors": 75,
-    "commits": 5227,
-    "pullRequests": 2474,
-    "issues": 107,
-    "stars": 126,
+    "commits": 5299,
+    "pullRequests": 2499,
+    "issues": 98,
+    "stars": 127,
     "forks": 187,
     "watches": 20
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-18T01:46:41.346Z",
+    "generatedAt": "2026-11-20T01:19:13.866Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
