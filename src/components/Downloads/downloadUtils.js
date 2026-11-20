@@ -53,5 +53,10 @@ export function extractFileName(url) {
   const parsed = safeParseUrl(url);
   if (!parsed) return '';
   const parts = parsed.pathname.split('/').filter(Boolean);
-  return decodeURIComponent(parts[parts.length - 1] || '');
+  const fileName = parts[parts.length - 1] || '';
+  try {
+    return decodeURIComponent(fileName);
+  } catch {
+    return fileName;
+  }
 }
