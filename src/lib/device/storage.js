@@ -60,10 +60,13 @@ export async function prepareImages(
     signal.throwIfAborted();
     const spec = pkg.data.distfiles.find((item) => item.name === name);
     if (!spec?.checksums?.sha256) throw Error(`No SHA-256 for ${name}`);
-    const verified = async (file) =>
-      file?.size === spec.size &&
-      (await runtime.run({ kind: 'hash', file })) === spec.checksums.sha256;
-    progress({ name, phase: 'SHA-256', bytes: 0, total: spec.size });
+    const verified = async (file) => {
+      if (file?.size !== spec.size) return false;
+      progress({ name, phase: 'SHA-256', bytes: 0, total: spec.size });
+      return (
+        (await runtime.run({ kind: 'hash', file })) === spec.checksums.sha256
+      );
+    };
     let file = await existing(archives, name);
     if (!(await verified(file))) {
       file = null;
@@ -97,13 +100,13 @@ export async function prepareImages(
           throw error;
         }
         const candidate = await existing(archives, name);
-        progress({ name, phase: 'SHA-256', bytes: 0, total: spec.size });
         if (!(await verified(candidate)))
           throw Error(`Size or SHA-256 mismatch: ${name}`);
         return candidate;
       };
       for (const url of urls) {
         try {
+          progress({ name, phase: 'Download', bytes: 0, total: spec.size });
           const response = await fetch(url, {
             signal,
             credentials: 'omit',
@@ -115,14 +118,16 @@ export async function prepareImages(
           break;
         } catch (error) {
           signal.throwIfAborted();
-          log(`${new URL(url).host}: ${error.message}`);
+          log(`${url}: ${error.message}`);
         }
       }
       if (!file) {
+        progress(null);
         const local = await localFile(spec);
         if (local.size !== spec.size)
           throw Error(`Incorrect file size for ${name}`);
-        file = await save(local.stream());
+        if (!(await verified(local))) throw Error(`SHA-256 mismatch: ${name}`);
+        file = local;
       }
     }
     log(`SHA-256 ✓ ${name}`);

@@ -204,8 +204,8 @@ export default function DeviceConsole() {
         await wait(
           'file',
           t(
-            '自动下载失败。请手动下载并选择对应文件。',
-            'Automatic download failed. Download and select the matching file.',
+            `请用侧栏的镜像链接下载 ${spec.name}，然后选择本地文件继续。`,
+            `Download ${spec.name} using the mirror link in the sidebar, then select the local file to continue.`,
           ),
           { spec },
         ),
@@ -459,6 +459,70 @@ export default function DeviceConsole() {
               })}
             </button>
           </section>
+          {transfer && (
+            <section>
+              <h2>
+                <Download size={20} />
+                {phaseLabel(transfer.phase)}
+              </h2>
+              <p>{transfer.name}</p>
+              <progress
+                max={transfer.total}
+                value={transfer.bytes || undefined}
+              />
+              <small>{formatBytes(transfer.total)}</small>
+            </section>
+          )}
+          {prompt?.kind === 'file' && (
+            <section>
+              <h2>
+                {translate({
+                  id: 'tryruyi.device.imageFile',
+                  message: '选择镜像文件',
+                })}
+              </h2>
+              <p>{prompt.spec.name}</p>
+              {prompt.spec.resolved_urls
+                .filter((url) => /^https?:\/\//.test(url))
+                .map((url) => (
+                  <a
+                    className={styles.downloadLink}
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {translate(
+                      {
+                        id: 'tryruyi.device.downloadFrom',
+                        message: '从 {host} 下载',
+                      },
+                      { host: new URL(url).hostname },
+                    )}
+                  </a>
+                ))}
+              <button type="button" onClick={() => filePicker.current?.click()}>
+                {translate({
+                  id: 'tryruyi.device.chooseFile',
+                  message: '选择本地文件',
+                })}
+              </button>
+              <input
+                ref={filePicker}
+                hidden
+                type="file"
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  if (file) settle(file);
+                }}
+              />
+            </section>
+          )}
+          {issue && (
+            <p role="alert" className={styles.error}>
+              {issue}
+            </p>
+          )}
           <details
             className={styles.traceCard}
             onToggle={(event) => setTraceOpen(event.currentTarget.open)}
@@ -510,58 +574,6 @@ export default function DeviceConsole() {
               </>
             )}
           </details>
-          {transfer && (
-            <section>
-              <h2>
-                <Download size={20} />
-                {phaseLabel(transfer.phase)}
-              </h2>
-              <p>{transfer.name}</p>
-              <progress
-                max={transfer.total}
-                value={transfer.bytes || undefined}
-              />
-              <small>{formatBytes(transfer.total)}</small>
-            </section>
-          )}
-          {prompt?.kind === 'file' && (
-            <section>
-              <h2>
-                {translate({
-                  id: 'tryruyi.device.imageFile',
-                  message: '选择镜像文件',
-                })}
-              </h2>
-              <p>{prompt.spec.name}</p>
-              {prompt.spec.resolved_urls
-                .filter((url) => /^https?:\/\//.test(url))
-                .map((url) => (
-                  <a key={url} href={url} target="_blank" rel="noreferrer">
-                    {new URL(url).hostname} ↗{' '}
-                  </a>
-                ))}
-              <button type="button" onClick={() => filePicker.current?.click()}>
-                {translate({
-                  id: 'tryruyi.device.chooseFile',
-                  message: '选择本地文件',
-                })}
-              </button>
-              <input
-                ref={filePicker}
-                hidden
-                type="file"
-                onChange={(event) => {
-                  const file = event.target.files?.[0];
-                  if (file) settle(file);
-                }}
-              />
-            </section>
-          )}
-          {issue && (
-            <p role="alert" className={styles.error}>
-              {issue}
-            </p>
-          )}
         </aside>
       </div>
     </main>

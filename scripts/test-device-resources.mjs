@@ -16,6 +16,7 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
   ];
   assert.ok(blocked.every((url) => !trustedDownload(url)));
   const requests = [];
+  const phases = [];
   context.mock.method(globalThis, 'fetch', async (url, options) => {
     requests.push(url);
     assert.equal(options.redirect, 'error');
@@ -47,16 +48,79 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
     prepareImages(pkg, {
       root,
       runtime: {},
-      progress: () => {},
+      progress: (value) => phases.push(value?.phase ?? null),
       log: () => {},
       signal: new AbortController().signal,
       localFile: async () => {
+        assert.deepEqual(phases, ['Download', null]);
         throw Error('manual import requested');
       },
     }),
     /manual import requested/,
   );
   assert.deepEqual(requests, [trusted]);
+});
+
+test('manual import verifies the selected file and extracts it without caching a copy', async () => {
+  const name = 'root.ext4.zst';
+  const archive = new File(['archive'], name);
+  const image = new File(['partition'], 'root.ext4');
+  const archives = {
+    getFileHandle: async (path, options) => {
+      assert.equal(path, name);
+      assert.ok(!options?.create, 'manual imports must not create an archive');
+      throw new DOMException('missing', 'NotFoundError');
+    },
+  };
+  const images = {
+    getFileHandle: async (path) => {
+      assert.equal(path, image.name);
+      return { getFile: async () => image };
+    },
+  };
+  const root = {
+    getDirectoryHandle: async (path) =>
+      ({ downloads: archives, images })[path] ?? root,
+  };
+  const pkg = {
+    package: 'test',
+    version: '1',
+    data: {
+      provisionable: { partition_map: { root: image.name } },
+      blob: { distfiles: [name] },
+      distfiles: [
+        {
+          name,
+          size: archive.size,
+          checksums: { sha256: 'expected' },
+          resolved_urls: [],
+        },
+      ],
+    },
+  };
+  let checksum = 'wrong';
+  const jobs = [];
+  const options = {
+    root,
+    log: () => {},
+    progress: () => {},
+    signal: new AbortController().signal,
+    localFile: async () => archive,
+    runtime: {
+      run: async (job) => {
+        jobs.push(job.kind);
+        assert.equal(job.file, archive);
+        if (job.kind === 'hash') return checksum;
+        assert.equal(job.dir, images);
+        return [image.name];
+      },
+    },
+  };
+  await assert.rejects(prepareImages(pkg, options), /SHA-256 mismatch/);
+  assert.deepEqual(jobs, ['hash']);
+  checksum = 'expected';
+  assert.equal((await prepareImages(pkg, options)).get(image.name), image);
+  assert.deepEqual(jobs, ['hash', 'hash', 'extract']);
 });
 
 test('flash reuses reviewed module and asset bytes and cannot fetch additional resources', async () => {

@@ -561,6 +561,9 @@
   "tryruyi.device.disconnected": {
     "message": "No board connected"
   },
+  "tryruyi.device.downloadFrom": {
+    "message": "Download from {host}"
+  },
   "tryruyi.device.downloading": {
     "message": "Downloading"
   },
