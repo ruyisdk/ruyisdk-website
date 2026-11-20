@@ -2,7 +2,8 @@
   max-width: 1160px;
   width: 100%;
   margin: 0 auto;
-  padding: clamp(24px, 5vw, 64px) 24px 60px;
+  padding-block: var(--ruyi-page-start) var(--ruyi-page-end);
+  padding-inline: 24px;
   color: var(--ifm-font-color-base);
 }
 .header h1 {
@@ -139,6 +140,9 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 10px;
 }
+.aside > :last-child {
+  margin-bottom: 0;
+}
 .traceCard summary {
   padding: 14px 18px;
   cursor: pointer;
@@ -176,7 +180,7 @@
     grid-column: 1 / -1;
   }
   .page {
-    padding: 24px 16px;
+    padding-inline: 16px;
   }
   .grid {
     gap: 12px;
