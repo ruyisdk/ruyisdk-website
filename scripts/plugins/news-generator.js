@@ -1,7 +1,7 @@
-import { readFileSync, writeFileSync, realpathSync } from "fs";
+import { readFileSync, realpathSync } from "fs";
 import { glob } from "glob";
-import { basename, resolve, join, relative, sep, isAbsolute } from "path";
-import matter from 'gray-matter';
+import { basename, resolve, relative, sep, isAbsolute } from "path";
+import { readNewsMetadata } from './news-metadata.js';
 import { localizeTitle } from './news-localize.cjs';
 
 const PATTERNS = {
@@ -48,74 +48,6 @@ const PATTERNS = {
     },
   },
 };
-
-function extractTitle(content, filename) {
-  // first H1
-  const h1 = content.match(/^#\s+(.+)$/m);
-  if (h1) return h1[1].trim();
-
-  // Final fallback: filename sans extension
-  return basename(filename, ".md");
-}
-
-function extractSummary(content) {
-  // Remove frontmatter
-  let text = content.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, "");
-
-  // Remove code blocks (```...```)
-  text = text.replace(/```[\s\S]*?```/g, "");
-
-  // Remove inline code (`...`)
-  text = text.replace(/`[^`]+`/g, "");
-
-  // Remove images (![...](...))
-  text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, "");
-
-  // Remove HTML tags
-  text = text.replace(/<[^>]+>/g, "");
-
-  // Remove links but keep link text ([text](url) -> text)
-  text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-
-  // Remove headings
-  text = text.replace(/^#+\s+.+$/gm, "");
-
-  // Remove bold/italic markdown
-  text = text.replace(/\*\*([^*]+)\*\*/g, "$1");
-  text = text.replace(/\*([^*]+)\*/g, "$1");
-  text = text.replace(/__([^_]+)__/g, "$1");
-  text = text.replace(/_([^_]+)_/g, "$1");
-
-  // Remove extra whitespace and normalize
-  const normalized = text
-    .replace(/\r?\n/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  const summary = normalized.slice(0, 200);
-  return summary + (normalized.length > 200 ? "..." : "");
-}
-
-function extractFirstImage(content) {
-  // Try to find markdown image format: ![alt](src)
-  const markdownImageMatch = content.match(/!\[[^\]]*\]\(([^)]+)\)/);
-  if (markdownImageMatch) return markdownImageMatch[1].trim();
-
-  // Try to find HTML img tag: <img src="..." />
-  const htmlImageMatch = content.match(/<img[^>]+src\s*=\s*["']([^"']+)["']/i);
-  if (htmlImageMatch) return htmlImageMatch[1].trim();
-
-  return null;
-}
-
-function extractDate(filename) {
-  const m = filename.match(/(\d{4})-?(\d{2})-?(\d{2})/);
-  if (m) {
-    const [, y, mo, d] = m;
-    return Date.UTC(Number(y), Number(mo) - 1, Number(d));
-  }
-  return Date.now();
-}
 
 function scanFiles(pattern, preferredLocale = null) {
   // Validate pattern for security: prevent path traversal and ensure it's a relative path
@@ -201,46 +133,12 @@ function scanFiles(pattern, preferredLocale = null) {
       }
       // Safe read: path is canonicalized, whitelisted by base dir, extension is .md, and characters are validated.
       const raw = readFileSync(safePath, "utf-8");
-      const parsed = matter(raw);
-      const content = parsed.content || raw;
-  const fm = parsed.data || {};
-  const fname = basename(file);
-
-  // Parse possible locale suffix (generic: 2-5 letters, case-insensitive)
-  const m = fname.match(/^(.+?)(?:\.([a-z]{2,5}))?\.md$/i);
+      const fname = basename(file);
+      const m = fname.match(/^(.+?)(?:\.([a-z]{2,5}))?\.md$/i);
       const baseKey = m ? m[1] : fname.replace(/\.md$/i, "");
       const localeTag = m && m[2] ? m[2].toLowerCase() : "default";
 
-      // Prefer frontmatter.date if provided, else filename-based date, else now
-      let dateVal = null;
-      if (fm.date) {
-        const mm = String(fm.date).match(/(\d{4})-?(\d{2})-?(\d{2})/);
-        if (mm) {
-          const [, y, mo, d] = mm;
-          dateVal = Date.UTC(Number(y), Number(mo) - 1, Number(d));
-        } else {
-          const dt = new Date(fm.date);
-          if (!Number.isNaN(dt.getTime())) dateVal = dt.getTime();
-        }
-      }
-
-      const computedDate = dateVal || extractDate(fname);
-
-      const title = fm.title || extractTitle(content, fname);
-      const summary = extractSummary(content);
-      const image = fm.image || extractFirstImage(content);
-      const linkFromFrontmatter = fm.link || fm.permalink || fm.url || null;
-
-      const entry = {
-        title,
-        summary,
-        date: computedDate,
-        image,
-        filename: fname,
-        link: linkFromFrontmatter,
-        _locale: localeTag,
-        _baseKey: baseKey,
-      };
+      const entry = { ...readNewsMetadata(raw, fname), _locale: localeTag, _baseKey: baseKey };
 
       if (!groups.has(baseKey)) groups.set(baseKey, []);
       groups.get(baseKey).push(entry);
