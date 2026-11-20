@@ -3,6 +3,7 @@
 
 # Production
 /build
+/static/device-runtime/
 
 # Generated files
 .docusaurus

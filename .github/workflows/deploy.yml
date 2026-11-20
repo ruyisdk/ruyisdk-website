@@ -13,6 +13,8 @@ on:
       - i18n/**
       - news/**
       - src/**
+      - tools/device-runtime/**
+      - scripts/build-device-runtime.cjs
       - static/**
       - package.json
       - pnpm-lock.yaml
