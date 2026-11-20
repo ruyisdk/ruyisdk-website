@@ -1,94 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { getEntities, getPackages, getHierarchy, getVendors } from '../api';
-import { Link } from 'react-router-dom';
-import { Search, Package, Server, Cpu, Factory, Tag, X, Filter } from 'lucide-react';
+import { Search, Cpu, Factory, Tag, X, Filter } from 'lucide-react';
 import { useI18n } from '../i18n';
-
-type Entity = {
-  type: string;
-  id: string;
-  display_name: string;
-  related?: string[];
-};
-
-type PackageItem = {
-  category: string;
-  package: string;
-  version: string;
-  desc?: string;
-};
-
-type VendorMap = Record<string, string>;
-
-const getVendorId = (deviceId: string) => deviceId.split('-', 1)[0];
-
-const getVendorName = (vendorId: string, vendors: VendorMap) =>
-  vendors[vendorId] || `${vendorId.charAt(0).toUpperCase()}${vendorId.slice(1)}`;
-
-const sortByDisplayName = (items: Entity[]) =>
-  [...items].sort((left, right) =>
-    left.display_name.localeCompare(right.display_name, undefined, {
-      sensitivity: 'base',
-    }),
-  );
-
-const semverPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
-
-const compareNumericIdentifiers = (left: string, right: string) => {
-  if (left.length !== right.length) return left.length - right.length;
-  if (left === right) return 0;
-  return left < right ? -1 : 1;
-};
-
-const comparePrerelease = (left: string | undefined, right: string | undefined) => {
-  if (left === right) return 0;
-  if (!left) return 1;
-  if (!right) return -1;
-
-  const leftParts = left.split('.');
-  const rightParts = right.split('.');
-  for (let index = 0; index < Math.max(leftParts.length, rightParts.length); index += 1) {
-    const leftPart = leftParts[index];
-    const rightPart = rightParts[index];
-    if (leftPart === rightPart) continue;
-    if (leftPart === undefined) return -1;
-    if (rightPart === undefined) return 1;
-    const leftNumber = /^\d+$/.test(leftPart);
-    const rightNumber = /^\d+$/.test(rightPart);
-    if (leftNumber && rightNumber) return compareNumericIdentifiers(leftPart, rightPart);
-    if (leftNumber) return -1;
-    if (rightNumber) return 1;
-    return leftPart < rightPart ? -1 : 1;
-  }
-  return 0;
-};
-
-const compareSemverDescending = (left: string, right: string) => {
-  const leftMatch = left.match(semverPattern);
-  const rightMatch = right.match(semverPattern);
-  if (!leftMatch || !rightMatch) {
-    return right.localeCompare(left, undefined, { sensitivity: 'base' });
-  }
-
-  for (let index = 1; index <= 3; index += 1) {
-    const difference = compareNumericIdentifiers(rightMatch[index], leftMatch[index]);
-    if (difference !== 0) return difference;
-  }
-  return -comparePrerelease(leftMatch[4], rightMatch[4]);
-};
-
-const sortPackagesByIdAndVersion = (items: PackageItem[]) =>
-  [...items].sort((left, right) => {
-    const idComparison = `${left.category}/${left.package}`.localeCompare(
-      `${right.category}/${right.package}`,
-      undefined,
-      { sensitivity: 'base' },
-    );
-    if (idComparison !== 0) return idComparison;
-    const versionComparison = compareSemverDescending(left.version, right.version);
-    if (versionComparison !== 0) return versionComparison;
-    return 0;
-  });
+import { filterDevices, filterPackages, getVendorId, getVendorName, sortByDisplayName } from './explorerFilters';
+import type { Entity, PackageItem, VendorMap } from './explorerFilters';
+import { DeviceList, PackageList } from './ExplorerResults';
 
 let lastScrollTop = 0;
 let lastMainScrollTop = 0;
@@ -317,56 +233,14 @@ export default function Explorer() {
     setter(next);
   };
 
-  const getDescendants = (startNodes: string[]) => {
-    const visited = new Set<string>();
-    const queue = [...startNodes];
-
-    while (queue.length > 0) {
-      const node = queue.shift()!;
-      if (visited.has(node)) continue;
-      visited.add(node);
-      for (const child of hierarchy[node] || []) {
-        queue.push(child);
-      }
-    }
-
-    return visited;
-  };
-
-  const filteredDevices = useMemo(() => {
-    let validDeviceIds: Set<string> | null = null;
-
-    if (selectedCpus.size > 0) {
-      const cpuDescendants = selectedCpus.size > 0
-        ? getDescendants(Array.from(selectedCpus).map((cpu) => `cpu:${cpu}`))
-        : null;
-
-      validDeviceIds = new Set(devices.map((device) => `device:${device.id}`));
-
-      if (cpuDescendants) {
-        validDeviceIds = new Set([...validDeviceIds].filter((id) => cpuDescendants.has(id)));
-      }
-    }
-
-    return devices.filter((device) => {
-      if (validDeviceIds && !validDeviceIds.has(`device:${device.id}`)) return false;
-      const vendorId = getVendorId(device.id);
-      if (selectedVendors.size > 0 && !selectedVendors.has(vendorId)) return false;
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      const haystack = [device.display_name, device.id, vendorId, vendors[vendorId] || '', ...(device.related || [])].join(' ').toLowerCase();
-      return haystack.includes(q);
-    });
-  }, [devices, selectedVendors, selectedCpus, searchQuery, hierarchy, vendors]);
-
-  const filteredPackages = useMemo(() => {
-    return sortPackagesByIdAndVersion(packages.filter((pkg) => {
-      if (selectedCategories.size > 0 && !selectedCategories.has(pkg.category)) return false;
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      return [pkg.package, pkg.category, pkg.version, pkg.desc || ''].join(' ').toLowerCase().includes(q);
-    }));
-  }, [packages, selectedCategories, searchQuery]);
+  const filteredDevices = useMemo(
+    () => filterDevices(devices, selectedVendors, selectedCpus, searchQuery, hierarchy, vendors),
+    [devices, selectedVendors, selectedCpus, searchQuery, hierarchy, vendors],
+  );
+  const filteredPackages = useMemo(
+    () => filterPackages(packages, selectedCategories, searchQuery),
+    [packages, selectedCategories, searchQuery],
+  );
 
   const activeFiltersCount = activeTab === 'devices'
     ? selectedVendors.size + selectedCpus.size
@@ -591,73 +465,9 @@ export default function Explorer() {
           {loading ? (
             <div className="flex min-h-[40vh] items-center justify-center text-sm text-[var(--subtle)]">{t('loading')}</div>
           ) : activeTab === 'devices' ? (
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              {filteredDevices.map((device) => {
-                const relatedVariants = (device.related || [])
-                  .filter((ref) => ref.startsWith('device-variant:'))
-                  .map((ref) => {
-                    const variantId = ref.slice('device-variant:'.length);
-                    return variantNames.get(variantId) || variantId;
-                  });
-
-                return (
-                  <Link to={`/device/${device.id}`} key={device.id} className="block">
-                    <article className="pi-card h-full p-4">
-                      <div className="mb-2 flex items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{device.display_name}</h3>
-                          <p className="mt-1 text-xs font-mono text-[var(--subtle)]">{device.id}</p>
-                        </div>
-                        <span className="pi-chip px-2 py-1 text-[11px] font-medium">{t('deviceType')}</span>
-                      </div>
-                      {relatedVariants.length > 0 && (
-                        <div className="text-sm text-[var(--light)]">
-                          <span className="font-medium">{t('variants')}:</span>{' '}
-                          {relatedVariants.join(', ')}
-                        </div>
-                      )}
-                    </article>
-                  </Link>
-                );
-              })}
-
-              {filteredDevices.length === 0 && (
-                <div className="col-span-full flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] text-center shadow-sm">
-                  <Server className="h-10 w-10 text-[var(--ifm-color-primary)]" />
-                  <div className="text-lg font-medium">{t('noDevices')}</div>
-                  <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
-                </div>
-              )}
-            </div>
+            <DeviceList devices={filteredDevices} variantNames={variantNames} />
           ) : (
-            <div className="space-y-3">
-              {filteredPackages.map((pkg) => (
-                <Link to={`/package/${pkg.category}/${pkg.package}/${pkg.version}`} key={`${pkg.category}-${pkg.package}-${pkg.version}`} className="block">
-                  <article className="pi-card p-4">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-lg font-semibold text-[var(--ifm-color-primary)]">{pkg.package}</h3>
-                          <span className="rounded-md bg-[var(--tintColor)] px-2 py-0.5 text-xs font-mono text-[var(--subtle)]">{pkg.version}</span>
-                        </div>
-                        <p className="mt-2 text-sm text-[var(--light)]">{pkg.desc || t('noDescription')}</p>
-                      </div>
-                      <span className="pi-chip self-start px-3 py-1 text-xs font-medium">
-                        {pkg.category}
-                      </span>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-
-              {filteredPackages.length === 0 && (
-                <div className="flex min-h-[40vh] flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-dashed border-[var(--divider)] bg-white dark:bg-[#151b23] text-center shadow-sm">
-                  <Package className="h-10 w-10 text-[var(--ifm-color-primary)]" />
-                  <div className="text-lg font-medium">{t('noPackages')}</div>
-                  <div className="max-w-md text-sm text-[var(--subtle)]">{t('adjustFilters')}</div>
-                </div>
-              )}
-            </div>
+            <PackageList packages={filteredPackages} />
           )}
         </main>
       </div>
