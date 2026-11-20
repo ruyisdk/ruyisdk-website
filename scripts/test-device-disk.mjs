@@ -121,6 +121,35 @@ for (const graphical of [true, false]) {
     assert.equal(writes.length, 1);
     assert.equal(writes[0][0], 'selection');
 
+    await context.test(
+      'a later image preparation failure never opens the disk picker',
+      async (subtest) => {
+        subtest.mock.method(capability, 'selectDisk', assert.fail);
+        const atoms = catalog.combo.data['image-combo'].package_atoms;
+        atoms.push(atoms[0]);
+        let extractions = 0;
+        try {
+          await assert.rejects(
+            provision({
+              ...options,
+              runtime: {
+                ...runtime,
+                run: (job, command) => {
+                  if (job.kind === 'extract' && ++extractions === 2)
+                    throw Error('Cannot extract image');
+                  return runtime.run(job, command);
+                },
+              },
+            }),
+            /Cannot extract image/,
+          );
+          assert.equal(capability.selectDisk.mock.callCount(), 0);
+        } finally {
+          atoms.pop();
+        }
+      },
+    );
+
     if (!graphical) {
       await context.test(
         'ordinary browsers stop before directory selection with actionable instructions',
