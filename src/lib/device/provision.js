@@ -220,9 +220,25 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   const host = desktopDisks();
   ui.trace?.(`packages-index: ${plugins.revision}`);
   const messageCatalog = await messages();
+  const prepared = [];
   for (const pkg of selected) {
+    const description = `${pkg.package} ${pkg.version} (${pkg.data.provisionable.strategy})`;
+    ui.trace?.(`Prepare: ${description}`);
+    const files = await prepareImages(pkg, {
+      root,
+      runtime,
+      signal,
+      log: (line) => {
+        ui.trace?.(line);
+        log(line);
+      },
+      localFile: ui.localFile,
+      progress: ui.progress,
+    });
+    prepared.push({ pkg, files, description });
+  }
+  for (const { pkg, files, description } of prepared) {
     const { strategy, partition_map: paths } = pkg.data.provisionable;
-    const description = `${pkg.package} ${pkg.version} (${strategy})`;
     const targets = Object.create(null);
     if (strategy === 'dd-v1') {
       for (const slot of Object.keys(paths)) {
@@ -238,7 +254,6 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
         targets[slot] = disks.get(slot);
       }
     }
-    ui.trace?.(`Prepare: ${description}`);
     const args = {
       strategy,
       paths,
@@ -250,17 +265,6 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       locale,
     };
     const plan = await runtime.run({ kind: 'preview', ...args });
-    const files = await prepareImages(pkg, {
-      root,
-      runtime,
-      signal,
-      log: (line) => {
-        ui.trace?.(line);
-        log(line);
-      },
-      localFile: ui.localFile,
-      progress: ui.progress,
-    });
     const execute =
       strategy === 'dd-v1'
         ? diskCommand({
