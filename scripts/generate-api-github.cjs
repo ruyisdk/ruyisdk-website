@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { withRequestTimeout } = require('./lib/request-timeout.cjs');
 
 // Repos under ruyisdk org to aggregate contributors from
 const GEN_REPOS = [
@@ -31,11 +32,7 @@ const FILTER_FILE = path.resolve(__dirname, '../settings/community/contributor_f
 
 
 async function fetchGitHubApi(url) {
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
-
-  try {
+  return withRequestTimeout(async (signal) => {
     const headers = {
       Accept: 'application/vnd.github.v3+json',
       'User-Agent': 'ruyisdk-website-generator',
@@ -45,7 +42,7 @@ async function fetchGitHubApi(url) {
     }
     const res = await fetch(url, {
       headers: headers,
-      signal: controller.signal,
+      signal,
     });
 
     if (res.status !== 200) {
@@ -60,13 +57,10 @@ async function fetchGitHubApi(url) {
     }
 
     return {data: json, headers: res.headers, code: res.status};
-
-  } catch (err) {
+  }).catch((err) => {
     console.error('[generate-api-github] Unexcepted error in fetchGitHubApi: ', err);
     return null;
-  } finally {
-    clearTimeout(timeout);
-  }
+  });
 }
 
 

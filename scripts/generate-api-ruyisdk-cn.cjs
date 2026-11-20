@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const { withRequestTimeout } = require('./lib/request-timeout.cjs');
 
 const API_URL = 'https://api.ruyisdk.cn';
 const API_LATEST_PM = '/releases/latest-pm';
@@ -13,15 +14,12 @@ const OUT_FILE_ECLIPSE = path.join(__dirname, '..', 'static', 'data', 'api', 'ap
 const OUT_FILE_DASHBOARD = path.join(__dirname, '..', 'static', 'data', 'api', 'api_ruyisdk_cn', 'fe_dashboard.json');
 
 async function apiFetch(url) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
-
-  try {
+  return withRequestTimeout(async (signal) => {
     const res = await fetch(url, {
       headers: {
         accept: 'application/json',
       },
-      signal: controller.signal,
+      signal,
     });
 
     if (!res.ok) {
@@ -30,13 +28,7 @@ async function apiFetch(url) {
     }
 
     return await res.json()
-
-  } catch (err) {
-    // why error?
-    throw err;
-  } finally {
-    clearTimeout(timeout);
-  }
+  });
 }
 
 function withGeneratedInfo(json, source) {
