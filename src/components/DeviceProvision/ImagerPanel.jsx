@@ -198,6 +198,30 @@ function Prompt({ prompt, settle }) {
   );
 }
 
+function Status({ message }) {
+  return message ? (
+    <p className={styles.status} role="status">
+      {message}
+    </p>
+  ) : null;
+}
+
+function FlashStep({ text }) {
+  const parts = [];
+  let start = 0;
+  for (const match of text.matchAll(/\[(yellow|green)\]([\s\S]*?)\[\/\]/g)) {
+    parts.push(text.slice(start, match.index));
+    parts.push(
+      <span key={match.index} className={styles[match[1]]}>
+        {match[2]}
+      </span>,
+    );
+    start = match.index + match[0].length;
+  }
+  parts.push(text.slice(start));
+  return parts;
+}
+
 export default function ImagerPanel({
   prompt,
   catalog,
@@ -205,23 +229,14 @@ export default function ImagerPanel({
   preparing,
   packageOptions,
   steps,
-  status,
+  panelStatus,
   complete,
   writing,
   restart,
   settle,
   selectSystem,
 }) {
-  const feedback = (
-    <>
-      {status && (
-        <p className={styles.status} role="status">
-          {status}
-        </p>
-      )}
-      <Prompt prompt={prompt} settle={settle} />
-    </>
-  );
+  const question = <Prompt prompt={prompt} settle={settle} />;
   return (
     <div className={styles.panels}>
       <section className={styles.panel}>
@@ -254,7 +269,8 @@ export default function ImagerPanel({
             </p>
           )
         )}
-        {!hasImage && feedback}
+        <Status message={panelStatus.setup} />
+        {!hasImage && question}
       </section>
       <section className={styles.panel}>
         <h2>
@@ -275,7 +291,8 @@ export default function ImagerPanel({
             prepare={settle}
           />
         )}
-        {hasImage && steps === null && feedback}
+        <Status message={panelStatus.prepare} />
+        {hasImage && steps === null && question}
       </section>
       <section className={styles.panel}>
         <h2>
@@ -294,12 +311,15 @@ export default function ImagerPanel({
               <div className={styles.review}>
                 <ol>
                   {steps.map((step, index) => (
-                    <li key={index}>{step}</li>
+                    <li key={index}>
+                      <FlashStep text={step} />
+                    </li>
                   ))}
                 </ol>
               </div>
             )}
-            {feedback}
+            <Status message={panelStatus.flash} />
+            {question}
           </>
         )}
       </section>
