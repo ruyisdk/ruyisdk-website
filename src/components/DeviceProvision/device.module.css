@@ -32,6 +32,9 @@
   flex-direction: column;
   font: 14px/1.65 var(--ifm-font-family-monospace);
 }
+.guide {
+  margin-top: 22px;
+}
 .bar,
 .command {
   display: flex;

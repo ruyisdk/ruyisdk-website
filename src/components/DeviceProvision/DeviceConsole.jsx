@@ -373,7 +373,7 @@ export default function DeviceConsole() {
   const usb = session.current?.usb,
     online = Boolean(usb?.device?.opened);
   return (
-    <main className={styles.page}>
+    <>
       <header className={styles.header}>
         <h1>ruyi device provision</h1>
         <p>
@@ -631,6 +631,6 @@ export default function DeviceConsole() {
           </details>
         </aside>
       </div>
-    </main>
+    </>
   );
 }

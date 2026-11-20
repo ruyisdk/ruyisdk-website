@@ -1,0 +1,9 @@
+## How to flash a board
+
+Open this page in desktop Chrome or Edge and use a USB cable that supports data transfer. Flashing overwrites the target partitions. Back up any data you want to keep before you begin.
+
+1. **Select a system.** In the terminal, enter an option number and press Enter to select your board, hardware variant, and system image. At a `(y/N)` prompt, enter `y` to continue.
+2. **Prepare the images.** Click **Choose directory**. The wizard verifies the SHA-256 checksums and extracts the files for flashing under `RuyiImages/` in that directory. If prompted to import a local file, choose the file with the exact name shown. Use a mirror link in the sidebar if you need to download it.
+3. **Connect and flash.** Put the board in fastboot mode, connect it to your computer over USB, and click **Connect board**. Select the board in the browser, then review the flashing steps and target device before confirming. Keep the board connected until the terminal reports that flashing is complete.
+
+If a step fails, open **Flashing log** at the bottom of the sidebar to see what happened. If the wizard reports that an image uses `dd-v1`, run `ruyi device provision` on your computer.
