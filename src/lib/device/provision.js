@@ -1,11 +1,7 @@
 import { packageFastboot } from './spacemit.js';
 import { prepareImages } from './storage.js';
 
-async function get(url, signal, json = true) {
-  const response = await fetch(url, { signal });
-  if (!response.ok) throw Error(`HTTP ${response.status}: ${url}`);
-  return json ? response.json() : response.text();
-}
+const indexTimeoutMs = 15_000;
 
 function deviceCatalog(entities, hierarchy) {
   const rows = (type, related) =>
@@ -34,13 +30,49 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   const t = (zh, en) => (locale === 'zh_CN' ? zh : en);
   const { log, confirm, choose } = ui;
   const index = runtime.api;
+  async function get(url, requestSignal = signal, json = true) {
+    requestSignal.throwIfAborted();
+    const controller = new AbortController();
+    const cancel = () => controller.abort(requestSignal.reason);
+    requestSignal.addEventListener('abort', cancel);
+    const timer = setTimeout(
+      () =>
+        controller.abort(
+          new Error(
+            t(`读取索引超时：${url}`, `Index request timed out: ${url}`),
+          ),
+        ),
+      indexTimeoutMs,
+    );
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (!response.ok) throw Error(`HTTP ${response.status}: ${url}`);
+      return await (json ? response.json() : response.text());
+    } catch (error) {
+      controller.signal.throwIfAborted();
+      throw error;
+    } finally {
+      clearTimeout(timer);
+      requestSignal.removeEventListener('abort', cancel);
+    }
+  }
+  async function vendorNames() {
+    if (locale === 'zh_CN') {
+      try {
+        return await get(`${index}vendors/zh-Hans.json`);
+      } catch {
+        signal.throwIfAborted();
+      }
+    }
+    return get(`${index}vendors/en.json`);
+  }
   if (!ui.selectSystem) {
     log(t('RuyiSDK 设备安装向导', 'RuyiSDK Device Provisioning Wizard'));
     if (!(await confirm(t('继续？', 'Continue?')))) return;
   }
   const [entities, packages, hierarchy, plugins] = await Promise.all(
     ['entities', 'packages', 'hierarchy', 'plugins/index'].map((name) =>
-      get(`${index}${name}.json`, signal),
+      get(`${index}${name}.json`),
     ),
   );
   const pick = async (
@@ -55,11 +87,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   const catalog = deviceCatalog(entities, hierarchy);
   let combo;
   if (ui.selectSystem) {
-    const vendors = await get(
-      `${index}vendors/${locale === 'zh_CN' ? 'zh-Hans' : 'en'}.json`,
-      signal,
-    );
-    combo = await ui.selectSystem(catalog, vendors);
+    combo = await ui.selectSystem(catalog, await vendorNames());
   } else {
     const device = await pick(
       t('请选择开发板', 'Select your device'),

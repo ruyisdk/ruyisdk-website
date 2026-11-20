@@ -630,6 +630,9 @@
   "tryruyi.imager.prepareHint": {
     "message": "Select a system image to review and prepare its packages here."
   },
+  "tryruyi.imager.retry": {
+    "message": "Retry"
+  },
   "tryruyi.imager.setup": {
     "message": "Board setup"
   },
