@@ -1,9 +1,11 @@
 import ast
+import ctypes
 import os
 import json
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from copy import deepcopy
@@ -88,8 +90,7 @@ def load_mirror_map(repo_path: str):
         try:
             config = tomllib.load(f)
         except Exception as e:
-            print(f"Error parsing {config_path}: {e}")
-            return mirrors
+            raise ValueError(f"Error parsing {config_path}: {e}") from e
 
     for mirror in config.get("mirrors", []):
         mirror_id = mirror.get("id")
@@ -168,7 +169,7 @@ def load_data(repo_path: str):
                           "data": data
                         })
                     except Exception as e:
-                        print(f"Error parsing {file_path}: {e}")
+                        raise ValueError(f"Error parsing {file_path}: {e}") from e
 
     packages_dir = Path(repo_path) / "packages"
     if packages_dir.exists():
@@ -190,7 +191,7 @@ def load_data(repo_path: str):
                               "data": augment_distfiles(data, mirrors)
                             })
                         except Exception as e:
-                            print(f"Error parsing {file_path}: {e}")
+                            raise ValueError(f"Error parsing {file_path}: {e}") from e
                             
     return entities, packages, mirrors
 
@@ -204,52 +205,62 @@ def export_provision_plugins(repo_path: str, output: Path):
     ).strip()
     modules = {}
     pending = list(entries)
-    with tempfile.TemporaryDirectory(dir=output) as temporary:
-        bundle = Path(temporary) / "plugins"
-        bundle.mkdir()
-        while pending:
-            name = pending.pop()
-            if name in modules:
-                continue
-            if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_-]*", name):
-                raise ValueError(f"Invalid plugin ID: {name}")
-            source = (root / name).resolve(strict=True)
-            if source.parent != root:
-                raise ValueError(f"Plugin {name} resolves outside {root}")
-            modules[name] = f"{source.name}/mod.star"
-            destination = bundle / source.name
-            if destination.exists():
-                continue
-            if not (source / "mod.star").is_file():
-                raise ValueError(f"Missing entry point for plugin {name}")
-            for path in sorted([*source.rglob("*.star"), *(source / "data").rglob("*.toml")]):
-                if not path.resolve(strict=True).is_relative_to(source):
-                    raise ValueError(f"Plugin file resolves outside {source}: {path}")
-                target = destination / path.relative_to(source)
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(path, target)
-                if path.suffix == ".star":
-                    for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"), filename=str(path))):
-                        if isinstance(node, ast.Constant) and isinstance(node.value, str):
-                            if node.value.startswith("ruyi-plugin://"):
-                                pending.append(node.value.removeprefix("ruyi-plugin://"))
-                            elif node.value.startswith("ruyi-plugin-data://"):
-                                pending.append(node.value.removeprefix("ruyi-plugin-data://").split("/", 1)[0])
-        entrypoints = sorted({Path(modules[name]).parent.name for name in entries})
-        manifest = {"revision": revision, "entrypoints": entrypoints, "modules": modules}
-        (bundle / "index.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        previous = output / "plugins"
-        if previous.exists():
-            shutil.rmtree(previous)
-        bundle.rename(previous)
+    assets = set()
+    bundle = output / "plugins"
+    bundle.mkdir()
+    while pending:
+        name = pending.pop()
+        if name in modules:
+            continue
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_-]*", name):
+            raise ValueError(f"Invalid plugin ID: {name}")
+        source = (root / name).resolve(strict=True)
+        if source.parent != root:
+            raise ValueError(f"Plugin {name} resolves outside {root}")
+        modules[name] = f"{source.name}/mod.star"
+        destination = bundle / source.name
+        if destination.exists():
+            continue
+        if not (source / "mod.star").is_file():
+            raise ValueError(f"Missing entry point for plugin {name}")
+        for path in sorted([*source.rglob("*.star"), *(source / "data").rglob("*.toml")]):
+            if not path.resolve(strict=True).is_relative_to(source):
+                raise ValueError(f"Plugin file resolves outside {source}: {path}")
+            target = destination / path.relative_to(source)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target)
+            if path.suffix == ".star":
+                for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"), filename=str(path))):
+                    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+                        if node.value.startswith("ruyi-plugin://"):
+                            pending.append(node.value.removeprefix("ruyi-plugin://"))
+                        elif node.value.startswith("ruyi-plugin-data://"):
+                            reference = node.value.removeprefix("ruyi-plugin-data://")
+                            plugin, _, asset = reference.partition("/")
+                            if not asset or any(part in ("", ".", "..") for part in asset.split("/")):
+                                raise ValueError(f"Invalid plugin data reference: {node.value}")
+                            pending.append(plugin)
+                            assets.add((plugin, asset))
+
+    for plugin, asset in sorted(assets):
+        directory = Path(modules[plugin]).parent / "data"
+        data_root = root / directory
+        path = (data_root / asset).resolve(strict=True)
+        if not path.is_relative_to(data_root) or not path.is_file():
+            raise ValueError(f"Invalid plugin data file: ruyi-plugin-data://{plugin}/{asset}")
+        target = bundle / directory / asset
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(path, target)
+
+    entrypoints = sorted({Path(modules[name]).parent.name for name in entries})
+    manifest = {"revision": revision, "entrypoints": entrypoints, "modules": modules}
+    (bundle / "index.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def generate_static_api(repo_path: str, output_dir: str):
+def write_static_api(repo_path: str, out: Path):
     print("Loading data...")
     ENTITIES, PACKAGES, MIRRORS = load_data(repo_path)
     
-    out = Path(output_dir)
-    out.mkdir(parents=True, exist_ok=True)
     export_provision_plugins(repo_path, out)
     
     print("Generating entities.json...")
@@ -314,6 +325,44 @@ def generate_static_api(repo_path: str, output_dir: str):
     with open(out / "hierarchy.json", "w", encoding="utf-8") as f:
         json.dump(relations, f, ensure_ascii=False)
         
+def publish_snapshot(staged: Path, output: Path):
+    if not output.exists():
+        staged.rename(output)
+        return
+
+    libc = ctypes.CDLL(None, use_errno=True)
+    source, target = os.fsencode(staged.absolute()), os.fsencode(output.absolute())
+    if sys.platform == "linux" and hasattr(libc, "renameat2"):
+        at_fdcwd = -100
+        rename_exchange = 2
+        result = libc.renameat2(at_fdcwd, source, at_fdcwd, target, rename_exchange)
+    elif sys.platform == "darwin" and hasattr(libc, "renamex_np"):
+        rename_swap = 2
+        result = libc.renamex_np(source, target, rename_swap)
+    else:
+        raise OSError("This platform cannot atomically exchange existing API directories")
+    if result != 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), str(output))
+
+
+def generate_static_api(repo_path: str, output_dir: str):
+    output = Path(output_dir)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=output.parent) as temporary:
+        staged = Path(temporary) / output.name
+        staged.mkdir()
+        write_static_api(repo_path, staged)
+        if output.exists():
+            for path in output.iterdir():
+                target = staged / path.name
+                if target.exists() or path.name in ("entities", "packages"):
+                    continue
+                if path.is_dir():
+                    shutil.copytree(path, target, symlinks=True)
+                else:
+                    shutil.copy2(path, target, follow_symlinks=False)
+        publish_snapshot(staged, output)
     print("Done!")
 
 if __name__ == "__main__":
