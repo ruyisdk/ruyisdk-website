@@ -68,7 +68,8 @@ export default function DeviceConsole() {
     filePicker = useRef(null),
     scroll = useRef(null),
     input = useRef(null);
-  const log = (text) => setLines((list) => [...list, clean(text)]);
+  const log = (text) =>
+    setLines((list) => [...list.slice(-511), clean(text).slice(0, 8192)]);
   const settle = (value) => {
     const current = pending.current;
     if (!current) return;
@@ -102,8 +103,14 @@ export default function DeviceConsole() {
     };
     const trace = (text) => {
       if (signal.aborted) return;
-      const entry = `${logClock.format(Date.now())}  ${clean(text)}\n`;
-      setTraceText((previous) => previous + entry);
+      const entry = `${logClock.format(Date.now())}  ${clean(text).slice(0, 8192)}\n`;
+      setTraceText((previous) => {
+        const all = previous + entry;
+        const limit = 512 * 1024;
+        if (all.length <= limit) return all;
+        const start = all.indexOf('\n', all.length - limit + 64);
+        return `[Earlier log entries omitted]\n${all.slice(start + 1)}`;
+      });
     };
     const usb = new FastbootSession(update, output, signal, trace);
     const runtime = new ProvisionRuntime(base, output, trace);

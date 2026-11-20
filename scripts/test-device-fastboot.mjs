@@ -79,3 +79,116 @@ test('stage sends the exact download, without a flash command', async () => {
   );
   assert.equal(writes.length, 3);
 });
+
+function wireSession(replies) {
+  const sent = [],
+    log = [];
+  const session = new FastbootSession(
+    () => {},
+    (message) => log.push(message),
+    new AbortController().signal,
+  );
+  let remaining = 0;
+  session.device = {
+    opened: true,
+    transferOut: async (_, bytes) => {
+      const buffer = Buffer.from(bytes);
+      if (remaining) {
+        remaining -= buffer.length;
+        assert.ok(remaining >= 0);
+        sent.push(buffer);
+        if (!remaining) replies.push('OKAY');
+      } else {
+        const cmd = buffer.toString();
+        sent.push(cmd);
+        if (cmd.startsWith('download:')) {
+          remaining = Number.parseInt(cmd.slice(9), 16);
+          replies.push('DATA' + cmd.slice(9));
+        } else if (!cmd.startsWith('getvar:')) replies.push('OKAY');
+      }
+      return { status: 'ok', bytesWritten: buffer.length };
+    },
+    transferIn: async () => {
+      assert.ok(replies.length);
+      return {
+        status: 'ok',
+        data: new DataView(new TextEncoder().encode(replies.shift()).buffer),
+      };
+    },
+  };
+  return { session, sent, log };
+}
+
+test('INFO limit governs actual sparse downloads and their cumulative partition offsets', async () => {
+  const { session, sent } = wireSession([
+    'INFOmax-download-size: 0x2000',
+    'OKAY',
+  ]);
+  const raw = Uint8Array.from(
+    { length: 16384 },
+    (_, index) => (index * 3) % 251,
+  );
+  await session.execute(
+    ['fastboot', 'flash', 'root', 'root.img'],
+    new Map([['root.img', new Blob([raw])]]),
+  );
+  assert.equal(session.limit, 8192);
+  const disk = new Uint8Array(raw.length);
+  const payloads = sent.filter(Buffer.isBuffer);
+  assert.ok(payloads.length > 1);
+  for (const payload of payloads) {
+    assert.ok(payload.length <= session.limit);
+    await applySparse(new Blob([payload]), disk);
+  }
+  assert.equal(
+    sent.filter((cmd) => cmd === 'flash:root').length,
+    payloads.length,
+  );
+  assert.deepEqual(disk, raw);
+});
+
+test('an oversized image stops before download when the board omits its limit', async () => {
+  const { session, sent } = wireSession(['FAILunknown variable']);
+  const image = new Blob([new Uint8Array(16 * 1024 * 1024 + 1)]);
+  await assert.rejects(
+    session.execute(
+      ['fastboot', 'flash', 'root', 'root.img'],
+      new Map([['root.img', image]]),
+    ),
+    /without a device-reported download limit/,
+  );
+  assert.deepEqual(sent, ['getvar:max-download-size']);
+});
+
+test('a newly opened device receives no commands until explicitly reconfirmed', async () => {
+  const { session, sent } = wireSession([]);
+  const original = session.device;
+  let consent = false,
+    prompts = 0;
+  session.confirmTarget(original, async () => {
+    prompts++;
+    return consent;
+  });
+  session.device = { ...original };
+  const files = new Map([['loader', new Blob(['data'])]]);
+  await assert.rejects(
+    session.execute(['fastboot', 'stage', 'loader'], files),
+    /not confirmed/,
+  );
+  assert.equal(prompts, 1);
+  assert.deepEqual(sent, []);
+  consent = true;
+  await session.execute(['fastboot', 'stage', 'loader'], files);
+  await session.execute(['fastboot', 'stage', 'loader'], files);
+  assert.equal(prompts, 2);
+});
+
+test('informational replies are bounded per command', async () => {
+  const { session, log, sent } = wireSession(Array(129).fill('INFOprogress'));
+  await assert.rejects(
+    session.execute(['fastboot', 'getvar', 'version'], new Map()),
+    /Too many/,
+  );
+  assert.equal(log.length, 128);
+  assert.deepEqual(sent, ['getvar:version']);
+});
