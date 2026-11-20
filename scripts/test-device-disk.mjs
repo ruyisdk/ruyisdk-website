@@ -1,8 +1,9 @@
+import { diskCommand, desktopDisks } from '../src/lib/device/disk.js';
+import { provision } from '../src/lib/device/provision.js';
+import { ProvisionRuntime } from '../src/lib/device/runtime.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { diskCommand, desktopDisks } from '../src/lib/device/disk.js';
-import { provision } from '../src/lib/device/provision.js';
 
 test('ordinary browsers have no disk capability', () =>
   assert.equal(desktopDisks(), null));
@@ -109,15 +110,108 @@ for (const graphical of [true, false]) {
       };
       ui.review = (steps) => assert.deepEqual(steps, ['sd.img → SD reader']);
     }
-    await provision({
+    const options = {
       runtime,
       usb: {},
       ui,
       locale: 'en_US',
       signal: new AbortController().signal,
-    });
+    };
+    await provision(options);
     assert.equal(writes.length, 1);
     assert.equal(writes[0][0], 'selection');
+
+    if (!graphical) {
+      await context.test(
+        'ordinary browsers stop before directory selection with actionable instructions',
+        async () => {
+          delete window.ruyiImager;
+          for (const locale of ['zh_CN', 'en_US']) {
+            const lines = [];
+            await provision({
+              ...options,
+              locale,
+              ui: {
+                ...ui,
+                log: (line) => lines.push(line),
+                directory: assert.fail,
+              },
+            });
+            assert.match(lines.at(-1), /ruyi device provision/);
+            assert.doesNotMatch(lines.at(-1), /Ruyi Imager/i);
+          }
+          window.ruyiImager = capability;
+        },
+      );
+    }
+
+    for (const failed of [false, true]) {
+      await context.test(
+        `leaving during read-back holds protection until the host ${failed ? 'fails' : 'finishes'}`,
+        async (subtest) => {
+          const entered = Promise.withResolvers();
+          const readback = Promise.withResolvers();
+          const guard = [];
+          const controller = new AbortController();
+          class WorkerStub {
+            postMessage({ id, job }) {
+              if (job.kind === 'hash') return;
+              assert.equal(job.kind, 'flash');
+              this.request = () =>
+                this.onmessage({
+                  data: {
+                    id,
+                    request: 1,
+                    argv: ['dd', 'if=sd.img', 'of=SD reader', 'bs=4096'],
+                  },
+                });
+              queueMicrotask(this.request);
+            }
+            terminate() {}
+          }
+          globalThis.Worker = WorkerStub;
+          globalThis.location = { origin: 'https://ruyisdk.org' };
+          subtest.after(() => {
+            delete globalThis.Worker;
+            delete globalThis.location;
+          });
+          const active = new ProvisionRuntime('/', assert.fail);
+          subtest.mock.method(capability, 'writeAndVerify', () => {
+            entered.resolve();
+            return readback.promise;
+          });
+          capability.setFlashing = (value) => guard.push(value);
+          const result = provision({
+            ...options,
+            signal: controller.signal,
+            runtime: {
+              ...runtime,
+              run: (job, command) =>
+                job.kind === 'flash'
+                  ? active.run(job, command)
+                  : runtime.run(job, command),
+            },
+          });
+          const stopped = assert.rejects(result, /Session closed/);
+          await entered.promise;
+          const queued = assert.rejects(
+            active.run({ kind: 'hash' }),
+            /Session closed/,
+          );
+          controller.abort();
+          active.dispose();
+          await queued;
+          await active.worker.request();
+          await new Promise((resolve) => setImmediate(resolve));
+          assert.deepEqual(guard, [true]);
+          assert.equal(capability.writeAndVerify.mock.callCount(), 1);
+          if (failed) readback.reject(Error('Read-back failed'));
+          else readback.resolve();
+          await stopped;
+          assert.deepEqual(guard, [true, false]);
+        },
+      );
+    }
   });
 }
 

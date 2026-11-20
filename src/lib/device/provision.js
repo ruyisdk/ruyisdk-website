@@ -154,8 +154,8 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1')
     )
       issue = t(
-        'dd-v1 需要直接写盘。请用 Ruyi Imager 桌面应用打开此页面，或在本机运行 ruyi device provision。',
-        'dd-v1 requires raw disk access. Open this page in the Ruyi Imager desktop app or run ruyi device provision locally.',
+        'dd-v1 需要直接写盘。请在本机运行 ruyi device provision。',
+        'dd-v1 requires raw disk access. Run ruyi device provision locally.',
       );
     else if (
       !window.showDirectoryPicker ||

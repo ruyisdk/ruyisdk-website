@@ -14,16 +14,20 @@ export class ProvisionRuntime {
         return;
       }
       if (data.request !== undefined) {
+        task.commandActive = true;
         try {
-          this.worker.postMessage({
-            reply: data.request,
-            result: await task.command(data.argv),
-          });
+          const result = await task.command(data.argv);
+          if (!this.closedReason)
+            this.worker.postMessage({ reply: data.request, result });
         } catch (error) {
-          this.worker.postMessage({
-            reply: data.request,
-            error: String(error),
-          });
+          if (!this.closedReason)
+            this.worker.postMessage({
+              reply: data.request,
+              error: String(error),
+            });
+        } finally {
+          task.commandActive = false;
+          if (this.closedReason) task.reject(Error(this.closedReason));
         }
         return;
       }
@@ -49,7 +53,9 @@ export class ProvisionRuntime {
     if (this.closedReason) return;
     this.closedReason = reason || 'Session closed';
     this.worker.terminate();
-    for (const task of this.pending.values()) task.reject(Error(reason));
+    for (const task of this.pending.values()) {
+      if (!task.commandActive) task.reject(Error(this.closedReason));
+    }
     this.pending.clear();
   }
 }
