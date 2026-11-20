@@ -523,6 +523,81 @@
     "message": "Source code"
   },
 
+  "========== tryruyi device ==========": { "message": "" },
+
+  "tryruyi.device.chooseDirectory": {
+    "message": "Choose directory"
+  },
+  "tryruyi.device.chooseFile": {
+    "message": "Choose local file"
+  },
+  "tryruyi.device.connect": {
+    "message": "Connect board"
+  },
+  "tryruyi.device.connectionError": {
+    "message": "Could not connect to the board."
+  },
+  "tryruyi.device.copiedLog": {
+    "message": "Copied"
+  },
+  "tryruyi.device.copyLog": {
+    "message": "Copy log"
+  },
+  "tryruyi.device.copyLogManually": {
+    "message": "Copy the selected log manually."
+  },
+  "tryruyi.device.description": {
+    "message": "Select a board and system image to install over USB."
+  },
+  "tryruyi.device.directory": {
+    "message": "Image directory"
+  },
+  "tryruyi.device.directoryError": {
+    "message": "Could not open the image directory."
+  },
+  "tryruyi.device.directoryHint": {
+    "message": "Choose a local directory for downloads and extracted partition images."
+  },
+  "tryruyi.device.disconnected": {
+    "message": "No board connected"
+  },
+  "tryruyi.device.downloading": {
+    "message": "Downloading"
+  },
+  "tryruyi.device.enter": {
+    "message": "Enter"
+  },
+  "tryruyi.device.extracting": {
+    "message": "Extracting"
+  },
+  "tryruyi.device.flashLog": {
+    "message": "Flashing log"
+  },
+  "tryruyi.device.imageFile": {
+    "message": "Select image file"
+  },
+  "tryruyi.device.reconnecting": {
+    "message": "Waiting for reconnection"
+  },
+  "tryruyi.device.restart": {
+    "message": "Restart"
+  },
+  "tryruyi.device.terminal": {
+    "message": "Terminal"
+  },
+  "tryruyi.device.terminalInput": {
+    "message": "Terminal input"
+  },
+  "tryruyi.device.terminalLabel": {
+    "message": "Interactive terminal"
+  },
+  "tryruyi.device.usbUnavailable": {
+    "message": "WebUSB unavailable"
+  },
+  "tryruyi.device.verifying": {
+    "message": "Verifying SHA-256"
+  },
+
   "========== issue ==========": { "message": "" },
 
   "issue.meta.title": {

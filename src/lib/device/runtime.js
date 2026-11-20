@@ -1,5 +1,5 @@
 export class ProvisionRuntime {
-  constructor(base, log) {
+  constructor(base, log, trace = () => {}) {
     this.base = new URL(base, location.origin).href;
     this.api = `${this.base}data/api/api_packages_index/`;
     this.worker = new Worker(`${this.base}device-worker.js`);
@@ -8,7 +8,11 @@ export class ProvisionRuntime {
     this.worker.onmessage = async ({ data }) => {
       const task = this.pending.get(data.id);
       if (!task) return;
-      if (data.log !== undefined) return log(data.log);
+      if (data.log !== undefined) {
+        trace(`Starlark [${data.level}]: ${data.log}`);
+        if (data.level !== 'D') log(data.log);
+        return;
+      }
       if (data.request !== undefined) {
         try {
           this.worker.postMessage({

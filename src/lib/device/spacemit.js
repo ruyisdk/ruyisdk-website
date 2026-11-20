@@ -18,6 +18,8 @@ export async function packageFastboot(usb, runtime, strategy, paths, files) {
   return async (argv) => {
     const [, action, partition, path] = argv;
     const entry = gptActive && action === 'flash' && partitions.get(partition);
+    if (entry && entry.path === path)
+      usb.trace?.(`GPT ${partition}: ${path}, gzip-${entry.level}`);
     const compress =
       entry && entry.path === path
         ? (file) => runtime.run({ kind: 'gzip', file, level: entry.level })
