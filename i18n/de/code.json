@@ -561,9 +561,6 @@
   "tryruyi.device.disconnected": {
     "message": "Kein Board verbunden"
   },
-  "tryruyi.device.diskCancel": {
-    "message": "Abbrechen"
-  },
   "tryruyi.device.diskEmpty": {
     "message": "Kein Wechseldatenträger oder SD-Leser gefunden."
   },

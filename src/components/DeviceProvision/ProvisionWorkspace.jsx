@@ -659,17 +659,6 @@ export default function ProvisionWorkspace({ graphical = false }) {
                         message: '刷新',
                       })}
                     </Button>
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      disabled={pickingDisk}
-                      onClick={() => settle(null)}
-                    >
-                      {translate({
-                        id: 'tryruyi.device.diskCancel',
-                        message: '取消',
-                      })}
-                    </Button>
                   </div>
                 </>
               )}
