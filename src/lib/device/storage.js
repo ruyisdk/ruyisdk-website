@@ -1,15 +1,8 @@
-const downloadOrigins = new Set([
-  'https://mirror.iscas.ac.cn',
-  'https://archive.spacemit.com',
-  'https://developer.zhcomputing.com',
-]);
-
-export function trustedDownload(value) {
+function isDownloadURL(value) {
   try {
     const url = new URL(value);
     return (
-      url.protocol === 'https:' &&
-      downloadOrigins.has(url.origin) &&
+      (url.protocol === 'http:' || url.protocol === 'https:') &&
       !url.username &&
       !url.password
     );
@@ -44,6 +37,30 @@ async function existing(dir, name) {
   }
 }
 
+async function mirrorSource(url, signal) {
+  signal.throwIfAborted();
+  const host = globalThis.window?.ruyiImager;
+  if (!host?.getMirrorDownloadURL) return url;
+
+  const cancelled = Promise.withResolvers();
+  const onAbort = () => cancelled.reject(signal.reason);
+  signal.addEventListener('abort', onAbort, { once: true });
+  try {
+    const ticket = await Promise.race([
+      cancelled.promise,
+      host.getMirrorDownloadURL(url),
+    ]);
+    if (
+      typeof ticket !== 'string' ||
+      !ticket.startsWith('ruyi-image://download/')
+    )
+      throw Error('Invalid desktop download URL');
+    return ticket;
+  } finally {
+    signal.removeEventListener('abort', onAbort);
+  }
+}
+
 export async function prepareImages(
   pkg,
   { root, runtime, log, progress, localFile, signal },
@@ -70,7 +87,7 @@ export async function prepareImages(
     let file = await existing(archives, name);
     if (!(await verified(file))) {
       file = null;
-      const urls = spec.resolved_urls.filter(trustedDownload);
+      const urls = spec.resolved_urls.filter(isDownloadURL);
       const save = async (stream) => {
         const writer = await (
           await archives.getFileHandle(segment(name), { create: true })
@@ -108,14 +125,10 @@ export async function prepareImages(
         let response;
         try {
           progress({ name, phase: 'Download', bytes: 0, total: spec.size });
-          const host = globalThis.window?.ruyiImager;
-          const source = host?.getMirrorDownloadURL
-            ? await host.getMirrorDownloadURL(url)
-            : url;
+          const source = await mirrorSource(url, signal);
           response = await fetch(source, {
             signal,
             credentials: 'omit',
-            redirect: 'error',
           });
           if (!response.ok || !response.body)
             throw Error(`HTTP ${response.status}`);

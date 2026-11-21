@@ -1,5 +1,5 @@
 import { provision } from '../src/lib/device/provision.js';
-import { prepareImages, trustedDownload } from '../src/lib/device/storage.js';
+import { prepareImages } from '../src/lib/device/storage.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
@@ -81,26 +81,19 @@ test('cancelling setup does not start an English fallback request', async (conte
   });
 });
 
-test('automatic downloads use trusted HTTPS origins and refuse redirects', async (context) => {
-  const trusted =
-    'https://mirror.iscas.ac.cn/revyos/image?signature=test-token';
+test('automatic and manual downloads use the catalog URLs and allow redirects', async (context) => {
+  const catalogURL = 'https://github.com/vendor/image?signature=test-token';
   const blocked = [
     'https://',
-    'https://example.org/image',
-    'http://mirror.iscas.ac.cn/image',
-    'https://mirror.iscas.ac.cn:8443/image',
-    'https://mirror.iscas.ac.cn.example.org/image',
     'https://user@mirror.iscas.ac.cn/image',
-    'blob:' + trusted,
-    'http://127.0.0.1/image',
+    'blob:' + catalogURL,
+    'file:///image',
   ];
-  assert.ok(blocked.every((url) => !trustedDownload(url)));
   const requests = [];
   const phases = [];
   const logs = [];
   context.mock.method(globalThis, 'fetch', async (url, options) => {
-    requests.push(url);
-    assert.equal(options.redirect, 'error');
+    requests.push({ url, redirect: new Request(url, options).redirect });
     throw new TypeError(`Failed to fetch ${url}`);
   });
   const root = {
@@ -120,12 +113,12 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
           name: 'image',
           size: 3,
           checksums: { sha256: 'fixture' },
-          resolved_urls: [...blocked, trusted],
+          resolved_urls: [...blocked, catalogURL],
         },
       ],
     },
   };
-  const prepare = () =>
+  const prepare = (overrides = {}) =>
     prepareImages(pkg, {
       root,
       runtime: {},
@@ -133,34 +126,76 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
       log: (line) => logs.push(line),
       signal: new AbortController().signal,
       localFile: async (spec, mirrors) => {
-        assert.deepEqual(mirrors, [trusted]);
+        assert.deepEqual(mirrors, [catalogURL]);
         assert.deepEqual(phases, ['Download', null]);
         throw Error('manual import requested');
       },
+      ...overrides,
     });
+  const expectedRequest = (url) => ({ url, redirect: 'follow' });
   await assert.rejects(prepare(), /manual import requested/);
-  assert.deepEqual(requests, [trusted]);
-  assert.deepEqual(logs, ['mirror.iscas.ac.cn: Download failed']);
+  assert.deepEqual(requests, [expectedRequest(catalogURL)]);
+  assert.deepEqual(logs, ['github.com: Download failed']);
 
+  const ticket = 'ruyi-image://download/test-ticket';
+  const installHost = (subtest, lookup) => {
+    globalThis.window = { ruyiImager: { getMirrorDownloadURL: lookup } };
+    subtest.after(() => delete globalThis.window);
+    requests.length = 0;
+    phases.length = 0;
+  };
   await context.test(
-    'Electron fetches the host-issued URL and keeps manual fallback',
+    'a failed desktop download prompts for import without a direct request',
     async (subtest) => {
-      const ticket = 'ruyi-image://download/test-ticket';
-      globalThis.window = {
-        ruyiImager: {
-          getMirrorDownloadURL(url) {
-            assert.equal(url, trusted);
-            return ticket;
-          },
-        },
-      };
-      subtest.after(() => delete globalThis.window);
-      phases.length = 0;
+      const lookup = subtest.mock.fn(() => ticket);
+      installHost(subtest, lookup);
       await assert.rejects(prepare(), /manual import requested/);
-      assert.deepEqual(requests, [trusted, ticket]);
-      assert.equal(logs.at(-1), 'mirror.iscas.ac.cn: Download failed');
+      assert.deepEqual(
+        lookup.mock.calls.map(({ arguments: args }) => args),
+        [[catalogURL]],
+      );
+      assert.deepEqual(requests, [expectedRequest(ticket)]);
+      assert.equal(logs.at(-1), 'github.com: Download failed');
     },
   );
+
+  await context.test(
+    'cancelling a pending desktop lookup settles before it replies',
+    { timeout: 2000 },
+    async (subtest) => {
+      const started = Promise.withResolvers();
+      const lookup = Promise.withResolvers();
+      installHost(subtest, () => {
+        started.resolve();
+        return lookup.promise;
+      });
+      const controller = new AbortController();
+      const stopped = assert.rejects(
+        prepare({ signal: controller.signal, localFile: assert.fail }),
+        { name: 'AbortError' },
+      );
+      await started.promise;
+      controller.abort();
+      await stopped;
+      lookup.resolve(ticket);
+      await new Promise(setImmediate);
+      assert.deepEqual(requests, []);
+    },
+  );
+
+  for (const [scenario, lookup] of [
+    ['lookup rejects', () => Promise.reject(Error('IPC unavailable'))],
+    ['lookup returns an invalid address', () => undefined],
+  ]) {
+    await context.test(
+      `manual import is available when desktop ${scenario}`,
+      async (subtest) => {
+        installHost(subtest, lookup);
+        await assert.rejects(prepare(), /manual import requested/);
+        assert.deepEqual(requests, []);
+      },
+    );
+  }
 });
 
 test('manual import verifies the selected file and extracts it without caching a copy', async () => {
