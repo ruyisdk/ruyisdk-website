@@ -8,6 +8,10 @@ export class ProvisionRuntime {
     this.worker.onmessage = async ({ data }) => {
       const task = this.pending.get(data.id);
       if (this.closedReason || !task || task.completion) return;
+      if (data.percent !== undefined) {
+        task.onProgress?.(data.percent);
+        return;
+      }
       if (data.log !== undefined) {
         trace(`Starlark [${data.level}]: ${data.log}`);
         if (data.level !== 'D') log(data.log);
@@ -47,13 +51,20 @@ export class ProvisionRuntime {
     if (error) task.reject(Error(error));
     else task.resolve(task.completion.result);
   }
-  run(job, command) {
+  run(job, command, onProgress) {
     if (this.closedReason) return Promise.reject(Error(this.closedReason));
     const id = ++this.sequence;
     return new Promise((resolve, reject) => {
-      this.pending.set(id, { resolve, reject, command, activeCommands: 0 });
+      this.pending.set(id, {
+        resolve,
+        reject,
+        command,
+        onProgress,
+        activeCommands: 0,
+      });
       this.worker.postMessage({
         id,
+        reportProgress: Boolean(onProgress),
         api: this.api,
         runtimeURL: `${this.base}device-runtime/`,
         job,

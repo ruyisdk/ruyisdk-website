@@ -68,6 +68,9 @@ self.onmessage = async ({ data }) => {
       return parts(job.modules[name]);
     };
     const host = {
+      progress: (percent) => {
+        if (data.reportProgress) self.postMessage({ id, percent });
+      },
       source: async (name) =>
         resource(`${api}plugins/${modulePath(name).join('/')}`),
       asset: async (name, path) =>
