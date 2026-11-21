@@ -4,6 +4,7 @@
 # Production
 /build
 /static/device-runtime/
+/static/device-worker.js
 
 # Generated files
 .docusaurus
