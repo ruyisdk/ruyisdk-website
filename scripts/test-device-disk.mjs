@@ -11,13 +11,14 @@ test('ordinary browsers have no disk capability', () =>
 for (const graphical of [true, false]) {
   test(`dd provisioning in the ${graphical ? 'GUI' : 'terminal'} uses only the selected disk`, async (context) => {
     const writes = [];
+    const selectDisk = context.mock.fn(async (slot) => {
+      assert.equal(slot, 'live');
+      return { id: 'selection', label: 'SD reader' };
+    });
     const capability = {
       version: 1,
       rawDiskWrite: true,
-      selectDisk: async (slot) => {
-        assert.equal(slot, 'live');
-        return { id: 'selection', label: 'SD reader' };
-      },
+      selectDisk: assert.fail,
       writeAndVerify: async (...args) => writes.push(args),
     };
     const original = Object.getOwnPropertyDescriptor(globalThis, 'window');
@@ -100,6 +101,8 @@ for (const graphical of [true, false]) {
       directory: async () => root,
       device: assert.fail,
       fastbootRequired: (value) => assert.equal(value, false),
+      diskRequired: (value) => assert.equal(value, true),
+      selectDisk,
     };
     if (graphical) {
       ui.selectSystem = async () => combo;
@@ -120,11 +123,12 @@ for (const graphical of [true, false]) {
     await provision(options);
     assert.equal(writes.length, 1);
     assert.equal(writes[0][0], 'selection');
+    assert.equal(selectDisk.mock.callCount(), 1);
 
     await context.test(
       'a later image preparation failure never opens the disk picker',
       async (subtest) => {
-        subtest.mock.method(capability, 'selectDisk', assert.fail);
+        const selections = selectDisk.mock.callCount();
         const atoms = catalog.combo.data['image-combo'].package_atoms;
         atoms.push(atoms[0]);
         let extractions = 0;
@@ -143,7 +147,7 @@ for (const graphical of [true, false]) {
             }),
             /Cannot extract image/,
           );
-          assert.equal(capability.selectDisk.mock.callCount(), 0);
+          assert.equal(selectDisk.mock.callCount(), selections);
         } finally {
           atoms.pop();
         }

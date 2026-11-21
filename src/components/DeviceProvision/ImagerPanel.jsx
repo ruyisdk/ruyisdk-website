@@ -180,7 +180,7 @@ function PackageVersions({
 }
 
 function Prompt({ prompt, settle }) {
-  if (!prompt?.title) return null;
+  if (!prompt?.title || prompt.kind === 'disk') return null;
   return (
     <>
       <p className={styles.question}>{prompt.title}</p>

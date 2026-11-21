@@ -117,6 +117,26 @@
   margin-bottom: 0.5rem;
   overflow-wrap: anywhere;
 }
+.diskList {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.diskList button {
+  width: 100%;
+  height: auto;
+  justify-content: flex-start;
+  text-align: left;
+  white-space: normal;
+}
+.diskList button > span {
+  align-items: flex-start;
+}
+.diskActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 .status i {
   display: inline-block;
   width: 8px;
