@@ -1,5 +1,5 @@
-import { packageFastboot } from './spacemit.js';
 import { desktopDisks, diskCommand } from './disk.js';
+import { packageFastboot } from './spacemit.js';
 import { prepareImages } from './storage.js';
 
 const indexTimeoutMs = 15_000;
@@ -212,7 +212,11 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   const usesFastboot = selected.some(
     (pkg) => pkg.data.provisionable.strategy !== 'dd-v1',
   );
+  const usesDisk = selected.some(
+    (pkg) => pkg.data.provisionable.strategy === 'dd-v1',
+  );
   ui.fastbootRequired?.(usesFastboot);
+  ui.diskRequired?.(usesDisk);
   const root = await ui.directory();
   log(`${root.name}/RuyiImages/`);
   const plans = [];
@@ -245,7 +249,9 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
         if (!disks.has(slot)) {
           signal.throwIfAborted();
           ui.trace?.(`Select target disk: ${slot}`);
-          const target = await host.selectDisk(slot);
+          const target = ui.selectDisk
+            ? await ui.selectDisk(slot)
+            : await host.selectDisk(slot);
           if (!target) {
             log(t('已取消。', 'Cancelled.'));
             return;

@@ -1,3 +1,4 @@
+import { desktopDisks } from '../../lib/device/disk';
 import { FastbootSession } from '../../lib/device/fastboot';
 import { provision } from '../../lib/device/provision';
 import { ProvisionRuntime } from '../../lib/device/runtime';
@@ -7,7 +8,14 @@ import styles from './device.module.css';
 import { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { Terminal, Usb, FolderOpen, RotateCcw, Download } from 'lucide-react';
+import {
+  Terminal,
+  Usb,
+  FolderOpen,
+  HardDrive,
+  RotateCcw,
+  Download,
+} from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const clean = (text) =>
@@ -59,6 +67,9 @@ export default function ProvisionWorkspace({ graphical = false }) {
   const [packageOptions, setPackageOptions] = useState(null);
   const [steps, setSteps] = useState(null);
   const [fastbootRequired, setFastbootRequired] = useState(true);
+  const [diskRequired, setDiskRequired] = useState(false);
+  const [diskTargets, setDiskTargets] = useState({});
+  const [pickingDisk, setPickingDisk] = useState(false);
   const [panelStatus, setPanelStatus] = useState({});
   const [traceText, setTraceText] = useState('');
   const [traceOpen, setTraceOpen] = useState(false);
@@ -150,6 +161,9 @@ export default function ProvisionWorkspace({ graphical = false }) {
     setPackageOptions(null);
     setSteps(null);
     setFastbootRequired(true);
+    setDiskRequired(false);
+    setDiskTargets({});
+    setPickingDisk(false);
     setPanelStatus({});
     setComplete(false);
     setIssue('');
@@ -166,6 +180,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
     let lastProgress = 0;
     const ui = {
       fastbootRequired: setFastbootRequired,
+      diskRequired: setDiskRequired,
       log: output,
       trace,
       confirm: async (title) => {
@@ -255,6 +270,37 @@ export default function ProvisionWorkspace({ graphical = false }) {
               ),
           { spec, mirrors },
         ),
+      selectDisk: async (slot) => {
+        const host = desktopDisks();
+        if (!host)
+          throw Error(t('没有写盘宿主。', 'No disk host is available.'));
+        let target;
+        if (host.listDisks) {
+          for (;;) {
+            let disks = [];
+            let error = '';
+            try {
+              disks = await host.listDisks();
+              if (!Array.isArray(disks)) throw Error('Invalid disk list');
+            } catch (problem) {
+              signal.throwIfAborted();
+              error = problem.message || String(problem);
+              trace(`Disk list: ${error}`);
+            }
+            target = await wait(
+              'disk',
+              t('选择目标磁盘', 'Select the target disk'),
+              { slot, disks, error },
+            );
+            if (target?.refresh) continue;
+            if (!target) return null;
+            break;
+          }
+        } else target = await host.selectDisk(slot);
+        if (target)
+          setDiskTargets((previous) => ({ ...previous, [slot]: target }));
+        return target;
+      },
     };
     if (graphical) {
       ui.selectSystem = async (catalog, vendors) => {
@@ -432,6 +478,27 @@ export default function ProvisionWorkspace({ graphical = false }) {
       );
     }
   }
+  async function chooseTargetDisk(disk) {
+    if (prompt?.kind !== 'disk' || pickingDisk) return;
+    const { slot } = prompt;
+    setPickingDisk(true);
+    setIssue('');
+    try {
+      const target = await desktopDisks()?.chooseDisk?.(slot, disk.id);
+      if (!target) throw Error('The selected disk is no longer available');
+      settle(target);
+    } catch (error) {
+      report(
+        error,
+        translate({
+          id: 'tryruyi.device.diskSelectError',
+          message: '无法选择目标磁盘。',
+        }),
+      );
+    } finally {
+      setPickingDisk(false);
+    }
+  }
   const usb = session.current?.usb,
     online = Boolean(usb?.device?.opened);
   return (
@@ -532,6 +599,95 @@ export default function ProvisionWorkspace({ graphical = false }) {
           </section>
         )}
         <aside className={styles.aside}>
+          {diskRequired && (
+            <section>
+              <h2>
+                <HardDrive size={20} />{' '}
+                {translate({
+                  id: 'tryruyi.device.diskTitle',
+                  message: '目标磁盘',
+                })}
+              </h2>
+              {Object.entries(diskTargets).map(([slot, target]) => (
+                <div className={styles.status} key={slot}>
+                  <i data-online="true" />
+                  {target.label}
+                </div>
+              ))}
+              {prompt?.kind === 'disk' && (
+                <>
+                  <p>
+                    {translate({
+                      id: 'tryruyi.device.diskSelect',
+                      message: '选择要写入的磁盘',
+                    })}
+                    {prompt.slot === 'disk' ? '' : ` · ${prompt.slot}`}
+                  </p>
+                  {prompt.error ? (
+                    <p className={styles.error} role="alert">
+                      {prompt.error}
+                    </p>
+                  ) : prompt.disks.length ? (
+                    <div className={styles.diskList}>
+                      {prompt.disks.map((disk) => (
+                        <Button
+                          key={disk.id}
+                          variant="secondary"
+                          size="sm"
+                          disabled={pickingDisk}
+                          onClick={() => chooseTargetDisk(disk)}
+                        >
+                          {disk.label}
+                        </Button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>
+                      {translate({
+                        id: 'tryruyi.device.diskEmpty',
+                        message: '未检测到可移动磁盘或 SD 读卡器。',
+                      })}
+                    </p>
+                  )}
+                  <div className={styles.diskActions}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      disabled={pickingDisk}
+                      onClick={() => {
+                        setIssue('');
+                        settle({ refresh: true });
+                      }}
+                    >
+                      {translate({
+                        id: 'tryruyi.device.diskRefresh',
+                        message: '刷新',
+                      })}
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      disabled={pickingDisk}
+                      onClick={() => settle(null)}
+                    >
+                      {translate({
+                        id: 'tryruyi.device.diskCancel',
+                        message: '取消',
+                      })}
+                    </Button>
+                  </div>
+                </>
+              )}
+              {!prompt && !Object.keys(diskTargets).length && (
+                <p>
+                  {translate({
+                    id: 'tryruyi.device.diskWaiting',
+                    message: '镜像准备完成后可选择目标磁盘。',
+                  })}
+                </p>
+              )}
+            </section>
+          )}
           {fastbootRequired && (
             <section>
               <h2>

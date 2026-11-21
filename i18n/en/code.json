@@ -561,6 +561,27 @@
   "tryruyi.device.disconnected": {
     "message": "No board connected"
   },
+  "tryruyi.device.diskCancel": {
+    "message": "Cancel"
+  },
+  "tryruyi.device.diskEmpty": {
+    "message": "No removable disk or SD reader detected."
+  },
+  "tryruyi.device.diskRefresh": {
+    "message": "Refresh"
+  },
+  "tryruyi.device.diskSelect": {
+    "message": "Select the disk to write"
+  },
+  "tryruyi.device.diskSelectError": {
+    "message": "Could not select the target disk."
+  },
+  "tryruyi.device.diskTitle": {
+    "message": "Target disk"
+  },
+  "tryruyi.device.diskWaiting": {
+    "message": "A target disk can be selected after the images are prepared."
+  },
   "tryruyi.device.downloadFrom": {
     "message": "Download from {host}"
   },
