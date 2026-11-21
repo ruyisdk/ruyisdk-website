@@ -757,10 +757,15 @@ export default function ProvisionWorkspace({ graphical = false }) {
               </h2>
               <p>{transfer.name}</p>
               <progress
-                max={transfer.total}
-                value={transfer.bytes || undefined}
+                max={transfer.percent === undefined ? transfer.total : 100}
+                value={transfer.percent ?? (transfer.bytes || undefined)}
+                aria-label={phaseLabel(transfer.phase)}
               />
-              <small>{formatBytes(transfer.total)}</small>
+              <small>
+                {transfer.percent === undefined
+                  ? formatBytes(transfer.total)
+                  : `${transfer.percent}%`}
+              </small>
             </section>
           )}
           {prompt?.kind === 'file' && (

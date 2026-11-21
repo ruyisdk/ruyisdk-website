@@ -25,9 +25,11 @@ test('xz and lz4 images stream to the declared partition file', async () => {
     ],
     ['.lz4', 'BCJNGGRApxEAAABfcnV5aQoFAP//ZVBydXlpCgAAAABJpRs4'],
   ]) {
-    const writes = [];
+    const writes = [],
+      percentages = [];
     let writer;
     const host = {
+      progress: (percent) => percentages.push(percent),
       async open(name) {
         assert.equal(name, 'disk.img');
         const output = new WritableStream({
@@ -38,7 +40,10 @@ test('xz and lz4 images stream to the declared partition file', async () => {
         writer = output.getWriter();
       },
       write: (chunk) => writer.write(chunk),
-      close: () => writer.close(),
+      close: async () => {
+        assert.ok(percentages.every((percent) => percent < 100));
+        await writer.close();
+      },
     };
     const found = await runProvisionTask(
       {
@@ -51,7 +56,43 @@ test('xz and lz4 images stream to the declared partition file', async () => {
     );
     assert.deepEqual(found, ['disk.img']);
     assert.deepEqual(Buffer.concat(writes), raw);
+    assert.ok(percentages.some((percent) => percent > 0 && percent < 100));
+    assert.equal(percentages.at(-1), 100);
   }
+});
+
+test('ZIP progress counts only selected output and completes after the last close', async () => {
+  const file = new Blob([
+    Buffer.from(
+      'UEsDBBQAAAAIAHKZdV3oDyghBgAAAFAAAAAEAAAAc2tpcKuooC4AAFBLAwQUAAAACABymXVdCuqbHAUAAAADAAAAAQAAAGGrqKgAAFBLAwQUAAAACABymXVdw/7CbgUAAAAJAAAAAQAAAGKrqIACAFBLAQIUAxQAAAAIAHKZdV3oDyghBgAAAFAAAAAEAAAAAAAAAAAAAACAAQAAAABza2lwUEsBAhQDFAAAAAgAcpl1XQrqmxwFAAAAAwAAAAEAAAAAAAAAAAAAAIABKAAAAGFQSwECFAMUAAAACABymXVdw/7CbgUAAAAJAAAAAQAAAAAAAAAAAAAAgAFMAAAAYlBLBQYAAAAAAwADAJAAAABwAAAAAAA=',
+      'base64',
+    ),
+  ]);
+  const job = { kind: 'extract', name: 'images.zip', file, wanted: ['a', 'b'] };
+  const events = [];
+  const host = {
+    open: async (name) => {
+      events.push(name);
+    },
+    write: async () => {},
+    close: async () => {
+      events.push('closed');
+    },
+    progress: (percent) => events.push(percent),
+  };
+  assert.deepEqual(await runProvisionTask(job, host), job.wanted);
+  assert.deepEqual(events, ['a', 25, 'closed', 'b', 99, 'closed', 100]);
+  events.length = 0;
+  await assert.rejects(
+    runProvisionTask(job, {
+      ...host,
+      close: async () => {
+        throw Error('disk full');
+      },
+    }),
+    /disk full/,
+  );
+  assert.deepEqual(events, ['a', 25]);
 });
 const limit = 16384;
 const paths = { gpt: 'layout.json', rootfs: 'root.ext4' };

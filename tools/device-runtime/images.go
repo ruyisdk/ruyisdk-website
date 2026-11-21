@@ -10,6 +10,7 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"math"
 	"strings"
 	"syscall/js"
 
@@ -26,6 +27,24 @@ type blobReader struct {
 }
 
 type outputWriter struct{ host js.Value }
+
+type extractionProgress struct {
+	host        js.Value
+	done, total uint64
+	percent     int
+}
+
+func (progress *extractionProgress) Write(data []byte) (int, error) {
+	progress.done += uint64(len(data))
+	if progress.total > 0 {
+		percent := min(99, int(float64(progress.done)/float64(progress.total)*100))
+		if percent > progress.percent {
+			progress.percent = percent
+			progress.host.Call("progress", percent)
+		}
+	}
+	return len(data), nil
+}
 
 func (writer outputWriter) Write(buffer []byte) (int, error) {
 	data := js.Global().Get("Uint8Array").New(len(buffer))
@@ -73,15 +92,18 @@ func gzipChunk(job js.Value) (js.Value, error) {
 func processImage(job, host js.Value) (any, error) {
 	blob := job.Get("file")
 	source := blobReader{blob, int64(blob.Get("size").Float())}
-	input := bufio.NewReaderSize(io.NewSectionReader(source, 0, source.size), bufferSize)
+	section := io.NewSectionReader(source, 0, source.size)
 	if job.Get("kind").String() == "hash" {
 		digest := sha256.New()
-		if _, err := io.Copy(digest, input); err != nil {
+		if _, err := io.CopyBuffer(digest, section, make([]byte, bufferSize)); err != nil {
 			return nil, err
 		}
 		return hex.EncodeToString(digest.Sum(nil)), nil
 	}
 	name := job.Get("name").String()
+	progress := &extractionProgress{host: host, total: uint64(source.size)}
+	input := bufio.NewReaderSize(io.TeeReader(section, progress), bufferSize)
+	var destination io.Writer = outputWriter{host}
 	wanted := map[string]bool{}
 	names := job.Get("wanted")
 	for index := 0; index < names.Length(); index++ {
@@ -101,7 +123,7 @@ func processImage(job, host js.Value) (any, error) {
 		if _, err := await(host.Call("open", path)); err != nil {
 			return err
 		}
-		output := bufio.NewWriterSize(outputWriter{host}, bufferSize)
+		output := bufio.NewWriterSize(destination, bufferSize)
 		if _, err := io.Copy(output, input); err != nil {
 			return err
 		}
@@ -117,16 +139,26 @@ func processImage(job, host js.Value) (any, error) {
 		if err != nil {
 			return nil, err
 		}
+		progress.total = 0
+		var selected []*zip.File
 		for _, member := range archive.File {
 			path := strings.TrimPrefix(member.Name, "./")
 			if !wanted[path] || !member.Mode().IsRegular() {
 				continue
 			}
+			if member.UncompressedSize64 > math.MaxUint64-progress.total {
+				return nil, fmt.Errorf("ZIP image sizes overflow")
+			}
+			progress.total += member.UncompressedSize64
+			selected = append(selected, member)
+		}
+		destination = io.MultiWriter(destination, progress)
+		for _, member := range selected {
 			stream, err := member.Open()
 			if err != nil {
 				return nil, err
 			}
-			err = write(path, stream)
+			err = write(strings.TrimPrefix(member.Name, "./"), stream)
 			stream.Close()
 			if err != nil {
 				return nil, err
@@ -193,5 +225,6 @@ func processImage(job, host js.Value) (any, error) {
 			return nil, err
 		}
 	}
+	host.Call("progress", 100)
 	return found, nil
 }

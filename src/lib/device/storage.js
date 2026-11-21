@@ -211,15 +211,21 @@ export async function prepareImages(
       }
     }
     log(`SHA-256 ✓ ${name}`);
-    progress({ name, phase: 'Extract', bytes: 0, total: file.size });
-    const found = await runtime.run({
-      kind: 'extract',
-      file,
-      dir: extracted,
-      name,
-      wanted,
-      strip: spec.strip_components ?? 1,
-    });
+    const extracting = (percent) =>
+      progress({ name, phase: 'Extract', percent });
+    extracting(0);
+    const found = await runtime.run(
+      {
+        kind: 'extract',
+        file,
+        dir: extracted,
+        name,
+        wanted,
+        strip: spec.strip_components ?? 1,
+      },
+      undefined,
+      extracting,
+    );
     for (const path of found) {
       if (files.has(path)) throw Error(`Duplicate package image: ${path}`);
       const parts = path.split('/'),
