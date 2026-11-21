@@ -208,7 +208,7 @@ test('manual import verifies the selected file and extracts it without caching a
 
 test('flash reuses reviewed module and asset bytes and cannot fetch additional resources', async () => {
   const worker = await readFile(
-    new URL('../static/device-worker.js', import.meta.url),
+    new URL('../tools/device-runtime/worker.js', import.meta.url),
     'utf8',
   );
   const replies = [],
@@ -219,7 +219,6 @@ test('flash reuses reviewed module and asset bytes and cannot fetch additional r
     self,
     Uint8Array,
     Map,
-    importScripts() {},
     Go: class {
       run() {}
     },

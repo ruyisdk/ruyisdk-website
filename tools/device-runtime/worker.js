@@ -4,7 +4,6 @@ const snapshots = new Map();
 let sequence = 0;
 
 async function initialize(runtimeURL) {
-  importScripts(`${runtimeURL}wasm_exec.js`);
   const go = new Go();
   const response = await fetch(`${runtimeURL}device.wasm`);
   if (!response.ok) throw new Error(`Runtime download: ${response.status}`);
