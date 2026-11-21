@@ -244,6 +244,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       for (const slot of Object.keys(paths)) {
         if (!disks.has(slot)) {
           signal.throwIfAborted();
+          ui.trace?.(`Select target disk: ${slot}`);
           const target = await host.selectDisk(slot);
           if (!target) {
             log(t('已取消。', 'Cancelled.'));

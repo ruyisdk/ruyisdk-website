@@ -61,6 +61,52 @@ async function mirrorSource(url, signal) {
   }
 }
 
+async function saveDownload(stream, archives, spec, signal, progress) {
+  const { name, size } = spec;
+  const reader = stream.getReader();
+  const stopReading = () => {
+    void reader.cancel().catch(() => {});
+  };
+  signal.addEventListener('abort', stopReading, { once: true });
+  let writer;
+  let bytes = 0;
+  try {
+    signal.throwIfAborted();
+    const handle = await archives.getFileHandle(segment(name), {
+      create: true,
+    });
+    writer = await handle.createWritable();
+    for (;;) {
+      signal.throwIfAborted();
+      let chunk;
+      try {
+        chunk = await reader.read();
+      } catch {
+        signal.throwIfAborted();
+        return `Transfer interrupted after ${bytes} of ${size} bytes`;
+      }
+      if (chunk.done) break;
+      bytes += chunk.value.byteLength;
+      if (bytes > size) break;
+      await writer.write(chunk.value);
+      progress({ name, phase: 'Download', bytes, total: size });
+    }
+    signal.throwIfAborted();
+    if (bytes !== size)
+      return `Size mismatch: expected ${size} bytes, received ${bytes}`;
+    await writer.close();
+    writer = null;
+  } catch (error) {
+    signal.throwIfAborted();
+    throw Error(`Cannot save ${name}: ${error.message || error}`);
+  } finally {
+    signal.removeEventListener('abort', stopReading);
+    await writer?.abort().catch(() => {});
+    await reader.cancel().catch(() => {});
+    reader.releaseLock();
+  }
+}
+
 export async function prepareImages(
   pkg,
   { root, runtime, log, progress, localFile, signal },
@@ -80,49 +126,27 @@ export async function prepareImages(
     const verified = async (file) => {
       if (file?.size !== spec.size) return false;
       progress({ name, phase: 'SHA-256', bytes: 0, total: spec.size });
-      return (
-        (await runtime.run({ kind: 'hash', file })) === spec.checksums.sha256
-      );
+      try {
+        return (
+          (await runtime.run({ kind: 'hash', file })) === spec.checksums.sha256
+        );
+      } catch (error) {
+        signal.throwIfAborted();
+        throw Error(
+          `Cannot verify SHA-256 for ${name}: ${error.message || error}`,
+        );
+      }
     };
     let file = await existing(archives, name);
-    if (!(await verified(file))) {
+    if (await verified(file)) {
+      log(`Using cached file: ${name}`);
+    } else {
+      if (file) log(`Cached file failed size or SHA-256 check: ${name}`);
       file = null;
       const urls = spec.resolved_urls.filter(isDownloadURL);
-      const save = async (stream) => {
-        const writer = await (
-          await archives.getFileHandle(segment(name), { create: true })
-        ).createWritable();
-        let bytes = 0;
-        try {
-          await stream
-            .pipeThrough(
-              new TransformStream({
-                transform(chunk, controller) {
-                  bytes += chunk.byteLength;
-                  if (bytes > spec.size)
-                    throw Error(`Oversized download: ${name}`);
-                  progress({
-                    name,
-                    phase: 'Download',
-                    bytes,
-                    total: spec.size,
-                  });
-                  controller.enqueue(chunk);
-                },
-              }),
-            )
-            .pipeTo(writer, { signal });
-        } catch (error) {
-          await writer.abort().catch(() => {});
-          throw error;
-        }
-        const candidate = await existing(archives, name);
-        if (!(await verified(candidate)))
-          throw Error(`Size or SHA-256 mismatch: ${name}`);
-        return candidate;
-      };
       for (const url of urls) {
         let response;
+        const sourceLabel = `${new URL(url).host} · ${name}`;
         try {
           progress({ name, phase: 'Download', bytes: 0, total: spec.size });
           const source = await mirrorSource(url, signal);
@@ -130,18 +154,42 @@ export async function prepareImages(
             signal,
             credentials: 'omit',
           });
-          if (!response.ok || !response.body)
-            throw Error(`HTTP ${response.status}`);
-          file = await save(response.body);
-          break;
         } catch {
           signal.throwIfAborted();
-          const reason =
-            response && !response.ok
-              ? `HTTP ${response.status}`
-              : 'Download failed';
-          log(`${new URL(url).host}: ${reason}`);
+          log(`${sourceLabel}: Download request failed`);
+          continue;
         }
+        if (!response.ok || !response.body) {
+          log(`${sourceLabel}: HTTP ${response.status}`);
+          await response.body?.cancel();
+          continue;
+        }
+        const failure = await saveDownload(
+          response.body,
+          archives,
+          spec,
+          signal,
+          progress,
+        );
+        if (failure) {
+          log(`${sourceLabel}: ${failure}`);
+          continue;
+        }
+        let candidate;
+        try {
+          candidate = await (await archives.getFileHandle(name)).getFile();
+        } catch (error) {
+          signal.throwIfAborted();
+          throw Error(
+            `Cannot read saved file ${name}: ${error.message || error}`,
+          );
+        }
+        if (!(await verified(candidate))) {
+          log(`${sourceLabel}: SHA-256 or size mismatch in saved file`);
+          continue;
+        }
+        file = candidate;
+        break;
       }
       if (!file) {
         progress(null);
