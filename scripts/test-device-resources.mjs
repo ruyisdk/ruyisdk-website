@@ -125,7 +125,7 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
       ],
     },
   };
-  await assert.rejects(
+  const prepare = () =>
     prepareImages(pkg, {
       root,
       runtime: {},
@@ -137,11 +137,30 @@ test('automatic downloads use trusted HTTPS origins and refuse redirects', async
         assert.deepEqual(phases, ['Download', null]);
         throw Error('manual import requested');
       },
-    }),
-    /manual import requested/,
-  );
+    });
+  await assert.rejects(prepare(), /manual import requested/);
   assert.deepEqual(requests, [trusted]);
   assert.deepEqual(logs, ['mirror.iscas.ac.cn: Download failed']);
+
+  await context.test(
+    'Electron fetches the host-issued URL and keeps manual fallback',
+    async (subtest) => {
+      const ticket = 'ruyi-image://download/test-ticket';
+      globalThis.window = {
+        ruyiImager: {
+          getMirrorDownloadURL(url) {
+            assert.equal(url, trusted);
+            return ticket;
+          },
+        },
+      };
+      subtest.after(() => delete globalThis.window);
+      phases.length = 0;
+      await assert.rejects(prepare(), /manual import requested/);
+      assert.deepEqual(requests, [trusted, ticket]);
+      assert.equal(logs.at(-1), 'mirror.iscas.ac.cn: Download failed');
+    },
+  );
 });
 
 test('manual import verifies the selected file and extracts it without caching a copy', async () => {
