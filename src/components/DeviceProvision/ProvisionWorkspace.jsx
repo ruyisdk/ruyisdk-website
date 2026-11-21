@@ -274,32 +274,27 @@ export default function ProvisionWorkspace({ graphical = false }) {
         const host = desktopDisks();
         if (!host)
           throw Error(t('没有写盘宿主。', 'No disk host is available.'));
-        let target;
-        if (host.listDisks) {
-          for (;;) {
-            let disks = [];
-            let error = '';
-            try {
-              disks = await host.listDisks();
-              if (!Array.isArray(disks)) throw Error('Invalid disk list');
-            } catch (problem) {
-              signal.throwIfAborted();
-              error = problem.message || String(problem);
-              trace(`Disk list: ${error}`);
-            }
-            target = await wait(
-              'disk',
-              t('选择目标磁盘', 'Select the target disk'),
-              { slot, disks, error },
-            );
-            if (target?.refresh) continue;
-            if (!target) return null;
-            break;
+        for (;;) {
+          let disks = [];
+          let error = '';
+          try {
+            disks = await host.listDisks();
+            if (!Array.isArray(disks)) throw Error('Invalid disk list');
+          } catch (problem) {
+            signal.throwIfAborted();
+            error = problem.message || String(problem);
+            trace(`Disk list: ${error}`);
           }
-        } else target = await host.selectDisk(slot);
-        if (target)
+          const target = await wait(
+            'disk',
+            t('选择目标磁盘', 'Select the target disk'),
+            { slot, disks, error },
+          );
+          if (target?.refresh) continue;
+          if (!target) return null;
           setDiskTargets((previous) => ({ ...previous, [slot]: target }));
-        return target;
+          return target;
+        }
       },
     };
     if (graphical) {

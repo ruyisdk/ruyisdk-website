@@ -153,10 +153,15 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       !desktopDisks() &&
       packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1')
     )
-      issue = t(
-        'dd-v1 需要直接写盘。请在本机运行 ruyi device provision。',
-        'dd-v1 requires raw disk access. Run ruyi device provision locally.',
-      );
+      issue = window.ruyiImager
+        ? t(
+            '请更新桌面应用，以便在侧栏选择目标磁盘。',
+            'Update the desktop app to select a target disk in the sidebar.',
+          )
+        : t(
+            'dd-v1 需要直接写盘。请在本机运行 ruyi device provision。',
+            'dd-v1 requires raw disk access. Run ruyi device provision locally.',
+          );
     else if (
       !window.showDirectoryPicker ||
       (packages.some((pkg) => pkg.data.provisionable.strategy !== 'dd-v1') &&
@@ -249,9 +254,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
         if (!disks.has(slot)) {
           signal.throwIfAborted();
           ui.trace?.(`Select target disk: ${slot}`);
-          const target = ui.selectDisk
-            ? await ui.selectDisk(slot)
-            : await host.selectDisk(slot);
+          const target = await ui.selectDisk(slot);
           if (!target) {
             log(t('已取消。', 'Cancelled.'));
             return;
