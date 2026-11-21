@@ -41,6 +41,7 @@ func main() {
 				var value any
 				var err error
 				switch job.Get("kind").String() {
+				case "warmup":
 				case "gzip":
 					compressed, err := gzipChunk(job)
 					if err != nil {

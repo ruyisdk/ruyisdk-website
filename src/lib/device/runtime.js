@@ -60,6 +60,9 @@ export class ProvisionRuntime {
       });
     });
   }
+  warmup() {
+    return this.run({ kind: 'warmup' });
+  }
   dispose(reason = 'Session closed') {
     if (this.closedReason) return;
     this.closedReason = reason || 'Session closed';

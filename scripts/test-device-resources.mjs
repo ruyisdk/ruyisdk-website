@@ -7,7 +7,7 @@ import vm from 'node:vm';
 
 const setupCatalog = (signal, selectSystem) =>
   provision({
-    runtime: { api: '/api/' },
+    runtime: { api: '/api/', warmup: async () => {} },
     locale: 'zh_CN',
     ui: { selectSystem },
     signal,

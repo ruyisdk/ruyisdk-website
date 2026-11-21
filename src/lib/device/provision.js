@@ -71,6 +71,11 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     log(t('RuyiSDK 设备安装向导', 'RuyiSDK Device Provisioning Wizard'));
     if (!(await confirm(t('继续？', 'Continue?')))) return;
   }
+  const runtimeReady = Promise.all([
+    runtime.warmup(),
+    get(`${runtime.base}device-runtime/messages.toml`, signal, false),
+  ]);
+  void runtimeReady.catch(() => {});
   const [entities, packages, hierarchy, plugins] = await Promise.all(
     ['entities', 'packages', 'hierarchy', 'plugins/index'].map((name) =>
       get(`${index}${name}.json`),
@@ -116,11 +121,9 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       requestSignal,
     );
   const config = (await detail(combo)).data['image-combo'];
-  const messages = () =>
-    get(`${runtime.base}device-runtime/messages.toml`, signal, false);
   const postInstall = async () => {
     if (!config.postinst_msgid) return;
-    const text = await messages();
+    const [, text] = await runtimeReady;
     log(
       await runtime.run({
         kind: 'message',
@@ -217,13 +220,13 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
   );
   ui.fastbootRequired?.(usesFastboot);
   ui.diskRequired?.(usesDisk);
+  const [, messageCatalog] = await runtimeReady;
   const root = await ui.directory();
   log(`${root.name}/RuyiImages/`);
   const plans = [];
   const disks = new Map();
   const host = desktopDisks();
   ui.trace?.(`packages-index: ${plugins.revision}`);
-  const messageCatalog = await messages();
   const prepared = [];
   for (const pkg of selected) {
     const description = `${pkg.package} ${pkg.version} (${pkg.data.provisionable.strategy})`;
