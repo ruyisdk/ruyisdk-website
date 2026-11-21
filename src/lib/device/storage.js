@@ -40,7 +40,7 @@ async function existing(dir, name) {
 async function mirrorSource(url, signal) {
   signal.throwIfAborted();
   const host = globalThis.window?.ruyiImager;
-  if (!host?.getMirrorDownloadURL) return url;
+  if (!host) return url;
 
   const cancelled = Promise.withResolvers();
   const onAbort = () => cancelled.reject(signal.reason);
