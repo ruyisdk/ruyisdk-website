@@ -1,11 +1,11 @@
+import { FastbootSession } from '../src/lib/device/fastboot.js';
+import { packageFastboot } from '../src/lib/device/spacemit.js';
+import '../static/device-runtime/wasm_exec.js';
 import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
-import { FastbootSession } from '../src/lib/device/fastboot.js';
-import { packageFastboot } from '../src/lib/device/spacemit.js';
-import '../static/device-runtime/wasm_exec.js';
 
 const go = new Go();
 const { instance } = await WebAssembly.instantiate(
@@ -15,6 +15,44 @@ const { instance } = await WebAssembly.instantiate(
   go.importObject,
 );
 go.run(instance);
+
+test('xz and lz4 images stream to the declared partition file', async () => {
+  const raw = Buffer.from('ruyi\n'.repeat(128));
+  for (const [extension, archive] of [
+    [
+      '.xz',
+      '/Td6WFoAAATm1rRGBMAXgAUhARYAAAAAAAAAAG1ISvDgAn8AD10AOR1LkfN1+t3cKlTio2AAAAC9UuZ8KQ8ztwABM4AFAAAAfuGDx7HEZ/sCAAAAAARZWg==',
+    ],
+    ['.lz4', 'BCJNGGRApxEAAABfcnV5aQoFAP//ZVBydXlpCgAAAABJpRs4'],
+  ]) {
+    const writes = [];
+    let writer;
+    const host = {
+      async open(name) {
+        assert.equal(name, 'disk.img');
+        const output = new WritableStream({
+          write: (chunk) => {
+            writes.push(Buffer.from(chunk));
+          },
+        });
+        writer = output.getWriter();
+      },
+      write: (chunk) => writer.write(chunk),
+      close: () => writer.close(),
+    };
+    const found = await runProvisionTask(
+      {
+        kind: 'extract',
+        file: new Blob([Buffer.from(archive, 'base64')]),
+        name: `disk.img${extension}`,
+        wanted: ['disk.img'],
+      },
+      host,
+    );
+    assert.deepEqual(found, ['disk.img']);
+    assert.deepEqual(Buffer.concat(writes), raw);
+  }
+});
 const limit = 16384;
 const paths = { gpt: 'layout.json', rootfs: 'root.ext4' };
 const layout = {

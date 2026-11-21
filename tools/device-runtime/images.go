@@ -14,6 +14,8 @@ import (
 	"syscall/js"
 
 	"github.com/klauspost/compress/zstd"
+	"github.com/pierrec/lz4/v4"
+	"github.com/ulikunitz/xz"
 )
 
 const bufferSize = 1024 * 1024
@@ -171,6 +173,19 @@ func processImage(job, host js.Value) (any, error) {
 		}
 		defer stream.Close()
 		if err = write(strings.TrimSuffix(name, ".gz"), stream); err != nil {
+			return nil, err
+		}
+	case strings.HasSuffix(name, ".xz"):
+		stream, err := xz.NewReader(input)
+		if err != nil {
+			return nil, err
+		}
+		if err = write(strings.TrimSuffix(name, ".xz"), stream); err != nil {
+			return nil, err
+		}
+	case strings.HasSuffix(name, ".lz4"):
+		stream := lz4.NewReader(input)
+		if err := write(strings.TrimSuffix(name, ".lz4"), stream); err != nil {
 			return nil, err
 		}
 	default:
