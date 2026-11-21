@@ -108,7 +108,11 @@ export async function prepareImages(
         let response;
         try {
           progress({ name, phase: 'Download', bytes: 0, total: spec.size });
-          response = await fetch(url, {
+          const host = globalThis.window?.ruyiImager;
+          const source = host?.getMirrorDownloadURL
+            ? await host.getMirrorDownloadURL(url)
+            : url;
+          response = await fetch(source, {
             signal,
             credentials: 'omit',
             redirect: 'error',
