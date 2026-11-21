@@ -16,11 +16,10 @@ for (const graphical of [true, false]) {
       return { id: 'selection', label: 'SD reader' };
     });
     const capability = {
-      version: 2,
-      rawDiskWrite: true,
       listDisks: () => [],
       chooseDisk: selectDisk,
       writeAndVerify: async (...args) => writes.push(args),
+      setFlashing: async () => {},
     };
     const original = Object.getOwnPropertyDescriptor(globalThis, 'window');
     Object.defineProperty(globalThis, 'window', {
@@ -146,37 +145,6 @@ for (const graphical of [true, false]) {
     );
 
     await context.test(
-      'an old host stops before download or native disk selection',
-      async () => {
-        window.ruyiImager = {
-          ...capability,
-          version: 1,
-          selectDisk: assert.fail,
-        };
-        try {
-          const issues = [];
-          const unavailable = {
-            ...ui,
-            directory: assert.fail,
-            selectDisk: assert.fail,
-            log: (line) => issues.push(line),
-          };
-          if (graphical)
-            unavailable.preparePackages = async ({ inspect, defaults }) => {
-              issues.push((await inspect(defaults)).issue);
-              throw Error('Setup disabled');
-            };
-          const run = provision({ ...options, ui: unavailable });
-          if (graphical) await assert.rejects(run, /Setup disabled/);
-          else await run;
-          assert.match(issues.at(-1), /Update the desktop app/);
-        } finally {
-          window.ruyiImager = capability;
-        }
-      },
-    );
-
-    await context.test(
       'a later image preparation failure never opens the disk picker',
       async (subtest) => {
         const selections = selectDisk.mock.callCount();
@@ -210,21 +178,24 @@ for (const graphical of [true, false]) {
         'ordinary browsers stop before directory selection with actionable instructions',
         async () => {
           delete window.ruyiImager;
-          for (const locale of ['zh_CN', 'en_US']) {
-            const lines = [];
-            await provision({
-              ...options,
-              locale,
-              ui: {
-                ...ui,
-                log: (line) => lines.push(line),
-                directory: assert.fail,
-              },
-            });
-            assert.match(lines.at(-1), /ruyi device provision/);
-            assert.doesNotMatch(lines.at(-1), /Ruyi Imager/i);
+          try {
+            for (const locale of ['zh_CN', 'en_US']) {
+              const lines = [];
+              await provision({
+                ...options,
+                locale,
+                ui: {
+                  ...ui,
+                  log: (line) => lines.push(line),
+                  directory: assert.fail,
+                },
+              });
+              assert.match(lines.at(-1), /ruyi device provision/);
+              assert.doesNotMatch(lines.at(-1), /Ruyi Imager/i);
+            }
+          } finally {
+            window.ruyiImager = capability;
           }
-          window.ruyiImager = capability;
         },
       );
     }

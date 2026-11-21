@@ -479,7 +479,7 @@ export default function ProvisionWorkspace({ graphical = false }) {
     setPickingDisk(true);
     setIssue('');
     try {
-      const target = await desktopDisks()?.chooseDisk?.(slot, disk.id);
+      const target = await desktopDisks().chooseDisk(slot, disk.id);
       if (!target) throw Error('The selected disk is no longer available');
       settle(target);
     } catch (error) {

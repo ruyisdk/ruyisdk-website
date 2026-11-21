@@ -153,15 +153,10 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       !desktopDisks() &&
       packages.some((pkg) => pkg.data.provisionable.strategy === 'dd-v1')
     )
-      issue = window.ruyiImager
-        ? t(
-            '请更新桌面应用，以便在侧栏选择目标磁盘。',
-            'Update the desktop app to select a target disk in the sidebar.',
-          )
-        : t(
-            'dd-v1 需要直接写盘。请在本机运行 ruyi device provision。',
-            'dd-v1 requires raw disk access. Run ruyi device provision locally.',
-          );
+      issue = t(
+        '网页不支持 dd-v1 直接写盘。请在本机运行 ruyi device provision。',
+        'The web page does not support writing dd-v1 images. Run ruyi device provision locally.',
+      );
     else if (
       !window.showDirectoryPicker ||
       (packages.some((pkg) => pkg.data.provisionable.strategy !== 'dd-v1') &&
@@ -340,7 +335,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
     usb.changed();
   }
   ui.flashing?.();
-  await host?.setFlashing?.(true);
+  if (host) await host.setFlashing(true);
   try {
     for (const plan of plans) {
       ui.trace?.(`Flash: ${plan.description}`);
@@ -351,7 +346,7 @@ export async function provision({ runtime, usb, ui, signal, locale }) {
       ui.trace?.(`Flash OK: ${plan.description}`);
     }
   } finally {
-    await host?.setFlashing?.(false);
+    if (host) await host.setFlashing(false);
   }
   log(t('刷写步骤成功完成。', 'Flashing finished successfully.'));
   await postInstall();
