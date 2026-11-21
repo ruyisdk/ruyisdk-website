@@ -197,6 +197,16 @@ export async function prepareImages(
         if (local.size !== spec.size)
           throw Error(`Incorrect file size for ${name}`);
         if (!(await verified(local))) throw Error(`SHA-256 mismatch: ${name}`);
+        signal.throwIfAborted();
+        try {
+          const handle = await archives.getFileHandle(name, { create: true });
+          await local
+            .stream()
+            .pipeTo(await handle.createWritable(), { signal });
+        } catch (error) {
+          signal.throwIfAborted();
+          throw Error(`Cannot save ${name}: ${error.message || error}`);
+        }
         file = local;
       }
     }

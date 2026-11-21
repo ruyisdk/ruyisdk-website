@@ -323,15 +323,28 @@ test('preparing multiple images downloads only missing archives and reuses them 
   }
 });
 
-test('manual import verifies the selected file and extracts it without caching a copy', async () => {
+test('a verified manual import is reused on restart without a download or file prompt', async (context) => {
   const name = 'root.ext4.zst';
   const archive = new File(['archive'], name);
   const image = new File(['partition'], 'root.ext4');
+  let cached;
   const archives = {
     getFileHandle: async (path, options) => {
       assert.equal(path, name);
-      assert.ok(!options?.create, 'manual imports must not create an archive');
-      throw new DOMException('missing', 'NotFoundError');
+      if (!options?.create && !cached)
+        throw new DOMException('missing', 'NotFoundError');
+      return {
+        getFile: async () => cached,
+        createWritable: async () => {
+          const chunks = [];
+          return new WritableStream({
+            write: (chunk) => chunks.push(chunk),
+            close: () => {
+              cached = new File(chunks, name);
+            },
+          });
+        },
+      };
     },
   };
   const images = {
@@ -355,23 +368,28 @@ test('manual import verifies the selected file and extracts it without caching a
           name,
           size: archive.size,
           checksums: { sha256: 'expected' },
-          resolved_urls: [],
+          resolved_urls: ['https://example.org/root.ext4.zst'],
         },
       ],
     },
   };
   let checksum = 'wrong';
   const jobs = [];
+  const fetch = context.mock.method(
+    globalThis,
+    'fetch',
+    async () => new Response(null, { status: 404 }),
+  );
   const options = {
     root,
     log: () => {},
     progress: () => {},
     signal: new AbortController().signal,
-    localFile: async () => archive,
+    localFile: context.mock.fn(async () => archive),
     runtime: {
       run: async (job) => {
         jobs.push(job.kind);
-        assert.equal(job.file, archive);
+        assert.equal(await job.file.text(), 'archive');
         if (job.kind === 'hash') return checksum;
         assert.equal(job.dir, images);
         return [image.name];
@@ -380,9 +398,14 @@ test('manual import verifies the selected file and extracts it without caching a
   };
   await assert.rejects(prepareImages(pkg, options), /SHA-256 mismatch/);
   assert.deepEqual(jobs, ['hash']);
+  assert.equal(cached, undefined);
   checksum = 'expected';
   assert.equal((await prepareImages(pkg, options)).get(image.name), image);
   assert.deepEqual(jobs, ['hash', 'hash', 'extract']);
+  assert.equal((await prepareImages(pkg, options)).get(image.name), image);
+  assert.deepEqual(jobs.slice(3), ['hash', 'extract']);
+  assert.equal(fetch.mock.callCount(), 2);
+  assert.equal(options.localFile.mock.callCount(), 2);
 });
 
 test('flash reuses reviewed module and asset bytes and cannot fetch additional resources', async () => {
