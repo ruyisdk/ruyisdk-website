@@ -135,7 +135,56 @@ test('automatic and manual downloads use the catalog URLs and allow redirects', 
   const expectedRequest = (url) => ({ url, redirect: 'follow' });
   await assert.rejects(prepare(), /manual import requested/);
   assert.deepEqual(requests, [expectedRequest(catalogURL)]);
-  assert.deepEqual(logs, ['github.com: Download failed']);
+  assert.deepEqual(logs, ['github.com · image: Download request failed']);
+
+  for (const stage of ['write', 'hash']) {
+    await context.test(
+      `a local ${stage} error does not prompt for another download`,
+      async (subtest) => {
+        subtest.mock.method(
+          globalThis,
+          'fetch',
+          async () => new Response('img'),
+        );
+        let saved;
+        const writer = {
+          write: async () => {
+            if (stage === 'write')
+              throw new DOMException('Disk full', 'QuotaExceededError');
+          },
+          close: async () => {
+            saved = new File(['img'], 'image');
+          },
+          abort: subtest.mock.fn(async () => {}),
+        };
+        const handle = {
+          createWritable: async () => writer,
+          getFile: async () => saved,
+        };
+        subtest.mock.method(root, 'getFileHandle', async (_name, options) => {
+          if (!options?.create && !saved)
+            throw new DOMException('missing', 'NotFoundError');
+          return handle;
+        });
+        const manual = subtest.mock.fn(assert.fail);
+        await assert.rejects(
+          prepare({
+            localFile: manual,
+            runtime: {
+              run: async () => {
+                throw Error('Worker unavailable');
+              },
+            },
+          }),
+          stage === 'write'
+            ? /Cannot save image: Disk full/
+            : /Cannot verify SHA-256 for image: Worker unavailable/,
+        );
+        assert.equal(manual.mock.callCount(), 0);
+        assert.equal(writer.abort.mock.callCount(), stage === 'write' ? 1 : 0);
+      },
+    );
+  }
 
   const ticket = 'ruyi-image://download/test-ticket';
   const installHost = (subtest, lookup) => {
@@ -155,7 +204,7 @@ test('automatic and manual downloads use the catalog URLs and allow redirects', 
         [[catalogURL]],
       );
       assert.deepEqual(requests, [expectedRequest(ticket)]);
-      assert.equal(logs.at(-1), 'github.com: Download failed');
+      assert.equal(logs.at(-1), 'github.com · image: Download request failed');
     },
   );
 
@@ -194,6 +243,82 @@ test('automatic and manual downloads use the catalog URLs and allow redirects', 
         await assert.rejects(prepare(), /manual import requested/);
         assert.deepEqual(requests, []);
       },
+    );
+  }
+});
+
+test('preparing multiple images downloads only missing archives and reuses them on restart', async (context) => {
+  const names = ['boot', 'root'];
+  const cached = new Map([['boot', new File(['boot'], 'boot')]]);
+  const archives = {
+    async getFileHandle(name, options) {
+      if (!cached.has(name) && !options?.create)
+        throw new DOMException('missing', 'NotFoundError');
+      return {
+        getFile: async () => cached.get(name),
+        createWritable: async () => {
+          const chunks = [];
+          return {
+            write: async (chunk) => chunks.push(chunk),
+            close: async () => cached.set(name, new File(chunks, name)),
+          };
+        },
+      };
+    },
+  };
+  const images = {
+    getFileHandle: async (name) => ({ getFile: async () => cached.get(name) }),
+  };
+  const root = {
+    getDirectoryHandle: async (name) =>
+      ({ downloads: archives, images })[name] ?? root,
+  };
+  const pkg = {
+    package: 'test',
+    version: '1',
+    data: {
+      provisionable: { partition_map: { boot: 'boot', root: 'root' } },
+      blob: { distfiles: names },
+      distfiles: names.map((name) => ({
+        name,
+        size: name.length,
+        checksums: { sha256: name },
+        resolved_urls: [`https://example.org/${name}`],
+      })),
+    },
+  };
+  const requests = context.mock.method(
+    globalThis,
+    'fetch',
+    async () => new Response('root'),
+  );
+  const jobs = [];
+  const options = {
+    root,
+    signal: new AbortController().signal,
+    localFile: assert.fail,
+    log() {},
+    progress() {},
+    runtime: {
+      async run({ kind, file }) {
+        jobs.push([kind, file.name]);
+        return kind === 'hash' ? file.text() : [file.name];
+      },
+    },
+  };
+  for (let run = 0; run < 2; run++) {
+    jobs.length = 0;
+    assert.deepEqual([...(await prepareImages(pkg, options)).keys()], names);
+    assert.deepEqual(
+      jobs,
+      names.flatMap((name) => [
+        ['hash', name],
+        ['extract', name],
+      ]),
+    );
+    assert.deepEqual(
+      requests.mock.calls.map((call) => call.arguments[0]),
+      ['https://example.org/root'],
     );
   }
 });
