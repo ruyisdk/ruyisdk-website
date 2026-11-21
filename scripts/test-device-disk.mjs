@@ -16,9 +16,10 @@ for (const graphical of [true, false]) {
       return { id: 'selection', label: 'SD reader' };
     });
     const capability = {
-      version: 1,
+      version: 2,
       rawDiskWrite: true,
-      selectDisk: assert.fail,
+      listDisks: () => [],
+      chooseDisk: selectDisk,
       writeAndVerify: async (...args) => writes.push(args),
     };
     const original = Object.getOwnPropertyDescriptor(globalThis, 'window');
@@ -124,6 +125,56 @@ for (const graphical of [true, false]) {
     assert.equal(writes.length, 1);
     assert.equal(writes[0][0], 'selection');
     assert.equal(selectDisk.mock.callCount(), 1);
+
+    await context.test(
+      'declining the in-page overwrite confirmation skips the writer',
+      async () => {
+        const confirmations = [];
+        await provision({
+          ...options,
+          ui: {
+            ...ui,
+            confirm: (message) => {
+              confirmations.push(message);
+              return !message.includes('overwrites');
+            },
+          },
+        });
+        assert.match(confirmations.at(-1), /overwrites/);
+        assert.equal(writes.length, 1);
+      },
+    );
+
+    await context.test(
+      'an old host stops before download or native disk selection',
+      async () => {
+        window.ruyiImager = {
+          ...capability,
+          version: 1,
+          selectDisk: assert.fail,
+        };
+        try {
+          const issues = [];
+          const unavailable = {
+            ...ui,
+            directory: assert.fail,
+            selectDisk: assert.fail,
+            log: (line) => issues.push(line),
+          };
+          if (graphical)
+            unavailable.preparePackages = async ({ inspect, defaults }) => {
+              issues.push((await inspect(defaults)).issue);
+              throw Error('Setup disabled');
+            };
+          const run = provision({ ...options, ui: unavailable });
+          if (graphical) await assert.rejects(run, /Setup disabled/);
+          else await run;
+          assert.match(issues.at(-1), /Update the desktop app/);
+        } finally {
+          window.ruyiImager = capability;
+        }
+      },
+    );
 
     await context.test(
       'a later image preparation failure never opens the disk picker',

@@ -1,6 +1,12 @@
 export function desktopDisks() {
   const host = globalThis.window?.ruyiImager;
-  return host?.version === 1 && host.rawDiskWrite === true ? host : null;
+  return host?.version === 2 &&
+    host.rawDiskWrite === true &&
+    typeof host.listDisks === 'function' &&
+    typeof host.chooseDisk === 'function' &&
+    typeof host.writeAndVerify === 'function'
+    ? host
+    : null;
 }
 
 export function diskCommand({
