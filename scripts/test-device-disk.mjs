@@ -83,6 +83,7 @@ for (const graphical of [true, false]) {
     const runtime = {
       api: '/api/',
       base: '/',
+      warmup: async () => {},
       run: async (job, command) => {
         if (job.kind === 'hash') return 'digest';
         if (job.kind === 'extract') return ['sd.img'];
