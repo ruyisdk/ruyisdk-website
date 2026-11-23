@@ -133,6 +133,10 @@
     box-shadow: none;
 }
 
+.navbar-sidebar__items {
+    height: 100%;
+}
+
 /* Remove centering on mobile devices */
 @media (max-width: 768px) {
     .navbar__inner {
