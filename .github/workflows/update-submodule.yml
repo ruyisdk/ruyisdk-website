@@ -13,7 +13,7 @@ jobs:
       contents: write
       pull-requests: write
     outputs:
-      pull-request-branch: ${{ steps.create.outputs.pull-request-branch }}
+      pull-request-head-sha: ${{ steps.create.outputs.pull-request-head-sha }}
 
     steps:
       - name: Compute run url
@@ -63,14 +63,14 @@ jobs:
   check:
     name: Check updated submodules
     needs: update
-    if: needs.update.outputs.pull-request-branch != ''
+    if: needs.update.outputs.pull-request-head-sha != ''
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ needs.update.outputs.pull-request-branch }}
+          ref: ${{ needs.update.outputs.pull-request-head-sha }}
           fetch-depth: 0
           persist-credentials: false
           submodules: recursive
