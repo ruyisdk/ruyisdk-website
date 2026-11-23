@@ -157,6 +157,19 @@ html[data-theme="dark"] .theme-doc-sidebar-item-category-level-2 > .menu__list {
 }
 
 @media (max-width: 996px) {
+  .theme-doc-toc-mobile .table-of-contents li {
+    margin-block: 0;
+  }
+
+  .theme-doc-toc-mobile .table-of-contents__link {
+    font-size: 0.875rem;
+    padding-block: 0.5rem;
+  }
+
+  .navbar-sidebar :is(.theme-doc-sidebar-item-link, .theme-doc-sidebar-item-category) :is(.menu__link, .menu__caret) {
+    min-height: 2.5rem;
+  }
+
   .theme-doc-sidebar-container {
     border-radius: 0;
     border-left: 0;
