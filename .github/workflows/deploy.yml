@@ -13,7 +13,7 @@ on:
       - i18n/**
       - news/**
       - src/**
-      - tools/device-runtime/**
+      - tools/device-runtime
       - scripts/build-device-runtime.cjs
       - static/**
       - package.json
