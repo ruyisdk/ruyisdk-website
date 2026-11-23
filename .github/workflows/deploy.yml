@@ -25,21 +25,44 @@ on:
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
           submodules: true
 
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
+
+      - name: Upload website
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-build
+          path: build
+          include-hidden-files: true
+
+  deploy:
+    name: Deploy to gh-pages branch
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download website
+        uses: actions/download-artifact@v4
+        with:
+          name: website-build
+          path: build
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4

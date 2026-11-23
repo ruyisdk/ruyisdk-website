@@ -16,8 +16,9 @@ This repo contains the website configuration and documentation powering the [Ruy
 ### Installation
 
 1.  `cd ruyisdk-website` to go into the project root.
-2.  Run `pnpm ci` to install the website's workspace dependencies.
-3.  Run `pnpm run build` to build the website.
+2.  Run `git submodule update --init --recursive` to initialize the website and runtime submodules. New clones can use `git clone --recurse-submodules`.
+3.  Run `pnpm install` to install the website's workspace dependencies.
+4.  Run `pnpm run build` to build the website.
 
 ### Running locally
 
