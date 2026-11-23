@@ -29,6 +29,22 @@ html[data-theme="dark"] .theme-doc-wrapper {
   --ifm-menu-color-background-active: rgba(121, 168, 255, 0.12);
 }
 
+.theme-doc-breadcrumbs .breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.theme-doc-breadcrumbs .breadcrumbs__item {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.theme-doc-breadcrumbs .breadcrumbs__link > svg {
+  top: auto;
+}
+
 aside.theme-doc-sidebar-container,
 .theme-doc-sidebar-container {
   border-right: none;
