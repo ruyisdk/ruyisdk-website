@@ -272,6 +272,10 @@ main[class*="docMainContainer"] {
 }
 
 @media (min-width: 997px) {
+  .theme-doc-sidebar-container .theme-doc-sidebar-item-category > .menu__list:has([aria-current="page"]) {
+    border-left-color: color-mix(in srgb, var(--ifm-menu-color-active) 45%, transparent);
+  }
+
   .theme-doc-wrapper .theme-doc-sidebar-container {
     margin-top: calc(-1 * var(--docs-sidebar-logo-row-height));
   }
