@@ -132,7 +132,8 @@ html[data-theme="dark"] .theme-doc-sidebar-item-category-level-2 > .menu__list {
 }
 
 .theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link--sublist::after,
-.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link--sublist::after {
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link--sublist::after,
+.theme-doc-toc-mobile > button::after {
   content: "";
   position: absolute;
   right: 0.7rem;
@@ -147,7 +148,8 @@ html[data-theme="dark"] .theme-doc-sidebar-item-category-level-2 > .menu__list {
 }
 
 .theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after,
-.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after {
+.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list-item-collapsible > .menu__link--sublist::after,
+.theme-doc-toc-mobile > button[class*="tocCollapsibleButtonExpanded"]::after {
   transform: translateY(-62%) rotate(45deg);
   opacity: 1;
 }
@@ -157,6 +159,16 @@ html[data-theme="dark"] .theme-doc-sidebar-item-category-level-2 > .menu__list {
 }
 
 @media (max-width: 996px) {
+  .theme-doc-toc-mobile > button {
+    position: relative;
+    padding-inline-end: 1.6rem;
+  }
+
+  .theme-doc-toc-mobile > button::after {
+    background: none;
+    filter: none;
+  }
+
   .theme-doc-toc-mobile .table-of-contents li {
     margin-block: 0;
   }
