@@ -10,3 +10,7 @@
 	path = news/ruyinews
 	url = https://github.com/ruyisdk/packages-index.git
 	branch = main
+[submodule "tools/device-runtime"]
+	path = tools/device-runtime
+	url = https://github.com/ruyisdk-test/ruyi-imager-core.git
+	branch = main
