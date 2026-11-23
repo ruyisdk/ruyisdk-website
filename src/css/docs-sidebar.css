@@ -182,6 +182,20 @@ html[data-theme="dark"] .theme-doc-sidebar-item-category-level-2 > .menu__list {
     min-height: 2.5rem;
   }
 
+  .navbar-sidebar :is(.theme-doc-sidebar-item-category-level-1, .theme-doc-sidebar-item-category-level-2) > .menu__list-item-collapsible {
+    > .menu__link--sublist::after {
+      pointer-events: none;
+    }
+
+    > .menu__caret {
+      min-width: 2.5rem;
+    }
+
+    > .menu__caret::before {
+      content: none;
+    }
+  }
+
   .theme-doc-sidebar-container {
     border-radius: 0;
     border-left: 0;
