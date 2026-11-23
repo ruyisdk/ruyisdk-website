@@ -3,7 +3,7 @@
   'use strict';
 
   function handleMenuTitleClick(e) {
-    const link = e.target.closest('.menu__link--sublist');
+    const link = e.target.closest('.theme-doc-sidebar-container .menu__link--sublist');
     if (!link) return;
 
     const collapsible = link.closest('.menu__list-item-collapsible');
