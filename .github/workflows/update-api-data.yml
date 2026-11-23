@@ -12,6 +12,8 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    outputs:
+      pull-request-branch: ${{ steps.create.outputs.pull-request-branch }}
 
     steps:
       - name: Compute run url
@@ -19,6 +21,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
+          persist-credentials: false
           submodules: recursive
 
       - uses: pnpm/action-setup@v4
@@ -37,6 +40,7 @@ jobs:
         run: pnpm run generate-ruyisdk-api
 
       - name: Create Pull Request
+        id: create
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -51,5 +55,19 @@ jobs:
           labels: automat
           branch: create-pull-request/apiupdate
 
+  check:
+    name: Check updated API data
+    needs: update
+    if: needs.update.outputs.pull-request-branch != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.update.outputs.pull-request-branch }}
+          fetch-depth: 0
+          persist-credentials: false
+          submodules: recursive
       - name: PNPM Build
         uses: ./.github/workflows/composite_npm_build
