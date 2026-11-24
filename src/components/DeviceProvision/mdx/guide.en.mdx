@@ -1,11 +1,17 @@
 ## How to flash an image
 
-Before flashing, back up any data you want to keep on the board. This tool brings the image flashing workflow of the RuyiSDK Package Manager to the browser using WebUSB. It supports only Chrome, Chromium, and Edge. The browser sandbox limits flashing to Fastboot mode. The wizard cannot download the required files automatically in the browser sandbox. Use the download links, then select each downloaded file to give the wizard permission to read it. Most supported boards reboot during flashing and reconnect with a different USB vendor or product ID (VID/PID). When that happens, select the board again to grant access.
+This browser-based flashing tool implements part of the `ruyi device provision` command. It uses WebUSB to bring the image flashing workflow of the RuyiSDK Package Manager to the browser. It supports only Chrome, Chromium, and Edge. The browser sandbox limits flashing to Fastboot mode. The wizard cannot download the required files automatically in the browser sandbox. Use the download links, then select each downloaded file to give the wizard permission to read it. Most supported boards reboot during flashing and reconnect with a different USB vendor or product ID (VID/PID). When that happens, select the board again to grant access.
+
+Before flashing, back up any data you want to keep on the board.
 
 1. **Select the board and system.** In the terminal, select the board, hardware variant, and system image in turn by entering the option number and pressing Enter. At each `(y/N)` prompt, check the terminal output before entering `y` to continue.
 2. **Prepare the image.** Click **Choose directory** and select a folder for the downloads and extracted files. The wizard tries to download the files automatically, but cross-origin restrictions often block the download. If it fails, download links appear in the sidebar. Follow the links, then use **Choose local file** to grant access to each downloaded file. Once the wizard can read all the files, it verifies their SHA-256 checksums and extracts the files needed for flashing into `RuyiImages/` inside the selected folder.
 3. **Start flashing.** Follow the board’s documentation to enter flashing mode. Connect the board to your computer with a USB data cable and click **Connect board**. Check the device name and USB VID/PID in the sidebar. Confirm the target board and the flashing steps before writing the image.
 4. **Grant access again after a reboot.** If the board’s USB VID/PID changes after a reboot, the wizard waits for the board to reconnect. Leave the wizard running and the USB cable connected. Click **Connect board** again and select the same physical board. Once you grant access, the wizard completes the remaining steps automatically.
+
+### Are the images up to date?
+
+The image data and flashing plugins are kept in sync with [packages-index](https://github.com/ruyisdk/packages-index/), the RuyiSDK package repository. Changes there can take up to a week to appear here.
 
 ### If the USB device does not appear
 
@@ -16,3 +22,7 @@ Even if your operating system lists the USB device, your user account still need
 - **macOS:** Further verification is pending.
 
 If a step fails, open **Flashing log** at the bottom of the sidebar to see what happened.
+
+### Prefer a graphical interface?
+
+[Try the web-based imager](/en/tryruyi/imager) to flash images through a fully graphical interface. It uses the same backend as the command-line interface on this page.

@@ -1,11 +1,17 @@
 ## Anleitung zum Flashen
 
-Sichere vor dem Flashen alle Daten, die du auf dem Board behalten möchtest. Mit diesem Werkzeug kannst du Systemabbilder ähnlich wie mit dem RuyiSDK-Paketmanager flashen, direkt im Browser über WebUSB. Es unterstützt nur Chrome, Chromium und Edge. In der Browser-Sandbox ist das Flashen nur im Fastboot-Modus möglich. Der Assistent kann die benötigten Dateien in der Browser-Sandbox nicht automatisch herunterladen. Lade sie über die angegebenen Links herunter und wähle anschließend jede Datei einzeln aus, um dem Assistenten Lesezugriff zu gewähren. Die meisten unterstützten Boards starten während des Flashens neu und melden sich mit einer anderen USB-Kennung (VID/PID) an. Wähle das Board dann erneut aus, um den Zugriff zu erlauben.
+Dieses Werkzeug stellt einen Teil der Funktionen von `ruyi device provision` im Browser bereit. Über WebUSB kannst du damit Systemabbilder ähnlich wie mit dem RuyiSDK-Paketmanager flashen. Es unterstützt nur Chrome, Chromium und Edge. In der Browser-Sandbox ist das Flashen nur im Fastboot-Modus möglich. Der Assistent kann die benötigten Dateien in der Browser-Sandbox nicht automatisch herunterladen. Lade sie über die angegebenen Links herunter und wähle anschließend jede Datei einzeln aus, um dem Assistenten Lesezugriff zu gewähren. Die meisten unterstützten Boards starten während des Flashens neu und melden sich mit einer anderen USB-Kennung (VID/PID) an. Wähle das Board dann erneut aus, um den Zugriff zu erlauben.
+
+Sichere vor dem Flashen alle Daten, die du auf dem Board behalten möchtest.
 
 1. **Board und System auswählen.** Wähle im Terminal nacheinander das Board, die Hardwarevariante und das Systemabbild aus. Gib dazu jeweils die Nummer der gewünschten Option ein und drücke die Eingabetaste. Prüfe bei jeder Abfrage `(y/N)` die Terminalausgabe, bevor du mit `y` fortfährst.
 2. **Abbild vorbereiten.** Klicke auf **Verzeichnis auswählen** und wähle einen Ordner für die Downloads und die entpackten Dateien. Der Assistent versucht, die Dateien automatisch herunterzuladen. Die Sicherheitsregeln des Browsers für Zugriffe auf andere Domains verhindern das häufig. Schlägt der Download fehl, erscheinen die Download-Links in der Seitenleiste. Lade die Dateien über diese Links herunter und gib sie anschließend einzeln über **Lokale Datei auswählen** zum Lesen frei. Sobald der Assistent alle Dateien lesen kann, prüft er ihre SHA-256-Prüfsummen und entpackt die zum Flashen benötigten Dateien im gewählten Ordner unter `RuyiImages/`.
 3. **Flashen starten.** Versetze das Board gemäß seiner Dokumentation in den Flash-Modus. Schließe es mit einem USB-Datenkabel an den Computer an und klicke auf **Board verbinden**. Prüfe in der Seitenleiste den Gerätenamen und die USB-Kennung (VID/PID). Bestätige das Zielgerät und die angezeigten Schritte, bevor du das Abbild schreibst.
 4. **Zugriff nach dem Neustart erneut erlauben.** Ändert sich beim Neustart die USB-Kennung des Boards, wartet der Assistent, bis du das Board wieder verbindest. Lass den Assistenten weiterlaufen und das USB-Kabel eingesteckt. Klicke erneut auf **Board verbinden** und wähle dasselbe physische Board aus. Sobald du den Zugriff erlaubst, führt der Assistent die restlichen Schritte automatisch aus.
+
+### Sind die Abbilder aktuell?
+
+Die Angaben zu den Abbildern und die Plugins für den Flashvorgang werden mit dem RuyiSDK-Paketrepository [packages-index](https://github.com/ruyisdk/packages-index/) synchronisiert. Änderungen können hier mit bis zu einer Woche Verzögerung erscheinen.
 
 ### Wenn das USB-Gerät nicht angezeigt wird
 
@@ -16,3 +22,7 @@ Auch wenn dein Betriebssystem das USB-Gerät anzeigt, braucht dein Benutzerkonto
 - **macOS:** Eine weitere Prüfung steht noch aus.
 
 Falls ein Schritt fehlschlägt, öffne das **Flash-Protokoll** unten in der Seitenleiste.
+
+### Lieber mit grafischer Oberfläche?
+
+Mit dem [Imager im Browser](/de/tryruyi/imager) kannst du Abbilder über eine vollständig grafische Oberfläche flashen. Er nutzt dasselbe Backend wie die Kommandozeile auf dieser Seite.
