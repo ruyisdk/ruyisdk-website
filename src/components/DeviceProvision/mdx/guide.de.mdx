@@ -1,22 +1,18 @@
 ## Anleitung zum Flashen
 
-Sichere vor dem Flashen alle Daten, die du auf dem Board behalten möchtest.
+Sichere vor dem Flashen alle Daten, die du auf dem Board behalten möchtest. Mit diesem Werkzeug kannst du Systemabbilder ähnlich wie mit dem RuyiSDK-Paketmanager flashen, direkt im Browser über WebUSB. Es unterstützt nur Chrome, Chromium und Edge. In der Browser-Sandbox ist das Flashen nur im Fastboot-Modus möglich. Der Assistent kann die benötigten Dateien in der Browser-Sandbox nicht automatisch herunterladen. Lade sie über die angegebenen Links herunter und wähle anschließend jede Datei einzeln aus, um dem Assistenten Lesezugriff zu gewähren. Die meisten unterstützten Boards starten während des Flashens neu und melden sich mit einer anderen USB-Kennung (VID/PID) an. Wähle das Board dann erneut aus, um den Zugriff zu erlauben.
 
-1. **System auswählen.** Gib im Terminal die Nummer der gewünschten Option ein und drücke die Eingabetaste. Wähle so das Board, die Hardwarevariante und das Systemabbild aus. Bei der Abfrage `(y/N)` gib `y` ein, um fortzufahren.
-2. **Abbilder vorbereiten.** Klicke auf **Verzeichnis auswählen**. Der Assistent prüft die SHA-256-Prüfsummen und entpackt die benötigten Dateien unter `RuyiImages/` im gewählten Verzeichnis. Falls du eine lokale Datei importieren sollst, wähle die Datei mit genau dem angezeigten Namen. Bei Bedarf kannst du sie über einen Download-Link in der Seitenleiste herunterladen.
+1. **Board und System auswählen.** Wähle im Terminal nacheinander das Board, die Hardwarevariante und das Systemabbild aus. Gib dazu jeweils die Nummer der gewünschten Option ein und drücke die Eingabetaste. Prüfe bei jeder Abfrage `(y/N)` die Terminalausgabe, bevor du mit `y` fortfährst.
+2. **Abbild vorbereiten.** Klicke auf **Verzeichnis auswählen** und wähle einen Ordner für die Downloads und die entpackten Dateien. Der Assistent versucht, die Dateien automatisch herunterzuladen. Die Sicherheitsregeln des Browsers für Zugriffe auf andere Domains verhindern das häufig. Schlägt der Download fehl, erscheinen die Download-Links in der Seitenleiste. Lade die Dateien über diese Links herunter und gib sie anschließend einzeln über **Lokale Datei auswählen** zum Lesen frei. Sobald der Assistent alle Dateien lesen kann, prüft er ihre SHA-256-Prüfsummen und entpackt die zum Flashen benötigten Dateien im gewählten Ordner unter `RuyiImages/`.
+3. **Flashen starten.** Versetze das Board gemäß seiner Dokumentation in den Flash-Modus. Schließe es mit einem USB-Datenkabel an den Computer an und klicke auf **Board verbinden**. Prüfe in der Seitenleiste den Gerätenamen und die USB-Kennung (VID/PID). Bestätige das Zielgerät und die angezeigten Schritte, bevor du das Abbild schreibst.
+4. **Zugriff nach dem Neustart erneut erlauben.** Ändert sich beim Neustart die USB-Kennung des Boards, wartet der Assistent, bis du das Board wieder verbindest. Lass den Assistenten weiterlaufen und das USB-Kabel eingesteckt. Klicke erneut auf **Board verbinden** und wähle dasselbe physische Board aus. Sobald du den Zugriff erlaubst, führt der Assistent die restlichen Schritte automatisch aus.
 
-### Board über Fastboot flashen
+### Wenn das USB-Gerät nicht angezeigt wird
 
-Öffne diese Seite auf dem Computer in Chrome oder Edge. Versetze das Board gemäß seiner Dokumentation in den Flash-Modus, schließe es mit einem USB-Datenkabel an und klicke auf **Board verbinden**. Prüfe in der Seitenleiste den Gerätenamen, die USB-Hersteller- und Produkt-ID sowie die Seriennummer, sofern verfügbar. Kontrolliere das Ziel und die angezeigten Schritte, bevor du das Schreiben bestätigst.
+Auch wenn dein Betriebssystem das USB-Gerät anzeigt, braucht dein Benutzerkonto die nötigen Rechte zum Flashen.
 
-Bei manchen Verfahren startet das Board während des Flashens neu. Lass das Kabel angeschlossen. Das Gerät kann mit einem anderen Namen oder einer anderen USB-ID wieder erscheinen. Wartet der Assistent weiterhin auf die Verbindung, klicke erneut auf **Board verbinden** und wähle den aktuellen Eintrag für dasselbe physische Board. Bestätige die Auswahl, wenn du dazu aufgefordert wirst. Der Assistent setzt die verbleibenden Schritte fort, ohne dass du ihn neu starten musst.
-
-### Das USB-Gerät wird angezeigt, lässt sich aber nicht öffnen
-
-Schließe andere Flash-Programme oder Browser-Tabs, die das Gerät verwenden könnten. Zeigt der Browser das Gerät als gekoppelt an, meldet aber `Access denied`, prüfe den Zugriff des Betriebssystems auf die USB-Schnittstelle der aktuellen Phase.
-
-- **Linux:** Erscheint das Board nur bei `sudo fastboot devices`, ermittle die aktuellen USB-IDs mit `lsusb`. Richte nach der Anleitung deiner Distribution oder deines Boards eine passende udev-Regel ein, die dem Desktop-Benutzer Lese- und Schreibzugriff gewährt. Lade die Regeln neu, verbinde das Board erneut und prüfe `fastboot devices` als normaler Benutzer.
+- **Linux:** Zeigt `lsusb` die USB-Kennung an, aber nur `sudo fastboot devices` listet das Board auf, richte nach der Anleitung deiner Distribution oder deines Boards eine passende udev-Regel ein. Sie muss deinem Benutzerkonto Lese- und Schreibzugriff gewähren. Lade die Regeln neu, schließe das Board erneut an und führe `fastboot devices` als normaler Benutzer aus, um den Zugriff zu prüfen.
 - **Windows:** Prüfe im Geräte-Manager die Hardware-ID und den Treiberstatus der USB-Schnittstelle für die aktuelle Phase. Fehlt der Treiber oder ist er inkompatibel, richte nach der Anleitung des Herstellers einen WinUSB-kompatiblen Treiber für diese Schnittstelle ein.
-- **macOS:** Prüfe unter **Systeminformationen → USB**, ob das Gerät in der aktuellen Phase erscheint. Wenn macOS es anzeigt, Chrome aber keine Verbindung herstellen kann, sieh unter `chrome://device-log` nach dem Fehler dieses Verbindungsversuchs.
+- **macOS:** Eine weitere Prüfung steht noch aus.
 
 Falls ein Schritt fehlschlägt, öffne das **Flash-Protokoll** unten in der Seitenleiste.
