@@ -12,19 +12,19 @@
     {
       "total": 1,
       "author": {
-        "login": "NX-lite",
-        "id": 281237347,
-        "avatar_url": "https://avatars.githubusercontent.com/u/281237347?v=4",
-        "html_url": "https://github.com/NX-lite"
+        "login": "KevinMX",
+        "id": 17025286,
+        "avatar_url": "https://avatars.githubusercontent.com/u/17025286?v=4",
+        "html_url": "https://github.com/KevinMX"
       }
     },
     {
       "total": 1,
       "author": {
-        "login": "KevinMX",
-        "id": 17025286,
-        "avatar_url": "https://avatars.githubusercontent.com/u/17025286?v=4",
-        "html_url": "https://github.com/KevinMX"
+        "login": "NX-lite",
+        "id": 281237347,
+        "avatar_url": "https://avatars.githubusercontent.com/u/281237347?v=4",
+        "html_url": "https://github.com/NX-lite"
       }
     },
     {
@@ -91,7 +91,7 @@
       }
     },
     {
-      "total": 15,
+      "total": 16,
       "author": {
         "login": "xijing21",
         "id": 84754181,
@@ -136,7 +136,7 @@
       }
     },
     {
-      "total": 474,
+      "total": 527,
       "author": {
         "login": "weilinfox",
         "id": 54651938,
@@ -146,7 +146,7 @@
     }
   ],
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-20T07:03:13.304Z",
+    "generatedAt": "2026-11-27T01:59:21.605Z",
     "source": "https://api.github.com/repos/ruyisdk/ruyisdk-website/stats/contributors"
   }
 }

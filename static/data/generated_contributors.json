@@ -7,21 +7,21 @@
       "name": "xen0n",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1175567?v=4",
       "github": "https://github.com/xen0n",
-      "contributions": 2413
+      "contributions": 2450
     },
     {
       "id": 54651938,
       "name": "weilinfox",
       "avatarUrl": "https://avatars.githubusercontent.com/u/54651938?v=4",
       "github": "https://github.com/weilinfox",
-      "contributions": 752
+      "contributions": 805
     },
     {
       "id": 84754181,
       "name": "xijing21",
       "avatarUrl": "https://avatars.githubusercontent.com/u/84754181?v=4",
       "github": "https://github.com/xijing21",
-      "contributions": 362
+      "contributions": 363
     },
     {
       "id": 29089388,
@@ -77,7 +77,7 @@
       "name": "sisungo",
       "avatarUrl": "https://avatars.githubusercontent.com/u/95552651?v=4",
       "github": "https://github.com/sisungo",
-      "contributions": 76
+      "contributions": 79
     },
     {
       "id": 198067605,
@@ -213,6 +213,13 @@
       "contributions": 14
     },
     {
+      "id": 53076703,
+      "name": "MalachiteN",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/53076703?v=4",
+      "github": "https://github.com/MalachiteN",
+      "contributions": 14
+    },
+    {
       "id": 43716472,
       "name": "NanamiKite",
       "avatarUrl": "https://avatars.githubusercontent.com/u/43716472?v=4",
@@ -280,13 +287,6 @@
       "name": "Sebastianhayashi",
       "avatarUrl": "https://avatars.githubusercontent.com/u/172239551?v=4",
       "github": "https://github.com/Sebastianhayashi",
-      "contributions": 8
-    },
-    {
-      "id": 53076703,
-      "name": "MalachiteN",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/53076703?v=4",
-      "github": "https://github.com/MalachiteN",
       "contributions": 8
     },
     {
@@ -530,15 +530,15 @@
   ],
   "totals": {
     "contributors": 75,
-    "commits": 5307,
-    "pullRequests": 2503,
-    "issues": 96,
+    "commits": 5407,
+    "pullRequests": 2542,
+    "issues": 93,
     "stars": 127,
     "forks": 187,
     "watches": 20
   },
   "ruyisdk_org_data": {
-    "generatedAt": "2026-11-20T07:20:01.488Z",
+    "generatedAt": "2026-11-27T02:20:25.150Z",
     "source": "https://ruyisdk.org/contributors"
   }
 }
